@@ -1,5 +1,6 @@
 ---
 layout: post
+lang: pt
 title: A stack front-end da Cubos
 description: Que linguagens e bibliotecas a Cubos usa em seus web apps?
 image: assets/images/posts/cubos-web-stack/code.jpeg
