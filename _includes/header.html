@@ -4,6 +4,13 @@
 <!-- Header -->
 <header id="header"{% if page.layout == "landing" %} class="alt style2"{% endif %}{% if page.layout == "home" %} class="alt"{% endif %}>
 	<a href="{{ "" | absolute_url }}" class="logo"><strong>{{ site.title }}</strong> <span>{{ site.subtitle }}</span></a>
+
+	<small>
+		{% for tongue in site.languages %}
+			<a {% if tongue == site.active_lang %}style="font-weight: bold;"{% endif %} href="{% if tongue == site.default_lang %} {{site.baseurl}}{{page.url}} {% else %} {{site.baseurl}}/{{ tongue }}{{page.url}} {% endif %}">{{ tongue }}</a> {% if forloop.last == false %}|{% endif %}
+		{% endfor %}
+	</small>
+
 	<nav>
 		<a href="#menu">Menu</a>
 	</nav>

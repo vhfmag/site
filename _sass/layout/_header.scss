@@ -28,6 +28,10 @@
 		width: 100%;
 		z-index: _misc(z-index-base);
 
+		.locale-nav {
+			margin-left: auto;
+		}
+
 		.logo {
 			border: 0;
 			display: inline-block;
