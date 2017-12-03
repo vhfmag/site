@@ -5,7 +5,7 @@ email: victorhfmag@gmail.com
 description: Desenvolvo web apps com React como ganha-pão, acho que a blockchain vai dominar o mundo, exagero no café e meio que sou de humanas
 # description: Develops React-based web apps for a living, thinks blockchain & ML will take over the world, loves coffee and social justice.
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "" # the base hostname & protocol for your site
+url: "http://vhfmag.gitlab.io" # the base hostname & protocol for your site
 author: Victor Magalhães
 street_address:
 city: Salvador
