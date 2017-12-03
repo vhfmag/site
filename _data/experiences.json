@@ -3,7 +3,7 @@
         {
             "company": "Cubos",
             "link": "https://cubos.io",
-            "image": "assets/images/cubos.svg",
+            "image": "assets/images/companies/cubos.svg",
             "period": "de março de 2016 até o presente",
             "role": "Desenvolvedor full-stack",
             "tasks": [
@@ -14,7 +14,7 @@
         {
             "company": "ZigPay",
             "link": "https://zigpay.com.br",
-            "image": "assets/images/zig.png",
+            "image": "assets/images/companies/zig.png",
             "period": "de maio de 2016 até o presente",
             "role": "Desenvolvedor full-stack + aventuras em data science",
             "tasks": [
