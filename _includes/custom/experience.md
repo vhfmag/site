@@ -15,7 +15,7 @@
                 <p>{{ include.experience.description | newline_to_br }}</p>
             {% endif %}
             {% if include.experience.tasks %}
-                <h4>Responsável por:</h4>
+                <h4>{{ site.data.strings.resume.responsibleFor }}</h4>
                 <ul class="fit">
                     {% for task in include.experience.tasks %}
                         <li>{{ task }}</li>
