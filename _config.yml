@@ -36,3 +36,28 @@ markdown: kramdown
 
 sass:
   style: compressed
+
+# let's encrypt
+gitlab-letsencrypt:
+  # Gitlab settings:
+  personal_access_token: 'DCgztGMykGZ5nKQewL6y'    # Gotten from the step above ^^
+  gitlab_repo:           'vhfmag/vhfmag.gitlab.io' # Namespaced repository identifier
+
+  # Domain settings:
+  email:                 'victorhfmag@gmail.com'     # Let's Encrypt email address
+  domain:                'vhfmag.gitlab.io'             # Domain that the cert will be issued for
+
+  # Jekyll settings:
+  base_path:  './'               # Where you want the file to go
+  pretty_url: false              # Add a "/" on the end of the URL... set to `true` if you use permalink_style: pretty
+  filename:   'letsencrypt.html' # What to call the generated challenge file
+
+  # Delay settings:
+  initial_delay: 120 # How long to wait for Gitlab CI to push your changes before it starts checking
+  delay_time:     15 # How long to wait between each check once it starts looking for the file
+
+  # Optional settings you probably don't need:
+  # endpoint:  'https://somewhere' # if you're doing the ACME thing outside of letsencrypt
+  branch:    'master'            # Defaults to master, but you can use a different branch
+  layout:    'null'              # Layout to use for challenge file - defaults to null, but you can change if needed
+  scheme:    'https'             # Scheme to use for challenge request; default http
