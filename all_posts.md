@@ -8,4 +8,4 @@ image: null
 author: null
 ---
 
-<h1>All posts</h1>
+<h1>Todos os posts</h1>
