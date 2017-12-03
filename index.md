@@ -1,7 +1,7 @@
 ---
 layout: home
 title: Home
-landing-title: 'Olá, meu nome é Victor'
+landing-title: 'Victor Magalhães'
 description: null
 image: null
 author: null
