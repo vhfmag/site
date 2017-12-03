@@ -37,6 +37,12 @@ markdown: kramdown
 sass:
   style: compressed
 
+# localization (polyglot gem)
+languages: ["pt", "en", "fr"]
+default_lang: "en"
+exclude_from_localization: ["javascript", "images", "css"]
+parallel_localization: true
+
 # let's encrypt
 gitlab-letsencrypt:
   # Gitlab settings:
