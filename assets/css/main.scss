@@ -86,4 +86,10 @@
 	height: 130px;
 }
 
+.centerflex {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
 @import "components/custom/experience";
