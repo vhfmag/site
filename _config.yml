@@ -39,7 +39,7 @@ sass:
 
 # localization (polyglot gem)
 languages: ["pt", "en", "fr"]
-default_lang: "en"
+default_lang: "pt"
 exclude_from_localization: ["javascript", "images", "css"]
 parallel_localization: true
 
