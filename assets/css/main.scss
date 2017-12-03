@@ -87,9 +87,13 @@
 }
 
 .centerflex {
-	display: flex;
+	@extend .flex;
 	align-items: center;
 	justify-content: center;
+}
+
+.flex {
+	display: flex;
 }
 
 @import "components/custom/experience";
