@@ -1,0 +1,29 @@
+{
+    "work": [
+        {
+            "company": "Cubos",
+            "link": "https://cubos.io",
+            "image": "assets/images/companies/cubos.svg",
+            "period": "de mars 2016 à maintenant",
+            "role": "Développeur full-stack",
+            "tasks": [
+                "Développement et entretien de sites statiques et applications web fait avec React, Typescript et Webpack",
+                "Développement et entretien de APIs fait avec Node, Typescript et RethinkDB"
+            ]
+        },
+        {
+            "company": "ZigPay",
+            "link": "https://zigpay.com.br",
+            "image": "assets/images/companies/zig.png",
+            "period": "de mai 2016 à maintenant",
+            "role": "Développeur full-stack + aventures sur la data science",
+            "tasks": [
+                "Développement et entretien des tableaux de bord administratif pour la plateforme",
+                "Développement d'une solution simple pour le traitement des données des consommateurs pour un système de recommandation",
+                "Développement et entretien des APIs de la plateforme"
+            ]
+        }
+    ],
+    "volunteer": [],
+    "sideprojects": []
+}

@@ -65,19 +65,19 @@
     ],
     "soft": [
         {
-            "name": "Comunicação Efetiva",
+            "name": "Comunicação efetiva",
             "intensity": 90
         },
         {
-            "name": "Resolução de Problemas",
+            "name": "Resolução criativa de problemas",
             "intensity": 80
         },
         {
-            "name": "Facilidade de Aprender",
+            "name": "Rápido aprendizado",
             "intensity": 100
         },
         {
-            "name": "Pensamento Crítico",
+            "name": "Pensamento crítico",
             "intensity": 90
         }
     ]

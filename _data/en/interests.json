@@ -1,0 +1,52 @@
+{
+    "subjects": [
+        {
+            "name": "Sistems & complexity",
+            "intensity": 75
+        },
+        {
+            "name": "Blockchain",
+            "intensity": 95
+        },
+        {
+            "name": "Distributed applications",
+            "intensity": 90
+        },
+        {
+            "name": "Data science & journalism",
+            "intensity": 75
+        },
+        {
+            "name": "Open data",
+            "intensity": 75
+        },
+        {
+            "name": "Open source software",
+            "intensity": 90
+        },
+        {
+            "name": "Web literacy",
+            "intensity": 90
+        },
+        {
+            "name": "Internet & privacy",
+            "intensity": 90
+        },
+        {
+            "name": "Design",
+            "intensity": 70
+        },
+        {
+            "name": "Humanities",
+            "intensity": 90
+        },
+        {
+            "name": "Inclusion & diversity",
+            "intensity": 90
+        },
+        {
+            "name": "Languages",
+            "intensity": 85
+        }
+    ]
+}

@@ -1,0 +1,14 @@
+{
+    "resume": {
+        "competences": "Competências",
+        "whatCanIDo": "O que eu posso fazer por você",
+        "professionalExperiences": "Experiências profissionais",
+        "responsibleFor": "Reponsável por",
+        "skillsAndInterests": "Habilidades e interesses",
+        "technicalSkills": "Habilidades técnicas",
+        "softSkills": "Soft skills",
+        "interests": "Interesses",
+        "resume": "Currículo",
+        "bio": "Desenvolvedor full-stack de Salvador, especializado em web apps feitos com React"
+    }
+}
