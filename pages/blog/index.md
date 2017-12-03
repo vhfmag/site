@@ -1,6 +1,6 @@
 ---
 layout: allposts
-permalink: /blog
+permalink: /blog.html
 title: Blog
 landing-title: 'All posts'
 nav-menu: true

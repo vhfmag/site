@@ -1,7 +1,7 @@
 ---
 title: Curriculum
 lang: fr
-permalink: /resume
+permalink: /resume.html
 layout: landing
 description: 'Développeur full-stack de Salvador - Brazil, spécialisé sur les applicationss web fait avec React'
 image: assets/images/code_editor.jpg
