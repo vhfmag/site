@@ -30,6 +30,7 @@ linkedin_url: https://www.linkedin.com/in/vhfmag
 pinterest_url:
 slack_url:
 twitter_url: https://twitter.com/vhfmag
+rss_url: /feed.xml
 
 # build settings
 markdown: kramdown
