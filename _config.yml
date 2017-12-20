@@ -1,8 +1,8 @@
 # site settings
 title: Victor Magalhães
-subtitle: desenvolvedor front-end
+subtitle: desenvolvedor web
 email: victorhfmag@gmail.com
-description: Desenvolvo web apps com React como ganha-pão, ainda acho o futuro é P2P, exagero no café e meio que sou de humanas
+description: Desenvolvo web apps com React e Typescript como ganha-pão, ainda acho o futuro é P2P, exagero no café e meio que sou de humanas
 # description: Develops React-based web apps for a living, thinks blockchain & ML will take over the world, loves coffee and social justice.
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://vhfmag.gitlab.io" # the base hostname & protocol for your site
