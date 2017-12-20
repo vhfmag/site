@@ -67,6 +67,9 @@
 	<footer id="footer">
 		<div class="inner">
 			<ul class="icons">
+				{% if site.rss_url %}
+				<li><a href="{{ site.rss_url }}" class="icon alt fa-rss" target="_blank"><span class="label">RSS</span></a></li>
+				{% endif %}
 				{% if site.twitter_url %}
 				<li><a href="{{ site.twitter_url }}" class="icon alt fa-twitter" target="_blank"><span class="label">Twitter</span></a></li>
 				{% endif %}
@@ -97,8 +100,8 @@
 				{% if site.linkedin_url %}
 				<li><a href="{{ site.linkedin_url }}" class="icon alt fa-linkedin" target="_blank"><span class="label">LinkedIn</span></a></li>
 				{% endif %}
-				{% if site.rss_url %}
-				<li><a href="{{ site.rss_url }}" class="icon alt fa-rss" target="_blank"><span class="label">RSS</span></a></li>
+				{% if site.pocket_url %}
+				<li><a href="{{ site.pocket_url }}" class="icon alt fa-get-pocket" target="_blank"><span class="label">Pocket</span></a></li>
 				{% endif %}
 				{% if site.keybase_url %}
 				<li><a href="{{ site.keybase_url }}" class="icon alt fa-keybase" target="_blank"><span class="label">Keybase</span></a></li>
