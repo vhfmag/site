@@ -1,8 +1,8 @@
 ---
 layout: post
 lang: pt
-title: O preconceito em nossas tecnologias
-description: Apesar do que diz o senso comum, a tecnologia está longe de ser neutra
+title: Uma breve introdução a minorias e tecnologia
+description: Diferente do que diz o senso comum, a tecnologia está longe de ser neutra
 image: assets/images/posts/tech-and-prejudice/kodak.png
 ---
 
