@@ -86,6 +86,11 @@
 	height: 130px;
 }
 
+.copyleft {
+	display:inline-block;
+	transform: rotate(180deg);
+}
+
 .centerflex {
 	@extend .flex;
 	align-items: center;
