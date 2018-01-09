@@ -1,7 +1,7 @@
 ---
 layout: post
 lang: pt
-title: Uma breve introdução a minorias e tecnologia
+title: Minorias e tecnologia
 description: Diferente do que diz o senso comum, a tecnologia está longe de ser neutra
 image: assets/images/posts/tech-and-prejudice/kodak.png
 ---
