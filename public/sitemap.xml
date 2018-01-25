@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>https://vhfmag.gitlab.io/2017/12/19/about-net-neutrality-pt/</loc>
+    <lastmod>2017-12-19T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://vhfmag.gitlab.io/2016/10/13/cubos-web-stack-pt/</loc>
+    <lastmod>2016-10-13T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://vhfmag.gitlab.io/2016/09/05/tech-and-minorities-pt/</loc>
+    <lastmod>2016-09-05T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://vhfmag.gitlab.io/categories/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://vhfmag.gitlab.io/post/</loc>
+    <lastmod>2017-12-19T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://vhfmag.gitlab.io/tags/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://vhfmag.gitlab.io/</loc>
+    <lastmod>2017-12-19T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+</urlset>

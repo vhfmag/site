@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on Victor Magalhães</title>
+    <link>https://vhfmag.gitlab.io/post/</link>
+    <description>Recent content in Posts on Victor Magalhães</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 19 Dec 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://vhfmag.gitlab.io/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Sobre neutralidade de rede</title>
+      <link>https://vhfmag.gitlab.io/2017/12/19/about-net-neutrality-pt/</link>
+      <pubDate>Tue, 19 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://vhfmag.gitlab.io/2017/12/19/about-net-neutrality-pt/</guid>
+      <description>{::options parse_block_html=&amp;ldquo;true&amp;rdquo; /}
+unsplash-logoRicardo Gomez Angel
+Recentemente, a FCC (Federal Communications Commission), agência do governo americano responsável por regular a comunicação no país em âmbito federal (similar à ANACOM no Brasil), votou por anular regras estabelecidas na era Obama pelo FCC Open Internet Order 2010, que regulamentavam a neutralidade de rede12. A votação, que envolveu um escândalo de manipulação de plataforma de consulta pública, incluindo roubo de identidade3, beneficiou as provedoras de internet, que passam a poder discriminar o conteúdo trafegado, passando a poder cobrar por serviços como priorização de tráfego ou até mesmo limitando a que sites e serviços o cliente terá acesso.</description>
+    </item>
+    
+    <item>
+      <title>A stack front-end da Cubos</title>
+      <link>https://vhfmag.gitlab.io/2016/10/13/cubos-web-stack-pt/</link>
+      <pubDate>Thu, 13 Oct 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://vhfmag.gitlab.io/2016/10/13/cubos-web-stack-pt/</guid>
+      <description>Começar em JavaScript em 2017 não é fácil. As infinitas possibilidades podem sobrecarregar e parar a gente antes da primeira linha de código.
+Enquanto para começar a desenvolver um aplicativo nativo para iOS há decisões simples, como entre Objective-C ou Swift, em JavaScript há mais de 5 opções de sintaxe (ES5, ES5+, Typescript, Elm, Clojure…), incontáveis frameworks/bibliotecas para a interface de usuário e ferramentas de build — tudo isso antes de escrever a primeira linha de código.</description>
+    </item>
+    
+    <item>
+      <title>Minorias e tecnologia</title>
+      <link>https://vhfmag.gitlab.io/2016/09/05/tech-and-minorities-pt/</link>
+      <pubDate>Mon, 05 Sep 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://vhfmag.gitlab.io/2016/09/05/tech-and-minorities-pt/</guid>
+      <description>{::options parse_block_html=&amp;ldquo;true&amp;rdquo; /}
+Nos últimos dois anos, somente brancos fora nominados para as categorias de atuação do Oscar, o que levou as hashtags #OscarSoWhite e #OscarStillSoWhite ao trending no Twitter e promoveu um debate acalorado sobre o tema em redes sociais 1. A discussão parece ter tido resultado: em 2017, finalmente há negros em todas as principais categorias.
+Os membros da Academia de Artes e Ciências Cinematográficas, organizadora do prêmio, no entanto, não são os únicos selecionadores com claro viés racial.</description>
+    </item>
+    
+  </channel>
+</rss>
