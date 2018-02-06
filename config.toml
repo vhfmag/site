@@ -2,7 +2,7 @@ baseURL = "https://vhfmag.gitlab.io/"
 languageCode = "pt-br"
 title = "victor magalhães"
 DefaultContentLanguage = "pt"
-copyright = "copyleft"
+theme = "crisp"
 
 [params]
 # config
