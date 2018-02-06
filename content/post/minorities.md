@@ -8,24 +8,23 @@ draft: false
 
 Nos últimos dois anos, somente brancos fora nominados para as categorias de atuação do Oscar, o que levou as hashtags [#OscarSoWhite](https://twitter.com/hashtag/oscarsowhite) e [#OscarStillSoWhite](https://twitter.com/hashtag/oscarstillsowhite) ao trending no Twitter e promoveu um debate acalorado sobre o tema em redes sociais [^1]. A discussão parece ter tido resultado: em 2017, finalmente há negros em todas as principais categorias.
 
-Os membros da Academia de Artes e Ciências Cinematográficas, organizadora do prêmio, no entanto, não são os únicos selecionadores com claro viés racial. Recentemente, um concurso mundial de beleza em que a seleção dos ganhadores ficou a cargo de uma inteligência artificial, o [Beauty.AI](http://beauty.ai/), publicou seus 44 ganhadores, dos quais apenas 1 não tinha pele clara e outros poucos eram asiáticos [^2], mesmo que grande parte de seus candidatos tenham vindo da Índia ou de países da África. **Mas o que leva um software a ter preferências de cor de pele?**
+Os membros da Academia de Artes e Ciências Cinematográficas, organizadora do prêmio, no entanto, não são os únicos selecionadores com claro viés racial. Recentemente, um concurso mundial de beleza em que a seleção dos ganhadores ficou a cargo de uma inteligência artificial, o [Beauty.AI](http://beauty.ai/), publicou seus 44 ganhadores, dos quais apenas 1 não tinha pele clara e outros poucos eram asiáticos [^2], mesmo que grande parte de seus candidatos tenham vindo da Índia ou de países da África. Mas o que leva um software a ter preferências de cor de pele?
 
-Para entender a resposta, é necessário saber como o robô em questão aprendeu a determinar a beleza das fotos que recebia. O algoritmo, que foi desenvolvido pelo grupo *Youth Laboratories* com apoio da *Microsoft*, aprendeu a avaliar a beleza dos candidatos a partir de uma enorme quantidade de fotos de pessoas, cada uma associada a uma pontuação de beleza, a partir das quais o algoritmo ‘aprendia’ a calcular a pontuação de beleza a partir de um retrato qualquer. No entanto, Alex Zhavoronkov, CSO *(Chief Science Officer)* da Beauty.AI, afirmou que o problema foi ter exposto o sistema a uma imensa maioria de pessoas brancas. Portanto, o algoritmo apenas evidenciou o viés racial dos próprios organizadores da competição.
+Para entender a resposta, é necessário saber como o robô em questão aprendeu a determinar a beleza das fotos que recebia. O algoritmo, que foi desenvolvido pelo grupo _Youth Laboratories_ com apoio da _Microsoft_, aprendeu a avaliar a beleza dos candidatos a partir de uma enorme quantidade de fotos de pessoas, cada uma associada a uma pontuação de beleza, a partir das quais o algoritmo ‘aprendia’ a calcular a pontuação de beleza a partir de um retrato qualquer. No entanto, Alex Zhavoronkov, CSO (_Chief Science Officer_) da Beauty.AI, afirmou que o problema foi ter exposto o sistema a uma imensa maioria de pessoas brancas. Portanto, o algoritmo apenas evidenciou o viés racial dos próprios organizadores da competição.
 
 O aparente racismo (e outras formas de discriminação) de algumas de nossas tecnologias baseadas em aprendizado de máquina é aprendido com a nossa sociedade e seus preconceitos estruturais. Outro exemplo recente foi Tay, o bot desenvolvido pela Microsoft para entender a linguagem de adolescentes e soar como eles [^3].
 
-![Tweet de @Tayandyou com conteúdo antissemita](/static/images/posts/tech-and-prejudice/tweet-1.png)
-<!-- ![Tweet de @Tayandyou com ](/static/images/posts/tech-and-prejudice/tweet-2.png) -->
+![Tweet de @Tayandyou com conteúdo antissemita](/images/posts/tech-and-minorities/tweet-1.png)
 
 No entanto, sua conta no Twitter foi desativada um dia após seu lançamento, já que usuários começaram a twittar mensagens racistas, misóginas e antissemitas para a conta, comportamento que foi prontamente aprendido [^4], conforme demonstrado nas imagens acima.
 
-A questão da inadequação de tecnologias a pessoas não-brancas é antiga e data, pelo menos, da invenção dos **Shirley Cards**, utilizados para calibrar os esquemas de cores de filmes fotográficos entre as décadas de 40 e 90. Com eles, buscava-se representar com a maior precisão possível a *‘cor de pele’* — obviamente baseada na pele branca.
+A questão da inadequação de tecnologias a pessoas não-brancas é antiga e data, pelo menos, da invenção dos _Shirley Cards_, utilizados para calibrar os esquemas de cores de filmes fotográficos entre as décadas de 40 e 90. Com eles, buscava-se representar com a maior precisão possível a _‘cor de pele’_  — obviamente baseada na pele branca.
 
-![Shirley cards, usados para estudar o esquema de cores de filmes analógicos](/static/images/posts/tech-and-prejudice/shirley-cards.gif)
+![Shirley cards, usados para estudar o esquema de cores de filmes analógicos](/images/posts/tech-and-minorities/shirley-cards.gif)
 
 Nestes cartões, apareciam algumas cores básicas e fotos de mulheres brancas com roupas coloridas, refletindo nisso o seu público alvo. Tal escolha levou, no entanto, a representações de pessoas negras ou de outras etnias com pouca precisão, confusas e borradas, conforme abaixo:
 
-![Fotografia com pessoas de pele escura, demonstrando a ineficácia de filmes da época em representar esse tom de pele](/static/images/posts/tech-and-prejudice/kodak.png)
+![Fotografia com pessoas de pele escura, demonstrando a ineficácia de filmes da época em representar esse tom de pele](/images/posts/tech-and-minorities/kodak.png)
 
 A questão só foi endereçada nos anos 70, e por uma razão não relacionada a raça. Diferentes empresas passaram a questionar a precisão dos filmes fotográficos produzidos à época, ao reproduzir em fotografias as diferentes nuances de cor de seus produtos. Por exemplo, empresas de móveis não conseguiam mostrar a diferença entre os diferentes tipos de madeira, e chocolate ao leite e chocolate meio amargo eram difíceis de distinguir em anúncios impressos. Para saber mais sobre o assunto, assista ao vídeo que a Vox fez sobre o assunto:
 
