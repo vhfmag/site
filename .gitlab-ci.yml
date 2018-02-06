@@ -1,10 +1,15 @@
-image: ruby
+# All available Hugo versions are listed here: https://gitlab.com/pages/hugo/container_registry
+image: registry.gitlab.com/pages/hugo:latest
+
+test:
+  script:
+  - hugo -t crisp
+  except:
+  - master
 
 pages:
-  stage: build
   script:
-  - bundle
-  - jekyll build -d public
+  - hugo -t crisp
   artifacts:
     paths:
     - public

@@ -1,0 +1,18 @@
+baseURL = "https://vhfmag.gitlab.io/"
+languageCode = "pt-br"
+title = "victor magalhães"
+DefaultContentLanguage = "pt"
+copyright = "copyleft"
+
+[params]
+# config
+rss = true
+index = "list"
+tagline = "web & stuff"
+# social
+gravatarHash = "aluntesarava"
+keybase = "https://keybase.io/vhfmag"
+linkedin = "https://www.linkedin.com/in/vhfmag"
+github = "https://github.com/vhfmag/"
+twitter = "https://twitter.com/vhfmag"
+pocket = "https://getpocket.com/@vhfmag"

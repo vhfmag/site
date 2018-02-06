@@ -1,1 +1,0 @@
-<li class="{{ 12 | divided_by: include.columns }}u 12u$(small)">{{ include.name }}</li>

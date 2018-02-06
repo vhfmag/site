@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>victor magalhães</title>
+    <link>https://vhfmag.gitlab.io/</link>
+    <description>Recent content on victor magalhães</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>pt-br</language>
+    <copyright>copyleft</copyright>
+    <lastBuildDate>Tue, 19 Dec 2017 00:41:45 -0300</lastBuildDate>
+    
+	<atom:link href="https://vhfmag.gitlab.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Sobre a neutralidade de rede</title>
+      <link>https://vhfmag.gitlab.io/post/net-neutrality/</link>
+      <pubDate>Tue, 19 Dec 2017 00:41:45 -0300</pubDate>
+      
+      <guid>https://vhfmag.gitlab.io/post/net-neutrality/</guid>
+      <description>Recentemente, a FCC (Federal Communications Commission), agência do governo americano responsável por regular a comunicação no país em âmbito federal (similar à ANACOM no Brasil), votou por anular regras estabelecidas na era Obama pelo FCC Open Internet Order 2010, que regulamentavam a neutralidade de rede12. A votação, que envolveu um escândalo de manipulação de plataforma de consulta pública, incluindo roubo de identidade3, beneficiou as provedoras de internet, que passam a poder discriminar o conteúdo trafegado, passando a poder cobrar por serviços como priorização de tráfego ou até mesmo limitando a que sites e serviços o cliente terá acesso.</description>
+    </item>
+    
+    <item>
+      <title>Tecnologia e minorias</title>
+      <link>https://vhfmag.gitlab.io/post/minorities/</link>
+      <pubDate>Tue, 05 Sep 2017 00:34:06 -0300</pubDate>
+      
+      <guid>https://vhfmag.gitlab.io/post/minorities/</guid>
+      <description>Nos últimos dois anos, somente brancos fora nominados para as categorias de atuação do Oscar, o que levou as hashtags #OscarSoWhite e #OscarStillSoWhite ao trending no Twitter e promoveu um debate acalorado sobre o tema em redes sociais 1. A discussão parece ter tido resultado: em 2017, finalmente há negros em todas as principais categorias.
+Os membros da Academia de Artes e Ciências Cinematográficas, organizadora do prêmio, no entanto, não são os únicos selecionadores com claro viés racial.</description>
+    </item>
+    
+  </channel>
+</rss>
