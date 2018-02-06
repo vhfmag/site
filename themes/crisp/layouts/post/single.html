@@ -11,6 +11,9 @@
             <div class="article singlepage" id="{{ .Slug }}" class="{{ .Type }}">
                 <div class="post-stamp">
                     <h1 class="post-title">{{ .Title }}</h1>
+                    <h2>
+                        {{ with .Description}}<p>{{.}}</p>{{end}}
+                    </h2>
                     <span class="post-date">{{ .Date.Format "Jan 2, 2006" }}{{ if not .Site.Params.hideReadingTime }} &middot; {{ .ReadingTime }} minute read{{ end }}</span>
                     {{ if isset .Params "categories" }}
                         <span class="taglist">
