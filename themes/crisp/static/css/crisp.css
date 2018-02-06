@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Zilla+Slab:300,400,700&subset=latin-ext');
+
 /* Basic Typography */
 :root {
 	--text-color: rgb(237, 237, 237);
@@ -21,6 +23,13 @@
 	background-color: var(--bg-color);
 }
 
+@media (min-width: 600px) {
+	.sidebar {
+		position: sticky;
+		height: 100vh;
+		top: 0;
+	}
+}
 @media (max-width: 600px) {
 	#layout {
 		flex-direction: column;
@@ -37,7 +46,7 @@
 
 html, button, input, select, textarea,
     .pure-g [class *= "pure-u"] {
-	font-family: "Open Sans", sans-serif;
+	font-family: "Zilla Slab", serif;
 	font-weight: 300;
 	color:var(--text-color);
 	font-size: 1em;
@@ -125,7 +134,7 @@ p, hr, h4, h5, h6 {
 }
 /* Headings */
 h1, h2, h3, h4, h5, h6 {
-	font-family: "Bree Serif", serif;
+	font-family: "Zilla Slab", serif;
 	font-weight: 400 !important;
 }
 h1 {
@@ -252,14 +261,14 @@ input {
 	color:#888;
 }
 h1.post-title {
-	margin-top:0.35em;
+	margin-top:0;
 	margin-bottom: 0.6em;
 }
 h3.post-title {
 	margin-top:0.4em;
 	padding-bottom:0.9em;
 	/* border-bottom: 1px solid #eee; */
-	font-size: 1em;
+	font-size: 1.1em;
 	color: var(--text-color);
 }
 .post-title .feature-star {
@@ -276,7 +285,7 @@ h3.post-title {
 	padding:0.3em 0.6em 0.3em 0.6em;
 	vertical-align:20%;
 	font-size:0.5em;
-	font-family: "Open Sans", sans-serif;
+	font-family: "Zilla Slab", sans-serif;
 	font-weight: 700 !important;
 	text-transform:uppercase;
 	letter-spacing:0.05em;
@@ -342,6 +351,9 @@ h3.post-title {
 @media only screen and (max-width: 800px) {
 	body {
 		padding:0;
+	}
+	.index-list, .singlepage {
+		padding-top: 1em;
 	}
 	.header {
 		border-right: none;
