@@ -92,11 +92,7 @@ html, button, input, select, textarea,
 
 /*********************** Content *****************/
 .index-list, .singlepage {
-    padding: 2em 2em 0;
-}
-
-.index-list h2 {
-	margin-top: 0;
+    margin: 2em 2em 0;
 }
 
 .article {
@@ -344,7 +340,7 @@ h3.post-title {
 		font-size: 1.1em;
 	}
     .index-list, .singlepage {
-        padding: 2em 3em 0;
+        margin: 2em 3em 0;
     }
 }
 /* Small Screens */
@@ -353,7 +349,7 @@ h3.post-title {
 		padding:0;
 	}
 	.index-list, .singlepage {
-		padding-top: 1em;
+		margin-top: 1em;
 	}
 	.header {
 		border-right: none;
