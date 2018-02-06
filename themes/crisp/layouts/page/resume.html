@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="{{.Site.LanguageCode}}">
+    <head>
+        {{ partial "header.html" . }}
+    </head>
+    <div id="layout">
+        <div class="sidebar">
+            {{ partial "sidebar.html" . }}
+        </div>
+        <div class="content">
+            <div class="singlepage {{ .Type }}" id="{{ .Slug }}">
+                {{ partial "resume.md" | markdownify }}
+                {{ partial "footer.html" . }}
+            </div>
+        </div>
+    </body>
+</html>
+
