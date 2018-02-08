@@ -6,8 +6,8 @@
         <!-- {{ with .Description}}<p>{{.}}</p>{{end}} -->
     </div>
     <div class="logo">
-        {{ if isset .Site.Params "gravatarHash" }}
-            <a id="logo" href="{{ .Site.BaseURL }}"><img src="https://www.gravatar.com/avatar/{{ .Site.Params.gravatarHash }}?s=200" alt="gravatar" title="{{ .Site.Author.name }}"></a>
+        {{ with .Site.Params.gravatarHash }}
+            <a id="logo" href="{{ $.Site.BaseURL }}"><img class="u-photo" src="https://www.gravatar.com/avatar/{{ . }}?s=200" alt="gravatar" title="{{ $.Site.Author.name }}"></a>
         {{ end }}
         {{ if isset .Site.Params "logo" }}
             {{ if .Site.Params.roundlogo }}
