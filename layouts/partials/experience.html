@@ -1,0 +1,18 @@
+<h2>Experiências</h2>
+<div class="experiences">
+    {{ range . }}
+    <div class="experience">
+        <img src="{{ .image }}" alt="Logo {{ .company }}"/>
+        <h4 class="title">{{ .company }}</h4>
+        <div class="info">
+            <div>{{ .role }}</div>
+            <div>{{ .period }}</div>
+        </div>
+        <ul class="description">
+            {{ range .tasks }}
+            <li>{{ . }}</li>
+            {{ end }}
+        </ul>
+    </div>
+    {{ end }}
+</div>
