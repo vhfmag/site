@@ -1,5 +1,9 @@
 /* competences */
 
+.hide {
+  display: none;
+}
+
 .resume .competences {
   /* display: flex;
     flex-wrap: wrap;
