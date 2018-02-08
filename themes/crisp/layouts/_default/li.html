@@ -1,8 +1,9 @@
 <h3 class="post-title">
-    <a href="{{ .Permalink }}">{{ .Title }}</a>
+    <a class="u-url p-name" href="{{ .Permalink }}">{{ .Title }}</a>
     <span class="separator"> &middot; </span>
     <time datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" | safeHTML }}">
-	{{ .Date.Format "2 Jan 2006" }}
+        {{ .Date.Format "2 Jan 2006" }}
+        <span class="dt-published hide">{{ .Date.Format "2006-01-02" }}</span>
     </time>
     {{if isset .Params "tags" }}
     <span class="taglist">
@@ -16,12 +17,12 @@
     <span class="taglist">
 	&middot;
 	{{ range .Params.categories }}
-	<a class="label" href="{{ "/categories/" | absURL }}{{ . | urlize }}">{{ . }}</a>
+	<a class="label p-category" href="{{ "/categories/" | absURL }}{{ . | urlize }}">{{ . }}</a>
 	{{ end }}
     </span>
     {{ end }}
     {{if isset .Params "description"}}
-    <p>{{ .Params.description }}</p>
+    <p class="p-summary">{{ .Params.description }}</p>
     {{end}}
 </h3>
 
