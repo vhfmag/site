@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="{{.Site.LanguageCode}}">
+    <head>
+        {{ partial "header.html" . }}
+    </head>
+    <body>
+        <div id="layout">
+            <div class="sidebar">
+                {{ partial "sidebar.html" . }}
+            </div>
+            <div class="content">
+                <div class="singlepage {{ .Type }}" id="{{ .Slug }}">
+                    <h1>Currículo</h1>
+                    <h2>Competências</h2>
+
+                    <h3>Como posso ser útil</h3>
+                    {{ range .Site.Data.resume.competences }}
+                        <dl>
+                            <dt>{{ .name }}</dt>
+                            <dd>{{ .description }}</dd>
+                        </dl>
+                    {{ end }}
+
+                    <h3>Habilidades e interesses</h3>
+                    <h4>Habilidades técnicas</h4>
+                    {{ range .Site.Data.resume.skills.technical }}
+                        <dl>
+                            <dt>{{ .name }}</dt>
+                            <dd>{{ .description }}</dd>
+                        </dl>
+                    {{ end }}
+
+                    {{ partial "footer.html" . }}
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+
