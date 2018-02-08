@@ -221,7 +221,7 @@ input {
 }
 
 .logo {
-    margin-bottom:2em;
+	display: none;
 }
 
 #follow-icons .fa:hover {
