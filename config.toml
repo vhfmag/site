@@ -4,13 +4,17 @@ title = "victor magalhães"
 DefaultContentLanguage = "pt"
 theme = "crisp"
 
+[author]
+name = "Victor Magalhães"
+email = "victorhfmag@gmail.com"
+
 [params]
 # config
 rss = true
 index = "list"
-tagline = "web & stuff"
+tagline = "web dev, decent web & p2p enthusiast, reader"
 # social
-gravatarHash = "aluntesarava"
+gravatarHash = "017c815c3972a18001cb840713ea761a"
 keybase = "https://keybase.io/vhfmag"
 linkedin = "https://www.linkedin.com/in/vhfmag"
 github = "https://github.com/vhfmag/"

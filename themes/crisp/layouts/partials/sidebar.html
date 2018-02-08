@@ -1,7 +1,8 @@
 <div class="header h-card">
     <div class="title">
         <h1><a href="{{.Site.BaseURL}}" class="p-name u-url">{{.Site.Title}}</a></h1>
-        {{ with .Site.Params.tagline }}<p class="lead">{{ . | markdownify }}</p>{{ end }}
+        {{ with .Site.Author.email }} <p><a href="mailto:{{.}}" class="u-email">{{ . }}</a></p> {{ end }}
+        {{ with .Site.Params.tagline }}<p class="lead p-note">{{ . | markdownify }}</p>{{ end }}
         <!-- {{ with .Description}}<p>{{.}}</p>{{end}} -->
     </div>
     <div class="logo">
