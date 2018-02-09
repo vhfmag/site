@@ -59,25 +59,96 @@
 <!-- RSS -->
 {{ $siteTitle := .Site.Title }}
 {{ $authorName := .Site.Author.name }}
-{{ with .RSSLink }}<link href="{{ . }}" rel="alternate" type="application/rss+xml" title="{{ $siteTitle }} &middot; {{ $authorName }}" />{{ end }}
+{{ with .RSSLink }}<link href="{{ . }}" rel="alternate" type="application/rss+xml" title="{{ $siteTitle }}" />{{ end }}
 
 <link rel="canonical" href="{{ .Permalink }}" />
+<link rel="author" href="{{ .Site.BaseURL }}" />
 
-{{ if .IsPage }}
-    {{ with .Site.Params.googleplus }}
-    <script type="application/ld+json">
-{
-                "@context": "http://schema.org",
-                "@type": "Article",
-                "headline": "{{ .Title }}",
-                "author": {
-                    "@type": "Person",
-                    "name": "http://profiles.google.com/{{ . }}?rel=author"
+<link rel="pingback" href="https://webmention.io/vhfmag.gitlab.io/xmlrpc" />
+<link rel="webmention" href="https://webmention.io/vhfmag.gitlab.io/webmention" />
+
+{{ if .IsHome }}
+<script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "Person",
+        {{ with .Site.Author.email }}"email": "mailto:{{ . }}",{{ end }}
+        {{ with .Site.Params.gravatarHash }}"image": "https://www.gravatar.com/avatar/{{ . }}?s=200",{{ end }}
+        {{ with .Site.Author.jobtitle }}"jobTitle": "{{ . }}",{{ end }}
+        {{ with .Site.Author.name }}"name": "{{ . }}",{{ end }}
+        {{ with .Site.Author.birthplace }}"birthPlace": "{{ . }}",{{ end }}
+        {{ with .Site.Author.birthdate }}"birthDate": "{{ . }}",{{ end }}
+        {{ with .Site.Author.gender }}"gender": "{{ . }}",{{ end }}
+        {{ with .Site.Author.nationality }}"nationality": "{{ . }}",{{ end }}
+        "url": "{{ .Site.BaseURL }}",
+        {{ with .Site.Author.address }}
+        "address": {
+            "@type": "PostalAddress",
+            {{ with .city }}"addressLocality": "{{ . }}",{{ end }}
+            {{ with .province }}"addressRegion": "{{ . }}",{{ end }}
+            {{ with .country }}"addressCountry": "{{ . }}",{{ end }}
+        },
+        {{ end }}
+        {{ with .Site.Author.organization }}
+        "worksFor": {
+            "@type": "LocalBusiness",
+            {{ with .name }}"name": "{{ . }}",{{ end }}
+            {{ with .url }}"url": "{{ . }}",{{ end }}
+            {{ with .logo }}"logo": "{{ . }}",{{ end }}
+            {{ with .description }}"description": "{{ . }}",{{ end }}
+            {{ with .address }}
+            "address": {
+                "@type": "PostalAddress",
+                {{ with .street }}"streetAddress": "{{ . }}",{{ end }}
+                {{ with .city }}"addressLocality": "{{ . }}",{{ end }}
+                {{ with .province }}"addressRegion": "{{ . }}",{{ end }}
+                {{ with .postalcode }}"postalCode": "{{ . }}",{{ end }}
+                {{ with .country }}"addressCountry": "{{ . }}"{{ end }}
             },
-            "datePublished": "{{ .Date.Format "2006-01-02" }}",
-            "description": "{{ .Description }}",
-            "wordCount": {{ .WordCount }}
+            "geo": {
+                "@type": "GeoCoordinates",
+                {{ with .latitude }}"latitude": "{{ . }}",{{ end }}
+                {{ with .longitude }}"longitude": "{{ . }}"{{ end }}
+            },
+            {{ with .map }}"hasMap": "{{ . }}",{{ end }}
+            {{ end }}
+            {{ with .phone }}
+            "contactPoint": {
+                "@type": "ContactPoint",
+                "telephone": "{{ . }}"
             }
+            {{ end }}
+        },
+        {{ end }}
+        "sameAs": [
+            {{ with .Site.Params.facebook }}"{{ . }}",{{end}}
+            {{ with .Site.Params.twitter }}"{{ . }}",{{ end }}
+            {{ with .Site.Params.linkedin }}"{{ . }}",{{ end }}
+            {{ with .Site.Params.gitlab }}"{{ . }}",{{end}}
+            {{ with .Site.Params.pocket }}"{{ . }}",{{end}}
+            {{ with .Site.Params.github }}"{{ . }}",{{end}}
+            {{ with .Site.Params.instagram }}"{{ . }}",{{end}}
+            {{ with .Site.Params.googleplus }}"{{ . }}",{{ end }}
+            {{ with .Site.Params.bitbucket }}"{{ . }}",{{ end }}
+            {{ with .Site.Params.stackOverflow }}"{{ . }}",{{ end }}
+            {{ with .Site.Params.keybase }}"{{ . }}",{{ end }}
+        ]
+    }
     </script>
-    {{ end }}
+{{ else if (and .IsPage (eq .Page.Type "post")) }}
+<script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "Article",
+        "headline": "{{ .Page.Title }}",
+        {{ with .Page.Description }}"description": "{{ . }}",{{ end }}
+        {{ with .Page.Params.image }}"image": "{{ . }}",{{ end }}
+        {{ with (default .Site.Author.name .Page.Params.author.name) }}"author": "{{ . }}",{{ end }}
+        "wordcount": "{{ .Page.WordCount }}",
+        "url": "{{ .Page.Permalink }}",
+        "datePublished": "{{ .Page.PublishDate.Format "2006-01-02" }}",
+        "dateModified": "{{ .Page.Lastmod.Format "2006-01-02" }}",
+        "articleBody": "{{ .Page.Plain }}"
+    }
+</script>
 {{ end }}

@@ -6,7 +6,32 @@ theme = "crisp"
 
 [author]
 name = "Victor Magalhães"
-email = "victorhfmag@gmail.com"
+email = "vhfmag@protonmail.com"
+birthplace = "Salvador, Bahia, Brazil"
+birthdate = "1994-03-26"
+jobtitle = "Web developer"
+gender = "male"
+nationality = "Brazilian"
+[author.address]
+city = "Salvador"
+province = "Bahia"
+country = "Brazil"
+
+[author.organization]
+name = "Cubos"
+url = "https://cubos.io/"
+logo = "https://cubos.io/img/logo.svg"
+phone = "+55 71 98788-3183"
+[author.organization.address]
+city = "Salvador"
+street = "Alameda Salvador, 1057, Salvador Shopping Business, Torre América, Sala 1008"
+postalcode = "41820-790"
+province = "Bahia"
+country = "Brazil"
+map = "https://goo.gl/maps/HFMPxrhNeV92"
+latitude = -12.97757
+longitude = -38.4595287
+# Salvador Shopping Business, Torre América, sala 1008 - Caminho das Árvores, Salvador - BA, 41820-790
 
 [params]
 # config
