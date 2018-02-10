@@ -398,3 +398,24 @@ h3.post-title {
 		margin-left: 2em;
 	}
 }
+
+@media (max-width: 600px) {
+	.sidebar-menu {
+		display: flex;
+		margin: -.25em;
+		padding: 0;
+		flex-wrap: wrap;
+	}
+
+	.sidebar-menu-item {
+		margin: .25em;
+	}
+
+	.sidebar .lead {
+		display: none;
+	}
+
+	.sidebar {
+		flex-basis: auto;
+	}
+}
