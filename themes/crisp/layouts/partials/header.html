@@ -17,7 +17,7 @@
         {{ with .Site.Author.birthdate }},"birthDate": "{{ . }}"{{ end }}
         {{ with .Site.Author.gender }},"gender": "{{ . }}"{{ end }}
         {{ with .Site.Author.nationality }},"nationality": "{{ . }}"{{ end }}
-        ,"url": "{{ .Site.BaseURL }}",
+        ,"url": "{{ .Site.BaseURL }}"
         {{ with .Site.Author.address }}
         ,"address": {
             "@type": "PostalAddress"
@@ -28,10 +28,11 @@
         {{ end }}
         {{ with .Site.Author.organization }}
         ,"worksFor": {
-            "@type": "LocalBusiness",
+            "@type": "LocalBusiness"
             {{ with .name }},"name": "{{ . }}"{{ end }}
             {{ with .email }},"email": "{{ . }}"{{ end }}
             {{ with .url }},"url": "{{ . }}"{{ end }}
+            {{ with .logo }},"image": "{{ . }}"{{ end }}
             {{ with .logo }},"logo": "{{ . }}"{{ end }}
             {{ with .description }},"description": "{{ . }}"{{ end }}
             {{ with .address }}
@@ -44,17 +45,14 @@
                 {{ with .country }},"addressCountry": "{{ . }}"{{ end }}
             }
             ,"geo": {
-                "@type": "GeoCoordinates",
+                "@type": "GeoCoordinates"
                 {{ with .latitude }},"latitude": "{{ . }}"{{ end }}
                 {{ with .longitude }},"longitude": "{{ . }}"{{ end }}
             }
             {{ with .map }},"hasMap": "{{ . }}"{{ end }}
             {{ end }}
             {{ with .phone }}
-            ,"contactPoint": {
-                "@type": "ContactPoint",
-                "telephone": "{{ . }}"
-            }
+            ,"telephone": "{{ . }}"
             {{ end }}
         },
         {{ end }}
