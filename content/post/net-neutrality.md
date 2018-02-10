@@ -1,7 +1,7 @@
 ---
 title: "Sobre a neutralidade de rede"
 description: "O que é, como a internet muda sem ela, porque defendem e porque atacam"
-date: 2017-12-19T00:41:45-03:00
+date: 2017-12-19
 draft: false
 ---
 
