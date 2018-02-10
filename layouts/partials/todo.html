@@ -1,0 +1,9 @@
+{{ if ne (index .list 0) nil }}
+<h2>{{ .title }}</h2>
+<dl class="todo-list">
+    {{ range .list }}
+        <dt class="{{ if (default false .done) }}stroke{{ end }}">{{ .title | markdownify }}</dt>
+        {{ with .description }}<dd><blockquote>{{ . | markdownify }}</blockquote></dd>{{ end }}
+    {{ end }}
+</dl>
+{{ end }}

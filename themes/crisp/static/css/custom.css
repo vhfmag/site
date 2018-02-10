@@ -1,5 +1,9 @@
 /* competences */
 
+.stroke {
+  text-decoration: line-through;
+}
+
 .hide {
   display: none;
 }

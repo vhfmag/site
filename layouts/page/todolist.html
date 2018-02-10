@@ -5,6 +5,10 @@
     {{ partial "header.html" . }}
 </head>
 
+{{ $list := shuffle .Site.Data.todo }}
+{{ $todo := where $list "done" "!=" true }}
+{{ $done := where $list "done" "==" true }}
+
 <body>
     <div id="layout">
         <div class="sidebar">
@@ -13,13 +17,8 @@
         <div class="content">
             <div class="singlepage {{ .Type }}" id="{{ .Slug }}">
                 <main class="todo">
-                    <h2>preciso/quero algum dia</h2>
-                    <dl class="todo-list">
-                        {{ range (shuffle .Site.Data.todo) }}
-                            <dt>{{ .title | markdownify }}</dt>
-                            {{ with .description }}<dd><blockquote>{{ . | markdownify }}</blockquote></dd>{{ end }}
-                        {{ end }}
-                    </dl>
+                    {{ partial "todo" (dict "title" "algum dia" "list" $todo) }}
+                    {{ partial "todo" (dict "title" "feito" "list" $done) }}
                 </main>
 
                 {{ partial "footer.html" . }}
