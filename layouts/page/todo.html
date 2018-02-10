@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="{{.Site.LanguageCode}}">
+
+<head>
+    {{ partial "header.html" . }}
+</head>
+
+<body>
+    <div id="layout">
+        <div class="sidebar">
+            {{ partial "sidebar.html" . }}
+        </div>
+        <div class="content">
+            <div class="singlepage {{ .Type }}" id="{{ .Slug }}">
+                <main class="todo">
+                    <h2>preciso/quero algum dia</h2>
+                    <dl class="todo-list">
+                        {{ range (shuffle .Site.Data.todo) }}
+                            <dt>{{ .title | markdownify }}</dt>
+                            {{ with .description }}<dd><blockquote>{{ . | markdownify }}</blockquote></dd>{{ end }}
+                        {{ end }}
+                    </dl>
+                </main>
+
+                {{ partial "footer.html" . }}
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

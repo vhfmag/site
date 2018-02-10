@@ -89,3 +89,12 @@
   grid-column: 1;
   margin-top: 0.2em;
 }
+
+.todo .todo-list {
+  font-size: .95em;
+}
+
+.todo .todo-list blockquote {
+  font-size: 1em;
+  margin: 0;
+}
