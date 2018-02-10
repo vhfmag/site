@@ -11,7 +11,7 @@ birthplace = "Salvador, Bahia, Brazil"
 birthdate = "1994-03-26"
 jobtitle = "Web developer"
 gender = "male"
-nationality = "Brazilian"
+nationality = "Brazil"
 [author.address]
 city = "Salvador"
 province = "Bahia"
