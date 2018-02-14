@@ -1,4 +1,4 @@
-baseURL = "https://vhfmag.gitlab.io/"
+baseURL = "https://vhfmag.netlify.com/"
 languageCode = "pt-br"
 title = "victor magalhães"
 DefaultContentLanguage = "pt"
