@@ -198,14 +198,11 @@ hr{
 /*ul, ol {
 	margin-left: 3em;
 }*/
-code {
-	font-size:1.4em;
-	background: #eee;
-}
 pre {
 	font-size: 0.8em;
 	line-height: 2em;
-	background: #eee;
+	background: rgba(255, 255, 255, .1);
+	color: var(--accent-color);
 	padding: 1em;
 	word-break: break-all;
 	word-wrap: break-word;
