@@ -14,17 +14,17 @@ Para entender a resposta, é necessário saber como o robô em questão aprendeu
 
 O aparente racismo (e outras formas de discriminação) de algumas de nossas tecnologias baseadas em aprendizado de máquina é aprendido com a nossa sociedade e seus preconceitos estruturais. Outro exemplo recente foi Tay, o bot desenvolvido pela Microsoft para entender a linguagem de adolescentes e soar como eles [^3].
 
-![Tweet de @Tayandyou com conteúdo antissemita](/images/posts/tech-and-minorities/tweet-1.png)
+{{< figure title="Tweet de @Tayandyou com conteúdo antissemita" src="/images/posts/tech-and-minorities/tweet-1.png" >}}
 
 No entanto, sua conta no Twitter foi desativada um dia após seu lançamento, já que usuários começaram a twittar mensagens racistas, misóginas e antissemitas para a conta, comportamento que foi prontamente aprendido [^4], conforme demonstrado nas imagens acima.
 
 A questão da inadequação de tecnologias a pessoas não-brancas é antiga e data, pelo menos, da invenção dos _Shirley Cards_, utilizados para calibrar os esquemas de cores de filmes fotográficos entre as décadas de 40 e 90. Com eles, buscava-se representar com a maior precisão possível a _‘cor de pele’_  — obviamente baseada na pele branca.
 
-![Shirley cards, usados para estudar o esquema de cores de filmes analógicos](/images/posts/tech-and-minorities/shirley-cards.gif)
+{{< figure title="Shirley cards, usados para estudar o esquema de cores de filmes analógicos" src="/images/posts/tech-and-minorities/shirley-cards.gif" >}}
 
 Nestes cartões, apareciam algumas cores básicas e fotos de mulheres brancas com roupas coloridas, refletindo nisso o seu público alvo. Tal escolha levou, no entanto, a representações de pessoas negras ou de outras etnias com pouca precisão, confusas e borradas, conforme abaixo:
 
-![Fotografia com pessoas de pele escura, demonstrando a ineficácia de filmes da época em representar esse tom de pele](/images/posts/tech-and-minorities/kodak.png)
+{{< figure title="Fotografia com pessoas de pele escura, demonstrando a ineficácia de filmes da época em representar esse tom de pele" src="/images/posts/tech-and-minorities/kodak.png" >}}
 
 A questão só foi endereçada nos anos 70, e por uma razão não relacionada a raça. Diferentes empresas passaram a questionar a precisão dos filmes fotográficos produzidos à época, ao reproduzir em fotografias as diferentes nuances de cor de seus produtos. Por exemplo, empresas de móveis não conseguiam mostrar a diferença entre os diferentes tipos de madeira, e chocolate ao leite e chocolate meio amargo eram difíceis de distinguir em anúncios impressos. Para saber mais sobre o assunto, assista ao vídeo que a Vox fez sobre o assunto:
 
