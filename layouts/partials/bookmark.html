@@ -3,7 +3,7 @@
     {{ range . }}
         <li class="bookmark">
             <h3><a href="{{ .Params.link }}">{{ .Params.title | markdownify }}</a></h3>
-            {{ with .Params.author }}<div class="bookmark-author">{{ . | markdownify }}</div>{{ end }}
+            {{ with .Params.author }}<div class="bookmark-author">By {{ . | markdownify }}</div>{{ end }}
             {{ with .Content }}<p>{{ . | markdownify }}</p>{{ end }}
         </li>
     {{ end }}

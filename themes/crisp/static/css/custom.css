@@ -110,3 +110,7 @@
 .bookmark-page .bookmark-author {
   font-size: .9em;
 }
+
+.bookmark-page .bookmark:not(:first-child) {
+  margin-top: 3em;
+}
