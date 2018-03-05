@@ -15,13 +15,13 @@
         <div class="content">
             <div class="singlepage {{ .Type }}" id="{{ .Slug }}">
                 <main class="bookmark-page">
-                    <h2>bookmarks</h2>
+                    <h2>{{ .CurrentSection.Name }}</h2>
                     {{ $paginator := .Paginate $bookmarks }}
-                    <ul class="bookmark-list">
+                    <section class="bookmark-list">
                     {{ range $paginator.Pages }}
                         {{ partial "bookmark" . }}
                     {{ end }}
-                    </ul>
+                    </section>
                     {{ partial "pagination.html" $paginator }}
                 </main>
 
