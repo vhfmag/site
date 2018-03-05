@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="{{.Site.LanguageCode}}">
+
+<head>
+    {{ partial "header.html" . }}
+</head>
+
+{{ $bookmarks := (where .Data.Pages "Type" "bookmark") }}
+
+<body>
+    <div id="layout">
+        <div class="sidebar">
+            {{ partial "sidebar.html" . }}
+        </div>
+        <div class="content">
+            <div class="singlepage {{ .Type }}" id="{{ .Slug }}">
+                <main class="bookmark-page">
+                    <h2>bookmarks</h2>
+                    {{ partial "bookmark" $bookmarks }}
+                </main>
+
+                {{ partial "footer.html" . }}
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

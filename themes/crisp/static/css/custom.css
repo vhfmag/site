@@ -102,3 +102,11 @@
   font-size: 1em;
   margin: 0;
 }
+
+.bookmark-page .bookmark-list {
+  list-style-type: none;
+}
+
+.bookmark-page .bookmark-author {
+  font-size: .9em;
+}
