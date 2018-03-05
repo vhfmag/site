@@ -15,7 +15,7 @@
         <div class="content">
             <div class="singlepage {{ .Type }}" id="{{ .Slug }}">
                 <main class="bookmark-page">
-                    <h2>{{ .CurrentSection.Name }}</h2>
+                    <h2>{{ .CurrentSection.Title }}</h2>
                     {{ $paginator := .Paginate $bookmarks }}
                     <section class="bookmark-list">
                     {{ range $paginator.Pages }}
