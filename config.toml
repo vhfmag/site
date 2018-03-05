@@ -3,6 +3,7 @@ languageCode = "pt-br"
 title = "victor magalhães"
 DefaultContentLanguage = "pt"
 theme = "crisp"
+Paginate = 5
 
 [author]
 name = "Victor Magalhães"
