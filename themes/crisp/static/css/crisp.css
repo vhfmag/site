@@ -109,9 +109,14 @@ html, button, input, select, textarea,
 .index-list .article {
     /* border-bottom: 0.1em #eee solid; */
 }
+
 .pagination {
 	margin-bottom:1em;
-        margin-top: 2em;
+	margin-top: 2em;
+}
+
+.pagination a {
+	margin: 4pt;
 }
 
 /*************** footer **************/
