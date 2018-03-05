@@ -4,6 +4,8 @@ title = "victor magalhães"
 DefaultContentLanguage = "pt"
 theme = "crisp"
 Paginate = 5
+enableEmoji = true
+enableGitInfo = true
 
 [author]
 name = "Victor Magalhães"
@@ -32,13 +34,12 @@ country = "Brazil"
 map = "https://goo.gl/maps/HFMPxrhNeV92"
 latitude = -12.97757
 longitude = -38.4595287
-# Salvador Shopping Business, Torre América, sala 1008 - Caminho das Árvores, Salvador - BA, 41820-790
 
 [params]
 # config
 rss = true
 index = "list"
-tagline = "web dev, decent web & p2p enthusiast, into the solarpunk hype train"
+tagline = "web dev, decentralized web & p2p enthusiast"
 # social
 gravatarHash = "017c815c3972a18001cb840713ea761a"
 keybase = "https://keybase.io/vhfmag"
