@@ -1,11 +1,19 @@
-{{ if ne (index . 0) nil }}
-<ul class="bookmark-list">
-    {{ range . }}
-        <li class="bookmark">
-            <h3><a href="{{ .Params.link }}">{{ .Params.title | markdownify }}</a></h3>
-            {{ with .Params.author }}<div class="bookmark-author">By {{ . | markdownify }}</div>{{ end }}
-            {{ with .Content }}<p>{{ . | markdownify }}</p>{{ end }}
-        </li>
-    {{ end }}
-</ul>
+<!-- {{ $islist := (eq .Kind "section") }} -->
+{{ $islist := .IsPage }}
+
+{{ if $islist }}
+<div class="bookmark">
+{{ else }}
+<li class="bookmark">
+{{ end }}
+    <h3>
+        <a href="{{ .Params.link }}">{{ .Params.title | markdownify }}</a>
+    </h3>
+    {{ with .Params.author }}<div class="bookmark-author">By {{ . | markdownify }}</div>{{ end }}
+    <a class="permalink" href="{{ .Permalink }}">Permalink</a>
+    {{ with .Content }}<p>{{ . | markdownify }}</p>{{ end }}
+{{ if $islist }}
+</div>
+{{ else }}
+</li>
 {{ end }}

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="{{.Site.LanguageCode}}">
+    <head>
+        {{ partial "header.html" . }}
+    </head>
+    <body>
+        <div id="layout">
+            <div class="sidebar">
+                {{ partial "sidebar.html" . }}
+            </div>
+            <div class="content">
+                <article class="article singlepage h-entry {{ .Type }}" id="{{ .Slug }}">
+                    {{ partial "bookmark.html" . }}
+                    {{ partial "footer.html" . }}
+                </article>
+            </div>
+        </div>
+    </body>
+</html>
+

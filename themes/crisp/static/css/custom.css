@@ -103,6 +103,10 @@
   margin: 0;
 }
 
+.bookmark .permalink {
+  font-size: .8em;
+}
+
 .bookmark-page .bookmark-list {
   list-style-type: none;
 }
