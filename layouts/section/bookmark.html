@@ -5,7 +5,7 @@
     {{ partial "header.html" . }}
 </head>
 
-{{ $bookmarks := (where .Data.Pages "Type" "bookmark") }}
+{{ $bookmarks := where .Data.Pages.ByLastmod.Reverse "Type" "bookmark" }}
 
 <body>
     <div id="layout">
