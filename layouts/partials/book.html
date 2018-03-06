@@ -1,0 +1,13 @@
+<article class="bookmark">
+    <h3>
+        <a href="{{ .Params.link }}">{{ .Params.title | markdownify }}</a>
+    </h3>
+
+    <div class="info">
+        {{ with .Params.author }}<div class="bookmark-author">By {{ . | markdownify }}</div>{{ end }}
+        <a class="permalink" href="{{ .Permalink }}">Permalink</a>
+        {{ with .Params.startDate }}<div>Started reading <time datetime="{{ dateFormat "2006-01-02" . }}">{{ dateFormat "02/01/2006" . }}</time></div>{{ end }}
+    </div>
+
+    {{ with .Content }}<p>{{ . | markdownify }}</p>{{ end }}
+</article>

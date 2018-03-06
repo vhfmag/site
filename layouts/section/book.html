@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="{{.Site.LanguageCode}}">
+
+<head>
+    {{ partial "header.html" . }}
+</head>
+
+{{ $books := where .Data.Pages.ByDate.Reverse "Type" "book" }}
+
+<body>
+    <div id="layout">
+        <div class="sidebar">
+            {{ partial "sidebar.html" . }}
+        </div>
+        <div class="content">
+            <div class="singlepage {{ .Type }}" id="{{ .Slug }}">
+                <main class="bookmark-page">
+                    <h2>{{ .CurrentSection.Title }}</h2>
+                    {{ $paginator := .Paginate $books }}
+                    <section class="bookmark-list">
+                    {{ range $paginator.Pages }}
+                        {{ partial "book" . }}
+                    {{ end }}
+                    </section>
+                    {{ partial "pagination.html" $paginator }}
+                </main>
+
+                {{ partial "footer.html" . }}
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
