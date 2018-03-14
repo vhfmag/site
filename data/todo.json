@@ -1,6 +1,7 @@
 [
     {
-        "title": "aprender rust"
+        "title": "fazer algum projeto com rust",
+        "tags": ["try-stuff"]
     },
     {
         "title": "ter um portfólio de respeito"
@@ -9,7 +10,8 @@
         "title": "fazer algo com dados abertos"
     },
     {
-        "title": "fazer iot com arduino / raspberry / whatever"
+        "title": "fazer iot com arduino / raspberry / whatever",
+        "tags": ["try-stuff"]
     },
     {
         "title": "ter educação financeira"
@@ -24,10 +26,12 @@
         "title": "me exercitar regularmente"
     },
     {
-        "title": "fazer uma WebExtension"
+        "title": "fazer uma WebExtension",
+        "tags": ["try-stuff"]
     },
     {
-        "title": "fazer algo usando [gun.js](https://gun.js.org/)"
+        "title": "fazer algo usando [gun.js](https://gun.js.org/)",
+        "tags": ["try-stuff"]
     },
     {
         "title": "data visualization"
@@ -57,7 +61,12 @@
         "title": "aprender alemão"
     },
     {
-        "title": "usar o [choo](https://choo.io/)"
+        "title": "usar o [choo](https://choo.io/)",
+        "tags": ["try-stuff"]
+    },
+    {
+        "title": "fazer app com [elm](https://http://elm-lang.org/)",
+        "tags": ["try-stuff"]
     },
     {
         "title": "aprender ciência da computação"
@@ -66,24 +75,37 @@
         "title": "se formar"
     },
     {
-        "title": "trabalhar no [workshop de typescript](https://github.com/vhfmag/typescript-workshop/) com o [workshopper-adventure](https://github.com/workshopper/workshopper-adventure)"
+        "title": "trabalhar no [workshop de typescript](https://github.com/vhfmag/typescript-workshop/) com o [workshopper-adventure](https://github.com/workshopper/workshopper-adventure)",
+        "tags": ["oss"]
     },
     {
         "title": "usar ML para transcrever fala humana em [IPA](https://www.internationalphoneticalphabet.org/)"
     },
     {
-        "title": "fazer algo com [Dat](https://datproject.org/) (provavelmente relacionado ao [Beaker Browser](https://beakerbrowser.com/))"
+        "title": "fazer algo com [Dat](https://datproject.org/) (provavelmente relacionado ao [Beaker Browser](https://beakerbrowser.com/))",
+        "tags": ["try-stuff"]
     },
     {
-        "title": "fazer algo com [SSB](https://scuttlebutt.nz/)"
+        "title": "fazer algo com [SSB](https://scuttlebutt.nz/)",
+        "tags": ["try-stuff"]
     },
     {
         "title": "estudar dois sistemas de design"
     },
     {
-        "title": "fazer algo com [IPFS](https://ipfs.io/)"
+        "title": "fazer algo com [IPFS](https://ipfs.io/)",
+        "tags": ["try-stuff"]
     },
     {
-        "title": "implementar plugin de Tandem (colaboração P2P com CRDT em editores de text) do VSCode ([issue](https://github.com/typeintandem/tandem/issues/128))"
+        "title": "implementar plugin de Tandem (colaboração P2P com CRDT em editores de text) do VSCode ([issue](https://github.com/typeintandem/tandem/issues/128))",
+        "tags": ["oss"]
+    },
+    {
+        "title": "usar [DangerJS](http://danger.systems/js/) em algum projeto",
+        "tags": ["try-stuff"]
+    },
+    {
+        "title": "implementar integração do [DangerJS](http://danger.systems/js/) com [Gitlab](https://gitlab.com) ([issue](https://github.com/danger/danger-js/issues/396))",
+        "tags": ["oss"]
     }
 ]
