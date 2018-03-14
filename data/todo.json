@@ -107,5 +107,8 @@
     {
         "title": "implementar integração do [DangerJS](http://danger.systems/js/) com [Gitlab](https://gitlab.com) ([issue](https://github.com/danger/danger-js/issues/396))",
         "tags": ["oss"]
+    },
+    {
+        "title": "implementar tags aqui no blog"
     }
 ]
