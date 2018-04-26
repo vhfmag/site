@@ -4,7 +4,7 @@ https://keybase.io/vhfmag
 
 I hereby claim:
 
-  * I am an admin of https://vhfmag.netlify.com
+  * I am an admin of https://vhfmag.gitlab.io
   * I am vhfmag (https://keybase.io/vhfmag) on keybase.
   * I have a public key ASCAJtivm-UDeM-Q-2kVzSbEqRO8Uk8yjwQzBh9Yuy0FVgo
 
@@ -26,7 +26,7 @@ To do so, I am signing this object:
       "seqno": 2079804
     },
     "service": {
-      "hostname": "vhfmag.netlify.com",
+      "hostname": "vhfmag.gitlab.io",
       "protocol": "https:"
     },
     "type": "web_service_binding",
