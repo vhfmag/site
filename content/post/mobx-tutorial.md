@@ -38,7 +38,7 @@ class TaskStore {
 
     constructor() {
         try {
-            this.tasks = JSON.parse(localStorage.getItem("tasks"));
+            this.tasks = JSON.parse(localStorage.getItem("tasks")) || ´[];
         } catch {
             this.tasks = [];
         }
@@ -76,7 +76,7 @@ class ExamStore {
 }
 
 const store = new ExamStore();
-store.results.push({ student: "Victor", grade: 5 });
+store.results.push({ student: "Victor", grade: 7 });
 store.results.push({ student: "Clara", grade: 8 });
 store.results.push({ student: "Dygufa", grade: 9 });
 
@@ -133,19 +133,19 @@ Antes de introduzir outros conceitos de MobX, gostaria de tornar nossos exemplos
 
 Observação: O exemplo acima é editável, dá pra abrir ele no [CodeSandbox](https://codesandbox.io/), fazer mudanças e ver o resultado em tempo real (dá pra experimentar colocar um `console.log` no `computed` `todoCount`, por exemplo, pra verificar se ele de fato só é chamado quando há mudanças)
 
-Nessa aplicação, usamos todos os conceitos que já vimos: observáveis, valores derivados e reações. Usamos também uma biblioteca nova, a `mobx-react`: nela são expostas funções que facilitam a integração de `mobx`, que pode ser usado com qualquer biblioteca de UI, com React. Uma dessas funções é a `observer`, cuja função é criar uma _reação_ que assiste às mudanças em _observáveis_ utilizados dentro de render e, a cada mudança, re-renderizam o componente. Conforme o exemplo, é possível usar `observer` tanto como decorador de classe (como em `App`) quanto como higher-order function (com componentes funcionais, como em `Task`).
+Nessa aplicação, usamos todos os conceitos que já vimos: observáveis, valores derivados e reações. Usamos também uma biblioteca nova, a `mobx-react`: nela são expostas funções que facilitam a integração de `mobx`, que pode ser usado com qualquer biblioteca de UI, com React. Uma dessas funções é a `observer`, cuja função é criar uma _reação_ que assiste às mudanças em _observáveis_ utilizados dentro de render e, a cada mudança, re-renderizam o componente. Conforme visto no exemplo, é possível usar `observer` tanto como decorador de classe (como em `App`, no exemplo) quanto como higher-order function (com componentes funcionais, como em `Task`).
 
 > **`observer`**: função que torna a re-renderização de um componente uma reação às mudanças de estado
 
 ### Ações
 
-Conforme citado anteriormente, o MobX é extremamente flexível - e a falta de padrões e boas práticas pode ter consequências negativas. O fato de que o estado é mutável leva com frequência desenvolvedores a mudá-lo diretamente nos componentes que o utilizam, espalhando a lógica de negócio por inúmeros arquivos, gerando dívida técnica e dificultando a manutenção. Outro *anti-pattern* comum é assumir que se está recebendo um `observable` como propriedade e modificá-lo diretamente, possivelmente introduzindo bugs sutis e difíceis de identificar caso a propriedade não seja observável.
+Conforme citado anteriormente, o MobX é extremamente flexível - e a subsequente falta de padrões e boas práticas pode ter consequências negativas. O fato de que o estado é mutável leva com frequência desenvolvedores a mudá-lo diretamente nos componentes que o utilizam, espalhando a lógica de negócio por inúmeros arquivos, gerando dívida técnica e dificultando a manutenção. Outro *anti-pattern* comum é assumir que se está recebendo um `observable` como propriedade e modificá-lo diretamente, possivelmente introduzindo bugs sutis e difíceis de identificar caso a propriedade não seja observável.
 
 Pensando nisso, o `mobx` introduz o conceito de `action`: funções que modificam o estado. Seu uso traz alguns benefícios:
 
 1. Reações só são notificadas de mudanças de estado no fim da action, prevenindo a criação de vários passos intermediários e atualização desnecessária da UI em cada etapa
 2. Melhor integração com as ferramentas de debugging do MobX
-3. Se seu uso for difundido, é fácil de saber onde mudanças de estado ocorrem
+3. Se seu uso for difundido, é fácil saber onde mudanças de estado ocorrem
 
 A seguir, o exemplo anterior, reescrito para usar actions:
 
@@ -238,15 +238,29 @@ store.statusByClient.set("victor", "Done");
 // o autorun roda nos dois casos! :)
 ```
 
-### Por que usar MobX
+### Prós e contras
+
+#### Porque usar MobX
 
 Principais prós:
 
 - Boilerplate mínimo ou ausente
-- Re-renderização é automaticamente otimizada, só sendo causada por mudanças de observáveis recentemente utilizados no `render` de um componente
+- Re-renderização é automaticamente otimizada de forma granular, só sendo causada por mudanças de observáveis recentemente utilizados no `render` de cada componente
 - Tendo sido feita em Typescript, ela trabalha muito bem com tipos (algo muito difícil de fazer e custoso de manter com Redux)
 
 Principais contras:
 
-- Boa parte da funcionalidade da biblioteca é abstraída e invisível para o desenvolvedor (vulgo mágica), então podem se difícil de debugar
-- Flexível demais e boas práticas precisam ser ativamente estimuladas pela equipe de desenvolvimento (enquanto em Redux as boas práticas são forçadas pela arquitetura)
+- Boa parte da funcionalidade da biblioteca é abstraída e invisível para o desenvolvedor (vulgo mágica), o que pode tornar debugar difícil
+- Flexível demais: boas práticas precisam ser ativamente estimuladas pela equipe de desenvolvimento (enquanto em Redux as boas práticas são forçadas pela arquitetura)
+
+#### Porque não usamos Redux
+
+Os principais problemas que encontramos com Redux foram:
+
+- Muito, muito boilerplate
+- Tipar o payload recebido por reducers das actions era extremamente custoso e difícil de manter (problema específico para usuário de Typescript)
+- Seletores são uma adição, ao invés de estar no cerne do paradigma
+
+### Conclusão
+
+Como vimos, MobX é uma poderosa e biblioteca simples de usar. Com poucas linhas de código e sem introduzir grandes mudanças no estilo ou paradigma de programação, seu projeto pode fazer uso de um gerenciamento de estado simples e ter otimizações de performance automáticas, sem esforço.
