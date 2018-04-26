@@ -118,3 +118,25 @@
 .bookmark-page .bookmark:not(:first-child) {
   margin-top: 3em;
 }
+
+code {
+  padding: .2em;
+  background-color: rgba(255, 255, 255, .1);
+  border-radius: .2em;
+  margin: .1em;
+  font-size: .9em;
+}
+
+pre code {
+  padding: unset;
+  background-color: unset;
+  border-radius: unset;
+  margin: unset;
+  font-size: unset;
+}
+
+blockquote {
+  margin-left: 0;
+  padding-left: 0.6em;
+  border-left-width: .2em;
+}
