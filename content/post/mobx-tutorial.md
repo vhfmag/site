@@ -4,11 +4,11 @@ description: "Apresentando os principais conceitos dessa biblioteca de gerenciam
 date: 2018-04-25
 ---
 
-O [MobX](https://github.com/mobxjs/mobx/) é uma biblioteca de gerenciamento de estado para Javascript frequentemente utilizada com React. Ela tem uma curva de aprendizado menos abrupta do que a sua alternativa mais popular, o [Redux](https://redux.js.org/), apesar de (de acordo minha experiência na [Cubos](https://cubos.io/)) más práticas emergirem com mais frequência com seu uso, provavelmente devido a sua flexibilidade. Nesse artigo, usaremos alguns exemplos de código em [Typescript](https://typescriptlang.org/) para explicar os principais conceitos, boas práticas e alguns gotchas.
+O [MobX](https://github.com/mobxjs/mobx/) é uma biblioteca de gerenciamento de estado para Javascript frequentemente utilizada com React. Ela tem uma curva de aprendizado menos abrupta do que a sua alternativa mais popular, o [Redux](https://redux.js.org/), apesar de (de acordo minha experiência na [Cubos](https://cubos.io/)) más práticas emergirem com mais frequência com seu uso. Nesse artigo, usaremos alguns exemplos de código em [Typescript](https://typescriptlang.org/) para explicar os principais conceitos, boas práticas e alguns gotchas.
 
 ## O que é MobX
 
-O MobX aplica conceitos de [programação funcional reativa](https://en.wikipedia.org/wiki/Functional_reactive_programming) em Javascript de forma transparente, escondendo detalhes complexos de implementação por trás de objetos Javascript puros. Tirando o jargão, isso significa que ele permite que partes de sua aplicação sejam notificadas de mudanças de estado sem mudar o paradigma de programação do seu projeto. Para determinar o que é observado e por quem, a biblioteca se utiliza de dois conceitos: observáveis e reações.
+O MobX aplica conceitos de [programação funcional reativa](https://en.wikipedia.org/wiki/Functional_reactive_programming) em Javascript de forma transparente, escondendo detalhes complexos de implementação por trás de objetos Javascript puros. Tirando o jargão, isso significa que ele permite que partes de sua aplicação sejam notificadas de mudanças de estado sem mudar o paradigma de programação do seu projeto. Para determinar o que é observado e por quem, a biblioteca se utiliza de dois conceitos de base: observáveis e reações.
 
 ### Observáveis e reações
 
@@ -29,7 +29,7 @@ lista.push(4);
 // printa 10
 ```
 
-Eis o que a biblioteca faz, por debaixo dos panos: roda a função passada para `autorun` uma vez, registra todos os observáveis utilizados dentro da função e a executa todas as vezes que algum desses observáveis mudar. O uso acima mostrado de observáveis é, apesar de possível, raro na prática. Com frequência, usamos classes que contém campos observáveis. Segue um exemplo próximo de como a biblioteca é usada na prática:
+Eis o que a biblioteca faz, por debaixo dos panos: roda a função passada para `autorun` uma vez, registra todos os observáveis utilizados dentro da função e a executa todas as vezes que algum desses observáveis mudar. O uso acima mostrado de observáveis é, apesar de possível, raro na prática. Com frequência, usamos classes que contém campos observáveis. Segue um exemplo mais próximo do uso prático:
 
 ```tsx
 class TaskStore {
@@ -56,7 +56,7 @@ O exemplo acima ilustra um dos usos mais frequentes de `autorun` na prática: pe
 
 ### Valores derivados
 
-Até agora, nós discutimos observáveis e reações. No entanto, reagir a mudanças no estado nem sempre é suficiente: por vezes, precisamos usar o estado para calcular uma nova informação. Por exemplo:
+Até agora, nós discutimos observáveis e reações. No entanto, reagir a mudanças no estado nem sempre é suficiente: por vezes, precisamos usar uma parte do estado para calcular outra. Por exemplo:
 
 ```tsx
 import { observable } from "mobx";
@@ -84,7 +84,7 @@ console.log(store.averageGrade());
 document.querySelector("avg").innerText = `Média da turma: ${store.averageGrade()}`;
 ```
 
-Nesse exemplo, `averageGrade` é chamado duas vezes, e a média é calculada duas vezes. Isso poderia ser otimizado, já que enquanto `results` não mudar, a média permanecerá a mesma e poderia ser calculada apenas uma vez (para quem é familiar com Redux, nesse contexto se usariam seletores). É para isso que serve o `computed`, mais uma função da biblioteca. O exemplo acima ficaria assim, quando reescrito para utilizar `computed`:
+Nesse exemplo, `averageGrade` é chamado duas vezes, recalculando a média desnecessariamente. Isso poderia ser otimizado, já que enquanto `results` não mudar, a média permanecerá a mesma (para quem é familiar com Redux, nesse contexto se usariam seletores). E é justamente para isso que serve o `computed`, mais uma função da biblioteca. O exemplo acima ficaria assim, quando reescrito para utilizar `computed`:
 
 ```tsx
 import { observable, computed } from "mobx";
@@ -123,7 +123,7 @@ Com essas 3 mudanças, o MobX otimiza o cálculo da média, fazendo-o apenas qua
 
 > **Valores derivados**: observáveis derivados a partir de outros observáveis que são automaticamente re-calculados sempre que os observáveis de que depende mudam
 
-> **Dica**: sempre que possível, use `computed` para derivar informações a partir do estado: isso evita que se repita computações custosas desnecessariamente
+> **Dica**: sempre que possível, use `computed` para derivar informações a partir do estado: isso evita que computações custosas se repitam desnecessariamente
 
 ### Observadores
 
@@ -131,19 +131,19 @@ Antes de introduzir outros conceitos de MobX, gostaria de tornar nossos exemplos
 
 <iframe src="https://codesandbox.io/embed/vq3p417997?fontsize=12" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
 
-Observação: O exemplo acima é editável, dá pra abrir ele no [CodeSandbox](https://codesandbox.io/), fazer mudanças e ver o resultado em tempo real (dá pra experimentar colocar um console.log em todoCount, por exemplo, pra verificar se ele de fato só é chamado quando há mudanças)
+Observação: O exemplo acima é editável, dá pra abrir ele no [CodeSandbox](https://codesandbox.io/), fazer mudanças e ver o resultado em tempo real (dá pra experimentar colocar um `console.log` no `computed` `todoCount`, por exemplo, pra verificar se ele de fato só é chamado quando há mudanças)
 
-Nessa aplicação, usamos todos os conceitos que já vimos: observáveis, valores derivados e reações. Usamos também uma biblioteca nova, a `mobx-react`: nela são expostas funções que facilitam a integração de `mobx`, que pode ser usado com qualquer biblioteca de UI, com React. Uma dessas funções é a `observer`, cuja função é criar uma _reação_ que assiste às mudanças em _observáveis_ utilizados dentro de render e, a cada mudança, re-renderizam o componente. Conforme o exemplo, dá pra usar `observer` tanto como decorador de classe (como em `App`) quanto como higher-order function (com componentes funcionais, como em `Task`).
+Nessa aplicação, usamos todos os conceitos que já vimos: observáveis, valores derivados e reações. Usamos também uma biblioteca nova, a `mobx-react`: nela são expostas funções que facilitam a integração de `mobx`, que pode ser usado com qualquer biblioteca de UI, com React. Uma dessas funções é a `observer`, cuja função é criar uma _reação_ que assiste às mudanças em _observáveis_ utilizados dentro de render e, a cada mudança, re-renderizam o componente. Conforme o exemplo, é possível usar `observer` tanto como decorador de classe (como em `App`) quanto como higher-order function (com componentes funcionais, como em `Task`).
 
 > **`observer`**: função que torna a re-renderização de um componente uma reação às mudanças de estado
 
 ### Ações
 
-Conforme citado anteriormente, o MobX é extremamente flexível - por vezes, até demais. O fato de que o estado é mutável leva com frequência desenvolvedores a mudá-lo diretamente nos componentes que o utilizam, espalhando a lógica de negócio por inúmeros arquivos, gerando dívida técnica e dificultando a manutenção. Outro *anti-pattern* comum é assumir que se está recebendo um `observable` como propriedade e modificá-lo diretamente, possivelmente introduzindo bugs sutis e difíceis de identificar caso a propriedade não seja observável.
+Conforme citado anteriormente, o MobX é extremamente flexível - e a falta de padrões e boas práticas pode ter consequências negativas. O fato de que o estado é mutável leva com frequência desenvolvedores a mudá-lo diretamente nos componentes que o utilizam, espalhando a lógica de negócio por inúmeros arquivos, gerando dívida técnica e dificultando a manutenção. Outro *anti-pattern* comum é assumir que se está recebendo um `observable` como propriedade e modificá-lo diretamente, possivelmente introduzindo bugs sutis e difíceis de identificar caso a propriedade não seja observável.
 
 Pensando nisso, o `mobx` introduz o conceito de `action`: funções que modificam o estado. Seu uso traz alguns benefícios:
 
-1. Reações só são notificadas de mudanças de estado no fim da action, prevenindo a criação de vários passos intermediários e atualização desnecessária da UI
+1. Reações só são notificadas de mudanças de estado no fim da action, prevenindo a criação de vários passos intermediários e atualização desnecessária da UI em cada etapa
 2. Melhor integração com as ferramentas de debugging do MobX
 3. Se seu uso for difundido, é fácil de saber onde mudanças de estado ocorrem
 
@@ -201,7 +201,7 @@ Essa arquitetura favorece boas práticas, separando lógica de negócio de lógi
 
 #### toJS
 
-Em geral, o comportamento de valores observáveis é idêntico ao comportamento padrão. Porém, há exceções (exemplo: Array e ObservableArray tem comportamentos diferentes em alguns casos) e, caso se encontre bugs obscuros ou se esteja passando observáveis para bibliotecas de terceiros, é recomendável usar a função `toJS` de `mobx` para se obter o valor original da variável.
+Em geral, o comportamento de valores observáveis é idêntico ao comportamento padrão. Porém, há exceções (exemplo: Array e ObservableArray tem comportamentos diferentes em alguns casos) e, caso se encontre bugs obscuros ou se esteja passando observáveis para bibliotecas de terceiros, é recomendável usar a função `toJS` de `mobx` para se obter um valor não alterado pelo MobX.
 
 #### Mapas observáveis
 
@@ -224,6 +224,8 @@ store.statusByClient.victor = "Done";
 Nesse caso, recomenda-se utilizar mapas observáveis:
 
 ```tsx
+import { observable, autorun } from "mobx";
+
 class BuggyStore {
     @observable statusByClient: Map<string, string> = new Map([["nicolas", "Pending"]]);
 
