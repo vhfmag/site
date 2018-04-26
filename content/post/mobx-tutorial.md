@@ -1,6 +1,6 @@
 ---
 title: "Uma introdução a MobX"
-description: "Apresentando os principais conceitos dessa biblioteca de gerenciamento de estado"
+description: "Apresentando os principais conceitos dessa biblioteca de gerenciamento de estado para web apps"
 date: 2018-04-25
 ---
 
@@ -258,7 +258,7 @@ Principais contras:
 Os principais problemas que encontramos com Redux foram:
 
 - Muito, muito boilerplate
-- Tipar o payload recebido por reducers das actions era extremamente custoso e difícil de manter (problema específico para usuário de Typescript)
+- Tipar o payload recebido por reducers das actions era extremamente custoso e difícil de manter (específico para quem usa Typescript, Flow ou similares)
 - Seletores são uma adição, ao invés de estar no cerne do paradigma
 
 ### Conclusão
