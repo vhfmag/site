@@ -6,6 +6,7 @@ theme = "crisp"
 Paginate = 5
 enableEmoji = true
 enableGitInfo = true
+pygmentsCodeFences = true
 
 [author]
 name = "Victor Magalhães"
