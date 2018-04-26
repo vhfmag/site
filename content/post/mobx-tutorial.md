@@ -236,3 +236,16 @@ store.statusByClient.set("nicolas", "Done");
 store.statusByClient.set("victor", "Done");
 // o autorun roda nos dois casos! :)
 ```
+
+### Por que usar MobX
+
+Principais prós:
+
+- Boilerplate mínimo ou ausente
+- Re-renderização é automaticamente otimizada, só sendo causada por mudanças de observáveis recentemente utilizados no `render` de um componente
+- Tendo sido feita em Typescript, ela trabalha muito bem com tipos (algo muito difícil de fazer e custoso de manter com Redux)
+
+Principais contras:
+
+- Boa parte da funcionalidade da biblioteca é abstraída e invisível para o desenvolvedor (vulgo mágica), então podem se difícil de debugar
+- Flexível demais e boas práticas precisam ser ativamente estimuladas pela equipe de desenvolvimento (enquanto em Redux as boas práticas são forçadas pela arquitetura)
