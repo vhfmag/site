@@ -1,4 +1,0 @@
----
-title: "bookmarks"
-menu: "main"
----
