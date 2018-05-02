@@ -1,0 +1,60 @@
+{
+  "name": "gatsby-starter-typescript",
+  "description": "Gatsby TypeScript starter",
+  "version": "1.0.0",
+  "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+  "dependencies": {
+    "@types/luxon": "^0.5.2",
+    "@types/node": "^8.0.7",
+    "@types/react": "^16",
+    "@types/react-dom": "^16",
+    "@types/react-helmet": "^5.0.6",
+    "font-awesome": "^4.7.0",
+    "gatsby": "^1.9.119",
+    "gatsby-image": "^1.0.48",
+    "gatsby-link": "^1.6.28",
+    "gatsby-plugin-manifest": "^1.0.21",
+    "gatsby-plugin-netlify": "^1.0.19",
+    "gatsby-plugin-offline": "^1.0.15",
+    "gatsby-plugin-react-helmet": "^1.0.8",
+    "gatsby-plugin-react-next": "^1.0.11",
+    "gatsby-plugin-sharp": "^1.6.44",
+    "gatsby-plugin-styled-components": "^2.0.11",
+    "gatsby-plugin-typescript": "^1.4.10",
+    "gatsby-plugin-typography": "^1.7.18",
+    "gatsby-remark-images": "^1.5.63",
+    "gatsby-remark-prismjs": "^2.0.2",
+    "gatsby-source-filesystem": "^1.5.35",
+    "gatsby-transformer-json": "^1.0.17",
+    "gatsby-transformer-remark": "^1.7.40",
+    "gatsby-transformer-sharp": "^1.6.24",
+    "graphql-code-generator": "^0.8.21",
+    "luxon": "^1.2.0",
+    "normalize-css": "^2.3.1",
+    "prismjs": "^1.14.0",
+    "react-helmet": "^5.2.0",
+    "styled-components": "^3.2.6",
+    "typelevel-ts": "^0.2.3",
+    "typography": "^0.16.17",
+    "typography-theme-grand-view": "^0.15.10"
+  },
+  "keywords": [
+    "gatsby, typescript"
+  ],
+  "license": "MIT",
+  "main": "n/a",
+  "scripts": {
+    "build": "gatsby build",
+    "develop": "gatsby develop",
+    "format": "prettier --write --config .prettierrc",
+    "generate-types": "gql-gen --url http://localhost:8000/___graphql --template typescript --out ./src/graphql-types.d.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "prettier": "^1.8.2"
+  },
+  "contributors": [
+    "fabien0102 <fabien0102@gmail.com>",
+    "Hays Clark <hays.clark@gmail.com>"
+  ]
+}
