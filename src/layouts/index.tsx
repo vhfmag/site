@@ -176,6 +176,10 @@ export default class DefaultLayout extends React.PureComponent<
 							name: "todo",
 							url: "/todo",
 						},
+						{
+							name: "currículo",
+							url: "/resume",
+						},
 					]}
 				/>
 
