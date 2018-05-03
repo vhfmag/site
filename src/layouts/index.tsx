@@ -1,20 +1,22 @@
 import * as React from "react";
-import Link from "gatsby-link";
 import { Helmet } from "react-helmet";
 import { ObjectOmit } from "typelevel-ts";
 import styled from "styled-components";
 
 import "normalize-css/normalize.css";
 import "font-awesome/css/font-awesome.min.css";
-import { backgroundColor, textColor, themeColor } from "../utils/consts";
+import {
+	backgroundColor,
+	textColor,
+	themeColor,
+	responsiveBreakpoint,
+} from "../utils/consts";
 import { social_2 } from "../graphql-types";
 import { css } from "../utils/taggedUtils";
+import { Sidebar } from "../components/Sidebar";
 
 require("prismjs/themes/prism-okaidia.css");
 
-const responsiveBreakpoint = "800px";
-
-const StyledSidebar = styled.aside``;
 const StyledMain = styled.main``;
 const StyledRoot = styled.div`
 	--rootPadding: 16pt;
@@ -27,25 +29,9 @@ const StyledRoot = styled.div`
 		flex-direction: column;
 	}
 
-	${StyledSidebar} {
-		flex: 0 0 var(--sidebarWidth);
-		padding: var(--rootPadding);
-
-		> h1 {
-			margin-top: 0;
-			text-transform: lowercase;
-		}
-
-		@media (min-width: ${responsiveBreakpoint}) {
-			max-height: 100vh;
-			position: sticky;
-			top: 0;
-		}
-	}
-
 	${StyledMain} {
 		--width: auto;
-		padding: 16pt;
+		padding: var(--rootPadding);
 		flex: 0 1 var(--width);
 		max-width: var(--width);
 		font-size: calc(1rem + 0.25vw);
@@ -60,51 +46,6 @@ const StyledRoot = styled.div`
 		}
 	}
 `;
-
-interface ISidebarProps {
-	title: string;
-	email: string;
-	description: string;
-	social: social_2[];
-}
-
-const SocialLinks = styled.div`
-	display: flex;
-	flex-wrap: wrap;
-
-	a {
-		margin: 2pt;
-		font-size: 1.5em;
-		color: ${textColor} !important;
-
-		&:active,
-		&:hover {
-			color: ${themeColor} !important;
-		}
-	}
-`;
-
-const Sidebar: React.SFC<ISidebarProps> = ({
-	title,
-	description,
-	email,
-	social,
-}) => (
-	<StyledSidebar>
-		<h1>{title}</h1>
-		<p>
-			<a href={`mailto:${email}`}>{email}</a>
-		</p>
-		<p>{description}</p>
-		<SocialLinks>
-			{social.map(({ service, url, icon }) => (
-				<a key={service} href={url}>
-					<i className={`fa ${icon}`} />
-				</a>
-			))}
-		</SocialLinks>
-	</StyledSidebar>
-);
 
 const baseCss = css`
 	:root {
@@ -179,7 +120,7 @@ interface DefaultLayoutProps
 		};
 		dataJson: {
 			email: string;
-			social: social_2[];
+			social: DeepNonNullable<social_2>[];
 		};
 	};
 }
@@ -228,7 +169,7 @@ export const pageQuery = graphql`
 		dataJson {
 			email
 			social {
-				service
+				serviceName
 				icon
 				url
 			}

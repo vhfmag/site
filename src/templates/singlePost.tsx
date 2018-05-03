@@ -1,7 +1,6 @@
 import * as React from "react";
-import { DateTime } from "luxon";
-import styled from "styled-components";
 import { formatDate } from "../utils/utils";
+import { Article } from "../components/Article";
 
 interface IPostTemplateProps {
 	data: {
@@ -20,22 +19,10 @@ interface IPostTemplateProps {
 	};
 }
 
-const StyledArticle = styled.article`
-	h1,
-	h2 {
-		margin: 0 0 0.6em;
-	}
-`;
-
-const StyledHeader = styled.header`
-	margin-bottom: 16pt;
-`;
-
 export default class SinglePostTemplate extends React.Component<
 	IPostTemplateProps
 > {
 	public render() {
-		console.log(this.props);
 		const {
 			data: {
 				markdownRemark: {
@@ -43,24 +30,18 @@ export default class SinglePostTemplate extends React.Component<
 					frontmatter: { date, title, description },
 				},
 			},
-			pathContext: { slug },
 		} = this.props;
 
 		const formattedDate = formatDate(date);
 
 		return (
-			<StyledArticle>
-				<StyledHeader>
-					<h1 className="post-title p-name">
-						<a className="u-url" href={`/post/${slug}`}>
-							{title}
-						</a>
-					</h1>
-					<h2>{description}</h2>
-					<span>{formattedDate}</span>
-				</StyledHeader>
-				<section dangerouslySetInnerHTML={{ __html: html }} />
-			</StyledArticle>
+			<Article
+				title={title}
+				subtitle={description}
+				info={formattedDate}
+				html={html}
+				url="#"
+			/>
 		);
 	}
 }

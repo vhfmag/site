@@ -1,67 +1,23 @@
 import * as React from "react";
-import Link from "gatsby-link";
-import { DateTime } from "luxon";
-import styled from "styled-components";
 import { getSlug, formatDate } from "../utils/utils";
-
-interface IPostItem {
-	fileAbsolutePath: string;
-	frontmatter: {
-		title: string;
-		description: string;
-		date: string;
-	};
-}
+import { EntryItem } from "../components/EntryItem";
 
 interface IndexPageProps {
 	data: {
 		allMarkdownRemark: {
-			edges: Array<{ node: IPostItem }>;
+			edges: Array<{
+				node: {
+					fileAbsolutePath: string;
+					frontmatter: {
+						title: string;
+						description: string;
+						date: string;
+					};
+				};
+			}>;
 		};
 	};
 }
-
-const StyledPostDescription = styled.div``;
-const StyledPostItem = styled.article`
-	display: grid;
-	grid-gap: 4pt;
-
-	${StyledPostDescription} {
-		font-size: 1rem;
-	}
-
-	p,
-	h2 {
-		margin: 0;
-	}
-
-	h2 {
-		font-size: 1.5rem;
-	}
-
-	& + & {
-		margin-top: 32pt;
-	}
-`;
-
-const PostItem: React.SFC<{ post: IPostItem }> = ({ post }) => {
-	const {
-		fileAbsolutePath,
-		frontmatter: { date, title, description },
-	} = post;
-
-	const slug = getSlug(fileAbsolutePath);
-
-	return (
-		<StyledPostItem>
-			<h2>
-				<a href={`/post/${slug}`}>{title}</a>
-			</h2>
-			<StyledPostDescription>{formatDate(date)}</StyledPostDescription>
-			<p>{description}</p>
-		</StyledPostItem>
-	);
-};
 
 export default class DefaultLayout extends React.Component<IndexPageProps, {}> {
 	constructor(props: IndexPageProps, context: any) {
@@ -74,12 +30,22 @@ export default class DefaultLayout extends React.Component<IndexPageProps, {}> {
 
 		return (
 			<>
-				{posts.map(post => (
-					<PostItem
-						key={post.node.fileAbsolutePath}
-						post={post.node}
-					/>
-				))}
+				{posts.map(
+					({
+						node: {
+							fileAbsolutePath,
+							frontmatter: { date, description, title },
+						},
+					}) => (
+						<EntryItem
+							key={fileAbsolutePath}
+							info={formatDate(date)}
+							title={title}
+							subtitle={description}
+							url={getSlug(fileAbsolutePath)!}
+						/>
+					),
+				)}
 			</>
 		);
 	}
