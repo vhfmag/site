@@ -185,7 +185,10 @@ export default class ResumePage extends React.Component<IResumePageProps> {
 							<h4>
 								{link ? <a href={link}>{company}</a> : company}
 							</h4>
-							<img src={image!} alt={company!} />
+							<img
+								src={require(`../../assets${image}`)}
+								alt={company!}
+							/>
 							<StyledExperienceInfo>
 								<div>{role}</div>
 								<div>{period}</div>
