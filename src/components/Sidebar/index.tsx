@@ -90,7 +90,7 @@ export const Sidebar: React.SFC<ISidebarProps> = ({
 		<StyledNav>
 			<ul>
 				{nav.map(({ name, url }) => (
-					<li>
+					<li key={name}>
 						<Link
 							exact
 							activeClassName={activeLinkClassName}
