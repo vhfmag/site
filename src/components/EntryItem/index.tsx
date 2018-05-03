@@ -1,5 +1,6 @@
 import * as React from "react";
 import styled from "styled-components";
+import Link from "gatsby-link";
 import { renderAst } from "../../utils/customComponents";
 
 type IEntryItemProps = HTMLOrString & {
@@ -47,7 +48,7 @@ export const EntryItem: React.SFC<IEntryItemProps> = ({
 }) => {
 	return (
 		<StyledEntryItem>
-			<h2>{url ? <a href={url}>{title}</a> : title}</h2>
+			<h2>{url ? <Link to={url}>{title}</Link> : title}</h2>
 			{subtitle && <h3>{subtitle}</h3>}
 			{info && <StyledEntryInfo>{info}</StyledEntryInfo>}
 			{(htmlAst || content) && (
