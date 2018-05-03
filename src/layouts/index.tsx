@@ -118,7 +118,7 @@ interface DefaultLayoutProps
 				description: string;
 			};
 		};
-		dataJson: {
+		personalJson: {
 			email: string;
 			social: DeepNonNullable<social_2>[];
 		};
@@ -131,7 +131,7 @@ export default class DefaultLayout extends React.PureComponent<
 > {
 	public render() {
 		const { title, description } = this.props.data.site.siteMetadata;
-		const { email, social } = this.props.data.dataJson;
+		const { email, social } = this.props.data.personalJson;
 
 		return (
 			<StyledRoot>
@@ -181,7 +181,7 @@ export const pageQuery = graphql`
 				description
 			}
 		}
-		dataJson {
+		personalJson {
 			email
 			social {
 				serviceName
