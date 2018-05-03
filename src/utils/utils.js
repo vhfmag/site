@@ -10,13 +10,13 @@ function formatDate(date) {
 		.toLocaleString(DateTime.DATE_FULL);
 }
 
-const slugRegex = /posts\/(.*?)\.md$/;
+const slugRegex = /\/([^/]*?)(\.\w+)?$/;
 
 /**
  * @param {string} path
  * @returns string
  */
-function getSlug(path) {
+function extractFileNameFromPath(path) {
 	const result = slugRegex.exec(path);
 
 	if (!result) return null;
@@ -27,5 +27,5 @@ function getSlug(path) {
 
 module.exports = {
 	formatDate,
-	getSlug,
+	extractFileNameFromPath,
 };

@@ -1,7 +1,7 @@
 const path = require("path");
 
 const { graphql } = require("./src/utils/taggedUtils");
-const { getSlug } = require("./src/utils/utils");
+const { extractFileNameFromPath } = require("./src/utils/utils");
 
 function buildPageQuery(pageKind) {
 	return graphql`
@@ -37,7 +37,7 @@ exports.createPages = ({ boundActionCreators, graphql: graphqlQuerier }) => {
 				// Create pages for each markdown file.
 				result.data.allMarkdownRemark.edges.forEach(({ node }) => {
 					const markdownPath = node.fileAbsolutePath;
-					const slug = getSlug(markdownPath);
+					const slug = extractFileNameFromPath(markdownPath);
 					createPage({
 						path: `/post/${slug}`,
 						component: blogPostTemplate,

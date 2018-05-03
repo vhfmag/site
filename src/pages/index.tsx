@@ -1,5 +1,5 @@
 import * as React from "react";
-import { getSlug, formatDate } from "../utils/utils";
+import { extractFileNameFromPath, formatDate } from "../utils/utils";
 import { EntryItem } from "../components/EntryItem";
 
 interface IndexPageProps {
@@ -42,7 +42,9 @@ export default class DefaultLayout extends React.Component<IndexPageProps, {}> {
 							info={formatDate(date)}
 							title={title}
 							subtitle={description}
-							url={getSlug(fileAbsolutePath)!}
+							url={`/post/${extractFileNameFromPath(
+								fileAbsolutePath,
+							)}`}
 						/>
 					),
 				)}
