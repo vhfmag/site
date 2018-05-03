@@ -17,7 +17,32 @@ import { Sidebar } from "../components/Sidebar";
 
 require("prismjs/themes/prism-okaidia.css");
 
-const StyledMain = styled.main``;
+const StyledMain = styled.main`
+	--width: auto;
+	padding: var(--rootPadding);
+	flex: 0 1 var(--width);
+	max-width: var(--width);
+	font-size: calc(1rem + 0.25vw);
+
+	p {
+		max-width: 70ch;
+		text-align: justify;
+	}
+
+	& > h1:first-child,
+	& > h2:first-child,
+	& > h3:first-child,
+	& > h4:first-child,
+	& > h5:first-child,
+	& > h6:first-child {
+		margin-top: 0;
+	}
+
+	@media (min-width: ${responsiveBreakpoint}) {
+		--width: calc(100vw - var(--sidebarWidth) - 2 * var(--rootPadding));
+	}
+`;
+
 const StyledRoot = styled.div`
 	--rootPadding: 16pt;
 	--sidebarWidth: 240px;
@@ -27,23 +52,6 @@ const StyledRoot = styled.div`
 
 	@media (max-width: ${responsiveBreakpoint}) {
 		flex-direction: column;
-	}
-
-	${StyledMain} {
-		--width: auto;
-		padding: var(--rootPadding);
-		flex: 0 1 var(--width);
-		max-width: var(--width);
-		font-size: calc(1rem + 0.25vw);
-
-		p {
-			max-width: 70ch;
-			text-align: justify;
-		}
-
-		@media (min-width: ${responsiveBreakpoint}) {
-			--width: calc(100vw - var(--sidebarWidth) - 2 * var(--rootPadding));
-		}
 	}
 `;
 
