@@ -3,13 +3,13 @@ import { EntryItem } from "../components/EntryItem";
 import Markdown from "react-markdown";
 import Helmet from "react-helmet";
 
-interface IndexPageProps {
+interface IBookListProps {
 	data: {
 		allMarkdownRemark: {
 			edges: Array<{
 				node: {
 					fileAbsolutePath: string;
-					html: string;
+					excerpt: string;
 					frontmatter: {
 						title: string;
 						author: string;
@@ -21,7 +21,7 @@ interface IndexPageProps {
 	};
 }
 
-export default class BookList extends React.Component<IndexPageProps, {}> {
+export default class BookList extends React.Component<IBookListProps, {}> {
 	public render() {
 		const {
 			allMarkdownRemark: { edges: posts },
@@ -34,7 +34,7 @@ export default class BookList extends React.Component<IndexPageProps, {}> {
 					({
 						node: {
 							fileAbsolutePath,
-							html,
+							excerpt,
 							frontmatter: { title, author, link },
 						},
 					}) => (
@@ -42,7 +42,7 @@ export default class BookList extends React.Component<IndexPageProps, {}> {
 							key={fileAbsolutePath}
 							info={<Markdown source={`Por ${author}`} />}
 							title={title}
-							html={html}
+							content={excerpt}
 							url={link}
 						/>
 					),
@@ -64,7 +64,7 @@ export const pageQuery = graphql`
 			edges {
 				node {
 					fileAbsolutePath
-					html
+					excerpt
 					frontmatter {
 						title
 						author
