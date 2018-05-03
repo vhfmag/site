@@ -89,6 +89,11 @@ export interface pluginOptions_3 {
 	name?: string | null;
 	path?: string | null;
 	maxWidth?: number | null;
+	wrapperStyle?: string | null;
+	backgroundColor?: string | null;
+	linkImagesToOriginal?: boolean | null;
+	showCaptions?: boolean | null;
+	pathPrefix?: string | null;
 	inlineCodeMarker?: string | null;
 	short_name?: string | null;
 	start_url?: string | null;
@@ -109,6 +114,11 @@ export interface plugins_2 {
 
 export interface pluginOptions_4 {
 	maxWidth?: number | null;
+	wrapperStyle?: string | null;
+	backgroundColor?: string | null;
+	linkImagesToOriginal?: boolean | null;
+	showCaptions?: boolean | null;
+	pathPrefix?: string | null;
 	inlineCodeMarker?: string | null;
 }
 
@@ -387,7 +397,7 @@ export interface DataJson extends Node {
 }
 
 export interface social_2 {
-	service?: string | null;
+	serviceName?: string | null;
 	icon?: string | null;
 	url?: string | null;
 }
@@ -630,10 +640,15 @@ export interface sitePageConnectionPluginCreatorPluginOptionsInputObject {
 	name?: sitePageConnectionPluginCreatorPluginOptionsNameQueryString | null;
 	path?: sitePageConnectionPluginCreatorPluginOptionsPathQueryString | null;
 	maxWidth?: sitePageConnectionPluginCreatorPluginOptionsMaxWidthQueryInteger | null;
+	wrapperStyle?: sitePageConnectionPluginCreatorPluginOptionsWrapperStyleQueryString | null;
+	backgroundColor?: sitePageConnectionPluginCreatorPluginOptionsBackgroundColorQueryString | null;
+	linkImagesToOriginal?: sitePageConnectionPluginCreatorPluginOptionsLinkImagesToOriginalQueryBoolean | null;
+	showCaptions?: sitePageConnectionPluginCreatorPluginOptionsShowCaptionsQueryBoolean | null;
+	pathPrefix?: sitePageConnectionPluginCreatorPluginOptionsPathPrefixQueryString | null;
 	inlineCodeMarker?: sitePageConnectionPluginCreatorPluginOptionsInlineCodeMarkerQueryString | null;
 	short_name?: sitePageConnectionPluginCreatorPluginOptionsShortNameQueryString | null;
 	start_url?: sitePageConnectionPluginCreatorPluginOptionsStartUrlQueryString | null;
-	background_color?: sitePageConnectionPluginCreatorPluginOptionsBackgroundColorQueryString | null;
+	background_color?: sitePageConnectionPluginCreatorPluginOptionsBackgroundColorQueryString_2 | null;
 	theme_color?: sitePageConnectionPluginCreatorPluginOptionsThemeColorQueryString | null;
 	display?: sitePageConnectionPluginCreatorPluginOptionsDisplayQueryString | null;
 	pathToConfigModule?: sitePageConnectionPluginCreatorPluginOptionsPathToConfigModuleQueryString | null;
@@ -684,12 +699,48 @@ export interface sitePageConnectionPluginCreatorPluginOptionsPluginsVersionQuery
 
 export interface sitePageConnectionPluginCreatorPluginOptionsPluginsPluginOptionsInputObject {
 	maxWidth?: sitePageConnectionPluginCreatorPluginOptionsPluginsPluginOptionsMaxWidthQueryInteger | null;
+	wrapperStyle?: sitePageConnectionPluginCreatorPluginOptionsPluginsPluginOptionsWrapperStyleQueryString | null;
+	backgroundColor?: sitePageConnectionPluginCreatorPluginOptionsPluginsPluginOptionsBackgroundColorQueryString | null;
+	linkImagesToOriginal?: sitePageConnectionPluginCreatorPluginOptionsPluginsPluginOptionsLinkImagesToOriginalQueryBoolean | null;
+	showCaptions?: sitePageConnectionPluginCreatorPluginOptionsPluginsPluginOptionsShowCaptionsQueryBoolean | null;
+	pathPrefix?: sitePageConnectionPluginCreatorPluginOptionsPluginsPluginOptionsPathPrefixQueryString | null;
 	inlineCodeMarker?: sitePageConnectionPluginCreatorPluginOptionsPluginsPluginOptionsInlineCodeMarkerQueryString | null;
 }
 
 export interface sitePageConnectionPluginCreatorPluginOptionsPluginsPluginOptionsMaxWidthQueryInteger {
 	eq?: number | null;
 	ne?: number | null;
+}
+
+export interface sitePageConnectionPluginCreatorPluginOptionsPluginsPluginOptionsWrapperStyleQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface sitePageConnectionPluginCreatorPluginOptionsPluginsPluginOptionsBackgroundColorQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface sitePageConnectionPluginCreatorPluginOptionsPluginsPluginOptionsLinkImagesToOriginalQueryBoolean {
+	eq?: boolean | null;
+	ne?: boolean | null;
+}
+
+export interface sitePageConnectionPluginCreatorPluginOptionsPluginsPluginOptionsShowCaptionsQueryBoolean {
+	eq?: boolean | null;
+	ne?: boolean | null;
+}
+
+export interface sitePageConnectionPluginCreatorPluginOptionsPluginsPluginOptionsPathPrefixQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
 }
 
 export interface sitePageConnectionPluginCreatorPluginOptionsPluginsPluginOptionsInlineCodeMarkerQueryString {
@@ -725,6 +776,37 @@ export interface sitePageConnectionPluginCreatorPluginOptionsMaxWidthQueryIntege
 	ne?: number | null;
 }
 
+export interface sitePageConnectionPluginCreatorPluginOptionsWrapperStyleQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface sitePageConnectionPluginCreatorPluginOptionsBackgroundColorQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface sitePageConnectionPluginCreatorPluginOptionsLinkImagesToOriginalQueryBoolean {
+	eq?: boolean | null;
+	ne?: boolean | null;
+}
+
+export interface sitePageConnectionPluginCreatorPluginOptionsShowCaptionsQueryBoolean {
+	eq?: boolean | null;
+	ne?: boolean | null;
+}
+
+export interface sitePageConnectionPluginCreatorPluginOptionsPathPrefixQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
 export interface sitePageConnectionPluginCreatorPluginOptionsInlineCodeMarkerQueryString {
 	eq?: string | null;
 	ne?: string | null;
@@ -746,7 +828,7 @@ export interface sitePageConnectionPluginCreatorPluginOptionsStartUrlQueryString
 	glob?: string | null;
 }
 
-export interface sitePageConnectionPluginCreatorPluginOptionsBackgroundColorQueryString {
+export interface sitePageConnectionPluginCreatorPluginOptionsBackgroundColorQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
@@ -1085,10 +1167,15 @@ export interface sitePluginConnectionPluginOptionsInputObject_2 {
 	name?: sitePluginConnectionPluginOptionsNameQueryString_2 | null;
 	path?: sitePluginConnectionPluginOptionsPathQueryString_2 | null;
 	maxWidth?: sitePluginConnectionPluginOptionsMaxWidthQueryInteger_2 | null;
+	wrapperStyle?: sitePluginConnectionPluginOptionsWrapperStyleQueryString_2 | null;
+	backgroundColor?: sitePluginConnectionPluginOptionsBackgroundColorQueryString_3 | null;
+	linkImagesToOriginal?: sitePluginConnectionPluginOptionsLinkImagesToOriginalQueryBoolean_2 | null;
+	showCaptions?: sitePluginConnectionPluginOptionsShowCaptionsQueryBoolean_2 | null;
+	pathPrefix?: sitePluginConnectionPluginOptionsPathPrefixQueryString_2 | null;
 	inlineCodeMarker?: sitePluginConnectionPluginOptionsInlineCodeMarkerQueryString_2 | null;
 	short_name?: sitePluginConnectionPluginOptionsShortNameQueryString_2 | null;
 	start_url?: sitePluginConnectionPluginOptionsStartUrlQueryString_2 | null;
-	background_color?: sitePluginConnectionPluginOptionsBackgroundColorQueryString_2 | null;
+	background_color?: sitePluginConnectionPluginOptionsBackgroundColorQueryString_4 | null;
 	theme_color?: sitePluginConnectionPluginOptionsThemeColorQueryString_2 | null;
 	display?: sitePluginConnectionPluginOptionsDisplayQueryString_2 | null;
 	pathToConfigModule?: sitePluginConnectionPluginOptionsPathToConfigModuleQueryString_2 | null;
@@ -1137,12 +1224,48 @@ export interface sitePluginConnectionPluginOptionsPluginsVersionQueryString_2 {
 
 export interface sitePluginConnectionPluginOptionsPluginsPluginOptionsInputObject_2 {
 	maxWidth?: sitePluginConnectionPluginOptionsPluginsPluginOptionsMaxWidthQueryInteger_2 | null;
+	wrapperStyle?: sitePluginConnectionPluginOptionsPluginsPluginOptionsWrapperStyleQueryString_2 | null;
+	backgroundColor?: sitePluginConnectionPluginOptionsPluginsPluginOptionsBackgroundColorQueryString_2 | null;
+	linkImagesToOriginal?: sitePluginConnectionPluginOptionsPluginsPluginOptionsLinkImagesToOriginalQueryBoolean_2 | null;
+	showCaptions?: sitePluginConnectionPluginOptionsPluginsPluginOptionsShowCaptionsQueryBoolean_2 | null;
+	pathPrefix?: sitePluginConnectionPluginOptionsPluginsPluginOptionsPathPrefixQueryString_2 | null;
 	inlineCodeMarker?: sitePluginConnectionPluginOptionsPluginsPluginOptionsInlineCodeMarkerQueryString_2 | null;
 }
 
 export interface sitePluginConnectionPluginOptionsPluginsPluginOptionsMaxWidthQueryInteger_2 {
 	eq?: number | null;
 	ne?: number | null;
+}
+
+export interface sitePluginConnectionPluginOptionsPluginsPluginOptionsWrapperStyleQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface sitePluginConnectionPluginOptionsPluginsPluginOptionsBackgroundColorQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface sitePluginConnectionPluginOptionsPluginsPluginOptionsLinkImagesToOriginalQueryBoolean_2 {
+	eq?: boolean | null;
+	ne?: boolean | null;
+}
+
+export interface sitePluginConnectionPluginOptionsPluginsPluginOptionsShowCaptionsQueryBoolean_2 {
+	eq?: boolean | null;
+	ne?: boolean | null;
+}
+
+export interface sitePluginConnectionPluginOptionsPluginsPluginOptionsPathPrefixQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
 }
 
 export interface sitePluginConnectionPluginOptionsPluginsPluginOptionsInlineCodeMarkerQueryString_2 {
@@ -1178,6 +1301,37 @@ export interface sitePluginConnectionPluginOptionsMaxWidthQueryInteger_2 {
 	ne?: number | null;
 }
 
+export interface sitePluginConnectionPluginOptionsWrapperStyleQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface sitePluginConnectionPluginOptionsBackgroundColorQueryString_3 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface sitePluginConnectionPluginOptionsLinkImagesToOriginalQueryBoolean_2 {
+	eq?: boolean | null;
+	ne?: boolean | null;
+}
+
+export interface sitePluginConnectionPluginOptionsShowCaptionsQueryBoolean_2 {
+	eq?: boolean | null;
+	ne?: boolean | null;
+}
+
+export interface sitePluginConnectionPluginOptionsPathPrefixQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
 export interface sitePluginConnectionPluginOptionsInlineCodeMarkerQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
@@ -1199,7 +1353,7 @@ export interface sitePluginConnectionPluginOptionsStartUrlQueryString_2 {
 	glob?: string | null;
 }
 
-export interface sitePluginConnectionPluginOptionsBackgroundColorQueryString_2 {
+export interface sitePluginConnectionPluginOptionsBackgroundColorQueryString_4 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
@@ -2259,12 +2413,12 @@ export interface dataJsonConnectionSocialQueryList_2 {
 }
 
 export interface dataJsonConnectionSocialInputObject_2 {
-	service?: dataJsonConnectionSocialServiceQueryString_2 | null;
+	serviceName?: dataJsonConnectionSocialServiceNameQueryString_2 | null;
 	icon?: dataJsonConnectionSocialIconQueryString_2 | null;
 	url?: dataJsonConnectionSocialUrlQueryString_2 | null;
 }
 
-export interface dataJsonConnectionSocialServiceQueryString_2 {
+export interface dataJsonConnectionSocialServiceNameQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
@@ -2428,10 +2582,15 @@ export interface sitePagePluginCreatorPluginOptionsInputObject {
 	name?: sitePagePluginCreatorPluginOptionsNameQueryString | null;
 	path?: sitePagePluginCreatorPluginOptionsPathQueryString | null;
 	maxWidth?: sitePagePluginCreatorPluginOptionsMaxWidthQueryInteger | null;
+	wrapperStyle?: sitePagePluginCreatorPluginOptionsWrapperStyleQueryString | null;
+	backgroundColor?: sitePagePluginCreatorPluginOptionsBackgroundColorQueryString | null;
+	linkImagesToOriginal?: sitePagePluginCreatorPluginOptionsLinkImagesToOriginalQueryBoolean | null;
+	showCaptions?: sitePagePluginCreatorPluginOptionsShowCaptionsQueryBoolean | null;
+	pathPrefix?: sitePagePluginCreatorPluginOptionsPathPrefixQueryString | null;
 	inlineCodeMarker?: sitePagePluginCreatorPluginOptionsInlineCodeMarkerQueryString | null;
 	short_name?: sitePagePluginCreatorPluginOptionsShortNameQueryString | null;
 	start_url?: sitePagePluginCreatorPluginOptionsStartUrlQueryString | null;
-	background_color?: sitePagePluginCreatorPluginOptionsBackgroundColorQueryString | null;
+	background_color?: sitePagePluginCreatorPluginOptionsBackgroundColorQueryString_2 | null;
 	theme_color?: sitePagePluginCreatorPluginOptionsThemeColorQueryString | null;
 	display?: sitePagePluginCreatorPluginOptionsDisplayQueryString | null;
 	pathToConfigModule?: sitePagePluginCreatorPluginOptionsPathToConfigModuleQueryString | null;
@@ -2480,12 +2639,48 @@ export interface sitePagePluginCreatorPluginOptionsPluginsVersionQueryString {
 
 export interface sitePagePluginCreatorPluginOptionsPluginsPluginOptionsInputObject {
 	maxWidth?: sitePagePluginCreatorPluginOptionsPluginsPluginOptionsMaxWidthQueryInteger | null;
+	wrapperStyle?: sitePagePluginCreatorPluginOptionsPluginsPluginOptionsWrapperStyleQueryString | null;
+	backgroundColor?: sitePagePluginCreatorPluginOptionsPluginsPluginOptionsBackgroundColorQueryString | null;
+	linkImagesToOriginal?: sitePagePluginCreatorPluginOptionsPluginsPluginOptionsLinkImagesToOriginalQueryBoolean | null;
+	showCaptions?: sitePagePluginCreatorPluginOptionsPluginsPluginOptionsShowCaptionsQueryBoolean | null;
+	pathPrefix?: sitePagePluginCreatorPluginOptionsPluginsPluginOptionsPathPrefixQueryString | null;
 	inlineCodeMarker?: sitePagePluginCreatorPluginOptionsPluginsPluginOptionsInlineCodeMarkerQueryString | null;
 }
 
 export interface sitePagePluginCreatorPluginOptionsPluginsPluginOptionsMaxWidthQueryInteger {
 	eq?: number | null;
 	ne?: number | null;
+}
+
+export interface sitePagePluginCreatorPluginOptionsPluginsPluginOptionsWrapperStyleQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface sitePagePluginCreatorPluginOptionsPluginsPluginOptionsBackgroundColorQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface sitePagePluginCreatorPluginOptionsPluginsPluginOptionsLinkImagesToOriginalQueryBoolean {
+	eq?: boolean | null;
+	ne?: boolean | null;
+}
+
+export interface sitePagePluginCreatorPluginOptionsPluginsPluginOptionsShowCaptionsQueryBoolean {
+	eq?: boolean | null;
+	ne?: boolean | null;
+}
+
+export interface sitePagePluginCreatorPluginOptionsPluginsPluginOptionsPathPrefixQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
 }
 
 export interface sitePagePluginCreatorPluginOptionsPluginsPluginOptionsInlineCodeMarkerQueryString {
@@ -2521,6 +2716,37 @@ export interface sitePagePluginCreatorPluginOptionsMaxWidthQueryInteger {
 	ne?: number | null;
 }
 
+export interface sitePagePluginCreatorPluginOptionsWrapperStyleQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface sitePagePluginCreatorPluginOptionsBackgroundColorQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface sitePagePluginCreatorPluginOptionsLinkImagesToOriginalQueryBoolean {
+	eq?: boolean | null;
+	ne?: boolean | null;
+}
+
+export interface sitePagePluginCreatorPluginOptionsShowCaptionsQueryBoolean {
+	eq?: boolean | null;
+	ne?: boolean | null;
+}
+
+export interface sitePagePluginCreatorPluginOptionsPathPrefixQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
 export interface sitePagePluginCreatorPluginOptionsInlineCodeMarkerQueryString {
 	eq?: string | null;
 	ne?: string | null;
@@ -2542,7 +2768,7 @@ export interface sitePagePluginCreatorPluginOptionsStartUrlQueryString {
 	glob?: string | null;
 }
 
-export interface sitePagePluginCreatorPluginOptionsBackgroundColorQueryString {
+export interface sitePagePluginCreatorPluginOptionsBackgroundColorQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
@@ -2856,10 +3082,15 @@ export interface sitePluginPluginOptionsInputObject_2 {
 	name?: sitePluginPluginOptionsNameQueryString_2 | null;
 	path?: sitePluginPluginOptionsPathQueryString_2 | null;
 	maxWidth?: sitePluginPluginOptionsMaxWidthQueryInteger_2 | null;
+	wrapperStyle?: sitePluginPluginOptionsWrapperStyleQueryString_2 | null;
+	backgroundColor?: sitePluginPluginOptionsBackgroundColorQueryString_3 | null;
+	linkImagesToOriginal?: sitePluginPluginOptionsLinkImagesToOriginalQueryBoolean_2 | null;
+	showCaptions?: sitePluginPluginOptionsShowCaptionsQueryBoolean_2 | null;
+	pathPrefix?: sitePluginPluginOptionsPathPrefixQueryString_2 | null;
 	inlineCodeMarker?: sitePluginPluginOptionsInlineCodeMarkerQueryString_2 | null;
 	short_name?: sitePluginPluginOptionsShortNameQueryString_2 | null;
 	start_url?: sitePluginPluginOptionsStartUrlQueryString_2 | null;
-	background_color?: sitePluginPluginOptionsBackgroundColorQueryString_2 | null;
+	background_color?: sitePluginPluginOptionsBackgroundColorQueryString_4 | null;
 	theme_color?: sitePluginPluginOptionsThemeColorQueryString_2 | null;
 	display?: sitePluginPluginOptionsDisplayQueryString_2 | null;
 	pathToConfigModule?: sitePluginPluginOptionsPathToConfigModuleQueryString_2 | null;
@@ -2908,12 +3139,48 @@ export interface sitePluginPluginOptionsPluginsVersionQueryString_2 {
 
 export interface sitePluginPluginOptionsPluginsPluginOptionsInputObject_2 {
 	maxWidth?: sitePluginPluginOptionsPluginsPluginOptionsMaxWidthQueryInteger_2 | null;
+	wrapperStyle?: sitePluginPluginOptionsPluginsPluginOptionsWrapperStyleQueryString_2 | null;
+	backgroundColor?: sitePluginPluginOptionsPluginsPluginOptionsBackgroundColorQueryString_2 | null;
+	linkImagesToOriginal?: sitePluginPluginOptionsPluginsPluginOptionsLinkImagesToOriginalQueryBoolean_2 | null;
+	showCaptions?: sitePluginPluginOptionsPluginsPluginOptionsShowCaptionsQueryBoolean_2 | null;
+	pathPrefix?: sitePluginPluginOptionsPluginsPluginOptionsPathPrefixQueryString_2 | null;
 	inlineCodeMarker?: sitePluginPluginOptionsPluginsPluginOptionsInlineCodeMarkerQueryString_2 | null;
 }
 
 export interface sitePluginPluginOptionsPluginsPluginOptionsMaxWidthQueryInteger_2 {
 	eq?: number | null;
 	ne?: number | null;
+}
+
+export interface sitePluginPluginOptionsPluginsPluginOptionsWrapperStyleQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface sitePluginPluginOptionsPluginsPluginOptionsBackgroundColorQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface sitePluginPluginOptionsPluginsPluginOptionsLinkImagesToOriginalQueryBoolean_2 {
+	eq?: boolean | null;
+	ne?: boolean | null;
+}
+
+export interface sitePluginPluginOptionsPluginsPluginOptionsShowCaptionsQueryBoolean_2 {
+	eq?: boolean | null;
+	ne?: boolean | null;
+}
+
+export interface sitePluginPluginOptionsPluginsPluginOptionsPathPrefixQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
 }
 
 export interface sitePluginPluginOptionsPluginsPluginOptionsInlineCodeMarkerQueryString_2 {
@@ -2949,6 +3216,37 @@ export interface sitePluginPluginOptionsMaxWidthQueryInteger_2 {
 	ne?: number | null;
 }
 
+export interface sitePluginPluginOptionsWrapperStyleQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface sitePluginPluginOptionsBackgroundColorQueryString_3 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface sitePluginPluginOptionsLinkImagesToOriginalQueryBoolean_2 {
+	eq?: boolean | null;
+	ne?: boolean | null;
+}
+
+export interface sitePluginPluginOptionsShowCaptionsQueryBoolean_2 {
+	eq?: boolean | null;
+	ne?: boolean | null;
+}
+
+export interface sitePluginPluginOptionsPathPrefixQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
 export interface sitePluginPluginOptionsInlineCodeMarkerQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
@@ -2970,7 +3268,7 @@ export interface sitePluginPluginOptionsStartUrlQueryString_2 {
 	glob?: string | null;
 }
 
-export interface sitePluginPluginOptionsBackgroundColorQueryString_2 {
+export interface sitePluginPluginOptionsBackgroundColorQueryString_4 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
@@ -4007,12 +4305,12 @@ export interface dataJsonSocialQueryList_2 {
 }
 
 export interface dataJsonSocialInputObject_2 {
-	service?: dataJsonSocialServiceQueryString_2 | null;
+	serviceName?: dataJsonSocialServiceNameQueryString_2 | null;
 	icon?: dataJsonSocialIconQueryString_2 | null;
 	url?: dataJsonSocialUrlQueryString_2 | null;
 }
 
-export interface dataJsonSocialServiceQueryString_2 {
+export interface dataJsonSocialServiceNameQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
@@ -4641,6 +4939,11 @@ export enum SitePluginConnectionSortByFieldsEnum {
 	pluginOptions___name = "pluginOptions___name",
 	pluginOptions___path = "pluginOptions___path",
 	pluginOptions___maxWidth = "pluginOptions___maxWidth",
+	pluginOptions___wrapperStyle = "pluginOptions___wrapperStyle",
+	pluginOptions___backgroundColor = "pluginOptions___backgroundColor",
+	pluginOptions___linkImagesToOriginal = "pluginOptions___linkImagesToOriginal",
+	pluginOptions___showCaptions = "pluginOptions___showCaptions",
+	pluginOptions___pathPrefix = "pluginOptions___pathPrefix",
 	pluginOptions___inlineCodeMarker = "pluginOptions___inlineCodeMarker",
 	pluginOptions___short_name = "pluginOptions___short_name",
 	pluginOptions___start_url = "pluginOptions___start_url",
@@ -4682,6 +4985,11 @@ export enum sitePluginDistinctEnum {
 	pluginOptions___name = "pluginOptions___name",
 	pluginOptions___path = "pluginOptions___path",
 	pluginOptions___maxWidth = "pluginOptions___maxWidth",
+	pluginOptions___wrapperStyle = "pluginOptions___wrapperStyle",
+	pluginOptions___backgroundColor = "pluginOptions___backgroundColor",
+	pluginOptions___linkImagesToOriginal = "pluginOptions___linkImagesToOriginal",
+	pluginOptions___showCaptions = "pluginOptions___showCaptions",
+	pluginOptions___pathPrefix = "pluginOptions___pathPrefix",
 	pluginOptions___inlineCodeMarker = "pluginOptions___inlineCodeMarker",
 	pluginOptions___short_name = "pluginOptions___short_name",
 	pluginOptions___start_url = "pluginOptions___start_url",
@@ -4718,6 +5026,11 @@ export enum sitePluginGroupEnum {
 	pluginOptions___name = "pluginOptions___name",
 	pluginOptions___path = "pluginOptions___path",
 	pluginOptions___maxWidth = "pluginOptions___maxWidth",
+	pluginOptions___wrapperStyle = "pluginOptions___wrapperStyle",
+	pluginOptions___backgroundColor = "pluginOptions___backgroundColor",
+	pluginOptions___linkImagesToOriginal = "pluginOptions___linkImagesToOriginal",
+	pluginOptions___showCaptions = "pluginOptions___showCaptions",
+	pluginOptions___pathPrefix = "pluginOptions___pathPrefix",
 	pluginOptions___inlineCodeMarker = "pluginOptions___inlineCodeMarker",
 	pluginOptions___short_name = "pluginOptions___short_name",
 	pluginOptions___start_url = "pluginOptions___start_url",
