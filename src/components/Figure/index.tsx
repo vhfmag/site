@@ -1,4 +1,9 @@
 import * as React from "react";
+import styled from "styled-components";
+
+const StyledFigure = styled.figure`
+	padding: 16pt;
+`;
 
 export interface IFigureProps {
 	src: string;
@@ -8,13 +13,13 @@ export interface IFigureProps {
 }
 
 export const Figure: React.SFC<IFigureProps> = ({ alt, attr, src, title }) => (
-	<figure>
-		<img src={src} alt={alt} />
+	<StyledFigure>
+		<img src={require(`../../assets${src}`)} alt={alt} />
 		{(title || attr) && (
 			<figcaption>
 				{title && <h4>{title}</h4>}
 				{attr && <p>{attr}</p>}
 			</figcaption>
 		)}
-	</figure>
+	</StyledFigure>
 );
