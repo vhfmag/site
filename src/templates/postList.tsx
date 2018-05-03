@@ -20,8 +20,6 @@ interface IndexPageProps {
 
 export default class PostList extends React.Component<IndexPageProps, {}> {
 	public render() {
-		console.log("postlist", this.props);
-
 		const { group: posts, ...paginationProps } = this.props.pathContext;
 
 		return (

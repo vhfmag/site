@@ -4,8 +4,6 @@ import Link from "gatsby-link";
 import Helmet from "react-helmet";
 import { renderAst } from "../../utils/customComponents";
 
-console.log({ renderAst });
-
 type IArticleProps = HTMLOrString & {
 	title: string;
 	subtitle?: NonNullableNode;
