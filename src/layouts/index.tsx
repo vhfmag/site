@@ -172,6 +172,10 @@ export default class DefaultLayout extends React.PureComponent<
 							name: "bookmarks",
 							url: "/bookmarks",
 						},
+						{
+							name: "todo",
+							url: "/todo",
+						},
 					]}
 				/>
 
