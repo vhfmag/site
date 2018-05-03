@@ -4,10 +4,12 @@ import Link from "gatsby-link";
 import Helmet from "react-helmet";
 import { renderAst } from "../../utils/customComponents";
 
+console.log({ renderAst });
+
 type IArticleProps = HTMLOrString & {
 	title: string;
 	subtitle?: NonNullableNode;
-	info?: string;
+	info?: NonNullableNode;
 	url?: string;
 	children?: never;
 };
@@ -43,7 +45,7 @@ export class Article extends React.Component<IArticleProps> {
 					{subtitle && <h2>{subtitle}</h2>}
 					{info && <span>{info}</span>}
 				</StyledHeader>
-				<section>{content || renderAst(htmlAst)}</section>
+				<section>{<p>{content}</p> || renderAst(htmlAst)}</section>
 			</StyledArticle>
 		);
 	}
