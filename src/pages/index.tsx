@@ -41,7 +41,7 @@ export default class DefaultLayout extends React.Component<IndexPageProps, {}> {
 							key={fileAbsolutePath}
 							info={formatDate(date)}
 							title={title}
-							subtitle={description}
+							content={description}
 							url={`/post/${extractFileNameFromPath(
 								fileAbsolutePath,
 							)}`}

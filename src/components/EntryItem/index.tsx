@@ -1,12 +1,16 @@
 import * as React from "react";
 import styled from "styled-components";
 
-interface IEntryItemProps {
+type IContentProps =
+	| { content?: NonNullableNode; html?: undefined }
+	| { html?: string; content?: undefined };
+
+type IEntryItemProps = IContentProps & {
 	title: NonNullableNode;
 	info?: NonNullableNode;
 	subtitle?: NonNullableNode;
 	url?: string;
-}
+};
 
 const StyledEntryInfo = styled.div``;
 const StyledEntryItem = styled.article`
@@ -36,12 +40,19 @@ export const EntryItem: React.SFC<IEntryItemProps> = ({
 	subtitle,
 	title,
 	url,
+	html,
+	content,
 }) => {
 	return (
 		<StyledEntryItem>
 			<h2>{url ? <a href={url}>{title}</a> : title}</h2>
+			{subtitle && <h3>{subtitle}</h3>}
 			{info && <StyledEntryInfo>{info}</StyledEntryInfo>}
-			{subtitle && <p>{subtitle}</p>}
+			{html ? (
+				<div dangerouslySetInnerHTML={{ __html: html }} />
+			) : content ? (
+				<p>{content}</p>
+			) : null}
 		</StyledEntryItem>
 	);
 };
