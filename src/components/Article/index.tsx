@@ -1,13 +1,14 @@
 import * as React from "react";
 import styled from "styled-components";
 import Link from "gatsby-link";
+import Helmet from "react-helmet";
 
 type IContentProps =
 	| { content: NonNullableNode; html?: undefined }
 	| { html: string; content?: undefined };
 
 type IArticleProps = IContentProps & {
-	title: NonNullableNode;
+	title: string;
 	subtitle?: NonNullableNode;
 	info?: string;
 	url?: string;
@@ -31,6 +32,7 @@ export class Article extends React.Component<IArticleProps> {
 
 		return (
 			<StyledArticle>
+				<Helmet title={title} />
 				<StyledHeader>
 					<h1 className="post-title p-name">
 						{url ? (

@@ -136,7 +136,8 @@ export default class DefaultLayout extends React.PureComponent<
 		return (
 			<StyledRoot>
 				<Helmet
-					title={title}
+					defaultTitle={title}
+					titleTemplate={`%s | ${title}`}
 					meta={[
 						{ name: "description", content: description },
 						{ name: "keywords", content: "sample, something" },
