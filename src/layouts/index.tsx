@@ -48,7 +48,7 @@ const StyledRoot = styled.div`
 		padding: 16pt;
 		flex: 0 1 var(--width);
 		max-width: var(--width);
-		font-size: calc(1rem + .25vw);
+		font-size: calc(1rem + 0.25vw);
 
 		p {
 			max-width: 70ch;
@@ -77,22 +77,30 @@ const SocialLinks = styled.div`
 		font-size: 1.5em;
 		color: ${textColor} !important;
 
-		&:active, &:hover {
+		&:active,
+		&:hover {
 			color: ${themeColor} !important;
 		}
 	}
 `;
 
-const Sidebar: React.SFC<ISidebarProps> = ({ title, description, email, social }) => (
+const Sidebar: React.SFC<ISidebarProps> = ({
+	title,
+	description,
+	email,
+	social,
+}) => (
 	<StyledSidebar>
-		<h1>{ title }</h1>
+		<h1>{title}</h1>
 		<p>
-			<a href={`mailto:${email}`}>{ email }</a>
+			<a href={`mailto:${email}`}>{email}</a>
 		</p>
-		<p>{ description }</p>
+		<p>{description}</p>
 		<SocialLinks>
 			{social.map(({ service, url, icon }) => (
-				<a key={service} href={url}><i className={`fa ${icon}`}/></a>
+				<a key={service} href={url}>
+					<i className={`fa ${icon}`} />
+				</a>
 			))}
 		</SocialLinks>
 	</StyledSidebar>
@@ -109,7 +117,13 @@ const baseCss = css`
 		box-sizing: border-box;
 	}
 
-	h1, h2, h3, h4, h5, h6, blockquote {
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6,
+	blockquote {
 		color: ${textColor};
 	}
 
@@ -121,7 +135,8 @@ const baseCss = css`
 		border-left-color: ${themeColor};
 	}
 
-	html, body {
+	html,
+	body {
 		background-color: ${backgroundColor};
 		color: ${textColor};
 		/* width: 100vw; */
@@ -131,19 +146,26 @@ const baseCss = css`
 	}
 
 	a {
-		transition: .25s color ease, .25s opacity ease;
+		transition: 0.25s color ease, 0.25s opacity ease;
 	}
 
-	a, a:hover, a:visited, a:focus, a:active {
+	a,
+	a:hover,
+	a:visited,
+	a:focus,
+	a:active {
 		color: ${themeColor};
 	}
 
-	a:hover, a:active, a:focus {
-		opacity: .75;
+	a:hover,
+	a:active,
+	a:focus {
+		opacity: 0.75;
 	}
 `;
 
-interface DefaultLayoutProps extends ObjectOmit<React.HTMLProps<HTMLDivElement>, "data"> {
+interface DefaultLayoutProps
+	extends ObjectOmit<React.HTMLProps<HTMLDivElement>, "data"> {
 	location: {
 		pathname: string;
 	};
@@ -158,11 +180,14 @@ interface DefaultLayoutProps extends ObjectOmit<React.HTMLProps<HTMLDivElement>,
 		dataJson: {
 			email: string;
 			social: social_2[];
-		}
+		};
 	};
 }
 
-export default class DefaultLayout extends React.PureComponent<DefaultLayoutProps, void> {
+export default class DefaultLayout extends React.PureComponent<
+	DefaultLayoutProps,
+	void
+> {
 	public render() {
 		const { title, description } = this.props.data.site.siteMetadata;
 		const { email, social } = this.props.data.dataJson;

@@ -5,34 +5,37 @@ import { formatDate } from "../utils/utils";
 
 interface IPostTemplateProps {
 	data: {
-        markdownRemark: {
-            html: string;
-            frontmatter: {
-                title: string;
-                description: string;
-                date: string;
-            };
-        };
+		markdownRemark: {
+			html: string;
+			frontmatter: {
+				title: string;
+				description: string;
+				date: string;
+			};
+		};
 	};
 	pathContext: {
-		 markdownPath: string;
-		 slug: string;
-	}
+		markdownPath: string;
+		slug: string;
+	};
 }
 
 const StyledArticle = styled.article`
-    h1, h2 {
-        margin: 0 0 0.6em;
-    }
+	h1,
+	h2 {
+		margin: 0 0 0.6em;
+	}
 `;
 
 const StyledHeader = styled.header`
 	margin-bottom: 16pt;
 `;
 
-export default class SinglePostTemplate extends React.Component<IPostTemplateProps> {
+export default class SinglePostTemplate extends React.Component<
+	IPostTemplateProps
+> {
 	public render() {
-        console.log(this.props);
+		console.log(this.props);
 		const {
 			data: {
 				markdownRemark: {
@@ -40,9 +43,7 @@ export default class SinglePostTemplate extends React.Component<IPostTemplatePro
 					frontmatter: { date, title, description },
 				},
 			},
-			pathContext: {
-				slug
-			},
+			pathContext: { slug },
 		} = this.props;
 
 		const formattedDate = formatDate(date);
@@ -59,7 +60,7 @@ export default class SinglePostTemplate extends React.Component<IPostTemplatePro
 					<span>{formattedDate}</span>
 				</StyledHeader>
 				<section dangerouslySetInnerHTML={{ __html: html }} />
-            </StyledArticle>
+			</StyledArticle>
 		);
 	}
 }

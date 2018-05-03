@@ -5,7 +5,9 @@ const { DateTime } = require("luxon");
  * @returns string
  */
 function formatDate(date) {
-    return DateTime.fromISO(date).setLocale("pt-br").toLocaleString(DateTime.DATE_FULL);
+	return DateTime.fromISO(date)
+		.setLocale("pt-br")
+		.toLocaleString(DateTime.DATE_FULL);
 }
 
 const slugRegex = /posts\/(.*?)\.md$/;
@@ -15,12 +17,11 @@ const slugRegex = /posts\/(.*?)\.md$/;
  * @returns string
  */
 function getSlug(path) {
-    const [,slug] = slugRegex.exec(path);
-    return slug;
+	const [, slug] = slugRegex.exec(path);
+	return slug;
 }
-
 
 module.exports = {
-    formatDate,
-    getSlug,
-}
+	formatDate,
+	getSlug,
+};

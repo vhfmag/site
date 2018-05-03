@@ -5,12 +5,12 @@ import styled from "styled-components";
 import { getSlug, formatDate } from "../utils/utils";
 
 interface IPostItem {
-    fileAbsolutePath: string;
-    frontmatter: {
-        title: string;
-        description: string;
-        date: string;
-    };
+	fileAbsolutePath: string;
+	frontmatter: {
+		title: string;
+		description: string;
+		date: string;
+	};
 }
 
 interface IndexPageProps {
@@ -30,7 +30,8 @@ const StyledPostItem = styled.article`
 		font-size: 1rem;
 	}
 
-	p, h2 {
+	p,
+	h2 {
 		margin: 0;
 	}
 
@@ -44,24 +45,22 @@ const StyledPostItem = styled.article`
 `;
 
 const PostItem: React.SFC<{ post: IPostItem }> = ({ post }) => {
-    const {
-        fileAbsolutePath,
-        frontmatter: {
-            date,
-            title,
-            description,
-        },
-    } = post;
+	const {
+		fileAbsolutePath,
+		frontmatter: { date, title, description },
+	} = post;
 
 	const slug = getSlug(fileAbsolutePath);
 
-    return (
-        <StyledPostItem>
-            <h2><a href={`/post/${slug}`}>{ title }</a></h2>
-            <StyledPostDescription>{ formatDate(date) }</StyledPostDescription>
-            <p>{ description }</p>
-        </StyledPostItem>
-    );
+	return (
+		<StyledPostItem>
+			<h2>
+				<a href={`/post/${slug}`}>{title}</a>
+			</h2>
+			<StyledPostDescription>{formatDate(date)}</StyledPostDescription>
+			<p>{description}</p>
+		</StyledPostItem>
+	);
 };
 
 export default class DefaultLayout extends React.Component<IndexPageProps, {}> {
@@ -69,16 +68,18 @@ export default class DefaultLayout extends React.Component<IndexPageProps, {}> {
 		super(props, context);
 	}
 	public render() {
-		const { allMarkdownRemark: { edges: posts } } = this.props.data;
+		const {
+			allMarkdownRemark: { edges: posts },
+		} = this.props.data;
 
 		return (
 			<>
-				{ posts.map(post => (
+				{posts.map(post => (
 					<PostItem
 						key={post.node.fileAbsolutePath}
 						post={post.node}
 					/>
-				)) }
+				))}
 			</>
 		);
 	}
@@ -88,15 +89,10 @@ export const pageQuery = graphql`
 	query IndexQuery {
 		allMarkdownRemark(
 			filter: {
-				fileAbsolutePath: { regex: "/\/posts\//" }
-				frontmatter: {
-					draft: { ne: true }
-				}
+				fileAbsolutePath: { regex: "//posts//" }
+				frontmatter: { draft: { ne: true } }
 			}
-			sort: {
-				fields: [frontmatter___date]
-				order: DESC
-			}
+			sort: { fields: [frontmatter___date], order: DESC }
 		) {
 			edges {
 				node {
