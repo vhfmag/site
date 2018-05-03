@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Helmet } from "react-helmet";
 import { ObjectOmit } from "typelevel-ts";
-import styled from "styled-components";
+import styled, { injectGlobal } from "styled-components";
 
 import "normalize-css/normalize.css";
 import "font-awesome/css/font-awesome.min.css";
@@ -12,7 +12,6 @@ import {
 	responsiveBreakpoint,
 } from "../utils/consts";
 import { social_2 } from "../graphql-types";
-import { css } from "../utils/taggedUtils";
 import { Sidebar } from "../components/Sidebar";
 
 require("prismjs/themes/prism-okaidia.css");
@@ -55,7 +54,7 @@ const StyledRoot = styled.div`
 	}
 `;
 
-const baseCss = css`
+injectGlobal`
 	:root {
 		--bgColor: ${backgroundColor};
 		--themeColor: ${themeColor};
@@ -150,9 +149,7 @@ export default class DefaultLayout extends React.PureComponent<
 						{ name: "description", content: description },
 						{ name: "keywords", content: "sample, something" },
 					]}
-				>
-					<style>{baseCss}</style>
-				</Helmet>
+				/>
 
 				<Sidebar
 					title={title}
