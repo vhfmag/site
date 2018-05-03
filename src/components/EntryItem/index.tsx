@@ -1,11 +1,8 @@
 import * as React from "react";
 import styled from "styled-components";
+import { renderAst } from "../../utils/customComponents";
 
-type IContentProps =
-	| { content?: NonNullableNode; html?: undefined }
-	| { html?: string; content?: undefined };
-
-type IEntryItemProps = IContentProps & {
+type IEntryItemProps = HTMLOrString & {
 	title: NonNullableNode;
 	info?: NonNullableNode;
 	subtitle?: NonNullableNode;
@@ -40,7 +37,7 @@ export const EntryItem: React.SFC<IEntryItemProps> = ({
 	subtitle,
 	title,
 	url,
-	html,
+	htmlAst,
 	content,
 }) => {
 	return (
@@ -48,11 +45,9 @@ export const EntryItem: React.SFC<IEntryItemProps> = ({
 			<h2>{url ? <a href={url}>{title}</a> : title}</h2>
 			{subtitle && <h3>{subtitle}</h3>}
 			{info && <StyledEntryInfo>{info}</StyledEntryInfo>}
-			{html ? (
-				<div dangerouslySetInnerHTML={{ __html: html }} />
-			) : content ? (
-				<p>{content}</p>
-			) : null}
+			{(htmlAst || content) && (
+				<section>{content || renderAst(htmlAst)}</section>
+			)}
 		</StyledEntryItem>
 	);
 };

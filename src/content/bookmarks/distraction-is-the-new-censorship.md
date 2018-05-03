@@ -4,7 +4,7 @@ author: "[Catherice Cusick](https://longreads.com/author/cusickcatherine/) at [L
 link: https://longreads.com/2018/01/31/distraction-is-the-new-censorship/
 ---
 
-{{< figure src="/images/bookmarks/estatua-bandeirantes-noise-awareness.jpg" title="Monument to the Bandeiras, International Noise Awareness Day in Brazil." attr="(Dario Oliveira/Anadolu Agency/Getty Images)">}}
+<figure src="/images/bookmarks/estatua-bandeirantes-noise-awareness.jpg" title="Monument to the Bandeiras, International Noise Awareness Day in Brazil." attr="(Dario Oliveira/Anadolu Agency/Getty Images)"></figure>
 
 > In today’s attention economy, ideas don’t need to be deleted or redacted to be silenced. They can be drowned out privately, screen by screen, by unchecked noise from decoy bots, doxxing campaigns, and filter bubbles.
 

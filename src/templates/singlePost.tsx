@@ -5,7 +5,7 @@ import { Article } from "../components/Article";
 interface IPostTemplateProps {
 	data: {
 		markdownRemark: {
-			html: string;
+			htmlAst: string;
 			frontmatter: {
 				title: string;
 				description: string;
@@ -26,7 +26,7 @@ export default class SinglePostTemplate extends React.Component<
 		const {
 			data: {
 				markdownRemark: {
-					html,
+					htmlAst,
 					frontmatter: { date, title, description },
 				},
 			},
@@ -39,7 +39,7 @@ export default class SinglePostTemplate extends React.Component<
 				title={title}
 				subtitle={description}
 				info={formattedDate}
-				html={html}
+				htmlAst={htmlAst}
 				url="#"
 			/>
 		);
@@ -49,7 +49,7 @@ export default class SinglePostTemplate extends React.Component<
 export const pageQuery = graphql`
 	query SinglePostQuery($markdownPath: String!) {
 		markdownRemark(fileAbsolutePath: { eq: $markdownPath }) {
-			html
+			htmlAst
 			frontmatter {
 				title
 				description

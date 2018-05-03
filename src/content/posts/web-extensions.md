@@ -55,7 +55,7 @@ Você vai precisar responder algumas perguntas simples, como o nome, o _slug_ e 
 - `Would you like more UI Features?` pergunta que features adicionais nós queremos. Para ter acesso à página e ler os metadados, precisaremos de um _content script_ que, como será explicado abaixo, um arquivo javascript que é executado no ambiente da página, podendo fazer leituras e mudanças na DOM.
 - `Would you like to use permissions?` A única permissão de que vamos precisar é a ActiveTab, direito de acesso ao conteúdo da aba atual.
 
-{{< figure src="/images/posts/webextensions/browseraction.png" title="Barra do Firefox mostrando browser actions à direita e page actions, como o ícone do Pocket, mais ao centro" >}}
+<figure src="/images/posts/webextensions/browseraction.png" title="Barra do Firefox mostrando browser actions à direita e page actions, como o ícone do Pocket, mais ao centro"></figure>
 
 Depois de responder a todas as perguntas, as dependências serão instaladas e o seu projeto estará pronto. Para testar, execute `npm run dev seu-browser-favorito` - os browsers disponíveis são o Edge, o Firefox, o Chrome e o Opera. Se o browser escolhido for o Firefox, ele será automaticamente aberto e a extensão, instalada. Para os demais browsers, pesquise como instalar extensões localmente.
 

@@ -2,12 +2,9 @@ import * as React from "react";
 import styled from "styled-components";
 import Link from "gatsby-link";
 import Helmet from "react-helmet";
+import { renderAst } from "../../utils/customComponents";
 
-type IContentProps =
-	| { content: NonNullableNode; html?: undefined }
-	| { html: string; content?: undefined };
-
-type IArticleProps = IContentProps & {
+type IArticleProps = HTMLOrString & {
 	title: string;
 	subtitle?: NonNullableNode;
 	info?: string;
@@ -28,7 +25,7 @@ const StyledHeader = styled.header`
 
 export class Article extends React.Component<IArticleProps> {
 	public render() {
-		const { title, url, subtitle, info, content, html } = this.props;
+		const { title, url, subtitle, info, content, htmlAst } = this.props;
 
 		return (
 			<StyledArticle>
@@ -46,11 +43,7 @@ export class Article extends React.Component<IArticleProps> {
 					{subtitle && <h2>{subtitle}</h2>}
 					{info && <span>{info}</span>}
 				</StyledHeader>
-				{html ? (
-					<section dangerouslySetInnerHTML={{ __html: html }} />
-				) : (
-					<section>{content}</section>
-				)}
+				<section>{content || renderAst(htmlAst)}</section>
 			</StyledArticle>
 		);
 	}
