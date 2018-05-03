@@ -151,6 +151,20 @@ export default class DefaultLayout extends React.PureComponent<
 					email={email}
 					social={social}
 					description={description}
+					nav={[
+						{
+							name: "posts",
+							url: "/",
+						},
+						{
+							name: "livros",
+							url: "/books",
+						},
+						{
+							name: "bookmarks",
+							url: "/bookmarks",
+						},
+					]}
 				/>
 
 				<StyledMain>{this.props.children()}</StyledMain>

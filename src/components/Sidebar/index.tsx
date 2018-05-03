@@ -8,6 +8,26 @@ import { SocialLink } from "./SocialLink";
 
 const responsiveBreakpoint = "800px";
 
+const activeLinkClassName = "active";
+
+const StyledNav = styled.nav`
+	ul {
+		list-style: none;
+		padding-left: 0;
+		margin-left: 0;
+		display: flex;
+		flex-direction: column;
+
+		li {
+			margin-bottom: 0;
+
+			a.${activeLinkClassName} {
+				font-weight: bold;
+			}
+		}
+	}
+`;
+
 const StyledSidebar = styled.header`
 	flex: 0 0 var(--sidebarWidth);
 	padding: var(--rootPadding);
@@ -42,6 +62,12 @@ interface ISidebarProps {
 	email: string;
 	description: string;
 	social: ISocialInfo[];
+	nav: ISidebarNav[];
+}
+
+export interface ISidebarNav {
+	name: string;
+	url: string;
 }
 
 export const Sidebar: React.SFC<ISidebarProps> = ({
@@ -49,6 +75,7 @@ export const Sidebar: React.SFC<ISidebarProps> = ({
 	description,
 	email,
 	social,
+	nav,
 }) => (
 	<StyledSidebar>
 		<h1 className="p-name">
@@ -60,6 +87,21 @@ export const Sidebar: React.SFC<ISidebarProps> = ({
 			</a>
 		</p>
 		<p className="lead p-note">{description}</p>
+		<StyledNav>
+			<ul>
+				{nav.map(({ name, url }) => (
+					<li>
+						<Link
+							exact
+							activeClassName={activeLinkClassName}
+							to={url}
+						>
+							{name}
+						</Link>
+					</li>
+				))}
+			</ul>
+		</StyledNav>
 		<SocialLinks>
 			{social.map(socialProps => (
 				<SocialLink key={socialProps.serviceName} {...socialProps} />
