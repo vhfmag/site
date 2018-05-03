@@ -1,0 +1,16 @@
+{
+	"subjects": [
+		{ "name": "Sistemas & complexidade", "intensity": 75 },
+		{ "name": "Blockchain", "intensity": 70 },
+		{ "name": "Web decentralizada e P2P", "intensity": 90 },
+		{ "name": "Ciência e jornalismo de dados", "intensity": 75 },
+		{ "name": "Dados abertos", "intensity": 75 },
+		{ "name": "Open source software", "intensity": 90 },
+		{ "name": "Web literacy", "intensity": 90 },
+		{ "name": "Internet & privacidade", "intensity": 90 },
+		{ "name": "Design", "intensity": 70 },
+		{ "name": "'Humanas'", "intensity": 90 },
+		{ "name": "Inclusão & diversidade", "intensity": 90 },
+		{ "name": "Línguas", "intensity": 85 }
+	]
+}

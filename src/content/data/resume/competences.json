@@ -1,0 +1,17 @@
+[
+	{
+		"name": "Desenvolver aplicações web",
+		"description":
+			"Desenvolver aplicações web responsivas, eficientes, ricas em funcionalidade, instaláveis em dispositivos mobile e que funcionam mesmo offline"
+	},
+	{
+		"name": "Desenvolver sites estáticos",
+		"description":
+			"Desenvolver sites estáticos focados em responsividade, SEO e conversão"
+	},
+	{
+		"name": "Desenvolver APIs",
+		"description":
+			"Desenvolver APIs que integram sua aplicação mobile ou web com seu banco de dados"
+	}
+]
