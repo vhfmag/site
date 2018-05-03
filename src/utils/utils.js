@@ -17,7 +17,11 @@ const slugRegex = /posts\/(.*?)\.md$/;
  * @returns string
  */
 function getSlug(path) {
-	const [, slug] = slugRegex.exec(path);
+	const result = slugRegex.exec(path);
+
+	if (!result) return null;
+
+	const [, slug] = result;
 	return slug;
 }
 
