@@ -18,14 +18,24 @@ export interface RootQueryType {
 	allDirectory?: DirectoryConnection | null /* Connection to all Directory nodes */;
 	allFile?: FileConnection | null /* Connection to all File nodes */;
 	allMarkdownRemark?: MarkdownRemarkConnection | null /* Connection to all MarkdownRemark nodes */;
-	allDataJson?: DataJsonConnection | null /* Connection to all DataJson nodes */;
+	allTodoJson?: TodoJsonConnection | null /* Connection to all TodoJson nodes */;
+	allPersonalJson?: PersonalJsonConnection | null /* Connection to all PersonalJson nodes */;
+	allCompetencesJson?: CompetencesJsonConnection | null /* Connection to all CompetencesJson nodes */;
+	allSkillsJson?: SkillsJsonConnection | null /* Connection to all SkillsJson nodes */;
+	allInterestsJson?: InterestsJsonConnection | null /* Connection to all InterestsJson nodes */;
+	allExperiencesJson?: ExperiencesJsonConnection | null /* Connection to all ExperiencesJson nodes */;
 	sitePage?: SitePage | null;
 	sitePlugin?: SitePlugin | null;
 	site?: Site | null;
 	directory?: Directory | null;
 	file?: File | null;
 	markdownRemark?: MarkdownRemark | null;
-	dataJson?: DataJson | null;
+	todoJson?: TodoJson | null;
+	personalJson?: PersonalJson | null;
+	competencesJson?: CompetencesJson | null;
+	skillsJson?: SkillsJson | null;
+	interestsJson?: InterestsJson | null;
+	experiencesJson?: ExperiencesJson | null;
 }
 /* A connection to a list of items. */
 export interface SitePageConnection {
@@ -60,12 +70,41 @@ export interface SitePage extends Node {
 	pluginCreator?: SitePlugin | null;
 	pluginCreatorId?: string | null;
 	componentPath?: string | null;
-	internal?: internal_8 | null;
+	internal?: internal_13 | null;
 }
 
 export interface context {
+	group?: group[] | null;
+	pathPrefix?: string | null;
+	first?: boolean | null;
+	last?: boolean | null;
+	index?: number | null;
+	pageCount?: number | null;
+	additionalContext?: additionalContext | null;
 	slug?: string | null;
 	markdownPath?: string | null;
+}
+
+export interface group {
+	node?: node | null;
+}
+
+export interface node {
+	excerpt?: string | null;
+	fileAbsolutePath?: string | null;
+	frontmatter?: frontmatter_2 | null;
+}
+
+export interface frontmatter_2 {
+	date?: Date | null;
+	author?: string | null;
+	link?: string | null;
+	title?: string | null;
+	description?: string | null;
+}
+
+export interface additionalContext {
+	singlePath?: string | null;
 }
 /* Node of type SitePlugin */
 export interface SitePlugin extends Node {
@@ -81,7 +120,7 @@ export interface SitePlugin extends Node {
 	ssrAPIs?: string[] | null;
 	pluginFilepath?: string | null;
 	packageJson?: packageJson_2 | null;
-	internal?: internal_9 | null;
+	internal?: internal_14 | null;
 }
 
 export interface pluginOptions_3 {
@@ -150,13 +189,13 @@ export interface peerDependencies_2 {
 	version?: string | null;
 }
 
-export interface internal_9 {
+export interface internal_14 {
 	contentDigest?: string | null;
 	type?: string | null;
 	owner?: string | null;
 }
 
-export interface internal_8 {
+export interface internal_13 {
 	type?: string | null;
 	contentDigest?: string | null;
 	description?: string | null;
@@ -223,7 +262,7 @@ export interface Directory extends Node {
 	id: string /* The id of this node. */;
 	parent?: Node | null /* The parent of this node. */;
 	children?: Node[] | null /* The children of this node. */;
-	internal?: internal_10 | null;
+	internal?: internal_15 | null;
 	sourceInstanceName?: string | null;
 	absolutePath?: string | null;
 	relativePath?: string | null;
@@ -259,7 +298,7 @@ export interface Directory extends Node {
 	birthtime?: Date | null;
 }
 
-export interface internal_10 {
+export interface internal_15 {
 	contentDigest?: string | null;
 	type?: string | null;
 	description?: string | null;
@@ -299,8 +338,17 @@ export interface File extends Node {
 	parent?: Node | null /* The parent of this node. */;
 	children?: Node[] | null /* The children of this node. */;
 	childMarkdownRemark?: MarkdownRemark | null /* The child of this node of type markdownRemark */;
-	childDataJson?: DataJson | null /* The child of this node of type dataJson */;
-	internal?: internal_11 | null;
+	childrenTodoJson?:
+		| TodoJson[]
+		| null /* The children of this node of type todoJson */;
+	childPersonalJson?: PersonalJson | null /* The child of this node of type personalJson */;
+	childrenCompetencesJson?:
+		| CompetencesJson[]
+		| null /* The children of this node of type competencesJson */;
+	childSkillsJson?: SkillsJson | null /* The child of this node of type skillsJson */;
+	childInterestsJson?: InterestsJson | null /* The child of this node of type interestsJson */;
+	childExperiencesJson?: ExperiencesJson | null /* The child of this node of type experiencesJson */;
+	internal?: internal_16 | null;
 	sourceInstanceName?: string | null;
 	absolutePath?: string | null;
 	relativePath?: string | null;
@@ -343,8 +391,8 @@ export interface MarkdownRemark extends Node {
 	id: string /* The id of this node. */;
 	parent?: Node | null /* The parent of this node. */;
 	children?: Node[] | null /* The children of this node. */;
-	internal?: internal_12 | null;
-	frontmatter?: frontmatter_2 | null;
+	internal?: internal_17 | null;
+	frontmatter?: frontmatter_3 | null;
 	excerpt?: string | null;
 	fileAbsolutePath?: string | null;
 	html?: string | null;
@@ -355,20 +403,19 @@ export interface MarkdownRemark extends Node {
 	wordCount?: wordCount | null;
 }
 
-export interface internal_12 {
+export interface internal_17 {
 	content?: string | null;
 	type?: string | null;
 	contentDigest?: string | null;
 	owner?: string | null;
 }
 
-export interface frontmatter_2 {
+export interface frontmatter_3 {
 	title?: string | null;
 	author?: string | null;
 	link?: string | null;
 	_PARENT?: string | null;
 	parent?: string | null;
-	links?: string | null;
 	startDate?: Date | null;
 	description?: string | null;
 	date?: Date | null;
@@ -386,14 +433,29 @@ export interface wordCount {
 	sentences?: number | null;
 	words?: number | null;
 }
-/* Node of type DataJson */
-export interface DataJson extends Node {
+/* Node of type TodoJson */
+export interface TodoJson extends Node {
+	id: string /* The id of this node. */;
+	parent?: Node | null /* The parent of this node. */;
+	children?: Node[] | null /* The children of this node. */;
+	title?: string | null;
+	tags?: string[] | null;
+	internal?: internal_18 | null;
+}
+
+export interface internal_18 {
+	contentDigest?: string | null;
+	type?: string | null;
+	owner?: string | null;
+}
+/* Node of type PersonalJson */
+export interface PersonalJson extends Node {
 	id: string /* The id of this node. */;
 	parent?: Node | null /* The parent of this node. */;
 	children?: Node[] | null /* The children of this node. */;
 	email?: string | null;
 	social?: social_2[] | null;
-	internal?: internal_13 | null;
+	internal?: internal_19 | null;
 }
 
 export interface social_2 {
@@ -402,13 +464,101 @@ export interface social_2 {
 	url?: string | null;
 }
 
-export interface internal_13 {
+export interface internal_19 {
+	contentDigest?: string | null;
+	type?: string | null;
+	owner?: string | null;
+}
+/* Node of type CompetencesJson */
+export interface CompetencesJson extends Node {
+	id: string /* The id of this node. */;
+	parent?: Node | null /* The parent of this node. */;
+	children?: Node[] | null /* The children of this node. */;
+	name?: string | null;
+	description?: string | null;
+	internal?: internal_20 | null;
+}
+
+export interface internal_20 {
+	contentDigest?: string | null;
+	type?: string | null;
+	owner?: string | null;
+}
+/* Node of type SkillsJson */
+export interface SkillsJson extends Node {
+	id: string /* The id of this node. */;
+	parent?: Node | null /* The parent of this node. */;
+	children?: Node[] | null /* The children of this node. */;
+	languages?: languages_2[] | null;
+	technical?: technical_2[] | null;
+	soft?: soft_2[] | null;
+	internal?: internal_21 | null;
+}
+
+export interface languages_2 {
+	name?: string | null;
+	intensity?: number | null;
+}
+
+export interface technical_2 {
+	name?: string | null;
+	intensity?: number | null;
+}
+
+export interface soft_2 {
+	name?: string | null;
+	intensity?: number | null;
+}
+
+export interface internal_21 {
+	contentDigest?: string | null;
+	type?: string | null;
+	owner?: string | null;
+}
+/* Node of type InterestsJson */
+export interface InterestsJson extends Node {
+	id: string /* The id of this node. */;
+	parent?: Node | null /* The parent of this node. */;
+	children?: Node[] | null /* The children of this node. */;
+	subjects?: subjects_2[] | null;
+	internal?: internal_22 | null;
+}
+
+export interface subjects_2 {
+	name?: string | null;
+	intensity?: number | null;
+}
+
+export interface internal_22 {
+	contentDigest?: string | null;
+	type?: string | null;
+	owner?: string | null;
+}
+/* Node of type ExperiencesJson */
+export interface ExperiencesJson extends Node {
+	id: string /* The id of this node. */;
+	parent?: Node | null /* The parent of this node. */;
+	children?: Node[] | null /* The children of this node. */;
+	work?: work_2[] | null;
+	internal?: internal_23 | null;
+}
+
+export interface work_2 {
+	company?: string | null;
+	link?: string | null;
+	image?: string | null;
+	period?: string | null;
+	role?: string | null;
+	tasks?: string[] | null;
+}
+
+export interface internal_23 {
 	contentDigest?: string | null;
 	type?: string | null;
 	owner?: string | null;
 }
 
-export interface internal_11 {
+export interface internal_16 {
 	contentDigest?: string | null;
 	mediaType?: string | null;
 	type?: string | null;
@@ -458,32 +608,172 @@ export interface markdownRemarkGroupConnectionEdge {
 	previous?: MarkdownRemark | null /* The previous edge in the connection */;
 }
 /* A connection to a list of items. */
-export interface DataJsonConnection {
+export interface TodoJsonConnection {
 	pageInfo: PageInfo /* Information to aid in pagination. */;
-	edges?: DataJsonEdge[] | null /* A list of edges. */;
+	edges?: TodoJsonEdge[] | null /* A list of edges. */;
 	totalCount?: number | null;
 	distinct?: string[] | null;
-	group?: dataJsonGroupConnectionConnection[] | null;
+	group?: todoJsonGroupConnectionConnection[] | null;
 }
 /* An edge in a connection. */
-export interface DataJsonEdge {
-	node?: DataJson | null /* The item at the end of the edge */;
-	next?: DataJson | null /* The next edge in the connection */;
-	previous?: DataJson | null /* The previous edge in the connection */;
+export interface TodoJsonEdge {
+	node?: TodoJson | null /* The item at the end of the edge */;
+	next?: TodoJson | null /* The next edge in the connection */;
+	previous?: TodoJson | null /* The previous edge in the connection */;
 }
 /* A connection to a list of items. */
-export interface dataJsonGroupConnectionConnection {
+export interface todoJsonGroupConnectionConnection {
 	pageInfo: PageInfo /* Information to aid in pagination. */;
-	edges?: dataJsonGroupConnectionEdge[] | null /* A list of edges. */;
+	edges?: todoJsonGroupConnectionEdge[] | null /* A list of edges. */;
 	field?: string | null;
 	fieldValue?: string | null;
 	totalCount?: number | null;
 }
 /* An edge in a connection. */
-export interface dataJsonGroupConnectionEdge {
-	node?: DataJson | null /* The item at the end of the edge */;
-	next?: DataJson | null /* The next edge in the connection */;
-	previous?: DataJson | null /* The previous edge in the connection */;
+export interface todoJsonGroupConnectionEdge {
+	node?: TodoJson | null /* The item at the end of the edge */;
+	next?: TodoJson | null /* The next edge in the connection */;
+	previous?: TodoJson | null /* The previous edge in the connection */;
+}
+/* A connection to a list of items. */
+export interface PersonalJsonConnection {
+	pageInfo: PageInfo /* Information to aid in pagination. */;
+	edges?: PersonalJsonEdge[] | null /* A list of edges. */;
+	totalCount?: number | null;
+	distinct?: string[] | null;
+	group?: personalJsonGroupConnectionConnection[] | null;
+}
+/* An edge in a connection. */
+export interface PersonalJsonEdge {
+	node?: PersonalJson | null /* The item at the end of the edge */;
+	next?: PersonalJson | null /* The next edge in the connection */;
+	previous?: PersonalJson | null /* The previous edge in the connection */;
+}
+/* A connection to a list of items. */
+export interface personalJsonGroupConnectionConnection {
+	pageInfo: PageInfo /* Information to aid in pagination. */;
+	edges?: personalJsonGroupConnectionEdge[] | null /* A list of edges. */;
+	field?: string | null;
+	fieldValue?: string | null;
+	totalCount?: number | null;
+}
+/* An edge in a connection. */
+export interface personalJsonGroupConnectionEdge {
+	node?: PersonalJson | null /* The item at the end of the edge */;
+	next?: PersonalJson | null /* The next edge in the connection */;
+	previous?: PersonalJson | null /* The previous edge in the connection */;
+}
+/* A connection to a list of items. */
+export interface CompetencesJsonConnection {
+	pageInfo: PageInfo /* Information to aid in pagination. */;
+	edges?: CompetencesJsonEdge[] | null /* A list of edges. */;
+	totalCount?: number | null;
+	distinct?: string[] | null;
+	group?: competencesJsonGroupConnectionConnection[] | null;
+}
+/* An edge in a connection. */
+export interface CompetencesJsonEdge {
+	node?: CompetencesJson | null /* The item at the end of the edge */;
+	next?: CompetencesJson | null /* The next edge in the connection */;
+	previous?: CompetencesJson | null /* The previous edge in the connection */;
+}
+/* A connection to a list of items. */
+export interface competencesJsonGroupConnectionConnection {
+	pageInfo: PageInfo /* Information to aid in pagination. */;
+	edges?: competencesJsonGroupConnectionEdge[] | null /* A list of edges. */;
+	field?: string | null;
+	fieldValue?: string | null;
+	totalCount?: number | null;
+}
+/* An edge in a connection. */
+export interface competencesJsonGroupConnectionEdge {
+	node?: CompetencesJson | null /* The item at the end of the edge */;
+	next?: CompetencesJson | null /* The next edge in the connection */;
+	previous?: CompetencesJson | null /* The previous edge in the connection */;
+}
+/* A connection to a list of items. */
+export interface SkillsJsonConnection {
+	pageInfo: PageInfo /* Information to aid in pagination. */;
+	edges?: SkillsJsonEdge[] | null /* A list of edges. */;
+	totalCount?: number | null;
+	distinct?: string[] | null;
+	group?: skillsJsonGroupConnectionConnection[] | null;
+}
+/* An edge in a connection. */
+export interface SkillsJsonEdge {
+	node?: SkillsJson | null /* The item at the end of the edge */;
+	next?: SkillsJson | null /* The next edge in the connection */;
+	previous?: SkillsJson | null /* The previous edge in the connection */;
+}
+/* A connection to a list of items. */
+export interface skillsJsonGroupConnectionConnection {
+	pageInfo: PageInfo /* Information to aid in pagination. */;
+	edges?: skillsJsonGroupConnectionEdge[] | null /* A list of edges. */;
+	field?: string | null;
+	fieldValue?: string | null;
+	totalCount?: number | null;
+}
+/* An edge in a connection. */
+export interface skillsJsonGroupConnectionEdge {
+	node?: SkillsJson | null /* The item at the end of the edge */;
+	next?: SkillsJson | null /* The next edge in the connection */;
+	previous?: SkillsJson | null /* The previous edge in the connection */;
+}
+/* A connection to a list of items. */
+export interface InterestsJsonConnection {
+	pageInfo: PageInfo /* Information to aid in pagination. */;
+	edges?: InterestsJsonEdge[] | null /* A list of edges. */;
+	totalCount?: number | null;
+	distinct?: string[] | null;
+	group?: interestsJsonGroupConnectionConnection[] | null;
+}
+/* An edge in a connection. */
+export interface InterestsJsonEdge {
+	node?: InterestsJson | null /* The item at the end of the edge */;
+	next?: InterestsJson | null /* The next edge in the connection */;
+	previous?: InterestsJson | null /* The previous edge in the connection */;
+}
+/* A connection to a list of items. */
+export interface interestsJsonGroupConnectionConnection {
+	pageInfo: PageInfo /* Information to aid in pagination. */;
+	edges?: interestsJsonGroupConnectionEdge[] | null /* A list of edges. */;
+	field?: string | null;
+	fieldValue?: string | null;
+	totalCount?: number | null;
+}
+/* An edge in a connection. */
+export interface interestsJsonGroupConnectionEdge {
+	node?: InterestsJson | null /* The item at the end of the edge */;
+	next?: InterestsJson | null /* The next edge in the connection */;
+	previous?: InterestsJson | null /* The previous edge in the connection */;
+}
+/* A connection to a list of items. */
+export interface ExperiencesJsonConnection {
+	pageInfo: PageInfo /* Information to aid in pagination. */;
+	edges?: ExperiencesJsonEdge[] | null /* A list of edges. */;
+	totalCount?: number | null;
+	distinct?: string[] | null;
+	group?: experiencesJsonGroupConnectionConnection[] | null;
+}
+/* An edge in a connection. */
+export interface ExperiencesJsonEdge {
+	node?: ExperiencesJson | null /* The item at the end of the edge */;
+	next?: ExperiencesJson | null /* The next edge in the connection */;
+	previous?: ExperiencesJson | null /* The previous edge in the connection */;
+}
+/* A connection to a list of items. */
+export interface experiencesJsonGroupConnectionConnection {
+	pageInfo: PageInfo /* Information to aid in pagination. */;
+	edges?: experiencesJsonGroupConnectionEdge[] | null /* A list of edges. */;
+	field?: string | null;
+	fieldValue?: string | null;
+	totalCount?: number | null;
+}
+/* An edge in a connection. */
+export interface experiencesJsonGroupConnectionEdge {
+	node?: ExperiencesJson | null /* The item at the end of the edge */;
+	next?: ExperiencesJson | null /* The next edge in the connection */;
+	previous?: ExperiencesJson | null /* The previous edge in the connection */;
 }
 /* Node of type Site */
 export interface Site extends Node {
@@ -496,7 +786,7 @@ export interface Site extends Node {
 	pathPrefix?: string | null;
 	polyfill?: boolean | null;
 	buildTime?: Date | null;
-	internal?: internal_14 | null;
+	internal?: internal_24 | null;
 }
 
 export interface siteMetadata_2 {
@@ -505,7 +795,7 @@ export interface siteMetadata_2 {
 	description?: string | null;
 }
 
-export interface internal_14 {
+export interface internal_24 {
 	contentDigest?: string | null;
 	type?: string | null;
 	owner?: string | null;
@@ -574,8 +864,124 @@ export interface sitePageConnectionComponentChunkNameQueryString {
 }
 
 export interface sitePageConnectionContextInputObject {
+	group?: sitePageConnectionContextGroupQueryList | null;
+	pathPrefix?: sitePageConnectionContextPathPrefixQueryString | null;
+	first?: sitePageConnectionContextFirstQueryBoolean | null;
+	last?: sitePageConnectionContextLastQueryBoolean | null;
+	index?: sitePageConnectionContextIndexQueryInteger | null;
+	pageCount?: sitePageConnectionContextPageCountQueryInteger | null;
+	additionalContext?: sitePageConnectionContextAdditionalContextInputObject | null;
 	slug?: sitePageConnectionContextSlugQueryString | null;
 	markdownPath?: sitePageConnectionContextMarkdownPathQueryString | null;
+}
+
+export interface sitePageConnectionContextGroupQueryList {
+	in?: sitePageConnectionContextGroupInputObject[] | null;
+}
+
+export interface sitePageConnectionContextGroupInputObject {
+	node?: sitePageConnectionContextGroupNodeInputObject | null;
+}
+
+export interface sitePageConnectionContextGroupNodeInputObject {
+	excerpt?: sitePageConnectionContextGroupNodeExcerptQueryString | null;
+	fileAbsolutePath?: sitePageConnectionContextGroupNodeFileAbsolutePathQueryString | null;
+	frontmatter?: sitePageConnectionContextGroupNodeFrontmatterInputObject | null;
+}
+
+export interface sitePageConnectionContextGroupNodeExcerptQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface sitePageConnectionContextGroupNodeFileAbsolutePathQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface sitePageConnectionContextGroupNodeFrontmatterInputObject {
+	date?: sitePageConnectionContextGroupNodeFrontmatterDateQueryString | null;
+	author?: sitePageConnectionContextGroupNodeFrontmatterAuthorQueryString | null;
+	link?: sitePageConnectionContextGroupNodeFrontmatterLinkQueryString | null;
+	title?: sitePageConnectionContextGroupNodeFrontmatterTitleQueryString | null;
+	description?: sitePageConnectionContextGroupNodeFrontmatterDescriptionQueryString | null;
+}
+
+export interface sitePageConnectionContextGroupNodeFrontmatterDateQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface sitePageConnectionContextGroupNodeFrontmatterAuthorQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface sitePageConnectionContextGroupNodeFrontmatterLinkQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface sitePageConnectionContextGroupNodeFrontmatterTitleQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface sitePageConnectionContextGroupNodeFrontmatterDescriptionQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface sitePageConnectionContextPathPrefixQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface sitePageConnectionContextFirstQueryBoolean {
+	eq?: boolean | null;
+	ne?: boolean | null;
+}
+
+export interface sitePageConnectionContextLastQueryBoolean {
+	eq?: boolean | null;
+	ne?: boolean | null;
+}
+
+export interface sitePageConnectionContextIndexQueryInteger {
+	eq?: number | null;
+	ne?: number | null;
+}
+
+export interface sitePageConnectionContextPageCountQueryInteger {
+	eq?: number | null;
+	ne?: number | null;
+}
+
+export interface sitePageConnectionContextAdditionalContextInputObject {
+	singlePath?: sitePageConnectionContextAdditionalContextSinglePathQueryString | null;
+}
+
+export interface sitePageConnectionContextAdditionalContextSinglePathQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
 }
 
 export interface sitePageConnectionContextSlugQueryString {
@@ -2229,7 +2635,6 @@ export interface markdownRemarkConnectionFrontmatterInputObject_2 {
 	link?: markdownRemarkConnectionFrontmatterLinkQueryString_2 | null;
 	_PARENT?: markdownRemarkConnectionFrontmatterParentQueryString_3 | null;
 	parent?: markdownRemarkConnectionFrontmatterParentQueryString_4 | null;
-	links?: markdownRemarkConnectionFrontmatterLinksQueryString_2 | null;
 	startDate?: markdownRemarkConnectionFrontmatterStartDateQueryString_2 | null;
 	description?: markdownRemarkConnectionFrontmatterDescriptionQueryString_2 | null;
 	date?: markdownRemarkConnectionFrontmatterDateQueryString_2 | null;
@@ -2266,13 +2671,6 @@ export interface markdownRemarkConnectionFrontmatterParentQueryString_3 {
 }
 
 export interface markdownRemarkConnectionFrontmatterParentQueryString_4 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-}
-
-export interface markdownRemarkConnectionFrontmatterLinksQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
@@ -2389,84 +2787,482 @@ export interface wordCountWordsQueryInt_4 {
 	ne?: number | null;
 }
 
-export interface dataJsonConnectionSort {
-	fields: DataJsonConnectionSortByFieldsEnum[];
-	order?: dataJsonConnectionSortOrderValues | null;
+export interface todoJsonConnectionSort {
+	fields: TodoJsonConnectionSortByFieldsEnum[];
+	order?: todoJsonConnectionSortOrderValues | null;
 }
 /* Filter connection on its fields */
-export interface filterDataJson {
-	email?: dataJsonConnectionEmailQueryString_2 | null;
-	social?: dataJsonConnectionSocialQueryList_2 | null;
-	id?: dataJsonConnectionIdQueryString_2 | null;
-	internal?: dataJsonConnectionInternalInputObject_2 | null;
+export interface filterTodoJson {
+	title?: todoJsonConnectionTitleQueryString_2 | null;
+	tags?: todoJsonConnectionTagsQueryList_2 | null;
+	id?: todoJsonConnectionIdQueryString_2 | null;
+	internal?: todoJsonConnectionInternalInputObject_2 | null;
 }
 
-export interface dataJsonConnectionEmailQueryString_2 {
+export interface todoJsonConnectionTitleQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 }
 
-export interface dataJsonConnectionSocialQueryList_2 {
-	in?: dataJsonConnectionSocialInputObject_2[] | null;
+export interface todoJsonConnectionTagsQueryList_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: string[] | null;
 }
 
-export interface dataJsonConnectionSocialInputObject_2 {
-	serviceName?: dataJsonConnectionSocialServiceNameQueryString_2 | null;
-	icon?: dataJsonConnectionSocialIconQueryString_2 | null;
-	url?: dataJsonConnectionSocialUrlQueryString_2 | null;
-}
-
-export interface dataJsonConnectionSocialServiceNameQueryString_2 {
+export interface todoJsonConnectionIdQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 }
 
-export interface dataJsonConnectionSocialIconQueryString_2 {
+export interface todoJsonConnectionInternalInputObject_2 {
+	contentDigest?: todoJsonConnectionInternalContentDigestQueryString_2 | null;
+	type?: todoJsonConnectionInternalTypeQueryString_2 | null;
+	owner?: todoJsonConnectionInternalOwnerQueryString_2 | null;
+}
+
+export interface todoJsonConnectionInternalContentDigestQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 }
 
-export interface dataJsonConnectionSocialUrlQueryString_2 {
+export interface todoJsonConnectionInternalTypeQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 }
 
-export interface dataJsonConnectionIdQueryString_2 {
+export interface todoJsonConnectionInternalOwnerQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 }
 
-export interface dataJsonConnectionInternalInputObject_2 {
-	contentDigest?: dataJsonConnectionInternalContentDigestQueryString_2 | null;
-	type?: dataJsonConnectionInternalTypeQueryString_2 | null;
-	owner?: dataJsonConnectionInternalOwnerQueryString_2 | null;
+export interface personalJsonConnectionSort {
+	fields: PersonalJsonConnectionSortByFieldsEnum[];
+	order?: personalJsonConnectionSortOrderValues | null;
+}
+/* Filter connection on its fields */
+export interface filterPersonalJson {
+	email?: personalJsonConnectionEmailQueryString_2 | null;
+	social?: personalJsonConnectionSocialQueryList_2 | null;
+	id?: personalJsonConnectionIdQueryString_2 | null;
+	internal?: personalJsonConnectionInternalInputObject_2 | null;
 }
 
-export interface dataJsonConnectionInternalContentDigestQueryString_2 {
+export interface personalJsonConnectionEmailQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 }
 
-export interface dataJsonConnectionInternalTypeQueryString_2 {
+export interface personalJsonConnectionSocialQueryList_2 {
+	in?: personalJsonConnectionSocialInputObject_2[] | null;
+}
+
+export interface personalJsonConnectionSocialInputObject_2 {
+	serviceName?: personalJsonConnectionSocialServiceNameQueryString_2 | null;
+	icon?: personalJsonConnectionSocialIconQueryString_2 | null;
+	url?: personalJsonConnectionSocialUrlQueryString_2 | null;
+}
+
+export interface personalJsonConnectionSocialServiceNameQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 }
 
-export interface dataJsonConnectionInternalOwnerQueryString_2 {
+export interface personalJsonConnectionSocialIconQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface personalJsonConnectionSocialUrlQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface personalJsonConnectionIdQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface personalJsonConnectionInternalInputObject_2 {
+	contentDigest?: personalJsonConnectionInternalContentDigestQueryString_2 | null;
+	type?: personalJsonConnectionInternalTypeQueryString_2 | null;
+	owner?: personalJsonConnectionInternalOwnerQueryString_2 | null;
+}
+
+export interface personalJsonConnectionInternalContentDigestQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface personalJsonConnectionInternalTypeQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface personalJsonConnectionInternalOwnerQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface competencesJsonConnectionSort {
+	fields: CompetencesJsonConnectionSortByFieldsEnum[];
+	order?: competencesJsonConnectionSortOrderValues | null;
+}
+/* Filter connection on its fields */
+export interface filterCompetencesJson {
+	name?: competencesJsonConnectionNameQueryString_2 | null;
+	description?: competencesJsonConnectionDescriptionQueryString_2 | null;
+	id?: competencesJsonConnectionIdQueryString_2 | null;
+	internal?: competencesJsonConnectionInternalInputObject_2 | null;
+}
+
+export interface competencesJsonConnectionNameQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface competencesJsonConnectionDescriptionQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface competencesJsonConnectionIdQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface competencesJsonConnectionInternalInputObject_2 {
+	contentDigest?: competencesJsonConnectionInternalContentDigestQueryString_2 | null;
+	type?: competencesJsonConnectionInternalTypeQueryString_2 | null;
+	owner?: competencesJsonConnectionInternalOwnerQueryString_2 | null;
+}
+
+export interface competencesJsonConnectionInternalContentDigestQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface competencesJsonConnectionInternalTypeQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface competencesJsonConnectionInternalOwnerQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface skillsJsonConnectionSort {
+	fields: SkillsJsonConnectionSortByFieldsEnum[];
+	order?: skillsJsonConnectionSortOrderValues | null;
+}
+/* Filter connection on its fields */
+export interface filterSkillsJson {
+	languages?: skillsJsonConnectionLanguagesQueryList_2 | null;
+	technical?: skillsJsonConnectionTechnicalQueryList_2 | null;
+	soft?: skillsJsonConnectionSoftQueryList_2 | null;
+	id?: skillsJsonConnectionIdQueryString_2 | null;
+	internal?: skillsJsonConnectionInternalInputObject_2 | null;
+}
+
+export interface skillsJsonConnectionLanguagesQueryList_2 {
+	in?: skillsJsonConnectionLanguagesInputObject_2[] | null;
+}
+
+export interface skillsJsonConnectionLanguagesInputObject_2 {
+	name?: skillsJsonConnectionLanguagesNameQueryString_2 | null;
+	intensity?: skillsJsonConnectionLanguagesIntensityQueryInteger_2 | null;
+}
+
+export interface skillsJsonConnectionLanguagesNameQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface skillsJsonConnectionLanguagesIntensityQueryInteger_2 {
+	eq?: number | null;
+	ne?: number | null;
+}
+
+export interface skillsJsonConnectionTechnicalQueryList_2 {
+	in?: skillsJsonConnectionTechnicalInputObject_2[] | null;
+}
+
+export interface skillsJsonConnectionTechnicalInputObject_2 {
+	name?: skillsJsonConnectionTechnicalNameQueryString_2 | null;
+	intensity?: skillsJsonConnectionTechnicalIntensityQueryInteger_2 | null;
+}
+
+export interface skillsJsonConnectionTechnicalNameQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface skillsJsonConnectionTechnicalIntensityQueryInteger_2 {
+	eq?: number | null;
+	ne?: number | null;
+}
+
+export interface skillsJsonConnectionSoftQueryList_2 {
+	in?: skillsJsonConnectionSoftInputObject_2[] | null;
+}
+
+export interface skillsJsonConnectionSoftInputObject_2 {
+	name?: skillsJsonConnectionSoftNameQueryString_2 | null;
+	intensity?: skillsJsonConnectionSoftIntensityQueryInteger_2 | null;
+}
+
+export interface skillsJsonConnectionSoftNameQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface skillsJsonConnectionSoftIntensityQueryInteger_2 {
+	eq?: number | null;
+	ne?: number | null;
+}
+
+export interface skillsJsonConnectionIdQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface skillsJsonConnectionInternalInputObject_2 {
+	contentDigest?: skillsJsonConnectionInternalContentDigestQueryString_2 | null;
+	type?: skillsJsonConnectionInternalTypeQueryString_2 | null;
+	owner?: skillsJsonConnectionInternalOwnerQueryString_2 | null;
+}
+
+export interface skillsJsonConnectionInternalContentDigestQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface skillsJsonConnectionInternalTypeQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface skillsJsonConnectionInternalOwnerQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface interestsJsonConnectionSort {
+	fields: InterestsJsonConnectionSortByFieldsEnum[];
+	order?: interestsJsonConnectionSortOrderValues | null;
+}
+/* Filter connection on its fields */
+export interface filterInterestsJson {
+	subjects?: interestsJsonConnectionSubjectsQueryList_2 | null;
+	id?: interestsJsonConnectionIdQueryString_2 | null;
+	internal?: interestsJsonConnectionInternalInputObject_2 | null;
+}
+
+export interface interestsJsonConnectionSubjectsQueryList_2 {
+	in?: interestsJsonConnectionSubjectsInputObject_2[] | null;
+}
+
+export interface interestsJsonConnectionSubjectsInputObject_2 {
+	name?: interestsJsonConnectionSubjectsNameQueryString_2 | null;
+	intensity?: interestsJsonConnectionSubjectsIntensityQueryInteger_2 | null;
+}
+
+export interface interestsJsonConnectionSubjectsNameQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface interestsJsonConnectionSubjectsIntensityQueryInteger_2 {
+	eq?: number | null;
+	ne?: number | null;
+}
+
+export interface interestsJsonConnectionIdQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface interestsJsonConnectionInternalInputObject_2 {
+	contentDigest?: interestsJsonConnectionInternalContentDigestQueryString_2 | null;
+	type?: interestsJsonConnectionInternalTypeQueryString_2 | null;
+	owner?: interestsJsonConnectionInternalOwnerQueryString_2 | null;
+}
+
+export interface interestsJsonConnectionInternalContentDigestQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface interestsJsonConnectionInternalTypeQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface interestsJsonConnectionInternalOwnerQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface experiencesJsonConnectionSort {
+	fields: ExperiencesJsonConnectionSortByFieldsEnum[];
+	order?: experiencesJsonConnectionSortOrderValues | null;
+}
+/* Filter connection on its fields */
+export interface filterExperiencesJson {
+	work?: experiencesJsonConnectionWorkQueryList_2 | null;
+	id?: experiencesJsonConnectionIdQueryString_2 | null;
+	internal?: experiencesJsonConnectionInternalInputObject_2 | null;
+}
+
+export interface experiencesJsonConnectionWorkQueryList_2 {
+	in?: experiencesJsonConnectionWorkInputObject_2[] | null;
+}
+
+export interface experiencesJsonConnectionWorkInputObject_2 {
+	company?: experiencesJsonConnectionWorkCompanyQueryString_2 | null;
+	link?: experiencesJsonConnectionWorkLinkQueryString_2 | null;
+	image?: experiencesJsonConnectionWorkImageQueryString_2 | null;
+	period?: experiencesJsonConnectionWorkPeriodQueryString_2 | null;
+	role?: experiencesJsonConnectionWorkRoleQueryString_2 | null;
+	tasks?: experiencesJsonConnectionWorkTasksQueryList_2 | null;
+}
+
+export interface experiencesJsonConnectionWorkCompanyQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface experiencesJsonConnectionWorkLinkQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface experiencesJsonConnectionWorkImageQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface experiencesJsonConnectionWorkPeriodQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface experiencesJsonConnectionWorkRoleQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface experiencesJsonConnectionWorkTasksQueryList_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: string[] | null;
+}
+
+export interface experiencesJsonConnectionIdQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface experiencesJsonConnectionInternalInputObject_2 {
+	contentDigest?: experiencesJsonConnectionInternalContentDigestQueryString_2 | null;
+	type?: experiencesJsonConnectionInternalTypeQueryString_2 | null;
+	owner?: experiencesJsonConnectionInternalOwnerQueryString_2 | null;
+}
+
+export interface experiencesJsonConnectionInternalContentDigestQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface experiencesJsonConnectionInternalTypeQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface experiencesJsonConnectionInternalOwnerQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
@@ -2516,8 +3312,124 @@ export interface sitePageComponentChunkNameQueryString {
 }
 
 export interface sitePageContextInputObject {
+	group?: sitePageContextGroupQueryList | null;
+	pathPrefix?: sitePageContextPathPrefixQueryString | null;
+	first?: sitePageContextFirstQueryBoolean | null;
+	last?: sitePageContextLastQueryBoolean | null;
+	index?: sitePageContextIndexQueryInteger | null;
+	pageCount?: sitePageContextPageCountQueryInteger | null;
+	additionalContext?: sitePageContextAdditionalContextInputObject | null;
 	slug?: sitePageContextSlugQueryString | null;
 	markdownPath?: sitePageContextMarkdownPathQueryString | null;
+}
+
+export interface sitePageContextGroupQueryList {
+	in?: sitePageContextGroupInputObject[] | null;
+}
+
+export interface sitePageContextGroupInputObject {
+	node?: sitePageContextGroupNodeInputObject | null;
+}
+
+export interface sitePageContextGroupNodeInputObject {
+	excerpt?: sitePageContextGroupNodeExcerptQueryString | null;
+	fileAbsolutePath?: sitePageContextGroupNodeFileAbsolutePathQueryString | null;
+	frontmatter?: sitePageContextGroupNodeFrontmatterInputObject | null;
+}
+
+export interface sitePageContextGroupNodeExcerptQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface sitePageContextGroupNodeFileAbsolutePathQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface sitePageContextGroupNodeFrontmatterInputObject {
+	date?: sitePageContextGroupNodeFrontmatterDateQueryString | null;
+	author?: sitePageContextGroupNodeFrontmatterAuthorQueryString | null;
+	link?: sitePageContextGroupNodeFrontmatterLinkQueryString | null;
+	title?: sitePageContextGroupNodeFrontmatterTitleQueryString | null;
+	description?: sitePageContextGroupNodeFrontmatterDescriptionQueryString | null;
+}
+
+export interface sitePageContextGroupNodeFrontmatterDateQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface sitePageContextGroupNodeFrontmatterAuthorQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface sitePageContextGroupNodeFrontmatterLinkQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface sitePageContextGroupNodeFrontmatterTitleQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface sitePageContextGroupNodeFrontmatterDescriptionQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface sitePageContextPathPrefixQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface sitePageContextFirstQueryBoolean {
+	eq?: boolean | null;
+	ne?: boolean | null;
+}
+
+export interface sitePageContextLastQueryBoolean {
+	eq?: boolean | null;
+	ne?: boolean | null;
+}
+
+export interface sitePageContextIndexQueryInteger {
+	eq?: number | null;
+	ne?: number | null;
+}
+
+export interface sitePageContextPageCountQueryInteger {
+	eq?: number | null;
+	ne?: number | null;
+}
+
+export interface sitePageContextAdditionalContextInputObject {
+	singlePath?: sitePageContextAdditionalContextSinglePathQueryString | null;
+}
+
+export interface sitePageContextAdditionalContextSinglePathQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
 }
 
 export interface sitePageContextSlugQueryString {
@@ -4133,7 +5045,6 @@ export interface markdownRemarkFrontmatterInputObject_2 {
 	link?: markdownRemarkFrontmatterLinkQueryString_2 | null;
 	_PARENT?: markdownRemarkFrontmatterParentQueryString_3 | null;
 	parent?: markdownRemarkFrontmatterParentQueryString_4 | null;
-	links?: markdownRemarkFrontmatterLinksQueryString_2 | null;
 	startDate?: markdownRemarkFrontmatterStartDateQueryString_2 | null;
 	description?: markdownRemarkFrontmatterDescriptionQueryString_2 | null;
 	date?: markdownRemarkFrontmatterDateQueryString_2 | null;
@@ -4170,13 +5081,6 @@ export interface markdownRemarkFrontmatterParentQueryString_3 {
 }
 
 export interface markdownRemarkFrontmatterParentQueryString_4 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-}
-
-export interface markdownRemarkFrontmatterLinksQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
@@ -4293,72 +5197,411 @@ export interface wordCountWordsQueryInt_3 {
 	ne?: number | null;
 }
 
-export interface dataJsonEmailQueryString_2 {
+export interface todoJsonTitleQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 }
 
-export interface dataJsonSocialQueryList_2 {
-	in?: dataJsonSocialInputObject_2[] | null;
+export interface todoJsonTagsQueryList_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: string[] | null;
 }
 
-export interface dataJsonSocialInputObject_2 {
-	serviceName?: dataJsonSocialServiceNameQueryString_2 | null;
-	icon?: dataJsonSocialIconQueryString_2 | null;
-	url?: dataJsonSocialUrlQueryString_2 | null;
-}
-
-export interface dataJsonSocialServiceNameQueryString_2 {
+export interface todoJsonIdQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 }
 
-export interface dataJsonSocialIconQueryString_2 {
+export interface todoJsonInternalInputObject_2 {
+	contentDigest?: todoJsonInternalContentDigestQueryString_2 | null;
+	type?: todoJsonInternalTypeQueryString_2 | null;
+	owner?: todoJsonInternalOwnerQueryString_2 | null;
+}
+
+export interface todoJsonInternalContentDigestQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 }
 
-export interface dataJsonSocialUrlQueryString_2 {
+export interface todoJsonInternalTypeQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 }
 
-export interface dataJsonIdQueryString_2 {
+export interface todoJsonInternalOwnerQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 }
 
-export interface dataJsonInternalInputObject_2 {
-	contentDigest?: dataJsonInternalContentDigestQueryString_2 | null;
-	type?: dataJsonInternalTypeQueryString_2 | null;
-	owner?: dataJsonInternalOwnerQueryString_2 | null;
-}
-
-export interface dataJsonInternalContentDigestQueryString_2 {
+export interface personalJsonEmailQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 }
 
-export interface dataJsonInternalTypeQueryString_2 {
+export interface personalJsonSocialQueryList_2 {
+	in?: personalJsonSocialInputObject_2[] | null;
+}
+
+export interface personalJsonSocialInputObject_2 {
+	serviceName?: personalJsonSocialServiceNameQueryString_2 | null;
+	icon?: personalJsonSocialIconQueryString_2 | null;
+	url?: personalJsonSocialUrlQueryString_2 | null;
+}
+
+export interface personalJsonSocialServiceNameQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 }
 
-export interface dataJsonInternalOwnerQueryString_2 {
+export interface personalJsonSocialIconQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface personalJsonSocialUrlQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface personalJsonIdQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface personalJsonInternalInputObject_2 {
+	contentDigest?: personalJsonInternalContentDigestQueryString_2 | null;
+	type?: personalJsonInternalTypeQueryString_2 | null;
+	owner?: personalJsonInternalOwnerQueryString_2 | null;
+}
+
+export interface personalJsonInternalContentDigestQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface personalJsonInternalTypeQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface personalJsonInternalOwnerQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface competencesJsonNameQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface competencesJsonDescriptionQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface competencesJsonIdQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface competencesJsonInternalInputObject_2 {
+	contentDigest?: competencesJsonInternalContentDigestQueryString_2 | null;
+	type?: competencesJsonInternalTypeQueryString_2 | null;
+	owner?: competencesJsonInternalOwnerQueryString_2 | null;
+}
+
+export interface competencesJsonInternalContentDigestQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface competencesJsonInternalTypeQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface competencesJsonInternalOwnerQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface skillsJsonLanguagesQueryList_2 {
+	in?: skillsJsonLanguagesInputObject_2[] | null;
+}
+
+export interface skillsJsonLanguagesInputObject_2 {
+	name?: skillsJsonLanguagesNameQueryString_2 | null;
+	intensity?: skillsJsonLanguagesIntensityQueryInteger_2 | null;
+}
+
+export interface skillsJsonLanguagesNameQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface skillsJsonLanguagesIntensityQueryInteger_2 {
+	eq?: number | null;
+	ne?: number | null;
+}
+
+export interface skillsJsonTechnicalQueryList_2 {
+	in?: skillsJsonTechnicalInputObject_2[] | null;
+}
+
+export interface skillsJsonTechnicalInputObject_2 {
+	name?: skillsJsonTechnicalNameQueryString_2 | null;
+	intensity?: skillsJsonTechnicalIntensityQueryInteger_2 | null;
+}
+
+export interface skillsJsonTechnicalNameQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface skillsJsonTechnicalIntensityQueryInteger_2 {
+	eq?: number | null;
+	ne?: number | null;
+}
+
+export interface skillsJsonSoftQueryList_2 {
+	in?: skillsJsonSoftInputObject_2[] | null;
+}
+
+export interface skillsJsonSoftInputObject_2 {
+	name?: skillsJsonSoftNameQueryString_2 | null;
+	intensity?: skillsJsonSoftIntensityQueryInteger_2 | null;
+}
+
+export interface skillsJsonSoftNameQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface skillsJsonSoftIntensityQueryInteger_2 {
+	eq?: number | null;
+	ne?: number | null;
+}
+
+export interface skillsJsonIdQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface skillsJsonInternalInputObject_2 {
+	contentDigest?: skillsJsonInternalContentDigestQueryString_2 | null;
+	type?: skillsJsonInternalTypeQueryString_2 | null;
+	owner?: skillsJsonInternalOwnerQueryString_2 | null;
+}
+
+export interface skillsJsonInternalContentDigestQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface skillsJsonInternalTypeQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface skillsJsonInternalOwnerQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface interestsJsonSubjectsQueryList_2 {
+	in?: interestsJsonSubjectsInputObject_2[] | null;
+}
+
+export interface interestsJsonSubjectsInputObject_2 {
+	name?: interestsJsonSubjectsNameQueryString_2 | null;
+	intensity?: interestsJsonSubjectsIntensityQueryInteger_2 | null;
+}
+
+export interface interestsJsonSubjectsNameQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface interestsJsonSubjectsIntensityQueryInteger_2 {
+	eq?: number | null;
+	ne?: number | null;
+}
+
+export interface interestsJsonIdQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface interestsJsonInternalInputObject_2 {
+	contentDigest?: interestsJsonInternalContentDigestQueryString_2 | null;
+	type?: interestsJsonInternalTypeQueryString_2 | null;
+	owner?: interestsJsonInternalOwnerQueryString_2 | null;
+}
+
+export interface interestsJsonInternalContentDigestQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface interestsJsonInternalTypeQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface interestsJsonInternalOwnerQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface experiencesJsonWorkQueryList_2 {
+	in?: experiencesJsonWorkInputObject_2[] | null;
+}
+
+export interface experiencesJsonWorkInputObject_2 {
+	company?: experiencesJsonWorkCompanyQueryString_2 | null;
+	link?: experiencesJsonWorkLinkQueryString_2 | null;
+	image?: experiencesJsonWorkImageQueryString_2 | null;
+	period?: experiencesJsonWorkPeriodQueryString_2 | null;
+	role?: experiencesJsonWorkRoleQueryString_2 | null;
+	tasks?: experiencesJsonWorkTasksQueryList_2 | null;
+}
+
+export interface experiencesJsonWorkCompanyQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface experiencesJsonWorkLinkQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface experiencesJsonWorkImageQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface experiencesJsonWorkPeriodQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface experiencesJsonWorkRoleQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface experiencesJsonWorkTasksQueryList_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: string[] | null;
+}
+
+export interface experiencesJsonIdQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface experiencesJsonInternalInputObject_2 {
+	contentDigest?: experiencesJsonInternalContentDigestQueryString_2 | null;
+	type?: experiencesJsonInternalTypeQueryString_2 | null;
+	owner?: experiencesJsonInternalOwnerQueryString_2 | null;
+}
+
+export interface experiencesJsonInternalContentDigestQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface experiencesJsonInternalTypeQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface experiencesJsonInternalOwnerQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
@@ -4394,11 +5637,41 @@ export interface AllMarkdownRemarkRootQueryTypeArgs {
 	sort?: markdownRemarkConnectionSort | null;
 	filter?: filterMarkdownRemark | null;
 }
-export interface AllDataJsonRootQueryTypeArgs {
+export interface AllTodoJsonRootQueryTypeArgs {
 	skip?: number | null;
 	limit?: number | null;
-	sort?: dataJsonConnectionSort | null;
-	filter?: filterDataJson | null;
+	sort?: todoJsonConnectionSort | null;
+	filter?: filterTodoJson | null;
+}
+export interface AllPersonalJsonRootQueryTypeArgs {
+	skip?: number | null;
+	limit?: number | null;
+	sort?: personalJsonConnectionSort | null;
+	filter?: filterPersonalJson | null;
+}
+export interface AllCompetencesJsonRootQueryTypeArgs {
+	skip?: number | null;
+	limit?: number | null;
+	sort?: competencesJsonConnectionSort | null;
+	filter?: filterCompetencesJson | null;
+}
+export interface AllSkillsJsonRootQueryTypeArgs {
+	skip?: number | null;
+	limit?: number | null;
+	sort?: skillsJsonConnectionSort | null;
+	filter?: filterSkillsJson | null;
+}
+export interface AllInterestsJsonRootQueryTypeArgs {
+	skip?: number | null;
+	limit?: number | null;
+	sort?: interestsJsonConnectionSort | null;
+	filter?: filterInterestsJson | null;
+}
+export interface AllExperiencesJsonRootQueryTypeArgs {
+	skip?: number | null;
+	limit?: number | null;
+	sort?: experiencesJsonConnectionSort | null;
+	filter?: filterExperiencesJson | null;
 }
 export interface SitePageRootQueryTypeArgs {
 	layout?: sitePageLayoutQueryString | null;
@@ -4524,11 +5797,40 @@ export interface MarkdownRemarkRootQueryTypeArgs {
 	tableOfContents?: tableOfContentsQueryString_3 | null;
 	wordCount?: wordCountTypeName_3 | null;
 }
-export interface DataJsonRootQueryTypeArgs {
-	email?: dataJsonEmailQueryString_2 | null;
-	social?: dataJsonSocialQueryList_2 | null;
-	id?: dataJsonIdQueryString_2 | null;
-	internal?: dataJsonInternalInputObject_2 | null;
+export interface TodoJsonRootQueryTypeArgs {
+	title?: todoJsonTitleQueryString_2 | null;
+	tags?: todoJsonTagsQueryList_2 | null;
+	id?: todoJsonIdQueryString_2 | null;
+	internal?: todoJsonInternalInputObject_2 | null;
+}
+export interface PersonalJsonRootQueryTypeArgs {
+	email?: personalJsonEmailQueryString_2 | null;
+	social?: personalJsonSocialQueryList_2 | null;
+	id?: personalJsonIdQueryString_2 | null;
+	internal?: personalJsonInternalInputObject_2 | null;
+}
+export interface CompetencesJsonRootQueryTypeArgs {
+	name?: competencesJsonNameQueryString_2 | null;
+	description?: competencesJsonDescriptionQueryString_2 | null;
+	id?: competencesJsonIdQueryString_2 | null;
+	internal?: competencesJsonInternalInputObject_2 | null;
+}
+export interface SkillsJsonRootQueryTypeArgs {
+	languages?: skillsJsonLanguagesQueryList_2 | null;
+	technical?: skillsJsonTechnicalQueryList_2 | null;
+	soft?: skillsJsonSoftQueryList_2 | null;
+	id?: skillsJsonIdQueryString_2 | null;
+	internal?: skillsJsonInternalInputObject_2 | null;
+}
+export interface InterestsJsonRootQueryTypeArgs {
+	subjects?: interestsJsonSubjectsQueryList_2 | null;
+	id?: interestsJsonIdQueryString_2 | null;
+	internal?: interestsJsonInternalInputObject_2 | null;
+}
+export interface ExperiencesJsonRootQueryTypeArgs {
+	work?: experiencesJsonWorkQueryList_2 | null;
+	id?: experiencesJsonIdQueryString_2 | null;
+	internal?: experiencesJsonInternalInputObject_2 | null;
 }
 export interface DistinctSitePageConnectionArgs {
 	field?: sitePageDistinctEnum | null;
@@ -4537,6 +5839,20 @@ export interface GroupSitePageConnectionArgs {
 	skip?: number | null;
 	limit?: number | null;
 	field?: sitePageGroupEnum | null;
+}
+export interface DateFrontmatter_2Args {
+	formatString?:
+		| string
+		| null /* Format the date using Moment.js&#x27; date tokens e.g. &quot;date(formatString: &quot;YYYY MMMM DD)&quot; See https://momentjs.com/docs/#/displaying/format/ for documentation for different tokens */;
+	fromNow?:
+		| boolean
+		| null /* Returns a string generated with Moment.js&#x27; fromNow function */;
+	difference?:
+		| string
+		| null /* Returns the difference between this date and the current time. Defaults to miliseconds but you can also pass in as the measurement years, months, weeks, days, hours, minutes, and seconds. */;
+	locale?:
+		| string
+		| null /* Configures the locale Moment.js will use to format the date. */;
 }
 export interface DistinctSitePluginConnectionArgs {
 	field?: sitePluginDistinctEnum | null;
@@ -4792,7 +6108,7 @@ export interface ExcerptMarkdownRemarkArgs {
 export interface HeadingsMarkdownRemarkArgs {
 	depth?: HeadingLevels | null;
 }
-export interface StartDateFrontmatter_2Args {
+export interface StartDateFrontmatter_3Args {
 	formatString?:
 		| string
 		| null /* Format the date using Moment.js&#x27; date tokens e.g. &quot;date(formatString: &quot;YYYY MMMM DD)&quot; See https://momentjs.com/docs/#/displaying/format/ for documentation for different tokens */;
@@ -4806,7 +6122,7 @@ export interface StartDateFrontmatter_2Args {
 		| string
 		| null /* Configures the locale Moment.js will use to format the date. */;
 }
-export interface DateFrontmatter_2Args {
+export interface DateFrontmatter_3Args {
 	formatString?:
 		| string
 		| null /* Format the date using Moment.js&#x27; date tokens e.g. &quot;date(formatString: &quot;YYYY MMMM DD)&quot; See https://momentjs.com/docs/#/displaying/format/ for documentation for different tokens */;
@@ -4828,13 +6144,53 @@ export interface GroupMarkdownRemarkConnectionArgs {
 	limit?: number | null;
 	field?: markdownRemarkGroupEnum | null;
 }
-export interface DistinctDataJsonConnectionArgs {
-	field?: dataJsonDistinctEnum | null;
+export interface DistinctTodoJsonConnectionArgs {
+	field?: todoJsonDistinctEnum | null;
 }
-export interface GroupDataJsonConnectionArgs {
+export interface GroupTodoJsonConnectionArgs {
 	skip?: number | null;
 	limit?: number | null;
-	field?: dataJsonGroupEnum | null;
+	field?: todoJsonGroupEnum | null;
+}
+export interface DistinctPersonalJsonConnectionArgs {
+	field?: personalJsonDistinctEnum | null;
+}
+export interface GroupPersonalJsonConnectionArgs {
+	skip?: number | null;
+	limit?: number | null;
+	field?: personalJsonGroupEnum | null;
+}
+export interface DistinctCompetencesJsonConnectionArgs {
+	field?: competencesJsonDistinctEnum | null;
+}
+export interface GroupCompetencesJsonConnectionArgs {
+	skip?: number | null;
+	limit?: number | null;
+	field?: competencesJsonGroupEnum | null;
+}
+export interface DistinctSkillsJsonConnectionArgs {
+	field?: skillsJsonDistinctEnum | null;
+}
+export interface GroupSkillsJsonConnectionArgs {
+	skip?: number | null;
+	limit?: number | null;
+	field?: skillsJsonGroupEnum | null;
+}
+export interface DistinctInterestsJsonConnectionArgs {
+	field?: interestsJsonDistinctEnum | null;
+}
+export interface GroupInterestsJsonConnectionArgs {
+	skip?: number | null;
+	limit?: number | null;
+	field?: interestsJsonGroupEnum | null;
+}
+export interface DistinctExperiencesJsonConnectionArgs {
+	field?: experiencesJsonDistinctEnum | null;
+}
+export interface GroupExperiencesJsonConnectionArgs {
+	skip?: number | null;
+	limit?: number | null;
+	field?: experiencesJsonGroupEnum | null;
 }
 export interface PortSiteArgs {
 	formatString?:
@@ -4872,6 +6228,13 @@ export enum SitePageConnectionSortByFieldsEnum {
 	path = "path",
 	component = "component",
 	componentChunkName = "componentChunkName",
+	context___group = "context___group",
+	context___pathPrefix = "context___pathPrefix",
+	context___first = "context___first",
+	context___last = "context___last",
+	context___index = "context___index",
+	context___pageCount = "context___pageCount",
+	context___additionalContext___singlePath = "context___additionalContext___singlePath",
 	context___slug = "context___slug",
 	context___markdownPath = "context___markdownPath",
 	pluginCreator___NODE = "pluginCreator___NODE",
@@ -4897,6 +6260,13 @@ export enum sitePageDistinctEnum {
 	path = "path",
 	component = "component",
 	componentChunkName = "componentChunkName",
+	context___group = "context___group",
+	context___pathPrefix = "context___pathPrefix",
+	context___first = "context___first",
+	context___last = "context___last",
+	context___index = "context___index",
+	context___pageCount = "context___pageCount",
+	context___additionalContext___singlePath = "context___additionalContext___singlePath",
 	context___slug = "context___slug",
 	context___markdownPath = "context___markdownPath",
 	pluginCreator___NODE = "pluginCreator___NODE",
@@ -4917,6 +6287,13 @@ export enum sitePageGroupEnum {
 	path = "path",
 	component = "component",
 	componentChunkName = "componentChunkName",
+	context___group = "context___group",
+	context___pathPrefix = "context___pathPrefix",
+	context___first = "context___first",
+	context___last = "context___last",
+	context___index = "context___index",
+	context___pageCount = "context___pageCount",
+	context___additionalContext___singlePath = "context___additionalContext___singlePath",
 	context___slug = "context___slug",
 	context___markdownPath = "context___markdownPath",
 	pluginCreator___NODE = "pluginCreator___NODE",
@@ -5348,7 +6725,6 @@ export enum MarkdownRemarkConnectionSortByFieldsEnum {
 	frontmatter___link = "frontmatter___link",
 	frontmatter____PARENT = "frontmatter____PARENT",
 	frontmatter___parent = "frontmatter___parent",
-	frontmatter___links = "frontmatter___links",
 	frontmatter___startDate = "frontmatter___startDate",
 	frontmatter___description = "frontmatter___description",
 	frontmatter___date = "frontmatter___date",
@@ -5382,7 +6758,6 @@ export enum markdownRemarkDistinctEnum {
 	frontmatter___link = "frontmatter___link",
 	frontmatter____PARENT = "frontmatter____PARENT",
 	frontmatter___parent = "frontmatter___parent",
-	frontmatter___links = "frontmatter___links",
 	frontmatter___startDate = "frontmatter___startDate",
 	frontmatter___description = "frontmatter___description",
 	frontmatter___date = "frontmatter___date",
@@ -5404,7 +6779,6 @@ export enum markdownRemarkGroupEnum {
 	frontmatter___link = "frontmatter___link",
 	frontmatter____PARENT = "frontmatter____PARENT",
 	frontmatter___parent = "frontmatter___parent",
-	frontmatter___links = "frontmatter___links",
 	frontmatter___startDate = "frontmatter___startDate",
 	frontmatter___description = "frontmatter___description",
 	frontmatter___date = "frontmatter___date",
@@ -5414,9 +6788,9 @@ export enum markdownRemarkGroupEnum {
 	fileAbsolutePath = "fileAbsolutePath",
 }
 
-export enum DataJsonConnectionSortByFieldsEnum {
-	email = "email",
-	social = "social",
+export enum TodoJsonConnectionSortByFieldsEnum {
+	title = "title",
+	tags = "tags",
 	id = "id",
 	parent = "parent",
 	internal___contentDigest = "internal___contentDigest",
@@ -5424,12 +6798,32 @@ export enum DataJsonConnectionSortByFieldsEnum {
 	internal___owner = "internal___owner",
 }
 
-export enum dataJsonConnectionSortOrderValues {
+export enum todoJsonConnectionSortOrderValues {
 	ASC = "ASC",
 	DESC = "DESC",
 }
 
-export enum dataJsonDistinctEnum {
+export enum todoJsonDistinctEnum {
+	title = "title",
+	tags = "tags",
+	id = "id",
+	parent = "parent",
+	internal___contentDigest = "internal___contentDigest",
+	internal___type = "internal___type",
+	internal___owner = "internal___owner",
+}
+
+export enum todoJsonGroupEnum {
+	title = "title",
+	tags = "tags",
+	id = "id",
+	parent = "parent",
+	internal___contentDigest = "internal___contentDigest",
+	internal___type = "internal___type",
+	internal___owner = "internal___owner",
+}
+
+export enum PersonalJsonConnectionSortByFieldsEnum {
 	email = "email",
 	social = "social",
 	id = "id",
@@ -5439,9 +6833,161 @@ export enum dataJsonDistinctEnum {
 	internal___owner = "internal___owner",
 }
 
-export enum dataJsonGroupEnum {
+export enum personalJsonConnectionSortOrderValues {
+	ASC = "ASC",
+	DESC = "DESC",
+}
+
+export enum personalJsonDistinctEnum {
 	email = "email",
 	social = "social",
+	id = "id",
+	parent = "parent",
+	internal___contentDigest = "internal___contentDigest",
+	internal___type = "internal___type",
+	internal___owner = "internal___owner",
+}
+
+export enum personalJsonGroupEnum {
+	email = "email",
+	social = "social",
+	id = "id",
+	parent = "parent",
+	internal___contentDigest = "internal___contentDigest",
+	internal___type = "internal___type",
+	internal___owner = "internal___owner",
+}
+
+export enum CompetencesJsonConnectionSortByFieldsEnum {
+	name = "name",
+	description = "description",
+	id = "id",
+	parent = "parent",
+	internal___contentDigest = "internal___contentDigest",
+	internal___type = "internal___type",
+	internal___owner = "internal___owner",
+}
+
+export enum competencesJsonConnectionSortOrderValues {
+	ASC = "ASC",
+	DESC = "DESC",
+}
+
+export enum competencesJsonDistinctEnum {
+	name = "name",
+	description = "description",
+	id = "id",
+	parent = "parent",
+	internal___contentDigest = "internal___contentDigest",
+	internal___type = "internal___type",
+	internal___owner = "internal___owner",
+}
+
+export enum competencesJsonGroupEnum {
+	name = "name",
+	description = "description",
+	id = "id",
+	parent = "parent",
+	internal___contentDigest = "internal___contentDigest",
+	internal___type = "internal___type",
+	internal___owner = "internal___owner",
+}
+
+export enum SkillsJsonConnectionSortByFieldsEnum {
+	languages = "languages",
+	technical = "technical",
+	soft = "soft",
+	id = "id",
+	parent = "parent",
+	internal___contentDigest = "internal___contentDigest",
+	internal___type = "internal___type",
+	internal___owner = "internal___owner",
+}
+
+export enum skillsJsonConnectionSortOrderValues {
+	ASC = "ASC",
+	DESC = "DESC",
+}
+
+export enum skillsJsonDistinctEnum {
+	languages = "languages",
+	technical = "technical",
+	soft = "soft",
+	id = "id",
+	parent = "parent",
+	internal___contentDigest = "internal___contentDigest",
+	internal___type = "internal___type",
+	internal___owner = "internal___owner",
+}
+
+export enum skillsJsonGroupEnum {
+	languages = "languages",
+	technical = "technical",
+	soft = "soft",
+	id = "id",
+	parent = "parent",
+	internal___contentDigest = "internal___contentDigest",
+	internal___type = "internal___type",
+	internal___owner = "internal___owner",
+}
+
+export enum InterestsJsonConnectionSortByFieldsEnum {
+	subjects = "subjects",
+	id = "id",
+	parent = "parent",
+	internal___contentDigest = "internal___contentDigest",
+	internal___type = "internal___type",
+	internal___owner = "internal___owner",
+}
+
+export enum interestsJsonConnectionSortOrderValues {
+	ASC = "ASC",
+	DESC = "DESC",
+}
+
+export enum interestsJsonDistinctEnum {
+	subjects = "subjects",
+	id = "id",
+	parent = "parent",
+	internal___contentDigest = "internal___contentDigest",
+	internal___type = "internal___type",
+	internal___owner = "internal___owner",
+}
+
+export enum interestsJsonGroupEnum {
+	subjects = "subjects",
+	id = "id",
+	parent = "parent",
+	internal___contentDigest = "internal___contentDigest",
+	internal___type = "internal___type",
+	internal___owner = "internal___owner",
+}
+
+export enum ExperiencesJsonConnectionSortByFieldsEnum {
+	work = "work",
+	id = "id",
+	parent = "parent",
+	internal___contentDigest = "internal___contentDigest",
+	internal___type = "internal___type",
+	internal___owner = "internal___owner",
+}
+
+export enum experiencesJsonConnectionSortOrderValues {
+	ASC = "ASC",
+	DESC = "DESC",
+}
+
+export enum experiencesJsonDistinctEnum {
+	work = "work",
+	id = "id",
+	parent = "parent",
+	internal___contentDigest = "internal___contentDigest",
+	internal___type = "internal___type",
+	internal___owner = "internal___owner",
+}
+
+export enum experiencesJsonGroupEnum {
+	work = "work",
 	id = "id",
 	parent = "parent",
 	internal___contentDigest = "internal___contentDigest",
