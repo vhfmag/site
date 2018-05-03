@@ -7,7 +7,7 @@ const {
 module.exports = {
 	siteMetadata: {
 		title: "Victor Magalhães",
-		siteUrl: "https://vhfmag.netlify.com",
+		siteUrl: "https://vhfmag.gitlab.io",
 		description: "web dev, decentralized web & p2p enthusiast",
 	},
 	plugins: [
