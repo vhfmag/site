@@ -3,6 +3,24 @@ import styled from "styled-components";
 
 const StyledFigure = styled.figure`
 	padding: 16pt;
+	display: grid;
+	grid-gap: 8pt;
+
+	img {
+		margin: 0;
+	}
+
+	figcaption {
+		display: contents;
+	}
+
+	p,
+	h1,
+	h2,
+	h3,
+	h4 {
+		margin: 0;
+	}
 `;
 
 export interface IFigureProps {
