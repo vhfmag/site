@@ -51,7 +51,9 @@ export const EntryItem: React.SFC<IEntryItemProps> = ({
 			{subtitle && <h3>{subtitle}</h3>}
 			{info && <StyledEntryInfo>{info}</StyledEntryInfo>}
 			{(htmlAst || content) && (
-				<section>{<p>{content}</p> || renderAst(htmlAst)}</section>
+				<section>
+					{content ? <p>{content}</p> : renderAst(htmlAst)}
+				</section>
 			)}
 		</StyledEntryItem>
 	);

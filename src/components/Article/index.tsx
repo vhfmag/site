@@ -45,7 +45,9 @@ export class Article extends React.Component<IArticleProps> {
 					{subtitle && <h2>{subtitle}</h2>}
 					{info && <span>{info}</span>}
 				</StyledHeader>
-				<section>{<p>{content}</p> || renderAst(htmlAst)}</section>
+				<section>
+					{content ? <p>{content}</p> : renderAst(htmlAst)}
+				</section>
 			</StyledArticle>
 		);
 	}
