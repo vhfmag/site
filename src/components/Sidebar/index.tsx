@@ -8,7 +8,7 @@ import { SocialLink } from "./SocialLink";
 
 const responsiveBreakpoint = "800px";
 
-const StyledSidebar = styled.aside`
+const StyledSidebar = styled.header`
 	flex: 0 0 var(--sidebarWidth);
 	padding: var(--rootPadding);
 
