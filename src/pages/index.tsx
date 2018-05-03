@@ -20,9 +20,6 @@ interface IndexPageProps {
 }
 
 export default class DefaultLayout extends React.Component<IndexPageProps, {}> {
-	constructor(props: IndexPageProps, context: any) {
-		super(props, context);
-	}
 	public render() {
 		const {
 			allMarkdownRemark: { edges: posts },
