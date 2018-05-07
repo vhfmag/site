@@ -62,12 +62,12 @@ module.exports = {
 		},
 		"gatsby-plugin-offline",
 		"gatsby-plugin-styled-components",
-		"gatsby-plugin-netlify",
 		{
 			resolve: `gatsby-plugin-typography`,
 			options: {
 				pathToConfigModule: `src/utils/typography`,
 			},
 		},
+		"gatsby-plugin-sitemap",
 	],
 };
