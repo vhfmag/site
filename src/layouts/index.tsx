@@ -148,6 +148,11 @@ export default class DefaultLayout extends React.PureComponent<
 					meta={[
 						{ name: "description", content: description },
 						{ name: "keywords", content: "sample, something" },
+						{
+							name: "google-site-verification",
+							content:
+								"RHQh7j4JKTIEmRsQrcOD1Pk7OoLoW8VK9YG4LscV7d0",
+						},
 					]}
 				/>
 
