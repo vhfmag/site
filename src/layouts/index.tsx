@@ -147,7 +147,22 @@ export default class DefaultLayout extends React.PureComponent<
 					titleTemplate={`%s | ${title}`}
 					meta={[
 						{ name: "description", content: description },
-						{ name: "keywords", content: "sample, something" },
+						{
+							name: "keywords",
+							content: [
+								"javascript",
+								"typescript",
+								"development",
+								"web development",
+								"web",
+								"decentralization",
+								"p2p",
+								"minorities",
+								"personal",
+								"blog",
+								"brazilian",
+							].join(", "),
+						},
 						{
 							name: "google-site-verification",
 							content:
