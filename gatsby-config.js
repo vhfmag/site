@@ -7,7 +7,7 @@ const {
 module.exports = {
 	siteMetadata: {
 		title: "Victor Magalhães",
-		siteUrl: "https://vhfmag.gitlab.io",
+		siteUrl: "https://victormagalhaes.codes",
 		description: "web dev, decentralized web & p2p enthusiast",
 	},
 	plugins: [
