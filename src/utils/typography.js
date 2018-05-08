@@ -5,9 +5,7 @@ const typography = new Typography({
 	...grandViewTheme,
 	googleFonts: [
 		// @ts-ignore
-		...grandViewTheme.googleFonts.filter(({
-			name
-		}) => name !== "Arvo"),
+		...grandViewTheme.googleFonts.filter(({ name }) => name !== "Arvo"),
 		{
 			name: "Zilla Slab",
 			styles: ["400", "400i", "700"],
