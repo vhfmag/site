@@ -18,8 +18,17 @@ export interface ISocialLinkProps {
 	icon: string;
 }
 
-export const SocialLink: React.SFC<ISocialLinkProps> = ({ url, icon }) => (
-	<StyledSocialLink rel="me noopener" className="u-url" href={url}>
+export const SocialLink: React.SFC<ISocialLinkProps> = ({
+	url,
+	icon,
+	serviceName,
+}) => (
+	<StyledSocialLink
+		rel="me noopener"
+		className="u-url"
+		href={url}
+		title={serviceName}
+	>
 		<i className={`fa ${icon}`} />
 	</StyledSocialLink>
 );
