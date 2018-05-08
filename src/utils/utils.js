@@ -1,8 +1,10 @@
-const { DateTime } = require("luxon");
+const {
+	DateTime
+} = require("luxon");
 
 /**
- * @param {string} date
- * @returns string
+ * @param {string} date ISO date string to localize
+ * @returns {string} formatted date
  */
 function formatDate(date) {
 	return DateTime.fromISO(date)
@@ -13,8 +15,8 @@ function formatDate(date) {
 const slugRegex = /\/([^/]*?)(\.\w+)?$/;
 
 /**
- * @param {string} path
- * @returns string
+ * @param {string} path Path to file
+ * @returns {string|null} File name
  */
 function extractFileNameFromPath(path) {
 	const result = slugRegex.exec(path);

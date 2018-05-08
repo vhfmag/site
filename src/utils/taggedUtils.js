@@ -3,7 +3,7 @@
  *
  * @param {TemplateStringsArray} template
  * @param {string[]} subs
- * @returns string
+ * @returns {string} Interpolated string
  */
 function highlighter(template, ...subs) {
 	return template
