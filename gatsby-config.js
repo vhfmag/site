@@ -65,6 +65,7 @@ module.exports = {
 			},
 		},
 		"gatsby-plugin-offline",
+		"gatsby-plugin-purify-css",
 		"gatsby-plugin-styled-components",
 		{
 			resolve: `gatsby-plugin-typography`,
@@ -137,6 +138,24 @@ module.exports = {
 					output: "/rss.xml",
 				}, ],
 			},
+		},
+		{
+			resolve: `gatsby-plugin-favicon`,
+			options: {
+				logo: "./src/assets/images/icons/icon.png",
+				injectHTML: true,
+				icons: {
+					android: true,
+					appleIcon: true,
+					appleStartup: true,
+					coast: true,
+					favicons: true,
+					firefox: true,
+					twitter: true,
+					yandex: true,
+					windows: true
+				}
+			}
 		},
 	],
 };
