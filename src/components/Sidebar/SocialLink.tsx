@@ -13,18 +13,20 @@ const StyledSocialLink = styled.a`
 `;
 
 export interface ISocialLinkProps {
+	rel?: string;
 	url: string;
 	serviceName: string;
 	icon: string;
 }
 
 export const SocialLink: React.SFC<ISocialLinkProps> = ({
+	rel = "me noopener noreferrer",
 	url,
 	icon,
 	serviceName,
 }) => (
 	<StyledSocialLink
-		rel="me noopener"
+		rel={rel}
 		className="u-url"
 		href={url}
 		title={serviceName}
