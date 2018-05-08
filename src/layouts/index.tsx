@@ -143,6 +143,9 @@ export default class DefaultLayout extends React.PureComponent<
 		return (
 			<StyledRoot>
 				<Helmet
+					htmlAttributes={{
+						lang: "pt-br",
+					}}
 					defaultTitle={title}
 					titleTemplate={`%s | ${title}`}
 					meta={[
