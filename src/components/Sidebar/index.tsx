@@ -5,8 +5,7 @@ import Link from "gatsby-link";
 import "normalize-css/normalize.css";
 import "font-awesome/css/font-awesome.min.css";
 import { SocialLink } from "./SocialLink";
-
-const responsiveBreakpoint = "800px";
+import { responsiveBreakpoint } from "../../utils/consts";
 
 const activeLinkClassName = "active";
 
@@ -15,8 +14,14 @@ const StyledNav = styled.nav`
 		list-style: none;
 		padding-left: 0;
 		margin-left: 0;
-		display: flex;
-		flex-direction: column;
+		display: grid;
+		grid-auto-flow: row;
+
+		@media (max-width: ${responsiveBreakpoint}) {
+			grid-auto-flow: column dense;
+			justify-content: flex-start;
+			grid-gap: 8pt;
+		}
 
 		li {
 			margin-bottom: 0;
@@ -41,6 +46,10 @@ const StyledSidebar = styled.header`
 		max-height: 100vh;
 		position: sticky;
 		top: 0;
+	}
+
+	@media (max-width: ${responsiveBreakpoint}) {
+		font-size: 0.9em;
 	}
 `;
 
