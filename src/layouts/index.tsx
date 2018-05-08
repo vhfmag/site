@@ -136,6 +136,16 @@ export default class DefaultLayout extends React.PureComponent<
 	DefaultLayoutProps,
 	void
 > {
+	public componentDidMount() {
+		const addStylesNode = document.getElementById("deferred-styles");
+		if (!addStylesNode) return;
+
+		const replacement = document.createElement("div");
+		replacement.innerHTML = addStylesNode.textContent!;
+		document.body.appendChild(replacement);
+		addStylesNode.parentElement!.removeChild(addStylesNode);
+	}
+
 	public render() {
 		const { title, description } = this.props.data.site.siteMetadata;
 		const { email, social } = this.props.data.personalJson;
@@ -172,7 +182,15 @@ export default class DefaultLayout extends React.PureComponent<
 								"RHQh7j4JKTIEmRsQrcOD1Pk7OoLoW8VK9YG4LscV7d0",
 						},
 					]}
-				/>
+				>
+					<noscript className="deferred-styles">{`
+						<link
+							href="//fonts.googleapis.com/css?family=Montserrat:700|Zilla+Slab:400,400i,700"
+							rel="stylesheet"
+							type="text/css"
+						/>
+					`}</noscript>
+				</Helmet>
 
 				<Sidebar
 					title={title}
