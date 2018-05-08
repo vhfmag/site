@@ -2,37 +2,37 @@
 	"email": "vhfmag@protonmail.com",
 	"social": [
 		{
-			"serviceName": "linkedin",
+			"serviceName": "Linkedin",
 			"icon": "fa-linkedin",
 			"url": "https://www.linkedin.com/in/vhfmag"
 		},
 		{
-			"serviceName": "twitter",
+			"serviceName": "Twitter",
 			"icon": "fa-twitter",
 			"url": "https://twitter.com/vhfmag"
 		},
 		{
-			"serviceName": "gitlab",
+			"serviceName": "Gitlab",
 			"icon": "fa-gitlab",
 			"url": "https://gitlab.com/vhfmag/"
 		},
 		{
-			"serviceName": "pocket",
+			"serviceName": "Pocket",
 			"icon": "fa-get-pocket",
 			"url": "https://getpocket.com/@vhfmag"
 		},
 		{
-			"serviceName": "github",
+			"serviceName": "Github",
 			"icon": "fa-github",
 			"url": "https://github.com/vhfmag/"
 		},
 		{
-			"serviceName": "instagram",
+			"serviceName": "Instagram",
 			"icon": "fa-instagram",
 			"url": "https://instagram.com/vhfmag"
 		},
 		{
-			"serviceName": "keybase",
+			"serviceName": "Keybase",
 			"icon": "fa-key",
 			"url": "https://keybase.io/vhfmag"
 		}
