@@ -36,7 +36,13 @@ export default class SingleEntryTemplate extends React.Component<
 			<Article
 				title={title}
 				info={<Markdown source={`Por ${author}`} />}
-				subtitle={link && <a href={link}>Link para original</a>}
+				subtitle={
+					link && (
+						<a rel="external" href={link}>
+							Link para original
+						</a>
+					)
+				}
 				htmlAst={htmlAst}
 				url="#"
 			/>
