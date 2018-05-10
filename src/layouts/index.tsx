@@ -26,6 +26,7 @@ const StyledMain = styled.main`
 	p {
 		max-width: 70ch;
 		text-align: justify;
+		hyphens: auto;
 	}
 
 	& > h1:first-child,
