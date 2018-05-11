@@ -39,8 +39,9 @@ export const Paginator: React.SFC<IPaginatorProps> = ({
 	<StyledNav>
 		<Link
 			className={(first && "disabled") || ""}
-			to={buildPath({ pathPrefix, index: index - 1 })}
-			rel="prev"
+			to={!first ? buildPath({ pathPrefix, index: index - 1 }) : "#"}
+			rel={!first ? "prev" : undefined}
+			title="Página anterior"
 		>
 			&lt;
 		</Link>
@@ -50,6 +51,7 @@ export const Paginator: React.SFC<IPaginatorProps> = ({
 				<Link
 					activeClassName="disabled"
 					key={i}
+					title={`Página ${i}`}
 					exact
 					to={buildPath({ pathPrefix, index: i })}
 				>
@@ -58,8 +60,9 @@ export const Paginator: React.SFC<IPaginatorProps> = ({
 			))}
 		<Link
 			className={(last && "disabled") || ""}
-			to={buildPath({ pathPrefix, index: index + 1 })}
-			rel="next"
+			to={!last ? buildPath({ pathPrefix, index: index + 1 }) : "#"}
+			rel={!last ? "next" : undefined}
+			title="Página seguinte"
 		>
 			&gt;
 		</Link>
