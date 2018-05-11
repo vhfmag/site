@@ -40,6 +40,7 @@ export const Paginator: React.SFC<IPaginatorProps> = ({
 		<Link
 			className={(first && "disabled") || ""}
 			to={buildPath({ pathPrefix, index: index - 1 })}
+			rel="prev"
 		>
 			&lt;
 		</Link>
@@ -58,6 +59,7 @@ export const Paginator: React.SFC<IPaginatorProps> = ({
 		<Link
 			className={(last && "disabled") || ""}
 			to={buildPath({ pathPrefix, index: index + 1 })}
+			rel="next"
 		>
 			&gt;
 		</Link>
