@@ -123,11 +123,20 @@ interface DefaultLayoutProps
 		site: {
 			siteMetadata: {
 				title: string;
+				siteUrl: string;
 				description: string;
 			};
 		};
+		organizationJson: {
+			name: string;
+			url: string;
+			logo: string;
+			telephone: string;
+		};
 		personalJson: {
 			email: string;
+			name: string;
+			jobTitle: string;
 			social: DeepNonNullable<social_2>[];
 		};
 	};
@@ -148,8 +157,38 @@ export default class DefaultLayout extends React.PureComponent<
 	}
 
 	public render() {
-		const { title, description } = this.props.data.site.siteMetadata;
-		const { email, social } = this.props.data.personalJson;
+		const {
+			title,
+			description,
+			siteUrl,
+		} = this.props.data.site.siteMetadata;
+		const { name, jobTitle, email, social } = this.props.data.personalJson;
+		const { organizationJson } = this.props.data;
+
+		const personLinkedData = {
+			"@context": "http://schema.org",
+			"@type": "Person",
+			name,
+			jobTitle,
+			email,
+			organization: {
+				"@type": "Organization",
+				...organizationJson,
+			},
+			url: "https://victormagalhaes.codes",
+			sameAs: social.map(({ url }) => url),
+		};
+
+		const blogLinkedData = {
+			"@context": "http://schema.org",
+			"@type": "Blog",
+			url: siteUrl,
+			name: title,
+			author: {
+				"@type": "Person",
+				"@id": name,
+			},
+		};
 
 		return (
 			<StyledRoot>
@@ -191,6 +230,12 @@ export default class DefaultLayout extends React.PureComponent<
 							type="text/css"
 						/>
 					`}</noscript>
+					<script type="application/ld+json">
+						{JSON.stringify(personLinkedData)}
+					</script>
+					<script type="application/ld+json">
+						{JSON.stringify(blogLinkedData)}
+					</script>
 				</Helmet>
 
 				<Sidebar
@@ -233,11 +278,20 @@ export const pageQuery = graphql`
 		site {
 			siteMetadata {
 				title
+				siteUrl
 				description
 			}
 		}
+		organizationJson {
+			name
+			url
+			logo
+			telephone
+		}
 		personalJson {
+			name
 			email
+			jobTitle
 			social {
 				serviceName
 				icon

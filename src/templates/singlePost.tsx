@@ -49,30 +49,28 @@ export default class SinglePostTemplate extends React.Component<
 
 		const formattedDate = formatDate(date);
 
-		const linkedData = `{
+		const linkedData = {
 			"@context": "http://schema.org",
 			"@type": "BlogPosting",
-			"mainEntityOfPage": {
+			mainEntityOfPage: {
 				"@type": "Blog",
-				"@id": "${siteUrl}"
+				"@id": siteUrl,
 			},
-			"headline": "${title}",
-			"datePublished": "${date}",
-			"author": {
+			headline: title,
+			datePublished: date,
+			author: {
 				"@type": "Person",
-				"name": "${name}"
+				name,
 			},
-			"publisher": {
-				"@type": "Person",
-				"name": "${name}"
-			},
-			"description": "${excerpt}"
-		}`;
+			description: excerpt,
+		};
 
 		return (
 			<>
 				<Helmet>
-					<script type="application/ld+json">{linkedData}</script>
+					<script type="application/ld+json">
+						{JSON.stringify(linkedData)}
+					</script>
 				</Helmet>
 				<Article
 					title={title}
