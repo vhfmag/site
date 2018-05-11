@@ -186,7 +186,7 @@ export default class DefaultLayout extends React.PureComponent<
 			name: title,
 			author: {
 				"@type": "Person",
-				"@id": name,
+				name,
 			},
 		};
 
