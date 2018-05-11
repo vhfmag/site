@@ -1,6 +1,4 @@
-const {
-	DateTime
-} = require("luxon");
+const { DateTime } = require("luxon");
 
 /**
  * @param {string} date ISO date string to localize
