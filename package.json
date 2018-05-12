@@ -35,7 +35,6 @@
 		"gatsby-transformer-remark": "^1.7.40",
 		"gatsby-transformer-sharp": "^1.6.24",
 		"graphql-code-generator": "^0.8.21",
-		"gray-percentage": "^2.0.0",
 		"luxon": "^1.2.0",
 		"normalize-css": "^2.3.1",
 		"prismjs": "^1.14.0",

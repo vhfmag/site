@@ -1,6 +1,5 @@
 import Typography from "typography";
 import { textColor, themeColor, backgroundColor } from "../utils/consts";
-import gray from "gray-percentage";
 import { MOBILE_MEDIA_QUERY } from "typography-breakpoint-constants";
 
 const typography = new Typography({
@@ -45,7 +44,6 @@ const typography = new Typography({
 		},
 		blockquote: {
 			...scale(1 / 5),
-			color: gray(41),
 			paddingLeft: rhythm(13 / 16),
 			marginLeft: 0,
 			borderLeft: `${rhythm(3 / 16)} solid ${options.themeColor}`,
