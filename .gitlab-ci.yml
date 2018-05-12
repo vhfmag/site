@@ -16,4 +16,5 @@ pages:
 
 now:
   script:
+  - npm install -g now
   - yarn run deploy-ci
