@@ -18,7 +18,7 @@ const gappedClassName = "has-gap";
 const StyledHeader = styled.header`
 	margin-bottom: ${props =>
 		props.className && props.className.includes(gappedClassName)
-			? "16pt"
+			? "32pt"
 			: "0"};
 `;
 
