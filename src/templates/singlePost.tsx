@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Entry } from "../components/Entry";
 import { Helmet } from "react-helmet";
+import { LinkedData } from "../components/LinkedData";
 
 interface IPostTemplateProps {
 	data: {
@@ -67,9 +68,7 @@ export default class SinglePostTemplate extends React.Component<
 		return (
 			<>
 				<Helmet>
-					<script type="application/ld+json">
-						{JSON.stringify(linkedData)}
-					</script>
+					<LinkedData data={linkedData} />
 				</Helmet>
 				<Entry
 					title={title}
