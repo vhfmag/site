@@ -1,0 +1,20 @@
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    transition: 0.25s color ease, 0.25s opacity ease;
+}
+
+a:hover,
+a:active,
+a:focus {
+    opacity: 0.75;
+}

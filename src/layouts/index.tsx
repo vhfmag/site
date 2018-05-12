@@ -1,20 +1,16 @@
 import * as React from "react";
 import { Helmet } from "react-helmet";
 import { ObjectOmit } from "typelevel-ts";
-import styled, { injectGlobal } from "styled-components";
+import styled from "styled-components";
 
-import "normalize-css/normalize.css";
-import "font-awesome/css/font-awesome.min.css";
-import {
-	backgroundColor,
-	textColor,
-	themeColor,
-	responsiveBreakpoint,
-} from "../utils/consts";
+import { responsiveBreakpoint } from "../utils/consts";
 import { social_2 } from "../graphql-types";
 import { Sidebar } from "../components/Sidebar";
 
-require("prismjs/themes/prism-okaidia.css");
+import "normalize-css/normalize.css";
+import "font-awesome/css/font-awesome.min.css";
+import "prismjs/themes/prism-okaidia.css";
+import "./style.css";
 
 const StyledMain = styled.main`
 	--width: auto;
@@ -52,64 +48,6 @@ const StyledRoot = styled.div`
 
 	@media (max-width: ${responsiveBreakpoint}) {
 		flex-direction: column;
-	}
-`;
-
-injectGlobal`
-	:root {
-		--bgColor: ${backgroundColor};
-		--themeColor: ${themeColor};
-		--textColor: ${textColor};
-	}
-
-	* {
-		box-sizing: border-box;
-	}
-
-	h1,
-	h2,
-	h3,
-	h4,
-	h5,
-	h6,
-	blockquote {
-		color: ${textColor};
-	}
-
-	em {
-		color: ${themeColor};
-	}
-
-	blockquote {
-		border-left-color: ${themeColor};
-	}
-
-	html,
-	body {
-		background-color: ${backgroundColor};
-		color: ${textColor};
-		/* width: 100vw; */
-		min-height: 100vh;
-		margin: 0;
-		padding: 0;
-	}
-
-	a {
-		transition: 0.25s color ease, 0.25s opacity ease;
-	}
-
-	a,
-	a:hover,
-	a:visited,
-	a:focus,
-	a:active {
-		color: ${themeColor};
-	}
-
-	a:hover,
-	a:active,
-	a:focus {
-		opacity: 0.75;
 	}
 `;
 

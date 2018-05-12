@@ -2,7 +2,8 @@
 import Typography from "typography";
 import {
 	textColor,
-	themeColor
+	themeColor,
+	backgroundColor,
 } from "../utils/consts";
 import gray from 'gray-percentage';
 import {
@@ -26,6 +27,7 @@ const typography = new Typography({
 	bodyFontFamily: ['Zilla Slab', 'sans-serif'],
 	headerColor: themeColor,
 	bodyColor: textColor,
+	backgroundColor,
 	headerWeight: 700,
 	bodyWeight: 400,
 	boldWeight: 700,
@@ -34,7 +36,7 @@ const typography = new Typography({
 		scale,
 		rhythm
 	}, options) => ({
-		a: {
+		"a, a:hover, a:visited, a:focus, a:active": {
 			color: options.headerColor,
 			textDecoration: 'none',
 		},
@@ -43,6 +45,12 @@ const typography = new Typography({
 		},
 		'h1,h2,h3,h4,h5,h6': {
 			marginTop: rhythm(2),
+		},
+		em: {
+			color: options.headerColor,
+		},
+		"html, body": {
+			backgroundColor: options.backgroundColor,
 		},
 		blockquote: {
 			...scale(1 / 5),
