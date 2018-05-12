@@ -85,9 +85,9 @@ export const EntryHeader: React.SFC<
 						className="dt-published"
 						dateTime={publishDate.toISOString()}
 					>
-						{DateTime.fromJSDate(publishDate).toLocaleString(
-							DateTime.DATE_FULL,
-						)}
+						{DateTime.fromJSDate(publishDate)
+							.setLocale("pt-br")
+							.toLocaleString(DateTime.DATE_FULL)}
 					</time>
 				</div>
 			)}
