@@ -1,6 +1,7 @@
 import * as React from "react";
 import Markdown from "react-markdown";
 import styled from "styled-components";
+import { Helmet } from "react-helmet";
 
 interface ITodoPageProps {
 	data: {
@@ -33,6 +34,7 @@ export default class TodoPage extends React.Component<ITodoPageProps> {
 
 		return (
 			<>
+				<Helmet title="todo" />
 				<h2>quem sabe um dia</h2>
 				<StyledTodoList>
 					{todos.map(({ node: { title } }) => (

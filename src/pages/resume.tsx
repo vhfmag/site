@@ -7,6 +7,7 @@ import {
 	CompetencesJson,
 	InterestsJson,
 } from "../graphql-types";
+import { Helmet } from "react-helmet";
 
 interface IResumePageProps {
 	data: {
@@ -138,6 +139,7 @@ export default class ResumePage extends React.Component<IResumePageProps> {
 
 		return (
 			<>
+				<Helmet title="Currículo" />
 				<h1>Currículo</h1>
 				<h2>Competências</h2>
 				<h3>Como posso ser útil</h3>
