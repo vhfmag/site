@@ -86,9 +86,11 @@ export const Sidebar: React.SFC<ISidebarProps> = ({
 	social,
 	nav,
 }) => (
-	<StyledSidebar>
-		<h1 className="p-name">
-			<Link to="/">{title}</Link>
+	<StyledSidebar className="h-card">
+		<h1>
+			<Link className="p-name u-uid u-url" to="/">
+				{title}
+			</Link>
 		</h1>
 		<p>
 			<a className="u-email" href={`mailto:${email}`}>

@@ -28,19 +28,19 @@ export class Article extends React.Component<IArticleProps> {
 		const { title, url, subtitle, info, content, htmlAst } = this.props;
 
 		return (
-			<StyledArticle>
+			<StyledArticle className="h-entry">
 				<Helmet title={title} />
 				<StyledHeader>
-					<h1 className="post-title p-name">
+					<h1 className="post-title">
 						{url ? (
-							<Link className="u-url" to={url}>
+							<Link className="p-name u-url u-uid" to={url}>
 								{title}
 							</Link>
 						) : (
 							title
 						)}
 					</h1>
-					{subtitle && <h2>{subtitle}</h2>}
+					{subtitle && <h2 className="p-summary">{subtitle}</h2>}
 					{info && <span>{info}</span>}
 				</StyledHeader>
 				<section>
