@@ -26,10 +26,21 @@ export default class BookmarkList extends React.Component<
 > {
 	public render() {
 		const { group: posts, ...paginationProps } = this.props.pathContext;
+		const {
+			pageCount,
+			index,
+			additionalContext: { listTitle, singlePath },
+		} = paginationProps;
+
+		if (!listTitle) throw new Error("Context is missing listTitle");
+		if (!singlePath) throw new Error("Context is missing singlePath");
 
 		return (
 			<>
-				<Helmet title="Bookmarks" />
+				<Helmet
+					title={`${listTitle} ${index}/${pageCount}`}
+					bodyAttributes={{ className: "h-feed" }}
+				/>
 				{posts.map(
 					({
 						node: {
@@ -44,9 +55,9 @@ export default class BookmarkList extends React.Component<
 							authors={authors}
 							title={title}
 							content={excerpt}
-							url={`/${
-								paginationProps.additionalContext.singlePath
-							}/${extractFileNameFromPath(fileAbsolutePath)}`}
+							url={`/${singlePath}/${extractFileNameFromPath(
+								fileAbsolutePath,
+							)}`}
 						/>
 					),
 				)}

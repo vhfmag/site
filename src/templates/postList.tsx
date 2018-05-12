@@ -2,6 +2,7 @@ import * as React from "react";
 import { extractFileNameFromPath } from "../utils/utils";
 import { EntrySummary } from "../components/EntrySummary";
 import { Paginator } from "../components/Paginator";
+import { Helmet } from "react-helmet";
 
 interface IPostNode {
 	node: {
@@ -31,9 +32,21 @@ export default class PostList extends React.Component<IndexPageProps, {}> {
 			personalJson: { name },
 		} = this.props.data;
 		const { group: posts, ...paginationProps } = this.props.pathContext;
+		const {
+			pageCount,
+			index,
+			additionalContext: { listTitle, singlePath },
+		} = paginationProps;
+
+		if (!listTitle) throw new Error("Context is missing listTitle");
+		if (!singlePath) throw new Error("Context is missing singlePath");
 
 		return (
 			<>
+				<Helmet
+					title={`${listTitle} ${index}/${pageCount}`}
+					bodyAttributes={{ class: "h-feed" }}
+				/>
 				{posts.map(
 					({
 						node: {

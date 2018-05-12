@@ -197,7 +197,7 @@ export default class DefaultLayout extends React.PureComponent<
 						lang: "pt-br",
 					}}
 					defaultTitle={title}
-					titleTemplate={`%s | ${title}`}
+					titleTemplate={`${title} | %s`}
 					meta={[
 						{ name: "description", content: description },
 						{

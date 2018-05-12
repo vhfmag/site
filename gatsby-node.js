@@ -40,6 +40,7 @@ function createEntryPages({
 	pageKind,
 	createPage,
 	singlePath,
+	listTitle,
 	graphqlQuerier,
 	listTemplatePath,
 	singleTemplatePath,
@@ -61,7 +62,8 @@ function createEntryPages({
 			pathPrefix,
 			pageLength: 5,
 			context: {
-				singlePath
+				singlePath,
+				listTitle,
 			},
 		});
 
@@ -194,6 +196,7 @@ exports.createPages = ({
 					listTemplatePath: postListTemplate,
 					graphqlQuerier,
 					createPage,
+					listTitle: "Posts",
 					singlePath: "post",
 					singleTemplatePath: postTemplate,
 				}),
@@ -202,6 +205,7 @@ exports.createPages = ({
 					listTemplatePath: entryListTemplate,
 					graphqlQuerier,
 					createPage,
+					listTitle: "Livros",
 					pathPrefix: "books",
 					singlePath: "book",
 					singleTemplatePath: entryTemplate,
@@ -211,6 +215,7 @@ exports.createPages = ({
 					listTemplatePath: entryListTemplate,
 					graphqlQuerier,
 					createPage,
+					listTitle: "Bookmarks",
 					pathPrefix: "bookmarks",
 					singlePath: "bookmark",
 					singleTemplatePath: entryTemplate,
