@@ -1,5 +1,3 @@
-import { authors_2 } from "./graphql-types";
-
 declare const graphql: (query: TemplateStringsArray) => void;
 declare type DeepNonNullable<T> = { [K in keyof T]-?: NonNullable<T[K]> };
 declare type NonNullableNode = NonNullable<React.ReactNode>;
@@ -17,4 +15,7 @@ declare interface GatsbyPaginatorProps<T> {
 	additionalContext: { [key: string]: any };
 }
 
-declare interface IAuthor extends authors_2 {}
+declare interface IAuthor {
+	name: string;
+	url?: string;
+}
