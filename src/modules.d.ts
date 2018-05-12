@@ -1,3 +1,4 @@
 declare module "typography";
 declare module "rehype-react";
-declare module "typography-theme-grand-view";
+declare module "gray-percentage";
+declare module "typography-breakpoint-constants";

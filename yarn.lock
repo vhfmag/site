@@ -2195,7 +2195,7 @@ commondir@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/commondir/-/commondir-1.0.1.tgz#ddd800da0c66127393cca5950ea968a3aaf1253b"
 
-compass-vertical-rhythm@^1.2.1, compass-vertical-rhythm@^1.4.5:
+compass-vertical-rhythm@^1.4.5:
   version "1.4.5"
   resolved "https://registry.yarnpkg.com/compass-vertical-rhythm/-/compass-vertical-rhythm-1.4.5.tgz#4baa8d7068fda164d3675d706775d7547e8750f5"
   dependencies:
@@ -10501,14 +10501,6 @@ typography-breakpoint-constants@^0.15.10:
 typography-normalize@^0.14.0:
   version "0.14.0"
   resolved "https://registry.yarnpkg.com/typography-normalize/-/typography-normalize-0.14.0.tgz#1d77c1fe2aaf4a51b3673c4c85c85a65a2d4b573"
-
-typography-theme-grand-view@^0.15.10:
-  version "0.15.10"
-  resolved "https://registry.yarnpkg.com/typography-theme-grand-view/-/typography-theme-grand-view-0.15.10.tgz#fb8984fc62fcc960c1799c83164db1c3d69e8fb1"
-  dependencies:
-    compass-vertical-rhythm "^1.2.1"
-    gray-percentage "^2.0.0"
-    typography-breakpoint-constants "^0.15.10"
 
 typography@^0.16.0, typography@^0.16.17:
   version "0.16.17"
