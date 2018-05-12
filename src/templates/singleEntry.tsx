@@ -15,6 +15,7 @@ interface IEntryTemplateProps {
 	pathContext: {
 		markdownPath: string;
 		slug: string;
+		category: string;
 	};
 }
 
@@ -29,12 +30,14 @@ export default class SingleEntryTemplate extends React.Component<
 					frontmatter: { title, authors, link },
 				},
 			},
+			pathContext: { category },
 		} = this.props;
 
 		return (
 			<Entry
 				title={title}
 				authors={authors}
+				category={category}
 				replyTo={link}
 				htmlAst={htmlAst}
 				url="#"

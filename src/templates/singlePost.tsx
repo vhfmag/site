@@ -25,6 +25,7 @@ interface IPostTemplateProps {
 	pathContext: {
 		markdownPath: string;
 		slug: string;
+		category: string;
 	};
 }
 
@@ -44,6 +45,9 @@ export default class SinglePostTemplate extends React.Component<
 					frontmatter: { date, title, description },
 				},
 			},
+			pathContext: {
+				category,
+			}
 		} = this.props;
 
 		const linkedData = {
@@ -71,6 +75,7 @@ export default class SinglePostTemplate extends React.Component<
 				</Helmet>
 				<Entry
 					title={title}
+					category={category}
 					subtitle={description}
 					publishDate={new Date(date)}
 					authors={[{ name, url: siteUrl }]}

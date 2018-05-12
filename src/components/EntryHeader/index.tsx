@@ -5,9 +5,11 @@ import { DateTime } from "luxon";
 
 export interface IEntryHeaderProps {
 	title: string;
+	category: string;
+	authors: IAuthor[];
+
 	subtitle?: NonNullableNode;
 	url?: string;
-	authors: IAuthor[];
 	publishDate?: Date;
 	replyTo?: string;
 	replyToText?: string;
@@ -28,6 +30,7 @@ export const EntryHeader: React.SFC<
 	url,
 	title,
 	subtitle,
+	category,
 	authors,
 	replyTo,
 	replyToText = "Link para original",
@@ -50,7 +53,7 @@ export const EntryHeader: React.SFC<
 			</Title>
 			{subtitle && <Subtitle>{subtitle}</Subtitle>}
 			<div>
-				Por{" "}
+				<span className="p-category">{category}</span> |{" "}
 				{authors
 					.map(
 						({ name, url }) =>

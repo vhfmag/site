@@ -41,6 +41,7 @@ function createEntryPages({
 	createPage,
 	singlePath,
 	listTitle,
+	category,
 	graphqlQuerier,
 	listTemplatePath,
 	singleTemplatePath,
@@ -64,6 +65,7 @@ function createEntryPages({
 			context: {
 				singlePath,
 				listTitle,
+				category,
 			},
 		});
 
@@ -78,6 +80,7 @@ function createEntryPages({
 				context: {
 					slug,
 					markdownPath,
+					category,
 				},
 			});
 		});
@@ -185,7 +188,7 @@ exports.createPages = ({
 
 	return new Promise((resolve, reject) => {
 		const postTemplate = path.resolve(`src/templates/singlePost.tsx`);
-		const postListTemplate = path.resolve(`src/templates/postList.tsx`);
+		// const postListTemplate = path.resolve(`src/templates/postList.tsx`);
 		const entryTemplate = path.resolve(`src/templates/singleEntry.tsx`);
 		const entryListTemplate = path.resolve(`src/templates/entryList.tsx`);
 
@@ -193,10 +196,11 @@ exports.createPages = ({
 			Promise.all([
 				createEntryPages({
 					pageKind: "posts",
-					listTemplatePath: postListTemplate,
+					listTemplatePath: entryListTemplate,
 					graphqlQuerier,
 					createPage,
 					listTitle: "Posts",
+					category: "Post",
 					singlePath: "post",
 					singleTemplatePath: postTemplate,
 				}),
@@ -206,6 +210,7 @@ exports.createPages = ({
 					graphqlQuerier,
 					createPage,
 					listTitle: "Livros",
+					category: "Livro",
 					pathPrefix: "books",
 					singlePath: "book",
 					singleTemplatePath: entryTemplate,
@@ -216,6 +221,7 @@ exports.createPages = ({
 					graphqlQuerier,
 					createPage,
 					listTitle: "Bookmarks",
+					category: "Bookmark",
 					pathPrefix: "bookmarks",
 					singlePath: "bookmark",
 					singleTemplatePath: entryTemplate,

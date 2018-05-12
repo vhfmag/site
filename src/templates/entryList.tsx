@@ -10,28 +10,39 @@ interface IEntryNode {
 		excerpt: string;
 		frontmatter: {
 			title: string;
-			authors: IAuthor[];
+			authors?: IAuthor[];
 			link: string;
+			date: string;
 		};
 	};
 }
 
 interface IBookmarkListProps {
+	data: {
+		site: { siteMetadata: { siteUrl: string } };
+		personalJson: { name: string };
+	};
 	pathContext: GatsbyPaginatorProps<IEntryNode>;
 }
 
-export default class BookmarkList extends React.Component<
-	IBookmarkListProps,
-	{}
-> {
+export default class BookmarkList extends React.Component<IBookmarkListProps> {
 	public render() {
 		const { group: posts, ...paginationProps } = this.props.pathContext;
 		const {
 			pageCount,
 			index,
-			additionalContext: { listTitle, singlePath },
+			additionalContext: { listTitle, singlePath, category },
 		} = paginationProps;
+		const {
+			site: {
+				siteMetadata: { siteUrl },
+			},
+			personalJson: { name },
+		} = this.props.data;
 
+		const meAuthor = { name, url: siteUrl };
+
+		if (!category) throw new Error("Context is missing category");
 		if (!listTitle) throw new Error("Context is missing listTitle");
 		if (!singlePath) throw new Error("Context is missing singlePath");
 
@@ -39,20 +50,22 @@ export default class BookmarkList extends React.Component<
 			<>
 				<Helmet
 					title={`${listTitle} ${index}/${pageCount}`}
-					bodyAttributes={{ className: "h-feed" }}
+					bodyAttributes={{ class: "h-feed" }}
 				/>
 				{posts.map(
 					({
 						node: {
 							fileAbsolutePath,
 							excerpt,
-							frontmatter: { title, authors, link },
+							frontmatter: { title, authors, link, date },
 						},
 					}) => (
 						<EntrySummary
 							key={fileAbsolutePath}
 							replyTo={link}
-							authors={authors}
+							authors={authors || [meAuthor]}
+							publishDate={new Date(date)}
+							category={category}
 							title={title}
 							content={excerpt}
 							url={`/${singlePath}/${extractFileNameFromPath(
@@ -66,3 +79,16 @@ export default class BookmarkList extends React.Component<
 		);
 	}
 }
+
+export const pageQuery = graphql`
+	query EntryListQuery {
+		site {
+			siteMetadata {
+				siteUrl
+			}
+		}
+		personalJson {
+			name
+		}
+	}
+`;
