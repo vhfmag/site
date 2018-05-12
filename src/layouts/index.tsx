@@ -11,7 +11,7 @@ import "normalize-css/normalize.css";
 import "font-awesome/css/font-awesome.min.css";
 import "prismjs/themes/prism-okaidia.css";
 import "./style.css";
-import { LinkedData } from "../components/LinkedData";
+import { generateLinkedDataTag } from "../components/LinkedData";
 
 const StyledMain = styled.main`
 	--width: auto;
@@ -169,8 +169,8 @@ export default class DefaultLayout extends React.PureComponent<
 							type="text/css"
 						/>
 					`}</noscript>
-					<LinkedData data={personLinkedData} />
-					<LinkedData data={blogLinkedData} />
+					{generateLinkedDataTag(personLinkedData)}
+					{generateLinkedDataTag(blogLinkedData)}
 				</Helmet>
 
 				<Sidebar

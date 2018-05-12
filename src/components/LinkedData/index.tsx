@@ -1,5 +1,5 @@
 import * as React from "react";
 
-export const LinkedData: React.SFC<{ data: object }> = ({ data }) => (
+export const generateLinkedDataTag = (data: object) => (
 	<script type="application/ld+json">{JSON.stringify(data)}</script>
 );
