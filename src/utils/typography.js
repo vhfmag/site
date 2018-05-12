@@ -1,49 +1,40 @@
-// @ts-nocheck
 import Typography from "typography";
-import {
-	textColor,
-	themeColor,
-	backgroundColor,
-} from "../utils/consts";
-import gray from 'gray-percentage';
-import {
-	MOBILE_MEDIA_QUERY
-} from 'typography-breakpoint-constants';
+import { textColor, themeColor, backgroundColor } from "../utils/consts";
+import gray from "gray-percentage";
+import { MOBILE_MEDIA_QUERY } from "typography-breakpoint-constants";
 
 const typography = new Typography({
-	title: 'Grand View',
-	baseFontSize: '16px',
+	title: "Grand View",
+	baseFontSize: "16px",
 	baseLineHeight: 1.6875,
-	googleFonts: [{
-			name: 'Montserrat',
-			styles: ['700'],
+	googleFonts: [
+		{
+			name: "Montserrat",
+			styles: ["700"],
 		},
 		{
-			name: 'Zilla Slab',
-			styles: ['400', '400i', '700'],
+			name: "Zilla Slab",
+			styles: ["400", "400i", "700"],
 		},
 	],
-	headerFontFamily: ['Montserrat', 'sans-serif'],
-	bodyFontFamily: ['Zilla Slab', 'sans-serif'],
+	headerFontFamily: ["Montserrat", "sans-serif"],
+	bodyFontFamily: ["Zilla Slab", "sans-serif"],
 	headerColor: themeColor,
 	bodyColor: textColor,
 	backgroundColor,
 	headerWeight: 700,
 	bodyWeight: 400,
 	boldWeight: 700,
-	overrideStyles: ({
-		adjustFontSizeTo,
-		scale,
-		rhythm
-	}, options) => ({
+	// @ts-ignore
+	overrideStyles: ({ adjustFontSizeTo, scale, rhythm }, options) => ({
 		"a, a:hover, a:visited, a:focus, a:active": {
 			color: options.headerColor,
-			textDecoration: 'none',
+			textDecoration: "none",
 		},
-		'a:hover,a:active': {
-			opacity: 0.75
+		"a:hover,a:active": {
+			opacity: 0.75,
 		},
-		'h1,h2,h3,h4,h5,h6': {
+		"h1,h2,h3,h4,h5,h6": {
 			marginTop: rhythm(2),
 		},
 		em: {
@@ -59,15 +50,15 @@ const typography = new Typography({
 			marginLeft: 0,
 			borderLeft: `${rhythm(3 / 16)} solid ${options.themeColor}`,
 		},
-		'blockquote > :last-child': {
+		"blockquote > :last-child": {
 			marginBottom: 0,
 		},
-		'blockquote cite': {
+		"blockquote cite": {
 			...adjustFontSizeTo(options.baseFontSize),
 			color: options.bodyColor,
 			fontWeight: options.bodyWeight,
 		},
-		'blockquote cite:before': {
+		"blockquote cite:before": {
 			content: '"— "',
 		},
 		[MOBILE_MEDIA_QUERY]: {

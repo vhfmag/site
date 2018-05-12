@@ -45,9 +45,7 @@ export default class SinglePostTemplate extends React.Component<
 					frontmatter: { date, title, description },
 				},
 			},
-			pathContext: {
-				category,
-			}
+			pathContext: { category },
 		} = this.props;
 
 		const linkedData = {
