@@ -1,6 +1,8 @@
 ---
 title: Reality has a surprising amount of detail
-author: "[John Salvatier](http://johnsalvatier.org/blog/)"
+authors:
+    - name: John Salvatier
+      url: http://johnsalvatier.org/blog/
 link: http://johnsalvatier.org/blog/2017/reality-has-a-surprising-amount-of-detail
 ---
 

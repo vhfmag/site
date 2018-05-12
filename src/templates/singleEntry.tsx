@@ -1,6 +1,5 @@
 import * as React from "react";
-import { Article } from "../components/Article";
-import Markdown from "react-markdown";
+import { Entry } from "../components/Entry";
 
 interface IEntryTemplateProps {
 	data: {
@@ -8,7 +7,7 @@ interface IEntryTemplateProps {
 			htmlAst: string;
 			frontmatter: {
 				title: string;
-				author: string;
+				authors: Array<{ name: string; url: string }>;
 				link: string;
 			};
 		};
@@ -27,22 +26,16 @@ export default class SingleEntryTemplate extends React.Component<
 			data: {
 				markdownRemark: {
 					htmlAst,
-					frontmatter: { title, author, link },
+					frontmatter: { title, authors, link },
 				},
 			},
 		} = this.props;
 
 		return (
-			<Article
+			<Entry
 				title={title}
-				info={<Markdown source={`Por ${author}`} />}
-				subtitle={
-					link && (
-						<a rel="external" href={link}>
-							Link para original
-						</a>
-					)
-				}
+				authors={authors}
+				replyTo={link}
 				htmlAst={htmlAst}
 				url="#"
 			/>
@@ -56,7 +49,10 @@ export const pageQuery = graphql`
 			htmlAst
 			frontmatter {
 				title
-				author
+				authors {
+					name
+					url
+				}
 				link
 			}
 		}

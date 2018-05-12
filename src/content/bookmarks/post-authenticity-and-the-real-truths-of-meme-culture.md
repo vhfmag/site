@@ -1,6 +1,8 @@
 ---
 title: "The Age of Post-Authenticity and the Ironic Truths of Meme Culture"
-author: "[Jay Owens](https://medium.com/@hautepop)"
+authors:
+    - name: Jay Owens
+      url: https://medium.com/@hautepop
 link: https://medium.com/s/story/post-authenticity-and-the-real-truths-of-meme-culture-f98b24d645a0
 ---
 

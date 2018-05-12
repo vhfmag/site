@@ -1,6 +1,8 @@
 ---
 title: "Post-work: the radical idea of a world without jobs"
-author: "[Andy Beckett](https://www.theguardian.com/profile/andybeckett) for [The Guardian](https://www.theguardian.com/)"
+authors:
+    - name: Andy Beckett
+      url: https://www.theguardian.com/profile/andybeckett
 link: https://www.theguardian.com/news/2018/jan/19/post-work-the-radical-idea-of-a-world-without-jobs
 ---
 

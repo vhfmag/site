@@ -1,6 +1,16 @@
 ---
 title: "10 PRINT CHR$(205.5+RND(1)); : GOTO 10"
-author: Nick Montfort, Patsy Baudoin, John Bell, Ian Bogost, Jeremy Douglass, Mark C. Marino, Michael Mateas, Casey Reas, Mark Sample, and Noah Vawter
+authors:
+    - name: Nick Montfort
+    - name: Patsy Baudoin
+    - name: John Bell
+    - name: Ian Bogost
+    - name: Jeremy Douglass
+    - name: Mark C. Marino
+    - name: Michael Mateas
+    - name: Casey Reas
+    - name: Mark Sample
+    - name: Noah Vawter
 link: http://10print.org/
 ---
 

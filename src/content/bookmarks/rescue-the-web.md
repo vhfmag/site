@@ -1,6 +1,8 @@
 ---
 title: A plan to rescue the Web from the Internet
-author: "[André Staltz](https://staltz.com/)"
+authors:
+    - name: André Staltz
+      url: https://staltz.com/
 link: https://staltz.com/a-plan-to-rescue-the-web-from-the-internet.html
 ---
 

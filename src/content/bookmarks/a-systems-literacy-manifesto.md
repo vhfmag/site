@@ -1,6 +1,8 @@
 ---
 title: A Systems Literacy Manifesto
-author: "[Hugh Dubberly](http://www.dubberly.com/author/hugh) at the [Dubberly Design Office](http://www.dubberly.com/)"
+authors:
+    - name: Hugh Dubberly
+      url: http://www.dubberly.com/author/hugh
 link: http://www.dubberly.com/articles/a-systems-literacy-manifesto.html
 ---
 

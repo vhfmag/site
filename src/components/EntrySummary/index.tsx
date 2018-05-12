@@ -1,17 +1,12 @@
 import * as React from "react";
 import styled from "styled-components";
-import Link from "gatsby-link";
 import { renderAst } from "../../utils/customComponents";
+import { IEntryHeaderProps, EntryHeader } from "../EntryHeader";
 
-type IEntryItemProps = HTMLOrString & {
-	title: NonNullableNode;
-	info?: NonNullableNode;
-	subtitle?: NonNullableNode;
-	url?: string;
-};
+type IEntrySummaryProps = HTMLOrString & IEntryHeaderProps;
 
 const StyledEntryInfo = styled.div``;
-const StyledEntryItem = styled.article`
+const StyledEntrySummary = styled.article`
 	display: grid;
 	grid-gap: 8pt;
 
@@ -38,24 +33,19 @@ const StyledEntryItem = styled.article`
 	}
 `;
 
-export const EntryItem: React.SFC<IEntryItemProps> = ({
-	info,
-	subtitle,
-	title,
-	url,
+export const EntrySummary: React.SFC<IEntrySummaryProps> = ({
 	htmlAst,
 	content,
+	...headerProps
 }) => {
 	return (
-		<StyledEntryItem>
-			<h2>{url ? <Link to={url}>{title}</Link> : title}</h2>
-			{subtitle && <h3>{subtitle}</h3>}
-			{info && <StyledEntryInfo>{info}</StyledEntryInfo>}
+		<StyledEntrySummary className="h-entry">
+			<EntryHeader {...headerProps} isFullPage={false} />
 			{(htmlAst || content) && (
-				<section>
+				<section className="p-summary">
 					{content ? <p>{content}</p> : renderAst(htmlAst)}
 				</section>
 			)}
-		</StyledEntryItem>
+		</StyledEntrySummary>
 	);
 };

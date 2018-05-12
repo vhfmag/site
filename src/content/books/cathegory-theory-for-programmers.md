@@ -1,6 +1,8 @@
 ---
 title: Category Theory for Programmers
-author: "[Bartosz Milewski](https://bartoszmilewski.com/)"
+authors:
+    - name: Bartosz Milewski
+      url: https://bartoszmilewski.com/
 link: https://github.com/hmemcpy/milewski-ctfp-pdf
 startDate: 2018-03-06
 ---

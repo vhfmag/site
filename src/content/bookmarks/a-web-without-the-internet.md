@@ -1,6 +1,8 @@
 ---
 title: Steps Towards a Web without The Internet
-author: "[Andrew Roach](http://ajroach42.com/)"
+authors:
+    - name: Andrew Roach
+      url: http://ajroach42.com/
 link: http://ajroach42.com/steps-towards-a-web-without-the-internet/
 ---
 

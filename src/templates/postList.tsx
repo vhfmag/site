@@ -1,6 +1,6 @@
 import * as React from "react";
-import { extractFileNameFromPath, formatDate } from "../utils/utils";
-import { EntryItem } from "../components/EntryItem";
+import { extractFileNameFromPath } from "../utils/utils";
+import { EntrySummary } from "../components/EntrySummary";
 import { Paginator } from "../components/Paginator";
 
 interface IPostNode {
@@ -10,6 +10,7 @@ interface IPostNode {
 			title: string;
 			description: string;
 			date: string;
+			authors: IAuthor[];
 		};
 	};
 }
@@ -28,13 +29,14 @@ export default class PostList extends React.Component<IndexPageProps, {}> {
 					({
 						node: {
 							fileAbsolutePath,
-							frontmatter: { date, description, title },
+							frontmatter: { date, description, title, authors },
 						},
 					}) => (
-						<EntryItem
+						<EntrySummary
 							key={fileAbsolutePath}
-							info={formatDate(date)}
+							publishDate={new Date(date)}
 							title={title}
+							authors={authors}
 							content={description}
 							url={`/post/${extractFileNameFromPath(
 								fileAbsolutePath,

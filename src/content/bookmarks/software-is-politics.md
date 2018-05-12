@@ -1,6 +1,8 @@
 ---
 title: Software Is Politics
-author: "[Richard Pope](https://www.fastcodesign.com/user/richard-pope) at [co.design](https://www.fastcodesign.com/)"
+authors:
+    - name: Richard Pope
+      url: https://www.fastcodesign.com/user/richard-pope
 link: https://deardesignstudent.com/?source=logo-6f1894598ca---11cf651abef3
 ---
 

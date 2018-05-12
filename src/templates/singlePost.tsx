@@ -1,6 +1,5 @@
 import * as React from "react";
-import { formatDate } from "../utils/utils";
-import { Article } from "../components/Article";
+import { Entry } from "../components/Entry";
 import { Helmet } from "react-helmet";
 
 interface IPostTemplateProps {
@@ -47,8 +46,6 @@ export default class SinglePostTemplate extends React.Component<
 			},
 		} = this.props;
 
-		const formattedDate = formatDate(date);
-
 		const linkedData = {
 			"@context": "http://schema.org",
 			"@type": "BlogPosting",
@@ -72,10 +69,11 @@ export default class SinglePostTemplate extends React.Component<
 						{JSON.stringify(linkedData)}
 					</script>
 				</Helmet>
-				<Article
+				<Entry
 					title={title}
 					subtitle={description}
-					info={formattedDate}
+					publishDate={new Date(date)}
+					authors={[{ name, url: siteUrl }]}
 					htmlAst={htmlAst}
 					url="#"
 				/>

@@ -1,6 +1,8 @@
 ---
 title: Distraction is the New Censorship
-author: "[Catherice Cusick](https://longreads.com/author/cusickcatherine/) at [LongReads](https://longreads.com/)"
+authors:
+    - name: Catherice Cusick
+      url: https://longreads.com/author/cusickcatherine/
 link: https://longreads.com/2018/01/31/distraction-is-the-new-censorship/
 ---
 

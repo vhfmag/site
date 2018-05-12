@@ -1,6 +1,8 @@
 ---
 title: "Survival of the Mediocre Mediocre"
-author: "[Venkatesh Rao](https://www.ribbonfarm.com/author/admin/) at [Ribbonfarm](https://www.ribbonfarm.com/)"
+authors:
+    - name: Venkatesh Rao
+      url: https://www.ribbonfarm.com/author/admin/
 link: https://www.ribbonfarm.com/2018/04/24/survival-of-the-mediocre-mediocre/
 ---
 

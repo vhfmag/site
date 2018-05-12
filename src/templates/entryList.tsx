@@ -1,6 +1,5 @@
 import * as React from "react";
-import { EntryItem } from "../components/EntryItem";
-import Markdown from "react-markdown";
+import { EntrySummary } from "../components/EntrySummary";
 import Helmet from "react-helmet";
 import { Paginator } from "../components/Paginator";
 import { extractFileNameFromPath } from "../utils/utils";
@@ -11,7 +10,7 @@ interface IEntryNode {
 		excerpt: string;
 		frontmatter: {
 			title: string;
-			author: string;
+			authors: IAuthor[];
 			link: string;
 		};
 	};
@@ -36,15 +35,13 @@ export default class BookmarkList extends React.Component<
 						node: {
 							fileAbsolutePath,
 							excerpt,
-							frontmatter: { title, author, link },
+							frontmatter: { title, authors, link },
 						},
 					}) => (
-						<EntryItem
+						<EntrySummary
 							key={fileAbsolutePath}
-							info={<Markdown source={`Por ${author}`} />}
-							subtitle={
-								link && <a href={link}>Link para original</a>
-							}
+							replyTo={link}
+							authors={authors}
 							title={title}
 							content={excerpt}
 							url={`/${

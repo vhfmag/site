@@ -20,10 +20,11 @@ export interface RootQueryType {
 	allMarkdownRemark?: MarkdownRemarkConnection | null /* Connection to all MarkdownRemark nodes */;
 	allTodoJson?: TodoJsonConnection | null /* Connection to all TodoJson nodes */;
 	allPersonalJson?: PersonalJsonConnection | null /* Connection to all PersonalJson nodes */;
+	allOrganizationJson?: OrganizationJsonConnection | null /* Connection to all OrganizationJson nodes */;
 	allCompetencesJson?: CompetencesJsonConnection | null /* Connection to all CompetencesJson nodes */;
-	allSkillsJson?: SkillsJsonConnection | null /* Connection to all SkillsJson nodes */;
-	allInterestsJson?: InterestsJsonConnection | null /* Connection to all InterestsJson nodes */;
 	allExperiencesJson?: ExperiencesJsonConnection | null /* Connection to all ExperiencesJson nodes */;
+	allInterestsJson?: InterestsJsonConnection | null /* Connection to all InterestsJson nodes */;
+	allSkillsJson?: SkillsJsonConnection | null /* Connection to all SkillsJson nodes */;
 	sitePage?: SitePage | null;
 	sitePlugin?: SitePlugin | null;
 	site?: Site | null;
@@ -32,10 +33,11 @@ export interface RootQueryType {
 	markdownRemark?: MarkdownRemark | null;
 	todoJson?: TodoJson | null;
 	personalJson?: PersonalJson | null;
+	organizationJson?: OrganizationJson | null;
 	competencesJson?: CompetencesJson | null;
-	skillsJson?: SkillsJson | null;
-	interestsJson?: InterestsJson | null;
 	experiencesJson?: ExperiencesJson | null;
+	interestsJson?: InterestsJson | null;
+	skillsJson?: SkillsJson | null;
 }
 /* A connection to a list of items. */
 export interface SitePageConnection {
@@ -70,7 +72,7 @@ export interface SitePage extends Node {
 	pluginCreator?: SitePlugin | null;
 	pluginCreatorId?: string | null;
 	componentPath?: string | null;
-	internal?: internal_13 | null;
+	internal?: internal_14 | null;
 }
 
 export interface context {
@@ -97,10 +99,15 @@ export interface node {
 
 export interface frontmatter_2 {
 	date?: Date | null;
-	author?: string | null;
+	authors?: authors_2[] | null;
 	link?: string | null;
 	title?: string | null;
 	description?: string | null;
+}
+
+export interface authors_2 {
+	name?: string | null;
+	url?: string | null;
 }
 
 export interface additionalContext {
@@ -120,7 +127,7 @@ export interface SitePlugin extends Node {
 	ssrAPIs?: string[] | null;
 	pluginFilepath?: string | null;
 	packageJson?: packageJson_2 | null;
-	internal?: internal_14 | null;
+	internal?: internal_15 | null;
 }
 
 export interface pluginOptions_3 {
@@ -139,7 +146,14 @@ export interface pluginOptions_3 {
 	background_color?: string | null;
 	theme_color?: string | null;
 	display?: string | null;
+	icon?: string | null;
 	pathToConfigModule?: string | null;
+	omitGoogleFont?: boolean | null;
+	query?: string | null;
+	feeds?: feeds_2[] | null;
+	logo?: string | null;
+	injectHTML?: boolean | null;
+	icons?: icons_2 | null;
 }
 
 export interface plugins_2 {
@@ -159,6 +173,23 @@ export interface pluginOptions_4 {
 	showCaptions?: boolean | null;
 	pathPrefix?: string | null;
 	inlineCodeMarker?: string | null;
+}
+
+export interface feeds_2 {
+	query?: string | null;
+	output?: string | null;
+}
+
+export interface icons_2 {
+	android?: boolean | null;
+	appleIcon?: boolean | null;
+	appleStartup?: boolean | null;
+	coast?: boolean | null;
+	favicons?: boolean | null;
+	firefox?: boolean | null;
+	twitter?: boolean | null;
+	yandex?: boolean | null;
+	windows?: boolean | null;
 }
 
 export interface packageJson_2 {
@@ -189,13 +220,13 @@ export interface peerDependencies_2 {
 	version?: string | null;
 }
 
-export interface internal_14 {
+export interface internal_15 {
 	contentDigest?: string | null;
 	type?: string | null;
 	owner?: string | null;
 }
 
-export interface internal_13 {
+export interface internal_14 {
 	type?: string | null;
 	contentDigest?: string | null;
 	description?: string | null;
@@ -262,7 +293,7 @@ export interface Directory extends Node {
 	id: string /* The id of this node. */;
 	parent?: Node | null /* The parent of this node. */;
 	children?: Node[] | null /* The children of this node. */;
-	internal?: internal_15 | null;
+	internal?: internal_16 | null;
 	sourceInstanceName?: string | null;
 	absolutePath?: string | null;
 	relativePath?: string | null;
@@ -298,7 +329,7 @@ export interface Directory extends Node {
 	birthtime?: Date | null;
 }
 
-export interface internal_15 {
+export interface internal_16 {
 	contentDigest?: string | null;
 	type?: string | null;
 	description?: string | null;
@@ -341,14 +372,15 @@ export interface File extends Node {
 	childrenTodoJson?:
 		| TodoJson[]
 		| null /* The children of this node of type todoJson */;
+	childOrganizationJson?: OrganizationJson | null /* The child of this node of type organizationJson */;
 	childPersonalJson?: PersonalJson | null /* The child of this node of type personalJson */;
 	childrenCompetencesJson?:
 		| CompetencesJson[]
 		| null /* The children of this node of type competencesJson */;
-	childSkillsJson?: SkillsJson | null /* The child of this node of type skillsJson */;
-	childInterestsJson?: InterestsJson | null /* The child of this node of type interestsJson */;
 	childExperiencesJson?: ExperiencesJson | null /* The child of this node of type experiencesJson */;
-	internal?: internal_16 | null;
+	childInterestsJson?: InterestsJson | null /* The child of this node of type interestsJson */;
+	childSkillsJson?: SkillsJson | null /* The child of this node of type skillsJson */;
+	internal?: internal_17 | null;
 	sourceInstanceName?: string | null;
 	absolutePath?: string | null;
 	relativePath?: string | null;
@@ -391,7 +423,7 @@ export interface MarkdownRemark extends Node {
 	id: string /* The id of this node. */;
 	parent?: Node | null /* The parent of this node. */;
 	children?: Node[] | null /* The children of this node. */;
-	internal?: internal_17 | null;
+	internal?: internal_18 | null;
 	frontmatter?: frontmatter_3 | null;
 	excerpt?: string | null;
 	fileAbsolutePath?: string | null;
@@ -403,7 +435,7 @@ export interface MarkdownRemark extends Node {
 	wordCount?: wordCount | null;
 }
 
-export interface internal_17 {
+export interface internal_18 {
 	content?: string | null;
 	type?: string | null;
 	contentDigest?: string | null;
@@ -412,7 +444,7 @@ export interface internal_17 {
 
 export interface frontmatter_3 {
 	title?: string | null;
-	author?: string | null;
+	authors?: authors_3[] | null;
 	link?: string | null;
 	_PARENT?: string | null;
 	parent?: string | null;
@@ -421,6 +453,11 @@ export interface frontmatter_3 {
 	date?: Date | null;
 	type?: string | null;
 	draft?: boolean | null;
+}
+
+export interface authors_3 {
+	name?: string | null;
+	url?: string | null;
 }
 
 export interface MarkdownHeading {
@@ -440,22 +477,51 @@ export interface TodoJson extends Node {
 	children?: Node[] | null /* The children of this node. */;
 	title?: string | null;
 	tags?: string[] | null;
-	internal?: internal_18 | null;
+	internal?: internal_19 | null;
 }
 
-export interface internal_18 {
+export interface internal_19 {
 	contentDigest?: string | null;
 	type?: string | null;
 	owner?: string | null;
+}
+/* Node of type OrganizationJson */
+export interface OrganizationJson extends Node {
+	id: string /* The id of this node. */;
+	parent?: Node | null /* The parent of this node. */;
+	children?: Node[] | null /* The children of this node. */;
+	name?: string | null;
+	url?: string | null;
+	logo?: string | null;
+	telephone?: string | null;
+	internal?: internal_20 | null;
+	fields?: fields_3 | null;
+}
+
+export interface internal_20 {
+	contentDigest?: string | null;
+	type?: string | null;
+	owner?: string | null;
+	fieldOwners?: fieldOwners_3 | null;
+}
+
+export interface fieldOwners_3 {
+	logo_image?: string | null;
+}
+
+export interface fields_3 {
+	logo_image?: string | null;
 }
 /* Node of type PersonalJson */
 export interface PersonalJson extends Node {
 	id: string /* The id of this node. */;
 	parent?: Node | null /* The parent of this node. */;
 	children?: Node[] | null /* The children of this node. */;
+	name?: string | null;
 	email?: string | null;
+	jobTitle?: string | null;
 	social?: social_2[] | null;
-	internal?: internal_19 | null;
+	internal?: internal_21 | null;
 }
 
 export interface social_2 {
@@ -464,7 +530,7 @@ export interface social_2 {
 	url?: string | null;
 }
 
-export interface internal_19 {
+export interface internal_21 {
 	contentDigest?: string | null;
 	type?: string | null;
 	owner?: string | null;
@@ -476,10 +542,62 @@ export interface CompetencesJson extends Node {
 	children?: Node[] | null /* The children of this node. */;
 	name?: string | null;
 	description?: string | null;
-	internal?: internal_20 | null;
+	internal?: internal_22 | null;
 }
 
-export interface internal_20 {
+export interface internal_22 {
+	contentDigest?: string | null;
+	type?: string | null;
+	owner?: string | null;
+}
+/* Node of type ExperiencesJson */
+export interface ExperiencesJson extends Node {
+	id: string /* The id of this node. */;
+	parent?: Node | null /* The parent of this node. */;
+	children?: Node[] | null /* The children of this node. */;
+	work?: work_2[] | null;
+	internal?: internal_23 | null;
+	fields?: fields_4 | null;
+}
+
+export interface work_2 {
+	company?: string | null;
+	link?: string | null;
+	image?: string | null;
+	period?: string | null;
+	role?: string | null;
+	tasks?: string[] | null;
+}
+
+export interface internal_23 {
+	contentDigest?: string | null;
+	type?: string | null;
+	owner?: string | null;
+	fieldOwners?: fieldOwners_4 | null;
+}
+
+export interface fieldOwners_4 {
+	image_image?: string | null;
+}
+
+export interface fields_4 {
+	image_image?: string[] | null;
+}
+/* Node of type InterestsJson */
+export interface InterestsJson extends Node {
+	id: string /* The id of this node. */;
+	parent?: Node | null /* The parent of this node. */;
+	children?: Node[] | null /* The children of this node. */;
+	subjects?: subjects_2[] | null;
+	internal?: internal_24 | null;
+}
+
+export interface subjects_2 {
+	name?: string | null;
+	intensity?: number | null;
+}
+
+export interface internal_24 {
 	contentDigest?: string | null;
 	type?: string | null;
 	owner?: string | null;
@@ -492,7 +610,7 @@ export interface SkillsJson extends Node {
 	languages?: languages_2[] | null;
 	technical?: technical_2[] | null;
 	soft?: soft_2[] | null;
-	internal?: internal_21 | null;
+	internal?: internal_25 | null;
 }
 
 export interface languages_2 {
@@ -510,55 +628,13 @@ export interface soft_2 {
 	intensity?: number | null;
 }
 
-export interface internal_21 {
-	contentDigest?: string | null;
-	type?: string | null;
-	owner?: string | null;
-}
-/* Node of type InterestsJson */
-export interface InterestsJson extends Node {
-	id: string /* The id of this node. */;
-	parent?: Node | null /* The parent of this node. */;
-	children?: Node[] | null /* The children of this node. */;
-	subjects?: subjects_2[] | null;
-	internal?: internal_22 | null;
-}
-
-export interface subjects_2 {
-	name?: string | null;
-	intensity?: number | null;
-}
-
-export interface internal_22 {
-	contentDigest?: string | null;
-	type?: string | null;
-	owner?: string | null;
-}
-/* Node of type ExperiencesJson */
-export interface ExperiencesJson extends Node {
-	id: string /* The id of this node. */;
-	parent?: Node | null /* The parent of this node. */;
-	children?: Node[] | null /* The children of this node. */;
-	work?: work_2[] | null;
-	internal?: internal_23 | null;
-}
-
-export interface work_2 {
-	company?: string | null;
-	link?: string | null;
-	image?: string | null;
-	period?: string | null;
-	role?: string | null;
-	tasks?: string[] | null;
-}
-
-export interface internal_23 {
+export interface internal_25 {
 	contentDigest?: string | null;
 	type?: string | null;
 	owner?: string | null;
 }
 
-export interface internal_16 {
+export interface internal_17 {
 	contentDigest?: string | null;
 	mediaType?: string | null;
 	type?: string | null;
@@ -664,6 +740,34 @@ export interface personalJsonGroupConnectionEdge {
 	previous?: PersonalJson | null /* The previous edge in the connection */;
 }
 /* A connection to a list of items. */
+export interface OrganizationJsonConnection {
+	pageInfo: PageInfo /* Information to aid in pagination. */;
+	edges?: OrganizationJsonEdge[] | null /* A list of edges. */;
+	totalCount?: number | null;
+	distinct?: string[] | null;
+	group?: organizationJsonGroupConnectionConnection[] | null;
+}
+/* An edge in a connection. */
+export interface OrganizationJsonEdge {
+	node?: OrganizationJson | null /* The item at the end of the edge */;
+	next?: OrganizationJson | null /* The next edge in the connection */;
+	previous?: OrganizationJson | null /* The previous edge in the connection */;
+}
+/* A connection to a list of items. */
+export interface organizationJsonGroupConnectionConnection {
+	pageInfo: PageInfo /* Information to aid in pagination. */;
+	edges?: organizationJsonGroupConnectionEdge[] | null /* A list of edges. */;
+	field?: string | null;
+	fieldValue?: string | null;
+	totalCount?: number | null;
+}
+/* An edge in a connection. */
+export interface organizationJsonGroupConnectionEdge {
+	node?: OrganizationJson | null /* The item at the end of the edge */;
+	next?: OrganizationJson | null /* The next edge in the connection */;
+	previous?: OrganizationJson | null /* The previous edge in the connection */;
+}
+/* A connection to a list of items. */
 export interface CompetencesJsonConnection {
 	pageInfo: PageInfo /* Information to aid in pagination. */;
 	edges?: CompetencesJsonEdge[] | null /* A list of edges. */;
@@ -692,32 +796,32 @@ export interface competencesJsonGroupConnectionEdge {
 	previous?: CompetencesJson | null /* The previous edge in the connection */;
 }
 /* A connection to a list of items. */
-export interface SkillsJsonConnection {
+export interface ExperiencesJsonConnection {
 	pageInfo: PageInfo /* Information to aid in pagination. */;
-	edges?: SkillsJsonEdge[] | null /* A list of edges. */;
+	edges?: ExperiencesJsonEdge[] | null /* A list of edges. */;
 	totalCount?: number | null;
 	distinct?: string[] | null;
-	group?: skillsJsonGroupConnectionConnection[] | null;
+	group?: experiencesJsonGroupConnectionConnection[] | null;
 }
 /* An edge in a connection. */
-export interface SkillsJsonEdge {
-	node?: SkillsJson | null /* The item at the end of the edge */;
-	next?: SkillsJson | null /* The next edge in the connection */;
-	previous?: SkillsJson | null /* The previous edge in the connection */;
+export interface ExperiencesJsonEdge {
+	node?: ExperiencesJson | null /* The item at the end of the edge */;
+	next?: ExperiencesJson | null /* The next edge in the connection */;
+	previous?: ExperiencesJson | null /* The previous edge in the connection */;
 }
 /* A connection to a list of items. */
-export interface skillsJsonGroupConnectionConnection {
+export interface experiencesJsonGroupConnectionConnection {
 	pageInfo: PageInfo /* Information to aid in pagination. */;
-	edges?: skillsJsonGroupConnectionEdge[] | null /* A list of edges. */;
+	edges?: experiencesJsonGroupConnectionEdge[] | null /* A list of edges. */;
 	field?: string | null;
 	fieldValue?: string | null;
 	totalCount?: number | null;
 }
 /* An edge in a connection. */
-export interface skillsJsonGroupConnectionEdge {
-	node?: SkillsJson | null /* The item at the end of the edge */;
-	next?: SkillsJson | null /* The next edge in the connection */;
-	previous?: SkillsJson | null /* The previous edge in the connection */;
+export interface experiencesJsonGroupConnectionEdge {
+	node?: ExperiencesJson | null /* The item at the end of the edge */;
+	next?: ExperiencesJson | null /* The next edge in the connection */;
+	previous?: ExperiencesJson | null /* The previous edge in the connection */;
 }
 /* A connection to a list of items. */
 export interface InterestsJsonConnection {
@@ -748,32 +852,32 @@ export interface interestsJsonGroupConnectionEdge {
 	previous?: InterestsJson | null /* The previous edge in the connection */;
 }
 /* A connection to a list of items. */
-export interface ExperiencesJsonConnection {
+export interface SkillsJsonConnection {
 	pageInfo: PageInfo /* Information to aid in pagination. */;
-	edges?: ExperiencesJsonEdge[] | null /* A list of edges. */;
+	edges?: SkillsJsonEdge[] | null /* A list of edges. */;
 	totalCount?: number | null;
 	distinct?: string[] | null;
-	group?: experiencesJsonGroupConnectionConnection[] | null;
+	group?: skillsJsonGroupConnectionConnection[] | null;
 }
 /* An edge in a connection. */
-export interface ExperiencesJsonEdge {
-	node?: ExperiencesJson | null /* The item at the end of the edge */;
-	next?: ExperiencesJson | null /* The next edge in the connection */;
-	previous?: ExperiencesJson | null /* The previous edge in the connection */;
+export interface SkillsJsonEdge {
+	node?: SkillsJson | null /* The item at the end of the edge */;
+	next?: SkillsJson | null /* The next edge in the connection */;
+	previous?: SkillsJson | null /* The previous edge in the connection */;
 }
 /* A connection to a list of items. */
-export interface experiencesJsonGroupConnectionConnection {
+export interface skillsJsonGroupConnectionConnection {
 	pageInfo: PageInfo /* Information to aid in pagination. */;
-	edges?: experiencesJsonGroupConnectionEdge[] | null /* A list of edges. */;
+	edges?: skillsJsonGroupConnectionEdge[] | null /* A list of edges. */;
 	field?: string | null;
 	fieldValue?: string | null;
 	totalCount?: number | null;
 }
 /* An edge in a connection. */
-export interface experiencesJsonGroupConnectionEdge {
-	node?: ExperiencesJson | null /* The item at the end of the edge */;
-	next?: ExperiencesJson | null /* The next edge in the connection */;
-	previous?: ExperiencesJson | null /* The previous edge in the connection */;
+export interface skillsJsonGroupConnectionEdge {
+	node?: SkillsJson | null /* The item at the end of the edge */;
+	next?: SkillsJson | null /* The next edge in the connection */;
+	previous?: SkillsJson | null /* The previous edge in the connection */;
 }
 /* Node of type Site */
 export interface Site extends Node {
@@ -786,7 +890,7 @@ export interface Site extends Node {
 	pathPrefix?: string | null;
 	polyfill?: boolean | null;
 	buildTime?: Date | null;
-	internal?: internal_24 | null;
+	internal?: internal_26 | null;
 }
 
 export interface siteMetadata_2 {
@@ -795,7 +899,7 @@ export interface siteMetadata_2 {
 	description?: string | null;
 }
 
-export interface internal_24 {
+export interface internal_26 {
 	contentDigest?: string | null;
 	type?: string | null;
 	owner?: string | null;
@@ -905,7 +1009,7 @@ export interface sitePageConnectionContextGroupNodeFileAbsolutePathQueryString {
 
 export interface sitePageConnectionContextGroupNodeFrontmatterInputObject {
 	date?: sitePageConnectionContextGroupNodeFrontmatterDateQueryString | null;
-	author?: sitePageConnectionContextGroupNodeFrontmatterAuthorQueryString | null;
+	authors?: sitePageConnectionContextGroupNodeFrontmatterAuthorsQueryList | null;
 	link?: sitePageConnectionContextGroupNodeFrontmatterLinkQueryString | null;
 	title?: sitePageConnectionContextGroupNodeFrontmatterTitleQueryString | null;
 	description?: sitePageConnectionContextGroupNodeFrontmatterDescriptionQueryString | null;
@@ -918,7 +1022,25 @@ export interface sitePageConnectionContextGroupNodeFrontmatterDateQueryString {
 	glob?: string | null;
 }
 
-export interface sitePageConnectionContextGroupNodeFrontmatterAuthorQueryString {
+export interface sitePageConnectionContextGroupNodeFrontmatterAuthorsQueryList {
+	in?:
+		| sitePageConnectionContextGroupNodeFrontmatterAuthorsInputObject[]
+		| null;
+}
+
+export interface sitePageConnectionContextGroupNodeFrontmatterAuthorsInputObject {
+	name?: sitePageConnectionContextGroupNodeFrontmatterAuthorsNameQueryString | null;
+	url?: sitePageConnectionContextGroupNodeFrontmatterAuthorsUrlQueryString | null;
+}
+
+export interface sitePageConnectionContextGroupNodeFrontmatterAuthorsNameQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface sitePageConnectionContextGroupNodeFrontmatterAuthorsUrlQueryString {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
@@ -1057,7 +1179,14 @@ export interface sitePageConnectionPluginCreatorPluginOptionsInputObject {
 	background_color?: sitePageConnectionPluginCreatorPluginOptionsBackgroundColorQueryString_2 | null;
 	theme_color?: sitePageConnectionPluginCreatorPluginOptionsThemeColorQueryString | null;
 	display?: sitePageConnectionPluginCreatorPluginOptionsDisplayQueryString | null;
+	icon?: sitePageConnectionPluginCreatorPluginOptionsIconQueryString | null;
 	pathToConfigModule?: sitePageConnectionPluginCreatorPluginOptionsPathToConfigModuleQueryString | null;
+	omitGoogleFont?: sitePageConnectionPluginCreatorPluginOptionsOmitGoogleFontQueryBoolean | null;
+	query?: sitePageConnectionPluginCreatorPluginOptionsQueryQueryString | null;
+	feeds?: sitePageConnectionPluginCreatorPluginOptionsFeedsQueryList | null;
+	logo?: sitePageConnectionPluginCreatorPluginOptionsLogoQueryString | null;
+	injectHTML?: sitePageConnectionPluginCreatorPluginOptionsInjectHtmlQueryBoolean | null;
+	icons?: sitePageConnectionPluginCreatorPluginOptionsIconsInputObject | null;
 }
 
 export interface sitePageConnectionPluginCreatorPluginOptionsPluginsQueryList {
@@ -1255,11 +1384,122 @@ export interface sitePageConnectionPluginCreatorPluginOptionsDisplayQueryString 
 	glob?: string | null;
 }
 
+export interface sitePageConnectionPluginCreatorPluginOptionsIconQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
 export interface sitePageConnectionPluginCreatorPluginOptionsPathToConfigModuleQueryString {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
+}
+
+export interface sitePageConnectionPluginCreatorPluginOptionsOmitGoogleFontQueryBoolean {
+	eq?: boolean | null;
+	ne?: boolean | null;
+}
+
+export interface sitePageConnectionPluginCreatorPluginOptionsQueryQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface sitePageConnectionPluginCreatorPluginOptionsFeedsQueryList {
+	in?: sitePageConnectionPluginCreatorPluginOptionsFeedsInputObject[] | null;
+}
+
+export interface sitePageConnectionPluginCreatorPluginOptionsFeedsInputObject {
+	query?: sitePageConnectionPluginCreatorPluginOptionsFeedsQueryQueryString | null;
+	output?: sitePageConnectionPluginCreatorPluginOptionsFeedsOutputQueryString | null;
+}
+
+export interface sitePageConnectionPluginCreatorPluginOptionsFeedsQueryQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface sitePageConnectionPluginCreatorPluginOptionsFeedsOutputQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface sitePageConnectionPluginCreatorPluginOptionsLogoQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface sitePageConnectionPluginCreatorPluginOptionsInjectHtmlQueryBoolean {
+	eq?: boolean | null;
+	ne?: boolean | null;
+}
+
+export interface sitePageConnectionPluginCreatorPluginOptionsIconsInputObject {
+	android?: sitePageConnectionPluginCreatorPluginOptionsIconsAndroidQueryBoolean | null;
+	appleIcon?: sitePageConnectionPluginCreatorPluginOptionsIconsAppleIconQueryBoolean | null;
+	appleStartup?: sitePageConnectionPluginCreatorPluginOptionsIconsAppleStartupQueryBoolean | null;
+	coast?: sitePageConnectionPluginCreatorPluginOptionsIconsCoastQueryBoolean | null;
+	favicons?: sitePageConnectionPluginCreatorPluginOptionsIconsFaviconsQueryBoolean | null;
+	firefox?: sitePageConnectionPluginCreatorPluginOptionsIconsFirefoxQueryBoolean | null;
+	twitter?: sitePageConnectionPluginCreatorPluginOptionsIconsTwitterQueryBoolean | null;
+	yandex?: sitePageConnectionPluginCreatorPluginOptionsIconsYandexQueryBoolean | null;
+	windows?: sitePageConnectionPluginCreatorPluginOptionsIconsWindowsQueryBoolean | null;
+}
+
+export interface sitePageConnectionPluginCreatorPluginOptionsIconsAndroidQueryBoolean {
+	eq?: boolean | null;
+	ne?: boolean | null;
+}
+
+export interface sitePageConnectionPluginCreatorPluginOptionsIconsAppleIconQueryBoolean {
+	eq?: boolean | null;
+	ne?: boolean | null;
+}
+
+export interface sitePageConnectionPluginCreatorPluginOptionsIconsAppleStartupQueryBoolean {
+	eq?: boolean | null;
+	ne?: boolean | null;
+}
+
+export interface sitePageConnectionPluginCreatorPluginOptionsIconsCoastQueryBoolean {
+	eq?: boolean | null;
+	ne?: boolean | null;
+}
+
+export interface sitePageConnectionPluginCreatorPluginOptionsIconsFaviconsQueryBoolean {
+	eq?: boolean | null;
+	ne?: boolean | null;
+}
+
+export interface sitePageConnectionPluginCreatorPluginOptionsIconsFirefoxQueryBoolean {
+	eq?: boolean | null;
+	ne?: boolean | null;
+}
+
+export interface sitePageConnectionPluginCreatorPluginOptionsIconsTwitterQueryBoolean {
+	eq?: boolean | null;
+	ne?: boolean | null;
+}
+
+export interface sitePageConnectionPluginCreatorPluginOptionsIconsYandexQueryBoolean {
+	eq?: boolean | null;
+	ne?: boolean | null;
+}
+
+export interface sitePageConnectionPluginCreatorPluginOptionsIconsWindowsQueryBoolean {
+	eq?: boolean | null;
+	ne?: boolean | null;
 }
 
 export interface sitePageConnectionPluginCreatorNodeApIsQueryList {
@@ -1573,18 +1813,25 @@ export interface sitePluginConnectionPluginOptionsInputObject_2 {
 	name?: sitePluginConnectionPluginOptionsNameQueryString_2 | null;
 	path?: sitePluginConnectionPluginOptionsPathQueryString_2 | null;
 	maxWidth?: sitePluginConnectionPluginOptionsMaxWidthQueryInteger_2 | null;
-	wrapperStyle?: sitePluginConnectionPluginOptionsWrapperStyleQueryString_2 | null;
-	backgroundColor?: sitePluginConnectionPluginOptionsBackgroundColorQueryString_3 | null;
-	linkImagesToOriginal?: sitePluginConnectionPluginOptionsLinkImagesToOriginalQueryBoolean_2 | null;
-	showCaptions?: sitePluginConnectionPluginOptionsShowCaptionsQueryBoolean_2 | null;
-	pathPrefix?: sitePluginConnectionPluginOptionsPathPrefixQueryString_2 | null;
+	wrapperStyle?: sitePluginConnectionPluginOptionsWrapperStyleQueryString | null;
+	backgroundColor?: sitePluginConnectionPluginOptionsBackgroundColorQueryString_2 | null;
+	linkImagesToOriginal?: sitePluginConnectionPluginOptionsLinkImagesToOriginalQueryBoolean | null;
+	showCaptions?: sitePluginConnectionPluginOptionsShowCaptionsQueryBoolean | null;
+	pathPrefix?: sitePluginConnectionPluginOptionsPathPrefixQueryString | null;
 	inlineCodeMarker?: sitePluginConnectionPluginOptionsInlineCodeMarkerQueryString_2 | null;
 	short_name?: sitePluginConnectionPluginOptionsShortNameQueryString_2 | null;
 	start_url?: sitePluginConnectionPluginOptionsStartUrlQueryString_2 | null;
-	background_color?: sitePluginConnectionPluginOptionsBackgroundColorQueryString_4 | null;
+	background_color?: sitePluginConnectionPluginOptionsBackgroundColorQueryString_3 | null;
 	theme_color?: sitePluginConnectionPluginOptionsThemeColorQueryString_2 | null;
 	display?: sitePluginConnectionPluginOptionsDisplayQueryString_2 | null;
+	icon?: sitePluginConnectionPluginOptionsIconQueryString_2 | null;
 	pathToConfigModule?: sitePluginConnectionPluginOptionsPathToConfigModuleQueryString_2 | null;
+	omitGoogleFont?: sitePluginConnectionPluginOptionsOmitGoogleFontQueryBoolean_2 | null;
+	query?: sitePluginConnectionPluginOptionsQueryQueryString_2 | null;
+	feeds?: sitePluginConnectionPluginOptionsFeedsQueryList_2 | null;
+	logo?: sitePluginConnectionPluginOptionsLogoQueryString_2 | null;
+	injectHTML?: sitePluginConnectionPluginOptionsInjectHtmlQueryBoolean_2 | null;
+	icons?: sitePluginConnectionPluginOptionsIconsInputObject_2 | null;
 }
 
 export interface sitePluginConnectionPluginOptionsPluginsQueryList_2 {
@@ -1630,11 +1877,11 @@ export interface sitePluginConnectionPluginOptionsPluginsVersionQueryString_2 {
 
 export interface sitePluginConnectionPluginOptionsPluginsPluginOptionsInputObject_2 {
 	maxWidth?: sitePluginConnectionPluginOptionsPluginsPluginOptionsMaxWidthQueryInteger_2 | null;
-	wrapperStyle?: sitePluginConnectionPluginOptionsPluginsPluginOptionsWrapperStyleQueryString_2 | null;
-	backgroundColor?: sitePluginConnectionPluginOptionsPluginsPluginOptionsBackgroundColorQueryString_2 | null;
-	linkImagesToOriginal?: sitePluginConnectionPluginOptionsPluginsPluginOptionsLinkImagesToOriginalQueryBoolean_2 | null;
-	showCaptions?: sitePluginConnectionPluginOptionsPluginsPluginOptionsShowCaptionsQueryBoolean_2 | null;
-	pathPrefix?: sitePluginConnectionPluginOptionsPluginsPluginOptionsPathPrefixQueryString_2 | null;
+	wrapperStyle?: sitePluginConnectionPluginOptionsPluginsPluginOptionsWrapperStyleQueryString | null;
+	backgroundColor?: sitePluginConnectionPluginOptionsPluginsPluginOptionsBackgroundColorQueryString | null;
+	linkImagesToOriginal?: sitePluginConnectionPluginOptionsPluginsPluginOptionsLinkImagesToOriginalQueryBoolean | null;
+	showCaptions?: sitePluginConnectionPluginOptionsPluginsPluginOptionsShowCaptionsQueryBoolean | null;
+	pathPrefix?: sitePluginConnectionPluginOptionsPluginsPluginOptionsPathPrefixQueryString | null;
 	inlineCodeMarker?: sitePluginConnectionPluginOptionsPluginsPluginOptionsInlineCodeMarkerQueryString_2 | null;
 }
 
@@ -1643,31 +1890,31 @@ export interface sitePluginConnectionPluginOptionsPluginsPluginOptionsMaxWidthQu
 	ne?: number | null;
 }
 
-export interface sitePluginConnectionPluginOptionsPluginsPluginOptionsWrapperStyleQueryString_2 {
+export interface sitePluginConnectionPluginOptionsPluginsPluginOptionsWrapperStyleQueryString {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 }
 
-export interface sitePluginConnectionPluginOptionsPluginsPluginOptionsBackgroundColorQueryString_2 {
+export interface sitePluginConnectionPluginOptionsPluginsPluginOptionsBackgroundColorQueryString {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 }
 
-export interface sitePluginConnectionPluginOptionsPluginsPluginOptionsLinkImagesToOriginalQueryBoolean_2 {
+export interface sitePluginConnectionPluginOptionsPluginsPluginOptionsLinkImagesToOriginalQueryBoolean {
 	eq?: boolean | null;
 	ne?: boolean | null;
 }
 
-export interface sitePluginConnectionPluginOptionsPluginsPluginOptionsShowCaptionsQueryBoolean_2 {
+export interface sitePluginConnectionPluginOptionsPluginsPluginOptionsShowCaptionsQueryBoolean {
 	eq?: boolean | null;
 	ne?: boolean | null;
 }
 
-export interface sitePluginConnectionPluginOptionsPluginsPluginOptionsPathPrefixQueryString_2 {
+export interface sitePluginConnectionPluginOptionsPluginsPluginOptionsPathPrefixQueryString {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
@@ -1707,31 +1954,31 @@ export interface sitePluginConnectionPluginOptionsMaxWidthQueryInteger_2 {
 	ne?: number | null;
 }
 
-export interface sitePluginConnectionPluginOptionsWrapperStyleQueryString_2 {
+export interface sitePluginConnectionPluginOptionsWrapperStyleQueryString {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 }
 
-export interface sitePluginConnectionPluginOptionsBackgroundColorQueryString_3 {
+export interface sitePluginConnectionPluginOptionsBackgroundColorQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 }
 
-export interface sitePluginConnectionPluginOptionsLinkImagesToOriginalQueryBoolean_2 {
+export interface sitePluginConnectionPluginOptionsLinkImagesToOriginalQueryBoolean {
 	eq?: boolean | null;
 	ne?: boolean | null;
 }
 
-export interface sitePluginConnectionPluginOptionsShowCaptionsQueryBoolean_2 {
+export interface sitePluginConnectionPluginOptionsShowCaptionsQueryBoolean {
 	eq?: boolean | null;
 	ne?: boolean | null;
 }
 
-export interface sitePluginConnectionPluginOptionsPathPrefixQueryString_2 {
+export interface sitePluginConnectionPluginOptionsPathPrefixQueryString {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
@@ -1759,7 +2006,7 @@ export interface sitePluginConnectionPluginOptionsStartUrlQueryString_2 {
 	glob?: string | null;
 }
 
-export interface sitePluginConnectionPluginOptionsBackgroundColorQueryString_4 {
+export interface sitePluginConnectionPluginOptionsBackgroundColorQueryString_3 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
@@ -1780,11 +2027,122 @@ export interface sitePluginConnectionPluginOptionsDisplayQueryString_2 {
 	glob?: string | null;
 }
 
+export interface sitePluginConnectionPluginOptionsIconQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
 export interface sitePluginConnectionPluginOptionsPathToConfigModuleQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
+}
+
+export interface sitePluginConnectionPluginOptionsOmitGoogleFontQueryBoolean_2 {
+	eq?: boolean | null;
+	ne?: boolean | null;
+}
+
+export interface sitePluginConnectionPluginOptionsQueryQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface sitePluginConnectionPluginOptionsFeedsQueryList_2 {
+	in?: sitePluginConnectionPluginOptionsFeedsInputObject_2[] | null;
+}
+
+export interface sitePluginConnectionPluginOptionsFeedsInputObject_2 {
+	query?: sitePluginConnectionPluginOptionsFeedsQueryQueryString_2 | null;
+	output?: sitePluginConnectionPluginOptionsFeedsOutputQueryString_2 | null;
+}
+
+export interface sitePluginConnectionPluginOptionsFeedsQueryQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface sitePluginConnectionPluginOptionsFeedsOutputQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface sitePluginConnectionPluginOptionsLogoQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface sitePluginConnectionPluginOptionsInjectHtmlQueryBoolean_2 {
+	eq?: boolean | null;
+	ne?: boolean | null;
+}
+
+export interface sitePluginConnectionPluginOptionsIconsInputObject_2 {
+	android?: sitePluginConnectionPluginOptionsIconsAndroidQueryBoolean_2 | null;
+	appleIcon?: sitePluginConnectionPluginOptionsIconsAppleIconQueryBoolean_2 | null;
+	appleStartup?: sitePluginConnectionPluginOptionsIconsAppleStartupQueryBoolean_2 | null;
+	coast?: sitePluginConnectionPluginOptionsIconsCoastQueryBoolean_2 | null;
+	favicons?: sitePluginConnectionPluginOptionsIconsFaviconsQueryBoolean_2 | null;
+	firefox?: sitePluginConnectionPluginOptionsIconsFirefoxQueryBoolean_2 | null;
+	twitter?: sitePluginConnectionPluginOptionsIconsTwitterQueryBoolean_2 | null;
+	yandex?: sitePluginConnectionPluginOptionsIconsYandexQueryBoolean_2 | null;
+	windows?: sitePluginConnectionPluginOptionsIconsWindowsQueryBoolean_2 | null;
+}
+
+export interface sitePluginConnectionPluginOptionsIconsAndroidQueryBoolean_2 {
+	eq?: boolean | null;
+	ne?: boolean | null;
+}
+
+export interface sitePluginConnectionPluginOptionsIconsAppleIconQueryBoolean_2 {
+	eq?: boolean | null;
+	ne?: boolean | null;
+}
+
+export interface sitePluginConnectionPluginOptionsIconsAppleStartupQueryBoolean_2 {
+	eq?: boolean | null;
+	ne?: boolean | null;
+}
+
+export interface sitePluginConnectionPluginOptionsIconsCoastQueryBoolean_2 {
+	eq?: boolean | null;
+	ne?: boolean | null;
+}
+
+export interface sitePluginConnectionPluginOptionsIconsFaviconsQueryBoolean_2 {
+	eq?: boolean | null;
+	ne?: boolean | null;
+}
+
+export interface sitePluginConnectionPluginOptionsIconsFirefoxQueryBoolean_2 {
+	eq?: boolean | null;
+	ne?: boolean | null;
+}
+
+export interface sitePluginConnectionPluginOptionsIconsTwitterQueryBoolean_2 {
+	eq?: boolean | null;
+	ne?: boolean | null;
+}
+
+export interface sitePluginConnectionPluginOptionsIconsYandexQueryBoolean_2 {
+	eq?: boolean | null;
+	ne?: boolean | null;
+}
+
+export interface sitePluginConnectionPluginOptionsIconsWindowsQueryBoolean_2 {
+	eq?: boolean | null;
+	ne?: boolean | null;
 }
 
 export interface sitePluginConnectionNodeApIsQueryList_2 {
@@ -2631,7 +2989,7 @@ export interface markdownRemarkConnectionInternalOwnerQueryString_2 {
 
 export interface markdownRemarkConnectionFrontmatterInputObject_2 {
 	title?: markdownRemarkConnectionFrontmatterTitleQueryString_2 | null;
-	author?: markdownRemarkConnectionFrontmatterAuthorQueryString_2 | null;
+	authors?: markdownRemarkConnectionFrontmatterAuthorsQueryList_2 | null;
 	link?: markdownRemarkConnectionFrontmatterLinkQueryString_2 | null;
 	_PARENT?: markdownRemarkConnectionFrontmatterParentQueryString_3 | null;
 	parent?: markdownRemarkConnectionFrontmatterParentQueryString_4 | null;
@@ -2649,7 +3007,23 @@ export interface markdownRemarkConnectionFrontmatterTitleQueryString_2 {
 	glob?: string | null;
 }
 
-export interface markdownRemarkConnectionFrontmatterAuthorQueryString_2 {
+export interface markdownRemarkConnectionFrontmatterAuthorsQueryList_2 {
+	in?: markdownRemarkConnectionFrontmatterAuthorsInputObject_2[] | null;
+}
+
+export interface markdownRemarkConnectionFrontmatterAuthorsInputObject_2 {
+	name?: markdownRemarkConnectionFrontmatterAuthorsNameQueryString_2 | null;
+	url?: markdownRemarkConnectionFrontmatterAuthorsUrlQueryString_2 | null;
+}
+
+export interface markdownRemarkConnectionFrontmatterAuthorsNameQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface markdownRemarkConnectionFrontmatterAuthorsUrlQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
@@ -2854,13 +3228,29 @@ export interface personalJsonConnectionSort {
 }
 /* Filter connection on its fields */
 export interface filterPersonalJson {
+	name?: personalJsonConnectionNameQueryString_2 | null;
 	email?: personalJsonConnectionEmailQueryString_2 | null;
+	jobTitle?: personalJsonConnectionJobTitleQueryString_2 | null;
 	social?: personalJsonConnectionSocialQueryList_2 | null;
 	id?: personalJsonConnectionIdQueryString_2 | null;
 	internal?: personalJsonConnectionInternalInputObject_2 | null;
 }
 
+export interface personalJsonConnectionNameQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
 export interface personalJsonConnectionEmailQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface personalJsonConnectionJobTitleQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
@@ -2932,6 +3322,106 @@ export interface personalJsonConnectionInternalOwnerQueryString_2 {
 	glob?: string | null;
 }
 
+export interface organizationJsonConnectionSort {
+	fields: OrganizationJsonConnectionSortByFieldsEnum[];
+	order?: organizationJsonConnectionSortOrderValues | null;
+}
+/* Filter connection on its fields */
+export interface filterOrganizationJson {
+	name?: organizationJsonConnectionNameQueryString_2 | null;
+	url?: organizationJsonConnectionUrlQueryString_2 | null;
+	logo?: organizationJsonConnectionLogoQueryString_2 | null;
+	telephone?: organizationJsonConnectionTelephoneQueryString_2 | null;
+	id?: organizationJsonConnectionIdQueryString_2 | null;
+	internal?: organizationJsonConnectionInternalInputObject_2 | null;
+	fields?: organizationJsonConnectionFieldsInputObject_2 | null;
+}
+
+export interface organizationJsonConnectionNameQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface organizationJsonConnectionUrlQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface organizationJsonConnectionLogoQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface organizationJsonConnectionTelephoneQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface organizationJsonConnectionIdQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface organizationJsonConnectionInternalInputObject_2 {
+	contentDigest?: organizationJsonConnectionInternalContentDigestQueryString_2 | null;
+	type?: organizationJsonConnectionInternalTypeQueryString_2 | null;
+	owner?: organizationJsonConnectionInternalOwnerQueryString_2 | null;
+	fieldOwners?: organizationJsonConnectionInternalFieldOwnersInputObject_2 | null;
+}
+
+export interface organizationJsonConnectionInternalContentDigestQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface organizationJsonConnectionInternalTypeQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface organizationJsonConnectionInternalOwnerQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface organizationJsonConnectionInternalFieldOwnersInputObject_2 {
+	logo_image?: organizationJsonConnectionInternalFieldOwnersLogoImageQueryString_2 | null;
+}
+
+export interface organizationJsonConnectionInternalFieldOwnersLogoImageQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface organizationJsonConnectionFieldsInputObject_2 {
+	logo_image?: organizationJsonConnectionFieldsLogoImageQueryString_2 | null;
+}
+
+export interface organizationJsonConnectionFieldsLogoImageQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
 export interface competencesJsonConnectionSort {
 	fields: CompetencesJsonConnectionSortByFieldsEnum[];
 	order?: competencesJsonConnectionSortOrderValues | null;
@@ -2986,6 +3476,198 @@ export interface competencesJsonConnectionInternalTypeQueryString_2 {
 }
 
 export interface competencesJsonConnectionInternalOwnerQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface experiencesJsonConnectionSort {
+	fields: ExperiencesJsonConnectionSortByFieldsEnum[];
+	order?: experiencesJsonConnectionSortOrderValues | null;
+}
+/* Filter connection on its fields */
+export interface filterExperiencesJson {
+	work?: experiencesJsonConnectionWorkQueryList_2 | null;
+	id?: experiencesJsonConnectionIdQueryString_2 | null;
+	internal?: experiencesJsonConnectionInternalInputObject_2 | null;
+	fields?: experiencesJsonConnectionFieldsInputObject_2 | null;
+}
+
+export interface experiencesJsonConnectionWorkQueryList_2 {
+	in?: experiencesJsonConnectionWorkInputObject_2[] | null;
+}
+
+export interface experiencesJsonConnectionWorkInputObject_2 {
+	company?: experiencesJsonConnectionWorkCompanyQueryString_2 | null;
+	link?: experiencesJsonConnectionWorkLinkQueryString_2 | null;
+	image?: experiencesJsonConnectionWorkImageQueryString_2 | null;
+	period?: experiencesJsonConnectionWorkPeriodQueryString_2 | null;
+	role?: experiencesJsonConnectionWorkRoleQueryString_2 | null;
+	tasks?: experiencesJsonConnectionWorkTasksQueryList_2 | null;
+}
+
+export interface experiencesJsonConnectionWorkCompanyQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface experiencesJsonConnectionWorkLinkQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface experiencesJsonConnectionWorkImageQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface experiencesJsonConnectionWorkPeriodQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface experiencesJsonConnectionWorkRoleQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface experiencesJsonConnectionWorkTasksQueryList_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: string[] | null;
+}
+
+export interface experiencesJsonConnectionIdQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface experiencesJsonConnectionInternalInputObject_2 {
+	contentDigest?: experiencesJsonConnectionInternalContentDigestQueryString_2 | null;
+	type?: experiencesJsonConnectionInternalTypeQueryString_2 | null;
+	owner?: experiencesJsonConnectionInternalOwnerQueryString_2 | null;
+	fieldOwners?: experiencesJsonConnectionInternalFieldOwnersInputObject_2 | null;
+}
+
+export interface experiencesJsonConnectionInternalContentDigestQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface experiencesJsonConnectionInternalTypeQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface experiencesJsonConnectionInternalOwnerQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface experiencesJsonConnectionInternalFieldOwnersInputObject_2 {
+	image_image?: experiencesJsonConnectionInternalFieldOwnersImageImageQueryString_2 | null;
+}
+
+export interface experiencesJsonConnectionInternalFieldOwnersImageImageQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface experiencesJsonConnectionFieldsInputObject_2 {
+	image_image?: experiencesJsonConnectionFieldsImageImageQueryList_2 | null;
+}
+
+export interface experiencesJsonConnectionFieldsImageImageQueryList_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: string[] | null;
+}
+
+export interface interestsJsonConnectionSort {
+	fields: InterestsJsonConnectionSortByFieldsEnum[];
+	order?: interestsJsonConnectionSortOrderValues | null;
+}
+/* Filter connection on its fields */
+export interface filterInterestsJson {
+	subjects?: interestsJsonConnectionSubjectsQueryList_2 | null;
+	id?: interestsJsonConnectionIdQueryString_2 | null;
+	internal?: interestsJsonConnectionInternalInputObject_2 | null;
+}
+
+export interface interestsJsonConnectionSubjectsQueryList_2 {
+	in?: interestsJsonConnectionSubjectsInputObject_2[] | null;
+}
+
+export interface interestsJsonConnectionSubjectsInputObject_2 {
+	name?: interestsJsonConnectionSubjectsNameQueryString_2 | null;
+	intensity?: interestsJsonConnectionSubjectsIntensityQueryInteger_2 | null;
+}
+
+export interface interestsJsonConnectionSubjectsNameQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface interestsJsonConnectionSubjectsIntensityQueryInteger_2 {
+	eq?: number | null;
+	ne?: number | null;
+}
+
+export interface interestsJsonConnectionIdQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface interestsJsonConnectionInternalInputObject_2 {
+	contentDigest?: interestsJsonConnectionInternalContentDigestQueryString_2 | null;
+	type?: interestsJsonConnectionInternalTypeQueryString_2 | null;
+	owner?: interestsJsonConnectionInternalOwnerQueryString_2 | null;
+}
+
+export interface interestsJsonConnectionInternalContentDigestQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface interestsJsonConnectionInternalTypeQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface interestsJsonConnectionInternalOwnerQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
@@ -3102,173 +3784,6 @@ export interface skillsJsonConnectionInternalOwnerQueryString_2 {
 	glob?: string | null;
 }
 
-export interface interestsJsonConnectionSort {
-	fields: InterestsJsonConnectionSortByFieldsEnum[];
-	order?: interestsJsonConnectionSortOrderValues | null;
-}
-/* Filter connection on its fields */
-export interface filterInterestsJson {
-	subjects?: interestsJsonConnectionSubjectsQueryList_2 | null;
-	id?: interestsJsonConnectionIdQueryString_2 | null;
-	internal?: interestsJsonConnectionInternalInputObject_2 | null;
-}
-
-export interface interestsJsonConnectionSubjectsQueryList_2 {
-	in?: interestsJsonConnectionSubjectsInputObject_2[] | null;
-}
-
-export interface interestsJsonConnectionSubjectsInputObject_2 {
-	name?: interestsJsonConnectionSubjectsNameQueryString_2 | null;
-	intensity?: interestsJsonConnectionSubjectsIntensityQueryInteger_2 | null;
-}
-
-export interface interestsJsonConnectionSubjectsNameQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-}
-
-export interface interestsJsonConnectionSubjectsIntensityQueryInteger_2 {
-	eq?: number | null;
-	ne?: number | null;
-}
-
-export interface interestsJsonConnectionIdQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-}
-
-export interface interestsJsonConnectionInternalInputObject_2 {
-	contentDigest?: interestsJsonConnectionInternalContentDigestQueryString_2 | null;
-	type?: interestsJsonConnectionInternalTypeQueryString_2 | null;
-	owner?: interestsJsonConnectionInternalOwnerQueryString_2 | null;
-}
-
-export interface interestsJsonConnectionInternalContentDigestQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-}
-
-export interface interestsJsonConnectionInternalTypeQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-}
-
-export interface interestsJsonConnectionInternalOwnerQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-}
-
-export interface experiencesJsonConnectionSort {
-	fields: ExperiencesJsonConnectionSortByFieldsEnum[];
-	order?: experiencesJsonConnectionSortOrderValues | null;
-}
-/* Filter connection on its fields */
-export interface filterExperiencesJson {
-	work?: experiencesJsonConnectionWorkQueryList_2 | null;
-	id?: experiencesJsonConnectionIdQueryString_2 | null;
-	internal?: experiencesJsonConnectionInternalInputObject_2 | null;
-}
-
-export interface experiencesJsonConnectionWorkQueryList_2 {
-	in?: experiencesJsonConnectionWorkInputObject_2[] | null;
-}
-
-export interface experiencesJsonConnectionWorkInputObject_2 {
-	company?: experiencesJsonConnectionWorkCompanyQueryString_2 | null;
-	link?: experiencesJsonConnectionWorkLinkQueryString_2 | null;
-	image?: experiencesJsonConnectionWorkImageQueryString_2 | null;
-	period?: experiencesJsonConnectionWorkPeriodQueryString_2 | null;
-	role?: experiencesJsonConnectionWorkRoleQueryString_2 | null;
-	tasks?: experiencesJsonConnectionWorkTasksQueryList_2 | null;
-}
-
-export interface experiencesJsonConnectionWorkCompanyQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-}
-
-export interface experiencesJsonConnectionWorkLinkQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-}
-
-export interface experiencesJsonConnectionWorkImageQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-}
-
-export interface experiencesJsonConnectionWorkPeriodQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-}
-
-export interface experiencesJsonConnectionWorkRoleQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-}
-
-export interface experiencesJsonConnectionWorkTasksQueryList_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: string[] | null;
-}
-
-export interface experiencesJsonConnectionIdQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-}
-
-export interface experiencesJsonConnectionInternalInputObject_2 {
-	contentDigest?: experiencesJsonConnectionInternalContentDigestQueryString_2 | null;
-	type?: experiencesJsonConnectionInternalTypeQueryString_2 | null;
-	owner?: experiencesJsonConnectionInternalOwnerQueryString_2 | null;
-}
-
-export interface experiencesJsonConnectionInternalContentDigestQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-}
-
-export interface experiencesJsonConnectionInternalTypeQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-}
-
-export interface experiencesJsonConnectionInternalOwnerQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-}
-
 export interface sitePageLayoutQueryString {
 	eq?: string | null;
 	ne?: string | null;
@@ -3353,7 +3868,7 @@ export interface sitePageContextGroupNodeFileAbsolutePathQueryString {
 
 export interface sitePageContextGroupNodeFrontmatterInputObject {
 	date?: sitePageContextGroupNodeFrontmatterDateQueryString | null;
-	author?: sitePageContextGroupNodeFrontmatterAuthorQueryString | null;
+	authors?: sitePageContextGroupNodeFrontmatterAuthorsQueryList | null;
 	link?: sitePageContextGroupNodeFrontmatterLinkQueryString | null;
 	title?: sitePageContextGroupNodeFrontmatterTitleQueryString | null;
 	description?: sitePageContextGroupNodeFrontmatterDescriptionQueryString | null;
@@ -3366,7 +3881,23 @@ export interface sitePageContextGroupNodeFrontmatterDateQueryString {
 	glob?: string | null;
 }
 
-export interface sitePageContextGroupNodeFrontmatterAuthorQueryString {
+export interface sitePageContextGroupNodeFrontmatterAuthorsQueryList {
+	in?: sitePageContextGroupNodeFrontmatterAuthorsInputObject[] | null;
+}
+
+export interface sitePageContextGroupNodeFrontmatterAuthorsInputObject {
+	name?: sitePageContextGroupNodeFrontmatterAuthorsNameQueryString | null;
+	url?: sitePageContextGroupNodeFrontmatterAuthorsUrlQueryString | null;
+}
+
+export interface sitePageContextGroupNodeFrontmatterAuthorsNameQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface sitePageContextGroupNodeFrontmatterAuthorsUrlQueryString {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
@@ -3505,7 +4036,14 @@ export interface sitePagePluginCreatorPluginOptionsInputObject {
 	background_color?: sitePagePluginCreatorPluginOptionsBackgroundColorQueryString_2 | null;
 	theme_color?: sitePagePluginCreatorPluginOptionsThemeColorQueryString | null;
 	display?: sitePagePluginCreatorPluginOptionsDisplayQueryString | null;
+	icon?: sitePagePluginCreatorPluginOptionsIconQueryString | null;
 	pathToConfigModule?: sitePagePluginCreatorPluginOptionsPathToConfigModuleQueryString | null;
+	omitGoogleFont?: sitePagePluginCreatorPluginOptionsOmitGoogleFontQueryBoolean | null;
+	query?: sitePagePluginCreatorPluginOptionsQueryQueryString | null;
+	feeds?: sitePagePluginCreatorPluginOptionsFeedsQueryList | null;
+	logo?: sitePagePluginCreatorPluginOptionsLogoQueryString | null;
+	injectHTML?: sitePagePluginCreatorPluginOptionsInjectHtmlQueryBoolean | null;
+	icons?: sitePagePluginCreatorPluginOptionsIconsInputObject | null;
 }
 
 export interface sitePagePluginCreatorPluginOptionsPluginsQueryList {
@@ -3701,11 +4239,122 @@ export interface sitePagePluginCreatorPluginOptionsDisplayQueryString {
 	glob?: string | null;
 }
 
+export interface sitePagePluginCreatorPluginOptionsIconQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
 export interface sitePagePluginCreatorPluginOptionsPathToConfigModuleQueryString {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
+}
+
+export interface sitePagePluginCreatorPluginOptionsOmitGoogleFontQueryBoolean {
+	eq?: boolean | null;
+	ne?: boolean | null;
+}
+
+export interface sitePagePluginCreatorPluginOptionsQueryQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface sitePagePluginCreatorPluginOptionsFeedsQueryList {
+	in?: sitePagePluginCreatorPluginOptionsFeedsInputObject[] | null;
+}
+
+export interface sitePagePluginCreatorPluginOptionsFeedsInputObject {
+	query?: sitePagePluginCreatorPluginOptionsFeedsQueryQueryString | null;
+	output?: sitePagePluginCreatorPluginOptionsFeedsOutputQueryString | null;
+}
+
+export interface sitePagePluginCreatorPluginOptionsFeedsQueryQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface sitePagePluginCreatorPluginOptionsFeedsOutputQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface sitePagePluginCreatorPluginOptionsLogoQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface sitePagePluginCreatorPluginOptionsInjectHtmlQueryBoolean {
+	eq?: boolean | null;
+	ne?: boolean | null;
+}
+
+export interface sitePagePluginCreatorPluginOptionsIconsInputObject {
+	android?: sitePagePluginCreatorPluginOptionsIconsAndroidQueryBoolean | null;
+	appleIcon?: sitePagePluginCreatorPluginOptionsIconsAppleIconQueryBoolean | null;
+	appleStartup?: sitePagePluginCreatorPluginOptionsIconsAppleStartupQueryBoolean | null;
+	coast?: sitePagePluginCreatorPluginOptionsIconsCoastQueryBoolean | null;
+	favicons?: sitePagePluginCreatorPluginOptionsIconsFaviconsQueryBoolean | null;
+	firefox?: sitePagePluginCreatorPluginOptionsIconsFirefoxQueryBoolean | null;
+	twitter?: sitePagePluginCreatorPluginOptionsIconsTwitterQueryBoolean | null;
+	yandex?: sitePagePluginCreatorPluginOptionsIconsYandexQueryBoolean | null;
+	windows?: sitePagePluginCreatorPluginOptionsIconsWindowsQueryBoolean | null;
+}
+
+export interface sitePagePluginCreatorPluginOptionsIconsAndroidQueryBoolean {
+	eq?: boolean | null;
+	ne?: boolean | null;
+}
+
+export interface sitePagePluginCreatorPluginOptionsIconsAppleIconQueryBoolean {
+	eq?: boolean | null;
+	ne?: boolean | null;
+}
+
+export interface sitePagePluginCreatorPluginOptionsIconsAppleStartupQueryBoolean {
+	eq?: boolean | null;
+	ne?: boolean | null;
+}
+
+export interface sitePagePluginCreatorPluginOptionsIconsCoastQueryBoolean {
+	eq?: boolean | null;
+	ne?: boolean | null;
+}
+
+export interface sitePagePluginCreatorPluginOptionsIconsFaviconsQueryBoolean {
+	eq?: boolean | null;
+	ne?: boolean | null;
+}
+
+export interface sitePagePluginCreatorPluginOptionsIconsFirefoxQueryBoolean {
+	eq?: boolean | null;
+	ne?: boolean | null;
+}
+
+export interface sitePagePluginCreatorPluginOptionsIconsTwitterQueryBoolean {
+	eq?: boolean | null;
+	ne?: boolean | null;
+}
+
+export interface sitePagePluginCreatorPluginOptionsIconsYandexQueryBoolean {
+	eq?: boolean | null;
+	ne?: boolean | null;
+}
+
+export interface sitePagePluginCreatorPluginOptionsIconsWindowsQueryBoolean {
+	eq?: boolean | null;
+	ne?: boolean | null;
 }
 
 export interface sitePagePluginCreatorNodeApIsQueryList {
@@ -3994,18 +4643,25 @@ export interface sitePluginPluginOptionsInputObject_2 {
 	name?: sitePluginPluginOptionsNameQueryString_2 | null;
 	path?: sitePluginPluginOptionsPathQueryString_2 | null;
 	maxWidth?: sitePluginPluginOptionsMaxWidthQueryInteger_2 | null;
-	wrapperStyle?: sitePluginPluginOptionsWrapperStyleQueryString_2 | null;
-	backgroundColor?: sitePluginPluginOptionsBackgroundColorQueryString_3 | null;
-	linkImagesToOriginal?: sitePluginPluginOptionsLinkImagesToOriginalQueryBoolean_2 | null;
-	showCaptions?: sitePluginPluginOptionsShowCaptionsQueryBoolean_2 | null;
-	pathPrefix?: sitePluginPluginOptionsPathPrefixQueryString_2 | null;
+	wrapperStyle?: sitePluginPluginOptionsWrapperStyleQueryString | null;
+	backgroundColor?: sitePluginPluginOptionsBackgroundColorQueryString_2 | null;
+	linkImagesToOriginal?: sitePluginPluginOptionsLinkImagesToOriginalQueryBoolean | null;
+	showCaptions?: sitePluginPluginOptionsShowCaptionsQueryBoolean | null;
+	pathPrefix?: sitePluginPluginOptionsPathPrefixQueryString | null;
 	inlineCodeMarker?: sitePluginPluginOptionsInlineCodeMarkerQueryString_2 | null;
 	short_name?: sitePluginPluginOptionsShortNameQueryString_2 | null;
 	start_url?: sitePluginPluginOptionsStartUrlQueryString_2 | null;
-	background_color?: sitePluginPluginOptionsBackgroundColorQueryString_4 | null;
+	background_color?: sitePluginPluginOptionsBackgroundColorQueryString_3 | null;
 	theme_color?: sitePluginPluginOptionsThemeColorQueryString_2 | null;
 	display?: sitePluginPluginOptionsDisplayQueryString_2 | null;
+	icon?: sitePluginPluginOptionsIconQueryString_2 | null;
 	pathToConfigModule?: sitePluginPluginOptionsPathToConfigModuleQueryString_2 | null;
+	omitGoogleFont?: sitePluginPluginOptionsOmitGoogleFontQueryBoolean_2 | null;
+	query?: sitePluginPluginOptionsQueryQueryString_2 | null;
+	feeds?: sitePluginPluginOptionsFeedsQueryList_2 | null;
+	logo?: sitePluginPluginOptionsLogoQueryString_2 | null;
+	injectHTML?: sitePluginPluginOptionsInjectHtmlQueryBoolean_2 | null;
+	icons?: sitePluginPluginOptionsIconsInputObject_2 | null;
 }
 
 export interface sitePluginPluginOptionsPluginsQueryList_2 {
@@ -4051,11 +4707,11 @@ export interface sitePluginPluginOptionsPluginsVersionQueryString_2 {
 
 export interface sitePluginPluginOptionsPluginsPluginOptionsInputObject_2 {
 	maxWidth?: sitePluginPluginOptionsPluginsPluginOptionsMaxWidthQueryInteger_2 | null;
-	wrapperStyle?: sitePluginPluginOptionsPluginsPluginOptionsWrapperStyleQueryString_2 | null;
-	backgroundColor?: sitePluginPluginOptionsPluginsPluginOptionsBackgroundColorQueryString_2 | null;
-	linkImagesToOriginal?: sitePluginPluginOptionsPluginsPluginOptionsLinkImagesToOriginalQueryBoolean_2 | null;
-	showCaptions?: sitePluginPluginOptionsPluginsPluginOptionsShowCaptionsQueryBoolean_2 | null;
-	pathPrefix?: sitePluginPluginOptionsPluginsPluginOptionsPathPrefixQueryString_2 | null;
+	wrapperStyle?: sitePluginPluginOptionsPluginsPluginOptionsWrapperStyleQueryString | null;
+	backgroundColor?: sitePluginPluginOptionsPluginsPluginOptionsBackgroundColorQueryString | null;
+	linkImagesToOriginal?: sitePluginPluginOptionsPluginsPluginOptionsLinkImagesToOriginalQueryBoolean | null;
+	showCaptions?: sitePluginPluginOptionsPluginsPluginOptionsShowCaptionsQueryBoolean | null;
+	pathPrefix?: sitePluginPluginOptionsPluginsPluginOptionsPathPrefixQueryString | null;
 	inlineCodeMarker?: sitePluginPluginOptionsPluginsPluginOptionsInlineCodeMarkerQueryString_2 | null;
 }
 
@@ -4064,31 +4720,31 @@ export interface sitePluginPluginOptionsPluginsPluginOptionsMaxWidthQueryInteger
 	ne?: number | null;
 }
 
-export interface sitePluginPluginOptionsPluginsPluginOptionsWrapperStyleQueryString_2 {
+export interface sitePluginPluginOptionsPluginsPluginOptionsWrapperStyleQueryString {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 }
 
-export interface sitePluginPluginOptionsPluginsPluginOptionsBackgroundColorQueryString_2 {
+export interface sitePluginPluginOptionsPluginsPluginOptionsBackgroundColorQueryString {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 }
 
-export interface sitePluginPluginOptionsPluginsPluginOptionsLinkImagesToOriginalQueryBoolean_2 {
+export interface sitePluginPluginOptionsPluginsPluginOptionsLinkImagesToOriginalQueryBoolean {
 	eq?: boolean | null;
 	ne?: boolean | null;
 }
 
-export interface sitePluginPluginOptionsPluginsPluginOptionsShowCaptionsQueryBoolean_2 {
+export interface sitePluginPluginOptionsPluginsPluginOptionsShowCaptionsQueryBoolean {
 	eq?: boolean | null;
 	ne?: boolean | null;
 }
 
-export interface sitePluginPluginOptionsPluginsPluginOptionsPathPrefixQueryString_2 {
+export interface sitePluginPluginOptionsPluginsPluginOptionsPathPrefixQueryString {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
@@ -4128,31 +4784,31 @@ export interface sitePluginPluginOptionsMaxWidthQueryInteger_2 {
 	ne?: number | null;
 }
 
-export interface sitePluginPluginOptionsWrapperStyleQueryString_2 {
+export interface sitePluginPluginOptionsWrapperStyleQueryString {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 }
 
-export interface sitePluginPluginOptionsBackgroundColorQueryString_3 {
+export interface sitePluginPluginOptionsBackgroundColorQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 }
 
-export interface sitePluginPluginOptionsLinkImagesToOriginalQueryBoolean_2 {
+export interface sitePluginPluginOptionsLinkImagesToOriginalQueryBoolean {
 	eq?: boolean | null;
 	ne?: boolean | null;
 }
 
-export interface sitePluginPluginOptionsShowCaptionsQueryBoolean_2 {
+export interface sitePluginPluginOptionsShowCaptionsQueryBoolean {
 	eq?: boolean | null;
 	ne?: boolean | null;
 }
 
-export interface sitePluginPluginOptionsPathPrefixQueryString_2 {
+export interface sitePluginPluginOptionsPathPrefixQueryString {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
@@ -4180,7 +4836,7 @@ export interface sitePluginPluginOptionsStartUrlQueryString_2 {
 	glob?: string | null;
 }
 
-export interface sitePluginPluginOptionsBackgroundColorQueryString_4 {
+export interface sitePluginPluginOptionsBackgroundColorQueryString_3 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
@@ -4201,11 +4857,122 @@ export interface sitePluginPluginOptionsDisplayQueryString_2 {
 	glob?: string | null;
 }
 
+export interface sitePluginPluginOptionsIconQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
 export interface sitePluginPluginOptionsPathToConfigModuleQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
+}
+
+export interface sitePluginPluginOptionsOmitGoogleFontQueryBoolean_2 {
+	eq?: boolean | null;
+	ne?: boolean | null;
+}
+
+export interface sitePluginPluginOptionsQueryQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface sitePluginPluginOptionsFeedsQueryList_2 {
+	in?: sitePluginPluginOptionsFeedsInputObject_2[] | null;
+}
+
+export interface sitePluginPluginOptionsFeedsInputObject_2 {
+	query?: sitePluginPluginOptionsFeedsQueryQueryString_2 | null;
+	output?: sitePluginPluginOptionsFeedsOutputQueryString_2 | null;
+}
+
+export interface sitePluginPluginOptionsFeedsQueryQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface sitePluginPluginOptionsFeedsOutputQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface sitePluginPluginOptionsLogoQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface sitePluginPluginOptionsInjectHtmlQueryBoolean_2 {
+	eq?: boolean | null;
+	ne?: boolean | null;
+}
+
+export interface sitePluginPluginOptionsIconsInputObject_2 {
+	android?: sitePluginPluginOptionsIconsAndroidQueryBoolean_2 | null;
+	appleIcon?: sitePluginPluginOptionsIconsAppleIconQueryBoolean_2 | null;
+	appleStartup?: sitePluginPluginOptionsIconsAppleStartupQueryBoolean_2 | null;
+	coast?: sitePluginPluginOptionsIconsCoastQueryBoolean_2 | null;
+	favicons?: sitePluginPluginOptionsIconsFaviconsQueryBoolean_2 | null;
+	firefox?: sitePluginPluginOptionsIconsFirefoxQueryBoolean_2 | null;
+	twitter?: sitePluginPluginOptionsIconsTwitterQueryBoolean_2 | null;
+	yandex?: sitePluginPluginOptionsIconsYandexQueryBoolean_2 | null;
+	windows?: sitePluginPluginOptionsIconsWindowsQueryBoolean_2 | null;
+}
+
+export interface sitePluginPluginOptionsIconsAndroidQueryBoolean_2 {
+	eq?: boolean | null;
+	ne?: boolean | null;
+}
+
+export interface sitePluginPluginOptionsIconsAppleIconQueryBoolean_2 {
+	eq?: boolean | null;
+	ne?: boolean | null;
+}
+
+export interface sitePluginPluginOptionsIconsAppleStartupQueryBoolean_2 {
+	eq?: boolean | null;
+	ne?: boolean | null;
+}
+
+export interface sitePluginPluginOptionsIconsCoastQueryBoolean_2 {
+	eq?: boolean | null;
+	ne?: boolean | null;
+}
+
+export interface sitePluginPluginOptionsIconsFaviconsQueryBoolean_2 {
+	eq?: boolean | null;
+	ne?: boolean | null;
+}
+
+export interface sitePluginPluginOptionsIconsFirefoxQueryBoolean_2 {
+	eq?: boolean | null;
+	ne?: boolean | null;
+}
+
+export interface sitePluginPluginOptionsIconsTwitterQueryBoolean_2 {
+	eq?: boolean | null;
+	ne?: boolean | null;
+}
+
+export interface sitePluginPluginOptionsIconsYandexQueryBoolean_2 {
+	eq?: boolean | null;
+	ne?: boolean | null;
+}
+
+export interface sitePluginPluginOptionsIconsWindowsQueryBoolean_2 {
+	eq?: boolean | null;
+	ne?: boolean | null;
 }
 
 export interface sitePluginNodeApIsQueryList_2 {
@@ -5041,7 +5808,7 @@ export interface markdownRemarkInternalOwnerQueryString_2 {
 
 export interface markdownRemarkFrontmatterInputObject_2 {
 	title?: markdownRemarkFrontmatterTitleQueryString_2 | null;
-	author?: markdownRemarkFrontmatterAuthorQueryString_2 | null;
+	authors?: markdownRemarkFrontmatterAuthorsQueryList_2 | null;
 	link?: markdownRemarkFrontmatterLinkQueryString_2 | null;
 	_PARENT?: markdownRemarkFrontmatterParentQueryString_3 | null;
 	parent?: markdownRemarkFrontmatterParentQueryString_4 | null;
@@ -5059,7 +5826,23 @@ export interface markdownRemarkFrontmatterTitleQueryString_2 {
 	glob?: string | null;
 }
 
-export interface markdownRemarkFrontmatterAuthorQueryString_2 {
+export interface markdownRemarkFrontmatterAuthorsQueryList_2 {
+	in?: markdownRemarkFrontmatterAuthorsInputObject_2[] | null;
+}
+
+export interface markdownRemarkFrontmatterAuthorsInputObject_2 {
+	name?: markdownRemarkFrontmatterAuthorsNameQueryString_2 | null;
+	url?: markdownRemarkFrontmatterAuthorsUrlQueryString_2 | null;
+}
+
+export interface markdownRemarkFrontmatterAuthorsNameQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface markdownRemarkFrontmatterAuthorsUrlQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
@@ -5246,7 +6029,21 @@ export interface todoJsonInternalOwnerQueryString_2 {
 	glob?: string | null;
 }
 
+export interface personalJsonNameQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
 export interface personalJsonEmailQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface personalJsonJobTitleQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
@@ -5318,6 +6115,91 @@ export interface personalJsonInternalOwnerQueryString_2 {
 	glob?: string | null;
 }
 
+export interface organizationJsonNameQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface organizationJsonUrlQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface organizationJsonLogoQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface organizationJsonTelephoneQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface organizationJsonIdQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface organizationJsonInternalInputObject_2 {
+	contentDigest?: organizationJsonInternalContentDigestQueryString_2 | null;
+	type?: organizationJsonInternalTypeQueryString_2 | null;
+	owner?: organizationJsonInternalOwnerQueryString_2 | null;
+	fieldOwners?: organizationJsonInternalFieldOwnersInputObject_2 | null;
+}
+
+export interface organizationJsonInternalContentDigestQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface organizationJsonInternalTypeQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface organizationJsonInternalOwnerQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface organizationJsonInternalFieldOwnersInputObject_2 {
+	logo_image?: organizationJsonInternalFieldOwnersLogoImageQueryString_2 | null;
+}
+
+export interface organizationJsonInternalFieldOwnersLogoImageQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface organizationJsonFieldsInputObject_2 {
+	logo_image?: organizationJsonFieldsLogoImageQueryString_2 | null;
+}
+
+export interface organizationJsonFieldsLogoImageQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
 export interface competencesJsonNameQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
@@ -5360,6 +6242,175 @@ export interface competencesJsonInternalTypeQueryString_2 {
 }
 
 export interface competencesJsonInternalOwnerQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface experiencesJsonWorkQueryList_2 {
+	in?: experiencesJsonWorkInputObject_2[] | null;
+}
+
+export interface experiencesJsonWorkInputObject_2 {
+	company?: experiencesJsonWorkCompanyQueryString_2 | null;
+	link?: experiencesJsonWorkLinkQueryString_2 | null;
+	image?: experiencesJsonWorkImageQueryString_2 | null;
+	period?: experiencesJsonWorkPeriodQueryString_2 | null;
+	role?: experiencesJsonWorkRoleQueryString_2 | null;
+	tasks?: experiencesJsonWorkTasksQueryList_2 | null;
+}
+
+export interface experiencesJsonWorkCompanyQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface experiencesJsonWorkLinkQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface experiencesJsonWorkImageQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface experiencesJsonWorkPeriodQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface experiencesJsonWorkRoleQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface experiencesJsonWorkTasksQueryList_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: string[] | null;
+}
+
+export interface experiencesJsonIdQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface experiencesJsonInternalInputObject_2 {
+	contentDigest?: experiencesJsonInternalContentDigestQueryString_2 | null;
+	type?: experiencesJsonInternalTypeQueryString_2 | null;
+	owner?: experiencesJsonInternalOwnerQueryString_2 | null;
+	fieldOwners?: experiencesJsonInternalFieldOwnersInputObject_2 | null;
+}
+
+export interface experiencesJsonInternalContentDigestQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface experiencesJsonInternalTypeQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface experiencesJsonInternalOwnerQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface experiencesJsonInternalFieldOwnersInputObject_2 {
+	image_image?: experiencesJsonInternalFieldOwnersImageImageQueryString_2 | null;
+}
+
+export interface experiencesJsonInternalFieldOwnersImageImageQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface experiencesJsonFieldsInputObject_2 {
+	image_image?: experiencesJsonFieldsImageImageQueryList_2 | null;
+}
+
+export interface experiencesJsonFieldsImageImageQueryList_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: string[] | null;
+}
+
+export interface interestsJsonSubjectsQueryList_2 {
+	in?: interestsJsonSubjectsInputObject_2[] | null;
+}
+
+export interface interestsJsonSubjectsInputObject_2 {
+	name?: interestsJsonSubjectsNameQueryString_2 | null;
+	intensity?: interestsJsonSubjectsIntensityQueryInteger_2 | null;
+}
+
+export interface interestsJsonSubjectsNameQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface interestsJsonSubjectsIntensityQueryInteger_2 {
+	eq?: number | null;
+	ne?: number | null;
+}
+
+export interface interestsJsonIdQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface interestsJsonInternalInputObject_2 {
+	contentDigest?: interestsJsonInternalContentDigestQueryString_2 | null;
+	type?: interestsJsonInternalTypeQueryString_2 | null;
+	owner?: interestsJsonInternalOwnerQueryString_2 | null;
+}
+
+export interface interestsJsonInternalContentDigestQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface interestsJsonInternalTypeQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface interestsJsonInternalOwnerQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
@@ -5462,151 +6513,6 @@ export interface skillsJsonInternalOwnerQueryString_2 {
 	regex?: string | null;
 	glob?: string | null;
 }
-
-export interface interestsJsonSubjectsQueryList_2 {
-	in?: interestsJsonSubjectsInputObject_2[] | null;
-}
-
-export interface interestsJsonSubjectsInputObject_2 {
-	name?: interestsJsonSubjectsNameQueryString_2 | null;
-	intensity?: interestsJsonSubjectsIntensityQueryInteger_2 | null;
-}
-
-export interface interestsJsonSubjectsNameQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-}
-
-export interface interestsJsonSubjectsIntensityQueryInteger_2 {
-	eq?: number | null;
-	ne?: number | null;
-}
-
-export interface interestsJsonIdQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-}
-
-export interface interestsJsonInternalInputObject_2 {
-	contentDigest?: interestsJsonInternalContentDigestQueryString_2 | null;
-	type?: interestsJsonInternalTypeQueryString_2 | null;
-	owner?: interestsJsonInternalOwnerQueryString_2 | null;
-}
-
-export interface interestsJsonInternalContentDigestQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-}
-
-export interface interestsJsonInternalTypeQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-}
-
-export interface interestsJsonInternalOwnerQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-}
-
-export interface experiencesJsonWorkQueryList_2 {
-	in?: experiencesJsonWorkInputObject_2[] | null;
-}
-
-export interface experiencesJsonWorkInputObject_2 {
-	company?: experiencesJsonWorkCompanyQueryString_2 | null;
-	link?: experiencesJsonWorkLinkQueryString_2 | null;
-	image?: experiencesJsonWorkImageQueryString_2 | null;
-	period?: experiencesJsonWorkPeriodQueryString_2 | null;
-	role?: experiencesJsonWorkRoleQueryString_2 | null;
-	tasks?: experiencesJsonWorkTasksQueryList_2 | null;
-}
-
-export interface experiencesJsonWorkCompanyQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-}
-
-export interface experiencesJsonWorkLinkQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-}
-
-export interface experiencesJsonWorkImageQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-}
-
-export interface experiencesJsonWorkPeriodQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-}
-
-export interface experiencesJsonWorkRoleQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-}
-
-export interface experiencesJsonWorkTasksQueryList_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: string[] | null;
-}
-
-export interface experiencesJsonIdQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-}
-
-export interface experiencesJsonInternalInputObject_2 {
-	contentDigest?: experiencesJsonInternalContentDigestQueryString_2 | null;
-	type?: experiencesJsonInternalTypeQueryString_2 | null;
-	owner?: experiencesJsonInternalOwnerQueryString_2 | null;
-}
-
-export interface experiencesJsonInternalContentDigestQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-}
-
-export interface experiencesJsonInternalTypeQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-}
-
-export interface experiencesJsonInternalOwnerQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-}
 export interface AllSitePageRootQueryTypeArgs {
 	skip?: number | null;
 	limit?: number | null;
@@ -5649,17 +6555,23 @@ export interface AllPersonalJsonRootQueryTypeArgs {
 	sort?: personalJsonConnectionSort | null;
 	filter?: filterPersonalJson | null;
 }
+export interface AllOrganizationJsonRootQueryTypeArgs {
+	skip?: number | null;
+	limit?: number | null;
+	sort?: organizationJsonConnectionSort | null;
+	filter?: filterOrganizationJson | null;
+}
 export interface AllCompetencesJsonRootQueryTypeArgs {
 	skip?: number | null;
 	limit?: number | null;
 	sort?: competencesJsonConnectionSort | null;
 	filter?: filterCompetencesJson | null;
 }
-export interface AllSkillsJsonRootQueryTypeArgs {
+export interface AllExperiencesJsonRootQueryTypeArgs {
 	skip?: number | null;
 	limit?: number | null;
-	sort?: skillsJsonConnectionSort | null;
-	filter?: filterSkillsJson | null;
+	sort?: experiencesJsonConnectionSort | null;
+	filter?: filterExperiencesJson | null;
 }
 export interface AllInterestsJsonRootQueryTypeArgs {
 	skip?: number | null;
@@ -5667,11 +6579,11 @@ export interface AllInterestsJsonRootQueryTypeArgs {
 	sort?: interestsJsonConnectionSort | null;
 	filter?: filterInterestsJson | null;
 }
-export interface AllExperiencesJsonRootQueryTypeArgs {
+export interface AllSkillsJsonRootQueryTypeArgs {
 	skip?: number | null;
 	limit?: number | null;
-	sort?: experiencesJsonConnectionSort | null;
-	filter?: filterExperiencesJson | null;
+	sort?: skillsJsonConnectionSort | null;
+	filter?: filterSkillsJson | null;
 }
 export interface SitePageRootQueryTypeArgs {
 	layout?: sitePageLayoutQueryString | null;
@@ -5804,10 +6716,21 @@ export interface TodoJsonRootQueryTypeArgs {
 	internal?: todoJsonInternalInputObject_2 | null;
 }
 export interface PersonalJsonRootQueryTypeArgs {
+	name?: personalJsonNameQueryString_2 | null;
 	email?: personalJsonEmailQueryString_2 | null;
+	jobTitle?: personalJsonJobTitleQueryString_2 | null;
 	social?: personalJsonSocialQueryList_2 | null;
 	id?: personalJsonIdQueryString_2 | null;
 	internal?: personalJsonInternalInputObject_2 | null;
+}
+export interface OrganizationJsonRootQueryTypeArgs {
+	name?: organizationJsonNameQueryString_2 | null;
+	url?: organizationJsonUrlQueryString_2 | null;
+	logo?: organizationJsonLogoQueryString_2 | null;
+	telephone?: organizationJsonTelephoneQueryString_2 | null;
+	id?: organizationJsonIdQueryString_2 | null;
+	internal?: organizationJsonInternalInputObject_2 | null;
+	fields?: organizationJsonFieldsInputObject_2 | null;
 }
 export interface CompetencesJsonRootQueryTypeArgs {
 	name?: competencesJsonNameQueryString_2 | null;
@@ -5815,22 +6738,23 @@ export interface CompetencesJsonRootQueryTypeArgs {
 	id?: competencesJsonIdQueryString_2 | null;
 	internal?: competencesJsonInternalInputObject_2 | null;
 }
-export interface SkillsJsonRootQueryTypeArgs {
-	languages?: skillsJsonLanguagesQueryList_2 | null;
-	technical?: skillsJsonTechnicalQueryList_2 | null;
-	soft?: skillsJsonSoftQueryList_2 | null;
-	id?: skillsJsonIdQueryString_2 | null;
-	internal?: skillsJsonInternalInputObject_2 | null;
+export interface ExperiencesJsonRootQueryTypeArgs {
+	work?: experiencesJsonWorkQueryList_2 | null;
+	id?: experiencesJsonIdQueryString_2 | null;
+	internal?: experiencesJsonInternalInputObject_2 | null;
+	fields?: experiencesJsonFieldsInputObject_2 | null;
 }
 export interface InterestsJsonRootQueryTypeArgs {
 	subjects?: interestsJsonSubjectsQueryList_2 | null;
 	id?: interestsJsonIdQueryString_2 | null;
 	internal?: interestsJsonInternalInputObject_2 | null;
 }
-export interface ExperiencesJsonRootQueryTypeArgs {
-	work?: experiencesJsonWorkQueryList_2 | null;
-	id?: experiencesJsonIdQueryString_2 | null;
-	internal?: experiencesJsonInternalInputObject_2 | null;
+export interface SkillsJsonRootQueryTypeArgs {
+	languages?: skillsJsonLanguagesQueryList_2 | null;
+	technical?: skillsJsonTechnicalQueryList_2 | null;
+	soft?: skillsJsonSoftQueryList_2 | null;
+	id?: skillsJsonIdQueryString_2 | null;
+	internal?: skillsJsonInternalInputObject_2 | null;
 }
 export interface DistinctSitePageConnectionArgs {
 	field?: sitePageDistinctEnum | null;
@@ -6160,6 +7084,14 @@ export interface GroupPersonalJsonConnectionArgs {
 	limit?: number | null;
 	field?: personalJsonGroupEnum | null;
 }
+export interface DistinctOrganizationJsonConnectionArgs {
+	field?: organizationJsonDistinctEnum | null;
+}
+export interface GroupOrganizationJsonConnectionArgs {
+	skip?: number | null;
+	limit?: number | null;
+	field?: organizationJsonGroupEnum | null;
+}
 export interface DistinctCompetencesJsonConnectionArgs {
 	field?: competencesJsonDistinctEnum | null;
 }
@@ -6168,13 +7100,13 @@ export interface GroupCompetencesJsonConnectionArgs {
 	limit?: number | null;
 	field?: competencesJsonGroupEnum | null;
 }
-export interface DistinctSkillsJsonConnectionArgs {
-	field?: skillsJsonDistinctEnum | null;
+export interface DistinctExperiencesJsonConnectionArgs {
+	field?: experiencesJsonDistinctEnum | null;
 }
-export interface GroupSkillsJsonConnectionArgs {
+export interface GroupExperiencesJsonConnectionArgs {
 	skip?: number | null;
 	limit?: number | null;
-	field?: skillsJsonGroupEnum | null;
+	field?: experiencesJsonGroupEnum | null;
 }
 export interface DistinctInterestsJsonConnectionArgs {
 	field?: interestsJsonDistinctEnum | null;
@@ -6184,13 +7116,13 @@ export interface GroupInterestsJsonConnectionArgs {
 	limit?: number | null;
 	field?: interestsJsonGroupEnum | null;
 }
-export interface DistinctExperiencesJsonConnectionArgs {
-	field?: experiencesJsonDistinctEnum | null;
+export interface DistinctSkillsJsonConnectionArgs {
+	field?: skillsJsonDistinctEnum | null;
 }
-export interface GroupExperiencesJsonConnectionArgs {
+export interface GroupSkillsJsonConnectionArgs {
 	skip?: number | null;
 	limit?: number | null;
-	field?: experiencesJsonGroupEnum | null;
+	field?: skillsJsonGroupEnum | null;
 }
 export interface PortSiteArgs {
 	formatString?:
@@ -6327,7 +7259,22 @@ export enum SitePluginConnectionSortByFieldsEnum {
 	pluginOptions___background_color = "pluginOptions___background_color",
 	pluginOptions___theme_color = "pluginOptions___theme_color",
 	pluginOptions___display = "pluginOptions___display",
+	pluginOptions___icon = "pluginOptions___icon",
 	pluginOptions___pathToConfigModule = "pluginOptions___pathToConfigModule",
+	pluginOptions___omitGoogleFont = "pluginOptions___omitGoogleFont",
+	pluginOptions___query = "pluginOptions___query",
+	pluginOptions___feeds = "pluginOptions___feeds",
+	pluginOptions___logo = "pluginOptions___logo",
+	pluginOptions___injectHTML = "pluginOptions___injectHTML",
+	pluginOptions___icons___android = "pluginOptions___icons___android",
+	pluginOptions___icons___appleIcon = "pluginOptions___icons___appleIcon",
+	pluginOptions___icons___appleStartup = "pluginOptions___icons___appleStartup",
+	pluginOptions___icons___coast = "pluginOptions___icons___coast",
+	pluginOptions___icons___favicons = "pluginOptions___icons___favicons",
+	pluginOptions___icons___firefox = "pluginOptions___icons___firefox",
+	pluginOptions___icons___twitter = "pluginOptions___icons___twitter",
+	pluginOptions___icons___yandex = "pluginOptions___icons___yandex",
+	pluginOptions___icons___windows = "pluginOptions___icons___windows",
 	nodeAPIs = "nodeAPIs",
 	browserAPIs = "browserAPIs",
 	ssrAPIs = "ssrAPIs",
@@ -6373,7 +7320,22 @@ export enum sitePluginDistinctEnum {
 	pluginOptions___background_color = "pluginOptions___background_color",
 	pluginOptions___theme_color = "pluginOptions___theme_color",
 	pluginOptions___display = "pluginOptions___display",
+	pluginOptions___icon = "pluginOptions___icon",
 	pluginOptions___pathToConfigModule = "pluginOptions___pathToConfigModule",
+	pluginOptions___omitGoogleFont = "pluginOptions___omitGoogleFont",
+	pluginOptions___query = "pluginOptions___query",
+	pluginOptions___feeds = "pluginOptions___feeds",
+	pluginOptions___logo = "pluginOptions___logo",
+	pluginOptions___injectHTML = "pluginOptions___injectHTML",
+	pluginOptions___icons___android = "pluginOptions___icons___android",
+	pluginOptions___icons___appleIcon = "pluginOptions___icons___appleIcon",
+	pluginOptions___icons___appleStartup = "pluginOptions___icons___appleStartup",
+	pluginOptions___icons___coast = "pluginOptions___icons___coast",
+	pluginOptions___icons___favicons = "pluginOptions___icons___favicons",
+	pluginOptions___icons___firefox = "pluginOptions___icons___firefox",
+	pluginOptions___icons___twitter = "pluginOptions___icons___twitter",
+	pluginOptions___icons___yandex = "pluginOptions___icons___yandex",
+	pluginOptions___icons___windows = "pluginOptions___icons___windows",
 	nodeAPIs = "nodeAPIs",
 	browserAPIs = "browserAPIs",
 	ssrAPIs = "ssrAPIs",
@@ -6414,7 +7376,22 @@ export enum sitePluginGroupEnum {
 	pluginOptions___background_color = "pluginOptions___background_color",
 	pluginOptions___theme_color = "pluginOptions___theme_color",
 	pluginOptions___display = "pluginOptions___display",
+	pluginOptions___icon = "pluginOptions___icon",
 	pluginOptions___pathToConfigModule = "pluginOptions___pathToConfigModule",
+	pluginOptions___omitGoogleFont = "pluginOptions___omitGoogleFont",
+	pluginOptions___query = "pluginOptions___query",
+	pluginOptions___feeds = "pluginOptions___feeds",
+	pluginOptions___logo = "pluginOptions___logo",
+	pluginOptions___injectHTML = "pluginOptions___injectHTML",
+	pluginOptions___icons___android = "pluginOptions___icons___android",
+	pluginOptions___icons___appleIcon = "pluginOptions___icons___appleIcon",
+	pluginOptions___icons___appleStartup = "pluginOptions___icons___appleStartup",
+	pluginOptions___icons___coast = "pluginOptions___icons___coast",
+	pluginOptions___icons___favicons = "pluginOptions___icons___favicons",
+	pluginOptions___icons___firefox = "pluginOptions___icons___firefox",
+	pluginOptions___icons___twitter = "pluginOptions___icons___twitter",
+	pluginOptions___icons___yandex = "pluginOptions___icons___yandex",
+	pluginOptions___icons___windows = "pluginOptions___icons___windows",
 	nodeAPIs = "nodeAPIs",
 	browserAPIs = "browserAPIs",
 	ssrAPIs = "ssrAPIs",
@@ -6721,7 +7698,7 @@ export enum MarkdownRemarkConnectionSortByFieldsEnum {
 	internal___contentDigest = "internal___contentDigest",
 	internal___owner = "internal___owner",
 	frontmatter___title = "frontmatter___title",
-	frontmatter___author = "frontmatter___author",
+	frontmatter___authors = "frontmatter___authors",
 	frontmatter___link = "frontmatter___link",
 	frontmatter____PARENT = "frontmatter____PARENT",
 	frontmatter___parent = "frontmatter___parent",
@@ -6754,7 +7731,7 @@ export enum markdownRemarkDistinctEnum {
 	internal___contentDigest = "internal___contentDigest",
 	internal___owner = "internal___owner",
 	frontmatter___title = "frontmatter___title",
-	frontmatter___author = "frontmatter___author",
+	frontmatter___authors = "frontmatter___authors",
 	frontmatter___link = "frontmatter___link",
 	frontmatter____PARENT = "frontmatter____PARENT",
 	frontmatter___parent = "frontmatter___parent",
@@ -6775,7 +7752,7 @@ export enum markdownRemarkGroupEnum {
 	internal___contentDigest = "internal___contentDigest",
 	internal___owner = "internal___owner",
 	frontmatter___title = "frontmatter___title",
-	frontmatter___author = "frontmatter___author",
+	frontmatter___authors = "frontmatter___authors",
 	frontmatter___link = "frontmatter___link",
 	frontmatter____PARENT = "frontmatter____PARENT",
 	frontmatter___parent = "frontmatter___parent",
@@ -6824,7 +7801,9 @@ export enum todoJsonGroupEnum {
 }
 
 export enum PersonalJsonConnectionSortByFieldsEnum {
+	name = "name",
 	email = "email",
+	jobTitle = "jobTitle",
 	social = "social",
 	id = "id",
 	parent = "parent",
@@ -6839,7 +7818,9 @@ export enum personalJsonConnectionSortOrderValues {
 }
 
 export enum personalJsonDistinctEnum {
+	name = "name",
 	email = "email",
+	jobTitle = "jobTitle",
 	social = "social",
 	id = "id",
 	parent = "parent",
@@ -6849,13 +7830,62 @@ export enum personalJsonDistinctEnum {
 }
 
 export enum personalJsonGroupEnum {
+	name = "name",
 	email = "email",
+	jobTitle = "jobTitle",
 	social = "social",
 	id = "id",
 	parent = "parent",
 	internal___contentDigest = "internal___contentDigest",
 	internal___type = "internal___type",
 	internal___owner = "internal___owner",
+}
+
+export enum OrganizationJsonConnectionSortByFieldsEnum {
+	name = "name",
+	url = "url",
+	logo = "logo",
+	telephone = "telephone",
+	id = "id",
+	parent = "parent",
+	internal___contentDigest = "internal___contentDigest",
+	internal___type = "internal___type",
+	internal___owner = "internal___owner",
+	internal___fieldOwners___logo_image = "internal___fieldOwners___logo_image",
+	fields___logo_image = "fields___logo_image",
+}
+
+export enum organizationJsonConnectionSortOrderValues {
+	ASC = "ASC",
+	DESC = "DESC",
+}
+
+export enum organizationJsonDistinctEnum {
+	name = "name",
+	url = "url",
+	logo = "logo",
+	telephone = "telephone",
+	id = "id",
+	parent = "parent",
+	internal___contentDigest = "internal___contentDigest",
+	internal___type = "internal___type",
+	internal___owner = "internal___owner",
+	internal___fieldOwners___logo_image = "internal___fieldOwners___logo_image",
+	fields___logo_image = "fields___logo_image",
+}
+
+export enum organizationJsonGroupEnum {
+	name = "name",
+	url = "url",
+	logo = "logo",
+	telephone = "telephone",
+	id = "id",
+	parent = "parent",
+	internal___contentDigest = "internal___contentDigest",
+	internal___type = "internal___type",
+	internal___owner = "internal___owner",
+	internal___fieldOwners___logo_image = "internal___fieldOwners___logo_image",
+	fields___logo_image = "fields___logo_image",
 }
 
 export enum CompetencesJsonConnectionSortByFieldsEnum {
@@ -6886,6 +7916,76 @@ export enum competencesJsonDistinctEnum {
 export enum competencesJsonGroupEnum {
 	name = "name",
 	description = "description",
+	id = "id",
+	parent = "parent",
+	internal___contentDigest = "internal___contentDigest",
+	internal___type = "internal___type",
+	internal___owner = "internal___owner",
+}
+
+export enum ExperiencesJsonConnectionSortByFieldsEnum {
+	work = "work",
+	id = "id",
+	parent = "parent",
+	internal___contentDigest = "internal___contentDigest",
+	internal___type = "internal___type",
+	internal___owner = "internal___owner",
+	internal___fieldOwners___image_image = "internal___fieldOwners___image_image",
+	fields___image_image = "fields___image_image",
+}
+
+export enum experiencesJsonConnectionSortOrderValues {
+	ASC = "ASC",
+	DESC = "DESC",
+}
+
+export enum experiencesJsonDistinctEnum {
+	work = "work",
+	id = "id",
+	parent = "parent",
+	internal___contentDigest = "internal___contentDigest",
+	internal___type = "internal___type",
+	internal___owner = "internal___owner",
+	internal___fieldOwners___image_image = "internal___fieldOwners___image_image",
+	fields___image_image = "fields___image_image",
+}
+
+export enum experiencesJsonGroupEnum {
+	work = "work",
+	id = "id",
+	parent = "parent",
+	internal___contentDigest = "internal___contentDigest",
+	internal___type = "internal___type",
+	internal___owner = "internal___owner",
+	internal___fieldOwners___image_image = "internal___fieldOwners___image_image",
+	fields___image_image = "fields___image_image",
+}
+
+export enum InterestsJsonConnectionSortByFieldsEnum {
+	subjects = "subjects",
+	id = "id",
+	parent = "parent",
+	internal___contentDigest = "internal___contentDigest",
+	internal___type = "internal___type",
+	internal___owner = "internal___owner",
+}
+
+export enum interestsJsonConnectionSortOrderValues {
+	ASC = "ASC",
+	DESC = "DESC",
+}
+
+export enum interestsJsonDistinctEnum {
+	subjects = "subjects",
+	id = "id",
+	parent = "parent",
+	internal___contentDigest = "internal___contentDigest",
+	internal___type = "internal___type",
+	internal___owner = "internal___owner",
+}
+
+export enum interestsJsonGroupEnum {
+	subjects = "subjects",
 	id = "id",
 	parent = "parent",
 	internal___contentDigest = "internal___contentDigest",
@@ -6924,70 +8024,6 @@ export enum skillsJsonGroupEnum {
 	languages = "languages",
 	technical = "technical",
 	soft = "soft",
-	id = "id",
-	parent = "parent",
-	internal___contentDigest = "internal___contentDigest",
-	internal___type = "internal___type",
-	internal___owner = "internal___owner",
-}
-
-export enum InterestsJsonConnectionSortByFieldsEnum {
-	subjects = "subjects",
-	id = "id",
-	parent = "parent",
-	internal___contentDigest = "internal___contentDigest",
-	internal___type = "internal___type",
-	internal___owner = "internal___owner",
-}
-
-export enum interestsJsonConnectionSortOrderValues {
-	ASC = "ASC",
-	DESC = "DESC",
-}
-
-export enum interestsJsonDistinctEnum {
-	subjects = "subjects",
-	id = "id",
-	parent = "parent",
-	internal___contentDigest = "internal___contentDigest",
-	internal___type = "internal___type",
-	internal___owner = "internal___owner",
-}
-
-export enum interestsJsonGroupEnum {
-	subjects = "subjects",
-	id = "id",
-	parent = "parent",
-	internal___contentDigest = "internal___contentDigest",
-	internal___type = "internal___type",
-	internal___owner = "internal___owner",
-}
-
-export enum ExperiencesJsonConnectionSortByFieldsEnum {
-	work = "work",
-	id = "id",
-	parent = "parent",
-	internal___contentDigest = "internal___contentDigest",
-	internal___type = "internal___type",
-	internal___owner = "internal___owner",
-}
-
-export enum experiencesJsonConnectionSortOrderValues {
-	ASC = "ASC",
-	DESC = "DESC",
-}
-
-export enum experiencesJsonDistinctEnum {
-	work = "work",
-	id = "id",
-	parent = "parent",
-	internal___contentDigest = "internal___contentDigest",
-	internal___type = "internal___type",
-	internal___owner = "internal___owner",
-}
-
-export enum experiencesJsonGroupEnum {
-	work = "work",
 	id = "id",
 	parent = "parent",
 	internal___contentDigest = "internal___contentDigest",

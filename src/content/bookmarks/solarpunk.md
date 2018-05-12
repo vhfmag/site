@@ -1,6 +1,8 @@
 ---
 title: On the political dimensions of solarpunk
-author: "[Andrew Dana Hudson](https://medium.com/@andrewdhudson?source=post_header_lockup)"
+authors:
+    - name: Andrew Dana Hudson
+      url: https://medium.com/@andrewdhudson?source=post_header_lockup
 link: https://medium.com/solarpunks/on-the-political-dimensions-of-solarpunk-c5a7b4bf8df4
 ---
 

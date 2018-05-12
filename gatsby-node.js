@@ -1,11 +1,15 @@
 const path = require("path");
 const createPaginatedPages = require("gatsby-paginate");
 
-const { graphql } = require("./src/utils/taggedUtils");
-const { extractFileNameFromPath } = require("./src/utils/utils");
+const {
+	graphql
+} = require("./src/utils/taggedUtils");
+const {
+	extractFileNameFromPath
+} = require("./src/utils/utils");
 
 function buildPageQuery(pageKind) {
-	return graphql`
+	return graphql `
 		{
 			allMarkdownRemark(
 					filter: {frontmatter: {draft: {ne: true}}, fileAbsolutePath: {regex: "/${pageKind}/.*\.md/"}},
@@ -17,7 +21,10 @@ function buildPageQuery(pageKind) {
 						fileAbsolutePath
 						frontmatter {
 							date
-							author
+							authors {
+								name
+								url
+							}
 							link
 							title
 							description
@@ -53,10 +60,14 @@ function createEntryPages({
 			edges: postEdges,
 			pathPrefix,
 			pageLength: 5,
-			context: { singlePath },
+			context: {
+				singlePath
+			},
 		});
 
-		postEdges.forEach(({ node }) => {
+		postEdges.forEach(({
+			node
+		}) => {
 			const markdownPath = node.fileAbsolutePath;
 			const slug = extractFileNameFromPath(markdownPath);
 			createPage({
@@ -71,9 +82,15 @@ function createEntryPages({
 	});
 }
 
-exports.onCreateNode = ({ node, boundActionCreators }) => {
+exports.onCreateNode = ({
+	node,
+	boundActionCreators
+}) => {
 	if (node.internal.owner === "gatsby-transformer-json")
-		recurseOnObjectProcessingImages({ node, boundActionCreators });
+		recurseOnObjectProcessingImages({
+			node,
+			boundActionCreators
+		});
 };
 
 function recurseOnObjectProcessingImages({
@@ -81,7 +98,9 @@ function recurseOnObjectProcessingImages({
 	content = node,
 	boundActionCreators,
 }) {
-	const { createNodeField } = boundActionCreators;
+	const {
+		createNodeField
+	} = boundActionCreators;
 
 	if (Array.isArray(content)) {
 		for (const object of content) {
@@ -154,8 +173,13 @@ function recurseOnObjectProcessingImages({
 	}
 }
 
-exports.createPages = ({ boundActionCreators, graphql: graphqlQuerier }) => {
-	const { createPage } = boundActionCreators;
+exports.createPages = ({
+	boundActionCreators,
+	graphql: graphqlQuerier
+}) => {
+	const {
+		createPage
+	} = boundActionCreators;
 
 	return new Promise((resolve, reject) => {
 		const postTemplate = path.resolve(`src/templates/singlePost.tsx`);

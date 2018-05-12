@@ -1,6 +1,10 @@
 ---
 title: How cybernetics connects computing, counterculture, and design
-author: "[Hugh Dubberly](http://www.dubberly.com/author/hugh) and [Paul Pangaro](http://www.dubberly.com/author/paulpangaro) from [Dubberly Design Office](http://www.dubberly.com/)"
+authors:
+    - name: Hugh Dubberly
+      url: http://www.dubberly.com/author/hugh
+    - name: Paul Pangaro
+      url: http://www.dubberly.com/author/paulpangaro
 link: http://www.dubberly.com/articles/cybernetics-and-counterculture.html
 ---
 

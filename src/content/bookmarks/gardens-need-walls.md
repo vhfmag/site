@@ -1,6 +1,8 @@
 ---
 title: "Gardens Need Walls: On Boundaries, Ritual, and Beauty"
-author: "[Sarah Perry](https://www.ribbonfarm.com/author/sarahperry/) at [Ribbonfarm](https://www.ribbonfarm.com/)"
+authors:
+    - name: Sarah Perry
+      url: https://www.ribbonfarm.com/author/sarahperry/
 link: https://www.ribbonfarm.com/2015/03/04/gardens-need-walls-on-boundaries-ritual-and-beauty/
 ---
 

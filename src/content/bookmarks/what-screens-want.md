@@ -1,6 +1,8 @@
 ---
 title: What Screens Want
-author: "[Frank Chimero](https://frankchimero.com)"
+authors:
+    - name: Frank Chimero
+      url: https://frankchimero.com
 link: https://frankchimero.com/writing/what-screens-want/
 ---
 

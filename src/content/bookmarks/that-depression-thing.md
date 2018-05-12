@@ -1,6 +1,8 @@
 ---
 title: the depression thing
-author: "[Zach Holman](https://zachholman.com/)"
+authors:
+    - name: Zach Holman
+      url: https://zachholman.com/
 link: https://zachholman.com/posts/the-depression-thing
 ---
 
