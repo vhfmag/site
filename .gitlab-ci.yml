@@ -4,7 +4,7 @@ pages:
   script:
   - yarn
   - yarn add gatsby-cli
-  - npx gatsby build --prefix-paths
+  - yarn build
   artifacts:
     paths:
     - public
@@ -13,3 +13,7 @@ pages:
     - node_modules
   only:
   - master
+
+now:
+  script:
+  - yarn run deploy-ci
