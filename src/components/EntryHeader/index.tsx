@@ -83,7 +83,7 @@ export const EntryHeader: React.SFC<
 				<div>
 					<time
 						className="dt-published"
-						dateTime={publishDate.toISOString().split("T")[0]}
+						dateTime={publishDate.toISOString()}
 					>
 						{DateTime.fromJSDate(publishDate).toLocaleString(
 							DateTime.DATE_FULL,
