@@ -16,5 +16,5 @@ pages:
 
 now:
   script:
-  - npm install -g now
-  - yarn run deploy-ci
+  - npm install -g --unsafe-perm now
+  - yarn run deploy-cif
