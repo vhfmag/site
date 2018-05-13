@@ -13,7 +13,7 @@ module.exports = {
 		title: "Victor Magalhães",
 		siteUrl: "https://victormagalhaes.codes",
 		sourceUrl: "https://gitlab.com/vhfmag/vhfmag.gitlab.io/",
-		description: "web dev, decentralized web & p2p enthusiast",
+		description: "javascript engineer at [cubos.io](https://cubos.io/) and web, p2p, and decentralization enthusiast",
 	},
 	plugins: [
 		"gatsby-plugin-react-next",
