@@ -20,8 +20,8 @@ export interface RootQueryType {
 	allMarkdownRemark?: MarkdownRemarkConnection | null /* Connection to all MarkdownRemark nodes */;
 	allTodoJson?: TodoJsonConnection | null /* Connection to all TodoJson nodes */;
 	allPersonalJson?: PersonalJsonConnection | null /* Connection to all PersonalJson nodes */;
-	allOrganizationJson?: OrganizationJsonConnection | null /* Connection to all OrganizationJson nodes */;
 	allCompetencesJson?: CompetencesJsonConnection | null /* Connection to all CompetencesJson nodes */;
+	allOrganizationJson?: OrganizationJsonConnection | null /* Connection to all OrganizationJson nodes */;
 	allExperiencesJson?: ExperiencesJsonConnection | null /* Connection to all ExperiencesJson nodes */;
 	allInterestsJson?: InterestsJsonConnection | null /* Connection to all InterestsJson nodes */;
 	allSkillsJson?: SkillsJsonConnection | null /* Connection to all SkillsJson nodes */;
@@ -33,8 +33,8 @@ export interface RootQueryType {
 	markdownRemark?: MarkdownRemark | null;
 	todoJson?: TodoJson | null;
 	personalJson?: PersonalJson | null;
-	organizationJson?: OrganizationJson | null;
 	competencesJson?: CompetencesJson | null;
+	organizationJson?: OrganizationJson | null;
 	experiencesJson?: ExperiencesJson | null;
 	interestsJson?: InterestsJson | null;
 	skillsJson?: SkillsJson | null;
@@ -85,6 +85,7 @@ export interface context {
 	additionalContext?: additionalContext | null;
 	slug?: string | null;
 	markdownPath?: string | null;
+	category?: string | null;
 }
 
 export interface group {
@@ -112,6 +113,8 @@ export interface authors_2 {
 
 export interface additionalContext {
 	singlePath?: string | null;
+	listTitle?: string | null;
+	category?: string | null;
 }
 /* Node of type SitePlugin */
 export interface SitePlugin extends Node {
@@ -740,34 +743,6 @@ export interface personalJsonGroupConnectionEdge {
 	previous?: PersonalJson | null /* The previous edge in the connection */;
 }
 /* A connection to a list of items. */
-export interface OrganizationJsonConnection {
-	pageInfo: PageInfo /* Information to aid in pagination. */;
-	edges?: OrganizationJsonEdge[] | null /* A list of edges. */;
-	totalCount?: number | null;
-	distinct?: string[] | null;
-	group?: organizationJsonGroupConnectionConnection[] | null;
-}
-/* An edge in a connection. */
-export interface OrganizationJsonEdge {
-	node?: OrganizationJson | null /* The item at the end of the edge */;
-	next?: OrganizationJson | null /* The next edge in the connection */;
-	previous?: OrganizationJson | null /* The previous edge in the connection */;
-}
-/* A connection to a list of items. */
-export interface organizationJsonGroupConnectionConnection {
-	pageInfo: PageInfo /* Information to aid in pagination. */;
-	edges?: organizationJsonGroupConnectionEdge[] | null /* A list of edges. */;
-	field?: string | null;
-	fieldValue?: string | null;
-	totalCount?: number | null;
-}
-/* An edge in a connection. */
-export interface organizationJsonGroupConnectionEdge {
-	node?: OrganizationJson | null /* The item at the end of the edge */;
-	next?: OrganizationJson | null /* The next edge in the connection */;
-	previous?: OrganizationJson | null /* The previous edge in the connection */;
-}
-/* A connection to a list of items. */
 export interface CompetencesJsonConnection {
 	pageInfo: PageInfo /* Information to aid in pagination. */;
 	edges?: CompetencesJsonEdge[] | null /* A list of edges. */;
@@ -794,6 +769,34 @@ export interface competencesJsonGroupConnectionEdge {
 	node?: CompetencesJson | null /* The item at the end of the edge */;
 	next?: CompetencesJson | null /* The next edge in the connection */;
 	previous?: CompetencesJson | null /* The previous edge in the connection */;
+}
+/* A connection to a list of items. */
+export interface OrganizationJsonConnection {
+	pageInfo: PageInfo /* Information to aid in pagination. */;
+	edges?: OrganizationJsonEdge[] | null /* A list of edges. */;
+	totalCount?: number | null;
+	distinct?: string[] | null;
+	group?: organizationJsonGroupConnectionConnection[] | null;
+}
+/* An edge in a connection. */
+export interface OrganizationJsonEdge {
+	node?: OrganizationJson | null /* The item at the end of the edge */;
+	next?: OrganizationJson | null /* The next edge in the connection */;
+	previous?: OrganizationJson | null /* The previous edge in the connection */;
+}
+/* A connection to a list of items. */
+export interface organizationJsonGroupConnectionConnection {
+	pageInfo: PageInfo /* Information to aid in pagination. */;
+	edges?: organizationJsonGroupConnectionEdge[] | null /* A list of edges. */;
+	field?: string | null;
+	fieldValue?: string | null;
+	totalCount?: number | null;
+}
+/* An edge in a connection. */
+export interface organizationJsonGroupConnectionEdge {
+	node?: OrganizationJson | null /* The item at the end of the edge */;
+	next?: OrganizationJson | null /* The next edge in the connection */;
+	previous?: OrganizationJson | null /* The previous edge in the connection */;
 }
 /* A connection to a list of items. */
 export interface ExperiencesJsonConnection {
@@ -896,6 +899,7 @@ export interface Site extends Node {
 export interface siteMetadata_2 {
 	title?: string | null;
 	siteUrl?: string | null;
+	sourceUrl?: string | null;
 	description?: string | null;
 }
 
@@ -977,6 +981,7 @@ export interface sitePageConnectionContextInputObject {
 	additionalContext?: sitePageConnectionContextAdditionalContextInputObject | null;
 	slug?: sitePageConnectionContextSlugQueryString | null;
 	markdownPath?: sitePageConnectionContextMarkdownPathQueryString | null;
+	category?: sitePageConnectionContextCategoryQueryString | null;
 }
 
 export interface sitePageConnectionContextGroupQueryList {
@@ -1097,9 +1102,25 @@ export interface sitePageConnectionContextPageCountQueryInteger {
 
 export interface sitePageConnectionContextAdditionalContextInputObject {
 	singlePath?: sitePageConnectionContextAdditionalContextSinglePathQueryString | null;
+	listTitle?: sitePageConnectionContextAdditionalContextListTitleQueryString | null;
+	category?: sitePageConnectionContextAdditionalContextCategoryQueryString | null;
 }
 
 export interface sitePageConnectionContextAdditionalContextSinglePathQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface sitePageConnectionContextAdditionalContextListTitleQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface sitePageConnectionContextAdditionalContextCategoryQueryString {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
@@ -1114,6 +1135,13 @@ export interface sitePageConnectionContextSlugQueryString {
 }
 
 export interface sitePageConnectionContextMarkdownPathQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface sitePageConnectionContextCategoryQueryString {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
@@ -3322,6 +3350,66 @@ export interface personalJsonConnectionInternalOwnerQueryString_2 {
 	glob?: string | null;
 }
 
+export interface competencesJsonConnectionSort {
+	fields: CompetencesJsonConnectionSortByFieldsEnum[];
+	order?: competencesJsonConnectionSortOrderValues | null;
+}
+/* Filter connection on its fields */
+export interface filterCompetencesJson {
+	name?: competencesJsonConnectionNameQueryString_2 | null;
+	description?: competencesJsonConnectionDescriptionQueryString_2 | null;
+	id?: competencesJsonConnectionIdQueryString_2 | null;
+	internal?: competencesJsonConnectionInternalInputObject_2 | null;
+}
+
+export interface competencesJsonConnectionNameQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface competencesJsonConnectionDescriptionQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface competencesJsonConnectionIdQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface competencesJsonConnectionInternalInputObject_2 {
+	contentDigest?: competencesJsonConnectionInternalContentDigestQueryString_2 | null;
+	type?: competencesJsonConnectionInternalTypeQueryString_2 | null;
+	owner?: competencesJsonConnectionInternalOwnerQueryString_2 | null;
+}
+
+export interface competencesJsonConnectionInternalContentDigestQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface competencesJsonConnectionInternalTypeQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface competencesJsonConnectionInternalOwnerQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
 export interface organizationJsonConnectionSort {
 	fields: OrganizationJsonConnectionSortByFieldsEnum[];
 	order?: organizationJsonConnectionSortOrderValues | null;
@@ -3416,66 +3504,6 @@ export interface organizationJsonConnectionFieldsInputObject_2 {
 }
 
 export interface organizationJsonConnectionFieldsLogoImageQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-}
-
-export interface competencesJsonConnectionSort {
-	fields: CompetencesJsonConnectionSortByFieldsEnum[];
-	order?: competencesJsonConnectionSortOrderValues | null;
-}
-/* Filter connection on its fields */
-export interface filterCompetencesJson {
-	name?: competencesJsonConnectionNameQueryString_2 | null;
-	description?: competencesJsonConnectionDescriptionQueryString_2 | null;
-	id?: competencesJsonConnectionIdQueryString_2 | null;
-	internal?: competencesJsonConnectionInternalInputObject_2 | null;
-}
-
-export interface competencesJsonConnectionNameQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-}
-
-export interface competencesJsonConnectionDescriptionQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-}
-
-export interface competencesJsonConnectionIdQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-}
-
-export interface competencesJsonConnectionInternalInputObject_2 {
-	contentDigest?: competencesJsonConnectionInternalContentDigestQueryString_2 | null;
-	type?: competencesJsonConnectionInternalTypeQueryString_2 | null;
-	owner?: competencesJsonConnectionInternalOwnerQueryString_2 | null;
-}
-
-export interface competencesJsonConnectionInternalContentDigestQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-}
-
-export interface competencesJsonConnectionInternalTypeQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-}
-
-export interface competencesJsonConnectionInternalOwnerQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
@@ -3836,6 +3864,7 @@ export interface sitePageContextInputObject {
 	additionalContext?: sitePageContextAdditionalContextInputObject | null;
 	slug?: sitePageContextSlugQueryString | null;
 	markdownPath?: sitePageContextMarkdownPathQueryString | null;
+	category?: sitePageContextCategoryQueryString | null;
 }
 
 export interface sitePageContextGroupQueryList {
@@ -3954,9 +3983,25 @@ export interface sitePageContextPageCountQueryInteger {
 
 export interface sitePageContextAdditionalContextInputObject {
 	singlePath?: sitePageContextAdditionalContextSinglePathQueryString | null;
+	listTitle?: sitePageContextAdditionalContextListTitleQueryString | null;
+	category?: sitePageContextAdditionalContextCategoryQueryString | null;
 }
 
 export interface sitePageContextAdditionalContextSinglePathQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface sitePageContextAdditionalContextListTitleQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface sitePageContextAdditionalContextCategoryQueryString {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
@@ -3971,6 +4016,13 @@ export interface sitePageContextSlugQueryString {
 }
 
 export interface sitePageContextMarkdownPathQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface sitePageContextCategoryQueryString {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
@@ -5168,6 +5220,7 @@ export interface sitePluginInternalOwnerQueryString_2 {
 export interface siteSiteMetadataInputObject_2 {
 	title?: siteSiteMetadataTitleQueryString_2 | null;
 	siteUrl?: siteSiteMetadataSiteUrlQueryString_2 | null;
+	sourceUrl?: siteSiteMetadataSourceUrlQueryString_2 | null;
 	description?: siteSiteMetadataDescriptionQueryString_2 | null;
 }
 
@@ -5179,6 +5232,13 @@ export interface siteSiteMetadataTitleQueryString_2 {
 }
 
 export interface siteSiteMetadataSiteUrlQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface siteSiteMetadataSourceUrlQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
@@ -6115,6 +6175,54 @@ export interface personalJsonInternalOwnerQueryString_2 {
 	glob?: string | null;
 }
 
+export interface competencesJsonNameQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface competencesJsonDescriptionQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface competencesJsonIdQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface competencesJsonInternalInputObject_2 {
+	contentDigest?: competencesJsonInternalContentDigestQueryString_2 | null;
+	type?: competencesJsonInternalTypeQueryString_2 | null;
+	owner?: competencesJsonInternalOwnerQueryString_2 | null;
+}
+
+export interface competencesJsonInternalContentDigestQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface competencesJsonInternalTypeQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
+export interface competencesJsonInternalOwnerQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+}
+
 export interface organizationJsonNameQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
@@ -6194,54 +6302,6 @@ export interface organizationJsonFieldsInputObject_2 {
 }
 
 export interface organizationJsonFieldsLogoImageQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-}
-
-export interface competencesJsonNameQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-}
-
-export interface competencesJsonDescriptionQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-}
-
-export interface competencesJsonIdQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-}
-
-export interface competencesJsonInternalInputObject_2 {
-	contentDigest?: competencesJsonInternalContentDigestQueryString_2 | null;
-	type?: competencesJsonInternalTypeQueryString_2 | null;
-	owner?: competencesJsonInternalOwnerQueryString_2 | null;
-}
-
-export interface competencesJsonInternalContentDigestQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-}
-
-export interface competencesJsonInternalTypeQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-}
-
-export interface competencesJsonInternalOwnerQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
@@ -6555,17 +6615,17 @@ export interface AllPersonalJsonRootQueryTypeArgs {
 	sort?: personalJsonConnectionSort | null;
 	filter?: filterPersonalJson | null;
 }
-export interface AllOrganizationJsonRootQueryTypeArgs {
-	skip?: number | null;
-	limit?: number | null;
-	sort?: organizationJsonConnectionSort | null;
-	filter?: filterOrganizationJson | null;
-}
 export interface AllCompetencesJsonRootQueryTypeArgs {
 	skip?: number | null;
 	limit?: number | null;
 	sort?: competencesJsonConnectionSort | null;
 	filter?: filterCompetencesJson | null;
+}
+export interface AllOrganizationJsonRootQueryTypeArgs {
+	skip?: number | null;
+	limit?: number | null;
+	sort?: organizationJsonConnectionSort | null;
+	filter?: filterOrganizationJson | null;
 }
 export interface AllExperiencesJsonRootQueryTypeArgs {
 	skip?: number | null;
@@ -6723,6 +6783,12 @@ export interface PersonalJsonRootQueryTypeArgs {
 	id?: personalJsonIdQueryString_2 | null;
 	internal?: personalJsonInternalInputObject_2 | null;
 }
+export interface CompetencesJsonRootQueryTypeArgs {
+	name?: competencesJsonNameQueryString_2 | null;
+	description?: competencesJsonDescriptionQueryString_2 | null;
+	id?: competencesJsonIdQueryString_2 | null;
+	internal?: competencesJsonInternalInputObject_2 | null;
+}
 export interface OrganizationJsonRootQueryTypeArgs {
 	name?: organizationJsonNameQueryString_2 | null;
 	url?: organizationJsonUrlQueryString_2 | null;
@@ -6731,12 +6797,6 @@ export interface OrganizationJsonRootQueryTypeArgs {
 	id?: organizationJsonIdQueryString_2 | null;
 	internal?: organizationJsonInternalInputObject_2 | null;
 	fields?: organizationJsonFieldsInputObject_2 | null;
-}
-export interface CompetencesJsonRootQueryTypeArgs {
-	name?: competencesJsonNameQueryString_2 | null;
-	description?: competencesJsonDescriptionQueryString_2 | null;
-	id?: competencesJsonIdQueryString_2 | null;
-	internal?: competencesJsonInternalInputObject_2 | null;
 }
 export interface ExperiencesJsonRootQueryTypeArgs {
 	work?: experiencesJsonWorkQueryList_2 | null;
@@ -7084,14 +7144,6 @@ export interface GroupPersonalJsonConnectionArgs {
 	limit?: number | null;
 	field?: personalJsonGroupEnum | null;
 }
-export interface DistinctOrganizationJsonConnectionArgs {
-	field?: organizationJsonDistinctEnum | null;
-}
-export interface GroupOrganizationJsonConnectionArgs {
-	skip?: number | null;
-	limit?: number | null;
-	field?: organizationJsonGroupEnum | null;
-}
 export interface DistinctCompetencesJsonConnectionArgs {
 	field?: competencesJsonDistinctEnum | null;
 }
@@ -7099,6 +7151,14 @@ export interface GroupCompetencesJsonConnectionArgs {
 	skip?: number | null;
 	limit?: number | null;
 	field?: competencesJsonGroupEnum | null;
+}
+export interface DistinctOrganizationJsonConnectionArgs {
+	field?: organizationJsonDistinctEnum | null;
+}
+export interface GroupOrganizationJsonConnectionArgs {
+	skip?: number | null;
+	limit?: number | null;
+	field?: organizationJsonGroupEnum | null;
 }
 export interface DistinctExperiencesJsonConnectionArgs {
 	field?: experiencesJsonDistinctEnum | null;
@@ -7167,8 +7227,11 @@ export enum SitePageConnectionSortByFieldsEnum {
 	context___index = "context___index",
 	context___pageCount = "context___pageCount",
 	context___additionalContext___singlePath = "context___additionalContext___singlePath",
+	context___additionalContext___listTitle = "context___additionalContext___listTitle",
+	context___additionalContext___category = "context___additionalContext___category",
 	context___slug = "context___slug",
 	context___markdownPath = "context___markdownPath",
+	context___category = "context___category",
 	pluginCreator___NODE = "pluginCreator___NODE",
 	pluginCreatorId = "pluginCreatorId",
 	componentPath = "componentPath",
@@ -7199,8 +7262,11 @@ export enum sitePageDistinctEnum {
 	context___index = "context___index",
 	context___pageCount = "context___pageCount",
 	context___additionalContext___singlePath = "context___additionalContext___singlePath",
+	context___additionalContext___listTitle = "context___additionalContext___listTitle",
+	context___additionalContext___category = "context___additionalContext___category",
 	context___slug = "context___slug",
 	context___markdownPath = "context___markdownPath",
+	context___category = "context___category",
 	pluginCreator___NODE = "pluginCreator___NODE",
 	pluginCreatorId = "pluginCreatorId",
 	componentPath = "componentPath",
@@ -7226,8 +7292,11 @@ export enum sitePageGroupEnum {
 	context___index = "context___index",
 	context___pageCount = "context___pageCount",
 	context___additionalContext___singlePath = "context___additionalContext___singlePath",
+	context___additionalContext___listTitle = "context___additionalContext___listTitle",
+	context___additionalContext___category = "context___additionalContext___category",
 	context___slug = "context___slug",
 	context___markdownPath = "context___markdownPath",
+	context___category = "context___category",
 	pluginCreator___NODE = "pluginCreator___NODE",
 	pluginCreatorId = "pluginCreatorId",
 	componentPath = "componentPath",
@@ -7841,6 +7910,41 @@ export enum personalJsonGroupEnum {
 	internal___owner = "internal___owner",
 }
 
+export enum CompetencesJsonConnectionSortByFieldsEnum {
+	name = "name",
+	description = "description",
+	id = "id",
+	parent = "parent",
+	internal___contentDigest = "internal___contentDigest",
+	internal___type = "internal___type",
+	internal___owner = "internal___owner",
+}
+
+export enum competencesJsonConnectionSortOrderValues {
+	ASC = "ASC",
+	DESC = "DESC",
+}
+
+export enum competencesJsonDistinctEnum {
+	name = "name",
+	description = "description",
+	id = "id",
+	parent = "parent",
+	internal___contentDigest = "internal___contentDigest",
+	internal___type = "internal___type",
+	internal___owner = "internal___owner",
+}
+
+export enum competencesJsonGroupEnum {
+	name = "name",
+	description = "description",
+	id = "id",
+	parent = "parent",
+	internal___contentDigest = "internal___contentDigest",
+	internal___type = "internal___type",
+	internal___owner = "internal___owner",
+}
+
 export enum OrganizationJsonConnectionSortByFieldsEnum {
 	name = "name",
 	url = "url",
@@ -7886,41 +7990,6 @@ export enum organizationJsonGroupEnum {
 	internal___owner = "internal___owner",
 	internal___fieldOwners___logo_image = "internal___fieldOwners___logo_image",
 	fields___logo_image = "fields___logo_image",
-}
-
-export enum CompetencesJsonConnectionSortByFieldsEnum {
-	name = "name",
-	description = "description",
-	id = "id",
-	parent = "parent",
-	internal___contentDigest = "internal___contentDigest",
-	internal___type = "internal___type",
-	internal___owner = "internal___owner",
-}
-
-export enum competencesJsonConnectionSortOrderValues {
-	ASC = "ASC",
-	DESC = "DESC",
-}
-
-export enum competencesJsonDistinctEnum {
-	name = "name",
-	description = "description",
-	id = "id",
-	parent = "parent",
-	internal___contentDigest = "internal___contentDigest",
-	internal___type = "internal___type",
-	internal___owner = "internal___owner",
-}
-
-export enum competencesJsonGroupEnum {
-	name = "name",
-	description = "description",
-	id = "id",
-	parent = "parent",
-	internal___contentDigest = "internal___contentDigest",
-	internal___type = "internal___type",
-	internal___owner = "internal___owner",
 }
 
 export enum ExperiencesJsonConnectionSortByFieldsEnum {
