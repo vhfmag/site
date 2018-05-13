@@ -105,9 +105,7 @@ export const Sidebar: React.SFC<ISidebarProps> = ({
 				<a href={sourceUrl}>código fonte</a>
 			</div>
 		</p>
-		<>
-			<Markdown source={description} className="lead p-note" />
-		</>
+		<p className="lead p-note">{description}</p>
 		<StyledNav>
 			<ul>
 				{nav.map(({ name, url }) => (
