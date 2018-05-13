@@ -12,12 +12,12 @@ module.exports = {
 	siteMetadata: {
 		title: "Victor Magalhães",
 		siteUrl: "https://victormagalhaes.codes",
+		sourceUrl: "https://gitlab.com/vhfmag/vhfmag.gitlab.io/",
 		description: "web dev, decentralized web & p2p enthusiast",
 	},
 	plugins: [
 		"gatsby-plugin-react-next",
 		"gatsby-plugin-react-helmet",
-		// Add typescript stack into webpack
 		"gatsby-plugin-typescript",
 		{
 			resolve: `gatsby-source-filesystem`,
@@ -34,9 +34,6 @@ module.exports = {
 					{
 						resolve: `gatsby-remark-images`,
 						options: {
-							// It's important to specify the maxWidth (in pixels) of
-							// the content container as this plugin uses this as the
-							// base for generating different widths of each image.
 							maxWidth: 590,
 						},
 					},
