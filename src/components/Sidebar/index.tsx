@@ -54,11 +54,17 @@ const StyledSidebar = styled.header`
 	}
 `;
 
-const SocialLinks = styled.div`
+const SocialLinks = styled.ul`
 	display: grid;
 	grid-template-columns: repeat(auto-fill, 1.75em);
 	grid-auto-flow: row dense;
 	grid-gap: 4pt;
+	list-style-type: none;
+	margin: 0;
+
+	li {
+		margin: 0;
+	}
 `;
 
 interface ISocialInfo {
@@ -131,7 +137,9 @@ export const Sidebar: React.SFC<ISidebarProps> = ({
 				url="/rss.xml"
 			/>
 			{social.map(socialProps => (
-				<SocialLink key={socialProps.serviceName} {...socialProps} />
+				<li key={socialProps.serviceName}>
+					<SocialLink {...socialProps} />
+				</li>
 			))}
 		</SocialLinks>
 	</StyledSidebar>
