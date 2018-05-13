@@ -53,6 +53,11 @@ export const Paginator: React.SFC<IPaginatorProps> = ({
 					key={i}
 					title={`Página ${i}`}
 					exact
+					rel={
+						`${i === 1 ? "first" : ""} ${
+							i === pageCount ? "last" : ""
+						}`.trim() || undefined
+					}
 					to={buildPath({ pathPrefix, index: i })}
 				>
 					{i}
