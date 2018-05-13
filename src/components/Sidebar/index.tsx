@@ -1,5 +1,6 @@
 import * as React from "react";
 import styled from "styled-components";
+import Markdown from "react-markdown";
 import Link from "gatsby-link";
 
 import "normalize-css/normalize.css";
@@ -104,7 +105,7 @@ export const Sidebar: React.SFC<ISidebarProps> = ({
 				<a href={sourceUrl}>código fonte</a>
 			</div>
 		</p>
-		<p className="lead p-note">{description}</p>
+		<Markdown source={description} className="lead p-note" />
 		<StyledNav>
 			<ul>
 				{nav.map(({ name, url }) => (
