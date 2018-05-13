@@ -69,6 +69,7 @@ interface ISocialInfo {
 interface ISidebarProps {
 	title: string;
 	email: string;
+	sourceUrl: string;
 	description: string;
 	social: ISocialInfo[];
 	nav: ISidebarNav[];
@@ -81,6 +82,7 @@ export interface ISidebarNav {
 
 export const Sidebar: React.SFC<ISidebarProps> = ({
 	title,
+	sourceUrl,
 	description,
 	email,
 	social,
@@ -93,9 +95,14 @@ export const Sidebar: React.SFC<ISidebarProps> = ({
 			</Link>
 		</h1>
 		<p>
-			<a className="u-email" href={`mailto:${email}`}>
-				{email}
-			</a>
+			<div>
+				<a className="u-email" href={`mailto:${email}`}>
+					{email}
+				</a>
+			</div>
+			<div>
+				<a href={sourceUrl}>código fonte</a>
+			</div>
 		</p>
 		<p className="lead p-note">{description}</p>
 		<StyledNav>

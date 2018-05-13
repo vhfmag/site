@@ -63,6 +63,7 @@ interface DefaultLayoutProps
 			siteMetadata: {
 				title: string;
 				siteUrl: string;
+				sourceUrl: string;
 				description: string;
 			};
 		};
@@ -100,6 +101,7 @@ export default class DefaultLayout extends React.PureComponent<
 			title,
 			description,
 			siteUrl,
+			sourceUrl,
 		} = this.props.data.site.siteMetadata;
 		const { name, jobTitle, email, social } = this.props.data.personalJson;
 		const { organizationJson } = this.props.data;
@@ -177,6 +179,7 @@ export default class DefaultLayout extends React.PureComponent<
 					title={title}
 					email={email}
 					social={social}
+					sourceUrl={sourceUrl}
 					description={description}
 					nav={[
 						{
@@ -214,6 +217,7 @@ export const pageQuery = graphql`
 			siteMetadata {
 				title
 				siteUrl
+				sourceUrl
 				description
 			}
 		}
