@@ -6,15 +6,15 @@ date:  2017-10-13
 
 Começar em JavaScript em 2017 não é fácil. As infinitas possibilidades podem sobrecarregar e parar a gente antes da primeira linha de código.
 
-Enquanto para começar a desenvolver um aplicativo nativo para iOS há decisões simples, como entre Objective-C ou Swift, em JavaScript há mais de 5 opções de sintaxe (ES5, ES5+, Typescript, Elm, Clojure…), incontáveis frameworks/bibliotecas para a interface de usuário e ferramentas de build — tudo isso antes de escrever a primeira linha de código. Como não há tempo hábil para testar cada uma das combinações possíveis de escolha, resta pesquisar e ver o que está sendo utilizado no mercado.
+Enquanto para começar a desenvolver um aplicativo nativo para iOS há decisões simples, como entre Objective-C ou Swift, em JavaScript há mais de 5 opções de sintaxe (ES5, ES5+, Typescript, Elm, ClojureScript, CoffeeScript, PureScript, ReasonML…), incontáveis frameworks/bibliotecas para a interface de usuário e ferramentas de build — tudo isso antes de escrever a primeira linha de código. Como não há tempo hábil para testar cada uma das combinações possíveis de escolha, resta pesquisar e ver o que está sendo utilizado no mercado.
 
-Por isso, a Cubos decidiu falar um pouco mais sobre a nossa stack front-end, passando principalmente pelas três categorias acima citadas: *flavor*, biblioteca de UI e ferramentas de build.
+Por isso, a Cubos decidiu falar um pouco mais sobre a nossa stack front-end, passando principalmente pelas três categorias acima citadas: _flavor_, biblioteca de UI e ferramentas de build.
 
 ## Typescript 
 
 ### JavaScript com tipos
 
-Nós usamos [TypeScript](http://www.typescriptlang.org/), um superset tipado de JavaScript. Ou seja: uma linguagem baseada em JavaScript (todo código JavaScript é, sintaticamente, um código TypeScript válido) que compila para JavaScript depois de checar a consistência e validade dos tipos na aplicação.
+Nós usamos [TypeScript](http://www.typescriptlang.org/), um superset tipado de JavaScript. Ou seja: uma linguagem baseada em JavaScript (todo código JavaScript é, sintaticamente, um código TypeScript válido - daí o _superset_) que compila para JavaScript depois de checar a consistência e validade dos tipos na aplicação.
 
 A razão principal para o usarmos é melhorar a sustentabilidade de nossas aplicações. Com checagem de tipo em tempo de compilação, os desenvolvedores podem mudar tranquilamente o tipo retornado pela API ou refatorar um componente React para receber novas propriedades e fazer todos os ajustes necessários com base nos erros exibidos durante a compilação ou no seu editor de código preferido.
 
