@@ -4,16 +4,15 @@ const {
 	textColor,
 } = require("./src/utils/consts");
 
-const {
-	extractFileNameFromPath,
-} = require("./src/utils/utils");
+const { extractFileNameFromPath } = require("./src/utils/utils");
 
 module.exports = {
 	siteMetadata: {
 		title: "Victor Magalhães",
 		siteUrl: "https://victormagalhaes.codes",
 		sourceUrl: "https://gitlab.com/vhfmag/vhfmag.gitlab.io/",
-		description: "javascript engineer at [cubos.io](https://cubos.io/) and web, p2p, and decentralization enthusiast",
+		description:
+			"javascript engineer at [cubos.io](https://cubos.io/) and web, p2p, and decentralization enthusiast",
 	},
 	plugins: [
 		"gatsby-plugin-react-next",
@@ -87,28 +86,35 @@ module.exports = {
 				  }
 				}
 			  `,
-				feeds: [{
-					serialize: ({
-						query: {
-							site,
-							allMarkdownRemark
-						}
-					}) => {
-						return allMarkdownRemark.edges.map(edge => {
-							const slug = extractFileNameFromPath(edge.node.fileAbsolutePath);
-							const url = `${site.siteMetadata.siteUrl}/post/${slug}`;
+				feeds: [
+					{
+						serialize: ({ query: { site, allMarkdownRemark } }) => {
+							return allMarkdownRemark.edges.map(edge => {
+								const slug = extractFileNameFromPath(
+									edge.node.fileAbsolutePath,
+								);
+								const url = `${
+									site.siteMetadata.siteUrl
+								}/post/${slug}`;
 
-							return Object.assign({}, edge.node.frontmatter, {
-								description: edge.node.excerpt,
-								url,
-								guid: url,
-								custom_elements: [{
-									"content:encoded": edge.node.html
-								}],
+								return Object.assign(
+									{},
+									edge.node.frontmatter,
+									{
+										description: edge.node.excerpt,
+										url,
+										guid: url,
+										custom_elements: [
+											{
+												"content:encoded":
+													edge.node.html,
+											},
+										],
+									},
+								);
 							});
-						});
-					},
-					query: `
+						},
+						query: `
 					{
 					  allMarkdownRemark(
 						limit: 1000,
@@ -132,8 +138,9 @@ module.exports = {
 					  }
 					}
 				  `,
-					output: "/rss.xml",
-				}, ],
+						output: "/rss.xml",
+					},
+				],
 			},
 		},
 		{
@@ -150,9 +157,9 @@ module.exports = {
 					firefox: true,
 					twitter: true,
 					yandex: true,
-					windows: true
-				}
-			}
+					windows: true,
+				},
+			},
 		},
 	],
 };
