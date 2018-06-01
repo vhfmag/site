@@ -161,7 +161,6 @@ export default class DefaultLayout extends React.PureComponent<
 								"web",
 								"decentralization",
 								"p2p",
-								"minorities",
 								"personal",
 								"blog",
 								"brazilian",
