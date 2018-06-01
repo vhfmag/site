@@ -52,7 +52,7 @@ const StyledRoot = styled.div`
 	}
 `;
 
-interface DefaultLayoutProps
+interface IDefaultLayoutProps
 	extends ObjectOmit<React.HTMLProps<HTMLDivElement>, "data"> {
 	location: {
 		pathname: string;
@@ -83,7 +83,7 @@ interface DefaultLayoutProps
 }
 
 export default class DefaultLayout extends React.PureComponent<
-	DefaultLayoutProps,
+	IDefaultLayoutProps,
 	void
 > {
 	public componentDidMount() {
@@ -107,6 +107,11 @@ export default class DefaultLayout extends React.PureComponent<
 		} = this.props.data.site.siteMetadata;
 		const { name, jobTitle, email, social } = this.props.data.personalJson;
 		const { organizationJson } = this.props.data;
+
+		const plainTextDescription = description.replace(
+			/\[([^\]]+)\]\([^\)]+\)/g,
+			"$1",
+		);
 
 		const personLinkedData = {
 			"@context": "http://schema.org",
@@ -142,7 +147,10 @@ export default class DefaultLayout extends React.PureComponent<
 					defaultTitle={title}
 					titleTemplate={`${title} | %s`}
 					meta={[
-						{ name: "description", content: description },
+						{
+							name: "description",
+							content: plainTextDescription,
+						},
 						{
 							name: "keywords",
 							content: [
