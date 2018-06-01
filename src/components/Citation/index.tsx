@@ -31,6 +31,13 @@ const StyledCitation = styled.blockquote`
 	}
 
 	cite {
+		&:before {
+			content: open-quote;
+		}
+
+		&:after {
+			content: close-quote;
+		}
 	}
 `;
 
@@ -49,7 +56,7 @@ export const Citation: React.SFC<
 		{...blockquoteProps}
 		className={`${blockquoteProps.className || ""} ${position || ""}`}
 	>
-		{quote && <cite>"{quote}"</cite>}
+		{quote && <cite>{quote}</cite>}
 		{(author || from) && (
 			<div className="description">
 				<span className="author">{author}</span>
