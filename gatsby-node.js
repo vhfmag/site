@@ -8,7 +8,11 @@ function buildPageQuery(pageKind) {
 	return graphql`
 		{
 			allMarkdownRemark(
-					filter: {frontmatter: {draft: {ne: true}}, fileAbsolutePath: {regex: "/${pageKind}/.*\.md/"}},
+					filter: {${
+						process.env.NODE_ENV === "production"
+							? `frontmatter: { draft: { ne: true } },`
+							: ""
+					}, fileAbsolutePath: {regex: "/${pageKind}/.*\.md/"}},
 					sort: {fields: [frontmatter___date], order: DESC}
 			) {
 				edges {
@@ -21,6 +25,7 @@ function buildPageQuery(pageKind) {
 								name
 								url
 							}
+							draft
 							link
 							title
 							description
