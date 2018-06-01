@@ -37,7 +37,7 @@ const typography = new Typography({
 			marginTop: rhythm(2),
 		},
 		em: {
-			color: options.headerColor,
+			opacity: 0.9,
 		},
 		"html, body": {
 			backgroundColor: options.backgroundColor,
