@@ -11,6 +11,10 @@ const StyledEntry = styled.article`
 	h2 {
 		margin: 0 0 0.6em;
 	}
+
+	.footnotes {
+		clear: both;
+	}
 `;
 
 export class Entry extends React.Component<IEntryProps> {
