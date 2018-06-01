@@ -77,7 +77,7 @@ interface DefaultLayoutProps
 			email: string;
 			name: string;
 			jobTitle: string;
-			social: DeepNonNullable<social_2>[];
+			social: Array<DeepNonNullable<social_2>>;
 		};
 	};
 }
@@ -88,7 +88,9 @@ export default class DefaultLayout extends React.PureComponent<
 > {
 	public componentDidMount() {
 		const addStylesNode = document.getElementById("deferred-styles");
-		if (!addStylesNode) return;
+		if (!addStylesNode) {
+			return;
+		}
 
 		const replacement = document.createElement("div");
 		replacement.innerHTML = addStylesNode.textContent!;

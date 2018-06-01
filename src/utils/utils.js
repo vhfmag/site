@@ -19,7 +19,9 @@ const slugRegex = /\/([^/]*?)(\.\w+)?$/;
 function extractFileNameFromPath(path) {
 	const result = slugRegex.exec(path);
 
-	if (!result) return null;
+	if (!result) {
+		return null;
+	}
 
 	const [, slug] = result;
 	return slug;

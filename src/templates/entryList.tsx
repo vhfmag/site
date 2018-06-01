@@ -42,9 +42,15 @@ export default class BookmarkList extends React.Component<IBookmarkListProps> {
 
 		const meAuthor = { name, url: siteUrl };
 
-		if (!category) throw new Error("Context is missing category");
-		if (!listTitle) throw new Error("Context is missing listTitle");
-		if (!singlePath) throw new Error("Context is missing singlePath");
+		if (!category) {
+			throw new Error("Context is missing category");
+		}
+		if (!listTitle) {
+			throw new Error("Context is missing listTitle");
+		}
+		if (!singlePath) {
+			throw new Error("Context is missing singlePath");
+		}
 
 		return (
 			<>

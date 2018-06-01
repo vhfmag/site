@@ -20,7 +20,7 @@ export class Entry extends React.Component<IEntryProps> {
 		return (
 			<StyledEntry className="h-entry">
 				<Helmet title={headerProps.title} />
-				<EntryHeader {...headerProps} isFullPage />
+				<EntryHeader {...headerProps} isFullPage={true} />
 				<section className="e-content">
 					{content ? <p>{content}</p> : renderAst(htmlAst)}
 				</section>
