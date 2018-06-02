@@ -8,7 +8,9 @@
 		"ordered-imports": [false],
 		"no-console": [false],
 		"no-var-requires": false,
-		"object-literal-sort-keys": false
+		"object-literal-sort-keys": false,
+		"member-ordering": false,
+		"max-classes-per-file": false
 	},
 	"rulesDirectory": []
 }
