@@ -4,6 +4,7 @@ import styled from "styled-components";
 const StyledCitation = styled.blockquote`
 	width: 33%;
 	min-width: 100px;
+	margin-left: 40px;
 
 	float: right;
 
