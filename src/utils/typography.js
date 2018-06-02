@@ -46,7 +46,7 @@ const typography = new Typography({
 			...scale(1 / 5),
 			paddingLeft: rhythm(13 / 16),
 			marginLeft: 0,
-			borderLeft: `${rhythm(3 / 16)} solid ${options.themeColor}`,
+			borderLeft: `${rhythm(3 / 16)} solid ${options.headerColor}`,
 		},
 		"blockquote > :last-child": {
 			marginBottom: 0,
