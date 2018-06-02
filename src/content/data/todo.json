@@ -7,6 +7,15 @@
 		"title": "ter um portfólio de respeito"
 	},
 	{
+		"title":
+			"fazer [POSSE](https://indieweb.org/POSSE) para Twitter, Medium e afins",
+		"tags": ["indie-web"]
+	},
+	{
+		"title": "implementar WebMentions usando [Brid.gy]",
+		"tags": ["indie-web"]
+	},
+	{
 		"title": "fazer algo com dados abertos"
 	},
 	{
@@ -47,7 +56,7 @@
 	},
 	{
 		"title":
-			"traduzir [A plan to rescue the Web from the Internet](https://staltz.com/a-plan-to-rescue-the-web-from-the-internet.html) de [André Staltz](A plan to rescue the Web from the Internet)"
+			"traduzir [A plan to rescue the Web from the Internet](https://staltz.com/a-plan-to-rescue-the-web-from-the-internet.html) de [André Staltz]"
 	},
 	{
 		"title":
@@ -79,7 +88,7 @@
 	{
 		"title":
 			"trabalhar no [workshop de typescript](https://github.com/vhfmag/typescript-workshop/) com o [workshopper-adventure](https://github.com/workshopper/workshopper-adventure)",
-		"tags": ["oss"]
+		"tags": ["open-source"]
 	},
 	{
 		"title":
@@ -87,7 +96,7 @@
 	},
 	{
 		"title":
-			"fazer algo com [Dat](https://datproject.org/) (provavelmente relacionado ao [Beaker Browser](https://beakerbrowser.com/))",
+			"fazer algo com [Dat](https://datproject.org/) e [Beaker Browser](https://beakerbrowser.com/)",
 		"tags": ["try-stuff"]
 	},
 	{
@@ -104,7 +113,7 @@
 	{
 		"title":
 			"implementar plugin de Tandem (colaboração P2P com CRDT em editores de text) do VSCode ([issue](https://github.com/typeintandem/tandem/issues/128))",
-		"tags": ["oss"]
+		"tags": ["open-source"]
 	},
 	{
 		"title": "usar [DangerJS](http://danger.systems/js/) em algum projeto",
@@ -113,7 +122,7 @@
 	{
 		"title":
 			"implementar integração do [DangerJS](http://danger.systems/js/) com [Gitlab](https://gitlab.com) ([issue](https://github.com/danger/danger-js/issues/396))",
-		"tags": ["oss"]
+		"tags": ["open-source"]
 	},
 	{
 		"title": "implementar tags aqui no blog"
