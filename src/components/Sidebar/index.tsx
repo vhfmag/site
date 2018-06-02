@@ -108,7 +108,7 @@ export const Sidebar: React.SFC<ISidebarProps> = ({
 				</a>
 			</div>
 			<div>
-				<a href={sourceUrl}>código fonte</a>
+				<a href={sourceUrl}>ver código fonte</a>
 			</div>
 		</p>
 		<>
