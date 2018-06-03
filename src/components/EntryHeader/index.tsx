@@ -29,6 +29,8 @@ const StyledHeader = styled.header`
 
 const StyledMetadata = styled.div`
 	font-size: 0.9em;
+	opacity: .85;
+	line-height: 1.4;
 `;
 
 export const EntryHeader: React.SFC<
