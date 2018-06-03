@@ -109,6 +109,10 @@ export const pageQuery = graphql`
 		markdownRemark(fileAbsolutePath: { eq: $markdownPath }) {
 			htmlAst
 			excerpt
+			timeToRead
+			count: wordCount {
+				words
+			}
 			frontmatter {
 				title
 				authors {
