@@ -21,6 +21,12 @@ interface IPostTemplateProps {
 				description: string;
 				date: string;
 			};
+			timeToRead: number;
+			count: {
+				words: number;
+				sentences: number;
+				paragraphs: number;
+			};
 		};
 	};
 	pathContext: {
@@ -44,6 +50,8 @@ export default class SinglePostTemplate extends React.Component<
 					htmlAst,
 					excerpt,
 					frontmatter: { date, title, description },
+					timeToRead,
+					count: { words } = { words: -1 },
 				},
 			},
 			pathContext: { category },
@@ -76,6 +84,8 @@ export default class SinglePostTemplate extends React.Component<
 					authors={[{ name, url: siteUrl }]}
 					htmlAst={htmlAst}
 					url="#"
+					wordCount={words}
+					timeToRead={timeToRead}
 				/>
 			</>
 		);
@@ -95,6 +105,10 @@ export const pageQuery = graphql`
 		markdownRemark(fileAbsolutePath: { eq: $markdownPath }) {
 			htmlAst
 			excerpt
+			timeToRead
+			count: wordCount {
+				words
+			}
 			frontmatter {
 				title
 				description

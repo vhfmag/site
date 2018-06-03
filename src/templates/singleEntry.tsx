@@ -21,6 +21,12 @@ interface IEntryTemplateProps {
 				authors: Array<{ name: string; url: string }>;
 				link: string;
 			};
+			timeToRead: number;
+			count: {
+				words: number;
+				sentences: number;
+				paragraphs: number;
+			};
 		};
 	};
 	pathContext: {
@@ -44,6 +50,8 @@ export default class SingleEntryTemplate extends React.Component<
 					htmlAst,
 					excerpt,
 					frontmatter: { title, authors, link },
+					timeToRead,
+					count: { words },
 				},
 			},
 			pathContext: { category },
@@ -80,6 +88,8 @@ export default class SingleEntryTemplate extends React.Component<
 					replyTo={link}
 					htmlAst={htmlAst}
 					url="#"
+					wordCount={words}
+					timeToRead={timeToRead}
 				/>
 			</>
 		);

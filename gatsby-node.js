@@ -30,6 +30,10 @@ function buildPageQuery(pageKind) {
 							title
 							description
 						}
+						count: wordCount {
+							words
+						}
+						timeToRead
 					}
 				}
 			}

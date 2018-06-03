@@ -13,6 +13,9 @@ export interface IEntryHeaderProps {
 	publishDate?: Date;
 	replyTo?: string;
 	replyToText?: string;
+
+	wordCount: number;
+	timeToRead: number;
 }
 
 const gappedClassName = "has-gap";
@@ -24,10 +27,14 @@ const StyledHeader = styled.header`
 			: "0"};
 `;
 
+const StyledMetadata = styled.div`
+	font-size: 0.9em;
+`;
+
 export const EntryHeader: React.SFC<
 	IEntryHeaderProps & { isFullPage: boolean }
 > = ({
-	url,
+	url: entryUrl,
 	title,
 	subtitle,
 	category,
@@ -36,6 +43,8 @@ export const EntryHeader: React.SFC<
 	replyToText = "Link para original",
 	publishDate,
 	isFullPage,
+	timeToRead,
+	wordCount,
 }) => {
 	const Title = isFullPage ? "h1" : "h2";
 	const Subtitle = isFullPage ? "h2" : "h3";
@@ -43,8 +52,8 @@ export const EntryHeader: React.SFC<
 	return (
 		<StyledHeader className={isFullPage ? gappedClassName : undefined}>
 			<Title className="post-title">
-				{url ? (
-					<Link className="p-name u-url u-uid" to={url}>
+				{entryUrl ? (
+					<Link className="p-name u-url u-uid" to={entryUrl}>
 						{title}
 					</Link>
 				) : (
@@ -52,16 +61,16 @@ export const EntryHeader: React.SFC<
 				)}
 			</Title>
 			{subtitle && <Subtitle>{subtitle}</Subtitle>}
-			<div>
+			<StyledMetadata>
 				<span className="p-category">{category}</span> |{" "}
 				{authors
 					.map(
-						({ name, url }) =>
-							url ? (
+						({ name, url: authorUrl }) =>
+							authorUrl ? (
 								<a
 									rel="author"
 									className="p-author h-card"
-									href={url}
+									href={authorUrl}
 								>
 									{name}
 								</a>
@@ -81,9 +90,9 @@ export const EntryHeader: React.SFC<
 								</>
 							),
 					)}
-			</div>
+			</StyledMetadata>
 			{publishDate && (
-				<div>
+				<StyledMetadata>
 					<time
 						className="dt-published"
 						dateTime={publishDate.toISOString()}
@@ -92,14 +101,18 @@ export const EntryHeader: React.SFC<
 							.setLocale("pt-br")
 							.toLocaleString(DateTime.DATE_FULL)}
 					</time>
-				</div>
+				</StyledMetadata>
 			)}
+			<StyledMetadata>
+				{wordCount} palavras - aproximadamente {timeToRead} minutos de
+				leitura
+			</StyledMetadata>
 			{replyTo && (
-				<div>
+				<StyledMetadata>
 					<a className="u-in-reply-to" href={replyTo}>
 						{replyToText}
 					</a>
-				</div>
+				</StyledMetadata>
 			)}
 		</StyledHeader>
 	);

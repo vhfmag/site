@@ -14,6 +14,12 @@ interface IEntryNode {
 			link: string;
 			date: string;
 		};
+		timeToRead: number;
+		count: {
+			words: number;
+			sentences: number;
+			paragraphs: number;
+		};
 	};
 }
 
@@ -64,6 +70,8 @@ export default class BookmarkList extends React.Component<IBookmarkListProps> {
 							fileAbsolutePath,
 							excerpt,
 							frontmatter: { title, authors, link, date },
+							timeToRead,
+							count: { words },
 						},
 					}) => (
 						<EntrySummary
@@ -77,6 +85,8 @@ export default class BookmarkList extends React.Component<IBookmarkListProps> {
 							url={`/${singlePath}/${extractFileNameFromPath(
 								fileAbsolutePath,
 							)}`}
+							wordCount={words}
+							timeToRead={timeToRead}
 						/>
 					),
 				)}
