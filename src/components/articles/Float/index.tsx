@@ -2,16 +2,20 @@ import * as React from "react";
 import styled from "styled-components";
 
 export const StyledHighlight = styled.blockquote`
-	width: 33%;
-	min-width: 100px;
-	margin-left: 40px;
+	@media (min-width: 600px) {
+		width: 33%;
+		min-width: 100px;
+		margin-left: 40px;
 
-	&.left {
-		float: left;
-	}
+		&.left {
+			float: left;
+			clear: left;
+		}
 
-	&.right {
-		float: right;
+		&.right {
+			float: right;
+			clear: right;
+		}
 	}
 `;
 
