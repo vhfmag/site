@@ -14,6 +14,13 @@ const StyledEntry = styled.article`
 
 	.footnotes {
 		clear: both;
+
+		li {
+			p {
+				margin: 0;
+				display: inline;
+			}
+		}
 	}
 `;
 
