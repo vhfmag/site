@@ -32,7 +32,7 @@ export interface IFigureProps {
 
 export const Figure: React.SFC<IFigureProps> = ({ alt, attr, src, title }) => (
 	<StyledFigure>
-		<img src={require(`../../assets${src}`)} alt={alt} />
+		<img src={require(`../../../assets${src}`)} alt={alt} />
 		{(title || attr) && (
 			<figcaption>
 				{title && <h4>{title}</h4>}
