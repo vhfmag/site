@@ -1,7 +1,7 @@
 import * as React from "react";
 import styled from "styled-components";
 import Link from "gatsby-link";
-import { DateTime } from "luxon";
+import { formatDate } from "../../utils/utils";
 
 export interface IEntryHeaderProps {
 	title: string;
@@ -97,9 +97,7 @@ export const EntryHeader: React.SFC<
 						className="dt-published"
 						dateTime={publishDate.toISOString()}
 					>
-						{DateTime.fromJSDate(publishDate)
-							.setLocale("pt-br")
-							.toLocaleString(DateTime.DATE_FULL)}
+						{formatDate(publishDate)}
 					</time>
 				</StyledMetadata>
 			)}
