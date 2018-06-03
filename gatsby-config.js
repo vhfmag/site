@@ -30,6 +30,7 @@ module.exports = {
 			options: {
 				plugins: [
 					"gatsby-remark-component",
+					"gatsby-remark-emoji",
 					{
 						resolve: `gatsby-remark-images`,
 						options: {
