@@ -1,13 +1,15 @@
-const { DateTime } = require("luxon");
+const dateFormatter = new Intl.DateTimeFormat(undefined, {
+	day: "2-digit",
+	month: "2-digit",
+	year: "numeric",
+});
 
 /**
- * @param {string} date ISO date string to localize
+ * @param {string | Date} date ISO date string to localize
  * @returns {string} formatted date
  */
 function formatDate(date) {
-	return DateTime.fromISO(date)
-		.setLocale("pt-br")
-		.toLocaleString(DateTime.DATE_FULL);
+	return dateFormatter.format(date instanceof Date ? date : new Date(date));
 }
 
 const slugRegex = /\/([^/]*?)(\.\w+)?$/;

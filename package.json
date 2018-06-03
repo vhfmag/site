@@ -4,7 +4,6 @@
 	"version": "1.0.0",
 	"author": "Victor Magalhães <vhfmag@protonmail.com>",
 	"dependencies": {
-		"@types/luxon": "^0.5.2",
 		"@types/node": "^8.0.7",
 		"@types/react": "^16",
 		"@types/react-dom": "^16",
@@ -35,7 +34,6 @@
 		"gatsby-transformer-remark": "^1.7.40",
 		"gatsby-transformer-sharp": "^1.6.24",
 		"graphql-code-generator": "^0.8.21",
-		"luxon": "^1.2.0",
 		"normalize-css": "^2.3.1",
 		"prismjs": "^1.14.0",
 		"react": "^16.3.2",
