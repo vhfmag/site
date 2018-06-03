@@ -50,6 +50,10 @@ const StyledRoot = styled.div`
 	@media (max-width: ${responsiveBreakpoint}) {
 		flex-direction: column;
 	}
+
+	.emojione {
+		height: 1.25em;
+	}
 `;
 
 interface IDefaultLayoutProps
