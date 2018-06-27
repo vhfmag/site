@@ -1,11 +1,15 @@
 const path = require("path");
 const createPaginatedPages = require("gatsby-paginate");
 
-const { graphql } = require("./src/utils/taggedUtils");
-const { extractFileNameFromPath } = require("./src/utils/utils");
+const {
+	graphql
+} = require("./src/utils/taggedUtils");
+const {
+	extractFileNameFromPath
+} = require("./src/utils/utils");
 
 function buildPageQuery(pageKind) {
-	return graphql`
+	return graphql `
 		{
 			allMarkdownRemark(
 					filter: {${
@@ -74,7 +78,9 @@ function createEntryPages({
 			},
 		});
 
-		postEdges.forEach(({ node }) => {
+		postEdges.forEach(({
+			node
+		}) => {
 			const markdownPath = node.fileAbsolutePath;
 			const slug = extractFileNameFromPath(markdownPath);
 			createPage({
@@ -90,27 +96,32 @@ function createEntryPages({
 	});
 }
 
-exports.onCreateNode = ({ node, boundActionCreators }) => {
+exports.onCreateNode = ({
+	node,
+	actions
+}) => {
 	if (node.internal.owner === "gatsby-transformer-json")
 		recurseOnObjectProcessingImages({
 			node,
-			boundActionCreators,
+			actions,
 		});
 };
 
 function recurseOnObjectProcessingImages({
 	node,
 	content = node,
-	boundActionCreators,
+	actions,
 }) {
-	const { createNodeField } = boundActionCreators;
+	const {
+		createNodeField
+	} = actions;
 
 	if (Array.isArray(content)) {
 		for (const object of content) {
 			recurseOnObjectProcessingImages({
 				node,
 				content: object,
-				boundActionCreators,
+				actions,
 			});
 		}
 	} else {
@@ -120,7 +131,7 @@ function recurseOnObjectProcessingImages({
 				recurseOnObjectProcessingImages({
 					node,
 					content: value,
-					boundActionCreators,
+					actions,
 				});
 			} else {
 				// Find all values on the object which end in an extension we recognise, then create a
@@ -176,8 +187,13 @@ function recurseOnObjectProcessingImages({
 	}
 }
 
-exports.createPages = ({ boundActionCreators, graphql: graphqlQuerier }) => {
-	const { createPage } = boundActionCreators;
+exports.createPages = ({
+	actions,
+	graphql: graphqlQuerier
+}) => {
+	const {
+		createPage
+	} = actions;
 
 	return new Promise((resolve, reject) => {
 		const postTemplate = path.resolve(`src/templates/singlePost.tsx`);

@@ -1,10 +1,11 @@
 import * as React from "react";
+import DefaultLayout from "../components/layout";
 
 const NotFoundPage = () => (
-	<div>
+	<DefaultLayout>
 		<h1>404</h1>
 		<p>Página não encontrada :(</p>
-	</div>
+	</DefaultLayout>
 );
 
 export default NotFoundPage;

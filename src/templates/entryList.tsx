@@ -3,6 +3,7 @@ import { EntrySummary } from "../components/EntrySummary";
 import Helmet from "react-helmet";
 import { Paginator } from "../components/Paginator";
 import { extractFileNameFromPath } from "../utils/utils";
+import { graphql } from "gatsby";
 
 interface IEntryNode {
 	node: {

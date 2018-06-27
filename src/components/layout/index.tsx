@@ -1,17 +1,17 @@
 import * as React from "react";
 import { Helmet } from "react-helmet";
-import { ObjectOmit } from "typelevel-ts";
 import styled from "styled-components";
+import { StaticQuery, graphql } from "gatsby";
 
-import { responsiveBreakpoint } from "../utils/consts";
-import { social_2 } from "../graphql-types";
-import { Sidebar } from "../components/Sidebar";
+import { responsiveBreakpoint } from "../../utils/consts";
+import { social_2 } from "../../graphql-types";
+import { Sidebar } from "../Sidebar";
 
 import "normalize-css/normalize.css";
 import "font-awesome/css/font-awesome.min.css";
 import "prismjs/themes/prism-okaidia.css";
 import "./style.css";
-import { generateLinkedDataTag } from "../components/LinkedData";
+import { generateLinkedDataTag } from "../LinkedData";
 
 const StyledMain = styled.main`
 	--width: auto;
@@ -56,40 +56,30 @@ const StyledRoot = styled.div`
 	}
 `;
 
-interface IDefaultLayoutProps
-	extends ObjectOmit<React.HTMLProps<HTMLDivElement>, "data"> {
-	location: {
-		pathname: string;
+interface ILayoutData {
+	site: {
+		siteMetadata: {
+			title: string;
+			siteUrl: string;
+			sourceUrl: string;
+			description: string;
+		};
 	};
-	children: any;
-	data: {
-		site: {
-			siteMetadata: {
-				title: string;
-				siteUrl: string;
-				sourceUrl: string;
-				description: string;
-			};
-		};
-		organizationJson: {
-			name: string;
-			url: string;
-			logo: string;
-			telephone: string;
-		};
-		personalJson: {
-			email: string;
-			name: string;
-			jobTitle: string;
-			social: Array<DeepNonNullable<social_2>>;
-		};
+	organizationJson: {
+		name: string;
+		url: string;
+		logo: string;
+		telephone: string;
+	};
+	personalJson: {
+		email: string;
+		name: string;
+		jobTitle: string;
+		social: Array<DeepNonNullable<social_2>>;
 	};
 }
 
-export default class DefaultLayout extends React.PureComponent<
-	IDefaultLayoutProps,
-	void
-> {
+export default class DefaultLayout extends React.Component {
 	public componentDidMount() {
 		const addStylesNode = document.getElementById("deferred-styles");
 		if (!addStylesNode) {
@@ -102,15 +92,15 @@ export default class DefaultLayout extends React.PureComponent<
 		addStylesNode.parentElement!.removeChild(addStylesNode);
 	}
 
-	public render() {
+	private renderPage = (data: ILayoutData) => {
 		const {
 			title,
 			description,
 			siteUrl,
 			sourceUrl,
-		} = this.props.data.site.siteMetadata;
-		const { name, jobTitle, email, social } = this.props.data.personalJson;
-		const { organizationJson } = this.props.data;
+		} = data.site.siteMetadata;
+		const { name, jobTitle, email, social } = data.personalJson;
+		const { organizationJson } = data;
 
 		const plainTextDescription = description.replace(
 			/\[([^\]]+)\]\([^\)]+\)/g,
@@ -161,10 +151,10 @@ export default class DefaultLayout extends React.PureComponent<
 								"javascript",
 								"typescript",
 								"development",
-								"web development",
-								"web",
-								"decentralization",
-								"p2p",
+								"IQueriedLayoutPropsweb development",
+								"IQueriedLayoutPropsweb",
+								"IQueriedLayoutPropsdecentralization",
+								"IQueriedLayoutPropsp2p",
 								"personal",
 								"blog",
 								"brazilian",
@@ -218,37 +208,44 @@ export default class DefaultLayout extends React.PureComponent<
 					]}
 				/>
 
-				<StyledMain>{this.props.children()}</StyledMain>
+				<StyledMain>{this.props.children}</StyledMain>
 			</StyledRoot>
+		);
+	};
+
+	public render() {
+		return (
+			<StaticQuery
+				query={graphql`
+					query MetadataQuery {
+						site {
+							siteMetadata {
+								title
+								siteUrl
+								sourceUrl
+								description
+							}
+						}
+						organizationJson {
+							name
+							url
+							logo
+							telephone
+						}
+						personalJson {
+							name
+							email
+							jobTitle
+							social {
+								serviceName
+								icon
+								url
+							}
+						}
+					}
+				`}
+				render={this.renderPage}
+			/>
 		);
 	}
 }
-
-export const pageQuery = graphql`
-	query MetadataQuery {
-		site {
-			siteMetadata {
-				title
-				siteUrl
-				sourceUrl
-				description
-			}
-		}
-		organizationJson {
-			name
-			url
-			logo
-			telephone
-		}
-		personalJson {
-			name
-			email
-			jobTitle
-			social {
-				serviceName
-				icon
-				url
-			}
-		}
-	}
-`;

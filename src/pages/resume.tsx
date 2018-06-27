@@ -8,6 +8,8 @@ import {
 	InterestsJson,
 } from "../graphql-types";
 import { Helmet } from "react-helmet";
+import DefaultLayout from "../components/layout";
+import { graphql } from "gatsby";
 
 interface IResumePageProps {
 	data: {
@@ -138,7 +140,7 @@ export default class ResumePage extends React.Component<IResumePageProps> {
 		} = this.props.data;
 
 		return (
-			<>
+			<DefaultLayout>
 				<Helmet title="Currículo" />
 				<h1>Currículo</h1>
 				<h2>Competências</h2>
@@ -201,7 +203,7 @@ export default class ResumePage extends React.Component<IResumePageProps> {
 						</StyledExperience>
 					),
 				)}
-			</>
+			</DefaultLayout>
 		);
 	}
 }

@@ -1,4 +1,3 @@
-declare const graphql: (query: TemplateStringsArray) => void;
 declare type DeepNonNullable<T> = { [K in keyof T]-?: NonNullable<T[K]> };
 declare type NonNullableNode = NonNullable<React.ReactNode>;
 declare type HTMLOrString =
@@ -19,3 +18,8 @@ declare interface IAuthor {
 	name: string;
 	url?: string;
 }
+
+type ObjectOmit<Obj, Props extends keyof Obj> = Pick<
+	Obj,
+	Exclude<keyof Obj, Props>
+>;

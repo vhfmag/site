@@ -4,20 +4,20 @@ const {
 	textColor,
 } = require("./src/utils/consts");
 
-const { extractFileNameFromPath } = require("./src/utils/utils");
+const {
+	extractFileNameFromPath
+} = require("./src/utils/utils");
 
 module.exports = {
 	siteMetadata: {
 		title: "Victor Magalhães",
 		siteUrl: "https://victormagalhaes.codes",
 		sourceUrl: "https://gitlab.com/vhfmag/vhfmag.gitlab.io/",
-		description:
-			"javascript engineer at [cubos.io](https://cubos.io/) and web, p2p, and decentralization enthusiast",
+		description: "javascript engineer at [cubos.io](https://cubos.io/) and web, p2p, and decentralization enthusiast",
 	},
 	plugins: [
-		"gatsby-plugin-react-next",
-		"gatsby-plugin-react-helmet",
 		"gatsby-plugin-typescript",
+		"gatsby-plugin-react-helmet",
 		{
 			resolve: `gatsby-source-filesystem`,
 			options: {
@@ -67,7 +67,7 @@ module.exports = {
 			},
 		},
 		"gatsby-plugin-offline",
-		"gatsby-plugin-purify-css",
+		// "gatsby-plugin-purify-css",
 		"gatsby-plugin-styled-components",
 		{
 			resolve: `gatsby-plugin-typography`,
@@ -92,35 +92,34 @@ module.exports = {
 				  }
 				}
 			  `,
-				feeds: [
-					{
-						serialize: ({ query: { site, allMarkdownRemark } }) => {
-							return allMarkdownRemark.edges.map(edge => {
-								const slug = extractFileNameFromPath(
-									edge.node.fileAbsolutePath,
-								);
-								const url = `${
+				feeds: [{
+					serialize: ({
+						query: {
+							site,
+							allMarkdownRemark
+						}
+					}) => {
+						return allMarkdownRemark.edges.map(edge => {
+							const slug = extractFileNameFromPath(
+								edge.node.fileAbsolutePath,
+							);
+							const url = `${
 									site.siteMetadata.siteUrl
 								}/post/${slug}`;
 
-								return Object.assign(
-									{},
-									edge.node.frontmatter,
-									{
-										description: edge.node.excerpt,
-										url,
-										guid: url,
-										custom_elements: [
-											{
-												"content:encoded":
-													edge.node.html,
-											},
-										],
-									},
-								);
-							});
-						},
-						query: `
+							return Object.assign({},
+								edge.node.frontmatter, {
+									description: edge.node.excerpt,
+									url,
+									guid: url,
+									custom_elements: [{
+										"content:encoded": edge.node.html,
+									}, ],
+								},
+							);
+						});
+					},
+					query: `
 					{
 					  allMarkdownRemark(
 						limit: 1000,
@@ -144,9 +143,8 @@ module.exports = {
 					  }
 					}
 				  `,
-						output: "/rss.xml",
-					},
-				],
+					output: "/rss.xml",
+				}, ],
 			},
 		},
 		{

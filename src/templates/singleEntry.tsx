@@ -2,6 +2,7 @@ import * as React from "react";
 import { Entry } from "../components/Entry";
 import { Helmet } from "react-helmet";
 import { generateLinkedDataTag } from "../components/LinkedData";
+import { graphql } from "gatsby";
 
 interface IEntryTemplateProps {
 	data: {

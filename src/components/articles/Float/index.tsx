@@ -25,7 +25,7 @@ export interface IFloatProps extends React.HTMLProps<HTMLQuoteElement> {
 
 export function Float({
 	position = "right",
-	ref,
+	ref: _,
 	children,
 	...blockquoteProps
 }: IFloatProps): React.ReactElement<{}> {

@@ -1,9 +1,15 @@
 import * as React from "react";
-import ReactMarkdown from "react-markdown";
+import * as Markdown from "react-markdown";
 import styled from "styled-components";
 import { Helmet } from "react-helmet";
 import { backgroundColor } from "../utils/consts";
 import FlipMove from "react-flip-move";
+import DefaultLayout from "../components/layout";
+import { graphql } from "gatsby";
+
+const ReactMarkdown = (Markdown as any) as React.ComponentClass<
+	Markdown.ReactMarkdownProps
+>;
 
 interface ITodo {
 	title: string;
@@ -148,7 +154,7 @@ export default class TodoPage extends React.Component<
 		const { todos } = this;
 
 		return (
-			<>
+			<DefaultLayout>
 				<Helmet title="todo" />
 				<h2>quem sabe um dia</h2>
 				<StyledTodoList>
@@ -165,7 +171,7 @@ export default class TodoPage extends React.Component<
 							))}
 					</FlipMove>
 				</StyledTodoList>
-			</>
+			</DefaultLayout>
 		);
 	}
 }

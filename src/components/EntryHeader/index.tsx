@@ -1,6 +1,6 @@
 import * as React from "react";
 import styled from "styled-components";
-import Link from "gatsby-link";
+import { Link } from "gatsby";
 import { formatDate } from "../../utils/utils";
 
 export interface IEntryHeaderProps {
@@ -29,7 +29,7 @@ const StyledHeader = styled.header`
 
 const StyledMetadata = styled.div`
 	font-size: 0.9em;
-	opacity: .85;
+	opacity: 0.85;
 	line-height: 1.4;
 `;
 

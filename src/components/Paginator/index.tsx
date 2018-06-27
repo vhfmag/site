@@ -1,7 +1,6 @@
 import * as React from "react";
-import { ObjectOmit } from "typelevel-ts";
 import styled from "styled-components";
-import Link from "gatsby-link";
+import { Link } from "gatsby";
 
 export type IPaginatorProps = ObjectOmit<GatsbyPaginatorProps<any>, "group">;
 

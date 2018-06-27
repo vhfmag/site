@@ -41,7 +41,7 @@ export function Citation({
 	from,
 	quote,
 	children,
-	ref,
+	ref: _,
 	...blockquoteProps
 }: ICitationProps) {
 	return (
