@@ -1,9 +1,11 @@
 ---
-title: "Gardens Need Walls: On Boundaries, Ritual, and Beauty"
+title: 'Gardens Need Walls: On Boundaries, Ritual, and Beauty'
+link: >-
+  https://www.ribbonfarm.com/2015/03/04/gardens-need-walls-on-boundaries-ritual-and-beauty/
+date: '2018-05-12T00:00:00-03:00'
 authors:
-    - name: Sarah Perry
-      url: https://www.ribbonfarm.com/author/sarahperry/
-link: https://www.ribbonfarm.com/2015/03/04/gardens-need-walls-on-boundaries-ritual-and-beauty/
+  - name: Sarah Perry
+    url: 'https://www.ribbonfarm.com/author/sarahperry/'
 ---
 
 ##### I read this quite a while ago, so I should reread before writing this (I will rewrite after rereading)

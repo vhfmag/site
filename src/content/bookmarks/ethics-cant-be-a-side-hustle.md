@@ -1,9 +1,10 @@
 ---
 title: Ethics can’t be a side hustle
+link: 'https://deardesignstudent.com/ethics-cant-be-a-side-hustle-b9e78c090aee'
+date: '2018-05-12'
 authors:
-    - name: Mike Monteiro
-      url: https://deardesignstudent.com/@monteiro
-link: https://deardesignstudent.com/ethics-cant-be-a-side-hustle-b9e78c090aee
+  - name: Mike Monteiro
+    url: 'https://deardesignstudent.com/@monteiro'
 ---
 
 > But here’s the thing. You can’t help Uber build Greyball during the day, or help Palantir design databases to round up immigrants as your main gig, and then buy ethics offsets by doing a non-profit side hustle. We need you to work ethically during that day job much more than we need you working with that non-profit.
