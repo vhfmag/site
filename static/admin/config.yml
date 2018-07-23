@@ -1,5 +1,6 @@
 backend:
-  name: git-gateway
+  name: gitlab
+  repo: vhfmag/vhfmag.gitlab.io
 
 media_folder: "static/img" # Folder where user uploaded files should go
 public_folder: "img"
