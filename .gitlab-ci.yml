@@ -5,6 +5,8 @@ stages:
   - deploy
 
 build:
+  stage:
+    - build
   script:
   - yarn && yarn run build
   artifacts:
@@ -19,6 +21,10 @@ build:
   - master
 
 pages:
+  stage:
+    - deploy
+  dependencies:
+    - build
   script:
   - echo 'done!'
   artifacts:
@@ -28,6 +34,10 @@ pages:
   - master
 
 now:
+  stage:
+    - deploy
+  dependencies:
+    - build
   script:
   - npm install --unsafe-perm now
   - yarn run deploy-ci

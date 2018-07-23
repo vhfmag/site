@@ -57,6 +57,7 @@
 	"main": "n/a",
 	"scripts": {
 		"build": "gatsby build",
+		"now-build": "echo 'It's been done :)",
 		"start": "gatsby serve",
 		"develop": "gatsby develop",
 		"deploy": "now && now alias && now scale victormagalhaes.codes 1",
