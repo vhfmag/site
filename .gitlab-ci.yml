@@ -1,11 +1,17 @@
 image: node:9
 
 pages:
-  dependencies:
-    - now
+  script:
+  - npm install --unsafe-perm now
+  - yarn run build
   artifacts:
     paths:
     - public
+  cache:
+    paths:
+    - node_modules
+  only:
+  - master
 
 now:
   script:
