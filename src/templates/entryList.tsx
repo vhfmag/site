@@ -44,6 +44,7 @@ export default class EntryList extends React.Component<IBookmarkListProps> {
 					bodyAttributes={{ class: "h-feed" }}
 				/>
 				<h1>{listTitle}</h1>
+				<Paginator {...this.props.pathContext} />
 				{posts.map(
 					({
 						node: {
