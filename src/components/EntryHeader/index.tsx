@@ -104,8 +104,8 @@ export const EntryHeader: React.SFC<
 				</StyledMetadata>
 			)}
 			<StyledMetadata>
-				{wordCount} palavras - aproximadamente {timeToRead} minutos de
-				leitura
+				{wordCount} palavras, <abbr title="aproximadamente">~</abbr>
+				{timeToRead} minutos de leitura
 			</StyledMetadata>
 			{replyTo && (
 				<StyledMetadata>
