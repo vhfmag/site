@@ -61,7 +61,7 @@ export const EntryHeader: React.SFC<
 	folderName,
 	authors,
 	replyTo,
-	replyToText = "Link para conteúdo mencionado",
+	replyToText = "Link para original",
 	publishDate,
 	isFullPage,
 	timeToRead,
