@@ -1,9 +1,10 @@
 ---
 title: Reality has a surprising amount of detail
+link: 'http://johnsalvatier.org/blog/2017/reality-has-a-surprising-amount-of-detail'
+date: '2018-05-12T00:00:00-03:00'
 authors:
-    - name: John Salvatier
-      url: http://johnsalvatier.org/blog/
-link: http://johnsalvatier.org/blog/2017/reality-has-a-surprising-amount-of-detail
+  - name: John Salvatier
+    url: 'http://johnsalvatier.org/blog/'
 ---
 
 > Before you’ve noticed important details they are, of course, basically invisible. It’s hard to put your attention on them because you don’t even know what you’re looking for. But after you see them they quickly become so integrated into your intuitive models of the world that they become essentially transparent. Do you remember the insights that were crucial in learning to ride a bike or drive? How about the details and insights you have that led you to be good at the things you’re good at?

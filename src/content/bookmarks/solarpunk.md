@@ -1,9 +1,11 @@
 ---
 title: On the political dimensions of solarpunk
+link: >-
+  https://medium.com/solarpunks/on-the-political-dimensions-of-solarpunk-c5a7b4bf8df4
+date: '2018-05-12T00:00:00-03:00'
 authors:
-    - name: Andrew Dana Hudson
-      url: https://medium.com/@andrewdhudson?source=post_header_lockup
-link: https://medium.com/solarpunks/on-the-political-dimensions-of-solarpunk-c5a7b4bf8df4
+  - name: Andrew Dana Hudson
+    url: 'https://medium.com/@andrewdhudson?source=post_header_lockup'
 ---
 
 Dystopias seems to be a thing of our time, a reaction to the anxiety that comes with the exponential growth of human population, society complexity, technology capabilities and all of their shiny, but also their nefarious, consequences, such as overpopulation, corporate greed, climate change and peak inequality. It sometimes may seem too doom and dreadful for plans, manifestos or hope. On that context, on the tradition of other punks, like cyberpunk and steampunk, there is a bright cultural alternative: _solarpunk_.
