@@ -2,12 +2,14 @@ import * as React from "react";
 import styled from "styled-components";
 import { Link } from "gatsby";
 
-export type IPaginatorProps = ObjectOmit<GatsbyPaginatorProps<any>, "group">;
+export type IPaginatorProps = ObjectOmit<GatsbyPaginatorProps<any>, "group"> & {
+	className?: string;
+};
 
 const StyledNav = styled.nav`
 	display: flex;
 	align-items: center;
-	justify-content: center;
+	justify-content: start;
 	margin: -4pt;
 
 	& > * {
@@ -34,13 +36,23 @@ export const Paginator: React.SFC<IPaginatorProps> = ({
 	first,
 	last,
 	index,
+	className,
+	additionalContext: { listTitle },
 }) => (
-	<StyledNav>
+	<StyledNav className={className}>
+		<Link
+			className={(first && "disabled") || ""}
+			to={!first ? buildPath({ pathPrefix, index: 1 }) : "#"}
+			rel={!first ? "first" : undefined}
+			title={`Primeira página anterior de ${listTitle}`}
+		>
+			&lt;&lt;
+		</Link>
 		<Link
 			className={(first && "disabled") || ""}
 			to={!first ? buildPath({ pathPrefix, index: index - 1 }) : "#"}
 			rel={!first ? "prev" : undefined}
-			title="Página anterior"
+			title={`Página anterior de ${listTitle}`}
 		>
 			&lt;
 		</Link>
@@ -50,7 +62,7 @@ export const Paginator: React.SFC<IPaginatorProps> = ({
 				<Link
 					activeClassName="disabled"
 					key={i}
-					title={`Página ${i}`}
+					title={`Página ${i} de ${listTitle}`}
 					exact={true}
 					rel={
 						`${i === 1 ? "first" : ""} ${
@@ -66,9 +78,17 @@ export const Paginator: React.SFC<IPaginatorProps> = ({
 			className={(last && "disabled") || ""}
 			to={!last ? buildPath({ pathPrefix, index: index + 1 }) : "#"}
 			rel={!last ? "next" : undefined}
-			title="Página seguinte"
+			title={`Página seguinte de ${listTitle}`}
 		>
 			&gt;
+		</Link>
+		<Link
+			className={(last && "disabled") || ""}
+			to={!last ? buildPath({ pathPrefix, index: pageCount }) : "#"}
+			rel={!last ? "last" : undefined}
+			title={`Última página de ${listTitle}`}
+		>
+			&gt;&gt;
 		</Link>
 	</StyledNav>
 );
