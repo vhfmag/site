@@ -1,0 +1,16 @@
+backend:
+  name: git-gateway
+
+media_folder: "src/static/img" # Folder where user uploaded files should go
+public_folder: "img"
+
+collections:
+  - name: "post"
+    label: "Post"
+    folder: "src/content/posts"
+    create: true
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Description", name: "description", widget: "text" }
+      - { label: "Publish Date", name: "date", widget: "datetime" }
+      - { label: "Body", name: "body", widget: "markdown" }
