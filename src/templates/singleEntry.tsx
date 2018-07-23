@@ -24,7 +24,7 @@ export default class SingleEntryTemplate extends React.Component<
 					htmlAst,
 					excerpt,
 					frontmatter: { title, authors, link, date },
-					parent: { modifiedTime, name: fileName, relativeDirectory },
+					parent: { birthTime, name: fileName, relativeDirectory },
 					timeToRead,
 					count: { words },
 				},
@@ -60,7 +60,7 @@ export default class SingleEntryTemplate extends React.Component<
 					authors={authors!}
 					fileName={fileName}
 					folderName={relativeDirectory}
-					publishDate={new Date(date || modifiedTime)}
+					publishDate={new Date(date || birthTime)}
 					replyTo={link}
 					htmlAst={htmlAst}
 					wordCount={words}

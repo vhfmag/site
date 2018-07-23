@@ -13,7 +13,7 @@ function formatDate(date) {
 }
 
 function getEdgeTimestamp(edge) {
-	return new Date(edge.node.frontmatter.date || edge.node.parent.modifiedTime).valueOf();
+	return new Date(edge.node.frontmatter.date || edge.node.parent.birthTime).valueOf();
 }
 
 module.exports = {

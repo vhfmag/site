@@ -39,7 +39,7 @@ function buildPageQuery(pageKind = ".*") {
 						fileAbsolutePath
 						parent {
 							... on File {
-								modifiedTime
+								birthTime
 								relativeDirectory
 								name
 							}

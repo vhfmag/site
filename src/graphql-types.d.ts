@@ -122,7 +122,7 @@ export interface authors_2 {
 }
 
 export interface parent {
-	modifiedTime?: Date | null;
+	birthTime?: Date | null;
 }
 
 export interface count {
@@ -311,7 +311,7 @@ export interface Directory extends Node {
 	extension?: string | null;
 	size?: number | null;
 	prettySize?: string | null;
-	modifiedTime?: Date | null;
+	birthTime?: Date | null;
 	accessTime?: Date | null;
 	changeTime?: Date | null;
 	birthTime?: Date | null;
@@ -400,7 +400,7 @@ export interface File extends Node {
 	extension?: string | null;
 	size?: number | null;
 	prettySize?: string | null;
-	modifiedTime?: Date | null;
+	birthTime?: Date | null;
 	accessTime?: Date | null;
 	changeTime?: Date | null;
 	birthTime?: Date | null;
@@ -1113,10 +1113,10 @@ export interface sitePageConnectionContextGroupNodeFrontmatterDescriptionQuerySt
 }
 
 export interface sitePageConnectionContextGroupNodeParentInputObject {
-	modifiedTime?: sitePageConnectionContextGroupNodeParentModifiedTimeQueryString | null;
+	birthTime?: sitePageConnectionContextGroupNodeParentbirthTimeQueryString | null;
 }
 
-export interface sitePageConnectionContextGroupNodeParentModifiedTimeQueryString {
+export interface sitePageConnectionContextGroupNodeParentbirthTimeQueryString {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
@@ -2471,7 +2471,7 @@ export interface filterDirectory {
 	extension?: directoryConnectionExtensionQueryString_2 | null;
 	size?: directoryConnectionSizeQueryInteger_2 | null;
 	prettySize?: directoryConnectionPrettySizeQueryString_2 | null;
-	modifiedTime?: directoryConnectionModifiedTimeQueryString_2 | null;
+	birthTime?: directoryConnectionbirthTimeQueryString_2 | null;
 	accessTime?: directoryConnectionAccessTimeQueryString_2 | null;
 	changeTime?: directoryConnectionChangeTimeQueryString_2 | null;
 	birthTime?: directoryConnectionBirthTimeQueryString_2 | null;
@@ -2597,7 +2597,7 @@ export interface directoryConnectionPrettySizeQueryString_2 {
 	in?: (string | null)[] | null;
 }
 
-export interface directoryConnectionModifiedTimeQueryString_2 {
+export interface directoryConnectionbirthTimeQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
@@ -2853,7 +2853,7 @@ export interface filterFile {
 	extension?: fileConnectionExtensionQueryString_2 | null;
 	size?: fileConnectionSizeQueryInteger_2 | null;
 	prettySize?: fileConnectionPrettySizeQueryString_2 | null;
-	modifiedTime?: fileConnectionModifiedTimeQueryString_2 | null;
+	birthTime?: fileConnectionbirthTimeQueryString_2 | null;
 	accessTime?: fileConnectionAccessTimeQueryString_2 | null;
 	changeTime?: fileConnectionChangeTimeQueryString_2 | null;
 	birthTime?: fileConnectionBirthTimeQueryString_2 | null;
@@ -2989,7 +2989,7 @@ export interface fileConnectionPrettySizeQueryString_2 {
 	in?: (string | null)[] | null;
 }
 
-export interface fileConnectionModifiedTimeQueryString_2 {
+export interface fileConnectionbirthTimeQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
@@ -4380,10 +4380,10 @@ export interface sitePageContextGroupNodeFrontmatterDescriptionQueryString {
 }
 
 export interface sitePageContextGroupNodeParentInputObject {
-	modifiedTime?: sitePageContextGroupNodeParentModifiedTimeQueryString | null;
+	birthTime?: sitePageContextGroupNodeParentbirthTimeQueryString | null;
 }
 
-export interface sitePageContextGroupNodeParentModifiedTimeQueryString {
+export interface sitePageContextGroupNodeParentbirthTimeQueryString {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
@@ -5917,7 +5917,7 @@ export interface directoryPrettySizeQueryString_2 {
 	in?: (string | null)[] | null;
 }
 
-export interface directoryModifiedTimeQueryString_2 {
+export interface directorybirthTimeQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
@@ -6265,7 +6265,7 @@ export interface filePrettySizeQueryString_2 {
 	in?: (string | null)[] | null;
 }
 
-export interface fileModifiedTimeQueryString_2 {
+export interface filebirthTimeQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
@@ -7506,7 +7506,7 @@ export interface DirectoryRootQueryTypeArgs {
 	extension?: directoryExtensionQueryString_2 | null;
 	size?: directorySizeQueryInteger_2 | null;
 	prettySize?: directoryPrettySizeQueryString_2 | null;
-	modifiedTime?: directoryModifiedTimeQueryString_2 | null;
+	birthTime?: directorybirthTimeQueryString_2 | null;
 	accessTime?: directoryAccessTimeQueryString_2 | null;
 	changeTime?: directoryChangeTimeQueryString_2 | null;
 	birthTime?: directoryBirthTimeQueryString_2 | null;
@@ -7543,7 +7543,7 @@ export interface FileRootQueryTypeArgs {
 	extension?: fileExtensionQueryString_2 | null;
 	size?: fileSizeQueryInteger_2 | null;
 	prettySize?: filePrettySizeQueryString_2 | null;
-	modifiedTime?: fileModifiedTimeQueryString_2 | null;
+	birthTime?: filebirthTimeQueryString_2 | null;
 	accessTime?: fileAccessTimeQueryString_2 | null;
 	changeTime?: fileChangeTimeQueryString_2 | null;
 	birthTime?: fileBirthTimeQueryString_2 | null;
@@ -7654,7 +7654,7 @@ export interface DateFrontmatter_2Args {
 		| string
 		| null /** Configures the locale Moment.js will use to format the date. */;
 }
-export interface ModifiedTimeParentArgs {
+export interface birthTimeParentArgs {
 	formatString?:
 		| string
 		| null /** Format the date using Moment.js' date tokens e.g. "date(formatString: "YYYY MMMM DD)" See https://momentjs.com/docs/#/displaying/format/ for documentation for different tokens */;
@@ -7684,7 +7684,7 @@ export interface GroupDirectoryConnectionArgs {
 	limit?: number | null;
 	field?: directoryGroupEnum | null;
 }
-export interface ModifiedTimeDirectoryArgs {
+export interface birthTimeDirectoryArgs {
 	formatString?:
 		| string
 		| null /** Format the date using Moment.js' date tokens e.g. "date(formatString: "YYYY MMMM DD)" See https://momentjs.com/docs/#/displaying/format/ for documentation for different tokens */;
@@ -7804,7 +7804,7 @@ export interface GroupFileConnectionArgs {
 	limit?: number | null;
 	field?: fileGroupEnum | null;
 }
-export interface ModifiedTimeFileArgs {
+export interface birthTimeFileArgs {
 	formatString?:
 		| string
 		| null /** Format the date using Moment.js' date tokens e.g. "date(formatString: "YYYY MMMM DD)" See https://momentjs.com/docs/#/displaying/format/ for documentation for different tokens */;
@@ -8285,7 +8285,7 @@ export enum DirectoryConnectionSortByFieldsEnum {
 	extension = "extension",
 	size = "size",
 	prettySize = "prettySize",
-	modifiedTime = "modifiedTime",
+	birthTime = "birthTime",
 	accessTime = "accessTime",
 	changeTime = "changeTime",
 	birthTime = "birthTime",
@@ -8332,7 +8332,7 @@ export enum directoryDistinctEnum {
 	extension = "extension",
 	size = "size",
 	prettySize = "prettySize",
-	modifiedTime = "modifiedTime",
+	birthTime = "birthTime",
 	accessTime = "accessTime",
 	changeTime = "changeTime",
 	birthTime = "birthTime",
@@ -8374,7 +8374,7 @@ export enum directoryGroupEnum {
 	extension = "extension",
 	size = "size",
 	prettySize = "prettySize",
-	modifiedTime = "modifiedTime",
+	birthTime = "birthTime",
 	accessTime = "accessTime",
 	changeTime = "changeTime",
 	birthTime = "birthTime",
@@ -8418,7 +8418,7 @@ export enum FileConnectionSortByFieldsEnum {
 	extension = "extension",
 	size = "size",
 	prettySize = "prettySize",
-	modifiedTime = "modifiedTime",
+	birthTime = "birthTime",
 	accessTime = "accessTime",
 	changeTime = "changeTime",
 	birthTime = "birthTime",
@@ -8477,7 +8477,7 @@ export enum fileDistinctEnum {
 	extension = "extension",
 	size = "size",
 	prettySize = "prettySize",
-	modifiedTime = "modifiedTime",
+	birthTime = "birthTime",
 	accessTime = "accessTime",
 	changeTime = "changeTime",
 	birthTime = "birthTime",
@@ -8521,7 +8521,7 @@ export enum fileGroupEnum {
 	extension = "extension",
 	size = "size",
 	prettySize = "prettySize",
-	modifiedTime = "modifiedTime",
+	birthTime = "birthTime",
 	accessTime = "accessTime",
 	changeTime = "changeTime",
 	birthTime = "birthTime",
@@ -9107,7 +9107,7 @@ export namespace RootQueryTypeResolvers {
 		extension?: directoryExtensionQueryString_2 | null;
 		size?: directorySizeQueryInteger_2 | null;
 		prettySize?: directoryPrettySizeQueryString_2 | null;
-		modifiedTime?: directoryModifiedTimeQueryString_2 | null;
+		birthTime?: directorybirthTimeQueryString_2 | null;
 		accessTime?: directoryAccessTimeQueryString_2 | null;
 		changeTime?: directoryChangeTimeQueryString_2 | null;
 		birthTime?: directoryBirthTimeQueryString_2 | null;
@@ -9146,7 +9146,7 @@ export namespace RootQueryTypeResolvers {
 		extension?: fileExtensionQueryString_2 | null;
 		size?: fileSizeQueryInteger_2 | null;
 		prettySize?: filePrettySizeQueryString_2 | null;
-		modifiedTime?: fileModifiedTimeQueryString_2 | null;
+		birthTime?: filebirthTimeQueryString_2 | null;
 		accessTime?: fileAccessTimeQueryString_2 | null;
 		changeTime?: fileChangeTimeQueryString_2 | null;
 		birthTime?: fileBirthTimeQueryString_2 | null;
@@ -9442,11 +9442,11 @@ export namespace authors_2Resolvers {
 }
 export namespace parentResolvers {
 	export interface Resolvers {
-		modifiedTime?: ModifiedTimeResolver;
+		birthTime?: birthTimeResolver;
 	}
 
-	export type ModifiedTimeResolver = Resolver<Date | null, ModifiedTimeArgs>;
-	export interface ModifiedTimeArgs {
+	export type birthTimeResolver = Resolver<Date | null, birthTimeArgs>;
+	export interface birthTimeArgs {
 		formatString?:
 			| string
 			| null /** Format the date using Moment.js' date tokens e.g. "date(formatString: "YYYY MMMM DD)" See https://momentjs.com/docs/#/displaying/format/ for documentation for different tokens */;
@@ -9834,7 +9834,7 @@ export namespace DirectoryResolvers {
 		extension?: ExtensionResolver;
 		size?: SizeResolver;
 		prettySize?: PrettySizeResolver;
-		modifiedTime?: ModifiedTimeResolver;
+		birthTime?: birthTimeResolver;
 		accessTime?: AccessTimeResolver;
 		changeTime?: ChangeTimeResolver;
 		birthTime?: BirthTimeResolver;
@@ -9873,8 +9873,8 @@ export namespace DirectoryResolvers {
 	export type ExtensionResolver = Resolver<string | null>;
 	export type SizeResolver = Resolver<number | null>;
 	export type PrettySizeResolver = Resolver<string | null>;
-	export type ModifiedTimeResolver = Resolver<Date | null, ModifiedTimeArgs>;
-	export interface ModifiedTimeArgs {
+	export type birthTimeResolver = Resolver<Date | null, birthTimeArgs>;
+	export interface birthTimeArgs {
 		formatString?:
 			| string
 			| null /** Format the date using Moment.js' date tokens e.g. "date(formatString: "YYYY MMMM DD)" See https://momentjs.com/docs/#/displaying/format/ for documentation for different tokens */;
@@ -10122,7 +10122,7 @@ export namespace FileResolvers {
 		extension?: ExtensionResolver;
 		size?: SizeResolver;
 		prettySize?: PrettySizeResolver;
-		modifiedTime?: ModifiedTimeResolver;
+		birthTime?: birthTimeResolver;
 		accessTime?: AccessTimeResolver;
 		changeTime?: ChangeTimeResolver;
 		birthTime?: BirthTimeResolver;
@@ -10172,8 +10172,8 @@ export namespace FileResolvers {
 	export type ExtensionResolver = Resolver<string | null>;
 	export type SizeResolver = Resolver<number | null>;
 	export type PrettySizeResolver = Resolver<string | null>;
-	export type ModifiedTimeResolver = Resolver<Date | null, ModifiedTimeArgs>;
-	export interface ModifiedTimeArgs {
+	export type birthTimeResolver = Resolver<Date | null, birthTimeArgs>;
+	export interface birthTimeArgs {
 		formatString?:
 			| string
 			| null /** Format the date using Moment.js' date tokens e.g. "date(formatString: "YYYY MMMM DD)" See https://momentjs.com/docs/#/displaying/format/ for documentation for different tokens */;

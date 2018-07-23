@@ -25,7 +25,7 @@ export default class SinglePostTemplate extends React.Component<
 					excerpt,
 					frontmatter: { date, title, description },
 					timeToRead,
-					parent: { modifiedTime, name: fileName, relativeDirectory },
+					parent: { birthTime, name: fileName, relativeDirectory },
 					count: { words } = { words: -1 },
 				},
 			},
@@ -55,7 +55,7 @@ export default class SinglePostTemplate extends React.Component<
 					fileName={fileName}
 					folderName={relativeDirectory}
 					subtitle={description}
-					publishDate={new Date(date || modifiedTime)}
+					publishDate={new Date(date || birthTime)}
 					authors={[{ name, url: siteUrl }]}
 					htmlAst={htmlAst}
 					wordCount={words}

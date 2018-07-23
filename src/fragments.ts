@@ -9,7 +9,7 @@ export interface MarkdownEntryFragment {
 	};
 	fileAbsolutePath: string;
 	parent: {
-		modifiedTime: string;
+		birthTime: string;
 		relativeDirectory: string;
 		name: string;
 	};
@@ -58,7 +58,7 @@ export const fragments = graphql`
 		fileAbsolutePath
 		parent {
 			... on File {
-				modifiedTime
+				birthTime
 				relativeDirectory
 				name
 			}
