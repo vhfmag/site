@@ -160,31 +160,40 @@ export default class ResumePage extends React.Component<IResumePageProps> {
 					<StyledList data-columns={2}>
 						<h4>Habilidades técnicas</h4>
 						<ul>
-							{skills.technical!.map(({ name }) => (
-								<li key={name!}>{name}</li>
+							{skills.technical!.map(skill => (
+								<li key={skill!.name!}>{skill!.name}</li>
 							))}
 						</ul>
 					</StyledList>
 					<StyledList data-columns={1}>
 						<h4>Soft skills</h4>
 						<ul>
-							{skills.soft!.map(({ name }) => (
-								<li key={name!}>{name}</li>
+							{skills.soft!.map(skill => (
+								<li key={skill!.name!}>{skill!.name}</li>
 							))}
 						</ul>
 					</StyledList>
 					<StyledList data-columns={3}>
 						<h4>Interesses</h4>
 						<ul>
-							{interests.subjects!.map(({ name }) => (
-								<li key={name!}>{name}</li>
+							{interests.subjects!.map(skill => (
+								<li key={skill!.name!}>{skill!.name}</li>
 							))}
 						</ul>
 					</StyledList>
 				</StyledListWrapper>
 				<h2>Experiências</h2>
-				{experiences.work!.map(
-					({ company, image, link, period, role, tasks }) => (
+				{experiences.work!.map(experience => {
+					const {
+						company,
+						image,
+						link,
+						period,
+						role,
+						tasks,
+					} = experience!;
+
+					return (
 						<StyledExperience key={company!}>
 							<h4>
 								{link ? <a href={link}>{company}</a> : company}
@@ -198,11 +207,13 @@ export default class ResumePage extends React.Component<IResumePageProps> {
 								<div>{period}</div>
 							</StyledExperienceInfo>
 							<ul>
-								{tasks!.map(task => <li key={task}>{task}</li>)}
+								{tasks!.map(task => (
+									<li key={task!}>{task}</li>
+								))}
 							</ul>
 						</StyledExperience>
-					),
-				)}
+					);
+				})}
 			</DefaultLayout>
 		);
 	}
