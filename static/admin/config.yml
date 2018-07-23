@@ -35,7 +35,7 @@ collections:
           - label: "URL"
             name: "url"
             widget: "string"
-      - { label: "Body", name: "body", widget: "markdown" }
+      - { label: "Body", name: "body", widget: "markdown", required: false }
   - name: "book"
     label: "Book"
     folder: "src/content/books"
@@ -55,7 +55,7 @@ collections:
           - label: "URL"
             name: "url"
             widget: "string"
-      - { label: "Body", name: "body", widget: "markdown" }
+      - { label: "Body", name: "body", widget: "markdown", required: false }
   - name: "content"
     label: "Conteúdo"
     files:
