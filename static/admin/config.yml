@@ -56,12 +56,3 @@ collections:
             name: "url"
             widget: "string"
       - { label: "Body", name: "body", widget: "markdown", required: false }
-  - name: "content"
-    label: "Conteúdo"
-    files:
-      - label: "Todo"
-        name: "todo"
-        file: "src/content/data/todo.json"
-        fields:
-          - { label: "Título", name: "title", widget: string }
-          - { label: "Tags", name: "tags", widget: list }
