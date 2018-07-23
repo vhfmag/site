@@ -3,6 +3,7 @@ import { Entry } from "../components/Entry";
 import { Helmet } from "react-helmet";
 import { generateLinkedDataTag } from "../components/LinkedData";
 import { graphql } from "gatsby";
+import DefaultLayout from "../components/layout";
 
 interface IPostTemplateProps {
 	data: {
@@ -75,7 +76,7 @@ export default class SinglePostTemplate extends React.Component<
 		};
 
 		return (
-			<>
+			<DefaultLayout>
 				<Helmet>{generateLinkedDataTag(linkedData)}</Helmet>
 				<Entry
 					title={title}
@@ -88,7 +89,7 @@ export default class SinglePostTemplate extends React.Component<
 					wordCount={words}
 					timeToRead={timeToRead}
 				/>
-			</>
+			</DefaultLayout>
 		);
 	}
 }

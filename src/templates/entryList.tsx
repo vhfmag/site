@@ -4,6 +4,7 @@ import Helmet from "react-helmet";
 import { Paginator } from "../components/Paginator";
 import { extractFileNameFromPath } from "../utils/utils";
 import { graphql } from "gatsby";
+import DefaultLayout from "../components/layout";
 
 interface IEntryNode {
 	node: {
@@ -60,7 +61,7 @@ export default class BookmarkList extends React.Component<IBookmarkListProps> {
 		}
 
 		return (
-			<>
+			<DefaultLayout>
 				<Helmet
 					title={`${listTitle} ${index}/${pageCount}`}
 					bodyAttributes={{ class: "h-feed" }}
@@ -92,7 +93,7 @@ export default class BookmarkList extends React.Component<IBookmarkListProps> {
 					),
 				)}
 				<Paginator {...paginationProps} />
-			</>
+			</DefaultLayout>
 		);
 	}
 }
