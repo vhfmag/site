@@ -1,7 +1,7 @@
 image: node:9
 
 pages:
-  depedencies:
+  dependencies:
     - now
   artifacts:
     paths:
