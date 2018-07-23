@@ -11,6 +11,7 @@ pages:
     paths:
     - node_modules
     - .cache
+    - public
   only:
   - master
 
@@ -25,5 +26,6 @@ now:
     paths:
     - node_modules
     - .cache
+    - public
   only:
   - master
