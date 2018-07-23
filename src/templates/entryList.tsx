@@ -5,6 +5,11 @@ import { Paginator } from "../components/Paginator";
 import { graphql } from "gatsby";
 import DefaultLayout from "../components/layout";
 import { GeneralMetadataFragment, MarkdownEntryFragment } from "../fragments";
+import styled from "styled-components";
+
+const ListWrapper = styled.div`
+	margin: 1rem 0;
+`;
 
 interface IEntryNode {
 	node: MarkdownEntryFragment;
@@ -25,13 +30,10 @@ export default class EntryList extends React.Component<IBookmarkListProps> {
 		} = this.props.pathContext;
 
 		const {
-			site: {
-				siteMetadata: { siteUrl },
-			},
 			personalJson: { name },
 		} = this.props.data;
 
-		const meAuthor = { name, url: siteUrl };
+		const meAuthor = { name };
 
 		if (!listTitle) {
 			throw new Error("Context is missing listTitle");
@@ -45,35 +47,37 @@ export default class EntryList extends React.Component<IBookmarkListProps> {
 				/>
 				<h1>{listTitle}</h1>
 				<Paginator {...this.props.pathContext} />
-				{posts.map(
-					({
-						node: {
-							fileAbsolutePath,
-							excerpt,
-							frontmatter: { title, authors, link, date },
-							timeToRead,
-							parent: {
-								birthTime,
-								name: fileName,
-								relativeDirectory,
+				<ListWrapper>
+					{posts.map(
+						({
+							node: {
+								fileAbsolutePath,
+								excerpt,
+								frontmatter: { title, authors, link, date },
+								timeToRead,
+								parent: {
+									birthTime,
+									name: fileName,
+									relativeDirectory,
+								},
+								count: { words },
 							},
-							count: { words },
-						},
-					}) => (
-						<EntrySummary
-							key={fileAbsolutePath}
-							replyTo={link}
-							authors={authors || [meAuthor]}
-							publishDate={new Date(date || birthTime)}
-							title={title}
-							fileName={fileName}
-							folderName={relativeDirectory}
-							content={excerpt}
-							wordCount={words}
-							timeToRead={timeToRead}
-						/>
-					),
-				)}
+						}) => (
+							<EntrySummary
+								key={fileAbsolutePath}
+								replyTo={link}
+								authors={authors || [meAuthor]}
+								publishDate={new Date(date || birthTime)}
+								title={title}
+								fileName={fileName}
+								folderName={relativeDirectory}
+								content={excerpt}
+								wordCount={words}
+								timeToRead={timeToRead}
+							/>
+						),
+					)}
+				</ListWrapper>
 				<Paginator {...this.props.pathContext} />
 			</DefaultLayout>
 		);
