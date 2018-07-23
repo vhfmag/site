@@ -3,7 +3,7 @@ image: node:9
 pages:
   script:
   - npm install --unsafe-perm now
-  - yarn run build
+  - yarn && yarn run build
   artifacts:
     paths:
     - public
