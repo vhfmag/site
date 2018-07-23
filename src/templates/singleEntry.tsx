@@ -4,38 +4,10 @@ import { Helmet } from "react-helmet";
 import { generateLinkedDataTag } from "../components/LinkedData";
 import { graphql } from "gatsby";
 import DefaultLayout from "../components/layout";
+import { GeneralMetadataFragment, MarkdownEntryFragment } from "../fragments";
 
 interface IEntryTemplateProps {
-	data: {
-		site: {
-			siteMetadata: {
-				siteUrl: string;
-			};
-		};
-		personalJson: {
-			name: string;
-		};
-		markdownRemark: {
-			htmlAst: object;
-			excerpt: string;
-			frontmatter: {
-				title: string;
-				authors: Array<{ name: string; url: string }>;
-				link: string;
-			};
-			timeToRead: number;
-			count: {
-				words: number;
-				sentences: number;
-				paragraphs: number;
-			};
-		};
-	};
-	pathContext: {
-		markdownPath: string;
-		slug: string;
-		category: string;
-	};
+	data: GeneralMetadataFragment & { markdownRemark: MarkdownEntryFragment };
 }
 
 export default class SingleEntryTemplate extends React.Component<
@@ -51,12 +23,12 @@ export default class SingleEntryTemplate extends React.Component<
 				markdownRemark: {
 					htmlAst,
 					excerpt,
-					frontmatter: { title, authors, link },
+					frontmatter: { title, authors, link, date },
+					parent: { modifiedTime, name: fileName, relativeDirectory },
 					timeToRead,
 					count: { words },
 				},
 			},
-			pathContext: { category },
 		} = this.props;
 
 		const linkedData = {
@@ -85,11 +57,12 @@ export default class SingleEntryTemplate extends React.Component<
 				<Helmet>{generateLinkedDataTag(linkedData)}</Helmet>
 				<Entry
 					title={title}
-					authors={authors}
-					category={category}
+					authors={authors!}
+					fileName={fileName}
+					folderName={relativeDirectory}
+					publishDate={new Date(date || modifiedTime)}
 					replyTo={link}
 					htmlAst={htmlAst}
-					url="#"
 					wordCount={words}
 					timeToRead={timeToRead}
 				/>
@@ -100,29 +73,9 @@ export default class SingleEntryTemplate extends React.Component<
 
 export const pageQuery = graphql`
 	query SingleEntryQuery($markdownPath: String!) {
-		site {
-			siteMetadata {
-				siteUrl
-			}
-		}
-		personalJson {
-			name
-		}
+		...GeneralMetadata
 		markdownRemark(fileAbsolutePath: { eq: $markdownPath }) {
-			htmlAst
-			excerpt
-			timeToRead
-			count: wordCount {
-				words
-			}
-			frontmatter {
-				title
-				authors {
-					name
-					url
-				}
-				link
-			}
+			...MarkdownEntry
 		}
 	}
 `;

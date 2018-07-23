@@ -2,17 +2,19 @@ import * as React from "react";
 import styled from "styled-components";
 import { Link } from "gatsby";
 import { formatDate } from "../../utils/utils";
+import { folderToCategory } from "../../utils/consts";
 
 export interface IEntryHeaderProps {
 	title: string;
-	category: string;
 	authors: IAuthor[];
 
 	subtitle?: NonNullableNode;
-	url?: string;
 	publishDate?: Date;
 	replyTo?: string;
 	replyToText?: string;
+
+	fileName: string;
+	folderName: string;
 
 	wordCount: number;
 	timeToRead: number;
@@ -33,16 +35,33 @@ const StyledMetadata = styled.div`
 	line-height: 1.4;
 `;
 
+function reduceElementsToEnumeration(
+	acc: JSX.Element,
+	el: JSX.Element,
+	i: number,
+	arr: JSX.Element[],
+) {
+	return i !== arr.length - 1 ? (
+		<>
+			{acc}, {el}
+		</>
+	) : (
+		<>
+			{acc} e {el}
+		</>
+	);
+}
+
 export const EntryHeader: React.SFC<
 	IEntryHeaderProps & { isFullPage: boolean }
 > = ({
-	url: entryUrl,
 	title,
 	subtitle,
-	category,
+	fileName,
+	folderName,
 	authors,
 	replyTo,
-	replyToText = "Link para original",
+	replyToText = "Link para conteúdo mencionado",
 	publishDate,
 	isFullPage,
 	timeToRead,
@@ -50,61 +69,59 @@ export const EntryHeader: React.SFC<
 }) => {
 	const Title = isFullPage ? "h1" : "h2";
 	const Subtitle = isFullPage ? "h2" : "h3";
+	const category = folderToCategory[folderName];
+
+	const entryUrl = `/${folderName}/${fileName}`;
 
 	return (
 		<StyledHeader className={isFullPage ? gappedClassName : undefined}>
 			<Title className="post-title">
-				{entryUrl ? (
-					<Link className="p-name u-url u-uid" to={entryUrl}>
-						{title}
-					</Link>
-				) : (
-					title
-				)}
+				<Link className="p-name u-url u-uid" to={entryUrl}>
+					{title}
+				</Link>
 			</Title>
 			{subtitle && <Subtitle>{subtitle}</Subtitle>}
 			<StyledMetadata>
-				<span className="p-category">{category}</span> |{" "}
-				{authors
-					.map(
-						({ name, url: authorUrl }) =>
-							authorUrl ? (
-								<a
-									rel="author"
-									className="p-author h-card"
-									href={authorUrl}
-								>
-									{name}
-								</a>
-							) : (
-								<span className="p-author h-card">{name}</span>
-							),
-					)
-					.reduce(
-						(acc, el, i, arr) =>
-							i !== arr.length - 1 ? (
-								<>
-									{acc}, {el}
-								</>
-							) : (
-								<>
-									{acc} e {el}
-								</>
-							),
-					)}
+				<span className="p-category">{category}</span>
+				{authors && (
+					<>
+						{" "}
+						| Por{" "}
+						{authors
+							.map(
+								({ name, url: authorUrl }) =>
+									authorUrl ? (
+										<a
+											rel="author"
+											className="p-author h-card"
+											href={authorUrl}
+										>
+											{name}
+										</a>
+									) : (
+										<span className="p-author h-card">
+											{name}
+										</span>
+									),
+							)
+							.reduce(reduceElementsToEnumeration)}
+					</>
+				)}
+				{publishDate && (
+					<>
+						{" "}
+						|{" "}
+						<time
+							className="dt-published"
+							dateTime={publishDate.toISOString()}
+						>
+							{formatDate(publishDate)}
+						</time>
+					</>
+				)}
 			</StyledMetadata>
-			{publishDate && (
-				<StyledMetadata>
-					<time
-						className="dt-published"
-						dateTime={publishDate.toISOString()}
-					>
-						{formatDate(publishDate)}
-					</time>
-				</StyledMetadata>
-			)}
 			<StyledMetadata>
-				{wordCount} palavras, <abbr title="aproximadamente">~</abbr>
+				{wordCount} palavras — <abbr title="aproximadamente">~</abbr>
 				{timeToRead} minutos de leitura
 			</StyledMetadata>
 			{replyTo && (

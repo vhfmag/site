@@ -9,6 +9,12 @@ import * as Markdown from "react-markdown";
 
 const activeLinkClassName = "active";
 
+const HeadLink = styled(Link)`
+	font-size: 2rem;
+	font-weight: 800;
+	line-height: 1.1;
+`;
+
 const StyledNav = styled.nav`
 	ul {
 		list-style: none;
@@ -33,9 +39,16 @@ const StyledNav = styled.nav`
 	}
 `;
 
+const SidebarSection = styled.div``;
+
 const StyledSidebar = styled.header`
 	flex: 0 0 var(--sidebarWidth);
 	padding: var(--rootPadding);
+
+	p,
+	${SidebarSection} {
+		margin: 0 0 1.6785em;
+	}
 
 	> h1 {
 		margin-top: 0;
@@ -95,12 +108,12 @@ export const Sidebar: React.SFC<ISidebarProps> = ({
 	nav,
 }) => (
 	<StyledSidebar className="h-card">
-		<h1>
-			<Link className="p-name u-uid u-url" to="/">
+		<SidebarSection>
+			<HeadLink className="p-name u-uid u-url" to="/">
 				{title}
-			</Link>
-		</h1>
-		<p>
+			</HeadLink>
+		</SidebarSection>
+		<SidebarSection>
 			<div>
 				<a className="u-email" href={`mailto:${email}`}>
 					{email}
@@ -109,10 +122,8 @@ export const Sidebar: React.SFC<ISidebarProps> = ({
 			<div>
 				<a href={sourceUrl}>ver código fonte</a>
 			</div>
-		</p>
-		<>
-			<Markdown source={description} className="lead p-note" />
-		</>
+		</SidebarSection>
+		<Markdown source={description} className="lead p-note" />
 		<StyledNav>
 			<ul>
 				{nav.map(({ name, url }) => (

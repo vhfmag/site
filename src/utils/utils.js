@@ -1,4 +1,4 @@
-const dateFormatter = new Intl.DateTimeFormat(undefined, {
+const dateFormatter = new Intl.DateTimeFormat((typeof navigator !== "undefined" && navigator.language) || "pt-BR", {
 	day: "2-digit",
 	month: "2-digit",
 	year: "numeric",
@@ -12,24 +12,11 @@ function formatDate(date) {
 	return dateFormatter.format(date instanceof Date ? date : new Date(date));
 }
 
-const slugRegex = /\/([^/]*?)(\.\w+)?$/;
-
-/**
- * @param {string} path Path to file
- * @returns {string|null} File name
- */
-function extractFileNameFromPath(path) {
-	const result = slugRegex.exec(path);
-
-	if (!result) {
-		return null;
-	}
-
-	const [, slug] = result;
-	return slug;
+function getEdgeTimestamp(edge) {
+	return new Date(edge.node.frontmatter.date || edge.node.parent.modifiedTime).valueOf();
 }
 
 module.exports = {
 	formatDate,
-	extractFileNameFromPath,
+	getEdgeTimestamp,
 };

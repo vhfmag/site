@@ -1,11 +1,14 @@
 const {
 	backgroundColor,
 	themeColor,
-	textColor,
 } = require("./src/utils/consts");
 
 const {
-	extractFileNameFromPath
+	graphql
+} = require("./src/utils/taggedUtils");
+
+const {
+	getEdgeTimestamp
 } = require("./src/utils/utils");
 
 module.exports = {
@@ -80,15 +83,15 @@ module.exports = {
 		{
 			resolve: `gatsby-plugin-feed`,
 			options: {
-				query: `
+				query: graphql `
 				{
 				  site {
-					siteMetadata {
-					  title
-					  description
-					  siteUrl
-					  site_url: siteUrl
-					}
+						siteMetadata {
+							title
+							description
+							siteUrl
+							site_url: siteUrl
+						}
 				  }
 				}
 			  `,
@@ -99,18 +102,16 @@ module.exports = {
 							allMarkdownRemark
 						}
 					}) => {
-						return allMarkdownRemark.edges.map(edge => {
-							const slug = extractFileNameFromPath(
-								edge.node.fileAbsolutePath,
-							);
+						return allMarkdownRemark.edges.sort((a, b) => getEdgeTimestamp(b) - getEdgeTimestamp(a)).map(edge => {
 							const url = `${
 									site.siteMetadata.siteUrl
-								}/post/${slug}`;
+								}/${edge.parent.relativeDirectory}/${edge.parent.name}`;
 
 							return Object.assign({},
 								edge.node.frontmatter, {
 									description: edge.node.excerpt,
 									url,
+									category: edge.parent.relativeDirectory,
 									guid: url,
 									custom_elements: [{
 										"content:encoded": edge.node.html,
@@ -119,25 +120,35 @@ module.exports = {
 							);
 						});
 					},
-					query: `
+					query: graphql `
 					{
 					  allMarkdownRemark(
-						limit: 1000,
-						sort: { order: DESC, fields: [frontmatter___date] },
-						filter: {
-							frontmatter: { draft: { ne: true } },
-							fileAbsolutePath: {regex: "/posts/"}
-						}
+							limit: 1000,
+							filter: {
+								frontmatter: { draft: { ne: true } },
+							}
 					  ) {
 						edges {
 						  node {
-							excerpt
-							html
-							fileAbsolutePath
-							frontmatter {
-							  title
-							  date
-							}
+								excerpt
+								html
+								fileAbsolutePath
+								parent {
+									... on File {
+										name
+										relativeDirectory
+									}
+								}
+								frontmatter {
+									title
+									title
+									description
+									date
+									authors {
+										name
+										url
+									}
+								}
 						  }
 						}
 					  }

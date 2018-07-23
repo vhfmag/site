@@ -2,45 +2,28 @@ import * as React from "react";
 import { EntrySummary } from "../components/EntrySummary";
 import Helmet from "react-helmet";
 import { Paginator } from "../components/Paginator";
-import { extractFileNameFromPath } from "../utils/utils";
 import { graphql } from "gatsby";
 import DefaultLayout from "../components/layout";
+import { GeneralMetadataFragment, MarkdownEntryFragment } from "../fragments";
 
 interface IEntryNode {
-	node: {
-		fileAbsolutePath: string;
-		excerpt: string;
-		frontmatter: {
-			title: string;
-			authors?: IAuthor[];
-			link: string;
-			date: string;
-		};
-		timeToRead: number;
-		count: {
-			words: number;
-			sentences: number;
-			paragraphs: number;
-		};
-	};
+	node: MarkdownEntryFragment;
 }
 
 interface IBookmarkListProps {
-	data: {
-		site: { siteMetadata: { siteUrl: string } };
-		personalJson: { name: string };
-	};
+	data: GeneralMetadataFragment;
 	pathContext: GatsbyPaginatorProps<IEntryNode>;
 }
 
-export default class BookmarkList extends React.Component<IBookmarkListProps> {
+export default class EntryList extends React.Component<IBookmarkListProps> {
 	public render() {
-		const { group: posts, ...paginationProps } = this.props.pathContext;
 		const {
+			group: posts,
 			pageCount,
 			index,
-			additionalContext: { listTitle, singlePath, category },
-		} = paginationProps;
+			additionalContext: { listTitle },
+		} = this.props.pathContext;
+
 		const {
 			site: {
 				siteMetadata: { siteUrl },
@@ -50,14 +33,8 @@ export default class BookmarkList extends React.Component<IBookmarkListProps> {
 
 		const meAuthor = { name, url: siteUrl };
 
-		if (!category) {
-			throw new Error("Context is missing category");
-		}
 		if (!listTitle) {
 			throw new Error("Context is missing listTitle");
-		}
-		if (!singlePath) {
-			throw new Error("Context is missing singlePath");
 		}
 
 		return (
@@ -66,6 +43,7 @@ export default class BookmarkList extends React.Component<IBookmarkListProps> {
 					title={`${listTitle} ${index}/${pageCount}`}
 					bodyAttributes={{ class: "h-feed" }}
 				/>
+				<h1>{listTitle}</h1>
 				{posts.map(
 					({
 						node: {
@@ -73,6 +51,11 @@ export default class BookmarkList extends React.Component<IBookmarkListProps> {
 							excerpt,
 							frontmatter: { title, authors, link, date },
 							timeToRead,
+							parent: {
+								modifiedTime,
+								name: fileName,
+								relativeDirectory,
+							},
 							count: { words },
 						},
 					}) => (
@@ -80,19 +63,17 @@ export default class BookmarkList extends React.Component<IBookmarkListProps> {
 							key={fileAbsolutePath}
 							replyTo={link}
 							authors={authors || [meAuthor]}
-							publishDate={new Date(date)}
-							category={category}
+							publishDate={new Date(date || modifiedTime)}
 							title={title}
+							fileName={fileName}
+							folderName={relativeDirectory}
 							content={excerpt}
-							url={`/${singlePath}/${extractFileNameFromPath(
-								fileAbsolutePath,
-							)}`}
 							wordCount={words}
 							timeToRead={timeToRead}
 						/>
 					),
 				)}
-				<Paginator {...paginationProps} />
+				<Paginator {...this.props.pathContext} />
 			</DefaultLayout>
 		);
 	}
@@ -100,13 +81,6 @@ export default class BookmarkList extends React.Component<IBookmarkListProps> {
 
 export const pageQuery = graphql`
 	query EntryListQuery {
-		site {
-			siteMetadata {
-				siteUrl
-			}
-		}
-		personalJson {
-			name
-		}
+		...GeneralMetadata
 	}
 `;

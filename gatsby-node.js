@@ -5,10 +5,20 @@ const {
 	graphql
 } = require("./src/utils/taggedUtils");
 const {
-	extractFileNameFromPath
+	getEdgeTimestamp
 } = require("./src/utils/utils");
 
-function buildPageQuery(pageKind) {
+const postTemplate = path.resolve(`src/templates/singlePost.tsx`);
+const entryTemplate = path.resolve(`src/templates/singleEntry.tsx`);
+const entryListTemplate = path.resolve(`src/templates/entryList.tsx`);
+
+const folderToPageTemplate = {
+	posts: postTemplate,
+	books: entryTemplate,
+	bookmarks: entryTemplate,
+};
+
+function buildPageQuery(pageKind = ".*") {
 	return graphql `
 		{
 			allMarkdownRemark(
@@ -16,28 +26,34 @@ function buildPageQuery(pageKind) {
 						process.env.NODE_ENV === "production"
 							? `frontmatter: { draft: { ne: true } },`
 							: ""
-					}, fileAbsolutePath: {regex: "/${pageKind}/.*\.md/"}},
-					sort: {fields: [frontmatter___date], order: DESC}
+					}, fileAbsolutePath: {regex: "/${pageKind}/.*\.md/"}}
 			) {
 				edges {
 					node {
+						htmlAst
 						excerpt
+						timeToRead
+						count: wordCount {
+							words
+						}
 						fileAbsolutePath
+						parent {
+							... on File {
+								modifiedTime
+								relativeDirectory
+								name
+							}
+						}
 						frontmatter {
+							title
+							description
 							date
 							authors {
 								name
 								url
 							}
-							draft
 							link
-							title
-							description
 						}
-						count: wordCount {
-							words
-						}
-						timeToRead
 					}
 				}
 			}
@@ -46,53 +62,56 @@ function buildPageQuery(pageKind) {
 }
 
 function createEntryPages({
-	pageKind,
+	pageKind = undefined,
 	createPage,
-	singlePath,
+	disableSinglePage = false,
 	listTitle,
-	category,
 	graphqlQuerier,
-	listTemplatePath,
-	singleTemplatePath,
 	pathPrefix = "",
 }) {
-	graphqlQuerier(buildPageQuery(pageKind)).then((result, reject) => {
+	graphqlQuerier(buildPageQuery(pageKind)).then((result) => {
 		if (result.errors) {
-			reject(result.errors);
-			return;
+			console.error(result.errors);
+			throw result.errors[0];
 		}
 
 		const postEdges = result.data.allMarkdownRemark.edges;
+		const sortedEdges = [...postEdges].sort((a, b) => getEdgeTimestamp(b) - getEdgeTimestamp(a));
 
 		// @ts-ignore
 		createPaginatedPages({
 			createPage,
-			pageTemplate: listTemplatePath,
-			edges: postEdges,
+			pageTemplate: entryListTemplate,
+			edges: sortedEdges,
 			pathPrefix,
 			pageLength: 5,
 			context: {
-				singlePath,
 				listTitle,
-				category,
 			},
 		});
 
-		postEdges.forEach(({
-			node
-		}) => {
-			const markdownPath = node.fileAbsolutePath;
-			const slug = extractFileNameFromPath(markdownPath);
-			createPage({
-				path: `/${singlePath}/${slug}`,
-				component: singleTemplatePath,
-				context: {
-					slug,
-					markdownPath,
-					category,
-				},
+		if (!disableSinglePage) {
+			postEdges.forEach(({
+				node: {
+					fileAbsolutePath: markdownPath,
+					parent: {
+						name: slug,
+						relativeDirectory: folder
+					}
+				}
+			}) => {
+				createPage({
+					path: `/${folder}/${slug}`,
+					component: folderToPageTemplate[folder],
+					context: {
+						markdownPath
+					},
+				});
 			});
-		});
+		}
+	}).catch(err => {
+		console.error(err);
+		process.exit(1);
 	});
 }
 
@@ -196,44 +215,34 @@ exports.createPages = ({
 	} = actions;
 
 	return new Promise((resolve, reject) => {
-		const postTemplate = path.resolve(`src/templates/singlePost.tsx`);
-		// const postListTemplate = path.resolve(`src/templates/postList.tsx`);
-		const entryTemplate = path.resolve(`src/templates/singleEntry.tsx`);
-		const entryListTemplate = path.resolve(`src/templates/entryList.tsx`);
-
 		resolve(
 			Promise.all([
 				createEntryPages({
+					graphqlQuerier,
+					createPage,
+					listTitle: "Feed",
+					disableSinglePage: true,
+				}),
+				createEntryPages({
 					pageKind: "posts",
-					listTemplatePath: entryListTemplate,
 					graphqlQuerier,
 					createPage,
 					listTitle: "Posts",
-					category: "Post",
-					singlePath: "post",
-					singleTemplatePath: postTemplate,
+					pathPrefix: "posts",
 				}),
 				createEntryPages({
 					pageKind: "books",
-					listTemplatePath: entryListTemplate,
 					graphqlQuerier,
 					createPage,
 					listTitle: "Livros",
-					category: "Livro",
 					pathPrefix: "books",
-					singlePath: "book",
-					singleTemplatePath: entryTemplate,
 				}),
 				createEntryPages({
 					pageKind: "bookmarks",
-					listTemplatePath: entryListTemplate,
 					graphqlQuerier,
 					createPage,
 					listTitle: "Bookmarks",
-					category: "Bookmark",
 					pathPrefix: "bookmarks",
-					singlePath: "bookmark",
-					singleTemplatePath: entryTemplate,
 				}),
 			]),
 		);

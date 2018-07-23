@@ -4,38 +4,10 @@ import { Helmet } from "react-helmet";
 import { generateLinkedDataTag } from "../components/LinkedData";
 import { graphql } from "gatsby";
 import DefaultLayout from "../components/layout";
+import { GeneralMetadataFragment, MarkdownEntryFragment } from "../fragments";
 
 interface IPostTemplateProps {
-	data: {
-		site: {
-			siteMetadata: {
-				siteUrl: string;
-			};
-		};
-		personalJson: {
-			name: string;
-		};
-		markdownRemark: {
-			htmlAst: string;
-			excerpt: string;
-			frontmatter: {
-				title: string;
-				description: string;
-				date: string;
-			};
-			timeToRead: number;
-			count: {
-				words: number;
-				sentences: number;
-				paragraphs: number;
-			};
-		};
-	};
-	pathContext: {
-		markdownPath: string;
-		slug: string;
-		category: string;
-	};
+	data: GeneralMetadataFragment & { markdownRemark: MarkdownEntryFragment };
 }
 
 export default class SinglePostTemplate extends React.Component<
@@ -53,10 +25,10 @@ export default class SinglePostTemplate extends React.Component<
 					excerpt,
 					frontmatter: { date, title, description },
 					timeToRead,
+					parent: { modifiedTime, name: fileName, relativeDirectory },
 					count: { words } = { words: -1 },
 				},
 			},
-			pathContext: { category },
 		} = this.props;
 
 		const linkedData = {
@@ -80,12 +52,12 @@ export default class SinglePostTemplate extends React.Component<
 				<Helmet>{generateLinkedDataTag(linkedData)}</Helmet>
 				<Entry
 					title={title}
-					category={category}
+					fileName={fileName}
+					folderName={relativeDirectory}
 					subtitle={description}
-					publishDate={new Date(date)}
+					publishDate={new Date(date || modifiedTime)}
 					authors={[{ name, url: siteUrl }]}
 					htmlAst={htmlAst}
-					url="#"
 					wordCount={words}
 					timeToRead={timeToRead}
 				/>
@@ -96,26 +68,9 @@ export default class SinglePostTemplate extends React.Component<
 
 export const pageQuery = graphql`
 	query SinglePostQuery($markdownPath: String!) {
-		site {
-			siteMetadata {
-				siteUrl
-			}
-		}
-		personalJson {
-			name
-		}
+		...GeneralMetadata
 		markdownRemark(fileAbsolutePath: { eq: $markdownPath }) {
-			htmlAst
-			excerpt
-			timeToRead
-			count: wordCount {
-				words
-			}
-			frontmatter {
-				title
-				description
-				date
-			}
+			...MarkdownEntry
 		}
 	}
 `;

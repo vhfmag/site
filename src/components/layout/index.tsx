@@ -186,8 +186,12 @@ export default class DefaultLayout extends React.Component {
 					description={description}
 					nav={[
 						{
-							name: "posts",
+							name: "feed",
 							url: "/",
+						},
+						{
+							name: "posts",
+							url: "/posts",
 						},
 						{
 							name: "livros",
