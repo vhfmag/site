@@ -105,13 +105,13 @@ module.exports = {
 						return allMarkdownRemark.edges.sort((a, b) => getEdgeTimestamp(b) - getEdgeTimestamp(a)).map(edge => {
 							const url = `${
 									site.siteMetadata.siteUrl
-								}/${edge.parent.relativeDirectory}/${edge.parent.name}`;
+								}/${edge.node.parent.relativeDirectory}/${edge.node.parent.name}`;
 
 							return Object.assign({},
 								edge.node.frontmatter, {
 									description: edge.node.excerpt,
 									url,
-									category: edge.parent.relativeDirectory,
+									category: edge.node.parent.relativeDirectory,
 									guid: url,
 									custom_elements: [{
 										"content:encoded": edge.node.html,
