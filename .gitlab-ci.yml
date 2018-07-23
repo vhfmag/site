@@ -5,8 +5,7 @@ stages:
   - deploy
 
 build:
-  stage:
-    - build
+  stage: build
   script:
   - yarn && yarn run build
   artifacts:
@@ -21,8 +20,7 @@ build:
   - master
 
 pages:
-  stage:
-    - deploy
+  stage: deploy
   dependencies:
     - build
   script:
@@ -34,8 +32,7 @@ pages:
   - master
 
 now:
-  stage:
-    - deploy
+  stage: deploy
   dependencies:
     - build
   script:
