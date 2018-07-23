@@ -1,10 +1,16 @@
 image: node:9
 
 pages:
+  depedencies:
+    - now
+  artifacts:
+    paths:
+    - public
+
+now:
   script:
-  - yarn
-  - yarn add gatsby-cli
-  - yarn build
+  - npm install --unsafe-perm now
+  - yarn run deploy-ci
   artifacts:
     paths:
     - public
@@ -13,8 +19,3 @@ pages:
     - node_modules
   only:
   - master
-
-now:
-  script:
-  - npm install -g --unsafe-perm now
-  - yarn run deploy-ci
