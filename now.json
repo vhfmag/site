@@ -1,3 +1,8 @@
 {
-    "alias": "victormagalhaes.codes"
+    "alias": "victormagalhaes.codes",
+    "files": [
+        "package.json",
+        "yarn.lock",
+        "public"
+    ]
 }
