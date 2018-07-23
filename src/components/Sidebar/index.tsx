@@ -2,8 +2,6 @@ import * as React from "react";
 import styled from "styled-components";
 import { Link } from "gatsby";
 
-import "normalize-css/normalize.css";
-import "font-awesome/css/font-awesome.min.css";
 import { SocialLink } from "./SocialLink";
 import { responsiveBreakpoint } from "../../utils/consts";
 
