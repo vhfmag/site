@@ -5619,6 +5619,10 @@ graphql-codegen-core@0.9.4:
     graphql-tools "3.0.2"
     winston "2.4.3"
 
+graphql-codegen-typescript-template@^0.10.3:
+  version "0.10.3"
+  resolved "https://registry.yarnpkg.com/graphql-codegen-typescript-template/-/graphql-codegen-typescript-template-0.10.3.tgz#3110f35891eba72960d91928ed691b23ea982d64"
+
 graphql-config@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/graphql-config/-/graphql-config-2.0.1.tgz#d34a9bdf1d7360af7b01db9b20260a342ddc7390"
