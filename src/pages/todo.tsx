@@ -181,9 +181,6 @@ export const todoFragment = graphql`
 		title
 		tags
 	}
-`;
-
-export const pageQuery = graphql`
 	query TodoPage {
 		allTodoJson {
 			edges {
