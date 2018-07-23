@@ -11,6 +11,7 @@ build:
   artifacts:
     paths:
     - public
+    - node_modules
   cache:
     paths:
     - node_modules
