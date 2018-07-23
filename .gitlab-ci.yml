@@ -10,6 +10,7 @@ pages:
   cache:
     paths:
     - node_modules
+    - .cache
   only:
   - master
 
@@ -23,5 +24,6 @@ now:
   cache:
     paths:
     - node_modules
+    - .cache
   only:
   - master
