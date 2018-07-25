@@ -2,7 +2,7 @@ image: node:9
 
 pages:
   script:
-  - npm install -g now
+  - npm install -g --unsafe-perm now
   - yarn
   - yarn build
   artifacts:
@@ -18,7 +18,7 @@ pages:
 
 now:
   script:
-  - npm install -g now
+  - npm install -g --unsafe-perm now
   - yarn run deploy-ci
   artifacts:
     paths:
