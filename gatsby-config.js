@@ -1,22 +1,16 @@
-const {
-	backgroundColor,
-	themeColor,
-} = require("./src/utils/consts");
+const { backgroundColor, themeColor } = require("./src/utils/consts");
 
-const {
-	graphql
-} = require("./src/utils/taggedUtils");
+const { graphql } = require("./src/utils/taggedUtils");
 
-const {
-	getEdgeTimestamp
-} = require("./src/utils/utils");
+const { getEdgeTimestamp } = require("./src/utils/utils");
 
 module.exports = {
 	siteMetadata: {
 		title: "Victor Magalhães",
 		siteUrl: "https://victormagalhaes.codes",
 		sourceUrl: "https://gitlab.com/vhfmag/vhfmag.gitlab.io/",
-		description: "javascript engineer at [cubos.io](https://cubos.io/) and web, p2p, and decentralization enthusiast",
+		description:
+			"desenvolvedor em [cubos.io](https://cubos.io/) e entusiasta da web, p2p, decentralização e privacidade",
 	},
 	plugins: [
 		"gatsby-plugin-typescript",
@@ -83,79 +77,89 @@ module.exports = {
 		{
 			resolve: `gatsby-plugin-feed`,
 			options: {
-				query: graphql `
-				{
-				  site {
-						siteMetadata {
-							title
-							description
-							siteUrl
-							site_url: siteUrl
-						}
-				  }
-				}
-			  `,
-				feeds: [{
-					serialize: ({
-						query: {
-							site,
-							allMarkdownRemark
-						}
-					}) => {
-						return allMarkdownRemark.edges.sort((a, b) => getEdgeTimestamp(b) - getEdgeTimestamp(a)).map(edge => {
-							const url = `${
-									site.siteMetadata.siteUrl
-								}/${edge.node.parent.relativeDirectory}/${edge.node.parent.name}`;
-
-							return Object.assign({},
-								edge.node.frontmatter, {
-									description: edge.node.excerpt,
-									url,
-									category: edge.node.parent.relativeDirectory,
-									guid: url,
-									custom_elements: [{
-										"content:encoded": edge.node.html,
-									}, ],
-								},
-							);
-						});
-					},
-					query: graphql `
+				query: graphql`
 					{
-					  allMarkdownRemark(
-							limit: 1000,
-							filter: {
-								frontmatter: { draft: { ne: true } },
+						site {
+							siteMetadata {
+								title
+								description
+								siteUrl
+								site_url: siteUrl
 							}
-					  ) {
-						edges {
-						  node {
-								excerpt
-								html
-								fileAbsolutePath
-								parent {
-									... on File {
-										name
-										relativeDirectory
-									}
-								}
-								frontmatter {
-									title
-									title
-									description
-									date
-									authors {
-										name
-										url
-									}
-								}
-						  }
 						}
-					  }
 					}
-				  `,
-					output: "/rss.xml",
-				}, ],
+				`,
+				feeds: [
+					{
+						serialize: ({ query: { site, allMarkdownRemark } }) => {
+							return allMarkdownRemark.edges
+								.sort(
+									(a, b) =>
+										getEdgeTimestamp(b) -
+										getEdgeTimestamp(a),
+								)
+								.map(edge => {
+									const url = `${site.siteMetadata.siteUrl}/${
+										edge.node.parent.relativeDirectory
+									}/${edge.node.parent.name}`;
+
+									return Object.assign(
+										{},
+										edge.node.frontmatter,
+										{
+											description: edge.node.excerpt,
+											url,
+											category:
+												edge.node.parent
+													.relativeDirectory,
+											guid: url,
+											custom_elements: [
+												{
+													"content:encoded":
+														edge.node.html,
+												},
+											],
+										},
+									);
+								});
+						},
+						query: graphql`
+							{
+								allMarkdownRemark(
+									limit: 1000
+									filter: {
+										frontmatter: { draft: { ne: true } }
+									}
+								) {
+									edges {
+										node {
+											excerpt
+											html
+											fileAbsolutePath
+											parent {
+												... on File {
+													name
+													relativeDirectory
+												}
+											}
+											frontmatter {
+												title
+												title
+												description
+												date
+												authors {
+													name
+													url
+												}
+											}
+										}
+									}
+								}
+							}
+						`,
+						output: "/rss.xml",
+					},
+				],
 			},
 		},
 		// {

@@ -4,7 +4,7 @@ draft: false
 description: 'O que eu li na última semana :)'
 date: '2018-07-30'
 ---
-Inspirado pelos posts de [Sadiq Saif](https://sadiqsaif.com/) (vide [esse](https://asininetech.com/2018/07/29/things-i-read-in-week-30-of-2018/)), pensei em começar uma série com minha leituras semanais, pra arquivar e me fazer sumarizar. Aí vai, numa porca separação por tema:
+Inspirado pelos posts de [Sadiq Saif](https://sadiqsaif.com/) (vide [esse post](https://asininetech.com/2018/07/29/things-i-read-in-week-30-of-2018/)), pensei em começar uma série com minha leituras semanais, pra arquivar e me fazer sumarizar. Aí vai, numa porca separação por tema:
 
 ## Desenvolvimento
 
