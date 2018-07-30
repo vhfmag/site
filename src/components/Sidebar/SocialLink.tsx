@@ -31,6 +31,6 @@ export const SocialLink: React.SFC<ISocialLinkProps> = ({
 		href={url}
 		title={serviceName}
 	>
-		<i className={`fa ${icon}`} />
+		<i className={icon} />
 	</StyledSocialLink>
 );
