@@ -190,7 +190,7 @@ export default class ResumePage extends React.Component<IResumePageProps> {
 						</ul>
 					</StyledList>
 					<StyledList data-columns={3}>
-						<h4>Interesses</h4>
+						<h4>Demais interesses</h4>
 						<ul>
 							{interests.subjects!.map(skill => (
 								<li key={skill!.name!}>{skill!.name}</li>

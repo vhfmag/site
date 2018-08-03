@@ -6,22 +6,25 @@
 		{ "name": "Espanhol", "intensity": 50 }
 	],
 	"technical": [
-		{ "name": "Javascript (ES6+)", "intensity": 90 },
+		{ "name": "Javascript moderno", "intensity": 90 },
 		{ "name": "Typescript", "intensity": 90 },
-		{ "name": "CSS & SASS", "intensity": 85 },
+		{ "name": "CSS", "intensity": 85 },
+		{ "name": "SASS", "intensity": 85 },
 		{ "name": "React", "intensity": 90 },
 		{ "name": "Webpack", "intensity": 80 },
 		{ "name": "Node", "intensity": 75 },
+		{ "name": "Testes automatizados", "intensity": 70 },
 		{ "name": "Python", "intensity": 60 },
+		{ "name": "Rust", "intensity": 50 },
 		{ "name": "RethinkDB", "intensity": 75 },
-		{ "name": "CI", "intensity": 65 },
-		{ "name": "Engenharia de Software", "intensity": 50 },
-		{ "name": "Scrum", "intensity": 50 }
+		{ "name": "CI", "intensity": 65 }
 	],
 	"soft": [
 		{ "name": "Comunicação efetiva", "intensity": 90 },
 		{ "name": "Resolução criativa de problemas", "intensity": 80 },
+		{ "name": "Metodologia ágil (scrum)", "intensity": 60 },
 		{ "name": "Rápido aprendizado", "intensity": 100 },
-		{ "name": "Pensamento crítico", "intensity": 90 }
+		{ "name": "Pensamento crítico", "intensity": 90 },
+		{ "name": "Versatilidade", "intensity": 90 }
 	]
 }

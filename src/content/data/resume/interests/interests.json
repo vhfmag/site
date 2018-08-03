@@ -2,15 +2,17 @@
 	"subjects": [
 		{ "name": "Sistemas & complexidade", "intensity": 75 },
 		{ "name": "Blockchain", "intensity": 70 },
-		{ "name": "Web decentralizada e P2P", "intensity": 90 },
-		{ "name": "Ciência e jornalismo de dados", "intensity": 75 },
+		{ "name": "Plataforma web", "intensity": 90 },
+		{ "name": "Decentralização e federação", "intensity": 90 },
+		{ "name": "Ciência e jornalismo de dados", "intensity": 50 },
 		{ "name": "Dados abertos", "intensity": 75 },
-		{ "name": "Open source software", "intensity": 90 },
-		{ "name": "Web literacy", "intensity": 90 },
+		{ "name": "Software livre e aberto", "intensity": 90 },
+		{ "name": "Letramento digital e web", "intensity": 90 },
 		{ "name": "Internet & privacidade", "intensity": 90 },
 		{ "name": "Design", "intensity": 70 },
-		{ "name": "'Humanas'", "intensity": 90 },
 		{ "name": "Inclusão & diversidade", "intensity": 90 },
+		{ "name": "Política e economia", "intensity": 90 },
+		{ "name": "Acessibilidade", "intensity": 90 },
 		{ "name": "Línguas", "intensity": 85 }
 	]
 }

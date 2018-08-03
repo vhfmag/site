@@ -7,8 +7,9 @@
 			"period": "de março de 2016 até o presente",
 			"role": "Desenvolvedor full-stack",
 			"tasks": [
-				"Desenvolvimento e manutenção de sites estáticos e aplicações web com React, Typescript e Webpack",
-				"Desenvolvimento e manutenção de APIs usando Node, Typescript e RethinkDB"
+				"Desenvolvimento e manutenção de diversas aplicações web com React, Typescript, Webpack, Node, Jest, Mobx, Redux e outras tecnologias",
+				"Desenvolvimento, manutenção e testes de APIs usando Node, Typescript, Jest, RethinkDB e outras tecnologias",
+				"Gestão e capacitação técnica de time de desenvolvimento"
 			]
 		},
 		{
