@@ -70,12 +70,12 @@ const StyledCompetences = styled.section`
 		display: grid;
 		grid-gap: 8pt;
 
-		@media (min-width: ${responsiveBreakpoint}) {
+		@media screen and (min-width: ${responsiveBreakpoint}) {
 			grid-auto-flow: column;
 			grid-template-rows: auto auto;
 		}
 
-		@media (max-width: ${responsiveBreakpoint}) {
+		@media print, (max-width: ${responsiveBreakpoint}) {
 			grid-auto-flow: row;
 			grid-template-columns: auto auto;
 		}
@@ -87,11 +87,22 @@ const innerListMargin = "8pt";
 const StyledListWrapper = styled.div`
 	display: flex;
 	flex-wrap: wrap;
+	padding: ${innerListMargin};
 	margin: -${innerListMargin};
+
+	@media print {
+		flex-direction: column;
+	}
 `;
 
 const StyledList = styled.div`
 	--columns: ${(prop: any) => prop["data-columns"]};
+
+	@media print {
+		--columns: 3;
+		break-inside: avoid;
+		page-break-inside: avoid;
+	}
 
 	ul {
 		display: grid;
@@ -100,6 +111,11 @@ const StyledList = styled.div`
 		padding: 0;
 		grid-gap: 4pt;
 		grid-template-columns: repeat(var(--columns), 1fr);
+
+		li {
+			margin-left: 1em;
+			margin-bottom: 0;
+		}
 	}
 `;
 

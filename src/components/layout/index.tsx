@@ -3,7 +3,11 @@ import { Helmet } from "react-helmet";
 import styled from "styled-components";
 import { StaticQuery, graphql } from "gatsby";
 
-import { responsiveBreakpoint } from "../../utils/consts";
+import {
+	responsiveBreakpoint,
+	backgroundColor,
+	textColor,
+} from "../../utils/consts";
 import { social_2 } from "../../graphql-types";
 import { Sidebar } from "../Sidebar";
 
@@ -46,12 +50,21 @@ const StyledRoot = styled.div`
 	display: flex;
 	align-items: stretch;
 
-	@media (max-width: ${responsiveBreakpoint}) {
+	@media print, (max-width: ${responsiveBreakpoint}) {
 		flex-direction: column;
 	}
 
 	.emojione {
 		height: 1.25em;
+	}
+
+	.fab,
+	.fas {
+		color: ${textColor};
+
+		&.fa-inverse {
+			color: ${backgroundColor};
+		}
 	}
 `;
 

@@ -6,6 +6,7 @@ import { SocialLink } from "./SocialLink";
 import { responsiveBreakpoint } from "../../utils/consts";
 
 import * as Markdown from "react-markdown";
+import { ScreenOnly } from "../../styles";
 
 const activeLinkClassName = "active";
 
@@ -23,7 +24,7 @@ const StyledNav = styled.nav`
 		display: grid;
 		grid-auto-flow: row;
 
-		@media (max-width: ${responsiveBreakpoint}) {
+		@media print, (max-width: ${responsiveBreakpoint}) {
 			grid-auto-flow: column dense;
 			justify-content: flex-start;
 			grid-gap: 8pt;
@@ -40,6 +41,9 @@ const StyledNav = styled.nav`
 `;
 
 const SidebarSection = styled.div``;
+const SidebarHeadingSection = SidebarSection.extend`
+	/* margin-bottom: 1em; */
+`;
 
 const StyledSidebar = styled.header`
 	flex: 0 0 var(--sidebarWidth);
@@ -55,18 +59,19 @@ const StyledSidebar = styled.header`
 		text-transform: lowercase;
 	}
 
-	@media (min-width: ${responsiveBreakpoint}) {
+	@media screen and (min-width: ${responsiveBreakpoint}) {
 		max-height: 100vh;
 		position: sticky;
 		top: 0;
 	}
 
-	@media (max-width: ${responsiveBreakpoint}) {
+	@media print, (max-width: ${responsiveBreakpoint}) {
 		font-size: 0.9em;
+		flex-basis: auto;
 	}
 `;
 
-const SocialLinks = styled.ul`
+const SocialLinks = ScreenOnly.withComponent("ul").extend`
 	display: grid;
 	grid-template-columns: repeat(auto-fill, 1.75em);
 	grid-auto-flow: row dense;
@@ -108,20 +113,20 @@ export const Sidebar: React.SFC<ISidebarProps> = ({
 	nav,
 }) => (
 	<StyledSidebar className="h-card">
-		<SidebarSection>
+		<SidebarHeadingSection>
 			<HeadLink className="p-name u-uid u-url" to="/">
 				{title}
 			</HeadLink>
-		</SidebarSection>
+		</SidebarHeadingSection>
 		<SidebarSection>
 			<div>
 				<a className="u-email" href={`mailto:${email}`}>
 					{email}
 				</a>
 			</div>
-			<div>
+			<ScreenOnly>
 				<a href={sourceUrl}>ver código fonte</a>
-			</div>
+			</ScreenOnly>
 		</SidebarSection>
 		<Markdown source={description} className="lead p-note" />
 		<StyledNav>
