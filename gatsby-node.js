@@ -1,12 +1,8 @@
 const path = require("path");
-const createPaginatedPages = require("gatsby-paginate");
+// const createPaginatedPages = require("gatsby-paginate");
 
-const {
-	graphql
-} = require("./src/utils/taggedUtils");
-const {
-	getEdgeTimestamp
-} = require("./src/utils/utils");
+const { graphql } = require("./src/utils/taggedUtils");
+const { getEdgeTimestamp } = require("./src/utils/utils");
 
 const postTemplate = path.resolve(`src/templates/singlePost.tsx`);
 const entryTemplate = path.resolve(`src/templates/singleEntry.tsx`);
@@ -19,7 +15,7 @@ const folderToPageTemplate = {
 };
 
 function buildPageQuery(pageKind = ".*") {
-	return graphql `
+	return graphql`
 		{
 			allMarkdownRemark(
 					filter: {${
@@ -69,56 +65,54 @@ function createEntryPages({
 	graphqlQuerier,
 	pathPrefix = "",
 }) {
-	graphqlQuerier(buildPageQuery(pageKind)).then((result) => {
-		if (result.errors) {
-			console.error(result.errors);
-			throw result.errors[0];
-		}
+	graphqlQuerier(buildPageQuery(pageKind))
+		.then(result => {
+			if (result.errors) {
+				console.error(result.errors);
+				throw result.errors[0];
+			}
 
-		const postEdges = result.data.allMarkdownRemark.edges;
-		const sortedEdges = [...postEdges].sort((a, b) => getEdgeTimestamp(b) - getEdgeTimestamp(a));
+			const postEdges = result.data.allMarkdownRemark.edges;
+			const sortedEdges = [...postEdges].sort(
+				(a, b) => getEdgeTimestamp(b) - getEdgeTimestamp(a),
+			);
 
-		// @ts-ignore
-		createPaginatedPages({
-			createPage,
-			pageTemplate: entryListTemplate,
-			edges: sortedEdges,
-			pathPrefix,
-			pageLength: 5,
-			context: {
-				listTitle,
-			},
-		});
-
-		if (!disableSinglePage) {
-			postEdges.forEach(({
-				node: {
-					fileAbsolutePath: markdownPath,
-					parent: {
-						name: slug,
-						relativeDirectory: folder
-					}
-				}
-			}) => {
-				createPage({
-					path: `/${folder}/${slug}`,
-					component: folderToPageTemplate[folder],
-					context: {
-						markdownPath
-					},
-				});
+			createPage({
+				path: `/${pathPrefix}`,
+				component: entryListTemplate,
+				context: {
+					group: sortedEdges,
+					pathPrefix,
+					additionalContext: { listTitle },
+				},
 			});
-		}
-	}).catch(err => {
-		console.error(err);
-		process.exit(1);
-	});
+
+			if (!disableSinglePage) {
+				postEdges.forEach(
+					({
+						node: {
+							fileAbsolutePath: markdownPath,
+							parent: { name: slug, relativeDirectory: folder },
+						},
+					}) => {
+						createPage({
+							path: `/${folder}/${slug}`,
+							component: folderToPageTemplate[folder],
+							context: {
+								markdownPath,
+							},
+						});
+					},
+				);
+			}
+		})
+		.catch(err => {
+			console.error(err);
+			process.exit(1);
+		});
 }
 
-exports.onCreateNode = ({
-	node,
-	actions
-}) => {
+exports.onCreateNode = ({ node, actions }) => {
 	if (node.internal.owner === "gatsby-transformer-json")
 		recurseOnObjectProcessingImages({
 			node,
@@ -126,14 +120,8 @@ exports.onCreateNode = ({
 		});
 };
 
-function recurseOnObjectProcessingImages({
-	node,
-	content = node,
-	actions,
-}) {
-	const {
-		createNodeField
-	} = actions;
+function recurseOnObjectProcessingImages({ node, content = node, actions }) {
+	const { createNodeField } = actions;
 
 	if (Array.isArray(content)) {
 		for (const object of content) {
@@ -206,13 +194,8 @@ function recurseOnObjectProcessingImages({
 	}
 }
 
-exports.createPages = ({
-	actions,
-	graphql: graphqlQuerier
-}) => {
-	const {
-		createPage
-	} = actions;
+exports.createPages = ({ actions, graphql: graphqlQuerier }) => {
+	const { createPage } = actions;
 
 	return new Promise((resolve, reject) => {
 		resolve(

@@ -42,6 +42,7 @@ export const Paginator: React.SFC<IPaginatorProps> = ({
 	<StyledNav className={className}>
 		<Link
 			className={(first && "disabled") || ""}
+			tabIndex={first ? -1 : undefined}
 			to={!first ? buildPath({ pathPrefix, index: 1 }) : "#"}
 			rel={!first ? "first" : undefined}
 			title={`Primeira página anterior de ${listTitle}`}
@@ -50,6 +51,7 @@ export const Paginator: React.SFC<IPaginatorProps> = ({
 		</Link>
 		<Link
 			className={(first && "disabled") || ""}
+			tabIndex={first ? -1 : undefined}
 			to={!first ? buildPath({ pathPrefix, index: index - 1 }) : "#"}
 			rel={!first ? "prev" : undefined}
 			title={`Página anterior de ${listTitle}`}
@@ -76,6 +78,7 @@ export const Paginator: React.SFC<IPaginatorProps> = ({
 			))}
 		<Link
 			className={(last && "disabled") || ""}
+			tabIndex={last ? -1 : undefined}
 			to={!last ? buildPath({ pathPrefix, index: index + 1 }) : "#"}
 			rel={!last ? "next" : undefined}
 			title={`Página seguinte de ${listTitle}`}
@@ -84,6 +87,7 @@ export const Paginator: React.SFC<IPaginatorProps> = ({
 		</Link>
 		<Link
 			className={(last && "disabled") || ""}
+			tabIndex={last ? -1 : undefined}
 			to={!last ? buildPath({ pathPrefix, index: pageCount }) : "#"}
 			rel={!last ? "last" : undefined}
 			title={`Última página de ${listTitle}`}

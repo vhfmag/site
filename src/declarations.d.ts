@@ -5,10 +5,6 @@ declare type HTMLOrString =
 	| { htmlAst: Object; content?: undefined };
 
 declare interface GatsbyPaginatorProps<T> {
-	first: boolean;
-	last: boolean;
-	index: number;
-	pageCount: number;
 	group: Array<T>;
 	pathPrefix: string;
 	additionalContext: { [key: string]: any };

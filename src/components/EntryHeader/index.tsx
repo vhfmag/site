@@ -33,6 +33,10 @@ const StyledMetadata = styled.div`
 	font-size: 0.9em;
 	opacity: 0.85;
 	line-height: 1.4;
+
+	* + *::before {
+		content: " | ";
+	}
 `;
 
 function reduceElementsToEnumeration(
@@ -61,7 +65,7 @@ export const EntryHeader: React.SFC<
 	folderName,
 	authors,
 	replyTo,
-	replyToText = "Link para original",
+	replyToText = "Link do bookmark",
 	publishDate,
 	isFullPage,
 	timeToRead,
@@ -82,11 +86,10 @@ export const EntryHeader: React.SFC<
 			</Title>
 			{subtitle && <Subtitle>{subtitle}</Subtitle>}
 			<StyledMetadata>
-				<span className="p-category">{category}</span>
+				{isFullPage && <span className="p-category">{category}</span>}
 				{authors && (
-					<>
-						{" "}
-						| Por{" "}
+					<span>
+						Por{" "}
 						{authors
 							.map(
 								({ name, url: authorUrl }) =>
@@ -105,23 +108,19 @@ export const EntryHeader: React.SFC<
 									),
 							)
 							.reduce(reduceElementsToEnumeration)}
-					</>
+					</span>
 				)}
 				{publishDate && (
-					<>
-						{" "}
-						|{" "}
-						<time
-							className="dt-published"
-							dateTime={publishDate.toISOString()}
-						>
-							{formatDate(publishDate)}
-						</time>
-					</>
+					<time
+						className="dt-published"
+						dateTime={publishDate.toISOString()}
+					>
+						{formatDate(publishDate)}
+					</time>
 				)}
 			</StyledMetadata>
 			<StyledMetadata>
-				{wordCount} palavras — <abbr title="aproximadamente">~</abbr>
+				{wordCount} palavras, <abbr title="aproximadamente">~</abbr>
 				{timeToRead} minutos de leitura
 			</StyledMetadata>
 			{replyTo && (

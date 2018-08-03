@@ -1,7 +1,6 @@
 import * as React from "react";
 import { EntrySummary } from "../components/EntrySummary";
 import Helmet from "react-helmet";
-import { Paginator } from "../components/Paginator";
 import { graphql } from "gatsby";
 import DefaultLayout from "../components/layout";
 import { GeneralMetadataFragment, MarkdownEntryFragment } from "../fragments";
@@ -24,8 +23,6 @@ export default class EntryList extends React.Component<IBookmarkListProps> {
 	public render() {
 		const {
 			group: posts,
-			pageCount,
-			index,
 			additionalContext: { listTitle },
 		} = this.props.pathContext;
 
@@ -42,11 +39,10 @@ export default class EntryList extends React.Component<IBookmarkListProps> {
 		return (
 			<DefaultLayout>
 				<Helmet
-					title={`${listTitle} ${index}/${pageCount}`}
+					title={listTitle}
 					bodyAttributes={{ class: "h-feed" }}
 				/>
 				<h1>{listTitle}</h1>
-				<Paginator {...this.props.pathContext} />
 				<ListWrapper>
 					{posts.map(
 						({
@@ -78,7 +74,6 @@ export default class EntryList extends React.Component<IBookmarkListProps> {
 						),
 					)}
 				</ListWrapper>
-				<Paginator {...this.props.pathContext} />
 			</DefaultLayout>
 		);
 	}

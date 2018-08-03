@@ -1,18 +1,36 @@
 import * as React from "react";
 import styled from "styled-components";
-import { renderAst } from "../../utils/customComponents";
+import {
+	themeColor,
+	backgroundColor,
+	folderToCategory,
+} from "../../utils/consts";
 import { IEntryHeaderProps, EntryHeader } from "../EntryHeader";
 
 type IEntrySummaryProps = HTMLOrString & IEntryHeaderProps;
 
-const StyledEntryInfo = styled.div``;
+const StyledEntryCategoryName = styled.div`
+	font-size: 0.8em;
+	color: ${themeColor};
+`;
+
+const StyledEntryCategory = styled.div`
+	& > .fa-stack {
+		font-size: 1rem;
+		.fab,
+		.fas {
+			color: ${themeColor};
+			&.fa-inverse {
+				color: ${backgroundColor};
+			}
+		}
+	}
+`;
+
 const StyledEntrySummary = styled.article`
 	display: grid;
 	grid-gap: 8pt;
-
-	${StyledEntryInfo} {
-		font-size: 1rem;
-	}
+	grid-template-columns: 8ch auto;
 
 	p,
 	h2,
@@ -29,9 +47,15 @@ const StyledEntrySummary = styled.article`
 	}
 
 	& + & {
-		margin-top: 32pt;
+		margin-top: 16pt;
 	}
 `;
+
+const iconPerFolder = {
+	posts: "fa-pen-nib",
+	books: "fa-book",
+	bookmarks: "fa-bookmark",
+};
 
 export const EntrySummary: React.SFC<IEntrySummaryProps> = ({
 	htmlAst,
@@ -40,12 +64,22 @@ export const EntrySummary: React.SFC<IEntrySummaryProps> = ({
 }) => {
 	return (
 		<StyledEntrySummary className="h-entry">
+			<StyledEntryCategory>
+				<span className="fa-stack fa-2x" role="img">
+					<i className="fas fa-circle fa-stack-2x" />
+					<i
+						className={`fas ${
+							iconPerFolder[
+								headerProps.folderName as keyof typeof iconPerFolder
+							]
+						} fa-stack-1x fa-inverse`}
+					/>
+				</span>
+				<StyledEntryCategoryName>
+					{folderToCategory[headerProps.folderName]}
+				</StyledEntryCategoryName>
+			</StyledEntryCategory>
 			<EntryHeader {...headerProps} isFullPage={false} />
-			{(htmlAst || content) && (
-				<section className="p-summary">
-					{content ? <p>{content}</p> : renderAst(htmlAst)}
-				</section>
-			)}
 		</StyledEntrySummary>
 	);
 };
