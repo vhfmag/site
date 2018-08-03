@@ -7,11 +7,6 @@ import { IEntryHeaderProps, EntryHeader } from "../EntryHeader";
 type IEntryProps = HTMLOrString & IEntryHeaderProps;
 
 const StyledEntry = styled.article`
-	h1,
-	h2 {
-		margin: 0 0 0.6em;
-	}
-
 	.footnotes {
 		clear: both;
 

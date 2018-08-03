@@ -27,6 +27,17 @@ const StyledHeader = styled.header`
 		props.className && props.className.includes(gappedClassName)
 			? "32pt"
 			: "0"};
+
+	> h1,
+	> h2,
+	> h3,
+	> h4,
+	> h5,
+	> h6 {
+		&:first-child {
+			margin-top: 0;
+		}
+	}
 `;
 
 const StyledMetadata = styled.div`
