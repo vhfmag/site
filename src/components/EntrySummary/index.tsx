@@ -15,6 +15,10 @@ const StyledEntryCategoryName = styled.div`
 `;
 
 const StyledEntryCategory = styled.div`
+	display: flex;
+	align-items: flex-end;
+	flex-direction: column;
+
 	& > .fa-stack {
 		font-size: 1rem;
 		.fab,
