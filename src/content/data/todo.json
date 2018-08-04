@@ -4,6 +4,21 @@
 		"tags": ["try-stuff"]
 	},
 	{
+		"title":
+			"ter uma instância de [Wallabag](https://wallabag.org/en) e sair do Pocket",
+		"tags": ["foss", "self-hosting"]
+	},
+	{
+		"title":
+			"ter uma instância de [Yunohost](https://yunohost.org/#/) com [NextCloud](https://nextcloud.com/) e sair de alguns dos produtos da Google",
+		"tags": ["foss", "self-hosting"]
+	},
+	{
+		"title":
+			"tentar implementar um plugin pro NextCloud que use face clustering (com [OpenFace](https://github.com/cmusatyalab/openface)?)",
+		"tags": ["foss", "machine-learning", "face-recognition"]
+	},
+	{
 		"title": "ter um portfólio de respeito"
 	},
 	{
