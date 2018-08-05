@@ -1,11 +1,12 @@
 image: node:9
 stages:
 - build
-- deploy
+- test
 
 pages:
   stage: build
   script:
+  - npm install -g --unsafe-perm now
   - yarn
   - yarn build
   artifacts:
@@ -16,13 +17,21 @@ pages:
     - node_modules
     - .cache
     - public
+  only:
+  - master
 
 now:
-  stage: deploy
-  dependencies:
-  - pages
+  stage: build
   script:
   - npm install -g --unsafe-perm now
   - yarn run deploy-ci
+  artifacts:
+    paths:
+    - public
+  cache:
+    paths:
+    - node_modules
+    - .cache
+    - public
   only:
   - master
