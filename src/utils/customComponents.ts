@@ -9,6 +9,4 @@ export const rehype = new rehypeReact({
 	components: { figure: Figure, citation: Citation, highlight: Highlight },
 });
 
-console.log({ rehype });
-
 export const renderAst = rehype.Compiler;
