@@ -4,6 +4,7 @@
 	"version": "1.0.0",
 	"author": "Victor Magalhães <vhfmag@protonmail.com>",
 	"dependencies": {
+		"@fortawesome/fontawesome-svg-core": "^1.2.0-14",
 		"@types/node": "^8.0.7",
 		"@types/react": "^16.4.2",
 		"@types/react-dom": "^16.0.6",
@@ -46,10 +47,13 @@
 		"rehype-react": "^3.0.2",
 		"styled-components": "^3.3.3",
 		"typelevel-ts": "^0.3.1",
+		"typescript": "^3.0.1",
 		"typography": "^0.16.17",
 		"typography-breakpoint-constants": "^0.15.10"
 	},
-	"keywords": ["gatsby, typescript"],
+	"keywords": [
+		"gatsby, typescript"
+	],
 	"license": "MIT",
 	"main": "n/a",
 	"scripts": {
@@ -57,16 +61,14 @@
 		"start": "gatsby serve",
 		"develop": "gatsby develop",
 		"deploy": "now && now alias && now scale victormagalhaes.codes 1",
-		"deploy-ci":
-			"now http://gitlab.com/vhfmag/vhfmag.gitlab.io/ -t $NOW_TOKEN && now alias -t $NOW_TOKEN && now scale victormagalhaes.codes 1 -t $NOW_TOKEN",
-		"generate-types":
-			"gql-gen --schema http://localhost:8000/___graphql --template typescript --out ./src/graphql-types.d.ts",
+		"deploy-ci": "now http://gitlab.com/vhfmag/vhfmag.gitlab.io/ -t $NOW_TOKEN && now alias -t $NOW_TOKEN && now scale victormagalhaes.codes 1 -t $NOW_TOKEN",
+		"generate-types": "gql-gen --schema http://localhost:8000/___graphql --template typescript --out ./src/graphql-types.d.ts",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"devDependencies": {
 		"prettier": "^1.13.6",
 		"regenerator-runtime": "^0.12.0",
-		"tslint": "^5.10.0",
-		"tslint-config-prettier": "^1.13.0"
+		"tslint": "^5.11.0",
+		"tslint-config-prettier": "^1.14.0"
 	}
 }
