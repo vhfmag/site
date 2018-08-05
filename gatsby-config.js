@@ -27,6 +27,7 @@ module.exports = {
 			options: {
 				plugins: [
 					"gatsby-remark-component",
+					"gatsby-remark-autolink-headers",
 					"gatsby-remark-emoji-unicode",
 					{
 						resolve: `gatsby-remark-images`,
@@ -35,9 +36,12 @@ module.exports = {
 						},
 					},
 					{
-						resolve: `gatsby-remark-images`,
+						resolve: "gatsby-remark-toc",
 						options: {
-							maxWidth: 590,
+							header: "Índice", // the custom header text
+							include: [
+								"./src/content/posts/**/*.md", // an include glob to match against
+							],
 						},
 					},
 					{
