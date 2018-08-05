@@ -37,7 +37,7 @@ export interface GeneralMetadataFragment {
 }
 
 export const fragments = graphql`
-	fragment GeneralMetadata on RootQueryType {
+	fragment GeneralMetadata on Query {
 		site {
 			siteMetadata {
 				siteUrl

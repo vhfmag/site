@@ -9,11 +9,11 @@
 		"@types/react-dom": "^16.0.6",
 		"@types/react-helmet": "^5.0.6",
 		"babel-plugin-styled-components": "^1.5.1",
-		"gatsby": "^2.0.0-beta.55",
+		"gatsby": "^2.0.0-beta.69",
 		"gatsby-cli": "^2.0.0-beta.7",
 		"gatsby-image": "^2.0.0-beta.7",
 		"gatsby-paginate": "^1.0.16",
-		"gatsby-plugin-favicon": "^2.1.1",
+		"gatsby-plugin-favicon": "^3.1.2",
 		"gatsby-plugin-feed": "^1.3.25",
 		"gatsby-plugin-manifest": "^1.0.27",
 		"gatsby-plugin-offline": "^1.0.18",
@@ -23,13 +23,13 @@
 		"gatsby-plugin-sharp": "^2.0.0-beta.7",
 		"gatsby-plugin-sitemap": "^1.2.25",
 		"gatsby-plugin-styled-components": "^3.0.0-beta.3",
-		"gatsby-plugin-typescript": "^2.0.0-beta.7",
+		"gatsby-plugin-typescript": "^2.0.0-beta.9",
 		"gatsby-plugin-typography": "^2.2.0-beta.3",
 		"gatsby-remark-component": "^1.1.3",
 		"gatsby-remark-emoji": "^0.0.2",
 		"gatsby-remark-images": "^1.5.67",
 		"gatsby-remark-prismjs": "^2.0.4",
-		"gatsby-source-filesystem": "^2.0.1-beta.9",
+		"gatsby-source-filesystem": "^2.0.1-beta.10",
 		"gatsby-transformer-json": "^1.0.20",
 		"gatsby-transformer-remark": "^1.7.44",
 		"gatsby-transformer-sharp": "^1.6.27",
@@ -60,7 +60,7 @@
 		"deploy-ci":
 			"now http://gitlab.com/vhfmag/vhfmag.gitlab.io/ -t $NOW_TOKEN && now alias -t $NOW_TOKEN && now scale victormagalhaes.codes 1 -t $NOW_TOKEN",
 		"generate-types":
-			"gql-gen --url http://localhost:8000/___graphql --template typescript --out ./src/graphql-types.d.ts",
+			"gql-gen --schema http://localhost:8000/___graphql --template typescript --out ./src/graphql-types.d.ts",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"devDependencies": {
