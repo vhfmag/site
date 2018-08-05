@@ -39,6 +39,7 @@ now:
 lighthouse:
   stage: test
   script:
+  - apt get install chrome
   - npm i -g lighthouse-ci
   - lighthouse-ci https://victormagalhaes.codes/ -r
   artifacts:
