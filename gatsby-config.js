@@ -27,10 +27,11 @@ module.exports = {
 			options: {
 				plugins: [
 					"gatsby-remark-component",
+					"gatsby-remark-emoji-unicode",
 					{
-						resolve: "gatsby-remark-emoji",
+						resolve: `gatsby-remark-images`,
 						options: {
-							emojiConversion: "shortnameToImage",
+							maxWidth: 590,
 						},
 					},
 					{
@@ -44,6 +45,9 @@ module.exports = {
 						options: {
 							inlineCodeMarker: "^",
 						},
+					},
+					{
+						resolve: "gatsby-remark-a11y-emoji",
 					},
 				],
 			},
