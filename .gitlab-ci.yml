@@ -39,7 +39,7 @@ now:
 lighthouse:
   stage: test
   script:
-  - npm i -g lighthouse
-  - lighthouse https://victormagalhaes.codes/ --output-path=./report.html --save-assets
+  - npm i -g lighthouse-ci
+  - lighthouse-ci https://victormagalhaes.codes/ -r
   artifacts:
     untracked: true
