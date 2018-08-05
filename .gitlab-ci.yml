@@ -3,7 +3,7 @@ stages:
 - build
 - deploy
 
-build:
+pages:
   stage: build
   script:
   - yarn
@@ -17,18 +17,10 @@ build:
     - .cache
     - public
 
-pages:
-  stage: deploy
-  dependencies:
-  - build
-  artifacts:
-    paths:
-    - public
-  only:
-  - master
-
 now:
   stage: deploy
+  dependencies:
+  - pages
   script:
   - npm install -g --unsafe-perm now
   - yarn run deploy-ci
