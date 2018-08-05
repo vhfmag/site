@@ -1,6 +1,10 @@
 image: node:9
+stages:
+- build
+- test
 
 pages:
+  stage: build
   script:
   - npm install -g --unsafe-perm now
   - yarn
@@ -17,6 +21,7 @@ pages:
   - master
 
 now:
+  stage: build
   script:
   - npm install -g --unsafe-perm now
   - yarn run deploy-ci
@@ -30,3 +35,10 @@ now:
     - public
   only:
   - master
+
+lighthouse:
+  stage: test
+  script:
+  - npx lighthouse https://victormagalhaes.codes/ --output-path=./report.html --save-assets
+  artifacts:
+    untracked: true
