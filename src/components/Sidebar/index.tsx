@@ -145,12 +145,14 @@ export const Sidebar: React.SFC<ISidebarProps> = ({
 			</ul>
 		</StyledNav>
 		<SocialLinks>
-			<SocialLink
-				icon="fas fa-rss"
-				serviceName="RSS"
-				rel="alternate"
-				url="/rss.xml"
-			/>
+			<li>
+				<SocialLink
+					icon="fas fa-rss"
+					serviceName="RSS"
+					rel="alternate"
+					url="/rss.xml"
+				/>
+			</li>
 			{social.map(socialProps => (
 				<li key={socialProps.serviceName}>
 					<SocialLink {...socialProps} />
