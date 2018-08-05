@@ -1,12 +1,11 @@
 image: node:9
 stages:
 - build
-- test
+- deploy
 
-pages:
+build:
   stage: build
   script:
-  - npm install -g --unsafe-perm now
   - yarn
   - yarn build
   artifacts:
@@ -17,30 +16,21 @@ pages:
     - node_modules
     - .cache
     - public
+
+pages:
+  stage: deploy
+  dependencies:
+  - build
+  artifacts:
+    paths:
+    - public
   only:
   - master
 
 now:
-  stage: build
+  stage: deploy
   script:
   - npm install -g --unsafe-perm now
   - yarn run deploy-ci
-  artifacts:
-    paths:
-    - public
-  cache:
-    paths:
-    - node_modules
-    - .cache
-    - public
   only:
   - master
-
-lighthouse:
-  stage: test
-  script:
-  - apt install chrome
-  - npm i -g lighthouse-ci
-  - lighthouse-ci https://victormagalhaes.codes/ -r
-  artifacts:
-    untracked: true
