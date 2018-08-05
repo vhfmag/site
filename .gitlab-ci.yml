@@ -39,6 +39,7 @@ now:
 lighthouse:
   stage: test
   script:
-  - npx lighthouse https://victormagalhaes.codes/ --output-path=./report.html --save-assets
+  - npm i -g lighthouse
+  - lighthouse https://victormagalhaes.codes/ --output-path=./report.html --save-assets
   artifacts:
     untracked: true
