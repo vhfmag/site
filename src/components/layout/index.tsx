@@ -62,7 +62,8 @@ const StyledRoot = styled.div`
 	@font-face {
 		font-family: emoji;
 
-		src: local("Apple Color Emoji"), local("Android Emoji"),
+		src: local("EmojiOneMozilla"), local("EmojiOne"), local("Twemoji"),
+			local("Apple Color Emoji"), local("Android Emoji"),
 			local("Segoe UI"), local(EmojiSymbols), local(Symbola);
 
 		/* Emoji unicode blocks */
