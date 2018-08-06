@@ -4,10 +4,10 @@ import { Helmet } from "react-helmet";
 import { generateLinkedDataTag } from "../components/LinkedData";
 import { graphql } from "gatsby";
 import DefaultLayout from "../components/layout";
-import { GeneralMetadataFragment, MarkdownEntryFragment } from "../fragments";
+import { GeneralMetadataFragment, IMarkdownEntryFragment } from "../fragments";
 
 interface IPostTemplateProps {
-	data: GeneralMetadataFragment & { markdownRemark: MarkdownEntryFragment };
+	data: GeneralMetadataFragment & { markdownRemark: IMarkdownEntryFragment };
 }
 
 export default class SinglePostTemplate extends React.Component<
@@ -22,8 +22,9 @@ export default class SinglePostTemplate extends React.Component<
 				personalJson: { name },
 				markdownRemark: {
 					htmlAst,
+					headings,
 					excerpt,
-					frontmatter: { date, title, description },
+					frontmatter: { toc, date, title, description },
 					timeToRead,
 					parent: { birthTime, name: fileName, relativeDirectory },
 					count: { words } = { words: -1 },
@@ -51,6 +52,7 @@ export default class SinglePostTemplate extends React.Component<
 			<DefaultLayout>
 				<Helmet>{generateLinkedDataTag(linkedData)}</Helmet>
 				<Entry
+					toc={toc}
 					title={title}
 					fileName={fileName}
 					folderName={relativeDirectory}
@@ -58,6 +60,7 @@ export default class SinglePostTemplate extends React.Component<
 					publishDate={new Date(date || birthTime)}
 					authors={[{ name, url: siteUrl }]}
 					htmlAst={htmlAst}
+					headings={headings}
 					wordCount={words}
 					timeToRead={timeToRead}
 				/>

@@ -4,10 +4,10 @@ import { Helmet } from "react-helmet";
 import { generateLinkedDataTag } from "../components/LinkedData";
 import { graphql } from "gatsby";
 import DefaultLayout from "../components/layout";
-import { GeneralMetadataFragment, MarkdownEntryFragment } from "../fragments";
+import { GeneralMetadataFragment, IMarkdownEntryFragment } from "../fragments";
 
 interface IEntryTemplateProps {
-	data: GeneralMetadataFragment & { markdownRemark: MarkdownEntryFragment };
+	data: GeneralMetadataFragment & { markdownRemark: IMarkdownEntryFragment };
 }
 
 export default class SingleEntryTemplate extends React.Component<
@@ -23,7 +23,8 @@ export default class SingleEntryTemplate extends React.Component<
 				markdownRemark: {
 					htmlAst,
 					excerpt,
-					frontmatter: { title, authors, link, date },
+					headings,
+					frontmatter: { title, toc, authors, link, date },
 					parent: { birthTime, name: fileName, relativeDirectory },
 					timeToRead,
 					count: { words },
@@ -56,6 +57,7 @@ export default class SingleEntryTemplate extends React.Component<
 			<DefaultLayout>
 				<Helmet>{generateLinkedDataTag(linkedData)}</Helmet>
 				<Entry
+					toc={toc}
 					title={title}
 					authors={authors!}
 					fileName={fileName}
@@ -63,6 +65,7 @@ export default class SingleEntryTemplate extends React.Component<
 					publishDate={new Date(date || birthTime)}
 					replyTo={link}
 					htmlAst={htmlAst}
+					headings={headings}
 					wordCount={words}
 					timeToRead={timeToRead}
 				/>

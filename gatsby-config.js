@@ -36,15 +36,6 @@ module.exports = {
 						},
 					},
 					{
-						resolve: "gatsby-remark-toc",
-						options: {
-							header: "Índice", // the custom header text
-							include: [
-								"./src/content/posts/**/*.md", // an include glob to match against
-							],
-						},
-					},
-					{
 						resolve: "gatsby-remark-prismjs",
 						options: {
 							inlineCodeMarker: "^",

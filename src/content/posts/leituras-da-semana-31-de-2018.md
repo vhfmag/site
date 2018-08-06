@@ -2,29 +2,30 @@
 title: Leituras da semana 31 de 2018
 draft: false
 date: '2018-08-05'
+toc: true
 ---
 
-# Design
+## Design
 
 - [Common webpage design mistakes](http://blog-en.tilda.cc/articles-website-design-mistakes)
 
-# Tecnologia
+## Tecnologia
 
-## Desenvolvimento e ciência da computação
+### Desenvolvimento e ciência da computação
 
 - [The Three-Things Theorem of Function Intention](http://blog.testdouble.com/posts/2018-08-03-three-things-theorem)
 
-## Machine learning
+### Machine learning
 
 - [Wikimedia joins Partnership on AI to promote more equitable use of intelligent systems](https://wikimediafoundation.org/2018/08/01/wikimedia-joins-partnership-on-ai/)
 
-## OpenStreetMaps
+### OpenStreetMaps
 
 Eu tenho tido algum contato a comunidade do [OpenStreetMaps](https://openstreetmap.org/) recentemente por causa do [Mastodon](https://joinmastodon.org) e até baixei o [OsmAnd](https://wiki.openstreetmap.org/wiki/OsmAnd). Essa semana não teve muita coisa, mas vou ficar de olho no OSM :smile:
 
 - [Interactive maps, now in your language – Wikimedia Blog](https://blog.wikimedia.org/2018/06/28/interactive-maps-now-in-your-language/)
 
-## GraphQL
+### GraphQL
 
 Voltei à hype de GraphQL desde a [apresentação de Mateus](https://slides.com/matheuscruzrocha/graphql-2#/) sobre o assunto no [ReactSSA](http://react.salvador.br/) e resolvi ler uns guias mais completos.
 
@@ -32,7 +33,7 @@ Voltei à hype de GraphQL desde a [apresentação de Mateus](https://slides.com/
 
 - [Why Apollo: Advantages, Disadvantages & Alternatives](https://www.robinwieruch.de/why-apollo-advantages-disadvantages-alternatives/)
 
-## Criptografia e privacidade
+### Criptografia e privacidade
 
 - [Threshold Consistency Protocols](https://fieldnotes.resistant.tech/threshold-consistency/)
 
@@ -40,7 +41,7 @@ Voltei à hype de GraphQL desde a [apresentação de Mateus](https://slides.com/
 
 - [Metadata Resistant Consensus](https://fieldnotes.resistant.tech/metadata-resistant-consensus/)
 
-## Typescript
+### Typescript
 
 - [Stronger JavaScript with Opaque Types](https://codemix.com/opaque-types-in-javascript/)
 
@@ -48,9 +49,9 @@ Voltei à hype de GraphQL desde a [apresentação de Mateus](https://slides.com/
 
 - [Exhaustive Switches in TypeScript](http://ideasintosoftware.com/exhaustive-switch-in-typescript/)
 
-## Web
+### Web
 
-### PWAs, service workers e apps na web
+#### PWAs, service workers e apps na web
 
 Leituras pra minha [apresentação](http://fsa.jsday.com.br/schedule/#session-009) de semana que vem no [JSDay de Feira de Santana](http://fsa.jsday.com.br/). Temas: forças e fraquezas da web, o que realmente significa PWA, como funcionam service workers (o texto sobre cache foi lido por causa de problemas técnicos na Cubos mesmo, haha).
 
@@ -68,35 +69,29 @@ Leituras pra minha [apresentação](http://fsa.jsday.com.br/schedule/#session-00
 
 - [What, Exactly, Makes Something A Progressive Web App?](https://infrequently.org/2016/09/what-exactly-makes-something-a-progressive-web-app/)
 
-### Web decentralizada
+#### Web decentralizada
 
 - [Introducing the Dweb – Mozilla Hacks : the Web developer blog](https://hacks.mozilla.org/2018/07/introducing-the-d-web)
 
 - [Multiwriter Dat could power the next Web](https://ar.al/2018/08/04/multiwriter-dat-could-power-the-next-web/)
 
-### Estado da web
+#### Estado da web
 
 - [The Bullshit Web](https://pxlnv.com/blog/bullshit-web/)
 
 - [Using the internet without the Amazon Cloud](https://www.theverge.com/2018/7/28/17622792/plugin-use-the-internet-without-the-amazon-cloud)
 
-### Web e internet das coisas
+#### Web e internet das coisas
 
 - [Things Gateway 0.5 packed full of new features, including experimental smart assistant – Mozilla Hacks : the Web developer blog](https://hacks.mozilla.org/2018/08/things-gateway-0-5-features-experimental-smart-assistant)
 
-### Web components
+#### Web components
 
 - [Web Components in 2018](https://www.sitepen.com/blog/2018/07/06/web-components-in-2018/)
 
-### Conspiração :eyes:
+### Tecnologia e sociedade
 
-`¯\_(ツ)_/¯`
-
-- [The Web is still a DARPA weapon.](https://medium.com/@giacomo_59737/the-web-is-still-a-darpa-weapon-31e3c3b032b8)
-
-## Tecnologia e sociedade
-
-### Mídias sociais e desinformação
+#### Mídias sociais e desinformação
 
 - [When should the press pay attention to trolls, lies and disinformation?](https://boingboing.net/2018/08/04/countermeasures-r-us.html)
 
@@ -104,7 +99,7 @@ Leituras pra minha [apresentação](http://fsa.jsday.com.br/schedule/#session-00
 
 - [Wikimedia panelists tackle the future of intermediary liability](https://wikimediafoundation.org/2018/08/02/intermediary-liability-future-panel/)
 
-### Privacidade
+#### Privacidade
 
 De shoppings usando reconhecimento facial pra coletar dados de transeuntes ao Google implementando busca censurada pro governo chinês, o kit distopia da semana tá bem completo :wink:
 
@@ -120,7 +115,7 @@ De shoppings usando reconhecimento facial pra coletar dados de transeuntes ao Go
 
 - [The nature of the self in the digital age](https://2018.ar.al/notes/the-nature-of-the-self-in-the-digital-age/)
 
-## Tecnologia - outros
+### Tecnologia - outros
 
 - [Why Neovim is Better than Vim](https://geoff.greer.fm/2015/01/15/why-neovim-is-better-than-vim/)
 
@@ -128,7 +123,7 @@ De shoppings usando reconhecimento facial pra coletar dados de transeuntes ao Go
 
 - [Teenager Finds Classical Alternative to Quantum Recommendation Algorithm](https://www.quantamagazine.org/teenager-finds-classical-alternative-to-quantum-recommendation-algorithm-20180731/)
 
-# Política, economia e opinião
+## Política, economia e opinião
 
 - [Network visualisations show what we can and what we may know](https://aeon.co/ideas/network-visualisations-show-what-we-can-and-what-we-may-know)
 

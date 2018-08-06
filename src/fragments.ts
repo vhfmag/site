@@ -1,7 +1,8 @@
 import { graphql } from "gatsby";
 
-export interface MarkdownEntryFragment {
+export interface IMarkdownEntryFragment {
 	htmlAst: any;
+	headings?: Array<{ depth: number; value: string }>;
 	excerpt: string;
 	timeToRead: number;
 	count: {
@@ -17,10 +18,11 @@ export interface MarkdownEntryFragment {
 		title: string;
 		description?: string;
 		date?: string;
-		authors?: {
+		authors?: Array<{
 			name: string;
 			url?: string;
-		}[];
+		}>;
+		toc?: boolean;
 		link?: string;
 	};
 }
@@ -50,6 +52,10 @@ export const fragments = graphql`
 
 	fragment MarkdownEntry on MarkdownRemark {
 		htmlAst
+		headings {
+			depth
+			value
+		}
 		excerpt
 		timeToRead
 		count: wordCount {
@@ -71,6 +77,7 @@ export const fragments = graphql`
 				name
 				url
 			}
+			toc
 			link
 		}
 	}

@@ -3,7 +3,7 @@ import { EntrySummary } from "../components/EntrySummary";
 import Helmet from "react-helmet";
 import { graphql } from "gatsby";
 import DefaultLayout from "../components/layout";
-import { GeneralMetadataFragment, MarkdownEntryFragment } from "../fragments";
+import { GeneralMetadataFragment, IMarkdownEntryFragment } from "../fragments";
 import styled from "styled-components";
 
 const ListWrapper = styled.div`
@@ -11,7 +11,7 @@ const ListWrapper = styled.div`
 `;
 
 interface IEntryNode {
-	node: MarkdownEntryFragment;
+	node: IMarkdownEntryFragment;
 }
 
 interface IBookmarkListProps {
