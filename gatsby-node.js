@@ -18,11 +18,14 @@ function buildPageQuery(pageKind = ".*") {
 	return graphql`
 		{
 			allMarkdownRemark(
-					filter: {${
+				filter: {
+					${
 						process.env.NODE_ENV === "production"
 							? `frontmatter: { draft: { ne: true } },`
 							: ""
-					}, fileAbsolutePath: {regex: "/${pageKind}/.*\.md/"}}
+					}
+					fileAbsolutePath: {regex: "/${pageKind}/.*\.md/"}
+				}
 			) {
 				edges {
 					node {
