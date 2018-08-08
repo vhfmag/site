@@ -4,6 +4,72 @@ const { graphql } = require("./src/utils/taggedUtils");
 
 const { getEdgeTimestamp } = require("./src/utils/utils");
 
+const serializeFeed = ({ query: { site, allMarkdownRemark } }) => {
+	return allMarkdownRemark.edges
+		.sort((a, b) => getEdgeTimestamp(b) - getEdgeTimestamp(a))
+		.map(edge => {
+			const url = `${site.siteMetadata.siteUrl}/${
+				edge.node.parent.relativeDirectory
+			}/${edge.node.parent.name}`;
+
+			return Object.assign({}, edge.node.frontmatter, {
+				description: edge.node.excerpt,
+				url,
+				category: edge.node.parent.relativeDirectory,
+				guid: url,
+				custom_elements: [
+					{
+						"content:encoded": edge.node.html,
+					},
+				],
+			});
+		});
+};
+
+const makeFeedQuery = (pageKind = ".*") => graphql`
+{
+	site {
+		siteMetadata {
+			title
+			description
+			siteUrl
+			site_url: siteUrl
+		}
+	}
+	allMarkdownRemark(
+		limit: 1000
+		filter: {
+			frontmatter: { draft: { ne: true } }
+			fileAbsolutePath: {regex: "/${pageKind}/.*\.md/"}
+		}
+	) {
+		edges {
+			node {
+				excerpt
+				html
+				fileAbsolutePath
+				parent {
+					... on File {
+						name
+						relativeDirectory
+					}
+				}
+				frontmatter {
+					title
+					title
+					description
+					date
+					authors {
+						name
+						url
+					}
+				}
+			}
+		}
+	}
+}
+`;
+
 module.exports = {
 	siteMetadata: {
 		title: "Victor Magalhães",
@@ -107,73 +173,14 @@ module.exports = {
 				`,
 				feeds: [
 					{
-						serialize: ({ query: { site, allMarkdownRemark } }) => {
-							return allMarkdownRemark.edges
-								.sort(
-									(a, b) =>
-										getEdgeTimestamp(b) -
-										getEdgeTimestamp(a),
-								)
-								.map(edge => {
-									const url = `${site.siteMetadata.siteUrl}/${
-										edge.node.parent.relativeDirectory
-									}/${edge.node.parent.name}`;
-
-									return Object.assign(
-										{},
-										edge.node.frontmatter,
-										{
-											description: edge.node.excerpt,
-											url,
-											category:
-												edge.node.parent
-													.relativeDirectory,
-											guid: url,
-											custom_elements: [
-												{
-													"content:encoded":
-														edge.node.html,
-												},
-											],
-										},
-									);
-								});
-						},
-						query: graphql`
-							{
-								allMarkdownRemark(
-									limit: 1000
-									filter: {
-										frontmatter: { draft: { ne: true } }
-									}
-								) {
-									edges {
-										node {
-											excerpt
-											html
-											fileAbsolutePath
-											parent {
-												... on File {
-													name
-													relativeDirectory
-												}
-											}
-											frontmatter {
-												title
-												title
-												description
-												date
-												authors {
-													name
-													url
-												}
-											}
-										}
-									}
-								}
-							}
-						`,
+						serialize: serializeFeed,
+						query: makeFeedQuery(),
 						output: "/rss.xml",
+					},
+					{
+						serialize: serializeFeed,
+						query: makeFeedQuery("posts"),
+						output: "/rss.posts.xml",
 					},
 				],
 			},
