@@ -8,6 +8,23 @@ const StyledTOC = styled.aside`
 		float: right;
 		max-width: 300px;
 	}
+
+	ol {
+		counter-reset: item;
+		list-style-type: none;
+	}
+
+	li {
+		position: relative;
+	}
+
+	li:before {
+		left: 0;
+		transform: translateX(calc(-100% - 1ch));
+		position: absolute;
+		content: counters(item, ".") ". ";
+		counter-increment: item;
+	}
 `;
 
 export interface ITreeNode<T> {
@@ -31,7 +48,7 @@ export class TableOfContents extends React.Component<ITableOfContentsProps> {
 		}
 
 		return (
-			<ul>
+			<ol>
 				{headings.map(h => (
 					<li key={h.value}>
 						<p>
@@ -40,7 +57,7 @@ export class TableOfContents extends React.Component<ITableOfContentsProps> {
 						<TableOfContents.ContentsTree headings={h.children} />
 					</li>
 				))}
-			</ul>
+			</ol>
 		);
 	}
 
