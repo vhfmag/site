@@ -40,12 +40,14 @@ function headingsToTree(
 				children: [],
 			};
 
+			const headingDepth = h.depth! - 1;
+
 			let depth = 1;
 			let lastNodeList = nodes;
 			let lastNode = last(nodes);
 
 			while (
-				depth < h.depth! &&
+				depth < headingDepth &&
 				lastNode &&
 				lastNode.children &&
 				lastNode.children.length > 0
@@ -55,7 +57,7 @@ function headingsToTree(
 				lastNode = last(lastNodeList);
 			}
 
-			if (lastNode && h.depth! > depth) {
+			if (lastNode && headingDepth > depth) {
 				lastNode.children.push(newNode);
 			} else {
 				lastNodeList.push(newNode);
