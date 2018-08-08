@@ -2,6 +2,7 @@ import { last } from "remeda";
 import * as React from "react";
 import styled from "styled-components";
 import Helmet from "react-helmet";
+import { themeColor } from "../../utils/consts";
 import { renderAst } from "../../utils/customComponents";
 import { IEntryHeaderProps, EntryHeader } from "../EntryHeader";
 import { TableOfContents, ITreeNode } from "../TableOfContents";
@@ -21,6 +22,17 @@ const StyledEntry = styled.article`
 				margin: 0;
 				display: inline;
 			}
+		}
+	}
+
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		.anchor path {
+			fill: ${themeColor};
 		}
 	}
 `;
