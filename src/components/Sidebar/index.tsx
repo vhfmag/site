@@ -19,19 +19,19 @@ const HeadLink = styled(Link)`
 const StyledNav = styled.nav`
 	ul {
 		list-style: none;
-		padding-left: 0;
-		margin-left: 0;
-		display: grid;
-		grid-auto-flow: row;
+		margin: -2pt -4pt;
+		padding-bottom: 1.6785em;
+		display: flex;
+		flex-wrap: wrap;
+		flex-direction: column;
 
 		@media print, (max-width: ${responsiveBreakpoint}) {
-			grid-auto-flow: column dense;
+			flex-direction: row;
 			justify-content: flex-start;
-			grid-gap: 8pt;
 		}
 
 		li {
-			margin-bottom: 0;
+			margin: 2pt 4pt;
 
 			a.${activeLinkClassName} {
 				font-weight: bold;
