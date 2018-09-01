@@ -25,12 +25,7 @@ export const SocialLink: React.SFC<ISocialLinkProps> = ({
 	icon,
 	serviceName,
 }) => (
-	<StyledSocialLink
-		rel={rel}
-		className="u-url"
-		href={url}
-		title={serviceName}
-	>
-		<i className={icon} />
+	<StyledSocialLink rel={rel} className="u-url" href={url}>
+		<i className={icon} role="img" title={serviceName} />
 	</StyledSocialLink>
 );

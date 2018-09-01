@@ -69,7 +69,7 @@ export const EntrySummary: React.SFC<IEntrySummaryProps> = ({
 	return (
 		<StyledEntrySummary className="h-entry">
 			<StyledEntryCategory>
-				<span className="fa-stack fa-2x" role="img">
+				<span className="fa-stack fa-2x" role="presentation">
 					<i className="fas fa-circle fa-stack-2x" />
 					<i
 						className={`fas ${
