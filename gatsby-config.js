@@ -81,6 +81,15 @@ module.exports = {
 	plugins: [
 		"gatsby-plugin-preact",
 		"gatsby-plugin-typescript",
+		{
+			resolve: "gatsby-plugin-webpack-bundle-analyzer",
+			options: {
+				production: true,
+				analyzerMode: "static",
+				defaultSizes: "gzip",
+				openAnalyzer: false,
+			},
+		},
 		"gatsby-plugin-react-helmet",
 		{
 			resolve: `gatsby-source-filesystem`,
