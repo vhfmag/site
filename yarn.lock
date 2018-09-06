@@ -649,6 +649,12 @@
     core-js "^2.5.7"
     regenerator-runtime "^0.12.0"
 
+"@babel/runtime@^7.0.0":
+  version "7.0.0"
+  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.0.0.tgz#adeb78fedfc855aa05bc041640f3f6f98e85424c"
+  dependencies:
+    regenerator-runtime "^0.12.0"
+
 "@babel/template@7.0.0-beta.44":
   version "7.0.0-beta.44"
   resolved "https://registry.yarnpkg.com/@babel/template/-/template-7.0.0-beta.44.tgz#f8832f4fdcee5d59bf515e595fc5106c529b394f"
@@ -4944,13 +4950,11 @@ gatsby-plugin-page-creator@^2.0.0-rc.0:
     parse-filepath "^1.0.1"
     slash "^1.0.0"
 
-gatsby-plugin-preact@^1.0.17:
-  version "1.0.17"
-  resolved "http://registry.npmjs.org/gatsby-plugin-preact/-/gatsby-plugin-preact-1.0.17.tgz#d8234b8472a20cb994c135d90434283ad3cf5f3a"
+gatsby-plugin-preact@^2.0.0-rc.1:
+  version "2.0.0-rc.1"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-preact/-/gatsby-plugin-preact-2.0.0-rc.1.tgz#021cc5a80f6ed6b8a121899154e32ee8baf12d3e"
   dependencies:
-    babel-runtime "^6.26.0"
-    preact "^8.2.5"
-    preact-compat "^3.17.0"
+    "@babel/runtime" "^7.0.0"
 
 gatsby-plugin-purify-css@^2.2.1:
   version "2.2.1"
@@ -9060,7 +9064,7 @@ potrace@^2.1.1:
   dependencies:
     jimp "^0.2.24"
 
-preact-compat@^3.17.0:
+preact-compat@^3.18.4:
   version "3.18.4"
   resolved "https://registry.yarnpkg.com/preact-compat/-/preact-compat-3.18.4.tgz#fbe76ddd30356c68e3ccde608107104946f2cf8d"
   dependencies:
@@ -9080,7 +9084,7 @@ preact-transition-group@^1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/preact-transition-group/-/preact-transition-group-1.1.1.tgz#f0a49327ea515ece34ea2be864c4a7d29e5d6e10"
 
-preact@^8.2.5:
+preact@^8.3.1:
   version "8.3.1"
   resolved "https://registry.yarnpkg.com/preact/-/preact-8.3.1.tgz#ed34f79d09edc5efd32a378a3416ef5dc531e3ac"
 
