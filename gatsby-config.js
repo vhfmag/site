@@ -79,6 +79,7 @@ module.exports = {
 			"desenvolvedor em [cubos.io](https://cubos.io/) e entusiasta da web, p2p e privacidade",
 	},
 	plugins: [
+		"gatsby-plugin-preact",
 		"gatsby-plugin-typescript",
 		"gatsby-plugin-react-helmet",
 		{
