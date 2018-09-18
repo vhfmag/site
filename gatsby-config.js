@@ -79,7 +79,6 @@ module.exports = {
 			"desenvolvedor em [cubos.io](https://cubos.io/) e entusiasta da web, p2p e privacidade",
 	},
 	plugins: [
-		"gatsby-plugin-preact",
 		"gatsby-plugin-typescript",
 		{
 			resolve: "gatsby-plugin-webpack-bundle-analyzer",
