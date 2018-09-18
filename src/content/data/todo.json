@@ -4,34 +4,29 @@
 		"tags": ["try-stuff"]
 	},
 	{
-		"title":
-			"ter uma instância de [Wallabag](https://wallabag.org/en) e sair do Pocket",
+		"title": "ter uma instância de <a href='https://wallabag.org/en'>Wallabag</a> e sair do Pocket",
 		"tags": ["foss", "self-hosting"]
 	},
 	{
-		"title":
-			"ter uma instância de [Yunohost](https://yunohost.org/#/) com [NextCloud](https://nextcloud.com/) e sair de alguns dos produtos da Google",
+		"title": "ter uma instância de <a href='https://yunohost.org/#/'>Yunohost</a> com <a href='https://nextcloud.com/'>NextCloud</a> e sair de alguns dos produtos da Google",
 		"tags": ["foss", "self-hosting"]
 	},
 	{
-		"title":
-			"tentar implementar um plugin pro NextCloud que use face clustering (com [OpenFace](https://github.com/cmusatyalab/openface)?)",
+		"title": "tentar implementar um plugin pro NextCloud que use face clustering (com <a href='https://github.com/cmusatyalab/openface'>OpenFace</a>?)",
 		"tags": ["foss", "machine-learning", "face-recognition"]
 	},
 	{
-		"title":
-			"implementar SRI com [esse plugin](https://www.npmjs.com/package/webpack-subresource-integrity) nesse site"
+		"title": "implementar SRI com <a href='https://www.npmjs.com/package/webpack-subresource-integrity'>esse plugin</a> nesse site"
 	},
 	{
 		"title": "ter um portfólio de respeito"
 	},
 	{
-		"title":
-			"fazer [POSSE](https://indieweb.org/POSSE) para Twitter, Medium e afins",
+		"title": "fazer <a href='https://indieweb.org/POSSE'>POSSE</a> para Twitter, Medium e afins",
 		"tags": ["indie-web"]
 	},
 	{
-		"title": "implementar WebMentions usando [Brid.gy]",
+		"title": "implementar WebMentions usando <a href='https://brid.gy'>Brid.gy</a>",
 		"tags": ["indie-web"]
 	},
 	{
@@ -58,7 +53,7 @@
 		"tags": ["try-stuff"]
 	},
 	{
-		"title": "fazer algo usando [gun.js](https://gun.js.org/)",
+		"title": "fazer algo usando <a href='https://gun.js.org/'>gun.js</a>",
 		"tags": ["try-stuff"]
 	},
 	{
@@ -68,18 +63,16 @@
 		"title": "contribuir mais com open source"
 	},
 	{
-		"title": "analisar meus dados do [pocket](https://getpocket.com)"
+		"title": "analisar meus dados do <a href='https://getpocket.com'>pocket</a>"
 	},
 	{
 		"title": "become googleless"
 	},
 	{
-		"title":
-			"traduzir [A plan to rescue the Web from the Internet](https://staltz.com/a-plan-to-rescue-the-web-from-the-internet.html) de [André Staltz]"
+		"title": "traduzir <a href='https://staltz.com/a-plan-to-rescue-the-web-from-the-internet.html'>A plan to rescue the Web from the Internet</a> de [André Staltz]"
 	},
 	{
-		"title":
-			"traduzir [How cybernetics connects computing, counterculture, and design](http://www.dubberly.com/articles/cybernetics-and-counterculture.html)"
+		"title": "traduzir <a href='http://www.dubberly.com/articles/cybernetics-and-counterculture.html'>How cybernetics connects computing, counterculture, and design</a>"
 	},
 	{
 		"title": "certificar inglês (CAE)"
@@ -91,11 +84,11 @@
 		"title": "aprender alemão"
 	},
 	{
-		"title": "usar o [choo](https://choo.io/)",
+		"title": "usar o <a href='https://choo.io/'>choo</a>",
 		"tags": ["try-stuff"]
 	},
 	{
-		"title": "fazer app com [elm](https://http://elm-lang.org/)",
+		"title": "fazer app com <a href='https://http://elm-lang.org/'>elm</a>",
 		"tags": ["try-stuff"]
 	},
 	{
@@ -105,49 +98,43 @@
 		"title": "se formar"
 	},
 	{
-		"title":
-			"trabalhar no [workshop de typescript](https://github.com/vhfmag/typescript-workshop/) com o [workshopper-adventure](https://github.com/workshopper/workshopper-adventure)",
+		"title": "trabalhar no <a href='https://github.com/vhfmag/typescript-workshop/'>workshop de typescript</a> com o <a href='https://github.com/workshopper/workshopper-adventure'>workshopper-adventure</a>",
 		"tags": ["open-source"]
 	},
 	{
-		"title":
-			"usar ML para transcrever fala humana em [IPA](https://www.internationalphoneticalphabet.org/)"
+		"title": "usar ML para transcrever fala humana em <a href='https://www.internationalphoneticalphabet.org/'>IPA</a>"
 	},
 	{
-		"title":
-			"fazer algo com [Dat](https://datproject.org/) e [Beaker Browser](https://beakerbrowser.com/)",
+		"title": "fazer algo com <a href='https://datproject.org/'>Dat</a> e <a href='https://beakerbrowser.com/'>Beaker Browser</a>",
 		"tags": ["try-stuff"]
 	},
 	{
-		"title": "fazer algo com [SSB](https://scuttlebutt.nz/)",
+		"title": "fazer algo com <a href='https://scuttlebutt.nz/'>SSB</a>",
 		"tags": ["try-stuff"]
 	},
 	{
 		"title": "estudar dois sistemas de design"
 	},
 	{
-		"title": "fazer algo com [IPFS](https://ipfs.io/)",
+		"title": "fazer algo com <a href='https://ipfs.io/'>IPFS</a>",
 		"tags": ["try-stuff"]
 	},
 	{
-		"title":
-			"implementar plugin de Tandem (colaboração P2P com CRDT em editores de texto) do VSCode ([issue](https://github.com/typeintandem/tandem/issues/128))",
+		"title": "implementar plugin de Tandem (colaboração P2P com CRDT em editores de texto) do VSCode (<a href='https://github.com/typeintandem/tandem/issues/128'>issue</a>)",
 		"tags": ["open-source"]
 	},
 	{
-		"title": "usar [DangerJS](http://danger.systems/js/) em algum projeto",
+		"title": "usar <a href='http://danger.systems/js/'>DangerJS</a> em algum projeto",
 		"tags": ["try-stuff"]
 	},
 	{
-		"title":
-			"implementar integração do [DangerJS](http://danger.systems/js/) com [Gitlab](https://gitlab.com) ([issue](https://github.com/danger/danger-js/issues/396))",
+		"title": "implementar integração do <a href='http://danger.systems/js/'>DangerJS</a> com <a href='https://gitlab.com'>Gitlab</a> (<a href='https://github.com/danger/danger-js/issues/396'>issue</a>)",
 		"tags": ["open-source"]
 	},
 	{
 		"title": "implementar tags aqui no blog"
 	},
 	{
-		"title":
-			"traduzir [12 Things Everyone Should Understand About Tech](https://medium.com/humane-tech/12-things-everyone-should-understand-about-tech-d158f5a26411)"
+		"title": "traduzir <a href='https://medium.com/humane-tech/12-things-everyone-should-understand-about-tech-d158f5a26411'>12 Things Everyone Should Understand About Tech</a>"
 	}
 ]

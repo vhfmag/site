@@ -1,15 +1,10 @@
 import * as React from "react";
-import * as Markdown from "react-markdown";
 import styled from "styled-components";
 import { Helmet } from "react-helmet";
 import { backgroundColor } from "../utils/consts";
 import FlipMove from "react-flip-move";
 import DefaultLayout from "../components/layout";
 import { graphql } from "gatsby";
-
-const ReactMarkdown = (Markdown as any) as React.ComponentClass<
-	Markdown.ReactMarkdownProps
->;
 
 interface ITodo {
 	title: string;
@@ -84,7 +79,7 @@ class Todo extends React.PureComponent<ITodoItemProps> {
 		return (
 			<TodoWrapper>
 				<TodoTitle>
-					<ReactMarkdown source={title} />
+					<p dangerouslySetInnerHTML={{ __html: title }} />
 				</TodoTitle>
 				{tags &&
 					tags.length > 0 && (
@@ -159,16 +154,14 @@ export default class TodoPage extends React.Component<
 				<h2>quem sabe um dia</h2>
 				<StyledTodoList>
 					<FlipMove typeName={null}>
-						{todos
-							.sort(this.todoComparer)
-							.map(todo => (
-								<Todo
-									{...todo}
-									key={todo.title}
-									currentTag={this.state.currentTag}
-									toggleCurrentTag={this.toggleCurrentTag}
-								/>
-							))}
+						{todos.sort(this.todoComparer).map(todo => (
+							<Todo
+								{...todo}
+								key={todo.title}
+								currentTag={this.state.currentTag}
+								toggleCurrentTag={this.toggleCurrentTag}
+							/>
+						))}
 					</FlipMove>
 				</StyledTodoList>
 			</DefaultLayout>

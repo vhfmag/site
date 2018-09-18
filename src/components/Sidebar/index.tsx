@@ -5,7 +5,6 @@ import { Link } from "gatsby";
 import { SocialLink } from "./SocialLink";
 import { responsiveBreakpoint } from "../../utils/consts";
 
-import * as Markdown from "react-markdown";
 import { ScreenOnly } from "../../styles";
 
 const activeLinkClassName = "active";
@@ -45,12 +44,14 @@ const SidebarHeadingSection = SidebarSection.extend`
 	/* margin-bottom: 1em; */
 `;
 
+const StyledDescription = styled.p``;
+
 const StyledSidebar = styled.header`
 	flex: 0 0 var(--sidebarWidth);
 	padding: var(--rootPadding);
 
 	p,
-	${SidebarSection} {
+	${StyledDescription}, ${SidebarSection} {
 		margin: 0 0 1.6785em;
 	}
 
@@ -128,7 +129,10 @@ export const Sidebar: React.SFC<ISidebarProps> = ({
 				<a href={sourceUrl}>ver código fonte</a>
 			</ScreenOnly>
 		</SidebarSection>
-		<Markdown source={description} className="lead p-note" />
+		<div
+			dangerouslySetInnerHTML={{ __html: description }}
+			className="lead p-note"
+		/>
 		<StyledNav>
 			<ul>
 				{nav.map(({ name, url }) => (

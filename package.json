@@ -42,7 +42,6 @@
 		"react-dom": "^16.4.1",
 		"react-flip-move": "^3.0.2",
 		"react-helmet": "^5.2.0",
-		"react-markdown": "^3.3.4",
 		"react-typography": "^0.16.13",
 		"rehype-react": "^3.0.2",
 		"remeda": "^0.0.3",
