@@ -40,9 +40,6 @@ const StyledNav = styled.nav`
 `;
 
 const SidebarSection = styled.div``;
-const SidebarHeadingSection = SidebarSection.extend`
-	/* margin-bottom: 1em; */
-`;
 
 const StyledDescription = styled.p``;
 
@@ -72,7 +69,7 @@ const StyledSidebar = styled.header`
 	}
 `;
 
-const SocialLinks = ScreenOnly.withComponent("ul").extend`
+const SocialLinks = styled(ScreenOnly.withComponent("ul"))`
 	display: grid;
 	grid-template-columns: repeat(auto-fill, 1.75em);
 	grid-auto-flow: row dense;
@@ -114,11 +111,11 @@ export const Sidebar: React.SFC<ISidebarProps> = ({
 	nav,
 }) => (
 	<StyledSidebar className="h-card">
-		<SidebarHeadingSection>
+		<SidebarSection>
 			<HeadLink className="p-name u-uid u-url" to="/">
 				{title}
 			</HeadLink>
-		</SidebarHeadingSection>
+		</SidebarSection>
 		<SidebarSection>
 			<div>
 				<a className="u-email" href={`mailto:${email}`}>
