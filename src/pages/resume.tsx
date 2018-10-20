@@ -130,6 +130,9 @@ const StyledExperience = styled.div`
 	img {
 		grid-row: 1/3;
 		grid-column: 1;
+		align-self: stretch;
+		justify-self: stretch;
+		min-height: 100px;
 	}
 
 	h4 {
@@ -222,11 +225,13 @@ export default class ResumePage extends React.Component<IResumePageProps> {
 								<div>{role}</div>
 								<div>{period}</div>
 							</StyledExperienceInfo>
+							{tasks && (
 							<ul>
-								{tasks!.map(task => (
+									{tasks.map(task => (
 									<li key={task!}>{task}</li>
 								))}
 							</ul>
+							)}
 						</StyledExperience>
 					);
 				})}
