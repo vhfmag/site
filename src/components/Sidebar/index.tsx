@@ -134,11 +134,7 @@ export const Sidebar: React.SFC<ISidebarProps> = ({
 			<ul>
 				{nav.map(({ name, url }) => (
 					<li key={name}>
-						<Link
-							exact={true}
-							activeClassName={activeLinkClassName}
-							to={url}
-						>
+						<Link activeClassName={activeLinkClassName} to={url}>
 							{name}
 						</Link>
 					</li>

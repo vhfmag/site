@@ -65,7 +65,6 @@ export const Paginator: React.SFC<IPaginatorProps> = ({
 					activeClassName="disabled"
 					key={i}
 					title={`Página ${i} de ${listTitle}`}
-					exact={true}
 					rel={
 						`${i === 1 ? "first" : ""} ${
 							i === pageCount ? "last" : ""
