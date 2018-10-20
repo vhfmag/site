@@ -212,6 +212,8 @@ export default class ResumePage extends React.Component<IResumePageProps> {
 						tasks,
 					} = experience!;
 
+					const [start, end] = period!;
+
 					return (
 						<StyledExperience key={company!}>
 							<h4>
@@ -223,14 +225,16 @@ export default class ResumePage extends React.Component<IResumePageProps> {
 							/>
 							<StyledExperienceInfo>
 								<div>{role}</div>
-								<div>{period}</div>
+								<div>
+									de {start} até {end || "o presente"}
+								</div>
 							</StyledExperienceInfo>
 							{tasks && (
-							<ul>
+								<ul>
 									{tasks.map(task => (
-									<li key={task!}>{task}</li>
-								))}
-							</ul>
+										<li key={task!}>{task}</li>
+									))}
+								</ul>
 							)}
 						</StyledExperience>
 					);

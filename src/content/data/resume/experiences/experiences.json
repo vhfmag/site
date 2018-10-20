@@ -4,7 +4,7 @@
 			"company": "Cubos",
 			"link": "https://cubos.io",
 			"image": "/images/companies/cubos.svg",
-			"period": "de março de 2016 até outubro de 2018",
+			"period": ["março de 2016", "outubro de 2018"],
 			"role": "Desenvolvedor full-stack",
 			"tasks": [
 				"Desenvolvimento e manutenção de diversas aplicações web com React, Typescript, Webpack, Node, Jest, Mobx, Redux e outras tecnologias",
@@ -16,7 +16,7 @@
 			"company": "ZigPay",
 			"link": "https://zigpay.com.br",
 			"image": "/images/companies/zig.png",
-			"period": "de maio de 2016 até outubro de 2018",
+			"period": ["maio de 2016", "julho de 2018"],
 			"role": "Desenvolvedor full-stack",
 			"tasks": [
 				"Desenvolvimento e manutenção de painéis administrativos para a plataforma",
@@ -28,7 +28,7 @@
 			"company": "Jusbrasil",
 			"link": "https://jusbrasil.com.br",
 			"image": "/images/companies/jusbrasil.svg",
-			"period": "de outubro de 2018 até o presente",
+			"period": ["outubro de 2018"],
 			"role": "Desenvolvedor full-stack",
 			"tasks": []
 		}
