@@ -250,7 +250,7 @@ export default class DefaultLayout extends React.Component {
 							url: "/books",
 						},
 						{
-							name: "bookmarks",
+							name: "recomendações",
 							url: "/bookmarks",
 						},
 						{

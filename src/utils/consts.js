@@ -6,6 +6,6 @@ module.exports = {
 	folderToCategory: {
 		posts: "Post",
 		books: "Livro",
-		bookmarks: "Bookmark",
+		bookmarks: "Recomendação",
 	},
 };
