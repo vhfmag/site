@@ -1,7 +1,6 @@
 image: node:9
 stages:
 - build
-- audit
 
 pages:
   stage: build
@@ -18,17 +17,3 @@ pages:
     - public
   only:
   - master
-
-audit:
-  image: 
-    name: thecreazy/siteaudit:1.1.4
-    entrypoint: ['']
-  stage: audit
-  variables:
-    SITEAUDIT_URL: "https://master.silvietta.n2.caffeina.host/"
-  script:
-    - echo "started siteaudit"
-    - /usr/local/bin/siteaudit ${SITEAUDIT_URL} --headless
-  artifacts:
-    paths:
-    - output
