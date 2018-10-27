@@ -13,6 +13,7 @@ import { Folder } from "../../utils/types";
 type IEntrySummaryProps = HTMLOrString & IEntryHeaderProps;
 
 const StyledEntryCategoryName = styled.div`
+	margin-top: 4pt;
 	font-size: 0.8em;
 	color: ${themeColor};
 `;
