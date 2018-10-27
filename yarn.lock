@@ -5687,7 +5687,7 @@ functional-red-black-tree@^1.0.1:
   resolved "https://registry.yarnpkg.com/functional-red-black-tree/-/functional-red-black-tree-1.0.1.tgz#1b0ab3bd553b2a0d6399d29c0e3ea0b252078327"
   integrity sha1-GwqzvVU7Kg1jmdKcDj6gslIHgyc=
 
-gatsby-cli@^2.0.0-beta.12, gatsby-cli@^2.4.3:
+gatsby-cli@^2, gatsby-cli@^2.4.3:
   version "2.4.3"
   resolved "https://registry.yarnpkg.com/gatsby-cli/-/gatsby-cli-2.4.3.tgz#355b2278ec3936618516935426ae0d164a75b994"
   integrity sha512-syIrRagg7a0i4XgWCnAzUmDV3RZXsIiuNwn7P9L1OH00bCJfp5Q3cnjQa5VbRF8i8fWQX/rh/RBmpdFUJZVdNg==
@@ -5713,7 +5713,7 @@ gatsby-cli@^2.0.0-beta.12, gatsby-cli@^2.4.3:
     yargs "^11.1.0"
     yurnalist "^0.2.1"
 
-gatsby-image@^2.0.0-beta.7:
+gatsby-image@^2:
   version "2.0.17"
   resolved "https://registry.yarnpkg.com/gatsby-image/-/gatsby-image-2.0.17.tgz#15030697b67a808cd5fc8283af80e22bcd1e740b"
   integrity sha512-feHLyuZXhV1GlWsAkK8RiWMjL+1C26PUCKFRkQYaa0BiZvvOXMgbeZuC/W0L7QSzBA6GdcOZeXEUtGuuavPFLw==
@@ -5760,7 +5760,7 @@ gatsby-plugin-manifest@^2.0.6:
     bluebird "^3.5.0"
     sharp "^0.21.0"
 
-gatsby-plugin-offline@^2.0.0-beta.9:
+gatsby-plugin-offline@^2:
   version "2.0.9"
   resolved "https://registry.yarnpkg.com/gatsby-plugin-offline/-/gatsby-plugin-offline-2.0.9.tgz#ca4cb733a3fd6c411da347dbfa7f9f1ceb5fe2e1"
   integrity sha512-uai/89BbV6OPCFFFc0Ex1oHKP72fxmBqutudDHVqbCWIza5lYNs0uS3vNDSBfv3/852c1Z0hTaG8r9/e/8XznA==
@@ -5990,7 +5990,7 @@ gatsby-transformer-sharp@^2.1.5:
     probe-image-size "^4.0.0"
     sharp "^0.21.0"
 
-gatsby@^2.0.0-beta.83:
+gatsby@^2:
   version "2.0.31"
   resolved "https://registry.yarnpkg.com/gatsby/-/gatsby-2.0.31.tgz#9f683eb63e0f10aed73bbb76568394b1a53274f1"
   integrity sha512-syshBRyPPGU+nuLiyGRCnlFCo6s40ZJDwuNDqbannL1Fe2dZzHwrO39V4SPwmG9+r19s6s7crxx9y8loK44RKA==
