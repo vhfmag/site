@@ -1,55 +1,38 @@
 import * as React from "react";
 import { Helmet } from "react-helmet";
-import styled from "styled-components";
+import styled, { createGlobalStyle } from "styled-components";
 import { StaticQuery, graphql } from "gatsby";
 
-import {
-	responsiveBreakpoint,
-	backgroundColor,
-	textColor,
-} from "../../utils/consts";
+import { responsiveBreakpoint } from "../../utils/consts";
 import { social_2 } from "../../graphql-types";
 import { Sidebar } from "../Sidebar";
 
-import { library } from "@fortawesome/fontawesome-svg-core";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-	faRss,
-	faPenNib,
-	faBook,
-	faBookmark,
-	faCircle,
-} from "@fortawesome/free-solid-svg-icons";
-import {
-	faMastodon,
-	faGitlab,
-	faGetPocket,
-	faGithub,
-	faLinkedin,
-	faTwitter,
-	faInstagram,
-	faKeybase,
-} from "@fortawesome/free-brands-svg-icons";
-
-import "normalize-css/normalize.css";
+import "./icons";
 import "prismjs/themes/prism-okaidia.css";
-import "./style.css";
 import { generateLinkedDataTag } from "../LinkedData";
 
-library.add(faRss);
-library.add(faPenNib);
-library.add(faBook);
-library.add(faBookmark);
-library.add(faCircle);
+const GlobalStyle = createGlobalStyle`
+	* {
+		box-sizing: border-box;
+	}
 
-library.add(faMastodon);
-library.add(faGitlab);
-library.add(faGetPocket);
-library.add(faGithub);
-library.add(faLinkedin);
-library.add(faTwitter);
-library.add(faInstagram);
-library.add(faKeybase);
+	html,
+	body {
+		min-height: 100vh;
+		margin: 0;
+		padding: 0;
+	}
+
+	a {
+		transition: 0.25s color ease, 0.25s opacity ease;
+	}
+
+	a:hover,
+	a:active,
+	a:focus {
+		opacity: 0.75;
+	}
+`;
 
 const StyledMain = styled.main`
 	--width: auto;
@@ -184,6 +167,7 @@ export default class DefaultLayout extends React.Component {
 
 		return (
 			<StyledRoot>
+				<GlobalStyle />
 				<Helmet
 					htmlAttributes={{
 						lang: "pt-br",
