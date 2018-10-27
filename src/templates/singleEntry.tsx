@@ -5,6 +5,7 @@ import { generateLinkedDataTag } from "../components/LinkedData";
 import { graphql } from "gatsby";
 import DefaultLayout from "../components/layout";
 import { GeneralMetadataFragment, IMarkdownEntryFragment } from "../fragments";
+import { isFolder } from "../utils/types";
 
 interface IEntryTemplateProps {
 	data: GeneralMetadataFragment & { markdownRemark: IMarkdownEntryFragment };
@@ -31,6 +32,12 @@ export default class SingleEntryTemplate extends React.Component<
 				},
 			},
 		} = this.props;
+
+		if (!isFolder(relativeDirectory)) {
+			throw new Error(
+				`There is an unhandled directory. Update 'folderToCategory' to include '${relativeDirectory}'`,
+			);
+		}
 
 		const linkedData = {
 			"@context": "http://schema.org",

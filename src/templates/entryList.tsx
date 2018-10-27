@@ -61,7 +61,7 @@ export default class EntryList extends React.Component<IBookmarkListProps> {
 						}) => {
 							if (!isFolder(relativeDirectory)) {
 								throw new Error(
-									`There is an unhandled directoriy. Update 'folderToCategory' to include '${relativeDirectory}'`,
+									`There is an unhandled directory. Update 'folderToCategory' to include '${relativeDirectory}'`,
 								);
 							}
 
