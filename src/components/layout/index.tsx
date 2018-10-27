@@ -102,12 +102,6 @@ interface ILayoutData {
 			description: string;
 		};
 	};
-	organizationJson: {
-		name: string;
-		url: string;
-		logo: string;
-		telephone: string;
-	};
 	personalJson: {
 		email: string;
 		name: string;
@@ -137,7 +131,6 @@ export default class DefaultLayout extends React.Component {
 			sourceUrl,
 		} = data.site.siteMetadata;
 		const { name, jobTitle, email, social } = data.personalJson;
-		const { organizationJson } = data;
 
 		const plainTextDescription = description.replace(
 			/\[([^\]]+)\]\([^\)]+\)/g,
@@ -150,10 +143,6 @@ export default class DefaultLayout extends React.Component {
 			name,
 			jobTitle,
 			email,
-			organization: {
-				"@type": "Organization",
-				...organizationJson,
-			},
 			url: "https://victormagalhaes.codes",
 			sameAs: social.map(({ url }) => url),
 		};
@@ -270,12 +259,6 @@ export default class DefaultLayout extends React.Component {
 								sourceUrl
 								description
 							}
-						}
-						organizationJson {
-							name
-							url
-							logo
-							telephone
 						}
 						personalJson {
 							name
