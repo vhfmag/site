@@ -5,42 +5,42 @@
 	"social": [
 		{
 			"serviceName": "Mastodon",
-			"icon": "fab fa-mastodon",
+			"icon": "fab mastodon",
 			"url": "https://mastodon.social/@vhfmag"
 		},
 		{
 			"serviceName": "Gitlab",
-			"icon": "fab fa-gitlab",
+			"icon": "fab gitlab",
 			"url": "https://gitlab.com/vhfmag/"
 		},
 		{
 			"serviceName": "Pocket",
-			"icon": "fab fa-get-pocket",
+			"icon": "fab get-pocket",
 			"url": "https://getpocket.com/@vhfmag"
 		},
 		{
 			"serviceName": "Github",
-			"icon": "fab fa-github",
+			"icon": "fab github",
 			"url": "https://github.com/vhfmag/"
 		},
 		{
 			"serviceName": "Linkedin",
-			"icon": "fab fa-linkedin",
+			"icon": "fab linkedin",
 			"url": "https://www.linkedin.com/in/vhfmag"
 		},
 		{
 			"serviceName": "Twitter",
-			"icon": "fab fa-twitter",
+			"icon": "fab twitter",
 			"url": "https://twitter.com/vhfmag"
 		},
 		{
 			"serviceName": "Instagram",
-			"icon": "fab fa-instagram",
+			"icon": "fab instagram",
 			"url": "https://instagram.com/vhfmag"
 		},
 		{
 			"serviceName": "Keybase",
-			"icon": "fab fa-keybase",
+			"icon": "fab keybase",
 			"url": "https://keybase.io/vhfmag"
 		}
 	]

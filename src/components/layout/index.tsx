@@ -11,10 +11,45 @@ import {
 import { social_2 } from "../../graphql-types";
 import { Sidebar } from "../Sidebar";
 
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+	faRss,
+	faPenNib,
+	faBook,
+	faBookmark,
+	faCircle,
+} from "@fortawesome/free-solid-svg-icons";
+import {
+	faMastodon,
+	faGitlab,
+	faGetPocket,
+	faGithub,
+	faLinkedin,
+	faTwitter,
+	faInstagram,
+	faKeybase,
+} from "@fortawesome/free-brands-svg-icons";
+
 import "normalize-css/normalize.css";
 import "prismjs/themes/prism-okaidia.css";
 import "./style.css";
 import { generateLinkedDataTag } from "../LinkedData";
+
+library.add(faRss);
+library.add(faPenNib);
+library.add(faBook);
+library.add(faBookmark);
+library.add(faCircle);
+
+library.add(faMastodon);
+library.add(faGitlab);
+library.add(faGetPocket);
+library.add(faGithub);
+library.add(faLinkedin);
+library.add(faTwitter);
+library.add(faInstagram);
+library.add(faKeybase);
 
 const StyledMain = styled.main`
 	--width: auto;
@@ -68,15 +103,6 @@ const StyledRoot = styled.div`
 
 		/* Emoji unicode blocks */
 		unicode-range: U+1F300-1F5FF, U+1F600-1F64F, U+1F680-1F6FF, U+2600-26FF;
-	}
-
-	.fab,
-	.fas {
-		color: ${textColor};
-
-		&.fa-inverse {
-			color: ${backgroundColor};
-		}
 	}
 `;
 
@@ -239,7 +265,7 @@ export default class DefaultLayout extends React.Component {
 				/>
 
 				<StyledMain>{this.props.children}</StyledMain>
-				<link
+				{/* <link
 					rel="stylesheet"
 					href="https://use.fontawesome.com/releases/v5.2.0/css/solid.css"
 					integrity="sha384-wnAC7ln+XN0UKdcPvJvtqIH3jOjs9pnKnq9qX68ImXvOGz2JuFoEiCjT8jyZQX2z"
@@ -256,7 +282,7 @@ export default class DefaultLayout extends React.Component {
 					href="https://use.fontawesome.com/releases/v5.2.0/css/fontawesome.css"
 					integrity="sha384-HbmWTHay9psM8qyzEKPc8odH4DsOuzdejtnr+OFtDmOcIVnhgReQ4GZBH7uwcjf6"
 					crossOrigin="anonymous"
-				/>
+				/> */}
 			</StyledRoot>
 		);
 	};

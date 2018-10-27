@@ -14,7 +14,7 @@ export interface IEntryHeaderProps {
 	replyToText?: string;
 
 	fileName: string;
-	folderName: string;
+	folderName: keyof typeof folderToCategory;
 
 	wordCount: number;
 	timeToRead: number;

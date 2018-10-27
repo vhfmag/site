@@ -6,6 +6,8 @@ import {
 	folderToCategory,
 } from "../../utils/consts";
 import { IEntryHeaderProps, EntryHeader } from "../EntryHeader";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { IconProp } from "@fortawesome/fontawesome-svg-core";
 
 type IEntrySummaryProps = HTMLOrString & IEntryHeaderProps;
 
@@ -18,17 +20,6 @@ const StyledEntryCategory = styled.div`
 	display: flex;
 	align-items: flex-end;
 	flex-direction: column;
-
-	& > .fa-stack {
-		font-size: 1rem;
-		.fab,
-		.fas {
-			color: ${themeColor};
-			&.fa-inverse {
-				color: ${backgroundColor};
-			}
-		}
-	}
 `;
 
 const StyledEntrySummary = styled.article`
@@ -55,10 +46,10 @@ const StyledEntrySummary = styled.article`
 	}
 `;
 
-const iconPerFolder = {
-	posts: "fa-pen-nib",
-	books: "fa-book",
-	bookmarks: "fa-bookmark",
+const iconPerFolder: Record<keyof typeof folderToCategory, IconProp> = {
+	posts: "pen-nib",
+	books: "book",
+	bookmarks: "bookmark",
 };
 
 export const EntrySummary: React.SFC<IEntrySummaryProps> = ({
@@ -69,14 +60,16 @@ export const EntrySummary: React.SFC<IEntrySummaryProps> = ({
 	return (
 		<StyledEntrySummary className="h-entry">
 			<StyledEntryCategory>
-				<span className="fa-stack fa-2x" role="presentation">
-					<i className="fas fa-circle fa-stack-2x" />
-					<i
-						className={`fas ${
-							iconPerFolder[
-								headerProps.folderName as keyof typeof iconPerFolder
-							]
-						} fa-stack-1x fa-inverse`}
+				<span className="fa-layers fa-fw fa-lg" role="presentation">
+					<FontAwesomeIcon
+						icon="circle"
+						size="lg"
+						color={themeColor}
+					/>
+					<FontAwesomeIcon
+						color={backgroundColor}
+						transform="shrink-4"
+						icon={iconPerFolder[headerProps.folderName]}
 					/>
 				</span>
 				<StyledEntryCategoryName>
