@@ -19,6 +19,8 @@ interface IBookmarkListProps {
 	pathContext: GatsbyPaginatorProps<IEntryNode>;
 }
 
+const bodyAttributes = { class: "h-feed" };
+
 export default class EntryList extends React.Component<IBookmarkListProps> {
 	public render() {
 		const {
@@ -40,7 +42,7 @@ export default class EntryList extends React.Component<IBookmarkListProps> {
 			<DefaultLayout>
 				<Helmet
 					title={listTitle}
-					bodyAttributes={{ class: "h-feed" }}
+					bodyAttributes={bodyAttributes}
 				/>
 				<h1>{listTitle}</h1>
 				<ListWrapper>
