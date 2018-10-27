@@ -7,6 +7,7 @@ public/
 .DS_Store
 yarn-error.log
 /.gtm/
+.netlify
 # Reports
-output/
+siteaudit/
 report.html

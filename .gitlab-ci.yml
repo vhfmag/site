@@ -1,12 +1,11 @@
 image: node:9
 stages:
 - build
-- test
+- audit
 
 pages:
   stage: build
   script:
-  - npm install -g --unsafe-perm now
   - yarn
   - yarn build
   artifacts:
@@ -20,18 +19,16 @@ pages:
   only:
   - master
 
-now:
-  stage: build
+audit:
+  image: 
+    name: thecreazy/siteaudit:1.1.4
+    entrypoint: ['']
+  stage: audit
+  variables:
+    SITEAUDIT_URL: "https://master.silvietta.n2.caffeina.host/"
   script:
-  - npm install -g --unsafe-perm now
-  - yarn run deploy-ci
+    - echo "started siteaudit"
+    - /usr/local/bin/siteaudit ${SITEAUDIT_URL} --headless
   artifacts:
     paths:
-    - public
-  cache:
-    paths:
-    - node_modules
-    - .cache
-    - public
-  only:
-  - master
+    - output
