@@ -8,6 +8,7 @@ import {
 import { IEntryHeaderProps, EntryHeader } from "../EntryHeader";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
+import { Folder } from "../../utils/types";
 
 type IEntrySummaryProps = HTMLOrString & IEntryHeaderProps;
 
@@ -46,7 +47,7 @@ const StyledEntrySummary = styled.article`
 	}
 `;
 
-const iconPerFolder: Record<keyof typeof folderToCategory, IconProp> = {
+const iconPerFolder: Record<Folder, IconProp> = {
 	posts: "pen-nib",
 	books: "book",
 	bookmarks: "bookmark",

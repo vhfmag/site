@@ -5,6 +5,7 @@ import { graphql } from "gatsby";
 import DefaultLayout from "../components/layout";
 import { GeneralMetadataFragment, IMarkdownEntryFragment } from "../fragments";
 import styled from "styled-components";
+import { isFolder } from "../utils/types";
 
 const ListWrapper = styled.div`
 	margin: 1rem 0;
@@ -40,10 +41,7 @@ export default class EntryList extends React.Component<IBookmarkListProps> {
 
 		return (
 			<DefaultLayout>
-				<Helmet
-					title={listTitle}
-					bodyAttributes={bodyAttributes}
-				/>
+				<Helmet title={listTitle} bodyAttributes={bodyAttributes} />
 				<h1>{listTitle}</h1>
 				<ListWrapper>
 					{posts.map(
@@ -60,20 +58,28 @@ export default class EntryList extends React.Component<IBookmarkListProps> {
 								},
 								count: { words },
 							},
-						}) => (
-							<EntrySummary
-								key={fileAbsolutePath}
-								replyTo={link}
-								authors={authors || [meAuthor]}
-								publishDate={new Date(date || birthTime)}
-								title={title}
-								fileName={fileName}
-								folderName={relativeDirectory}
-								content={excerpt}
-								wordCount={words}
-								timeToRead={timeToRead}
-							/>
-						),
+						}) => {
+							if (!isFolder(relativeDirectory)) {
+								throw new Error(
+									`There is an unhandled directoriy. Update 'folderToCategory' to include '${relativeDirectory}'`,
+								);
+							}
+
+							return (
+								<EntrySummary
+									key={fileAbsolutePath}
+									replyTo={link}
+									authors={authors || [meAuthor]}
+									publishDate={new Date(date || birthTime)}
+									title={title}
+									fileName={fileName}
+									folderName={relativeDirectory}
+									content={excerpt}
+									wordCount={words}
+									timeToRead={timeToRead}
+								/>
+							);
+						},
 					)}
 				</ListWrapper>
 			</DefaultLayout>
