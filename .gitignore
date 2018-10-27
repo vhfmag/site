@@ -7,3 +7,6 @@ public/
 .DS_Store
 yarn-error.log
 /.gtm/
+# Reports
+output/
+report.html
