@@ -11,6 +11,8 @@ import "./icons";
 import "prismjs/themes/prism-okaidia.css";
 import { generateLinkedDataTag } from "../LinkedData";
 
+import { dom } from "@fortawesome/fontawesome-svg-core";
+
 const GlobalStyle = createGlobalStyle`
 	* {
 		box-sizing: border-box;
@@ -32,6 +34,8 @@ const GlobalStyle = createGlobalStyle`
 	a:focus {
 		opacity: 0.75;
 	}
+
+	${dom.css()}
 `;
 
 const StyledMain = styled.main`
