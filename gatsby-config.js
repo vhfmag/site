@@ -2,11 +2,11 @@ const { backgroundColor, themeColor } = require("./src/utils/consts");
 
 const { graphql } = require("./src/utils/taggedUtils");
 
-const { getEdgeTimestamp } = require("./src/utils/utils");
+const { compareEntryEdges } = require("./src/utils/utils");
 
 const serializeFeed = ({ query: { site, allMarkdownRemark } }) => {
 	return allMarkdownRemark.edges
-		.sort((a, b) => getEdgeTimestamp(b) - getEdgeTimestamp(a))
+		.sort((a, b) => compareEntryEdges)
 		.map(edge => {
 			const url = `${site.siteMetadata.siteUrl}/${
 				edge.node.parent.relativeDirectory

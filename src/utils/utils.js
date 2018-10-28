@@ -21,6 +21,17 @@ function getEdgeTimestamp(edge) {
 	).valueOf();
 }
 
+function compareEntryEdges(e1, e2) {
+	const t1 = getEdgeTimestamp(e1);
+	const t2 = getEdgeTimestamp(e2);
+
+	if (t1 !== t2) {
+		return t2 - t1;
+	} else {
+		return e1.node.parent.name.localeCompare(e2.node.parent.name);
+	}
+}
+
 /**
  *	Turns this kind of stuff into this-kind-of-stuff
  *
@@ -37,5 +48,6 @@ function slugify(text) {
 module.exports = {
 	formatDate,
 	getEdgeTimestamp,
+	compareEntryEdges,
 	slugify,
 };

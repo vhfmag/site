@@ -2,7 +2,7 @@ const path = require("path");
 // const createPaginatedPages = require("gatsby-paginate");
 
 const { graphql } = require("./src/utils/taggedUtils");
-const { getEdgeTimestamp } = require("./src/utils/utils");
+const { compareEntryEdges } = require("./src/utils/utils");
 
 const postTemplate = path.resolve(`src/templates/singlePost.tsx`);
 const entryTemplate = path.resolve(`src/templates/singleEntry.tsx`);
@@ -76,9 +76,7 @@ function createEntryPages({
 			}
 
 			const postEdges = result.data.allMarkdownRemark.edges;
-			const sortedEdges = [...postEdges].sort(
-				(a, b) => getEdgeTimestamp(b) - getEdgeTimestamp(a),
-			);
+			const sortedEdges = [...postEdges].sort(compareEntryEdges);
 
 			createPage({
 				path: `/${pathPrefix}`,
