@@ -26,6 +26,9 @@ const serializeFeed = ({ query: { site, allMarkdownRemark } }) => {
 		});
 };
 
+const netlifyCacheControlHeader =
+	"Cache-Control: public, max-age=31536000, immutable";
+
 const makeFeedQuery = (pageKind = ".*") => graphql`
 {
 	site {
@@ -166,6 +169,28 @@ module.exports = {
 				],
 			},
 		},
+		{
+			resolve: "gatsby-plugin-netlify",
+			options: {
+				headers: {
+					"/*.js": [
+						"Content-Type: text/javascript; charset=utf-8",
+						netlifyCacheControlHeader,
+					],
+					"/*.css": [netlifyCacheControlHeader],
+					"/*.png": [netlifyCacheControlHeader],
+					"/*.jpg": [netlifyCacheControlHeader],
+					"/*.jpeg": [netlifyCacheControlHeader],
+					"/*.gif": [netlifyCacheControlHeader],
+					"/*.svg": [netlifyCacheControlHeader],
+				},
+				allPageHeaders: [
+					"X-Content-Type-Options: nosniff",
+					"Strict-Transport-Security: max-age=31536000",
+				],
+			},
+		},
+		"gatsby-plugin-netlify-cache",
 		{
 			resolve: "gatsby-plugin-manifest",
 			options: {

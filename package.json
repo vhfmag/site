@@ -20,6 +20,8 @@
 		"gatsby-plugin-brotli": "^1.0.0",
 		"gatsby-plugin-feed": "^2.0.8",
 		"gatsby-plugin-manifest": "^2.0.6",
+		"gatsby-plugin-netlify": "^2.0.2",
+		"gatsby-plugin-netlify-cache": "^1.0.0",
 		"gatsby-plugin-offline": "^2.0.9",
 		"gatsby-plugin-purify-css": "^2.2.1",
 		"gatsby-plugin-react-helmet": "^3.0.0-beta.4",

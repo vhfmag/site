@@ -1,7 +1,0 @@
-/*
-    X-Content-Type-Options: nosniff
-    Strict-Transport-Security: max-age=31536000
-/*.js
-	Content-Type: text/javascript; charset=utf-8
-/*.js,/*.css,/*.png,/*.jpg,/*.jpeg,/*.gif,/*.svg
-	Cache-Control: max-age=31536000, immutable
