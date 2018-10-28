@@ -126,20 +126,8 @@ module.exports = {
 		"gatsby-plugin-sharp",
 		"gatsby-plugin-brotli",
 		"gatsby-plugin-zopfli",
+		"gatsby-plugin-sri",
 		"gatsby-transformer-sharp",
-		{
-			resolve: "gatsby-plugin-manifest",
-			options: {
-				name: "Victor Magalhães",
-				short_name: "Victor",
-				start_url: "/",
-				background_color: backgroundColor,
-				theme_color: themeColor,
-				display: "minimal-ui",
-				icon: "src/assets/images/icons/icon.png",
-			},
-		},
-		"gatsby-plugin-offline",
 		"gatsby-plugin-styled-components",
 		{
 			resolve: `gatsby-plugin-typography`,
@@ -178,5 +166,18 @@ module.exports = {
 				],
 			},
 		},
+		{
+			resolve: "gatsby-plugin-manifest",
+			options: {
+				name: "Victor Magalhães",
+				short_name: "Victor",
+				start_url: "/",
+				background_color: backgroundColor,
+				theme_color: themeColor,
+				display: "minimal-ui",
+				icon: "src/assets/images/icons/icon.png",
+			},
+		},
+		"gatsby-plugin-offline",
 	],
 };

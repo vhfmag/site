@@ -25,6 +25,7 @@
 		"gatsby-plugin-react-helmet": "^3.0.0-beta.4",
 		"gatsby-plugin-sharp": "^2.0.8",
 		"gatsby-plugin-sitemap": "^2.0.1",
+		"gatsby-plugin-sri": "^1.0.3",
 		"gatsby-plugin-styled-components": "^3.0.0-beta.3",
 		"gatsby-plugin-typescript": "^2.0.0-beta.9",
 		"gatsby-plugin-typography": "^2.2.0-beta.3",
@@ -57,7 +58,9 @@
 		"typography": "^0.16.17",
 		"typography-breakpoint-constants": "^0.15.10"
 	},
-	"keywords": ["gatsby, typescript"],
+	"keywords": [
+		"gatsby, typescript"
+	],
 	"license": "MIT",
 	"main": "n/a",
 	"scripts": {
