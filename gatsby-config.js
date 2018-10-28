@@ -174,20 +174,24 @@ module.exports = {
 			options: {
 				headers: {
 					"/*.js": [
+						"X-Content-Type-Options: nosniff",
 						"Content-Type: text/javascript; charset=utf-8",
 						netlifyCacheControlHeader,
 					],
-					"/*.css": [netlifyCacheControlHeader],
+					"/*.webmanifest": [
+						"Content-Type: application/manifest+json; charset=utf-8",
+					],
+					"/*.css": [
+						"X-Content-Type-Options: nosniff",
+						netlifyCacheControlHeader,
+					],
 					"/*.png": [netlifyCacheControlHeader],
 					"/*.jpg": [netlifyCacheControlHeader],
 					"/*.jpeg": [netlifyCacheControlHeader],
 					"/*.gif": [netlifyCacheControlHeader],
 					"/*.svg": [netlifyCacheControlHeader],
 				},
-				allPageHeaders: [
-					"X-Content-Type-Options: nosniff",
-					"Strict-Transport-Security: max-age=31536000",
-				],
+				allPageHeaders: ["Strict-Transport-Security: max-age=31536000"],
 			},
 		},
 		"gatsby-plugin-netlify-cache",
