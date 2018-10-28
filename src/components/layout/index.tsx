@@ -169,6 +169,9 @@ export default class DefaultLayout extends React.Component {
 					titleTemplate={`${title} | %s`}
 					meta={[
 						{
+							charset: "UTF-8",
+						},
+						{
 							name: "description",
 							content: plainTextDescription,
 						},
