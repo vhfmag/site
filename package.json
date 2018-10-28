@@ -18,10 +18,9 @@
 		"gatsby-cli": "^2",
 		"gatsby-image": "^2",
 		"gatsby-plugin-brotli": "^1.0.0",
-		"gatsby-plugin-favicon": "^3.1.2",
 		"gatsby-plugin-feed": "^2.0.8",
 		"gatsby-plugin-manifest": "^2.0.6",
-		"gatsby-plugin-offline": "^2",
+		"gatsby-plugin-offline": "^2.0.9",
 		"gatsby-plugin-purify-css": "^2.2.1",
 		"gatsby-plugin-react-helmet": "^3.0.0-beta.4",
 		"gatsby-plugin-sharp": "^2.0.8",
@@ -58,9 +57,7 @@
 		"typography": "^0.16.17",
 		"typography-breakpoint-constants": "^0.15.10"
 	},
-	"keywords": [
-		"gatsby, typescript"
-	],
+	"keywords": ["gatsby, typescript"],
 	"license": "MIT",
 	"main": "n/a",
 	"scripts": {

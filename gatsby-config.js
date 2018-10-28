@@ -140,24 +140,6 @@ module.exports = {
 			},
 		},
 		"gatsby-plugin-offline",
-		{
-			resolve: `gatsby-plugin-favicon`,
-			options: {
-				logo: "./src/assets/images/icons/icon.png",
-				injectHTML: true,
-				icons: {
-					android: true,
-					appleIcon: true,
-					appleStartup: true,
-					coast: true,
-					favicons: true,
-					firefox: true,
-					twitter: true,
-					yandex: true,
-					windows: true,
-				},
-			},
-		},
 		"gatsby-plugin-styled-components",
 		{
 			resolve: `gatsby-plugin-typography`,
