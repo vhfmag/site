@@ -124,6 +124,8 @@ module.exports = {
 		},
 		"gatsby-transformer-json",
 		"gatsby-plugin-sharp",
+		"gatsby-plugin-brotli",
+		"gatsby-plugin-zopfli",
 		"gatsby-transformer-sharp",
 		{
 			resolve: "gatsby-plugin-manifest",
