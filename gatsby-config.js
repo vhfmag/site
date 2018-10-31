@@ -178,6 +178,7 @@ module.exports = {
 						"Content-Type: text/javascript; charset=utf-8",
 						netlifyCacheControlHeader,
 					],
+					"sw.js": ["Cache-Control: no-cache"],
 					"/*.webmanifest": [
 						"Content-Type: application/manifest+json; charset=utf-8",
 					],
