@@ -27,7 +27,7 @@ const StyledEntryCategory = styled.div`
 const StyledEntrySummary = styled.article`
 	display: grid;
 	grid-gap: 8pt;
-	grid-template-columns: 8ch auto;
+	grid-template-columns: 10ch auto;
 
 	p,
 	h2,
