@@ -6,22 +6,28 @@
 			"image": "/images/companies/cubos.svg",
 			"period": ["março de 2016", "outubro de 2018"],
 			"role": "Desenvolvedor full-stack",
-			"tasks": [
-				"Desenvolvimento e manutenção de diversas aplicações web com React, Typescript, Webpack, Node, Jest, Mobx, Redux e outras tecnologias",
-				"Desenvolvimento, manutenção e testes de APIs usando Node, Typescript, Jest, RethinkDB e outras tecnologias",
-				"Gestão e capacitação técnica de time de desenvolvimento"
-			]
-		},
-		{
-			"company": "ZigPay",
-			"link": "https://zigpay.com.br",
-			"image": "/images/companies/zig.png",
-			"period": ["maio de 2016", "julho de 2018"],
-			"role": "Desenvolvedor full-stack",
-			"tasks": [
-				"Desenvolvimento e manutenção de painéis administrativos para a plataforma",
-				"Desenvolvimento de solução simples de processamento de dados de consumo para sistema de recomendação",
-				"Incrementação e manutenção das APIs da plataforma"
+			"skills": [
+				"React",
+				"Typescript",
+				"Javascript",
+				"RethinkDB",
+				"Scrum",
+				"Webpack",
+				"Node",
+				"HTML",
+				"CSS",
+				"Sass",
+				"Jest",
+				"Mobx",
+				"Redux",
+				"Python"
+			],
+			"projects": [
+				{
+					"name": "ZigPay",
+					"url": "https://zigpay.com.br/",
+					"description": "Startup baiana que desenvolve uma solução completa de gestão e pagamento para eventos e casas noturnas"
+				}
 			]
 		},
 		{
@@ -30,7 +36,7 @@
 			"image": "/images/companies/jusbrasil.svg",
 			"period": ["outubro de 2018"],
 			"role": "Desenvolvedor full-stack",
-			"tasks": []
+			"skills": ["React", "Flow", "Jest", "TDD", "Enzyme", "Scala"]
 		}
 	],
 	"volunteer": [],

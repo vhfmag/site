@@ -1,18 +1,38 @@
 /* tslint:disable */
 import { GraphQLResolveInfo } from "graphql";
 
-type Resolver<Result, Args = any> = (
-	parent: any,
+export type Resolver<Result, Parent = any, Context = any, Args = any> = (
+	parent: Parent,
 	args: Args,
-	context: any,
+	context: Context,
 	info: GraphQLResolveInfo,
 ) => Promise<Result> | Result;
+
+export type SubscriptionResolver<
+	Result,
+	Parent = any,
+	Context = any,
+	Args = any
+> = {
+	subscribe<R = Result, P = Parent>(
+		parent: P,
+		args: Args,
+		context: Context,
+		info: GraphQLResolveInfo,
+	): AsyncIterator<R | Result>;
+	resolve?<R = Result, P = Parent>(
+		parent: P,
+		args: Args,
+		context: Context,
+		info: GraphQLResolveInfo,
+	): R | Result | Promise<R | Result>;
+};
 
 /** A date string, such as 2007-12-03, compliant with the ISO 8601 standard  for representation of dates and times using the Gregorian calendar. */
 export type Date = any;
 
 /** The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf). */
-export type JSON = any;
+export type Json = any;
 /** An object with an id, parent, and children */
 export interface Node {
 	id: string /** The id of the node. */;
@@ -27,12 +47,12 @@ export interface Query {
 	allFile?: FileConnection | null /** Connection to all File nodes */;
 	allMarkdownRemark?: MarkdownRemarkConnection | null /** Connection to all MarkdownRemark nodes */;
 	allTodoJson?: TodoJsonConnection | null /** Connection to all TodoJson nodes */;
-	allOrganizationJson?: OrganizationJsonConnection | null /** Connection to all OrganizationJson nodes */;
-	allExperiencesJson?: ExperiencesJsonConnection | null /** Connection to all ExperiencesJson nodes */;
-	allCompetencesJson?: CompetencesJsonConnection | null /** Connection to all CompetencesJson nodes */;
 	allInterestsJson?: InterestsJsonConnection | null /** Connection to all InterestsJson nodes */;
-	allPersonalJson?: PersonalJsonConnection | null /** Connection to all PersonalJson nodes */;
+	allOrganizationJson?: OrganizationJsonConnection | null /** Connection to all OrganizationJson nodes */;
 	allSkillsJson?: SkillsJsonConnection | null /** Connection to all SkillsJson nodes */;
+	allCompetencesJson?: CompetencesJsonConnection | null /** Connection to all CompetencesJson nodes */;
+	allPersonalJson?: PersonalJsonConnection | null /** Connection to all PersonalJson nodes */;
+	allExperiencesJson?: ExperiencesJsonConnection | null /** Connection to all ExperiencesJson nodes */;
 	sitePage?: SitePage | null;
 	sitePlugin?: SitePlugin | null;
 	site?: Site | null;
@@ -40,12 +60,12 @@ export interface Query {
 	file?: File | null;
 	markdownRemark?: MarkdownRemark | null;
 	todoJson?: TodoJson | null;
-	organizationJson?: OrganizationJson | null;
-	experiencesJson?: ExperiencesJson | null;
-	competencesJson?: CompetencesJson | null;
 	interestsJson?: InterestsJson | null;
-	personalJson?: PersonalJson | null;
+	organizationJson?: OrganizationJson | null;
 	skillsJson?: SkillsJson | null;
+	competencesJson?: CompetencesJson | null;
+	personalJson?: PersonalJson | null;
+	experiencesJson?: ExperiencesJson | null;
 }
 /** A connection to a list of items. */
 export interface SitePageConnection {
@@ -53,7 +73,7 @@ export interface SitePageConnection {
 	edges?: (SitePageEdge | null)[] | null /** A list of edges. */;
 	totalCount?: number | null;
 	distinct?: (string | null)[] | null;
-	group?: (sitePageGroupConnectionConnection | null)[] | null;
+	group?: (SitePageGroupConnectionConnection | null)[] | null;
 }
 /** Information about pagination in a connection. */
 export interface PageInfo {
@@ -75,173 +95,184 @@ export interface SitePage extends Node {
 	path?: string | null;
 	component?: string | null;
 	componentChunkName?: string | null;
-	context?: context | null;
+	context?: Context | null;
 	pluginCreator?: SitePlugin | null;
 	pluginCreatorId?: string | null;
 	componentPath?: string | null;
-	internal?: internal_14 | null;
+	internal?: Internal_14 | null;
 }
 
-export interface context {
-	group?: (group | null)[] | null;
+export interface Context {
+	group?: (Group | null)[] | null;
 	pathPrefix?: string | null;
-	additionalContext?: additionalContext | null;
+	additionalContext?: AdditionalContext | null;
 	markdownPath?: string | null;
 }
 
-export interface group {
-	node?: node | null;
+export interface Group {
+	node?: Node | null;
 }
 
-export interface node {
-	htmlAst?: htmlAst | null;
+export interface Node {
+	htmlAst?: HtmlAst | null;
 	excerpt?: string | null;
 	timeToRead?: number | null;
-	count?: count | null;
+	count?: Count | null;
 	fileAbsolutePath?: string | null;
-	parent?: parent | null;
-	frontmatter?: frontmatter_2 | null;
+	parent?: Parent | null;
+	frontmatter?: Frontmatter_2 | null;
 }
 
-export interface htmlAst {
+export interface HtmlAst {
 	type?: string | null;
-	children?: (children | null)[] | null;
-	data?: data | null;
+	children?: (Children | null)[] | null;
+	data?: Data | null;
 	tagName?: string | null;
 }
 
-export interface children {
+export interface Children {
 	type?: string | null;
 	tagName?: string | null;
-	properties?: properties | null;
-	children?: (children_2 | null)[] | null;
+	properties?: Properties | null;
+	children?: (Children_2 | null)[] | null;
 	value?: string | null;
 }
 
-export interface properties {
-	src?: string | null;
-	title?: string | null;
-	attr?: string | null;
+export interface Properties {
+	id?: string | null;
 	size?: string | null;
 	className?: (string | null)[] | null;
 	dataLanguage?: string | null;
+	src?: string | null;
 	style?: string | null;
 	sandbox?: (string | null)[] | null;
+	title?: string | null;
 	width?: number | null;
 	height?: number | null;
 	frameBorder?: string | null;
 	allow?: string | null;
 	allowFullScreen?: boolean | null;
+	attr?: string | null;
 }
 
-export interface children_2 {
+export interface Children_2 {
 	type?: string | null;
-	value?: string | null;
 	tagName?: string | null;
-	properties?: properties_2 | null;
-	children?: (children_3 | null)[] | null;
+	properties?: Properties_2 | null;
+	children?: (Children_3 | null)[] | null;
+	value?: string | null;
 }
 
-export interface properties_2 {
+export interface Properties_2 {
 	href?: string | null;
-	title?: string | null;
+	ariaHidden?: boolean | null;
+	className?: (string | null)[] | null;
+	role?: string | null;
+	ariaLabelledBy?: (string | null)[] | null;
 	id?: string | null;
 	quote?: string | null;
 	author?: string | null;
 	from?: string | null;
 	position?: string | null;
-	className?: (string | null)[] | null;
-	alt?: string | null;
+	title?: string | null;
 	src?: string | null;
+	alt?: string | null;
 }
 
-export interface children_3 {
+export interface Children_3 {
 	type?: string | null;
-	value?: string | null;
 	tagName?: string | null;
-	properties?: properties_3 | null;
-	children?: (children_4 | null)[] | null;
+	properties?: Properties_3 | null;
+	children?: (Children_4 | null)[] | null;
+	value?: string | null;
 }
 
-export interface properties_3 {
+export interface Properties_3 {
+	ariaHidden?: string | null;
+	height?: string | null;
+	version?: string | null;
+	viewBox?: string | null;
+	width?: string | null;
 	href?: string | null;
 	className?: (string | null)[] | null;
 	id?: string | null;
 }
 
-export interface children_4 {
+export interface Children_4 {
 	type?: string | null;
-	value?: string | null;
 	tagName?: string | null;
-	properties?: properties_4 | null;
-	children?: (children_5 | null)[] | null;
+	properties?: Properties_4 | null;
+	children?: (Children_5 | null)[] | null;
+	value?: string | null;
 }
 
-export interface properties_4 {
+export interface Properties_4 {
+	fillRule?: string | null;
+	d?: string | null;
 	href?: string | null;
 	className?: (string | null)[] | null;
 }
 
-export interface children_5 {
+export interface Children_5 {
 	type?: string | null;
-	tagName?: string | null;
-	properties?: properties_5 | null;
-	children?: (children_6 | null)[] | null;
 	value?: string | null;
+	tagName?: string | null;
+	properties?: Properties_5 | null;
+	children?: (Children_6 | null)[] | null;
 }
 
-export interface properties_5 {
+export interface Properties_5 {
 	href?: string | null;
 	className?: (string | null)[] | null;
 	id?: string | null;
 }
 
-export interface children_6 {
+export interface Children_6 {
 	type?: string | null;
 	value?: string | null;
 	tagName?: string | null;
-	properties?: properties_6 | null;
-	children?: (children_7 | null)[] | null;
+	properties?: Properties_6 | null;
+	children?: (Children_7 | null)[] | null;
 }
 
-export interface properties_6 {
+export interface Properties_6 {
 	className?: (string | null)[] | null;
 	href?: string | null;
 }
 
-export interface children_7 {
+export interface Children_7 {
 	type?: string | null;
 	value?: string | null;
 }
 
-export interface data {
+export interface Data {
 	quirksMode?: boolean | null;
 }
 
-export interface count {
+export interface Count {
 	words?: number | null;
 }
 
-export interface parent {
+export interface Parent {
 	birthTime?: Date | null;
 	relativeDirectory?: string | null;
 	name?: string | null;
 }
 
-export interface frontmatter_2 {
+export interface Frontmatter_2 {
 	title?: string | null;
 	description?: string | null;
 	date?: Date | null;
-	authors?: (authors_2 | null)[] | null;
+	authors?: (Authors_2 | null)[] | null;
 	link?: string | null;
 }
 
-export interface authors_2 {
+export interface Authors_2 {
 	name?: string | null;
 	url?: string | null;
 }
 
-export interface additionalContext {
+export interface AdditionalContext {
 	listTitle?: string | null;
 }
 /** Node of type SitePlugin */
@@ -252,132 +283,137 @@ export interface SitePlugin extends Node {
 	resolve?: string | null;
 	name?: string | null;
 	version?: string | null;
-	pluginOptions?: pluginOptions_3 | null;
+	pluginOptions?: PluginOptions_3 | null;
 	nodeAPIs?: (string | null)[] | null;
 	browserAPIs?: (string | null)[] | null;
 	ssrAPIs?: (string | null)[] | null;
 	pluginFilepath?: string | null;
-	packageJson?: packageJson_2 | null;
-	internal?: internal_15 | null;
+	packageJson?: PackageJson_2 | null;
+	internal?: Internal_15 | null;
 }
 
-export interface pluginOptions_3 {
-	plugins?: (plugins_2 | null)[] | null;
+export interface PluginOptions_3 {
+	plugins?: (Plugins_2 | null)[] | null;
+	production?: boolean | null;
+	analyzerMode?: string | null;
+	defaultSizes?: string | null;
+	openAnalyzer?: boolean | null;
 	name?: string | null;
 	path?: string | null;
-	emojiConversion?: string | null;
 	maxWidth?: number | null;
 	wrapperStyle?: string | null;
 	backgroundColor?: string | null;
 	linkImagesToOriginal?: boolean | null;
 	showCaptions?: boolean | null;
 	pathPrefix?: string | null;
+	withWebp?: boolean | null;
 	inlineCodeMarker?: string | null;
+	pathToConfigModule?: string | null;
+	omitGoogleFont?: boolean | null;
+	query?: string | null;
+	feeds?: (Feeds_2 | null)[] | null;
+	headers?: Headers_2 | null;
+	allPageHeaders?: (string | null)[] | null;
 	short_name?: string | null;
 	start_url?: string | null;
 	background_color?: string | null;
 	theme_color?: string | null;
 	display?: string | null;
 	icon?: string | null;
-	logo?: string | null;
-	injectHTML?: boolean | null;
-	icons?: icons_2 | null;
-	pathToConfigModule?: string | null;
-	omitGoogleFont?: boolean | null;
-	query?: string | null;
-	feeds?: (feeds_2 | null)[] | null;
 	pathCheck?: boolean | null;
 }
 
-export interface plugins_2 {
+export interface Plugins_2 {
 	resolve?: string | null;
 	id?: string | null;
 	name?: string | null;
 	version?: string | null;
-	pluginOptions?: pluginOptions_4 | null;
+	pluginOptions?: PluginOptions_4 | null;
+	browserAPIs?: (string | null)[] | null;
+	ssrAPIs?: (string | null)[] | null;
 	pluginFilepath?: string | null;
 }
 
-export interface pluginOptions_4 {
-	emojiConversion?: string | null;
+export interface PluginOptions_4 {
 	maxWidth?: number | null;
 	wrapperStyle?: string | null;
 	backgroundColor?: string | null;
 	linkImagesToOriginal?: boolean | null;
 	showCaptions?: boolean | null;
 	pathPrefix?: string | null;
+	withWebp?: boolean | null;
 	inlineCodeMarker?: string | null;
 }
 
-export interface icons_2 {
-	android?: boolean | null;
-	appleIcon?: boolean | null;
-	appleStartup?: boolean | null;
-	coast?: boolean | null;
-	favicons?: boolean | null;
-	firefox?: boolean | null;
-	twitter?: boolean | null;
-	yandex?: boolean | null;
-	windows?: boolean | null;
-}
-
-export interface feeds_2 {
+export interface Feeds_2 {
 	query?: string | null;
 	output?: string | null;
 }
 
-export interface packageJson_2 {
+export interface Headers_2 {
+	_xxjs?: (string | null)[] | null;
+	_sw_js?: (string | null)[] | null;
+	_xxwebmanifest?: (string | null)[] | null;
+	_xxcss?: (string | null)[] | null;
+	_xxpng?: (string | null)[] | null;
+	_xxjpg?: (string | null)[] | null;
+	_xxjpeg?: (string | null)[] | null;
+	_xxgif?: (string | null)[] | null;
+	_xxsvg?: (string | null)[] | null;
+}
+
+export interface PackageJson_2 {
 	name?: string | null;
 	description?: string | null;
 	version?: string | null;
 	main?: string | null;
 	author?: string | null;
 	license?: string | null;
-	dependencies?: (dependencies_2 | null)[] | null;
-	devDependencies?: (devDependencies_2 | null)[] | null;
-	peerDependencies?: (peerDependencies_2 | null)[] | null;
+	dependencies?: (Dependencies_2 | null)[] | null;
+	devDependencies?: (DevDependencies_2 | null)[] | null;
+	peerDependencies?: (PeerDependencies_2 | null)[] | null;
 	keywords?: (string | null)[] | null;
 }
 
-export interface dependencies_2 {
+export interface Dependencies_2 {
 	name?: string | null;
 	version?: string | null;
 }
 
-export interface devDependencies_2 {
+export interface DevDependencies_2 {
 	name?: string | null;
 	version?: string | null;
 }
 
-export interface peerDependencies_2 {
+export interface PeerDependencies_2 {
 	name?: string | null;
 	version?: string | null;
 }
 
-export interface internal_15 {
+export interface Internal_15 {
 	contentDigest?: string | null;
 	type?: string | null;
 	owner?: string | null;
 }
 
-export interface internal_14 {
+export interface Internal_14 {
 	type?: string | null;
 	contentDigest?: string | null;
 	description?: string | null;
 	owner?: string | null;
 }
 /** A connection to a list of items. */
-export interface sitePageGroupConnectionConnection {
+export interface SitePageGroupConnectionConnection {
 	pageInfo: PageInfo /** Information to aid in pagination. */;
 	edges?:
-		| (sitePageGroupConnectionEdge | null)[]
+		| (SitePageGroupConnectionEdge | null)[]
 		| null /** A list of edges. */;
 	field?: string | null;
 	fieldValue?: string | null;
 	totalCount?: number | null;
 }
 /** An edge in a connection. */
-export interface sitePageGroupConnectionEdge {
+export interface SitePageGroupConnectionEdge {
 	node?: SitePage | null /** The item at the end of the edge */;
 	next?: SitePage | null /** The next edge in the connection */;
 	previous?: SitePage | null /** The previous edge in the connection */;
@@ -388,7 +424,7 @@ export interface SitePluginConnection {
 	edges?: (SitePluginEdge | null)[] | null /** A list of edges. */;
 	totalCount?: number | null;
 	distinct?: (string | null)[] | null;
-	group?: (sitePluginGroupConnectionConnection | null)[] | null;
+	group?: (SitePluginGroupConnectionConnection | null)[] | null;
 }
 /** An edge in a connection. */
 export interface SitePluginEdge {
@@ -397,17 +433,17 @@ export interface SitePluginEdge {
 	previous?: SitePlugin | null /** The previous edge in the connection */;
 }
 /** A connection to a list of items. */
-export interface sitePluginGroupConnectionConnection {
+export interface SitePluginGroupConnectionConnection {
 	pageInfo: PageInfo /** Information to aid in pagination. */;
 	edges?:
-		| (sitePluginGroupConnectionEdge | null)[]
+		| (SitePluginGroupConnectionEdge | null)[]
 		| null /** A list of edges. */;
 	field?: string | null;
 	fieldValue?: string | null;
 	totalCount?: number | null;
 }
 /** An edge in a connection. */
-export interface sitePluginGroupConnectionEdge {
+export interface SitePluginGroupConnectionEdge {
 	node?: SitePlugin | null /** The item at the end of the edge */;
 	next?: SitePlugin | null /** The next edge in the connection */;
 	previous?: SitePlugin | null /** The previous edge in the connection */;
@@ -418,7 +454,7 @@ export interface DirectoryConnection {
 	edges?: (DirectoryEdge | null)[] | null /** A list of edges. */;
 	totalCount?: number | null;
 	distinct?: (string | null)[] | null;
-	group?: (directoryGroupConnectionConnection | null)[] | null;
+	group?: (DirectoryGroupConnectionConnection | null)[] | null;
 }
 /** An edge in a connection. */
 export interface DirectoryEdge {
@@ -431,7 +467,7 @@ export interface Directory extends Node {
 	id: string /** The id of this node. */;
 	parent?: Node | null /** The parent of this node. */;
 	children?: (Node | null)[] | null /** The children of this node. */;
-	internal?: internal_16 | null;
+	internal?: Internal_16 | null;
 	sourceInstanceName?: string | null;
 	absolutePath?: string | null;
 	relativePath?: string | null;
@@ -467,24 +503,24 @@ export interface Directory extends Node {
 	birthtime?: Date | null;
 }
 
-export interface internal_16 {
+export interface Internal_16 {
 	contentDigest?: string | null;
 	type?: string | null;
 	description?: string | null;
 	owner?: string | null;
 }
 /** A connection to a list of items. */
-export interface directoryGroupConnectionConnection {
+export interface DirectoryGroupConnectionConnection {
 	pageInfo: PageInfo /** Information to aid in pagination. */;
 	edges?:
-		| (directoryGroupConnectionEdge | null)[]
+		| (DirectoryGroupConnectionEdge | null)[]
 		| null /** A list of edges. */;
 	field?: string | null;
 	fieldValue?: string | null;
 	totalCount?: number | null;
 }
 /** An edge in a connection. */
-export interface directoryGroupConnectionEdge {
+export interface DirectoryGroupConnectionEdge {
 	node?: Directory | null /** The item at the end of the edge */;
 	next?: Directory | null /** The next edge in the connection */;
 	previous?: Directory | null /** The previous edge in the connection */;
@@ -495,7 +531,7 @@ export interface FileConnection {
 	edges?: (FileEdge | null)[] | null /** A list of edges. */;
 	totalCount?: number | null;
 	distinct?: (string | null)[] | null;
-	group?: (fileGroupConnectionConnection | null)[] | null;
+	group?: (FileGroupConnectionConnection | null)[] | null;
 }
 /** An edge in a connection. */
 export interface FileEdge {
@@ -508,19 +544,19 @@ export interface File extends Node {
 	id: string /** The id of this node. */;
 	parent?: Node | null /** The parent of this node. */;
 	children?: (Node | null)[] | null /** The children of this node. */;
-	childMarkdownRemark?: MarkdownRemark | null /** The child of this node of type markdownRemark */;
 	childrenTodoJson?:
 		| (TodoJson | null)[]
 		| null /** The children of this node of type todoJson */;
-	childOrganizationJson?: OrganizationJson | null /** The child of this node of type organizationJson */;
+	childMarkdownRemark?: MarkdownRemark | null /** The child of this node of type markdownRemark */;
 	childExperiencesJson?: ExperiencesJson | null /** The child of this node of type experiencesJson */;
+	childInterestsJson?: InterestsJson | null /** The child of this node of type interestsJson */;
+	childOrganizationJson?: OrganizationJson | null /** The child of this node of type organizationJson */;
+	childSkillsJson?: SkillsJson | null /** The child of this node of type skillsJson */;
+	childPersonalJson?: PersonalJson | null /** The child of this node of type personalJson */;
 	childrenCompetencesJson?:
 		| (CompetencesJson | null)[]
 		| null /** The children of this node of type competencesJson */;
-	childInterestsJson?: InterestsJson | null /** The child of this node of type interestsJson */;
-	childPersonalJson?: PersonalJson | null /** The child of this node of type personalJson */;
-	childSkillsJson?: SkillsJson | null /** The child of this node of type skillsJson */;
-	internal?: internal_17 | null;
+	internal?: Internal_17 | null;
 	sourceInstanceName?: string | null;
 	absolutePath?: string | null;
 	relativePath?: string | null;
@@ -558,44 +594,59 @@ export interface File extends Node {
 		| string
 		| null /** Copy file to static directory and return public url to it */;
 }
+/** Node of type TodoJson */
+export interface TodoJson extends Node {
+	id: string /** The id of this node. */;
+	parent?: Node | null /** The parent of this node. */;
+	children?: (Node | null)[] | null /** The children of this node. */;
+	title?: string | null;
+	tags?: (string | null)[] | null;
+	internal?: Internal_18 | null;
+}
+
+export interface Internal_18 {
+	contentDigest?: string | null;
+	type?: string | null;
+	owner?: string | null;
+}
 /** Node of type MarkdownRemark */
 export interface MarkdownRemark extends Node {
 	id: string /** The id of this node. */;
 	parent?: Node | null /** The parent of this node. */;
 	children?: (Node | null)[] | null /** The children of this node. */;
-	internal?: internal_18 | null;
-	frontmatter?: frontmatter_3 | null;
+	internal?: Internal_19 | null;
+	frontmatter?: Frontmatter_3 | null;
 	rawMarkdownBody?: string | null;
 	fileAbsolutePath?: string | null;
 	html?: string | null;
-	htmlAst?: JSON | null;
+	htmlAst?: Json | null;
 	excerpt?: string | null;
 	headings?: (MarkdownHeading | null)[] | null;
 	timeToRead?: number | null;
 	tableOfContents?: string | null;
-	wordCount?: wordCount | null;
+	wordCount?: WordCount | null;
 }
 
-export interface internal_18 {
+export interface Internal_19 {
 	content?: string | null;
 	type?: string | null;
 	contentDigest?: string | null;
 	owner?: string | null;
 }
 
-export interface frontmatter_3 {
+export interface Frontmatter_3 {
 	title?: string | null;
 	link?: string | null;
 	date?: Date | null;
-	authors?: (authors_3 | null)[] | null;
+	authors?: (Authors_3 | null)[] | null;
 	_PARENT?: string | null;
-	parent?: string | null;
 	description?: string | null;
-	type?: string | null;
 	draft?: boolean | null;
+	toc?: boolean | null;
+	type?: string | null;
 }
 
-export interface authors_3 {
+export interface Authors_3 {
 	name?: string | null;
 	url?: string | null;
 }
@@ -605,22 +656,66 @@ export interface MarkdownHeading {
 	depth?: number | null;
 }
 
-export interface wordCount {
+export interface WordCount {
 	paragraphs?: number | null;
 	sentences?: number | null;
 	words?: number | null;
 }
-/** Node of type TodoJson */
-export interface TodoJson extends Node {
+/** Node of type ExperiencesJson */
+export interface ExperiencesJson extends Node {
 	id: string /** The id of this node. */;
 	parent?: Node | null /** The parent of this node. */;
 	children?: (Node | null)[] | null /** The children of this node. */;
-	title?: string | null;
-	tags?: (string | null)[] | null;
-	internal?: internal_19 | null;
+	work?: (Work_2 | null)[] | null;
+	internal?: Internal_20 | null;
+	fields?: Fields_3 | null;
 }
 
-export interface internal_19 {
+export interface Work_2 {
+	company?: string | null;
+	link?: string | null;
+	image?: string | null;
+	period?: (string | null)[] | null;
+	role?: string | null;
+	skills?: (string | null)[] | null;
+	projects?: (Projects_2 | null)[] | null;
+}
+
+export interface Projects_2 {
+	name?: string | null;
+	url?: string | null;
+	description?: string | null;
+}
+
+export interface Internal_20 {
+	contentDigest?: string | null;
+	type?: string | null;
+	owner?: string | null;
+	fieldOwners?: FieldOwners_3 | null;
+}
+
+export interface FieldOwners_3 {
+	image_image?: string | null;
+}
+
+export interface Fields_3 {
+	image_image?: (string | null)[] | null;
+}
+/** Node of type InterestsJson */
+export interface InterestsJson extends Node {
+	id: string /** The id of this node. */;
+	parent?: Node | null /** The parent of this node. */;
+	children?: (Node | null)[] | null /** The children of this node. */;
+	subjects?: (Subjects_2 | null)[] | null;
+	internal?: Internal_21 | null;
+}
+
+export interface Subjects_2 {
+	name?: string | null;
+	intensity?: number | null;
+}
+
+export interface Internal_21 {
 	contentDigest?: string | null;
 	type?: string | null;
 	owner?: string | null;
@@ -634,87 +729,51 @@ export interface OrganizationJson extends Node {
 	url?: string | null;
 	logo?: string | null;
 	telephone?: string | null;
-	internal?: internal_20 | null;
-	fields?: fields_3 | null;
+	internal?: Internal_22 | null;
+	fields?: Fields_4 | null;
 }
 
-export interface internal_20 {
+export interface Internal_22 {
 	contentDigest?: string | null;
 	type?: string | null;
 	owner?: string | null;
-	fieldOwners?: fieldOwners_3 | null;
+	fieldOwners?: FieldOwners_4 | null;
 }
 
-export interface fieldOwners_3 {
+export interface FieldOwners_4 {
 	logo_image?: string | null;
 }
 
-export interface fields_3 {
+export interface Fields_4 {
 	logo_image?: string | null;
 }
-/** Node of type ExperiencesJson */
-export interface ExperiencesJson extends Node {
+/** Node of type SkillsJson */
+export interface SkillsJson extends Node {
 	id: string /** The id of this node. */;
 	parent?: Node | null /** The parent of this node. */;
 	children?: (Node | null)[] | null /** The children of this node. */;
-	work?: (work_2 | null)[] | null;
-	internal?: internal_21 | null;
-	fields?: fields_4 | null;
+	languages?: (Languages_2 | null)[] | null;
+	technical?: (Technical_2 | null)[] | null;
+	soft?: (Soft_2 | null)[] | null;
+	internal?: Internal_23 | null;
 }
 
-export interface work_2 {
-	company?: string | null;
-	link?: string | null;
-	image?: string | null;
-	period?: string | null;
-	role?: string | null;
-	tasks?: (string | null)[] | null;
-}
-
-export interface internal_21 {
-	contentDigest?: string | null;
-	type?: string | null;
-	owner?: string | null;
-	fieldOwners?: fieldOwners_4 | null;
-}
-
-export interface fieldOwners_4 {
-	image_image?: string | null;
-}
-
-export interface fields_4 {
-	image_image?: (string | null)[] | null;
-}
-/** Node of type CompetencesJson */
-export interface CompetencesJson extends Node {
-	id: string /** The id of this node. */;
-	parent?: Node | null /** The parent of this node. */;
-	children?: (Node | null)[] | null /** The children of this node. */;
-	name?: string | null;
-	description?: string | null;
-	internal?: internal_22 | null;
-}
-
-export interface internal_22 {
-	contentDigest?: string | null;
-	type?: string | null;
-	owner?: string | null;
-}
-/** Node of type InterestsJson */
-export interface InterestsJson extends Node {
-	id: string /** The id of this node. */;
-	parent?: Node | null /** The parent of this node. */;
-	children?: (Node | null)[] | null /** The children of this node. */;
-	subjects?: (subjects_2 | null)[] | null;
-	internal?: internal_23 | null;
-}
-
-export interface subjects_2 {
+export interface Languages_2 {
 	name?: string | null;
 	intensity?: number | null;
 }
 
-export interface internal_23 {
+export interface Technical_2 {
+	name?: string | null;
+	intensity?: number | null;
+}
+
+export interface Soft_2 {
+	name?: string | null;
+	intensity?: number | null;
+}
+
+export interface Internal_23 {
 	contentDigest?: string | null;
 	type?: string | null;
 	owner?: string | null;
@@ -727,54 +786,38 @@ export interface PersonalJson extends Node {
 	name?: string | null;
 	email?: string | null;
 	jobTitle?: string | null;
-	social?: (social_2 | null)[] | null;
-	internal?: internal_24 | null;
+	social?: (Social_2 | null)[] | null;
+	internal?: Internal_24 | null;
 }
 
-export interface social_2 {
+export interface Social_2 {
 	serviceName?: string | null;
 	icon?: string | null;
 	url?: string | null;
 }
 
-export interface internal_24 {
+export interface Internal_24 {
 	contentDigest?: string | null;
 	type?: string | null;
 	owner?: string | null;
 }
-/** Node of type SkillsJson */
-export interface SkillsJson extends Node {
+/** Node of type CompetencesJson */
+export interface CompetencesJson extends Node {
 	id: string /** The id of this node. */;
 	parent?: Node | null /** The parent of this node. */;
 	children?: (Node | null)[] | null /** The children of this node. */;
-	languages?: (languages_2 | null)[] | null;
-	technical?: (technical_2 | null)[] | null;
-	soft?: (soft_2 | null)[] | null;
-	internal?: internal_25 | null;
-}
-
-export interface languages_2 {
 	name?: string | null;
-	intensity?: number | null;
+	description?: string | null;
+	internal?: Internal_25 | null;
 }
 
-export interface technical_2 {
-	name?: string | null;
-	intensity?: number | null;
-}
-
-export interface soft_2 {
-	name?: string | null;
-	intensity?: number | null;
-}
-
-export interface internal_25 {
+export interface Internal_25 {
 	contentDigest?: string | null;
 	type?: string | null;
 	owner?: string | null;
 }
 
-export interface internal_17 {
+export interface Internal_17 {
 	contentDigest?: string | null;
 	type?: string | null;
 	mediaType?: string | null;
@@ -782,15 +825,15 @@ export interface internal_17 {
 	owner?: string | null;
 }
 /** A connection to a list of items. */
-export interface fileGroupConnectionConnection {
+export interface FileGroupConnectionConnection {
 	pageInfo: PageInfo /** Information to aid in pagination. */;
-	edges?: (fileGroupConnectionEdge | null)[] | null /** A list of edges. */;
+	edges?: (FileGroupConnectionEdge | null)[] | null /** A list of edges. */;
 	field?: string | null;
 	fieldValue?: string | null;
 	totalCount?: number | null;
 }
 /** An edge in a connection. */
-export interface fileGroupConnectionEdge {
+export interface FileGroupConnectionEdge {
 	node?: File | null /** The item at the end of the edge */;
 	next?: File | null /** The next edge in the connection */;
 	previous?: File | null /** The previous edge in the connection */;
@@ -801,7 +844,7 @@ export interface MarkdownRemarkConnection {
 	edges?: (MarkdownRemarkEdge | null)[] | null /** A list of edges. */;
 	totalCount?: number | null;
 	distinct?: (string | null)[] | null;
-	group?: (markdownRemarkGroupConnectionConnection | null)[] | null;
+	group?: (MarkdownRemarkGroupConnectionConnection | null)[] | null;
 }
 /** An edge in a connection. */
 export interface MarkdownRemarkEdge {
@@ -810,17 +853,17 @@ export interface MarkdownRemarkEdge {
 	previous?: MarkdownRemark | null /** The previous edge in the connection */;
 }
 /** A connection to a list of items. */
-export interface markdownRemarkGroupConnectionConnection {
+export interface MarkdownRemarkGroupConnectionConnection {
 	pageInfo: PageInfo /** Information to aid in pagination. */;
 	edges?:
-		| (markdownRemarkGroupConnectionEdge | null)[]
+		| (MarkdownRemarkGroupConnectionEdge | null)[]
 		| null /** A list of edges. */;
 	field?: string | null;
 	fieldValue?: string | null;
 	totalCount?: number | null;
 }
 /** An edge in a connection. */
-export interface markdownRemarkGroupConnectionEdge {
+export interface MarkdownRemarkGroupConnectionEdge {
 	node?: MarkdownRemark | null /** The item at the end of the edge */;
 	next?: MarkdownRemark | null /** The next edge in the connection */;
 	previous?: MarkdownRemark | null /** The previous edge in the connection */;
@@ -831,7 +874,7 @@ export interface TodoJsonConnection {
 	edges?: (TodoJsonEdge | null)[] | null /** A list of edges. */;
 	totalCount?: number | null;
 	distinct?: (string | null)[] | null;
-	group?: (todoJsonGroupConnectionConnection | null)[] | null;
+	group?: (TodoJsonGroupConnectionConnection | null)[] | null;
 }
 /** An edge in a connection. */
 export interface TodoJsonEdge {
@@ -840,110 +883,20 @@ export interface TodoJsonEdge {
 	previous?: TodoJson | null /** The previous edge in the connection */;
 }
 /** A connection to a list of items. */
-export interface todoJsonGroupConnectionConnection {
+export interface TodoJsonGroupConnectionConnection {
 	pageInfo: PageInfo /** Information to aid in pagination. */;
 	edges?:
-		| (todoJsonGroupConnectionEdge | null)[]
+		| (TodoJsonGroupConnectionEdge | null)[]
 		| null /** A list of edges. */;
 	field?: string | null;
 	fieldValue?: string | null;
 	totalCount?: number | null;
 }
 /** An edge in a connection. */
-export interface todoJsonGroupConnectionEdge {
+export interface TodoJsonGroupConnectionEdge {
 	node?: TodoJson | null /** The item at the end of the edge */;
 	next?: TodoJson | null /** The next edge in the connection */;
 	previous?: TodoJson | null /** The previous edge in the connection */;
-}
-/** A connection to a list of items. */
-export interface OrganizationJsonConnection {
-	pageInfo: PageInfo /** Information to aid in pagination. */;
-	edges?: (OrganizationJsonEdge | null)[] | null /** A list of edges. */;
-	totalCount?: number | null;
-	distinct?: (string | null)[] | null;
-	group?: (organizationJsonGroupConnectionConnection | null)[] | null;
-}
-/** An edge in a connection. */
-export interface OrganizationJsonEdge {
-	node?: OrganizationJson | null /** The item at the end of the edge */;
-	next?: OrganizationJson | null /** The next edge in the connection */;
-	previous?: OrganizationJson | null /** The previous edge in the connection */;
-}
-/** A connection to a list of items. */
-export interface organizationJsonGroupConnectionConnection {
-	pageInfo: PageInfo /** Information to aid in pagination. */;
-	edges?:
-		| (organizationJsonGroupConnectionEdge | null)[]
-		| null /** A list of edges. */;
-	field?: string | null;
-	fieldValue?: string | null;
-	totalCount?: number | null;
-}
-/** An edge in a connection. */
-export interface organizationJsonGroupConnectionEdge {
-	node?: OrganizationJson | null /** The item at the end of the edge */;
-	next?: OrganizationJson | null /** The next edge in the connection */;
-	previous?: OrganizationJson | null /** The previous edge in the connection */;
-}
-/** A connection to a list of items. */
-export interface ExperiencesJsonConnection {
-	pageInfo: PageInfo /** Information to aid in pagination. */;
-	edges?: (ExperiencesJsonEdge | null)[] | null /** A list of edges. */;
-	totalCount?: number | null;
-	distinct?: (string | null)[] | null;
-	group?: (experiencesJsonGroupConnectionConnection | null)[] | null;
-}
-/** An edge in a connection. */
-export interface ExperiencesJsonEdge {
-	node?: ExperiencesJson | null /** The item at the end of the edge */;
-	next?: ExperiencesJson | null /** The next edge in the connection */;
-	previous?: ExperiencesJson | null /** The previous edge in the connection */;
-}
-/** A connection to a list of items. */
-export interface experiencesJsonGroupConnectionConnection {
-	pageInfo: PageInfo /** Information to aid in pagination. */;
-	edges?:
-		| (experiencesJsonGroupConnectionEdge | null)[]
-		| null /** A list of edges. */;
-	field?: string | null;
-	fieldValue?: string | null;
-	totalCount?: number | null;
-}
-/** An edge in a connection. */
-export interface experiencesJsonGroupConnectionEdge {
-	node?: ExperiencesJson | null /** The item at the end of the edge */;
-	next?: ExperiencesJson | null /** The next edge in the connection */;
-	previous?: ExperiencesJson | null /** The previous edge in the connection */;
-}
-/** A connection to a list of items. */
-export interface CompetencesJsonConnection {
-	pageInfo: PageInfo /** Information to aid in pagination. */;
-	edges?: (CompetencesJsonEdge | null)[] | null /** A list of edges. */;
-	totalCount?: number | null;
-	distinct?: (string | null)[] | null;
-	group?: (competencesJsonGroupConnectionConnection | null)[] | null;
-}
-/** An edge in a connection. */
-export interface CompetencesJsonEdge {
-	node?: CompetencesJson | null /** The item at the end of the edge */;
-	next?: CompetencesJson | null /** The next edge in the connection */;
-	previous?: CompetencesJson | null /** The previous edge in the connection */;
-}
-/** A connection to a list of items. */
-export interface competencesJsonGroupConnectionConnection {
-	pageInfo: PageInfo /** Information to aid in pagination. */;
-	edges?:
-		| (competencesJsonGroupConnectionEdge | null)[]
-		| null /** A list of edges. */;
-	field?: string | null;
-	fieldValue?: string | null;
-	totalCount?: number | null;
-}
-/** An edge in a connection. */
-export interface competencesJsonGroupConnectionEdge {
-	node?: CompetencesJson | null /** The item at the end of the edge */;
-	next?: CompetencesJson | null /** The next edge in the connection */;
-	previous?: CompetencesJson | null /** The previous edge in the connection */;
 }
 /** A connection to a list of items. */
 export interface InterestsJsonConnection {
@@ -951,7 +904,7 @@ export interface InterestsJsonConnection {
 	edges?: (InterestsJsonEdge | null)[] | null /** A list of edges. */;
 	totalCount?: number | null;
 	distinct?: (string | null)[] | null;
-	group?: (interestsJsonGroupConnectionConnection | null)[] | null;
+	group?: (InterestsJsonGroupConnectionConnection | null)[] | null;
 }
 /** An edge in a connection. */
 export interface InterestsJsonEdge {
@@ -960,50 +913,50 @@ export interface InterestsJsonEdge {
 	previous?: InterestsJson | null /** The previous edge in the connection */;
 }
 /** A connection to a list of items. */
-export interface interestsJsonGroupConnectionConnection {
+export interface InterestsJsonGroupConnectionConnection {
 	pageInfo: PageInfo /** Information to aid in pagination. */;
 	edges?:
-		| (interestsJsonGroupConnectionEdge | null)[]
+		| (InterestsJsonGroupConnectionEdge | null)[]
 		| null /** A list of edges. */;
 	field?: string | null;
 	fieldValue?: string | null;
 	totalCount?: number | null;
 }
 /** An edge in a connection. */
-export interface interestsJsonGroupConnectionEdge {
+export interface InterestsJsonGroupConnectionEdge {
 	node?: InterestsJson | null /** The item at the end of the edge */;
 	next?: InterestsJson | null /** The next edge in the connection */;
 	previous?: InterestsJson | null /** The previous edge in the connection */;
 }
 /** A connection to a list of items. */
-export interface PersonalJsonConnection {
+export interface OrganizationJsonConnection {
 	pageInfo: PageInfo /** Information to aid in pagination. */;
-	edges?: (PersonalJsonEdge | null)[] | null /** A list of edges. */;
+	edges?: (OrganizationJsonEdge | null)[] | null /** A list of edges. */;
 	totalCount?: number | null;
 	distinct?: (string | null)[] | null;
-	group?: (personalJsonGroupConnectionConnection | null)[] | null;
+	group?: (OrganizationJsonGroupConnectionConnection | null)[] | null;
 }
 /** An edge in a connection. */
-export interface PersonalJsonEdge {
-	node?: PersonalJson | null /** The item at the end of the edge */;
-	next?: PersonalJson | null /** The next edge in the connection */;
-	previous?: PersonalJson | null /** The previous edge in the connection */;
+export interface OrganizationJsonEdge {
+	node?: OrganizationJson | null /** The item at the end of the edge */;
+	next?: OrganizationJson | null /** The next edge in the connection */;
+	previous?: OrganizationJson | null /** The previous edge in the connection */;
 }
 /** A connection to a list of items. */
-export interface personalJsonGroupConnectionConnection {
+export interface OrganizationJsonGroupConnectionConnection {
 	pageInfo: PageInfo /** Information to aid in pagination. */;
 	edges?:
-		| (personalJsonGroupConnectionEdge | null)[]
+		| (OrganizationJsonGroupConnectionEdge | null)[]
 		| null /** A list of edges. */;
 	field?: string | null;
 	fieldValue?: string | null;
 	totalCount?: number | null;
 }
 /** An edge in a connection. */
-export interface personalJsonGroupConnectionEdge {
-	node?: PersonalJson | null /** The item at the end of the edge */;
-	next?: PersonalJson | null /** The next edge in the connection */;
-	previous?: PersonalJson | null /** The previous edge in the connection */;
+export interface OrganizationJsonGroupConnectionEdge {
+	node?: OrganizationJson | null /** The item at the end of the edge */;
+	next?: OrganizationJson | null /** The next edge in the connection */;
+	previous?: OrganizationJson | null /** The previous edge in the connection */;
 }
 /** A connection to a list of items. */
 export interface SkillsJsonConnection {
@@ -1011,7 +964,7 @@ export interface SkillsJsonConnection {
 	edges?: (SkillsJsonEdge | null)[] | null /** A list of edges. */;
 	totalCount?: number | null;
 	distinct?: (string | null)[] | null;
-	group?: (skillsJsonGroupConnectionConnection | null)[] | null;
+	group?: (SkillsJsonGroupConnectionConnection | null)[] | null;
 }
 /** An edge in a connection. */
 export interface SkillsJsonEdge {
@@ -1020,256 +973,363 @@ export interface SkillsJsonEdge {
 	previous?: SkillsJson | null /** The previous edge in the connection */;
 }
 /** A connection to a list of items. */
-export interface skillsJsonGroupConnectionConnection {
+export interface SkillsJsonGroupConnectionConnection {
 	pageInfo: PageInfo /** Information to aid in pagination. */;
 	edges?:
-		| (skillsJsonGroupConnectionEdge | null)[]
+		| (SkillsJsonGroupConnectionEdge | null)[]
 		| null /** A list of edges. */;
 	field?: string | null;
 	fieldValue?: string | null;
 	totalCount?: number | null;
 }
 /** An edge in a connection. */
-export interface skillsJsonGroupConnectionEdge {
+export interface SkillsJsonGroupConnectionEdge {
 	node?: SkillsJson | null /** The item at the end of the edge */;
 	next?: SkillsJson | null /** The next edge in the connection */;
 	previous?: SkillsJson | null /** The previous edge in the connection */;
+}
+/** A connection to a list of items. */
+export interface CompetencesJsonConnection {
+	pageInfo: PageInfo /** Information to aid in pagination. */;
+	edges?: (CompetencesJsonEdge | null)[] | null /** A list of edges. */;
+	totalCount?: number | null;
+	distinct?: (string | null)[] | null;
+	group?: (CompetencesJsonGroupConnectionConnection | null)[] | null;
+}
+/** An edge in a connection. */
+export interface CompetencesJsonEdge {
+	node?: CompetencesJson | null /** The item at the end of the edge */;
+	next?: CompetencesJson | null /** The next edge in the connection */;
+	previous?: CompetencesJson | null /** The previous edge in the connection */;
+}
+/** A connection to a list of items. */
+export interface CompetencesJsonGroupConnectionConnection {
+	pageInfo: PageInfo /** Information to aid in pagination. */;
+	edges?:
+		| (CompetencesJsonGroupConnectionEdge | null)[]
+		| null /** A list of edges. */;
+	field?: string | null;
+	fieldValue?: string | null;
+	totalCount?: number | null;
+}
+/** An edge in a connection. */
+export interface CompetencesJsonGroupConnectionEdge {
+	node?: CompetencesJson | null /** The item at the end of the edge */;
+	next?: CompetencesJson | null /** The next edge in the connection */;
+	previous?: CompetencesJson | null /** The previous edge in the connection */;
+}
+/** A connection to a list of items. */
+export interface PersonalJsonConnection {
+	pageInfo: PageInfo /** Information to aid in pagination. */;
+	edges?: (PersonalJsonEdge | null)[] | null /** A list of edges. */;
+	totalCount?: number | null;
+	distinct?: (string | null)[] | null;
+	group?: (PersonalJsonGroupConnectionConnection | null)[] | null;
+}
+/** An edge in a connection. */
+export interface PersonalJsonEdge {
+	node?: PersonalJson | null /** The item at the end of the edge */;
+	next?: PersonalJson | null /** The next edge in the connection */;
+	previous?: PersonalJson | null /** The previous edge in the connection */;
+}
+/** A connection to a list of items. */
+export interface PersonalJsonGroupConnectionConnection {
+	pageInfo: PageInfo /** Information to aid in pagination. */;
+	edges?:
+		| (PersonalJsonGroupConnectionEdge | null)[]
+		| null /** A list of edges. */;
+	field?: string | null;
+	fieldValue?: string | null;
+	totalCount?: number | null;
+}
+/** An edge in a connection. */
+export interface PersonalJsonGroupConnectionEdge {
+	node?: PersonalJson | null /** The item at the end of the edge */;
+	next?: PersonalJson | null /** The next edge in the connection */;
+	previous?: PersonalJson | null /** The previous edge in the connection */;
+}
+/** A connection to a list of items. */
+export interface ExperiencesJsonConnection {
+	pageInfo: PageInfo /** Information to aid in pagination. */;
+	edges?: (ExperiencesJsonEdge | null)[] | null /** A list of edges. */;
+	totalCount?: number | null;
+	distinct?: (string | null)[] | null;
+	group?: (ExperiencesJsonGroupConnectionConnection | null)[] | null;
+}
+/** An edge in a connection. */
+export interface ExperiencesJsonEdge {
+	node?: ExperiencesJson | null /** The item at the end of the edge */;
+	next?: ExperiencesJson | null /** The next edge in the connection */;
+	previous?: ExperiencesJson | null /** The previous edge in the connection */;
+}
+/** A connection to a list of items. */
+export interface ExperiencesJsonGroupConnectionConnection {
+	pageInfo: PageInfo /** Information to aid in pagination. */;
+	edges?:
+		| (ExperiencesJsonGroupConnectionEdge | null)[]
+		| null /** A list of edges. */;
+	field?: string | null;
+	fieldValue?: string | null;
+	totalCount?: number | null;
+}
+/** An edge in a connection. */
+export interface ExperiencesJsonGroupConnectionEdge {
+	node?: ExperiencesJson | null /** The item at the end of the edge */;
+	next?: ExperiencesJson | null /** The next edge in the connection */;
+	previous?: ExperiencesJson | null /** The previous edge in the connection */;
 }
 /** Node of type Site */
 export interface Site extends Node {
 	id: string /** The id of this node. */;
 	parent?: Node | null /** The parent of this node. */;
 	children?: (Node | null)[] | null /** The children of this node. */;
-	siteMetadata?: siteMetadata_2 | null;
+	siteMetadata?: SiteMetadata_2 | null;
 	port?: Date | null;
 	host?: string | null;
 	pathPrefix?: string | null;
 	polyfill?: boolean | null;
 	buildTime?: Date | null;
-	internal?: internal_26 | null;
+	internal?: Internal_26 | null;
 }
 
-export interface siteMetadata_2 {
+export interface SiteMetadata_2 {
 	title?: string | null;
 	siteUrl?: string | null;
 	sourceUrl?: string | null;
 	description?: string | null;
 }
 
-export interface internal_26 {
+export interface Internal_26 {
 	contentDigest?: string | null;
 	type?: string | null;
 	owner?: string | null;
 }
 
-export interface sitePageConnectionSort {
+export interface SitePageConnectionSort {
 	fields: (SitePageConnectionSortByFieldsEnum | null)[];
-	order?: sitePageConnectionSortOrderValues | null;
+	order?: SitePageConnectionSortOrderValues | null;
 }
 /** Filter connection on its fields */
-export interface filterSitePage {
-	jsonName?: sitePageConnectionJsonNameQueryString | null;
-	internalComponentName?: sitePageConnectionInternalComponentNameQueryString | null;
-	path?: sitePageConnectionPathQueryString_2 | null;
-	component?: sitePageConnectionComponentQueryString | null;
-	componentChunkName?: sitePageConnectionComponentChunkNameQueryString | null;
-	context?: sitePageConnectionContextInputObject | null;
-	pluginCreator?: sitePageConnectionPluginCreatorInputObject | null;
-	pluginCreatorId?: sitePageConnectionPluginCreatorIdQueryString_2 | null;
-	componentPath?: sitePageConnectionComponentPathQueryString | null;
-	id?: sitePageConnectionIdQueryString_2 | null;
-	internal?: sitePageConnectionInternalInputObject_2 | null;
+export interface FilterSitePage {
+	jsonName?: SitePageConnectionJsonNameQueryString | null;
+	internalComponentName?: SitePageConnectionInternalComponentNameQueryString | null;
+	path?: SitePageConnectionPathQueryString_2 | null;
+	component?: SitePageConnectionComponentQueryString | null;
+	componentChunkName?: SitePageConnectionComponentChunkNameQueryString | null;
+	context?: SitePageConnectionContextInputObject | null;
+	pluginCreator?: SitePageConnectionPluginCreatorInputObject | null;
+	pluginCreatorId?: SitePageConnectionPluginCreatorIdQueryString_2 | null;
+	componentPath?: SitePageConnectionComponentPathQueryString | null;
+	id?: SitePageConnectionIdQueryString_2 | null;
+	internal?: SitePageConnectionInternalInputObject_2 | null;
 }
 
-export interface sitePageConnectionJsonNameQueryString {
+export interface SitePageConnectionJsonNameQueryString {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePageConnectionInternalComponentNameQueryString {
+export interface SitePageConnectionInternalComponentNameQueryString {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePageConnectionPathQueryString_2 {
+export interface SitePageConnectionPathQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePageConnectionComponentQueryString {
+export interface SitePageConnectionComponentQueryString {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePageConnectionComponentChunkNameQueryString {
+export interface SitePageConnectionComponentChunkNameQueryString {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePageConnectionContextInputObject {
-	group?: sitePageConnectionContextGroupQueryList | null;
-	pathPrefix?: sitePageConnectionContextPathPrefixQueryString | null;
-	additionalContext?: sitePageConnectionContextAdditionalContextInputObject | null;
-	markdownPath?: sitePageConnectionContextMarkdownPathQueryString | null;
+export interface SitePageConnectionContextInputObject {
+	group?: SitePageConnectionContextGroupQueryList | null;
+	pathPrefix?: SitePageConnectionContextPathPrefixQueryString | null;
+	additionalContext?: SitePageConnectionContextAdditionalContextInputObject | null;
+	markdownPath?: SitePageConnectionContextMarkdownPathQueryString | null;
 }
 
-export interface sitePageConnectionContextGroupQueryList {
-	elemMatch?: sitePageConnectionContextGroupInputObject | null;
+export interface SitePageConnectionContextGroupQueryList {
+	elemMatch?: SitePageConnectionContextGroupInputObject | null;
 }
 
-export interface sitePageConnectionContextGroupInputObject {
-	node?: sitePageConnectionContextGroupNodeInputObject | null;
+export interface SitePageConnectionContextGroupInputObject {
+	node?: SitePageConnectionContextGroupNodeInputObject | null;
 }
 
-export interface sitePageConnectionContextGroupNodeInputObject {
-	htmlAst?: sitePageConnectionContextGroupNodeHtmlAstInputObject | null;
-	excerpt?: sitePageConnectionContextGroupNodeExcerptQueryString | null;
-	timeToRead?: sitePageConnectionContextGroupNodeTimeToReadQueryInteger | null;
-	count?: sitePageConnectionContextGroupNodeCountInputObject | null;
-	fileAbsolutePath?: sitePageConnectionContextGroupNodeFileAbsolutePathQueryString | null;
-	parent?: sitePageConnectionContextGroupNodeParentInputObject | null;
-	frontmatter?: sitePageConnectionContextGroupNodeFrontmatterInputObject | null;
+export interface SitePageConnectionContextGroupNodeInputObject {
+	htmlAst?: SitePageConnectionContextGroupNodeHtmlAstInputObject | null;
+	excerpt?: SitePageConnectionContextGroupNodeExcerptQueryString | null;
+	timeToRead?: SitePageConnectionContextGroupNodeTimeToReadQueryInteger | null;
+	count?: SitePageConnectionContextGroupNodeCountInputObject | null;
+	fileAbsolutePath?: SitePageConnectionContextGroupNodeFileAbsolutePathQueryString | null;
+	parent?: SitePageConnectionContextGroupNodeParentInputObject | null;
+	frontmatter?: SitePageConnectionContextGroupNodeFrontmatterInputObject | null;
 }
 
-export interface sitePageConnectionContextGroupNodeHtmlAstInputObject {
-	type?: sitePageConnectionContextGroupNodeHtmlAstTypeQueryString | null;
-	children?: sitePageConnectionContextGroupNodeHtmlAstChildrenQueryList | null;
-	data?: sitePageConnectionContextGroupNodeHtmlAstDataInputObject | null;
-	tagName?: sitePageConnectionContextGroupNodeHtmlAstTagNameQueryString | null;
+export interface SitePageConnectionContextGroupNodeHtmlAstInputObject {
+	type?: SitePageConnectionContextGroupNodeHtmlAstTypeQueryString | null;
+	children?: SitePageConnectionContextGroupNodeHtmlAstChildrenQueryList | null;
+	data?: SitePageConnectionContextGroupNodeHtmlAstDataInputObject | null;
+	tagName?: SitePageConnectionContextGroupNodeHtmlAstTagNameQueryString | null;
 }
 
-export interface sitePageConnectionContextGroupNodeHtmlAstTypeQueryString {
+export interface SitePageConnectionContextGroupNodeHtmlAstTypeQueryString {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePageConnectionContextGroupNodeHtmlAstChildrenQueryList {
-	elemMatch?: sitePageConnectionContextGroupNodeHtmlAstChildrenInputObject | null;
+export interface SitePageConnectionContextGroupNodeHtmlAstChildrenQueryList {
+	elemMatch?: SitePageConnectionContextGroupNodeHtmlAstChildrenInputObject | null;
 }
 
-export interface sitePageConnectionContextGroupNodeHtmlAstChildrenInputObject {
-	type?: sitePageConnectionContextGroupNodeHtmlAstChildrenTypeQueryString | null;
-	tagName?: sitePageConnectionContextGroupNodeHtmlAstChildrenTagNameQueryString | null;
-	properties?: sitePageConnectionContextGroupNodeHtmlAstChildrenPropertiesInputObject | null;
-	children?: sitePageConnectionContextGroupNodeHtmlAstChildrenChildrenQueryList | null;
-	value?: sitePageConnectionContextGroupNodeHtmlAstChildrenValueQueryString | null;
+export interface SitePageConnectionContextGroupNodeHtmlAstChildrenInputObject {
+	type?: SitePageConnectionContextGroupNodeHtmlAstChildrenTypeQueryString | null;
+	tagName?: SitePageConnectionContextGroupNodeHtmlAstChildrenTagNameQueryString | null;
+	properties?: SitePageConnectionContextGroupNodeHtmlAstChildrenPropertiesInputObject | null;
+	children?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenQueryList | null;
+	value?: SitePageConnectionContextGroupNodeHtmlAstChildrenValueQueryString | null;
 }
 
-export interface sitePageConnectionContextGroupNodeHtmlAstChildrenTypeQueryString {
+export interface SitePageConnectionContextGroupNodeHtmlAstChildrenTypeQueryString {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePageConnectionContextGroupNodeHtmlAstChildrenTagNameQueryString {
+export interface SitePageConnectionContextGroupNodeHtmlAstChildrenTagNameQueryString {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePageConnectionContextGroupNodeHtmlAstChildrenPropertiesInputObject {
-	src?: sitePageConnectionContextGroupNodeHtmlAstChildrenPropertiesSrcQueryString | null;
-	title?: sitePageConnectionContextGroupNodeHtmlAstChildrenPropertiesTitleQueryString | null;
-	attr?: sitePageConnectionContextGroupNodeHtmlAstChildrenPropertiesAttrQueryString | null;
-	size?: sitePageConnectionContextGroupNodeHtmlAstChildrenPropertiesSizeQueryString | null;
-	className?: sitePageConnectionContextGroupNodeHtmlAstChildrenPropertiesClassNameQueryList | null;
-	dataLanguage?: sitePageConnectionContextGroupNodeHtmlAstChildrenPropertiesDataLanguageQueryString | null;
-	style?: sitePageConnectionContextGroupNodeHtmlAstChildrenPropertiesStyleQueryString | null;
-	sandbox?: sitePageConnectionContextGroupNodeHtmlAstChildrenPropertiesSandboxQueryList | null;
-	width?: sitePageConnectionContextGroupNodeHtmlAstChildrenPropertiesWidthQueryInteger | null;
-	height?: sitePageConnectionContextGroupNodeHtmlAstChildrenPropertiesHeightQueryInteger | null;
-	frameBorder?: sitePageConnectionContextGroupNodeHtmlAstChildrenPropertiesFrameBorderQueryString | null;
-	allow?: sitePageConnectionContextGroupNodeHtmlAstChildrenPropertiesAllowQueryString | null;
-	allowFullScreen?: sitePageConnectionContextGroupNodeHtmlAstChildrenPropertiesAllowFullScreenQueryBoolean | null;
+export interface SitePageConnectionContextGroupNodeHtmlAstChildrenPropertiesInputObject {
+	id?: SitePageConnectionContextGroupNodeHtmlAstChildrenPropertiesIdQueryString | null;
+	size?: SitePageConnectionContextGroupNodeHtmlAstChildrenPropertiesSizeQueryString | null;
+	className?: SitePageConnectionContextGroupNodeHtmlAstChildrenPropertiesClassNameQueryList | null;
+	dataLanguage?: SitePageConnectionContextGroupNodeHtmlAstChildrenPropertiesDataLanguageQueryString | null;
+	src?: SitePageConnectionContextGroupNodeHtmlAstChildrenPropertiesSrcQueryString | null;
+	style?: SitePageConnectionContextGroupNodeHtmlAstChildrenPropertiesStyleQueryString | null;
+	sandbox?: SitePageConnectionContextGroupNodeHtmlAstChildrenPropertiesSandboxQueryList | null;
+	title?: SitePageConnectionContextGroupNodeHtmlAstChildrenPropertiesTitleQueryString | null;
+	width?: SitePageConnectionContextGroupNodeHtmlAstChildrenPropertiesWidthQueryInteger | null;
+	height?: SitePageConnectionContextGroupNodeHtmlAstChildrenPropertiesHeightQueryInteger | null;
+	frameBorder?: SitePageConnectionContextGroupNodeHtmlAstChildrenPropertiesFrameBorderQueryString | null;
+	allow?: SitePageConnectionContextGroupNodeHtmlAstChildrenPropertiesAllowQueryString | null;
+	allowFullScreen?: SitePageConnectionContextGroupNodeHtmlAstChildrenPropertiesAllowFullScreenQueryBoolean | null;
+	attr?: SitePageConnectionContextGroupNodeHtmlAstChildrenPropertiesAttrQueryString | null;
 }
 
-export interface sitePageConnectionContextGroupNodeHtmlAstChildrenPropertiesSrcQueryString {
+export interface SitePageConnectionContextGroupNodeHtmlAstChildrenPropertiesIdQueryString {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePageConnectionContextGroupNodeHtmlAstChildrenPropertiesTitleQueryString {
+export interface SitePageConnectionContextGroupNodeHtmlAstChildrenPropertiesSizeQueryString {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePageConnectionContextGroupNodeHtmlAstChildrenPropertiesAttrQueryString {
+export interface SitePageConnectionContextGroupNodeHtmlAstChildrenPropertiesClassNameQueryList {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePageConnectionContextGroupNodeHtmlAstChildrenPropertiesSizeQueryString {
+export interface SitePageConnectionContextGroupNodeHtmlAstChildrenPropertiesDataLanguageQueryString {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePageConnectionContextGroupNodeHtmlAstChildrenPropertiesClassNameQueryList {
+export interface SitePageConnectionContextGroupNodeHtmlAstChildrenPropertiesSrcQueryString {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePageConnectionContextGroupNodeHtmlAstChildrenPropertiesDataLanguageQueryString {
+export interface SitePageConnectionContextGroupNodeHtmlAstChildrenPropertiesStyleQueryString {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePageConnectionContextGroupNodeHtmlAstChildrenPropertiesStyleQueryString {
+export interface SitePageConnectionContextGroupNodeHtmlAstChildrenPropertiesSandboxQueryList {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePageConnectionContextGroupNodeHtmlAstChildrenPropertiesSandboxQueryList {
+export interface SitePageConnectionContextGroupNodeHtmlAstChildrenPropertiesTitleQueryString {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePageConnectionContextGroupNodeHtmlAstChildrenPropertiesWidthQueryInteger {
+export interface SitePageConnectionContextGroupNodeHtmlAstChildrenPropertiesWidthQueryInteger {
 	eq?: number | null;
 	ne?: number | null;
 	gt?: number | null;
@@ -1277,9 +1337,10 @@ export interface sitePageConnectionContextGroupNodeHtmlAstChildrenPropertiesWidt
 	lt?: number | null;
 	lte?: number | null;
 	in?: (number | null)[] | null;
+	nin?: (number | null)[] | null;
 }
 
-export interface sitePageConnectionContextGroupNodeHtmlAstChildrenPropertiesHeightQueryInteger {
+export interface SitePageConnectionContextGroupNodeHtmlAstChildrenPropertiesHeightQueryInteger {
 	eq?: number | null;
 	ne?: number | null;
 	gt?: number | null;
@@ -1287,465 +1348,617 @@ export interface sitePageConnectionContextGroupNodeHtmlAstChildrenPropertiesHeig
 	lt?: number | null;
 	lte?: number | null;
 	in?: (number | null)[] | null;
+	nin?: (number | null)[] | null;
 }
 
-export interface sitePageConnectionContextGroupNodeHtmlAstChildrenPropertiesFrameBorderQueryString {
+export interface SitePageConnectionContextGroupNodeHtmlAstChildrenPropertiesFrameBorderQueryString {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePageConnectionContextGroupNodeHtmlAstChildrenPropertiesAllowQueryString {
+export interface SitePageConnectionContextGroupNodeHtmlAstChildrenPropertiesAllowQueryString {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePageConnectionContextGroupNodeHtmlAstChildrenPropertiesAllowFullScreenQueryBoolean {
+export interface SitePageConnectionContextGroupNodeHtmlAstChildrenPropertiesAllowFullScreenQueryBoolean {
 	eq?: boolean | null;
 	ne?: boolean | null;
 	in?: (boolean | null)[] | null;
+	nin?: (boolean | null)[] | null;
 }
 
-export interface sitePageConnectionContextGroupNodeHtmlAstChildrenChildrenQueryList {
-	elemMatch?: sitePageConnectionContextGroupNodeHtmlAstChildrenChildrenInputObject | null;
-}
-
-export interface sitePageConnectionContextGroupNodeHtmlAstChildrenChildrenInputObject {
-	type?: sitePageConnectionContextGroupNodeHtmlAstChildrenChildrenTypeQueryString | null;
-	value?: sitePageConnectionContextGroupNodeHtmlAstChildrenChildrenValueQueryString | null;
-	tagName?: sitePageConnectionContextGroupNodeHtmlAstChildrenChildrenTagNameQueryString | null;
-	properties?: sitePageConnectionContextGroupNodeHtmlAstChildrenChildrenPropertiesInputObject | null;
-	children?: sitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenQueryList | null;
-}
-
-export interface sitePageConnectionContextGroupNodeHtmlAstChildrenChildrenTypeQueryString {
+export interface SitePageConnectionContextGroupNodeHtmlAstChildrenPropertiesAttrQueryString {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePageConnectionContextGroupNodeHtmlAstChildrenChildrenValueQueryString {
+export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenQueryList {
+	elemMatch?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenInputObject | null;
+}
+
+export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenInputObject {
+	type?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenTypeQueryString | null;
+	tagName?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenTagNameQueryString | null;
+	properties?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenPropertiesInputObject | null;
+	children?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenQueryList | null;
+	value?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenValueQueryString | null;
+}
+
+export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenTypeQueryString {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePageConnectionContextGroupNodeHtmlAstChildrenChildrenTagNameQueryString {
+export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenTagNameQueryString {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePageConnectionContextGroupNodeHtmlAstChildrenChildrenPropertiesInputObject {
-	href?: sitePageConnectionContextGroupNodeHtmlAstChildrenChildrenPropertiesHrefQueryString | null;
-	title?: sitePageConnectionContextGroupNodeHtmlAstChildrenChildrenPropertiesTitleQueryString | null;
-	id?: sitePageConnectionContextGroupNodeHtmlAstChildrenChildrenPropertiesIdQueryString | null;
-	quote?: sitePageConnectionContextGroupNodeHtmlAstChildrenChildrenPropertiesQuoteQueryString | null;
-	author?: sitePageConnectionContextGroupNodeHtmlAstChildrenChildrenPropertiesAuthorQueryString | null;
-	from?: sitePageConnectionContextGroupNodeHtmlAstChildrenChildrenPropertiesFromQueryString | null;
-	position?: sitePageConnectionContextGroupNodeHtmlAstChildrenChildrenPropertiesPositionQueryString | null;
-	className?: sitePageConnectionContextGroupNodeHtmlAstChildrenChildrenPropertiesClassNameQueryList | null;
-	alt?: sitePageConnectionContextGroupNodeHtmlAstChildrenChildrenPropertiesAltQueryString | null;
-	src?: sitePageConnectionContextGroupNodeHtmlAstChildrenChildrenPropertiesSrcQueryString | null;
+export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenPropertiesInputObject {
+	href?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenPropertiesHrefQueryString | null;
+	ariaHidden?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenPropertiesAriaHiddenQueryBoolean | null;
+	className?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenPropertiesClassNameQueryList | null;
+	role?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenPropertiesRoleQueryString | null;
+	ariaLabelledBy?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenPropertiesAriaLabelledByQueryList | null;
+	id?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenPropertiesIdQueryString | null;
+	quote?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenPropertiesQuoteQueryString | null;
+	author?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenPropertiesAuthorQueryString | null;
+	from?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenPropertiesFromQueryString | null;
+	position?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenPropertiesPositionQueryString | null;
+	title?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenPropertiesTitleQueryString | null;
+	src?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenPropertiesSrcQueryString | null;
+	alt?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenPropertiesAltQueryString | null;
 }
 
-export interface sitePageConnectionContextGroupNodeHtmlAstChildrenChildrenPropertiesHrefQueryString {
+export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenPropertiesHrefQueryString {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePageConnectionContextGroupNodeHtmlAstChildrenChildrenPropertiesTitleQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePageConnectionContextGroupNodeHtmlAstChildrenChildrenPropertiesIdQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePageConnectionContextGroupNodeHtmlAstChildrenChildrenPropertiesQuoteQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePageConnectionContextGroupNodeHtmlAstChildrenChildrenPropertiesAuthorQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePageConnectionContextGroupNodeHtmlAstChildrenChildrenPropertiesFromQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePageConnectionContextGroupNodeHtmlAstChildrenChildrenPropertiesPositionQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePageConnectionContextGroupNodeHtmlAstChildrenChildrenPropertiesClassNameQueryList {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePageConnectionContextGroupNodeHtmlAstChildrenChildrenPropertiesAltQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePageConnectionContextGroupNodeHtmlAstChildrenChildrenPropertiesSrcQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenQueryList {
-	elemMatch?: sitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenInputObject | null;
-}
-
-export interface sitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenInputObject {
-	type?: sitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenTypeQueryString | null;
-	value?: sitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenValueQueryString | null;
-	tagName?: sitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenTagNameQueryString | null;
-	properties?: sitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenPropertiesInputObject | null;
-	children?: sitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenQueryList | null;
-}
-
-export interface sitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenTypeQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenValueQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenTagNameQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenPropertiesInputObject {
-	href?: sitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenPropertiesHrefQueryString | null;
-	className?: sitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenPropertiesClassNameQueryList | null;
-	id?: sitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenPropertiesIdQueryString | null;
-}
-
-export interface sitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenPropertiesHrefQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenPropertiesClassNameQueryList {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenPropertiesIdQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenQueryList {
-	elemMatch?: sitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenInputObject | null;
-}
-
-export interface sitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenInputObject {
-	type?: sitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenTypeQueryString | null;
-	value?: sitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenValueQueryString | null;
-	tagName?: sitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenTagNameQueryString | null;
-	properties?: sitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenPropertiesInputObject | null;
-	children?: sitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenQueryList | null;
-}
-
-export interface sitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenTypeQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenValueQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenTagNameQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenPropertiesInputObject {
-	href?: sitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenPropertiesHrefQueryString | null;
-	className?: sitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenPropertiesClassNameQueryList | null;
-}
-
-export interface sitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenPropertiesHrefQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenPropertiesClassNameQueryList {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenQueryList {
-	elemMatch?: sitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenInputObject | null;
-}
-
-export interface sitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenInputObject {
-	type?: sitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenTypeQueryString | null;
-	tagName?: sitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenTagNameQueryString | null;
-	properties?: sitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenPropertiesInputObject | null;
-	children?: sitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenQueryList | null;
-	value?: sitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenValueQueryString | null;
-}
-
-export interface sitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenTypeQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenTagNameQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenPropertiesInputObject {
-	href?: sitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenPropertiesHrefQueryString | null;
-	className?: sitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenPropertiesClassNameQueryList | null;
-	id?: sitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenPropertiesIdQueryString | null;
-}
-
-export interface sitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenPropertiesHrefQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenPropertiesClassNameQueryList {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenPropertiesIdQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenQueryList {
-	elemMatch?: sitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenInputObject | null;
-}
-
-export interface sitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenInputObject {
-	type?: sitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenTypeQueryString | null;
-	value?: sitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenValueQueryString | null;
-	tagName?: sitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenTagNameQueryString | null;
-	properties?: sitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenPropertiesInputObject | null;
-	children?: sitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenChildrenQueryList | null;
-}
-
-export interface sitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenTypeQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenValueQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenTagNameQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenPropertiesInputObject {
-	className?: sitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenPropertiesClassNameQueryList | null;
-	href?: sitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenPropertiesHrefQueryString | null;
-}
-
-export interface sitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenPropertiesClassNameQueryList {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenPropertiesHrefQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenChildrenQueryList {
-	elemMatch?: sitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenChildrenInputObject | null;
-}
-
-export interface sitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenChildrenInputObject {
-	type?: sitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenChildrenTypeQueryString | null;
-	value?: sitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenChildrenValueQueryString | null;
-}
-
-export interface sitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenChildrenTypeQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenChildrenValueQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenValueQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePageConnectionContextGroupNodeHtmlAstChildrenValueQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePageConnectionContextGroupNodeHtmlAstDataInputObject {
-	quirksMode?: sitePageConnectionContextGroupNodeHtmlAstDataQuirksModeQueryBoolean | null;
-}
-
-export interface sitePageConnectionContextGroupNodeHtmlAstDataQuirksModeQueryBoolean {
+export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenPropertiesAriaHiddenQueryBoolean {
 	eq?: boolean | null;
 	ne?: boolean | null;
 	in?: (boolean | null)[] | null;
+	nin?: (boolean | null)[] | null;
 }
 
-export interface sitePageConnectionContextGroupNodeHtmlAstTagNameQueryString {
+export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenPropertiesClassNameQueryList {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePageConnectionContextGroupNodeExcerptQueryString {
+export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenPropertiesRoleQueryString {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePageConnectionContextGroupNodeTimeToReadQueryInteger {
+export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenPropertiesAriaLabelledByQueryList {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenPropertiesIdQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenPropertiesQuoteQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenPropertiesAuthorQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenPropertiesFromQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenPropertiesPositionQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenPropertiesTitleQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenPropertiesSrcQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenPropertiesAltQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenQueryList {
+	elemMatch?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenInputObject | null;
+}
+
+export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenInputObject {
+	type?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenTypeQueryString | null;
+	tagName?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenTagNameQueryString | null;
+	properties?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenPropertiesInputObject | null;
+	children?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenQueryList | null;
+	value?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenValueQueryString | null;
+}
+
+export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenTypeQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenTagNameQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenPropertiesInputObject {
+	ariaHidden?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenPropertiesAriaHiddenQueryString | null;
+	height?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenPropertiesHeightQueryString | null;
+	version?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenPropertiesVersionQueryString | null;
+	viewBox?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenPropertiesViewBoxQueryString | null;
+	width?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenPropertiesWidthQueryString | null;
+	href?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenPropertiesHrefQueryString | null;
+	className?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenPropertiesClassNameQueryList | null;
+	id?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenPropertiesIdQueryString | null;
+}
+
+export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenPropertiesAriaHiddenQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenPropertiesHeightQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenPropertiesVersionQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenPropertiesViewBoxQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenPropertiesWidthQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenPropertiesHrefQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenPropertiesClassNameQueryList {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenPropertiesIdQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenQueryList {
+	elemMatch?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenInputObject | null;
+}
+
+export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenInputObject {
+	type?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenTypeQueryString | null;
+	tagName?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenTagNameQueryString | null;
+	properties?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenPropertiesInputObject | null;
+	children?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenQueryList | null;
+	value?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenValueQueryString | null;
+}
+
+export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenTypeQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenTagNameQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenPropertiesInputObject {
+	fillRule?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenPropertiesFillRuleQueryString | null;
+	d?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenPropertiesDQueryString | null;
+	href?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenPropertiesHrefQueryString | null;
+	className?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenPropertiesClassNameQueryList | null;
+}
+
+export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenPropertiesFillRuleQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenPropertiesDQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenPropertiesHrefQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenPropertiesClassNameQueryList {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenQueryList {
+	elemMatch?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenInputObject | null;
+}
+
+export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenInputObject {
+	type?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenTypeQueryString | null;
+	value?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenValueQueryString | null;
+	tagName?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenTagNameQueryString | null;
+	properties?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenPropertiesInputObject | null;
+	children?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenQueryList | null;
+}
+
+export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenTypeQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenValueQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenTagNameQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenPropertiesInputObject {
+	href?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenPropertiesHrefQueryString | null;
+	className?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenPropertiesClassNameQueryList | null;
+	id?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenPropertiesIdQueryString | null;
+}
+
+export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenPropertiesHrefQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenPropertiesClassNameQueryList {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenPropertiesIdQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenQueryList {
+	elemMatch?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenInputObject | null;
+}
+
+export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenInputObject {
+	type?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenTypeQueryString | null;
+	value?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenValueQueryString | null;
+	tagName?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenTagNameQueryString | null;
+	properties?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenPropertiesInputObject | null;
+	children?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenChildrenQueryList | null;
+}
+
+export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenTypeQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenValueQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenTagNameQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenPropertiesInputObject {
+	className?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenPropertiesClassNameQueryList | null;
+	href?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenPropertiesHrefQueryString | null;
+}
+
+export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenPropertiesClassNameQueryList {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenPropertiesHrefQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenChildrenQueryList {
+	elemMatch?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenChildrenInputObject | null;
+}
+
+export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenChildrenInputObject {
+	type?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenChildrenTypeQueryString | null;
+	value?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenChildrenValueQueryString | null;
+}
+
+export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenChildrenTypeQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenChildrenValueQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenValueQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenValueQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenValueQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageConnectionContextGroupNodeHtmlAstChildrenValueQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageConnectionContextGroupNodeHtmlAstDataInputObject {
+	quirksMode?: SitePageConnectionContextGroupNodeHtmlAstDataQuirksModeQueryBoolean | null;
+}
+
+export interface SitePageConnectionContextGroupNodeHtmlAstDataQuirksModeQueryBoolean {
+	eq?: boolean | null;
+	ne?: boolean | null;
+	in?: (boolean | null)[] | null;
+	nin?: (boolean | null)[] | null;
+}
+
+export interface SitePageConnectionContextGroupNodeHtmlAstTagNameQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageConnectionContextGroupNodeExcerptQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageConnectionContextGroupNodeTimeToReadQueryInteger {
 	eq?: number | null;
 	ne?: number | null;
 	gt?: number | null;
@@ -1753,13 +1966,14 @@ export interface sitePageConnectionContextGroupNodeTimeToReadQueryInteger {
 	lt?: number | null;
 	lte?: number | null;
 	in?: (number | null)[] | null;
+	nin?: (number | null)[] | null;
 }
 
-export interface sitePageConnectionContextGroupNodeCountInputObject {
-	words?: sitePageConnectionContextGroupNodeCountWordsQueryInteger | null;
+export interface SitePageConnectionContextGroupNodeCountInputObject {
+	words?: SitePageConnectionContextGroupNodeCountWordsQueryInteger | null;
 }
 
-export interface sitePageConnectionContextGroupNodeCountWordsQueryInteger {
+export interface SitePageConnectionContextGroupNodeCountWordsQueryInteger {
 	eq?: number | null;
 	ne?: number | null;
 	gt?: number | null;
@@ -1767,279 +1981,298 @@ export interface sitePageConnectionContextGroupNodeCountWordsQueryInteger {
 	lt?: number | null;
 	lte?: number | null;
 	in?: (number | null)[] | null;
+	nin?: (number | null)[] | null;
 }
 
-export interface sitePageConnectionContextGroupNodeFileAbsolutePathQueryString {
+export interface SitePageConnectionContextGroupNodeFileAbsolutePathQueryString {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePageConnectionContextGroupNodeParentInputObject {
-	birthTime?: sitePageConnectionContextGroupNodeParentBirthTimeQueryString | null;
-	relativeDirectory?: sitePageConnectionContextGroupNodeParentRelativeDirectoryQueryString | null;
-	name?: sitePageConnectionContextGroupNodeParentNameQueryString | null;
+export interface SitePageConnectionContextGroupNodeParentInputObject {
+	birthTime?: SitePageConnectionContextGroupNodeParentBirthTimeQueryString | null;
+	relativeDirectory?: SitePageConnectionContextGroupNodeParentRelativeDirectoryQueryString | null;
+	name?: SitePageConnectionContextGroupNodeParentNameQueryString | null;
 }
 
-export interface sitePageConnectionContextGroupNodeParentBirthTimeQueryString {
+export interface SitePageConnectionContextGroupNodeParentBirthTimeQueryString {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePageConnectionContextGroupNodeParentRelativeDirectoryQueryString {
+export interface SitePageConnectionContextGroupNodeParentRelativeDirectoryQueryString {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePageConnectionContextGroupNodeParentNameQueryString {
+export interface SitePageConnectionContextGroupNodeParentNameQueryString {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePageConnectionContextGroupNodeFrontmatterInputObject {
-	title?: sitePageConnectionContextGroupNodeFrontmatterTitleQueryString | null;
-	description?: sitePageConnectionContextGroupNodeFrontmatterDescriptionQueryString | null;
-	date?: sitePageConnectionContextGroupNodeFrontmatterDateQueryString | null;
-	authors?: sitePageConnectionContextGroupNodeFrontmatterAuthorsQueryList | null;
-	link?: sitePageConnectionContextGroupNodeFrontmatterLinkQueryString | null;
+export interface SitePageConnectionContextGroupNodeFrontmatterInputObject {
+	title?: SitePageConnectionContextGroupNodeFrontmatterTitleQueryString | null;
+	description?: SitePageConnectionContextGroupNodeFrontmatterDescriptionQueryString | null;
+	date?: SitePageConnectionContextGroupNodeFrontmatterDateQueryString | null;
+	authors?: SitePageConnectionContextGroupNodeFrontmatterAuthorsQueryList | null;
+	link?: SitePageConnectionContextGroupNodeFrontmatterLinkQueryString | null;
 }
 
-export interface sitePageConnectionContextGroupNodeFrontmatterTitleQueryString {
+export interface SitePageConnectionContextGroupNodeFrontmatterTitleQueryString {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePageConnectionContextGroupNodeFrontmatterDescriptionQueryString {
+export interface SitePageConnectionContextGroupNodeFrontmatterDescriptionQueryString {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePageConnectionContextGroupNodeFrontmatterDateQueryString {
+export interface SitePageConnectionContextGroupNodeFrontmatterDateQueryString {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePageConnectionContextGroupNodeFrontmatterAuthorsQueryList {
-	elemMatch?: sitePageConnectionContextGroupNodeFrontmatterAuthorsInputObject | null;
+export interface SitePageConnectionContextGroupNodeFrontmatterAuthorsQueryList {
+	elemMatch?: SitePageConnectionContextGroupNodeFrontmatterAuthorsInputObject | null;
 }
 
-export interface sitePageConnectionContextGroupNodeFrontmatterAuthorsInputObject {
-	name?: sitePageConnectionContextGroupNodeFrontmatterAuthorsNameQueryString | null;
-	url?: sitePageConnectionContextGroupNodeFrontmatterAuthorsUrlQueryString | null;
+export interface SitePageConnectionContextGroupNodeFrontmatterAuthorsInputObject {
+	name?: SitePageConnectionContextGroupNodeFrontmatterAuthorsNameQueryString | null;
+	url?: SitePageConnectionContextGroupNodeFrontmatterAuthorsUrlQueryString | null;
 }
 
-export interface sitePageConnectionContextGroupNodeFrontmatterAuthorsNameQueryString {
+export interface SitePageConnectionContextGroupNodeFrontmatterAuthorsNameQueryString {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePageConnectionContextGroupNodeFrontmatterAuthorsUrlQueryString {
+export interface SitePageConnectionContextGroupNodeFrontmatterAuthorsUrlQueryString {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePageConnectionContextGroupNodeFrontmatterLinkQueryString {
+export interface SitePageConnectionContextGroupNodeFrontmatterLinkQueryString {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePageConnectionContextPathPrefixQueryString {
+export interface SitePageConnectionContextPathPrefixQueryString {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePageConnectionContextAdditionalContextInputObject {
-	listTitle?: sitePageConnectionContextAdditionalContextListTitleQueryString | null;
+export interface SitePageConnectionContextAdditionalContextInputObject {
+	listTitle?: SitePageConnectionContextAdditionalContextListTitleQueryString | null;
 }
 
-export interface sitePageConnectionContextAdditionalContextListTitleQueryString {
+export interface SitePageConnectionContextAdditionalContextListTitleQueryString {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePageConnectionContextMarkdownPathQueryString {
+export interface SitePageConnectionContextMarkdownPathQueryString {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePageConnectionPluginCreatorInputObject {
-	resolve?: sitePageConnectionPluginCreatorResolveQueryString | null;
-	id?: sitePageConnectionPluginCreatorIdQueryString | null;
-	name?: sitePageConnectionPluginCreatorNameQueryString | null;
-	version?: sitePageConnectionPluginCreatorVersionQueryString | null;
-	pluginOptions?: sitePageConnectionPluginCreatorPluginOptionsInputObject | null;
-	nodeAPIs?: sitePageConnectionPluginCreatorNodeApIsQueryList | null;
-	browserAPIs?: sitePageConnectionPluginCreatorBrowserApIsQueryList | null;
-	ssrAPIs?: sitePageConnectionPluginCreatorSsrApIsQueryList | null;
-	pluginFilepath?: sitePageConnectionPluginCreatorPluginFilepathQueryString | null;
-	packageJson?: sitePageConnectionPluginCreatorPackageJsonInputObject | null;
-	parent?: sitePageConnectionPluginCreatorParentQueryString | null;
-	internal?: sitePageConnectionPluginCreatorInternalInputObject | null;
+export interface SitePageConnectionPluginCreatorInputObject {
+	resolve?: SitePageConnectionPluginCreatorResolveQueryString | null;
+	id?: SitePageConnectionPluginCreatorIdQueryString | null;
+	name?: SitePageConnectionPluginCreatorNameQueryString | null;
+	version?: SitePageConnectionPluginCreatorVersionQueryString | null;
+	pluginOptions?: SitePageConnectionPluginCreatorPluginOptionsInputObject | null;
+	nodeAPIs?: SitePageConnectionPluginCreatorNodeApIsQueryList | null;
+	browserAPIs?: SitePageConnectionPluginCreatorBrowserApIsQueryList | null;
+	ssrAPIs?: SitePageConnectionPluginCreatorSsrApIsQueryList | null;
+	pluginFilepath?: SitePageConnectionPluginCreatorPluginFilepathQueryString | null;
+	packageJson?: SitePageConnectionPluginCreatorPackageJsonInputObject | null;
+	parent?: SitePageConnectionPluginCreatorParentQueryString | null;
+	internal?: SitePageConnectionPluginCreatorInternalInputObject | null;
 }
 
-export interface sitePageConnectionPluginCreatorResolveQueryString {
+export interface SitePageConnectionPluginCreatorResolveQueryString {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePageConnectionPluginCreatorIdQueryString {
+export interface SitePageConnectionPluginCreatorIdQueryString {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePageConnectionPluginCreatorNameQueryString {
+export interface SitePageConnectionPluginCreatorNameQueryString {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePageConnectionPluginCreatorVersionQueryString {
+export interface SitePageConnectionPluginCreatorVersionQueryString {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePageConnectionPluginCreatorPluginOptionsInputObject {
-	plugins?: sitePageConnectionPluginCreatorPluginOptionsPluginsQueryList | null;
-	name?: sitePageConnectionPluginCreatorPluginOptionsNameQueryString | null;
-	path?: sitePageConnectionPluginCreatorPluginOptionsPathQueryString | null;
-	emojiConversion?: sitePageConnectionPluginCreatorPluginOptionsEmojiConversionQueryString | null;
-	maxWidth?: sitePageConnectionPluginCreatorPluginOptionsMaxWidthQueryInteger | null;
-	wrapperStyle?: sitePageConnectionPluginCreatorPluginOptionsWrapperStyleQueryString | null;
-	backgroundColor?: sitePageConnectionPluginCreatorPluginOptionsBackgroundColorQueryString | null;
-	linkImagesToOriginal?: sitePageConnectionPluginCreatorPluginOptionsLinkImagesToOriginalQueryBoolean | null;
-	showCaptions?: sitePageConnectionPluginCreatorPluginOptionsShowCaptionsQueryBoolean | null;
-	pathPrefix?: sitePageConnectionPluginCreatorPluginOptionsPathPrefixQueryString | null;
-	inlineCodeMarker?: sitePageConnectionPluginCreatorPluginOptionsInlineCodeMarkerQueryString | null;
-	short_name?: sitePageConnectionPluginCreatorPluginOptionsShortNameQueryString | null;
-	start_url?: sitePageConnectionPluginCreatorPluginOptionsStartUrlQueryString | null;
-	background_color?: sitePageConnectionPluginCreatorPluginOptionsBackgroundColorQueryString_2 | null;
-	theme_color?: sitePageConnectionPluginCreatorPluginOptionsThemeColorQueryString | null;
-	display?: sitePageConnectionPluginCreatorPluginOptionsDisplayQueryString | null;
-	icon?: sitePageConnectionPluginCreatorPluginOptionsIconQueryString | null;
-	logo?: sitePageConnectionPluginCreatorPluginOptionsLogoQueryString | null;
-	injectHTML?: sitePageConnectionPluginCreatorPluginOptionsInjectHtmlQueryBoolean | null;
-	icons?: sitePageConnectionPluginCreatorPluginOptionsIconsInputObject | null;
-	pathToConfigModule?: sitePageConnectionPluginCreatorPluginOptionsPathToConfigModuleQueryString | null;
-	omitGoogleFont?: sitePageConnectionPluginCreatorPluginOptionsOmitGoogleFontQueryBoolean | null;
-	query?: sitePageConnectionPluginCreatorPluginOptionsQueryQueryString | null;
-	feeds?: sitePageConnectionPluginCreatorPluginOptionsFeedsQueryList | null;
-	pathCheck?: sitePageConnectionPluginCreatorPluginOptionsPathCheckQueryBoolean | null;
+export interface SitePageConnectionPluginCreatorPluginOptionsInputObject {
+	plugins?: SitePageConnectionPluginCreatorPluginOptionsPluginsQueryList | null;
+	production?: SitePageConnectionPluginCreatorPluginOptionsProductionQueryBoolean | null;
+	analyzerMode?: SitePageConnectionPluginCreatorPluginOptionsAnalyzerModeQueryString | null;
+	defaultSizes?: SitePageConnectionPluginCreatorPluginOptionsDefaultSizesQueryString | null;
+	openAnalyzer?: SitePageConnectionPluginCreatorPluginOptionsOpenAnalyzerQueryBoolean | null;
+	name?: SitePageConnectionPluginCreatorPluginOptionsNameQueryString | null;
+	path?: SitePageConnectionPluginCreatorPluginOptionsPathQueryString | null;
+	maxWidth?: SitePageConnectionPluginCreatorPluginOptionsMaxWidthQueryInteger | null;
+	wrapperStyle?: SitePageConnectionPluginCreatorPluginOptionsWrapperStyleQueryString | null;
+	backgroundColor?: SitePageConnectionPluginCreatorPluginOptionsBackgroundColorQueryString | null;
+	linkImagesToOriginal?: SitePageConnectionPluginCreatorPluginOptionsLinkImagesToOriginalQueryBoolean | null;
+	showCaptions?: SitePageConnectionPluginCreatorPluginOptionsShowCaptionsQueryBoolean | null;
+	pathPrefix?: SitePageConnectionPluginCreatorPluginOptionsPathPrefixQueryString | null;
+	withWebp?: SitePageConnectionPluginCreatorPluginOptionsWithWebpQueryBoolean | null;
+	inlineCodeMarker?: SitePageConnectionPluginCreatorPluginOptionsInlineCodeMarkerQueryString | null;
+	pathToConfigModule?: SitePageConnectionPluginCreatorPluginOptionsPathToConfigModuleQueryString | null;
+	omitGoogleFont?: SitePageConnectionPluginCreatorPluginOptionsOmitGoogleFontQueryBoolean | null;
+	query?: SitePageConnectionPluginCreatorPluginOptionsQueryQueryString | null;
+	feeds?: SitePageConnectionPluginCreatorPluginOptionsFeedsQueryList | null;
+	headers?: SitePageConnectionPluginCreatorPluginOptionsHeadersInputObject | null;
+	allPageHeaders?: SitePageConnectionPluginCreatorPluginOptionsAllPageHeadersQueryList | null;
+	short_name?: SitePageConnectionPluginCreatorPluginOptionsShortNameQueryString | null;
+	start_url?: SitePageConnectionPluginCreatorPluginOptionsStartUrlQueryString | null;
+	background_color?: SitePageConnectionPluginCreatorPluginOptionsBackgroundColorQueryString_2 | null;
+	theme_color?: SitePageConnectionPluginCreatorPluginOptionsThemeColorQueryString | null;
+	display?: SitePageConnectionPluginCreatorPluginOptionsDisplayQueryString | null;
+	icon?: SitePageConnectionPluginCreatorPluginOptionsIconQueryString | null;
+	pathCheck?: SitePageConnectionPluginCreatorPluginOptionsPathCheckQueryBoolean | null;
 }
 
-export interface sitePageConnectionPluginCreatorPluginOptionsPluginsQueryList {
-	elemMatch?: sitePageConnectionPluginCreatorPluginOptionsPluginsInputObject | null;
+export interface SitePageConnectionPluginCreatorPluginOptionsPluginsQueryList {
+	elemMatch?: SitePageConnectionPluginCreatorPluginOptionsPluginsInputObject | null;
 }
 
-export interface sitePageConnectionPluginCreatorPluginOptionsPluginsInputObject {
-	resolve?: sitePageConnectionPluginCreatorPluginOptionsPluginsResolveQueryString | null;
-	id?: sitePageConnectionPluginCreatorPluginOptionsPluginsIdQueryString | null;
-	name?: sitePageConnectionPluginCreatorPluginOptionsPluginsNameQueryString | null;
-	version?: sitePageConnectionPluginCreatorPluginOptionsPluginsVersionQueryString | null;
-	pluginOptions?: sitePageConnectionPluginCreatorPluginOptionsPluginsPluginOptionsInputObject | null;
-	pluginFilepath?: sitePageConnectionPluginCreatorPluginOptionsPluginsPluginFilepathQueryString | null;
+export interface SitePageConnectionPluginCreatorPluginOptionsPluginsInputObject {
+	resolve?: SitePageConnectionPluginCreatorPluginOptionsPluginsResolveQueryString | null;
+	id?: SitePageConnectionPluginCreatorPluginOptionsPluginsIdQueryString | null;
+	name?: SitePageConnectionPluginCreatorPluginOptionsPluginsNameQueryString | null;
+	version?: SitePageConnectionPluginCreatorPluginOptionsPluginsVersionQueryString | null;
+	pluginOptions?: SitePageConnectionPluginCreatorPluginOptionsPluginsPluginOptionsInputObject | null;
+	browserAPIs?: SitePageConnectionPluginCreatorPluginOptionsPluginsBrowserApIsQueryList | null;
+	ssrAPIs?: SitePageConnectionPluginCreatorPluginOptionsPluginsSsrApIsQueryList | null;
+	pluginFilepath?: SitePageConnectionPluginCreatorPluginOptionsPluginsPluginFilepathQueryString | null;
 }
 
-export interface sitePageConnectionPluginCreatorPluginOptionsPluginsResolveQueryString {
+export interface SitePageConnectionPluginCreatorPluginOptionsPluginsResolveQueryString {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePageConnectionPluginCreatorPluginOptionsPluginsIdQueryString {
+export interface SitePageConnectionPluginCreatorPluginOptionsPluginsIdQueryString {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePageConnectionPluginCreatorPluginOptionsPluginsNameQueryString {
+export interface SitePageConnectionPluginCreatorPluginOptionsPluginsNameQueryString {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePageConnectionPluginCreatorPluginOptionsPluginsVersionQueryString {
+export interface SitePageConnectionPluginCreatorPluginOptionsPluginsVersionQueryString {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePageConnectionPluginCreatorPluginOptionsPluginsPluginOptionsInputObject {
-	emojiConversion?: sitePageConnectionPluginCreatorPluginOptionsPluginsPluginOptionsEmojiConversionQueryString | null;
-	maxWidth?: sitePageConnectionPluginCreatorPluginOptionsPluginsPluginOptionsMaxWidthQueryInteger | null;
-	wrapperStyle?: sitePageConnectionPluginCreatorPluginOptionsPluginsPluginOptionsWrapperStyleQueryString | null;
-	backgroundColor?: sitePageConnectionPluginCreatorPluginOptionsPluginsPluginOptionsBackgroundColorQueryString | null;
-	linkImagesToOriginal?: sitePageConnectionPluginCreatorPluginOptionsPluginsPluginOptionsLinkImagesToOriginalQueryBoolean | null;
-	showCaptions?: sitePageConnectionPluginCreatorPluginOptionsPluginsPluginOptionsShowCaptionsQueryBoolean | null;
-	pathPrefix?: sitePageConnectionPluginCreatorPluginOptionsPluginsPluginOptionsPathPrefixQueryString | null;
-	inlineCodeMarker?: sitePageConnectionPluginCreatorPluginOptionsPluginsPluginOptionsInlineCodeMarkerQueryString | null;
+export interface SitePageConnectionPluginCreatorPluginOptionsPluginsPluginOptionsInputObject {
+	maxWidth?: SitePageConnectionPluginCreatorPluginOptionsPluginsPluginOptionsMaxWidthQueryInteger | null;
+	wrapperStyle?: SitePageConnectionPluginCreatorPluginOptionsPluginsPluginOptionsWrapperStyleQueryString | null;
+	backgroundColor?: SitePageConnectionPluginCreatorPluginOptionsPluginsPluginOptionsBackgroundColorQueryString | null;
+	linkImagesToOriginal?: SitePageConnectionPluginCreatorPluginOptionsPluginsPluginOptionsLinkImagesToOriginalQueryBoolean | null;
+	showCaptions?: SitePageConnectionPluginCreatorPluginOptionsPluginsPluginOptionsShowCaptionsQueryBoolean | null;
+	pathPrefix?: SitePageConnectionPluginCreatorPluginOptionsPluginsPluginOptionsPathPrefixQueryString | null;
+	withWebp?: SitePageConnectionPluginCreatorPluginOptionsPluginsPluginOptionsWithWebpQueryBoolean | null;
+	inlineCodeMarker?: SitePageConnectionPluginCreatorPluginOptionsPluginsPluginOptionsInlineCodeMarkerQueryString | null;
 }
 
-export interface sitePageConnectionPluginCreatorPluginOptionsPluginsPluginOptionsEmojiConversionQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePageConnectionPluginCreatorPluginOptionsPluginsPluginOptionsMaxWidthQueryInteger {
+export interface SitePageConnectionPluginCreatorPluginOptionsPluginsPluginOptionsMaxWidthQueryInteger {
 	eq?: number | null;
 	ne?: number | null;
 	gt?: number | null;
@@ -2047,85 +2280,144 @@ export interface sitePageConnectionPluginCreatorPluginOptionsPluginsPluginOption
 	lt?: number | null;
 	lte?: number | null;
 	in?: (number | null)[] | null;
+	nin?: (number | null)[] | null;
 }
 
-export interface sitePageConnectionPluginCreatorPluginOptionsPluginsPluginOptionsWrapperStyleQueryString {
+export interface SitePageConnectionPluginCreatorPluginOptionsPluginsPluginOptionsWrapperStyleQueryString {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePageConnectionPluginCreatorPluginOptionsPluginsPluginOptionsBackgroundColorQueryString {
+export interface SitePageConnectionPluginCreatorPluginOptionsPluginsPluginOptionsBackgroundColorQueryString {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePageConnectionPluginCreatorPluginOptionsPluginsPluginOptionsLinkImagesToOriginalQueryBoolean {
+export interface SitePageConnectionPluginCreatorPluginOptionsPluginsPluginOptionsLinkImagesToOriginalQueryBoolean {
 	eq?: boolean | null;
 	ne?: boolean | null;
 	in?: (boolean | null)[] | null;
+	nin?: (boolean | null)[] | null;
 }
 
-export interface sitePageConnectionPluginCreatorPluginOptionsPluginsPluginOptionsShowCaptionsQueryBoolean {
+export interface SitePageConnectionPluginCreatorPluginOptionsPluginsPluginOptionsShowCaptionsQueryBoolean {
 	eq?: boolean | null;
 	ne?: boolean | null;
 	in?: (boolean | null)[] | null;
+	nin?: (boolean | null)[] | null;
 }
 
-export interface sitePageConnectionPluginCreatorPluginOptionsPluginsPluginOptionsPathPrefixQueryString {
+export interface SitePageConnectionPluginCreatorPluginOptionsPluginsPluginOptionsPathPrefixQueryString {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePageConnectionPluginCreatorPluginOptionsPluginsPluginOptionsInlineCodeMarkerQueryString {
+export interface SitePageConnectionPluginCreatorPluginOptionsPluginsPluginOptionsWithWebpQueryBoolean {
+	eq?: boolean | null;
+	ne?: boolean | null;
+	in?: (boolean | null)[] | null;
+	nin?: (boolean | null)[] | null;
+}
+
+export interface SitePageConnectionPluginCreatorPluginOptionsPluginsPluginOptionsInlineCodeMarkerQueryString {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePageConnectionPluginCreatorPluginOptionsPluginsPluginFilepathQueryString {
+export interface SitePageConnectionPluginCreatorPluginOptionsPluginsBrowserApIsQueryList {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePageConnectionPluginCreatorPluginOptionsNameQueryString {
+export interface SitePageConnectionPluginCreatorPluginOptionsPluginsSsrApIsQueryList {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePageConnectionPluginCreatorPluginOptionsPathQueryString {
+export interface SitePageConnectionPluginCreatorPluginOptionsPluginsPluginFilepathQueryString {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePageConnectionPluginCreatorPluginOptionsEmojiConversionQueryString {
+export interface SitePageConnectionPluginCreatorPluginOptionsProductionQueryBoolean {
+	eq?: boolean | null;
+	ne?: boolean | null;
+	in?: (boolean | null)[] | null;
+	nin?: (boolean | null)[] | null;
+}
+
+export interface SitePageConnectionPluginCreatorPluginOptionsAnalyzerModeQueryString {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePageConnectionPluginCreatorPluginOptionsMaxWidthQueryInteger {
+export interface SitePageConnectionPluginCreatorPluginOptionsDefaultSizesQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageConnectionPluginCreatorPluginOptionsOpenAnalyzerQueryBoolean {
+	eq?: boolean | null;
+	ne?: boolean | null;
+	in?: (boolean | null)[] | null;
+	nin?: (boolean | null)[] | null;
+}
+
+export interface SitePageConnectionPluginCreatorPluginOptionsNameQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageConnectionPluginCreatorPluginOptionsPathQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageConnectionPluginCreatorPluginOptionsMaxWidthQueryInteger {
 	eq?: number | null;
 	ne?: number | null;
 	gt?: number | null;
@@ -2133,654 +2425,735 @@ export interface sitePageConnectionPluginCreatorPluginOptionsMaxWidthQueryIntege
 	lt?: number | null;
 	lte?: number | null;
 	in?: (number | null)[] | null;
+	nin?: (number | null)[] | null;
 }
 
-export interface sitePageConnectionPluginCreatorPluginOptionsWrapperStyleQueryString {
+export interface SitePageConnectionPluginCreatorPluginOptionsWrapperStyleQueryString {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePageConnectionPluginCreatorPluginOptionsBackgroundColorQueryString {
+export interface SitePageConnectionPluginCreatorPluginOptionsBackgroundColorQueryString {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePageConnectionPluginCreatorPluginOptionsLinkImagesToOriginalQueryBoolean {
+export interface SitePageConnectionPluginCreatorPluginOptionsLinkImagesToOriginalQueryBoolean {
 	eq?: boolean | null;
 	ne?: boolean | null;
 	in?: (boolean | null)[] | null;
+	nin?: (boolean | null)[] | null;
 }
 
-export interface sitePageConnectionPluginCreatorPluginOptionsShowCaptionsQueryBoolean {
+export interface SitePageConnectionPluginCreatorPluginOptionsShowCaptionsQueryBoolean {
 	eq?: boolean | null;
 	ne?: boolean | null;
 	in?: (boolean | null)[] | null;
+	nin?: (boolean | null)[] | null;
 }
 
-export interface sitePageConnectionPluginCreatorPluginOptionsPathPrefixQueryString {
+export interface SitePageConnectionPluginCreatorPluginOptionsPathPrefixQueryString {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePageConnectionPluginCreatorPluginOptionsInlineCodeMarkerQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePageConnectionPluginCreatorPluginOptionsShortNameQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePageConnectionPluginCreatorPluginOptionsStartUrlQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePageConnectionPluginCreatorPluginOptionsBackgroundColorQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePageConnectionPluginCreatorPluginOptionsThemeColorQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePageConnectionPluginCreatorPluginOptionsDisplayQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePageConnectionPluginCreatorPluginOptionsIconQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePageConnectionPluginCreatorPluginOptionsLogoQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePageConnectionPluginCreatorPluginOptionsInjectHtmlQueryBoolean {
+export interface SitePageConnectionPluginCreatorPluginOptionsWithWebpQueryBoolean {
 	eq?: boolean | null;
 	ne?: boolean | null;
 	in?: (boolean | null)[] | null;
+	nin?: (boolean | null)[] | null;
 }
 
-export interface sitePageConnectionPluginCreatorPluginOptionsIconsInputObject {
-	android?: sitePageConnectionPluginCreatorPluginOptionsIconsAndroidQueryBoolean | null;
-	appleIcon?: sitePageConnectionPluginCreatorPluginOptionsIconsAppleIconQueryBoolean | null;
-	appleStartup?: sitePageConnectionPluginCreatorPluginOptionsIconsAppleStartupQueryBoolean | null;
-	coast?: sitePageConnectionPluginCreatorPluginOptionsIconsCoastQueryBoolean | null;
-	favicons?: sitePageConnectionPluginCreatorPluginOptionsIconsFaviconsQueryBoolean | null;
-	firefox?: sitePageConnectionPluginCreatorPluginOptionsIconsFirefoxQueryBoolean | null;
-	twitter?: sitePageConnectionPluginCreatorPluginOptionsIconsTwitterQueryBoolean | null;
-	yandex?: sitePageConnectionPluginCreatorPluginOptionsIconsYandexQueryBoolean | null;
-	windows?: sitePageConnectionPluginCreatorPluginOptionsIconsWindowsQueryBoolean | null;
+export interface SitePageConnectionPluginCreatorPluginOptionsInlineCodeMarkerQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePageConnectionPluginCreatorPluginOptionsIconsAndroidQueryBoolean {
+export interface SitePageConnectionPluginCreatorPluginOptionsPathToConfigModuleQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageConnectionPluginCreatorPluginOptionsOmitGoogleFontQueryBoolean {
 	eq?: boolean | null;
 	ne?: boolean | null;
 	in?: (boolean | null)[] | null;
+	nin?: (boolean | null)[] | null;
 }
 
-export interface sitePageConnectionPluginCreatorPluginOptionsIconsAppleIconQueryBoolean {
+export interface SitePageConnectionPluginCreatorPluginOptionsQueryQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageConnectionPluginCreatorPluginOptionsFeedsQueryList {
+	elemMatch?: SitePageConnectionPluginCreatorPluginOptionsFeedsInputObject | null;
+}
+
+export interface SitePageConnectionPluginCreatorPluginOptionsFeedsInputObject {
+	query?: SitePageConnectionPluginCreatorPluginOptionsFeedsQueryQueryString | null;
+	output?: SitePageConnectionPluginCreatorPluginOptionsFeedsOutputQueryString | null;
+}
+
+export interface SitePageConnectionPluginCreatorPluginOptionsFeedsQueryQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageConnectionPluginCreatorPluginOptionsFeedsOutputQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageConnectionPluginCreatorPluginOptionsHeadersInputObject {
+	_xxjs?: SitePageConnectionPluginCreatorPluginOptionsHeadersJsQueryList | null;
+	_sw_js?: SitePageConnectionPluginCreatorPluginOptionsHeadersSwJsQueryList | null;
+	_xxwebmanifest?: SitePageConnectionPluginCreatorPluginOptionsHeadersWebmanifestQueryList | null;
+	_xxcss?: SitePageConnectionPluginCreatorPluginOptionsHeadersCssQueryList | null;
+	_xxpng?: SitePageConnectionPluginCreatorPluginOptionsHeadersPngQueryList | null;
+	_xxjpg?: SitePageConnectionPluginCreatorPluginOptionsHeadersJpgQueryList | null;
+	_xxjpeg?: SitePageConnectionPluginCreatorPluginOptionsHeadersJpegQueryList | null;
+	_xxgif?: SitePageConnectionPluginCreatorPluginOptionsHeadersGifQueryList | null;
+	_xxsvg?: SitePageConnectionPluginCreatorPluginOptionsHeadersSvgQueryList | null;
+}
+
+export interface SitePageConnectionPluginCreatorPluginOptionsHeadersJsQueryList {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageConnectionPluginCreatorPluginOptionsHeadersSwJsQueryList {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageConnectionPluginCreatorPluginOptionsHeadersWebmanifestQueryList {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageConnectionPluginCreatorPluginOptionsHeadersCssQueryList {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageConnectionPluginCreatorPluginOptionsHeadersPngQueryList {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageConnectionPluginCreatorPluginOptionsHeadersJpgQueryList {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageConnectionPluginCreatorPluginOptionsHeadersJpegQueryList {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageConnectionPluginCreatorPluginOptionsHeadersGifQueryList {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageConnectionPluginCreatorPluginOptionsHeadersSvgQueryList {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageConnectionPluginCreatorPluginOptionsAllPageHeadersQueryList {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageConnectionPluginCreatorPluginOptionsShortNameQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageConnectionPluginCreatorPluginOptionsStartUrlQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageConnectionPluginCreatorPluginOptionsBackgroundColorQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageConnectionPluginCreatorPluginOptionsThemeColorQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageConnectionPluginCreatorPluginOptionsDisplayQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageConnectionPluginCreatorPluginOptionsIconQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageConnectionPluginCreatorPluginOptionsPathCheckQueryBoolean {
 	eq?: boolean | null;
 	ne?: boolean | null;
 	in?: (boolean | null)[] | null;
+	nin?: (boolean | null)[] | null;
 }
 
-export interface sitePageConnectionPluginCreatorPluginOptionsIconsAppleStartupQueryBoolean {
-	eq?: boolean | null;
-	ne?: boolean | null;
-	in?: (boolean | null)[] | null;
-}
-
-export interface sitePageConnectionPluginCreatorPluginOptionsIconsCoastQueryBoolean {
-	eq?: boolean | null;
-	ne?: boolean | null;
-	in?: (boolean | null)[] | null;
-}
-
-export interface sitePageConnectionPluginCreatorPluginOptionsIconsFaviconsQueryBoolean {
-	eq?: boolean | null;
-	ne?: boolean | null;
-	in?: (boolean | null)[] | null;
-}
-
-export interface sitePageConnectionPluginCreatorPluginOptionsIconsFirefoxQueryBoolean {
-	eq?: boolean | null;
-	ne?: boolean | null;
-	in?: (boolean | null)[] | null;
-}
-
-export interface sitePageConnectionPluginCreatorPluginOptionsIconsTwitterQueryBoolean {
-	eq?: boolean | null;
-	ne?: boolean | null;
-	in?: (boolean | null)[] | null;
-}
-
-export interface sitePageConnectionPluginCreatorPluginOptionsIconsYandexQueryBoolean {
-	eq?: boolean | null;
-	ne?: boolean | null;
-	in?: (boolean | null)[] | null;
-}
-
-export interface sitePageConnectionPluginCreatorPluginOptionsIconsWindowsQueryBoolean {
-	eq?: boolean | null;
-	ne?: boolean | null;
-	in?: (boolean | null)[] | null;
-}
-
-export interface sitePageConnectionPluginCreatorPluginOptionsPathToConfigModuleQueryString {
+export interface SitePageConnectionPluginCreatorNodeApIsQueryList {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePageConnectionPluginCreatorPluginOptionsOmitGoogleFontQueryBoolean {
-	eq?: boolean | null;
-	ne?: boolean | null;
-	in?: (boolean | null)[] | null;
-}
-
-export interface sitePageConnectionPluginCreatorPluginOptionsQueryQueryString {
+export interface SitePageConnectionPluginCreatorBrowserApIsQueryList {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePageConnectionPluginCreatorPluginOptionsFeedsQueryList {
-	elemMatch?: sitePageConnectionPluginCreatorPluginOptionsFeedsInputObject | null;
-}
-
-export interface sitePageConnectionPluginCreatorPluginOptionsFeedsInputObject {
-	query?: sitePageConnectionPluginCreatorPluginOptionsFeedsQueryQueryString | null;
-	output?: sitePageConnectionPluginCreatorPluginOptionsFeedsOutputQueryString | null;
-}
-
-export interface sitePageConnectionPluginCreatorPluginOptionsFeedsQueryQueryString {
+export interface SitePageConnectionPluginCreatorSsrApIsQueryList {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePageConnectionPluginCreatorPluginOptionsFeedsOutputQueryString {
+export interface SitePageConnectionPluginCreatorPluginFilepathQueryString {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePageConnectionPluginCreatorPluginOptionsPathCheckQueryBoolean {
-	eq?: boolean | null;
-	ne?: boolean | null;
-	in?: (boolean | null)[] | null;
+export interface SitePageConnectionPluginCreatorPackageJsonInputObject {
+	name?: SitePageConnectionPluginCreatorPackageJsonNameQueryString | null;
+	description?: SitePageConnectionPluginCreatorPackageJsonDescriptionQueryString | null;
+	version?: SitePageConnectionPluginCreatorPackageJsonVersionQueryString | null;
+	main?: SitePageConnectionPluginCreatorPackageJsonMainQueryString | null;
+	author?: SitePageConnectionPluginCreatorPackageJsonAuthorQueryString | null;
+	license?: SitePageConnectionPluginCreatorPackageJsonLicenseQueryString | null;
+	dependencies?: SitePageConnectionPluginCreatorPackageJsonDependenciesQueryList | null;
+	devDependencies?: SitePageConnectionPluginCreatorPackageJsonDevDependenciesQueryList | null;
+	peerDependencies?: SitePageConnectionPluginCreatorPackageJsonPeerDependenciesQueryList | null;
+	keywords?: SitePageConnectionPluginCreatorPackageJsonKeywordsQueryList | null;
 }
 
-export interface sitePageConnectionPluginCreatorNodeApIsQueryList {
+export interface SitePageConnectionPluginCreatorPackageJsonNameQueryString {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePageConnectionPluginCreatorBrowserApIsQueryList {
+export interface SitePageConnectionPluginCreatorPackageJsonDescriptionQueryString {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePageConnectionPluginCreatorSsrApIsQueryList {
+export interface SitePageConnectionPluginCreatorPackageJsonVersionQueryString {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePageConnectionPluginCreatorPluginFilepathQueryString {
+export interface SitePageConnectionPluginCreatorPackageJsonMainQueryString {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePageConnectionPluginCreatorPackageJsonInputObject {
-	name?: sitePageConnectionPluginCreatorPackageJsonNameQueryString | null;
-	description?: sitePageConnectionPluginCreatorPackageJsonDescriptionQueryString | null;
-	version?: sitePageConnectionPluginCreatorPackageJsonVersionQueryString | null;
-	main?: sitePageConnectionPluginCreatorPackageJsonMainQueryString | null;
-	author?: sitePageConnectionPluginCreatorPackageJsonAuthorQueryString | null;
-	license?: sitePageConnectionPluginCreatorPackageJsonLicenseQueryString | null;
-	dependencies?: sitePageConnectionPluginCreatorPackageJsonDependenciesQueryList | null;
-	devDependencies?: sitePageConnectionPluginCreatorPackageJsonDevDependenciesQueryList | null;
-	peerDependencies?: sitePageConnectionPluginCreatorPackageJsonPeerDependenciesQueryList | null;
-	keywords?: sitePageConnectionPluginCreatorPackageJsonKeywordsQueryList | null;
-}
-
-export interface sitePageConnectionPluginCreatorPackageJsonNameQueryString {
+export interface SitePageConnectionPluginCreatorPackageJsonAuthorQueryString {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePageConnectionPluginCreatorPackageJsonDescriptionQueryString {
+export interface SitePageConnectionPluginCreatorPackageJsonLicenseQueryString {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePageConnectionPluginCreatorPackageJsonVersionQueryString {
+export interface SitePageConnectionPluginCreatorPackageJsonDependenciesQueryList {
+	elemMatch?: SitePageConnectionPluginCreatorPackageJsonDependenciesInputObject | null;
+}
+
+export interface SitePageConnectionPluginCreatorPackageJsonDependenciesInputObject {
+	name?: SitePageConnectionPluginCreatorPackageJsonDependenciesNameQueryString | null;
+	version?: SitePageConnectionPluginCreatorPackageJsonDependenciesVersionQueryString | null;
+}
+
+export interface SitePageConnectionPluginCreatorPackageJsonDependenciesNameQueryString {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePageConnectionPluginCreatorPackageJsonMainQueryString {
+export interface SitePageConnectionPluginCreatorPackageJsonDependenciesVersionQueryString {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePageConnectionPluginCreatorPackageJsonAuthorQueryString {
+export interface SitePageConnectionPluginCreatorPackageJsonDevDependenciesQueryList {
+	elemMatch?: SitePageConnectionPluginCreatorPackageJsonDevDependenciesInputObject | null;
+}
+
+export interface SitePageConnectionPluginCreatorPackageJsonDevDependenciesInputObject {
+	name?: SitePageConnectionPluginCreatorPackageJsonDevDependenciesNameQueryString | null;
+	version?: SitePageConnectionPluginCreatorPackageJsonDevDependenciesVersionQueryString | null;
+}
+
+export interface SitePageConnectionPluginCreatorPackageJsonDevDependenciesNameQueryString {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePageConnectionPluginCreatorPackageJsonLicenseQueryString {
+export interface SitePageConnectionPluginCreatorPackageJsonDevDependenciesVersionQueryString {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePageConnectionPluginCreatorPackageJsonDependenciesQueryList {
-	elemMatch?: sitePageConnectionPluginCreatorPackageJsonDependenciesInputObject | null;
+export interface SitePageConnectionPluginCreatorPackageJsonPeerDependenciesQueryList {
+	elemMatch?: SitePageConnectionPluginCreatorPackageJsonPeerDependenciesInputObject | null;
 }
 
-export interface sitePageConnectionPluginCreatorPackageJsonDependenciesInputObject {
-	name?: sitePageConnectionPluginCreatorPackageJsonDependenciesNameQueryString | null;
-	version?: sitePageConnectionPluginCreatorPackageJsonDependenciesVersionQueryString | null;
+export interface SitePageConnectionPluginCreatorPackageJsonPeerDependenciesInputObject {
+	name?: SitePageConnectionPluginCreatorPackageJsonPeerDependenciesNameQueryString | null;
+	version?: SitePageConnectionPluginCreatorPackageJsonPeerDependenciesVersionQueryString | null;
 }
 
-export interface sitePageConnectionPluginCreatorPackageJsonDependenciesNameQueryString {
+export interface SitePageConnectionPluginCreatorPackageJsonPeerDependenciesNameQueryString {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePageConnectionPluginCreatorPackageJsonDependenciesVersionQueryString {
+export interface SitePageConnectionPluginCreatorPackageJsonPeerDependenciesVersionQueryString {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePageConnectionPluginCreatorPackageJsonDevDependenciesQueryList {
-	elemMatch?: sitePageConnectionPluginCreatorPackageJsonDevDependenciesInputObject | null;
-}
-
-export interface sitePageConnectionPluginCreatorPackageJsonDevDependenciesInputObject {
-	name?: sitePageConnectionPluginCreatorPackageJsonDevDependenciesNameQueryString | null;
-	version?: sitePageConnectionPluginCreatorPackageJsonDevDependenciesVersionQueryString | null;
-}
-
-export interface sitePageConnectionPluginCreatorPackageJsonDevDependenciesNameQueryString {
+export interface SitePageConnectionPluginCreatorPackageJsonKeywordsQueryList {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePageConnectionPluginCreatorPackageJsonDevDependenciesVersionQueryString {
+export interface SitePageConnectionPluginCreatorParentQueryString {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePageConnectionPluginCreatorPackageJsonPeerDependenciesQueryList {
-	elemMatch?: sitePageConnectionPluginCreatorPackageJsonPeerDependenciesInputObject | null;
+export interface SitePageConnectionPluginCreatorInternalInputObject {
+	contentDigest?: SitePageConnectionPluginCreatorInternalContentDigestQueryString | null;
+	type?: SitePageConnectionPluginCreatorInternalTypeQueryString | null;
+	owner?: SitePageConnectionPluginCreatorInternalOwnerQueryString | null;
 }
 
-export interface sitePageConnectionPluginCreatorPackageJsonPeerDependenciesInputObject {
-	name?: sitePageConnectionPluginCreatorPackageJsonPeerDependenciesNameQueryString | null;
-	version?: sitePageConnectionPluginCreatorPackageJsonPeerDependenciesVersionQueryString | null;
-}
-
-export interface sitePageConnectionPluginCreatorPackageJsonPeerDependenciesNameQueryString {
+export interface SitePageConnectionPluginCreatorInternalContentDigestQueryString {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePageConnectionPluginCreatorPackageJsonPeerDependenciesVersionQueryString {
+export interface SitePageConnectionPluginCreatorInternalTypeQueryString {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePageConnectionPluginCreatorPackageJsonKeywordsQueryList {
+export interface SitePageConnectionPluginCreatorInternalOwnerQueryString {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePageConnectionPluginCreatorParentQueryString {
+export interface SitePageConnectionPluginCreatorIdQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePageConnectionPluginCreatorInternalInputObject {
-	contentDigest?: sitePageConnectionPluginCreatorInternalContentDigestQueryString | null;
-	type?: sitePageConnectionPluginCreatorInternalTypeQueryString | null;
-	owner?: sitePageConnectionPluginCreatorInternalOwnerQueryString | null;
-}
-
-export interface sitePageConnectionPluginCreatorInternalContentDigestQueryString {
+export interface SitePageConnectionComponentPathQueryString {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePageConnectionPluginCreatorInternalTypeQueryString {
+export interface SitePageConnectionIdQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePageConnectionPluginCreatorInternalOwnerQueryString {
+export interface SitePageConnectionInternalInputObject_2 {
+	type?: SitePageConnectionInternalTypeQueryString_2 | null;
+	contentDigest?: SitePageConnectionInternalContentDigestQueryString_2 | null;
+	description?: SitePageConnectionInternalDescriptionQueryString | null;
+	owner?: SitePageConnectionInternalOwnerQueryString_2 | null;
+}
+
+export interface SitePageConnectionInternalTypeQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePageConnectionPluginCreatorIdQueryString_2 {
+export interface SitePageConnectionInternalContentDigestQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePageConnectionComponentPathQueryString {
+export interface SitePageConnectionInternalDescriptionQueryString {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePageConnectionIdQueryString_2 {
+export interface SitePageConnectionInternalOwnerQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePageConnectionInternalInputObject_2 {
-	type?: sitePageConnectionInternalTypeQueryString_2 | null;
-	contentDigest?: sitePageConnectionInternalContentDigestQueryString_2 | null;
-	description?: sitePageConnectionInternalDescriptionQueryString | null;
-	owner?: sitePageConnectionInternalOwnerQueryString_2 | null;
-}
-
-export interface sitePageConnectionInternalTypeQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePageConnectionInternalContentDigestQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePageConnectionInternalDescriptionQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePageConnectionInternalOwnerQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePluginConnectionSort {
+export interface SitePluginConnectionSort {
 	fields: (SitePluginConnectionSortByFieldsEnum | null)[];
-	order?: sitePluginConnectionSortOrderValues | null;
+	order?: SitePluginConnectionSortOrderValues | null;
 }
 /** Filter connection on its fields */
-export interface filterSitePlugin {
-	resolve?: sitePluginConnectionResolveQueryString_2 | null;
-	id?: sitePluginConnectionIdQueryString_2 | null;
-	name?: sitePluginConnectionNameQueryString_2 | null;
-	version?: sitePluginConnectionVersionQueryString_2 | null;
-	pluginOptions?: sitePluginConnectionPluginOptionsInputObject_2 | null;
-	nodeAPIs?: sitePluginConnectionNodeApIsQueryList_2 | null;
-	browserAPIs?: sitePluginConnectionBrowserApIsQueryList_2 | null;
-	ssrAPIs?: sitePluginConnectionSsrApIsQueryList_2 | null;
-	pluginFilepath?: sitePluginConnectionPluginFilepathQueryString_2 | null;
-	packageJson?: sitePluginConnectionPackageJsonInputObject_2 | null;
-	internal?: sitePluginConnectionInternalInputObject_2 | null;
+export interface FilterSitePlugin {
+	resolve?: SitePluginConnectionResolveQueryString_2 | null;
+	id?: SitePluginConnectionIdQueryString_2 | null;
+	name?: SitePluginConnectionNameQueryString_2 | null;
+	version?: SitePluginConnectionVersionQueryString_2 | null;
+	pluginOptions?: SitePluginConnectionPluginOptionsInputObject_2 | null;
+	nodeAPIs?: SitePluginConnectionNodeApIsQueryList_2 | null;
+	browserAPIs?: SitePluginConnectionBrowserApIsQueryList_2 | null;
+	ssrAPIs?: SitePluginConnectionSsrApIsQueryList_2 | null;
+	pluginFilepath?: SitePluginConnectionPluginFilepathQueryString_2 | null;
+	packageJson?: SitePluginConnectionPackageJsonInputObject_2 | null;
+	internal?: SitePluginConnectionInternalInputObject_2 | null;
 }
 
-export interface sitePluginConnectionResolveQueryString_2 {
+export interface SitePluginConnectionResolveQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePluginConnectionIdQueryString_2 {
+export interface SitePluginConnectionIdQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePluginConnectionNameQueryString_2 {
+export interface SitePluginConnectionNameQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePluginConnectionVersionQueryString_2 {
+export interface SitePluginConnectionVersionQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePluginConnectionPluginOptionsInputObject_2 {
-	plugins?: sitePluginConnectionPluginOptionsPluginsQueryList_2 | null;
-	name?: sitePluginConnectionPluginOptionsNameQueryString_2 | null;
-	path?: sitePluginConnectionPluginOptionsPathQueryString_2 | null;
-	emojiConversion?: sitePluginConnectionPluginOptionsEmojiConversionQueryString_2 | null;
-	maxWidth?: sitePluginConnectionPluginOptionsMaxWidthQueryInteger_2 | null;
-	wrapperStyle?: sitePluginConnectionPluginOptionsWrapperStyleQueryString | null;
-	backgroundColor?: sitePluginConnectionPluginOptionsBackgroundColorQueryString_2 | null;
-	linkImagesToOriginal?: sitePluginConnectionPluginOptionsLinkImagesToOriginalQueryBoolean | null;
-	showCaptions?: sitePluginConnectionPluginOptionsShowCaptionsQueryBoolean | null;
-	pathPrefix?: sitePluginConnectionPluginOptionsPathPrefixQueryString | null;
-	inlineCodeMarker?: sitePluginConnectionPluginOptionsInlineCodeMarkerQueryString_2 | null;
-	short_name?: sitePluginConnectionPluginOptionsShortNameQueryString_2 | null;
-	start_url?: sitePluginConnectionPluginOptionsStartUrlQueryString_2 | null;
-	background_color?: sitePluginConnectionPluginOptionsBackgroundColorQueryString_3 | null;
-	theme_color?: sitePluginConnectionPluginOptionsThemeColorQueryString_2 | null;
-	display?: sitePluginConnectionPluginOptionsDisplayQueryString_2 | null;
-	icon?: sitePluginConnectionPluginOptionsIconQueryString_2 | null;
-	logo?: sitePluginConnectionPluginOptionsLogoQueryString_2 | null;
-	injectHTML?: sitePluginConnectionPluginOptionsInjectHtmlQueryBoolean_2 | null;
-	icons?: sitePluginConnectionPluginOptionsIconsInputObject_2 | null;
-	pathToConfigModule?: sitePluginConnectionPluginOptionsPathToConfigModuleQueryString_2 | null;
-	omitGoogleFont?: sitePluginConnectionPluginOptionsOmitGoogleFontQueryBoolean_2 | null;
-	query?: sitePluginConnectionPluginOptionsQueryQueryString_2 | null;
-	feeds?: sitePluginConnectionPluginOptionsFeedsQueryList_2 | null;
-	pathCheck?: sitePluginConnectionPluginOptionsPathCheckQueryBoolean_2 | null;
+export interface SitePluginConnectionPluginOptionsInputObject_2 {
+	plugins?: SitePluginConnectionPluginOptionsPluginsQueryList_2 | null;
+	production?: SitePluginConnectionPluginOptionsProductionQueryBoolean_2 | null;
+	analyzerMode?: SitePluginConnectionPluginOptionsAnalyzerModeQueryString_2 | null;
+	defaultSizes?: SitePluginConnectionPluginOptionsDefaultSizesQueryString_2 | null;
+	openAnalyzer?: SitePluginConnectionPluginOptionsOpenAnalyzerQueryBoolean_2 | null;
+	name?: SitePluginConnectionPluginOptionsNameQueryString_2 | null;
+	path?: SitePluginConnectionPluginOptionsPathQueryString_2 | null;
+	maxWidth?: SitePluginConnectionPluginOptionsMaxWidthQueryInteger_2 | null;
+	wrapperStyle?: SitePluginConnectionPluginOptionsWrapperStyleQueryString_2 | null;
+	backgroundColor?: SitePluginConnectionPluginOptionsBackgroundColorQueryString_3 | null;
+	linkImagesToOriginal?: SitePluginConnectionPluginOptionsLinkImagesToOriginalQueryBoolean_2 | null;
+	showCaptions?: SitePluginConnectionPluginOptionsShowCaptionsQueryBoolean_2 | null;
+	pathPrefix?: SitePluginConnectionPluginOptionsPathPrefixQueryString_2 | null;
+	withWebp?: SitePluginConnectionPluginOptionsWithWebpQueryBoolean_2 | null;
+	inlineCodeMarker?: SitePluginConnectionPluginOptionsInlineCodeMarkerQueryString_2 | null;
+	pathToConfigModule?: SitePluginConnectionPluginOptionsPathToConfigModuleQueryString_2 | null;
+	omitGoogleFont?: SitePluginConnectionPluginOptionsOmitGoogleFontQueryBoolean_2 | null;
+	query?: SitePluginConnectionPluginOptionsQueryQueryString_2 | null;
+	feeds?: SitePluginConnectionPluginOptionsFeedsQueryList_2 | null;
+	headers?: SitePluginConnectionPluginOptionsHeadersInputObject_2 | null;
+	allPageHeaders?: SitePluginConnectionPluginOptionsAllPageHeadersQueryList_2 | null;
+	short_name?: SitePluginConnectionPluginOptionsShortNameQueryString_2 | null;
+	start_url?: SitePluginConnectionPluginOptionsStartUrlQueryString_2 | null;
+	background_color?: SitePluginConnectionPluginOptionsBackgroundColorQueryString_4 | null;
+	theme_color?: SitePluginConnectionPluginOptionsThemeColorQueryString_2 | null;
+	display?: SitePluginConnectionPluginOptionsDisplayQueryString_2 | null;
+	icon?: SitePluginConnectionPluginOptionsIconQueryString_2 | null;
+	pathCheck?: SitePluginConnectionPluginOptionsPathCheckQueryBoolean_2 | null;
 }
 
-export interface sitePluginConnectionPluginOptionsPluginsQueryList_2 {
-	elemMatch?: sitePluginConnectionPluginOptionsPluginsInputObject_2 | null;
+export interface SitePluginConnectionPluginOptionsPluginsQueryList_2 {
+	elemMatch?: SitePluginConnectionPluginOptionsPluginsInputObject_2 | null;
 }
 
-export interface sitePluginConnectionPluginOptionsPluginsInputObject_2 {
-	resolve?: sitePluginConnectionPluginOptionsPluginsResolveQueryString_2 | null;
-	id?: sitePluginConnectionPluginOptionsPluginsIdQueryString_2 | null;
-	name?: sitePluginConnectionPluginOptionsPluginsNameQueryString_2 | null;
-	version?: sitePluginConnectionPluginOptionsPluginsVersionQueryString_2 | null;
-	pluginOptions?: sitePluginConnectionPluginOptionsPluginsPluginOptionsInputObject_2 | null;
-	pluginFilepath?: sitePluginConnectionPluginOptionsPluginsPluginFilepathQueryString_2 | null;
+export interface SitePluginConnectionPluginOptionsPluginsInputObject_2 {
+	resolve?: SitePluginConnectionPluginOptionsPluginsResolveQueryString_2 | null;
+	id?: SitePluginConnectionPluginOptionsPluginsIdQueryString_2 | null;
+	name?: SitePluginConnectionPluginOptionsPluginsNameQueryString_2 | null;
+	version?: SitePluginConnectionPluginOptionsPluginsVersionQueryString_2 | null;
+	pluginOptions?: SitePluginConnectionPluginOptionsPluginsPluginOptionsInputObject_2 | null;
+	browserAPIs?: SitePluginConnectionPluginOptionsPluginsBrowserApIsQueryList_2 | null;
+	ssrAPIs?: SitePluginConnectionPluginOptionsPluginsSsrApIsQueryList_2 | null;
+	pluginFilepath?: SitePluginConnectionPluginOptionsPluginsPluginFilepathQueryString_2 | null;
 }
 
-export interface sitePluginConnectionPluginOptionsPluginsResolveQueryString_2 {
+export interface SitePluginConnectionPluginOptionsPluginsResolveQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePluginConnectionPluginOptionsPluginsIdQueryString_2 {
+export interface SitePluginConnectionPluginOptionsPluginsIdQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePluginConnectionPluginOptionsPluginsNameQueryString_2 {
+export interface SitePluginConnectionPluginOptionsPluginsNameQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePluginConnectionPluginOptionsPluginsVersionQueryString_2 {
+export interface SitePluginConnectionPluginOptionsPluginsVersionQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePluginConnectionPluginOptionsPluginsPluginOptionsInputObject_2 {
-	emojiConversion?: sitePluginConnectionPluginOptionsPluginsPluginOptionsEmojiConversionQueryString_2 | null;
-	maxWidth?: sitePluginConnectionPluginOptionsPluginsPluginOptionsMaxWidthQueryInteger_2 | null;
-	wrapperStyle?: sitePluginConnectionPluginOptionsPluginsPluginOptionsWrapperStyleQueryString | null;
-	backgroundColor?: sitePluginConnectionPluginOptionsPluginsPluginOptionsBackgroundColorQueryString | null;
-	linkImagesToOriginal?: sitePluginConnectionPluginOptionsPluginsPluginOptionsLinkImagesToOriginalQueryBoolean | null;
-	showCaptions?: sitePluginConnectionPluginOptionsPluginsPluginOptionsShowCaptionsQueryBoolean | null;
-	pathPrefix?: sitePluginConnectionPluginOptionsPluginsPluginOptionsPathPrefixQueryString | null;
-	inlineCodeMarker?: sitePluginConnectionPluginOptionsPluginsPluginOptionsInlineCodeMarkerQueryString_2 | null;
+export interface SitePluginConnectionPluginOptionsPluginsPluginOptionsInputObject_2 {
+	maxWidth?: SitePluginConnectionPluginOptionsPluginsPluginOptionsMaxWidthQueryInteger_2 | null;
+	wrapperStyle?: SitePluginConnectionPluginOptionsPluginsPluginOptionsWrapperStyleQueryString_2 | null;
+	backgroundColor?: SitePluginConnectionPluginOptionsPluginsPluginOptionsBackgroundColorQueryString_2 | null;
+	linkImagesToOriginal?: SitePluginConnectionPluginOptionsPluginsPluginOptionsLinkImagesToOriginalQueryBoolean_2 | null;
+	showCaptions?: SitePluginConnectionPluginOptionsPluginsPluginOptionsShowCaptionsQueryBoolean_2 | null;
+	pathPrefix?: SitePluginConnectionPluginOptionsPluginsPluginOptionsPathPrefixQueryString_2 | null;
+	withWebp?: SitePluginConnectionPluginOptionsPluginsPluginOptionsWithWebpQueryBoolean_2 | null;
+	inlineCodeMarker?: SitePluginConnectionPluginOptionsPluginsPluginOptionsInlineCodeMarkerQueryString_2 | null;
 }
 
-export interface sitePluginConnectionPluginOptionsPluginsPluginOptionsEmojiConversionQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePluginConnectionPluginOptionsPluginsPluginOptionsMaxWidthQueryInteger_2 {
+export interface SitePluginConnectionPluginOptionsPluginsPluginOptionsMaxWidthQueryInteger_2 {
 	eq?: number | null;
 	ne?: number | null;
 	gt?: number | null;
@@ -2788,85 +3161,144 @@ export interface sitePluginConnectionPluginOptionsPluginsPluginOptionsMaxWidthQu
 	lt?: number | null;
 	lte?: number | null;
 	in?: (number | null)[] | null;
+	nin?: (number | null)[] | null;
 }
 
-export interface sitePluginConnectionPluginOptionsPluginsPluginOptionsWrapperStyleQueryString {
+export interface SitePluginConnectionPluginOptionsPluginsPluginOptionsWrapperStyleQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePluginConnectionPluginOptionsPluginsPluginOptionsBackgroundColorQueryString {
+export interface SitePluginConnectionPluginOptionsPluginsPluginOptionsBackgroundColorQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePluginConnectionPluginOptionsPluginsPluginOptionsLinkImagesToOriginalQueryBoolean {
+export interface SitePluginConnectionPluginOptionsPluginsPluginOptionsLinkImagesToOriginalQueryBoolean_2 {
 	eq?: boolean | null;
 	ne?: boolean | null;
 	in?: (boolean | null)[] | null;
+	nin?: (boolean | null)[] | null;
 }
 
-export interface sitePluginConnectionPluginOptionsPluginsPluginOptionsShowCaptionsQueryBoolean {
+export interface SitePluginConnectionPluginOptionsPluginsPluginOptionsShowCaptionsQueryBoolean_2 {
 	eq?: boolean | null;
 	ne?: boolean | null;
 	in?: (boolean | null)[] | null;
+	nin?: (boolean | null)[] | null;
 }
 
-export interface sitePluginConnectionPluginOptionsPluginsPluginOptionsPathPrefixQueryString {
+export interface SitePluginConnectionPluginOptionsPluginsPluginOptionsPathPrefixQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePluginConnectionPluginOptionsPluginsPluginOptionsInlineCodeMarkerQueryString_2 {
+export interface SitePluginConnectionPluginOptionsPluginsPluginOptionsWithWebpQueryBoolean_2 {
+	eq?: boolean | null;
+	ne?: boolean | null;
+	in?: (boolean | null)[] | null;
+	nin?: (boolean | null)[] | null;
+}
+
+export interface SitePluginConnectionPluginOptionsPluginsPluginOptionsInlineCodeMarkerQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePluginConnectionPluginOptionsPluginsPluginFilepathQueryString_2 {
+export interface SitePluginConnectionPluginOptionsPluginsBrowserApIsQueryList_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePluginConnectionPluginOptionsNameQueryString_2 {
+export interface SitePluginConnectionPluginOptionsPluginsSsrApIsQueryList_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePluginConnectionPluginOptionsPathQueryString_2 {
+export interface SitePluginConnectionPluginOptionsPluginsPluginFilepathQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePluginConnectionPluginOptionsEmojiConversionQueryString_2 {
+export interface SitePluginConnectionPluginOptionsProductionQueryBoolean_2 {
+	eq?: boolean | null;
+	ne?: boolean | null;
+	in?: (boolean | null)[] | null;
+	nin?: (boolean | null)[] | null;
+}
+
+export interface SitePluginConnectionPluginOptionsAnalyzerModeQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePluginConnectionPluginOptionsMaxWidthQueryInteger_2 {
+export interface SitePluginConnectionPluginOptionsDefaultSizesQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePluginConnectionPluginOptionsOpenAnalyzerQueryBoolean_2 {
+	eq?: boolean | null;
+	ne?: boolean | null;
+	in?: (boolean | null)[] | null;
+	nin?: (boolean | null)[] | null;
+}
+
+export interface SitePluginConnectionPluginOptionsNameQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePluginConnectionPluginOptionsPathQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePluginConnectionPluginOptionsMaxWidthQueryInteger_2 {
 	eq?: number | null;
 	ne?: number | null;
 	gt?: number | null;
@@ -2874,562 +3306,639 @@ export interface sitePluginConnectionPluginOptionsMaxWidthQueryInteger_2 {
 	lt?: number | null;
 	lte?: number | null;
 	in?: (number | null)[] | null;
+	nin?: (number | null)[] | null;
 }
 
-export interface sitePluginConnectionPluginOptionsWrapperStyleQueryString {
+export interface SitePluginConnectionPluginOptionsWrapperStyleQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePluginConnectionPluginOptionsBackgroundColorQueryString_2 {
+export interface SitePluginConnectionPluginOptionsBackgroundColorQueryString_3 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePluginConnectionPluginOptionsLinkImagesToOriginalQueryBoolean {
+export interface SitePluginConnectionPluginOptionsLinkImagesToOriginalQueryBoolean_2 {
 	eq?: boolean | null;
 	ne?: boolean | null;
 	in?: (boolean | null)[] | null;
+	nin?: (boolean | null)[] | null;
 }
 
-export interface sitePluginConnectionPluginOptionsShowCaptionsQueryBoolean {
+export interface SitePluginConnectionPluginOptionsShowCaptionsQueryBoolean_2 {
 	eq?: boolean | null;
 	ne?: boolean | null;
 	in?: (boolean | null)[] | null;
+	nin?: (boolean | null)[] | null;
 }
 
-export interface sitePluginConnectionPluginOptionsPathPrefixQueryString {
+export interface SitePluginConnectionPluginOptionsPathPrefixQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePluginConnectionPluginOptionsInlineCodeMarkerQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePluginConnectionPluginOptionsShortNameQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePluginConnectionPluginOptionsStartUrlQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePluginConnectionPluginOptionsBackgroundColorQueryString_3 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePluginConnectionPluginOptionsThemeColorQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePluginConnectionPluginOptionsDisplayQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePluginConnectionPluginOptionsIconQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePluginConnectionPluginOptionsLogoQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePluginConnectionPluginOptionsInjectHtmlQueryBoolean_2 {
+export interface SitePluginConnectionPluginOptionsWithWebpQueryBoolean_2 {
 	eq?: boolean | null;
 	ne?: boolean | null;
 	in?: (boolean | null)[] | null;
+	nin?: (boolean | null)[] | null;
 }
 
-export interface sitePluginConnectionPluginOptionsIconsInputObject_2 {
-	android?: sitePluginConnectionPluginOptionsIconsAndroidQueryBoolean_2 | null;
-	appleIcon?: sitePluginConnectionPluginOptionsIconsAppleIconQueryBoolean_2 | null;
-	appleStartup?: sitePluginConnectionPluginOptionsIconsAppleStartupQueryBoolean_2 | null;
-	coast?: sitePluginConnectionPluginOptionsIconsCoastQueryBoolean_2 | null;
-	favicons?: sitePluginConnectionPluginOptionsIconsFaviconsQueryBoolean_2 | null;
-	firefox?: sitePluginConnectionPluginOptionsIconsFirefoxQueryBoolean_2 | null;
-	twitter?: sitePluginConnectionPluginOptionsIconsTwitterQueryBoolean_2 | null;
-	yandex?: sitePluginConnectionPluginOptionsIconsYandexQueryBoolean_2 | null;
-	windows?: sitePluginConnectionPluginOptionsIconsWindowsQueryBoolean_2 | null;
+export interface SitePluginConnectionPluginOptionsInlineCodeMarkerQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePluginConnectionPluginOptionsIconsAndroidQueryBoolean_2 {
+export interface SitePluginConnectionPluginOptionsPathToConfigModuleQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePluginConnectionPluginOptionsOmitGoogleFontQueryBoolean_2 {
 	eq?: boolean | null;
 	ne?: boolean | null;
 	in?: (boolean | null)[] | null;
+	nin?: (boolean | null)[] | null;
 }
 
-export interface sitePluginConnectionPluginOptionsIconsAppleIconQueryBoolean_2 {
+export interface SitePluginConnectionPluginOptionsQueryQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePluginConnectionPluginOptionsFeedsQueryList_2 {
+	elemMatch?: SitePluginConnectionPluginOptionsFeedsInputObject_2 | null;
+}
+
+export interface SitePluginConnectionPluginOptionsFeedsInputObject_2 {
+	query?: SitePluginConnectionPluginOptionsFeedsQueryQueryString_2 | null;
+	output?: SitePluginConnectionPluginOptionsFeedsOutputQueryString_2 | null;
+}
+
+export interface SitePluginConnectionPluginOptionsFeedsQueryQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePluginConnectionPluginOptionsFeedsOutputQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePluginConnectionPluginOptionsHeadersInputObject_2 {
+	_xxjs?: SitePluginConnectionPluginOptionsHeadersJsQueryList_2 | null;
+	_sw_js?: SitePluginConnectionPluginOptionsHeadersSwJsQueryList_2 | null;
+	_xxwebmanifest?: SitePluginConnectionPluginOptionsHeadersWebmanifestQueryList_2 | null;
+	_xxcss?: SitePluginConnectionPluginOptionsHeadersCssQueryList_2 | null;
+	_xxpng?: SitePluginConnectionPluginOptionsHeadersPngQueryList_2 | null;
+	_xxjpg?: SitePluginConnectionPluginOptionsHeadersJpgQueryList_2 | null;
+	_xxjpeg?: SitePluginConnectionPluginOptionsHeadersJpegQueryList_2 | null;
+	_xxgif?: SitePluginConnectionPluginOptionsHeadersGifQueryList_2 | null;
+	_xxsvg?: SitePluginConnectionPluginOptionsHeadersSvgQueryList_2 | null;
+}
+
+export interface SitePluginConnectionPluginOptionsHeadersJsQueryList_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePluginConnectionPluginOptionsHeadersSwJsQueryList_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePluginConnectionPluginOptionsHeadersWebmanifestQueryList_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePluginConnectionPluginOptionsHeadersCssQueryList_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePluginConnectionPluginOptionsHeadersPngQueryList_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePluginConnectionPluginOptionsHeadersJpgQueryList_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePluginConnectionPluginOptionsHeadersJpegQueryList_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePluginConnectionPluginOptionsHeadersGifQueryList_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePluginConnectionPluginOptionsHeadersSvgQueryList_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePluginConnectionPluginOptionsAllPageHeadersQueryList_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePluginConnectionPluginOptionsShortNameQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePluginConnectionPluginOptionsStartUrlQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePluginConnectionPluginOptionsBackgroundColorQueryString_4 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePluginConnectionPluginOptionsThemeColorQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePluginConnectionPluginOptionsDisplayQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePluginConnectionPluginOptionsIconQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePluginConnectionPluginOptionsPathCheckQueryBoolean_2 {
 	eq?: boolean | null;
 	ne?: boolean | null;
 	in?: (boolean | null)[] | null;
+	nin?: (boolean | null)[] | null;
 }
 
-export interface sitePluginConnectionPluginOptionsIconsAppleStartupQueryBoolean_2 {
-	eq?: boolean | null;
-	ne?: boolean | null;
-	in?: (boolean | null)[] | null;
-}
-
-export interface sitePluginConnectionPluginOptionsIconsCoastQueryBoolean_2 {
-	eq?: boolean | null;
-	ne?: boolean | null;
-	in?: (boolean | null)[] | null;
-}
-
-export interface sitePluginConnectionPluginOptionsIconsFaviconsQueryBoolean_2 {
-	eq?: boolean | null;
-	ne?: boolean | null;
-	in?: (boolean | null)[] | null;
-}
-
-export interface sitePluginConnectionPluginOptionsIconsFirefoxQueryBoolean_2 {
-	eq?: boolean | null;
-	ne?: boolean | null;
-	in?: (boolean | null)[] | null;
-}
-
-export interface sitePluginConnectionPluginOptionsIconsTwitterQueryBoolean_2 {
-	eq?: boolean | null;
-	ne?: boolean | null;
-	in?: (boolean | null)[] | null;
-}
-
-export interface sitePluginConnectionPluginOptionsIconsYandexQueryBoolean_2 {
-	eq?: boolean | null;
-	ne?: boolean | null;
-	in?: (boolean | null)[] | null;
-}
-
-export interface sitePluginConnectionPluginOptionsIconsWindowsQueryBoolean_2 {
-	eq?: boolean | null;
-	ne?: boolean | null;
-	in?: (boolean | null)[] | null;
-}
-
-export interface sitePluginConnectionPluginOptionsPathToConfigModuleQueryString_2 {
+export interface SitePluginConnectionNodeApIsQueryList_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePluginConnectionPluginOptionsOmitGoogleFontQueryBoolean_2 {
-	eq?: boolean | null;
-	ne?: boolean | null;
-	in?: (boolean | null)[] | null;
-}
-
-export interface sitePluginConnectionPluginOptionsQueryQueryString_2 {
+export interface SitePluginConnectionBrowserApIsQueryList_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePluginConnectionPluginOptionsFeedsQueryList_2 {
-	elemMatch?: sitePluginConnectionPluginOptionsFeedsInputObject_2 | null;
-}
-
-export interface sitePluginConnectionPluginOptionsFeedsInputObject_2 {
-	query?: sitePluginConnectionPluginOptionsFeedsQueryQueryString_2 | null;
-	output?: sitePluginConnectionPluginOptionsFeedsOutputQueryString_2 | null;
-}
-
-export interface sitePluginConnectionPluginOptionsFeedsQueryQueryString_2 {
+export interface SitePluginConnectionSsrApIsQueryList_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePluginConnectionPluginOptionsFeedsOutputQueryString_2 {
+export interface SitePluginConnectionPluginFilepathQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePluginConnectionPluginOptionsPathCheckQueryBoolean_2 {
-	eq?: boolean | null;
-	ne?: boolean | null;
-	in?: (boolean | null)[] | null;
+export interface SitePluginConnectionPackageJsonInputObject_2 {
+	name?: SitePluginConnectionPackageJsonNameQueryString_2 | null;
+	description?: SitePluginConnectionPackageJsonDescriptionQueryString_2 | null;
+	version?: SitePluginConnectionPackageJsonVersionQueryString_2 | null;
+	main?: SitePluginConnectionPackageJsonMainQueryString_2 | null;
+	author?: SitePluginConnectionPackageJsonAuthorQueryString_2 | null;
+	license?: SitePluginConnectionPackageJsonLicenseQueryString_2 | null;
+	dependencies?: SitePluginConnectionPackageJsonDependenciesQueryList_2 | null;
+	devDependencies?: SitePluginConnectionPackageJsonDevDependenciesQueryList_2 | null;
+	peerDependencies?: SitePluginConnectionPackageJsonPeerDependenciesQueryList_2 | null;
+	keywords?: SitePluginConnectionPackageJsonKeywordsQueryList_2 | null;
 }
 
-export interface sitePluginConnectionNodeApIsQueryList_2 {
+export interface SitePluginConnectionPackageJsonNameQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePluginConnectionBrowserApIsQueryList_2 {
+export interface SitePluginConnectionPackageJsonDescriptionQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePluginConnectionSsrApIsQueryList_2 {
+export interface SitePluginConnectionPackageJsonVersionQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePluginConnectionPluginFilepathQueryString_2 {
+export interface SitePluginConnectionPackageJsonMainQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePluginConnectionPackageJsonInputObject_2 {
-	name?: sitePluginConnectionPackageJsonNameQueryString_2 | null;
-	description?: sitePluginConnectionPackageJsonDescriptionQueryString_2 | null;
-	version?: sitePluginConnectionPackageJsonVersionQueryString_2 | null;
-	main?: sitePluginConnectionPackageJsonMainQueryString_2 | null;
-	author?: sitePluginConnectionPackageJsonAuthorQueryString_2 | null;
-	license?: sitePluginConnectionPackageJsonLicenseQueryString_2 | null;
-	dependencies?: sitePluginConnectionPackageJsonDependenciesQueryList_2 | null;
-	devDependencies?: sitePluginConnectionPackageJsonDevDependenciesQueryList_2 | null;
-	peerDependencies?: sitePluginConnectionPackageJsonPeerDependenciesQueryList_2 | null;
-	keywords?: sitePluginConnectionPackageJsonKeywordsQueryList_2 | null;
-}
-
-export interface sitePluginConnectionPackageJsonNameQueryString_2 {
+export interface SitePluginConnectionPackageJsonAuthorQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePluginConnectionPackageJsonDescriptionQueryString_2 {
+export interface SitePluginConnectionPackageJsonLicenseQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePluginConnectionPackageJsonVersionQueryString_2 {
+export interface SitePluginConnectionPackageJsonDependenciesQueryList_2 {
+	elemMatch?: SitePluginConnectionPackageJsonDependenciesInputObject_2 | null;
+}
+
+export interface SitePluginConnectionPackageJsonDependenciesInputObject_2 {
+	name?: SitePluginConnectionPackageJsonDependenciesNameQueryString_2 | null;
+	version?: SitePluginConnectionPackageJsonDependenciesVersionQueryString_2 | null;
+}
+
+export interface SitePluginConnectionPackageJsonDependenciesNameQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePluginConnectionPackageJsonMainQueryString_2 {
+export interface SitePluginConnectionPackageJsonDependenciesVersionQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePluginConnectionPackageJsonAuthorQueryString_2 {
+export interface SitePluginConnectionPackageJsonDevDependenciesQueryList_2 {
+	elemMatch?: SitePluginConnectionPackageJsonDevDependenciesInputObject_2 | null;
+}
+
+export interface SitePluginConnectionPackageJsonDevDependenciesInputObject_2 {
+	name?: SitePluginConnectionPackageJsonDevDependenciesNameQueryString_2 | null;
+	version?: SitePluginConnectionPackageJsonDevDependenciesVersionQueryString_2 | null;
+}
+
+export interface SitePluginConnectionPackageJsonDevDependenciesNameQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePluginConnectionPackageJsonLicenseQueryString_2 {
+export interface SitePluginConnectionPackageJsonDevDependenciesVersionQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePluginConnectionPackageJsonDependenciesQueryList_2 {
-	elemMatch?: sitePluginConnectionPackageJsonDependenciesInputObject_2 | null;
+export interface SitePluginConnectionPackageJsonPeerDependenciesQueryList_2 {
+	elemMatch?: SitePluginConnectionPackageJsonPeerDependenciesInputObject_2 | null;
 }
 
-export interface sitePluginConnectionPackageJsonDependenciesInputObject_2 {
-	name?: sitePluginConnectionPackageJsonDependenciesNameQueryString_2 | null;
-	version?: sitePluginConnectionPackageJsonDependenciesVersionQueryString_2 | null;
+export interface SitePluginConnectionPackageJsonPeerDependenciesInputObject_2 {
+	name?: SitePluginConnectionPackageJsonPeerDependenciesNameQueryString_2 | null;
+	version?: SitePluginConnectionPackageJsonPeerDependenciesVersionQueryString_2 | null;
 }
 
-export interface sitePluginConnectionPackageJsonDependenciesNameQueryString_2 {
+export interface SitePluginConnectionPackageJsonPeerDependenciesNameQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePluginConnectionPackageJsonDependenciesVersionQueryString_2 {
+export interface SitePluginConnectionPackageJsonPeerDependenciesVersionQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePluginConnectionPackageJsonDevDependenciesQueryList_2 {
-	elemMatch?: sitePluginConnectionPackageJsonDevDependenciesInputObject_2 | null;
-}
-
-export interface sitePluginConnectionPackageJsonDevDependenciesInputObject_2 {
-	name?: sitePluginConnectionPackageJsonDevDependenciesNameQueryString_2 | null;
-	version?: sitePluginConnectionPackageJsonDevDependenciesVersionQueryString_2 | null;
-}
-
-export interface sitePluginConnectionPackageJsonDevDependenciesNameQueryString_2 {
+export interface SitePluginConnectionPackageJsonKeywordsQueryList_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePluginConnectionPackageJsonDevDependenciesVersionQueryString_2 {
+export interface SitePluginConnectionInternalInputObject_2 {
+	contentDigest?: SitePluginConnectionInternalContentDigestQueryString_2 | null;
+	type?: SitePluginConnectionInternalTypeQueryString_2 | null;
+	owner?: SitePluginConnectionInternalOwnerQueryString_2 | null;
+}
+
+export interface SitePluginConnectionInternalContentDigestQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePluginConnectionPackageJsonPeerDependenciesQueryList_2 {
-	elemMatch?: sitePluginConnectionPackageJsonPeerDependenciesInputObject_2 | null;
-}
-
-export interface sitePluginConnectionPackageJsonPeerDependenciesInputObject_2 {
-	name?: sitePluginConnectionPackageJsonPeerDependenciesNameQueryString_2 | null;
-	version?: sitePluginConnectionPackageJsonPeerDependenciesVersionQueryString_2 | null;
-}
-
-export interface sitePluginConnectionPackageJsonPeerDependenciesNameQueryString_2 {
+export interface SitePluginConnectionInternalTypeQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePluginConnectionPackageJsonPeerDependenciesVersionQueryString_2 {
+export interface SitePluginConnectionInternalOwnerQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePluginConnectionPackageJsonKeywordsQueryList_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePluginConnectionInternalInputObject_2 {
-	contentDigest?: sitePluginConnectionInternalContentDigestQueryString_2 | null;
-	type?: sitePluginConnectionInternalTypeQueryString_2 | null;
-	owner?: sitePluginConnectionInternalOwnerQueryString_2 | null;
-}
-
-export interface sitePluginConnectionInternalContentDigestQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePluginConnectionInternalTypeQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePluginConnectionInternalOwnerQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface directoryConnectionSort {
+export interface DirectoryConnectionSort {
 	fields: (DirectoryConnectionSortByFieldsEnum | null)[];
-	order?: directoryConnectionSortOrderValues | null;
+	order?: DirectoryConnectionSortOrderValues | null;
 }
 /** Filter connection on its fields */
-export interface filterDirectory {
-	id?: directoryConnectionIdQueryString_2 | null;
-	internal?: directoryConnectionInternalInputObject_2 | null;
-	sourceInstanceName?: directoryConnectionSourceInstanceNameQueryString_2 | null;
-	absolutePath?: directoryConnectionAbsolutePathQueryString_2 | null;
-	relativePath?: directoryConnectionRelativePathQueryString_2 | null;
-	extension?: directoryConnectionExtensionQueryString_2 | null;
-	size?: directoryConnectionSizeQueryInteger_2 | null;
-	prettySize?: directoryConnectionPrettySizeQueryString_2 | null;
-	modifiedTime?: directoryConnectionModifiedTimeQueryString_2 | null;
-	accessTime?: directoryConnectionAccessTimeQueryString_2 | null;
-	changeTime?: directoryConnectionChangeTimeQueryString_2 | null;
-	birthTime?: directoryConnectionBirthTimeQueryString_2 | null;
-	root?: directoryConnectionRootQueryString_2 | null;
-	dir?: directoryConnectionDirQueryString_2 | null;
-	base?: directoryConnectionBaseQueryString_2 | null;
-	ext?: directoryConnectionExtQueryString_2 | null;
-	name?: directoryConnectionNameQueryString_2 | null;
-	relativeDirectory?: directoryConnectionRelativeDirectoryQueryString_2 | null;
-	dev?: directoryConnectionDevQueryInteger_2 | null;
-	mode?: directoryConnectionModeQueryInteger_2 | null;
-	nlink?: directoryConnectionNlinkQueryInteger_2 | null;
-	uid?: directoryConnectionUidQueryInteger_2 | null;
-	gid?: directoryConnectionGidQueryInteger_2 | null;
-	rdev?: directoryConnectionRdevQueryInteger_2 | null;
-	blksize?: directoryConnectionBlksizeQueryInteger_2 | null;
-	ino?: directoryConnectionInoQueryInteger_2 | null;
-	blocks?: directoryConnectionBlocksQueryInteger_2 | null;
-	atimeMs?: directoryConnectionAtimeMsQueryFloat_2 | null;
-	mtimeMs?: directoryConnectionMtimeMsQueryFloat_2 | null;
-	ctimeMs?: directoryConnectionCtimeMsQueryFloat_2 | null;
-	birthtimeMs?: directoryConnectionBirthtimeMsQueryFloat_2 | null;
-	atime?: directoryConnectionAtimeQueryString_2 | null;
-	mtime?: directoryConnectionMtimeQueryString_2 | null;
-	ctime?: directoryConnectionCtimeQueryString_2 | null;
-	birthtime?: directoryConnectionBirthtimeQueryString_2 | null;
+export interface FilterDirectory {
+	id?: DirectoryConnectionIdQueryString_2 | null;
+	internal?: DirectoryConnectionInternalInputObject_2 | null;
+	sourceInstanceName?: DirectoryConnectionSourceInstanceNameQueryString_2 | null;
+	absolutePath?: DirectoryConnectionAbsolutePathQueryString_2 | null;
+	relativePath?: DirectoryConnectionRelativePathQueryString_2 | null;
+	extension?: DirectoryConnectionExtensionQueryString_2 | null;
+	size?: DirectoryConnectionSizeQueryInteger_2 | null;
+	prettySize?: DirectoryConnectionPrettySizeQueryString_2 | null;
+	modifiedTime?: DirectoryConnectionModifiedTimeQueryString_2 | null;
+	accessTime?: DirectoryConnectionAccessTimeQueryString_2 | null;
+	changeTime?: DirectoryConnectionChangeTimeQueryString_2 | null;
+	birthTime?: DirectoryConnectionBirthTimeQueryString_2 | null;
+	root?: DirectoryConnectionRootQueryString_2 | null;
+	dir?: DirectoryConnectionDirQueryString_2 | null;
+	base?: DirectoryConnectionBaseQueryString_2 | null;
+	ext?: DirectoryConnectionExtQueryString_2 | null;
+	name?: DirectoryConnectionNameQueryString_2 | null;
+	relativeDirectory?: DirectoryConnectionRelativeDirectoryQueryString_2 | null;
+	dev?: DirectoryConnectionDevQueryInteger_2 | null;
+	mode?: DirectoryConnectionModeQueryInteger_2 | null;
+	nlink?: DirectoryConnectionNlinkQueryInteger_2 | null;
+	uid?: DirectoryConnectionUidQueryInteger_2 | null;
+	gid?: DirectoryConnectionGidQueryInteger_2 | null;
+	rdev?: DirectoryConnectionRdevQueryInteger_2 | null;
+	blksize?: DirectoryConnectionBlksizeQueryInteger_2 | null;
+	ino?: DirectoryConnectionInoQueryInteger_2 | null;
+	blocks?: DirectoryConnectionBlocksQueryInteger_2 | null;
+	atimeMs?: DirectoryConnectionAtimeMsQueryFloat_2 | null;
+	mtimeMs?: DirectoryConnectionMtimeMsQueryFloat_2 | null;
+	ctimeMs?: DirectoryConnectionCtimeMsQueryFloat_2 | null;
+	birthtimeMs?: DirectoryConnectionBirthtimeMsQueryFloat_2 | null;
+	atime?: DirectoryConnectionAtimeQueryString_2 | null;
+	mtime?: DirectoryConnectionMtimeQueryString_2 | null;
+	ctime?: DirectoryConnectionCtimeQueryString_2 | null;
+	birthtime?: DirectoryConnectionBirthtimeQueryString_2 | null;
 }
 
-export interface directoryConnectionIdQueryString_2 {
+export interface DirectoryConnectionIdQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface directoryConnectionInternalInputObject_2 {
-	contentDigest?: directoryConnectionInternalContentDigestQueryString_2 | null;
-	type?: directoryConnectionInternalTypeQueryString_2 | null;
-	description?: directoryConnectionInternalDescriptionQueryString_2 | null;
-	owner?: directoryConnectionInternalOwnerQueryString_2 | null;
+export interface DirectoryConnectionInternalInputObject_2 {
+	contentDigest?: DirectoryConnectionInternalContentDigestQueryString_2 | null;
+	type?: DirectoryConnectionInternalTypeQueryString_2 | null;
+	description?: DirectoryConnectionInternalDescriptionQueryString_2 | null;
+	owner?: DirectoryConnectionInternalOwnerQueryString_2 | null;
 }
 
-export interface directoryConnectionInternalContentDigestQueryString_2 {
+export interface DirectoryConnectionInternalContentDigestQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface directoryConnectionInternalTypeQueryString_2 {
+export interface DirectoryConnectionInternalTypeQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface directoryConnectionInternalDescriptionQueryString_2 {
+export interface DirectoryConnectionInternalDescriptionQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface directoryConnectionInternalOwnerQueryString_2 {
+export interface DirectoryConnectionInternalOwnerQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface directoryConnectionSourceInstanceNameQueryString_2 {
+export interface DirectoryConnectionSourceInstanceNameQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface directoryConnectionAbsolutePathQueryString_2 {
+export interface DirectoryConnectionAbsolutePathQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface directoryConnectionRelativePathQueryString_2 {
+export interface DirectoryConnectionRelativePathQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface directoryConnectionExtensionQueryString_2 {
+export interface DirectoryConnectionExtensionQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface directoryConnectionSizeQueryInteger_2 {
+export interface DirectoryConnectionSizeQueryInteger_2 {
 	eq?: number | null;
 	ne?: number | null;
 	gt?: number | null;
@@ -3437,97 +3946,109 @@ export interface directoryConnectionSizeQueryInteger_2 {
 	lt?: number | null;
 	lte?: number | null;
 	in?: (number | null)[] | null;
+	nin?: (number | null)[] | null;
 }
 
-export interface directoryConnectionPrettySizeQueryString_2 {
+export interface DirectoryConnectionPrettySizeQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface directoryConnectionModifiedTimeQueryString_2 {
+export interface DirectoryConnectionModifiedTimeQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface directoryConnectionAccessTimeQueryString_2 {
+export interface DirectoryConnectionAccessTimeQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface directoryConnectionChangeTimeQueryString_2 {
+export interface DirectoryConnectionChangeTimeQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface directoryConnectionBirthTimeQueryString_2 {
+export interface DirectoryConnectionBirthTimeQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface directoryConnectionRootQueryString_2 {
+export interface DirectoryConnectionRootQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface directoryConnectionDirQueryString_2 {
+export interface DirectoryConnectionDirQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface directoryConnectionBaseQueryString_2 {
+export interface DirectoryConnectionBaseQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface directoryConnectionExtQueryString_2 {
+export interface DirectoryConnectionExtQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface directoryConnectionNameQueryString_2 {
+export interface DirectoryConnectionNameQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface directoryConnectionRelativeDirectoryQueryString_2 {
+export interface DirectoryConnectionRelativeDirectoryQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface directoryConnectionDevQueryInteger_2 {
+export interface DirectoryConnectionDevQueryInteger_2 {
 	eq?: number | null;
 	ne?: number | null;
 	gt?: number | null;
@@ -3535,9 +4056,10 @@ export interface directoryConnectionDevQueryInteger_2 {
 	lt?: number | null;
 	lte?: number | null;
 	in?: (number | null)[] | null;
+	nin?: (number | null)[] | null;
 }
 
-export interface directoryConnectionModeQueryInteger_2 {
+export interface DirectoryConnectionModeQueryInteger_2 {
 	eq?: number | null;
 	ne?: number | null;
 	gt?: number | null;
@@ -3545,9 +4067,10 @@ export interface directoryConnectionModeQueryInteger_2 {
 	lt?: number | null;
 	lte?: number | null;
 	in?: (number | null)[] | null;
+	nin?: (number | null)[] | null;
 }
 
-export interface directoryConnectionNlinkQueryInteger_2 {
+export interface DirectoryConnectionNlinkQueryInteger_2 {
 	eq?: number | null;
 	ne?: number | null;
 	gt?: number | null;
@@ -3555,9 +4078,10 @@ export interface directoryConnectionNlinkQueryInteger_2 {
 	lt?: number | null;
 	lte?: number | null;
 	in?: (number | null)[] | null;
+	nin?: (number | null)[] | null;
 }
 
-export interface directoryConnectionUidQueryInteger_2 {
+export interface DirectoryConnectionUidQueryInteger_2 {
 	eq?: number | null;
 	ne?: number | null;
 	gt?: number | null;
@@ -3565,9 +4089,10 @@ export interface directoryConnectionUidQueryInteger_2 {
 	lt?: number | null;
 	lte?: number | null;
 	in?: (number | null)[] | null;
+	nin?: (number | null)[] | null;
 }
 
-export interface directoryConnectionGidQueryInteger_2 {
+export interface DirectoryConnectionGidQueryInteger_2 {
 	eq?: number | null;
 	ne?: number | null;
 	gt?: number | null;
@@ -3575,9 +4100,10 @@ export interface directoryConnectionGidQueryInteger_2 {
 	lt?: number | null;
 	lte?: number | null;
 	in?: (number | null)[] | null;
+	nin?: (number | null)[] | null;
 }
 
-export interface directoryConnectionRdevQueryInteger_2 {
+export interface DirectoryConnectionRdevQueryInteger_2 {
 	eq?: number | null;
 	ne?: number | null;
 	gt?: number | null;
@@ -3585,9 +4111,10 @@ export interface directoryConnectionRdevQueryInteger_2 {
 	lt?: number | null;
 	lte?: number | null;
 	in?: (number | null)[] | null;
+	nin?: (number | null)[] | null;
 }
 
-export interface directoryConnectionBlksizeQueryInteger_2 {
+export interface DirectoryConnectionBlksizeQueryInteger_2 {
 	eq?: number | null;
 	ne?: number | null;
 	gt?: number | null;
@@ -3595,9 +4122,10 @@ export interface directoryConnectionBlksizeQueryInteger_2 {
 	lt?: number | null;
 	lte?: number | null;
 	in?: (number | null)[] | null;
+	nin?: (number | null)[] | null;
 }
 
-export interface directoryConnectionInoQueryInteger_2 {
+export interface DirectoryConnectionInoQueryInteger_2 {
 	eq?: number | null;
 	ne?: number | null;
 	gt?: number | null;
@@ -3605,9 +4133,10 @@ export interface directoryConnectionInoQueryInteger_2 {
 	lt?: number | null;
 	lte?: number | null;
 	in?: (number | null)[] | null;
+	nin?: (number | null)[] | null;
 }
 
-export interface directoryConnectionBlocksQueryInteger_2 {
+export interface DirectoryConnectionBlocksQueryInteger_2 {
 	eq?: number | null;
 	ne?: number | null;
 	gt?: number | null;
@@ -3615,9 +4144,10 @@ export interface directoryConnectionBlocksQueryInteger_2 {
 	lt?: number | null;
 	lte?: number | null;
 	in?: (number | null)[] | null;
+	nin?: (number | null)[] | null;
 }
 
-export interface directoryConnectionAtimeMsQueryFloat_2 {
+export interface DirectoryConnectionAtimeMsQueryFloat_2 {
 	eq?: number | null;
 	ne?: number | null;
 	gt?: number | null;
@@ -3625,9 +4155,10 @@ export interface directoryConnectionAtimeMsQueryFloat_2 {
 	lt?: number | null;
 	lte?: number | null;
 	in?: (number | null)[] | null;
+	nin?: (number | null)[] | null;
 }
 
-export interface directoryConnectionMtimeMsQueryFloat_2 {
+export interface DirectoryConnectionMtimeMsQueryFloat_2 {
 	eq?: number | null;
 	ne?: number | null;
 	gt?: number | null;
@@ -3635,9 +4166,10 @@ export interface directoryConnectionMtimeMsQueryFloat_2 {
 	lt?: number | null;
 	lte?: number | null;
 	in?: (number | null)[] | null;
+	nin?: (number | null)[] | null;
 }
 
-export interface directoryConnectionCtimeMsQueryFloat_2 {
+export interface DirectoryConnectionCtimeMsQueryFloat_2 {
 	eq?: number | null;
 	ne?: number | null;
 	gt?: number | null;
@@ -3645,9 +4177,10 @@ export interface directoryConnectionCtimeMsQueryFloat_2 {
 	lt?: number | null;
 	lte?: number | null;
 	in?: (number | null)[] | null;
+	nin?: (number | null)[] | null;
 }
 
-export interface directoryConnectionBirthtimeMsQueryFloat_2 {
+export interface DirectoryConnectionBirthtimeMsQueryFloat_2 {
 	eq?: number | null;
 	ne?: number | null;
 	gt?: number | null;
@@ -3655,173 +4188,188 @@ export interface directoryConnectionBirthtimeMsQueryFloat_2 {
 	lt?: number | null;
 	lte?: number | null;
 	in?: (number | null)[] | null;
+	nin?: (number | null)[] | null;
 }
 
-export interface directoryConnectionAtimeQueryString_2 {
+export interface DirectoryConnectionAtimeQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface directoryConnectionMtimeQueryString_2 {
+export interface DirectoryConnectionMtimeQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface directoryConnectionCtimeQueryString_2 {
+export interface DirectoryConnectionCtimeQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface directoryConnectionBirthtimeQueryString_2 {
+export interface DirectoryConnectionBirthtimeQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface fileConnectionSort {
+export interface FileConnectionSort {
 	fields: (FileConnectionSortByFieldsEnum | null)[];
-	order?: fileConnectionSortOrderValues | null;
+	order?: FileConnectionSortOrderValues | null;
 }
 /** Filter connection on its fields */
-export interface filterFile {
-	id?: fileConnectionIdQueryString_2 | null;
-	internal?: fileConnectionInternalInputObject_2 | null;
-	sourceInstanceName?: fileConnectionSourceInstanceNameQueryString_2 | null;
-	absolutePath?: fileConnectionAbsolutePathQueryString_2 | null;
-	relativePath?: fileConnectionRelativePathQueryString_2 | null;
-	extension?: fileConnectionExtensionQueryString_2 | null;
-	size?: fileConnectionSizeQueryInteger_2 | null;
-	prettySize?: fileConnectionPrettySizeQueryString_2 | null;
-	modifiedTime?: fileConnectionModifiedTimeQueryString_2 | null;
-	accessTime?: fileConnectionAccessTimeQueryString_2 | null;
-	changeTime?: fileConnectionChangeTimeQueryString_2 | null;
-	birthTime?: fileConnectionBirthTimeQueryString_2 | null;
-	root?: fileConnectionRootQueryString_2 | null;
-	dir?: fileConnectionDirQueryString_2 | null;
-	base?: fileConnectionBaseQueryString_2 | null;
-	ext?: fileConnectionExtQueryString_2 | null;
-	name?: fileConnectionNameQueryString_2 | null;
-	relativeDirectory?: fileConnectionRelativeDirectoryQueryString_2 | null;
-	dev?: fileConnectionDevQueryInteger_2 | null;
-	mode?: fileConnectionModeQueryInteger_2 | null;
-	nlink?: fileConnectionNlinkQueryInteger_2 | null;
-	uid?: fileConnectionUidQueryInteger_2 | null;
-	gid?: fileConnectionGidQueryInteger_2 | null;
-	rdev?: fileConnectionRdevQueryInteger_2 | null;
-	blksize?: fileConnectionBlksizeQueryInteger_2 | null;
-	ino?: fileConnectionInoQueryInteger_2 | null;
-	blocks?: fileConnectionBlocksQueryInteger_2 | null;
-	atimeMs?: fileConnectionAtimeMsQueryFloat_2 | null;
-	mtimeMs?: fileConnectionMtimeMsQueryFloat_2 | null;
-	ctimeMs?: fileConnectionCtimeMsQueryFloat_2 | null;
-	birthtimeMs?: fileConnectionBirthtimeMsQueryFloat_2 | null;
-	atime?: fileConnectionAtimeQueryString_2 | null;
-	mtime?: fileConnectionMtimeQueryString_2 | null;
-	ctime?: fileConnectionCtimeQueryString_2 | null;
-	birthtime?: fileConnectionBirthtimeQueryString_2 | null;
-	publicURL?: publicUrlQueryString_4 | null;
+export interface FilterFile {
+	id?: FileConnectionIdQueryString_2 | null;
+	internal?: FileConnectionInternalInputObject_2 | null;
+	sourceInstanceName?: FileConnectionSourceInstanceNameQueryString_2 | null;
+	absolutePath?: FileConnectionAbsolutePathQueryString_2 | null;
+	relativePath?: FileConnectionRelativePathQueryString_2 | null;
+	extension?: FileConnectionExtensionQueryString_2 | null;
+	size?: FileConnectionSizeQueryInteger_2 | null;
+	prettySize?: FileConnectionPrettySizeQueryString_2 | null;
+	modifiedTime?: FileConnectionModifiedTimeQueryString_2 | null;
+	accessTime?: FileConnectionAccessTimeQueryString_2 | null;
+	changeTime?: FileConnectionChangeTimeQueryString_2 | null;
+	birthTime?: FileConnectionBirthTimeQueryString_2 | null;
+	root?: FileConnectionRootQueryString_2 | null;
+	dir?: FileConnectionDirQueryString_2 | null;
+	base?: FileConnectionBaseQueryString_2 | null;
+	ext?: FileConnectionExtQueryString_2 | null;
+	name?: FileConnectionNameQueryString_2 | null;
+	relativeDirectory?: FileConnectionRelativeDirectoryQueryString_2 | null;
+	dev?: FileConnectionDevQueryInteger_2 | null;
+	mode?: FileConnectionModeQueryInteger_2 | null;
+	nlink?: FileConnectionNlinkQueryInteger_2 | null;
+	uid?: FileConnectionUidQueryInteger_2 | null;
+	gid?: FileConnectionGidQueryInteger_2 | null;
+	rdev?: FileConnectionRdevQueryInteger_2 | null;
+	blksize?: FileConnectionBlksizeQueryInteger_2 | null;
+	ino?: FileConnectionInoQueryInteger_2 | null;
+	blocks?: FileConnectionBlocksQueryInteger_2 | null;
+	atimeMs?: FileConnectionAtimeMsQueryFloat_2 | null;
+	mtimeMs?: FileConnectionMtimeMsQueryFloat_2 | null;
+	ctimeMs?: FileConnectionCtimeMsQueryFloat_2 | null;
+	birthtimeMs?: FileConnectionBirthtimeMsQueryFloat_2 | null;
+	atime?: FileConnectionAtimeQueryString_2 | null;
+	mtime?: FileConnectionMtimeQueryString_2 | null;
+	ctime?: FileConnectionCtimeQueryString_2 | null;
+	birthtime?: FileConnectionBirthtimeQueryString_2 | null;
+	publicURL?: PublicUrlQueryString_4 | null;
 }
 
-export interface fileConnectionIdQueryString_2 {
+export interface FileConnectionIdQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface fileConnectionInternalInputObject_2 {
-	contentDigest?: fileConnectionInternalContentDigestQueryString_2 | null;
-	type?: fileConnectionInternalTypeQueryString_2 | null;
-	mediaType?: fileConnectionInternalMediaTypeQueryString_2 | null;
-	description?: fileConnectionInternalDescriptionQueryString_2 | null;
-	owner?: fileConnectionInternalOwnerQueryString_2 | null;
+export interface FileConnectionInternalInputObject_2 {
+	contentDigest?: FileConnectionInternalContentDigestQueryString_2 | null;
+	type?: FileConnectionInternalTypeQueryString_2 | null;
+	mediaType?: FileConnectionInternalMediaTypeQueryString_2 | null;
+	description?: FileConnectionInternalDescriptionQueryString_2 | null;
+	owner?: FileConnectionInternalOwnerQueryString_2 | null;
 }
 
-export interface fileConnectionInternalContentDigestQueryString_2 {
+export interface FileConnectionInternalContentDigestQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface fileConnectionInternalTypeQueryString_2 {
+export interface FileConnectionInternalTypeQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface fileConnectionInternalMediaTypeQueryString_2 {
+export interface FileConnectionInternalMediaTypeQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface fileConnectionInternalDescriptionQueryString_2 {
+export interface FileConnectionInternalDescriptionQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface fileConnectionInternalOwnerQueryString_2 {
+export interface FileConnectionInternalOwnerQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface fileConnectionSourceInstanceNameQueryString_2 {
+export interface FileConnectionSourceInstanceNameQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface fileConnectionAbsolutePathQueryString_2 {
+export interface FileConnectionAbsolutePathQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface fileConnectionRelativePathQueryString_2 {
+export interface FileConnectionRelativePathQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface fileConnectionExtensionQueryString_2 {
+export interface FileConnectionExtensionQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface fileConnectionSizeQueryInteger_2 {
+export interface FileConnectionSizeQueryInteger_2 {
 	eq?: number | null;
 	ne?: number | null;
 	gt?: number | null;
@@ -3829,97 +4377,109 @@ export interface fileConnectionSizeQueryInteger_2 {
 	lt?: number | null;
 	lte?: number | null;
 	in?: (number | null)[] | null;
+	nin?: (number | null)[] | null;
 }
 
-export interface fileConnectionPrettySizeQueryString_2 {
+export interface FileConnectionPrettySizeQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface fileConnectionModifiedTimeQueryString_2 {
+export interface FileConnectionModifiedTimeQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface fileConnectionAccessTimeQueryString_2 {
+export interface FileConnectionAccessTimeQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface fileConnectionChangeTimeQueryString_2 {
+export interface FileConnectionChangeTimeQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface fileConnectionBirthTimeQueryString_2 {
+export interface FileConnectionBirthTimeQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface fileConnectionRootQueryString_2 {
+export interface FileConnectionRootQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface fileConnectionDirQueryString_2 {
+export interface FileConnectionDirQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface fileConnectionBaseQueryString_2 {
+export interface FileConnectionBaseQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface fileConnectionExtQueryString_2 {
+export interface FileConnectionExtQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface fileConnectionNameQueryString_2 {
+export interface FileConnectionNameQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface fileConnectionRelativeDirectoryQueryString_2 {
+export interface FileConnectionRelativeDirectoryQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface fileConnectionDevQueryInteger_2 {
+export interface FileConnectionDevQueryInteger_2 {
 	eq?: number | null;
 	ne?: number | null;
 	gt?: number | null;
@@ -3927,9 +4487,10 @@ export interface fileConnectionDevQueryInteger_2 {
 	lt?: number | null;
 	lte?: number | null;
 	in?: (number | null)[] | null;
+	nin?: (number | null)[] | null;
 }
 
-export interface fileConnectionModeQueryInteger_2 {
+export interface FileConnectionModeQueryInteger_2 {
 	eq?: number | null;
 	ne?: number | null;
 	gt?: number | null;
@@ -3937,9 +4498,10 @@ export interface fileConnectionModeQueryInteger_2 {
 	lt?: number | null;
 	lte?: number | null;
 	in?: (number | null)[] | null;
+	nin?: (number | null)[] | null;
 }
 
-export interface fileConnectionNlinkQueryInteger_2 {
+export interface FileConnectionNlinkQueryInteger_2 {
 	eq?: number | null;
 	ne?: number | null;
 	gt?: number | null;
@@ -3947,9 +4509,10 @@ export interface fileConnectionNlinkQueryInteger_2 {
 	lt?: number | null;
 	lte?: number | null;
 	in?: (number | null)[] | null;
+	nin?: (number | null)[] | null;
 }
 
-export interface fileConnectionUidQueryInteger_2 {
+export interface FileConnectionUidQueryInteger_2 {
 	eq?: number | null;
 	ne?: number | null;
 	gt?: number | null;
@@ -3957,9 +4520,10 @@ export interface fileConnectionUidQueryInteger_2 {
 	lt?: number | null;
 	lte?: number | null;
 	in?: (number | null)[] | null;
+	nin?: (number | null)[] | null;
 }
 
-export interface fileConnectionGidQueryInteger_2 {
+export interface FileConnectionGidQueryInteger_2 {
 	eq?: number | null;
 	ne?: number | null;
 	gt?: number | null;
@@ -3967,9 +4531,10 @@ export interface fileConnectionGidQueryInteger_2 {
 	lt?: number | null;
 	lte?: number | null;
 	in?: (number | null)[] | null;
+	nin?: (number | null)[] | null;
 }
 
-export interface fileConnectionRdevQueryInteger_2 {
+export interface FileConnectionRdevQueryInteger_2 {
 	eq?: number | null;
 	ne?: number | null;
 	gt?: number | null;
@@ -3977,9 +4542,10 @@ export interface fileConnectionRdevQueryInteger_2 {
 	lt?: number | null;
 	lte?: number | null;
 	in?: (number | null)[] | null;
+	nin?: (number | null)[] | null;
 }
 
-export interface fileConnectionBlksizeQueryInteger_2 {
+export interface FileConnectionBlksizeQueryInteger_2 {
 	eq?: number | null;
 	ne?: number | null;
 	gt?: number | null;
@@ -3987,9 +4553,10 @@ export interface fileConnectionBlksizeQueryInteger_2 {
 	lt?: number | null;
 	lte?: number | null;
 	in?: (number | null)[] | null;
+	nin?: (number | null)[] | null;
 }
 
-export interface fileConnectionInoQueryInteger_2 {
+export interface FileConnectionInoQueryInteger_2 {
 	eq?: number | null;
 	ne?: number | null;
 	gt?: number | null;
@@ -3997,9 +4564,10 @@ export interface fileConnectionInoQueryInteger_2 {
 	lt?: number | null;
 	lte?: number | null;
 	in?: (number | null)[] | null;
+	nin?: (number | null)[] | null;
 }
 
-export interface fileConnectionBlocksQueryInteger_2 {
+export interface FileConnectionBlocksQueryInteger_2 {
 	eq?: number | null;
 	ne?: number | null;
 	gt?: number | null;
@@ -4007,9 +4575,10 @@ export interface fileConnectionBlocksQueryInteger_2 {
 	lt?: number | null;
 	lte?: number | null;
 	in?: (number | null)[] | null;
+	nin?: (number | null)[] | null;
 }
 
-export interface fileConnectionAtimeMsQueryFloat_2 {
+export interface FileConnectionAtimeMsQueryFloat_2 {
 	eq?: number | null;
 	ne?: number | null;
 	gt?: number | null;
@@ -4017,9 +4586,10 @@ export interface fileConnectionAtimeMsQueryFloat_2 {
 	lt?: number | null;
 	lte?: number | null;
 	in?: (number | null)[] | null;
+	nin?: (number | null)[] | null;
 }
 
-export interface fileConnectionMtimeMsQueryFloat_2 {
+export interface FileConnectionMtimeMsQueryFloat_2 {
 	eq?: number | null;
 	ne?: number | null;
 	gt?: number | null;
@@ -4027,9 +4597,10 @@ export interface fileConnectionMtimeMsQueryFloat_2 {
 	lt?: number | null;
 	lte?: number | null;
 	in?: (number | null)[] | null;
+	nin?: (number | null)[] | null;
 }
 
-export interface fileConnectionCtimeMsQueryFloat_2 {
+export interface FileConnectionCtimeMsQueryFloat_2 {
 	eq?: number | null;
 	ne?: number | null;
 	gt?: number | null;
@@ -4037,9 +4608,10 @@ export interface fileConnectionCtimeMsQueryFloat_2 {
 	lt?: number | null;
 	lte?: number | null;
 	in?: (number | null)[] | null;
+	nin?: (number | null)[] | null;
 }
 
-export interface fileConnectionBirthtimeMsQueryFloat_2 {
+export interface FileConnectionBirthtimeMsQueryFloat_2 {
 	eq?: number | null;
 	ne?: number | null;
 	gt?: number | null;
@@ -4047,263 +4619,287 @@ export interface fileConnectionBirthtimeMsQueryFloat_2 {
 	lt?: number | null;
 	lte?: number | null;
 	in?: (number | null)[] | null;
+	nin?: (number | null)[] | null;
 }
 
-export interface fileConnectionAtimeQueryString_2 {
+export interface FileConnectionAtimeQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface fileConnectionMtimeQueryString_2 {
+export interface FileConnectionMtimeQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface fileConnectionCtimeQueryString_2 {
+export interface FileConnectionCtimeQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface fileConnectionBirthtimeQueryString_2 {
+export interface FileConnectionBirthtimeQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface publicUrlQueryString_4 {
+export interface PublicUrlQueryString_4 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface markdownRemarkConnectionSort {
+export interface MarkdownRemarkConnectionSort {
 	fields: (MarkdownRemarkConnectionSortByFieldsEnum | null)[];
-	order?: markdownRemarkConnectionSortOrderValues | null;
+	order?: MarkdownRemarkConnectionSortOrderValues | null;
 }
 /** Filter connection on its fields */
-export interface filterMarkdownRemark {
-	id?: markdownRemarkConnectionIdQueryString_2 | null;
-	internal?: markdownRemarkConnectionInternalInputObject_2 | null;
-	frontmatter?: markdownRemarkConnectionFrontmatterInputObject_2 | null;
-	excerpt?: excerptQueryString_4 | null;
-	rawMarkdownBody?: markdownRemarkConnectionRawMarkdownBodyQueryString_2 | null;
-	fileAbsolutePath?: markdownRemarkConnectionFileAbsolutePathQueryString_2 | null;
-	html?: htmlQueryString_4 | null;
-	headings?: headingsQueryList_4 | null;
-	timeToRead?: timeToReadQueryInt_4 | null;
-	tableOfContents?: tableOfContentsQueryString_4 | null;
-	wordCount?: wordCountTypeName_4 | null;
+export interface FilterMarkdownRemark {
+	id?: MarkdownRemarkConnectionIdQueryString_2 | null;
+	internal?: MarkdownRemarkConnectionInternalInputObject_2 | null;
+	frontmatter?: MarkdownRemarkConnectionFrontmatterInputObject_2 | null;
+	excerpt?: ExcerptQueryString_4 | null;
+	rawMarkdownBody?: MarkdownRemarkConnectionRawMarkdownBodyQueryString_2 | null;
+	fileAbsolutePath?: MarkdownRemarkConnectionFileAbsolutePathQueryString_2 | null;
+	html?: HtmlQueryString_4 | null;
+	headings?: HeadingsQueryList_4 | null;
+	timeToRead?: TimeToReadQueryInt_4 | null;
+	tableOfContents?: TableOfContentsQueryString_4 | null;
+	wordCount?: WordCountTypeName_4 | null;
 }
 
-export interface markdownRemarkConnectionIdQueryString_2 {
+export interface MarkdownRemarkConnectionIdQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface markdownRemarkConnectionInternalInputObject_2 {
-	content?: markdownRemarkConnectionInternalContentQueryString_2 | null;
-	type?: markdownRemarkConnectionInternalTypeQueryString_2 | null;
-	contentDigest?: markdownRemarkConnectionInternalContentDigestQueryString_2 | null;
-	owner?: markdownRemarkConnectionInternalOwnerQueryString_2 | null;
+export interface MarkdownRemarkConnectionInternalInputObject_2 {
+	content?: MarkdownRemarkConnectionInternalContentQueryString_2 | null;
+	type?: MarkdownRemarkConnectionInternalTypeQueryString_2 | null;
+	contentDigest?: MarkdownRemarkConnectionInternalContentDigestQueryString_2 | null;
+	owner?: MarkdownRemarkConnectionInternalOwnerQueryString_2 | null;
 }
 
-export interface markdownRemarkConnectionInternalContentQueryString_2 {
+export interface MarkdownRemarkConnectionInternalContentQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface markdownRemarkConnectionInternalTypeQueryString_2 {
+export interface MarkdownRemarkConnectionInternalTypeQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface markdownRemarkConnectionInternalContentDigestQueryString_2 {
+export interface MarkdownRemarkConnectionInternalContentDigestQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface markdownRemarkConnectionInternalOwnerQueryString_2 {
+export interface MarkdownRemarkConnectionInternalOwnerQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface markdownRemarkConnectionFrontmatterInputObject_2 {
-	title?: markdownRemarkConnectionFrontmatterTitleQueryString_2 | null;
-	link?: markdownRemarkConnectionFrontmatterLinkQueryString_2 | null;
-	date?: markdownRemarkConnectionFrontmatterDateQueryString_2 | null;
-	authors?: markdownRemarkConnectionFrontmatterAuthorsQueryList_2 | null;
-	_PARENT?: markdownRemarkConnectionFrontmatterParentQueryString_3 | null;
-	parent?: markdownRemarkConnectionFrontmatterParentQueryString_4 | null;
-	description?: markdownRemarkConnectionFrontmatterDescriptionQueryString_2 | null;
-	type?: markdownRemarkConnectionFrontmatterTypeQueryString_2 | null;
-	draft?: markdownRemarkConnectionFrontmatterDraftQueryBoolean_2 | null;
+export interface MarkdownRemarkConnectionFrontmatterInputObject_2 {
+	title?: MarkdownRemarkConnectionFrontmatterTitleQueryString_2 | null;
+	link?: MarkdownRemarkConnectionFrontmatterLinkQueryString_2 | null;
+	date?: MarkdownRemarkConnectionFrontmatterDateQueryString_2 | null;
+	authors?: MarkdownRemarkConnectionFrontmatterAuthorsQueryList_2 | null;
+	_PARENT?: MarkdownRemarkConnectionFrontmatterParentQueryString_2 | null;
+	description?: MarkdownRemarkConnectionFrontmatterDescriptionQueryString_2 | null;
+	draft?: MarkdownRemarkConnectionFrontmatterDraftQueryBoolean_2 | null;
+	toc?: MarkdownRemarkConnectionFrontmatterTocQueryBoolean_2 | null;
+	type?: MarkdownRemarkConnectionFrontmatterTypeQueryString_2 | null;
 }
 
-export interface markdownRemarkConnectionFrontmatterTitleQueryString_2 {
+export interface MarkdownRemarkConnectionFrontmatterTitleQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface markdownRemarkConnectionFrontmatterLinkQueryString_2 {
+export interface MarkdownRemarkConnectionFrontmatterLinkQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface markdownRemarkConnectionFrontmatterDateQueryString_2 {
+export interface MarkdownRemarkConnectionFrontmatterDateQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface markdownRemarkConnectionFrontmatterAuthorsQueryList_2 {
-	elemMatch?: markdownRemarkConnectionFrontmatterAuthorsInputObject_2 | null;
+export interface MarkdownRemarkConnectionFrontmatterAuthorsQueryList_2 {
+	elemMatch?: MarkdownRemarkConnectionFrontmatterAuthorsInputObject_2 | null;
 }
 
-export interface markdownRemarkConnectionFrontmatterAuthorsInputObject_2 {
-	name?: markdownRemarkConnectionFrontmatterAuthorsNameQueryString_2 | null;
-	url?: markdownRemarkConnectionFrontmatterAuthorsUrlQueryString_2 | null;
+export interface MarkdownRemarkConnectionFrontmatterAuthorsInputObject_2 {
+	name?: MarkdownRemarkConnectionFrontmatterAuthorsNameQueryString_2 | null;
+	url?: MarkdownRemarkConnectionFrontmatterAuthorsUrlQueryString_2 | null;
 }
 
-export interface markdownRemarkConnectionFrontmatterAuthorsNameQueryString_2 {
+export interface MarkdownRemarkConnectionFrontmatterAuthorsNameQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface markdownRemarkConnectionFrontmatterAuthorsUrlQueryString_2 {
+export interface MarkdownRemarkConnectionFrontmatterAuthorsUrlQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface markdownRemarkConnectionFrontmatterParentQueryString_3 {
+export interface MarkdownRemarkConnectionFrontmatterParentQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface markdownRemarkConnectionFrontmatterParentQueryString_4 {
+export interface MarkdownRemarkConnectionFrontmatterDescriptionQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface markdownRemarkConnectionFrontmatterDescriptionQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface markdownRemarkConnectionFrontmatterTypeQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface markdownRemarkConnectionFrontmatterDraftQueryBoolean_2 {
+export interface MarkdownRemarkConnectionFrontmatterDraftQueryBoolean_2 {
 	eq?: boolean | null;
 	ne?: boolean | null;
 	in?: (boolean | null)[] | null;
+	nin?: (boolean | null)[] | null;
 }
 
-export interface excerptQueryString_4 {
+export interface MarkdownRemarkConnectionFrontmatterTocQueryBoolean_2 {
+	eq?: boolean | null;
+	ne?: boolean | null;
+	in?: (boolean | null)[] | null;
+	nin?: (boolean | null)[] | null;
+}
+
+export interface MarkdownRemarkConnectionFrontmatterTypeQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface markdownRemarkConnectionRawMarkdownBodyQueryString_2 {
+export interface ExcerptQueryString_4 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface markdownRemarkConnectionFileAbsolutePathQueryString_2 {
+export interface MarkdownRemarkConnectionRawMarkdownBodyQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface htmlQueryString_4 {
+export interface MarkdownRemarkConnectionFileAbsolutePathQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface headingsQueryList_4 {
-	elemMatch?: headingsListElemTypeName_4 | null;
-}
-
-export interface headingsListElemTypeName_4 {
-	value?: headingsListElemValueQueryString_4 | null;
-	depth?: headingsListElemDepthQueryInt_4 | null;
-}
-
-export interface headingsListElemValueQueryString_4 {
+export interface HtmlQueryString_4 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface headingsListElemDepthQueryInt_4 {
+export interface HeadingsQueryList_4 {
+	elemMatch?: HeadingsListElemTypeName_4 | null;
+}
+
+export interface HeadingsListElemTypeName_4 {
+	value?: HeadingsListElemValueQueryString_4 | null;
+	depth?: HeadingsListElemDepthQueryInt_4 | null;
+}
+
+export interface HeadingsListElemValueQueryString_4 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface HeadingsListElemDepthQueryInt_4 {
 	eq?: number | null;
 	ne?: number | null;
 	gt?: number | null;
@@ -4311,9 +4907,10 @@ export interface headingsListElemDepthQueryInt_4 {
 	lt?: number | null;
 	lte?: number | null;
 	in?: (number | null)[] | null;
+	nin?: (number | null)[] | null;
 }
 
-export interface timeToReadQueryInt_4 {
+export interface TimeToReadQueryInt_4 {
 	eq?: number | null;
 	ne?: number | null;
 	gt?: number | null;
@@ -4321,23 +4918,25 @@ export interface timeToReadQueryInt_4 {
 	lt?: number | null;
 	lte?: number | null;
 	in?: (number | null)[] | null;
+	nin?: (number | null)[] | null;
 }
 
-export interface tableOfContentsQueryString_4 {
+export interface TableOfContentsQueryString_4 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface wordCountTypeName_4 {
-	paragraphs?: wordCountParagraphsQueryInt_4 | null;
-	sentences?: wordCountSentencesQueryInt_4 | null;
-	words?: wordCountWordsQueryInt_4 | null;
+export interface WordCountTypeName_4 {
+	paragraphs?: WordCountParagraphsQueryInt_4 | null;
+	sentences?: WordCountSentencesQueryInt_4 | null;
+	words?: WordCountWordsQueryInt_4 | null;
 }
 
-export interface wordCountParagraphsQueryInt_4 {
+export interface WordCountParagraphsQueryInt_4 {
 	eq?: number | null;
 	ne?: number | null;
 	gt?: number | null;
@@ -4345,9 +4944,10 @@ export interface wordCountParagraphsQueryInt_4 {
 	lt?: number | null;
 	lte?: number | null;
 	in?: (number | null)[] | null;
+	nin?: (number | null)[] | null;
 }
 
-export interface wordCountSentencesQueryInt_4 {
+export interface WordCountSentencesQueryInt_4 {
 	eq?: number | null;
 	ne?: number | null;
 	gt?: number | null;
@@ -4355,9 +4955,10 @@ export interface wordCountSentencesQueryInt_4 {
 	lt?: number | null;
 	lte?: number | null;
 	in?: (number | null)[] | null;
+	nin?: (number | null)[] | null;
 }
 
-export interface wordCountWordsQueryInt_4 {
+export interface WordCountWordsQueryInt_4 {
 	eq?: number | null;
 	ne?: number | null;
 	gt?: number | null;
@@ -4365,415 +4966,111 @@ export interface wordCountWordsQueryInt_4 {
 	lt?: number | null;
 	lte?: number | null;
 	in?: (number | null)[] | null;
+	nin?: (number | null)[] | null;
 }
 
-export interface todoJsonConnectionSort {
+export interface TodoJsonConnectionSort {
 	fields: (TodoJsonConnectionSortByFieldsEnum | null)[];
-	order?: todoJsonConnectionSortOrderValues | null;
+	order?: TodoJsonConnectionSortOrderValues | null;
 }
 /** Filter connection on its fields */
-export interface filterTodoJson {
-	title?: todoJsonConnectionTitleQueryString_2 | null;
-	tags?: todoJsonConnectionTagsQueryList_2 | null;
-	id?: todoJsonConnectionIdQueryString_2 | null;
-	internal?: todoJsonConnectionInternalInputObject_2 | null;
+export interface FilterTodoJson {
+	title?: TodoJsonConnectionTitleQueryString_2 | null;
+	tags?: TodoJsonConnectionTagsQueryList_2 | null;
+	id?: TodoJsonConnectionIdQueryString_2 | null;
+	internal?: TodoJsonConnectionInternalInputObject_2 | null;
 }
 
-export interface todoJsonConnectionTitleQueryString_2 {
+export interface TodoJsonConnectionTitleQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface todoJsonConnectionTagsQueryList_2 {
+export interface TodoJsonConnectionTagsQueryList_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface todoJsonConnectionIdQueryString_2 {
+export interface TodoJsonConnectionIdQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface todoJsonConnectionInternalInputObject_2 {
-	contentDigest?: todoJsonConnectionInternalContentDigestQueryString_2 | null;
-	type?: todoJsonConnectionInternalTypeQueryString_2 | null;
-	owner?: todoJsonConnectionInternalOwnerQueryString_2 | null;
+export interface TodoJsonConnectionInternalInputObject_2 {
+	contentDigest?: TodoJsonConnectionInternalContentDigestQueryString_2 | null;
+	type?: TodoJsonConnectionInternalTypeQueryString_2 | null;
+	owner?: TodoJsonConnectionInternalOwnerQueryString_2 | null;
 }
 
-export interface todoJsonConnectionInternalContentDigestQueryString_2 {
+export interface TodoJsonConnectionInternalContentDigestQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface todoJsonConnectionInternalTypeQueryString_2 {
+export interface TodoJsonConnectionInternalTypeQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface todoJsonConnectionInternalOwnerQueryString_2 {
+export interface TodoJsonConnectionInternalOwnerQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface organizationJsonConnectionSort {
-	fields: (OrganizationJsonConnectionSortByFieldsEnum | null)[];
-	order?: organizationJsonConnectionSortOrderValues | null;
-}
-/** Filter connection on its fields */
-export interface filterOrganizationJson {
-	name?: organizationJsonConnectionNameQueryString_2 | null;
-	url?: organizationJsonConnectionUrlQueryString_2 | null;
-	logo?: organizationJsonConnectionLogoQueryString_2 | null;
-	telephone?: organizationJsonConnectionTelephoneQueryString_2 | null;
-	id?: organizationJsonConnectionIdQueryString_2 | null;
-	internal?: organizationJsonConnectionInternalInputObject_2 | null;
-	fields?: organizationJsonConnectionFieldsInputObject_2 | null;
-}
-
-export interface organizationJsonConnectionNameQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface organizationJsonConnectionUrlQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface organizationJsonConnectionLogoQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface organizationJsonConnectionTelephoneQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface organizationJsonConnectionIdQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface organizationJsonConnectionInternalInputObject_2 {
-	contentDigest?: organizationJsonConnectionInternalContentDigestQueryString_2 | null;
-	type?: organizationJsonConnectionInternalTypeQueryString_2 | null;
-	owner?: organizationJsonConnectionInternalOwnerQueryString_2 | null;
-	fieldOwners?: organizationJsonConnectionInternalFieldOwnersInputObject_2 | null;
-}
-
-export interface organizationJsonConnectionInternalContentDigestQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface organizationJsonConnectionInternalTypeQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface organizationJsonConnectionInternalOwnerQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface organizationJsonConnectionInternalFieldOwnersInputObject_2 {
-	logo_image?: organizationJsonConnectionInternalFieldOwnersLogoImageQueryString_2 | null;
-}
-
-export interface organizationJsonConnectionInternalFieldOwnersLogoImageQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface organizationJsonConnectionFieldsInputObject_2 {
-	logo_image?: organizationJsonConnectionFieldsLogoImageQueryString_2 | null;
-}
-
-export interface organizationJsonConnectionFieldsLogoImageQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface experiencesJsonConnectionSort {
-	fields: (ExperiencesJsonConnectionSortByFieldsEnum | null)[];
-	order?: experiencesJsonConnectionSortOrderValues | null;
-}
-/** Filter connection on its fields */
-export interface filterExperiencesJson {
-	work?: experiencesJsonConnectionWorkQueryList_2 | null;
-	id?: experiencesJsonConnectionIdQueryString_2 | null;
-	internal?: experiencesJsonConnectionInternalInputObject_2 | null;
-	fields?: experiencesJsonConnectionFieldsInputObject_2 | null;
-}
-
-export interface experiencesJsonConnectionWorkQueryList_2 {
-	elemMatch?: experiencesJsonConnectionWorkInputObject_2 | null;
-}
-
-export interface experiencesJsonConnectionWorkInputObject_2 {
-	company?: experiencesJsonConnectionWorkCompanyQueryString_2 | null;
-	link?: experiencesJsonConnectionWorkLinkQueryString_2 | null;
-	image?: experiencesJsonConnectionWorkImageQueryString_2 | null;
-	period?: experiencesJsonConnectionWorkPeriodQueryString_2 | null;
-	role?: experiencesJsonConnectionWorkRoleQueryString_2 | null;
-	tasks?: experiencesJsonConnectionWorkTasksQueryList_2 | null;
-}
-
-export interface experiencesJsonConnectionWorkCompanyQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface experiencesJsonConnectionWorkLinkQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface experiencesJsonConnectionWorkImageQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface experiencesJsonConnectionWorkPeriodQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface experiencesJsonConnectionWorkRoleQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface experiencesJsonConnectionWorkTasksQueryList_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface experiencesJsonConnectionIdQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface experiencesJsonConnectionInternalInputObject_2 {
-	contentDigest?: experiencesJsonConnectionInternalContentDigestQueryString_2 | null;
-	type?: experiencesJsonConnectionInternalTypeQueryString_2 | null;
-	owner?: experiencesJsonConnectionInternalOwnerQueryString_2 | null;
-	fieldOwners?: experiencesJsonConnectionInternalFieldOwnersInputObject_2 | null;
-}
-
-export interface experiencesJsonConnectionInternalContentDigestQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface experiencesJsonConnectionInternalTypeQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface experiencesJsonConnectionInternalOwnerQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface experiencesJsonConnectionInternalFieldOwnersInputObject_2 {
-	image_image?: experiencesJsonConnectionInternalFieldOwnersImageImageQueryString_2 | null;
-}
-
-export interface experiencesJsonConnectionInternalFieldOwnersImageImageQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface experiencesJsonConnectionFieldsInputObject_2 {
-	image_image?: experiencesJsonConnectionFieldsImageImageQueryList_2 | null;
-}
-
-export interface experiencesJsonConnectionFieldsImageImageQueryList_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface competencesJsonConnectionSort {
-	fields: (CompetencesJsonConnectionSortByFieldsEnum | null)[];
-	order?: competencesJsonConnectionSortOrderValues | null;
-}
-/** Filter connection on its fields */
-export interface filterCompetencesJson {
-	name?: competencesJsonConnectionNameQueryString_2 | null;
-	description?: competencesJsonConnectionDescriptionQueryString_2 | null;
-	id?: competencesJsonConnectionIdQueryString_2 | null;
-	internal?: competencesJsonConnectionInternalInputObject_2 | null;
-}
-
-export interface competencesJsonConnectionNameQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface competencesJsonConnectionDescriptionQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface competencesJsonConnectionIdQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface competencesJsonConnectionInternalInputObject_2 {
-	contentDigest?: competencesJsonConnectionInternalContentDigestQueryString_2 | null;
-	type?: competencesJsonConnectionInternalTypeQueryString_2 | null;
-	owner?: competencesJsonConnectionInternalOwnerQueryString_2 | null;
-}
-
-export interface competencesJsonConnectionInternalContentDigestQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface competencesJsonConnectionInternalTypeQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface competencesJsonConnectionInternalOwnerQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface interestsJsonConnectionSort {
+export interface InterestsJsonConnectionSort {
 	fields: (InterestsJsonConnectionSortByFieldsEnum | null)[];
-	order?: interestsJsonConnectionSortOrderValues | null;
+	order?: InterestsJsonConnectionSortOrderValues | null;
 }
 /** Filter connection on its fields */
-export interface filterInterestsJson {
-	subjects?: interestsJsonConnectionSubjectsQueryList_2 | null;
-	id?: interestsJsonConnectionIdQueryString_2 | null;
-	internal?: interestsJsonConnectionInternalInputObject_2 | null;
+export interface FilterInterestsJson {
+	subjects?: InterestsJsonConnectionSubjectsQueryList_2 | null;
+	id?: InterestsJsonConnectionIdQueryString_2 | null;
+	internal?: InterestsJsonConnectionInternalInputObject_2 | null;
 }
 
-export interface interestsJsonConnectionSubjectsQueryList_2 {
-	elemMatch?: interestsJsonConnectionSubjectsInputObject_2 | null;
+export interface InterestsJsonConnectionSubjectsQueryList_2 {
+	elemMatch?: InterestsJsonConnectionSubjectsInputObject_2 | null;
 }
 
-export interface interestsJsonConnectionSubjectsInputObject_2 {
-	name?: interestsJsonConnectionSubjectsNameQueryString_2 | null;
-	intensity?: interestsJsonConnectionSubjectsIntensityQueryInteger_2 | null;
+export interface InterestsJsonConnectionSubjectsInputObject_2 {
+	name?: InterestsJsonConnectionSubjectsNameQueryString_2 | null;
+	intensity?: InterestsJsonConnectionSubjectsIntensityQueryInteger_2 | null;
 }
 
-export interface interestsJsonConnectionSubjectsNameQueryString_2 {
+export interface InterestsJsonConnectionSubjectsNameQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface interestsJsonConnectionSubjectsIntensityQueryInteger_2 {
+export interface InterestsJsonConnectionSubjectsIntensityQueryInteger_2 {
 	eq?: number | null;
 	ne?: number | null;
 	gt?: number | null;
@@ -4781,187 +5078,203 @@ export interface interestsJsonConnectionSubjectsIntensityQueryInteger_2 {
 	lt?: number | null;
 	lte?: number | null;
 	in?: (number | null)[] | null;
+	nin?: (number | null)[] | null;
 }
 
-export interface interestsJsonConnectionIdQueryString_2 {
+export interface InterestsJsonConnectionIdQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface interestsJsonConnectionInternalInputObject_2 {
-	contentDigest?: interestsJsonConnectionInternalContentDigestQueryString_2 | null;
-	type?: interestsJsonConnectionInternalTypeQueryString_2 | null;
-	owner?: interestsJsonConnectionInternalOwnerQueryString_2 | null;
+export interface InterestsJsonConnectionInternalInputObject_2 {
+	contentDigest?: InterestsJsonConnectionInternalContentDigestQueryString_2 | null;
+	type?: InterestsJsonConnectionInternalTypeQueryString_2 | null;
+	owner?: InterestsJsonConnectionInternalOwnerQueryString_2 | null;
 }
 
-export interface interestsJsonConnectionInternalContentDigestQueryString_2 {
+export interface InterestsJsonConnectionInternalContentDigestQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface interestsJsonConnectionInternalTypeQueryString_2 {
+export interface InterestsJsonConnectionInternalTypeQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface interestsJsonConnectionInternalOwnerQueryString_2 {
+export interface InterestsJsonConnectionInternalOwnerQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface personalJsonConnectionSort {
-	fields: (PersonalJsonConnectionSortByFieldsEnum | null)[];
-	order?: personalJsonConnectionSortOrderValues | null;
+export interface OrganizationJsonConnectionSort {
+	fields: (OrganizationJsonConnectionSortByFieldsEnum | null)[];
+	order?: OrganizationJsonConnectionSortOrderValues | null;
 }
 /** Filter connection on its fields */
-export interface filterPersonalJson {
-	name?: personalJsonConnectionNameQueryString_2 | null;
-	email?: personalJsonConnectionEmailQueryString_2 | null;
-	jobTitle?: personalJsonConnectionJobTitleQueryString_2 | null;
-	social?: personalJsonConnectionSocialQueryList_2 | null;
-	id?: personalJsonConnectionIdQueryString_2 | null;
-	internal?: personalJsonConnectionInternalInputObject_2 | null;
+export interface FilterOrganizationJson {
+	name?: OrganizationJsonConnectionNameQueryString_2 | null;
+	url?: OrganizationJsonConnectionUrlQueryString_2 | null;
+	logo?: OrganizationJsonConnectionLogoQueryString_2 | null;
+	telephone?: OrganizationJsonConnectionTelephoneQueryString_2 | null;
+	id?: OrganizationJsonConnectionIdQueryString_2 | null;
+	internal?: OrganizationJsonConnectionInternalInputObject_2 | null;
+	fields?: OrganizationJsonConnectionFieldsInputObject_2 | null;
 }
 
-export interface personalJsonConnectionNameQueryString_2 {
+export interface OrganizationJsonConnectionNameQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface personalJsonConnectionEmailQueryString_2 {
+export interface OrganizationJsonConnectionUrlQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface personalJsonConnectionJobTitleQueryString_2 {
+export interface OrganizationJsonConnectionLogoQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface personalJsonConnectionSocialQueryList_2 {
-	elemMatch?: personalJsonConnectionSocialInputObject_2 | null;
-}
-
-export interface personalJsonConnectionSocialInputObject_2 {
-	serviceName?: personalJsonConnectionSocialServiceNameQueryString_2 | null;
-	icon?: personalJsonConnectionSocialIconQueryString_2 | null;
-	url?: personalJsonConnectionSocialUrlQueryString_2 | null;
-}
-
-export interface personalJsonConnectionSocialServiceNameQueryString_2 {
+export interface OrganizationJsonConnectionTelephoneQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface personalJsonConnectionSocialIconQueryString_2 {
+export interface OrganizationJsonConnectionIdQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface personalJsonConnectionSocialUrlQueryString_2 {
+export interface OrganizationJsonConnectionInternalInputObject_2 {
+	contentDigest?: OrganizationJsonConnectionInternalContentDigestQueryString_2 | null;
+	type?: OrganizationJsonConnectionInternalTypeQueryString_2 | null;
+	owner?: OrganizationJsonConnectionInternalOwnerQueryString_2 | null;
+	fieldOwners?: OrganizationJsonConnectionInternalFieldOwnersInputObject_2 | null;
+}
+
+export interface OrganizationJsonConnectionInternalContentDigestQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface personalJsonConnectionIdQueryString_2 {
+export interface OrganizationJsonConnectionInternalTypeQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface personalJsonConnectionInternalInputObject_2 {
-	contentDigest?: personalJsonConnectionInternalContentDigestQueryString_2 | null;
-	type?: personalJsonConnectionInternalTypeQueryString_2 | null;
-	owner?: personalJsonConnectionInternalOwnerQueryString_2 | null;
-}
-
-export interface personalJsonConnectionInternalContentDigestQueryString_2 {
+export interface OrganizationJsonConnectionInternalOwnerQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface personalJsonConnectionInternalTypeQueryString_2 {
+export interface OrganizationJsonConnectionInternalFieldOwnersInputObject_2 {
+	logo_image?: OrganizationJsonConnectionInternalFieldOwnersLogoImageQueryString_2 | null;
+}
+
+export interface OrganizationJsonConnectionInternalFieldOwnersLogoImageQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface personalJsonConnectionInternalOwnerQueryString_2 {
+export interface OrganizationJsonConnectionFieldsInputObject_2 {
+	logo_image?: OrganizationJsonConnectionFieldsLogoImageQueryString_2 | null;
+}
+
+export interface OrganizationJsonConnectionFieldsLogoImageQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface skillsJsonConnectionSort {
+export interface SkillsJsonConnectionSort {
 	fields: (SkillsJsonConnectionSortByFieldsEnum | null)[];
-	order?: skillsJsonConnectionSortOrderValues | null;
+	order?: SkillsJsonConnectionSortOrderValues | null;
 }
 /** Filter connection on its fields */
-export interface filterSkillsJson {
-	languages?: skillsJsonConnectionLanguagesQueryList_2 | null;
-	technical?: skillsJsonConnectionTechnicalQueryList_2 | null;
-	soft?: skillsJsonConnectionSoftQueryList_2 | null;
-	id?: skillsJsonConnectionIdQueryString_2 | null;
-	internal?: skillsJsonConnectionInternalInputObject_2 | null;
+export interface FilterSkillsJson {
+	languages?: SkillsJsonConnectionLanguagesQueryList_2 | null;
+	technical?: SkillsJsonConnectionTechnicalQueryList_2 | null;
+	soft?: SkillsJsonConnectionSoftQueryList_2 | null;
+	id?: SkillsJsonConnectionIdQueryString_2 | null;
+	internal?: SkillsJsonConnectionInternalInputObject_2 | null;
 }
 
-export interface skillsJsonConnectionLanguagesQueryList_2 {
-	elemMatch?: skillsJsonConnectionLanguagesInputObject_2 | null;
+export interface SkillsJsonConnectionLanguagesQueryList_2 {
+	elemMatch?: SkillsJsonConnectionLanguagesInputObject_2 | null;
 }
 
-export interface skillsJsonConnectionLanguagesInputObject_2 {
-	name?: skillsJsonConnectionLanguagesNameQueryString_2 | null;
-	intensity?: skillsJsonConnectionLanguagesIntensityQueryInteger_2 | null;
+export interface SkillsJsonConnectionLanguagesInputObject_2 {
+	name?: SkillsJsonConnectionLanguagesNameQueryString_2 | null;
+	intensity?: SkillsJsonConnectionLanguagesIntensityQueryInteger_2 | null;
 }
 
-export interface skillsJsonConnectionLanguagesNameQueryString_2 {
+export interface SkillsJsonConnectionLanguagesNameQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface skillsJsonConnectionLanguagesIntensityQueryInteger_2 {
+export interface SkillsJsonConnectionLanguagesIntensityQueryInteger_2 {
 	eq?: number | null;
 	ne?: number | null;
 	gt?: number | null;
@@ -4969,26 +5282,28 @@ export interface skillsJsonConnectionLanguagesIntensityQueryInteger_2 {
 	lt?: number | null;
 	lte?: number | null;
 	in?: (number | null)[] | null;
+	nin?: (number | null)[] | null;
 }
 
-export interface skillsJsonConnectionTechnicalQueryList_2 {
-	elemMatch?: skillsJsonConnectionTechnicalInputObject_2 | null;
+export interface SkillsJsonConnectionTechnicalQueryList_2 {
+	elemMatch?: SkillsJsonConnectionTechnicalInputObject_2 | null;
 }
 
-export interface skillsJsonConnectionTechnicalInputObject_2 {
-	name?: skillsJsonConnectionTechnicalNameQueryString_2 | null;
-	intensity?: skillsJsonConnectionTechnicalIntensityQueryInteger_2 | null;
+export interface SkillsJsonConnectionTechnicalInputObject_2 {
+	name?: SkillsJsonConnectionTechnicalNameQueryString_2 | null;
+	intensity?: SkillsJsonConnectionTechnicalIntensityQueryInteger_2 | null;
 }
 
-export interface skillsJsonConnectionTechnicalNameQueryString_2 {
+export interface SkillsJsonConnectionTechnicalNameQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface skillsJsonConnectionTechnicalIntensityQueryInteger_2 {
+export interface SkillsJsonConnectionTechnicalIntensityQueryInteger_2 {
 	eq?: number | null;
 	ne?: number | null;
 	gt?: number | null;
@@ -4996,26 +5311,28 @@ export interface skillsJsonConnectionTechnicalIntensityQueryInteger_2 {
 	lt?: number | null;
 	lte?: number | null;
 	in?: (number | null)[] | null;
+	nin?: (number | null)[] | null;
 }
 
-export interface skillsJsonConnectionSoftQueryList_2 {
-	elemMatch?: skillsJsonConnectionSoftInputObject_2 | null;
+export interface SkillsJsonConnectionSoftQueryList_2 {
+	elemMatch?: SkillsJsonConnectionSoftInputObject_2 | null;
 }
 
-export interface skillsJsonConnectionSoftInputObject_2 {
-	name?: skillsJsonConnectionSoftNameQueryString_2 | null;
-	intensity?: skillsJsonConnectionSoftIntensityQueryInteger_2 | null;
+export interface SkillsJsonConnectionSoftInputObject_2 {
+	name?: SkillsJsonConnectionSoftNameQueryString_2 | null;
+	intensity?: SkillsJsonConnectionSoftIntensityQueryInteger_2 | null;
 }
 
-export interface skillsJsonConnectionSoftNameQueryString_2 {
+export interface SkillsJsonConnectionSoftNameQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface skillsJsonConnectionSoftIntensityQueryInteger_2 {
+export interface SkillsJsonConnectionSoftIntensityQueryInteger_2 {
 	eq?: number | null;
 	ne?: number | null;
 	gt?: number | null;
@@ -5023,235 +5340,635 @@ export interface skillsJsonConnectionSoftIntensityQueryInteger_2 {
 	lt?: number | null;
 	lte?: number | null;
 	in?: (number | null)[] | null;
+	nin?: (number | null)[] | null;
 }
 
-export interface skillsJsonConnectionIdQueryString_2 {
+export interface SkillsJsonConnectionIdQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface skillsJsonConnectionInternalInputObject_2 {
-	contentDigest?: skillsJsonConnectionInternalContentDigestQueryString_2 | null;
-	type?: skillsJsonConnectionInternalTypeQueryString_2 | null;
-	owner?: skillsJsonConnectionInternalOwnerQueryString_2 | null;
+export interface SkillsJsonConnectionInternalInputObject_2 {
+	contentDigest?: SkillsJsonConnectionInternalContentDigestQueryString_2 | null;
+	type?: SkillsJsonConnectionInternalTypeQueryString_2 | null;
+	owner?: SkillsJsonConnectionInternalOwnerQueryString_2 | null;
 }
 
-export interface skillsJsonConnectionInternalContentDigestQueryString_2 {
+export interface SkillsJsonConnectionInternalContentDigestQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface skillsJsonConnectionInternalTypeQueryString_2 {
+export interface SkillsJsonConnectionInternalTypeQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface skillsJsonConnectionInternalOwnerQueryString_2 {
+export interface SkillsJsonConnectionInternalOwnerQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePageJsonNameQueryString {
+export interface CompetencesJsonConnectionSort {
+	fields: (CompetencesJsonConnectionSortByFieldsEnum | null)[];
+	order?: CompetencesJsonConnectionSortOrderValues | null;
+}
+/** Filter connection on its fields */
+export interface FilterCompetencesJson {
+	name?: CompetencesJsonConnectionNameQueryString_2 | null;
+	description?: CompetencesJsonConnectionDescriptionQueryString_2 | null;
+	id?: CompetencesJsonConnectionIdQueryString_2 | null;
+	internal?: CompetencesJsonConnectionInternalInputObject_2 | null;
+}
+
+export interface CompetencesJsonConnectionNameQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePageInternalComponentNameQueryString {
+export interface CompetencesJsonConnectionDescriptionQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePagePathQueryString_2 {
+export interface CompetencesJsonConnectionIdQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePageComponentQueryString {
+export interface CompetencesJsonConnectionInternalInputObject_2 {
+	contentDigest?: CompetencesJsonConnectionInternalContentDigestQueryString_2 | null;
+	type?: CompetencesJsonConnectionInternalTypeQueryString_2 | null;
+	owner?: CompetencesJsonConnectionInternalOwnerQueryString_2 | null;
+}
+
+export interface CompetencesJsonConnectionInternalContentDigestQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePageComponentChunkNameQueryString {
+export interface CompetencesJsonConnectionInternalTypeQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePageContextInputObject {
-	group?: sitePageContextGroupQueryList | null;
-	pathPrefix?: sitePageContextPathPrefixQueryString | null;
-	additionalContext?: sitePageContextAdditionalContextInputObject | null;
-	markdownPath?: sitePageContextMarkdownPathQueryString | null;
-}
-
-export interface sitePageContextGroupQueryList {
-	elemMatch?: sitePageContextGroupInputObject | null;
-}
-
-export interface sitePageContextGroupInputObject {
-	node?: sitePageContextGroupNodeInputObject | null;
-}
-
-export interface sitePageContextGroupNodeInputObject {
-	htmlAst?: sitePageContextGroupNodeHtmlAstInputObject | null;
-	excerpt?: sitePageContextGroupNodeExcerptQueryString | null;
-	timeToRead?: sitePageContextGroupNodeTimeToReadQueryInteger | null;
-	count?: sitePageContextGroupNodeCountInputObject | null;
-	fileAbsolutePath?: sitePageContextGroupNodeFileAbsolutePathQueryString | null;
-	parent?: sitePageContextGroupNodeParentInputObject | null;
-	frontmatter?: sitePageContextGroupNodeFrontmatterInputObject | null;
-}
-
-export interface sitePageContextGroupNodeHtmlAstInputObject {
-	type?: sitePageContextGroupNodeHtmlAstTypeQueryString | null;
-	children?: sitePageContextGroupNodeHtmlAstChildrenQueryList | null;
-	data?: sitePageContextGroupNodeHtmlAstDataInputObject | null;
-	tagName?: sitePageContextGroupNodeHtmlAstTagNameQueryString | null;
-}
-
-export interface sitePageContextGroupNodeHtmlAstTypeQueryString {
+export interface CompetencesJsonConnectionInternalOwnerQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePageContextGroupNodeHtmlAstChildrenQueryList {
-	elemMatch?: sitePageContextGroupNodeHtmlAstChildrenInputObject | null;
+export interface PersonalJsonConnectionSort {
+	fields: (PersonalJsonConnectionSortByFieldsEnum | null)[];
+	order?: PersonalJsonConnectionSortOrderValues | null;
+}
+/** Filter connection on its fields */
+export interface FilterPersonalJson {
+	name?: PersonalJsonConnectionNameQueryString_2 | null;
+	email?: PersonalJsonConnectionEmailQueryString_2 | null;
+	jobTitle?: PersonalJsonConnectionJobTitleQueryString_2 | null;
+	social?: PersonalJsonConnectionSocialQueryList_2 | null;
+	id?: PersonalJsonConnectionIdQueryString_2 | null;
+	internal?: PersonalJsonConnectionInternalInputObject_2 | null;
 }
 
-export interface sitePageContextGroupNodeHtmlAstChildrenInputObject {
-	type?: sitePageContextGroupNodeHtmlAstChildrenTypeQueryString | null;
-	tagName?: sitePageContextGroupNodeHtmlAstChildrenTagNameQueryString | null;
-	properties?: sitePageContextGroupNodeHtmlAstChildrenPropertiesInputObject | null;
-	children?: sitePageContextGroupNodeHtmlAstChildrenChildrenQueryList | null;
-	value?: sitePageContextGroupNodeHtmlAstChildrenValueQueryString | null;
-}
-
-export interface sitePageContextGroupNodeHtmlAstChildrenTypeQueryString {
+export interface PersonalJsonConnectionNameQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePageContextGroupNodeHtmlAstChildrenTagNameQueryString {
+export interface PersonalJsonConnectionEmailQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePageContextGroupNodeHtmlAstChildrenPropertiesInputObject {
-	src?: sitePageContextGroupNodeHtmlAstChildrenPropertiesSrcQueryString | null;
-	title?: sitePageContextGroupNodeHtmlAstChildrenPropertiesTitleQueryString | null;
-	attr?: sitePageContextGroupNodeHtmlAstChildrenPropertiesAttrQueryString | null;
-	size?: sitePageContextGroupNodeHtmlAstChildrenPropertiesSizeQueryString | null;
-	className?: sitePageContextGroupNodeHtmlAstChildrenPropertiesClassNameQueryList | null;
-	dataLanguage?: sitePageContextGroupNodeHtmlAstChildrenPropertiesDataLanguageQueryString | null;
-	style?: sitePageContextGroupNodeHtmlAstChildrenPropertiesStyleQueryString | null;
-	sandbox?: sitePageContextGroupNodeHtmlAstChildrenPropertiesSandboxQueryList | null;
-	width?: sitePageContextGroupNodeHtmlAstChildrenPropertiesWidthQueryInteger | null;
-	height?: sitePageContextGroupNodeHtmlAstChildrenPropertiesHeightQueryInteger | null;
-	frameBorder?: sitePageContextGroupNodeHtmlAstChildrenPropertiesFrameBorderQueryString | null;
-	allow?: sitePageContextGroupNodeHtmlAstChildrenPropertiesAllowQueryString | null;
-	allowFullScreen?: sitePageContextGroupNodeHtmlAstChildrenPropertiesAllowFullScreenQueryBoolean | null;
-}
-
-export interface sitePageContextGroupNodeHtmlAstChildrenPropertiesSrcQueryString {
+export interface PersonalJsonConnectionJobTitleQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePageContextGroupNodeHtmlAstChildrenPropertiesTitleQueryString {
+export interface PersonalJsonConnectionSocialQueryList_2 {
+	elemMatch?: PersonalJsonConnectionSocialInputObject_2 | null;
+}
+
+export interface PersonalJsonConnectionSocialInputObject_2 {
+	serviceName?: PersonalJsonConnectionSocialServiceNameQueryString_2 | null;
+	icon?: PersonalJsonConnectionSocialIconQueryString_2 | null;
+	url?: PersonalJsonConnectionSocialUrlQueryString_2 | null;
+}
+
+export interface PersonalJsonConnectionSocialServiceNameQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePageContextGroupNodeHtmlAstChildrenPropertiesAttrQueryString {
+export interface PersonalJsonConnectionSocialIconQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePageContextGroupNodeHtmlAstChildrenPropertiesSizeQueryString {
+export interface PersonalJsonConnectionSocialUrlQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePageContextGroupNodeHtmlAstChildrenPropertiesClassNameQueryList {
+export interface PersonalJsonConnectionIdQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePageContextGroupNodeHtmlAstChildrenPropertiesDataLanguageQueryString {
+export interface PersonalJsonConnectionInternalInputObject_2 {
+	contentDigest?: PersonalJsonConnectionInternalContentDigestQueryString_2 | null;
+	type?: PersonalJsonConnectionInternalTypeQueryString_2 | null;
+	owner?: PersonalJsonConnectionInternalOwnerQueryString_2 | null;
+}
+
+export interface PersonalJsonConnectionInternalContentDigestQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePageContextGroupNodeHtmlAstChildrenPropertiesStyleQueryString {
+export interface PersonalJsonConnectionInternalTypeQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePageContextGroupNodeHtmlAstChildrenPropertiesSandboxQueryList {
+export interface PersonalJsonConnectionInternalOwnerQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePageContextGroupNodeHtmlAstChildrenPropertiesWidthQueryInteger {
+export interface ExperiencesJsonConnectionSort {
+	fields: (ExperiencesJsonConnectionSortByFieldsEnum | null)[];
+	order?: ExperiencesJsonConnectionSortOrderValues | null;
+}
+/** Filter connection on its fields */
+export interface FilterExperiencesJson {
+	work?: ExperiencesJsonConnectionWorkQueryList_2 | null;
+	id?: ExperiencesJsonConnectionIdQueryString_2 | null;
+	internal?: ExperiencesJsonConnectionInternalInputObject_2 | null;
+	fields?: ExperiencesJsonConnectionFieldsInputObject_2 | null;
+}
+
+export interface ExperiencesJsonConnectionWorkQueryList_2 {
+	elemMatch?: ExperiencesJsonConnectionWorkInputObject_2 | null;
+}
+
+export interface ExperiencesJsonConnectionWorkInputObject_2 {
+	company?: ExperiencesJsonConnectionWorkCompanyQueryString_2 | null;
+	link?: ExperiencesJsonConnectionWorkLinkQueryString_2 | null;
+	image?: ExperiencesJsonConnectionWorkImageQueryString_2 | null;
+	period?: ExperiencesJsonConnectionWorkPeriodQueryList_2 | null;
+	role?: ExperiencesJsonConnectionWorkRoleQueryString_2 | null;
+	skills?: ExperiencesJsonConnectionWorkSkillsQueryList_2 | null;
+	projects?: ExperiencesJsonConnectionWorkProjectsQueryList_2 | null;
+}
+
+export interface ExperiencesJsonConnectionWorkCompanyQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface ExperiencesJsonConnectionWorkLinkQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface ExperiencesJsonConnectionWorkImageQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface ExperiencesJsonConnectionWorkPeriodQueryList_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface ExperiencesJsonConnectionWorkRoleQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface ExperiencesJsonConnectionWorkSkillsQueryList_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface ExperiencesJsonConnectionWorkProjectsQueryList_2 {
+	elemMatch?: ExperiencesJsonConnectionWorkProjectsInputObject_2 | null;
+}
+
+export interface ExperiencesJsonConnectionWorkProjectsInputObject_2 {
+	name?: ExperiencesJsonConnectionWorkProjectsNameQueryString_2 | null;
+	url?: ExperiencesJsonConnectionWorkProjectsUrlQueryString_2 | null;
+	description?: ExperiencesJsonConnectionWorkProjectsDescriptionQueryString_2 | null;
+}
+
+export interface ExperiencesJsonConnectionWorkProjectsNameQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface ExperiencesJsonConnectionWorkProjectsUrlQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface ExperiencesJsonConnectionWorkProjectsDescriptionQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface ExperiencesJsonConnectionIdQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface ExperiencesJsonConnectionInternalInputObject_2 {
+	contentDigest?: ExperiencesJsonConnectionInternalContentDigestQueryString_2 | null;
+	type?: ExperiencesJsonConnectionInternalTypeQueryString_2 | null;
+	owner?: ExperiencesJsonConnectionInternalOwnerQueryString_2 | null;
+	fieldOwners?: ExperiencesJsonConnectionInternalFieldOwnersInputObject_2 | null;
+}
+
+export interface ExperiencesJsonConnectionInternalContentDigestQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface ExperiencesJsonConnectionInternalTypeQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface ExperiencesJsonConnectionInternalOwnerQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface ExperiencesJsonConnectionInternalFieldOwnersInputObject_2 {
+	image_image?: ExperiencesJsonConnectionInternalFieldOwnersImageImageQueryString_2 | null;
+}
+
+export interface ExperiencesJsonConnectionInternalFieldOwnersImageImageQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface ExperiencesJsonConnectionFieldsInputObject_2 {
+	image_image?: ExperiencesJsonConnectionFieldsImageImageQueryList_2 | null;
+}
+
+export interface ExperiencesJsonConnectionFieldsImageImageQueryList_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageJsonNameQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageInternalComponentNameQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePagePathQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageComponentQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageComponentChunkNameQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageContextInputObject {
+	group?: SitePageContextGroupQueryList | null;
+	pathPrefix?: SitePageContextPathPrefixQueryString | null;
+	additionalContext?: SitePageContextAdditionalContextInputObject | null;
+	markdownPath?: SitePageContextMarkdownPathQueryString | null;
+}
+
+export interface SitePageContextGroupQueryList {
+	elemMatch?: SitePageContextGroupInputObject | null;
+}
+
+export interface SitePageContextGroupInputObject {
+	node?: SitePageContextGroupNodeInputObject | null;
+}
+
+export interface SitePageContextGroupNodeInputObject {
+	htmlAst?: SitePageContextGroupNodeHtmlAstInputObject | null;
+	excerpt?: SitePageContextGroupNodeExcerptQueryString | null;
+	timeToRead?: SitePageContextGroupNodeTimeToReadQueryInteger | null;
+	count?: SitePageContextGroupNodeCountInputObject | null;
+	fileAbsolutePath?: SitePageContextGroupNodeFileAbsolutePathQueryString | null;
+	parent?: SitePageContextGroupNodeParentInputObject | null;
+	frontmatter?: SitePageContextGroupNodeFrontmatterInputObject | null;
+}
+
+export interface SitePageContextGroupNodeHtmlAstInputObject {
+	type?: SitePageContextGroupNodeHtmlAstTypeQueryString | null;
+	children?: SitePageContextGroupNodeHtmlAstChildrenQueryList | null;
+	data?: SitePageContextGroupNodeHtmlAstDataInputObject | null;
+	tagName?: SitePageContextGroupNodeHtmlAstTagNameQueryString | null;
+}
+
+export interface SitePageContextGroupNodeHtmlAstTypeQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageContextGroupNodeHtmlAstChildrenQueryList {
+	elemMatch?: SitePageContextGroupNodeHtmlAstChildrenInputObject | null;
+}
+
+export interface SitePageContextGroupNodeHtmlAstChildrenInputObject {
+	type?: SitePageContextGroupNodeHtmlAstChildrenTypeQueryString | null;
+	tagName?: SitePageContextGroupNodeHtmlAstChildrenTagNameQueryString | null;
+	properties?: SitePageContextGroupNodeHtmlAstChildrenPropertiesInputObject | null;
+	children?: SitePageContextGroupNodeHtmlAstChildrenChildrenQueryList | null;
+	value?: SitePageContextGroupNodeHtmlAstChildrenValueQueryString | null;
+}
+
+export interface SitePageContextGroupNodeHtmlAstChildrenTypeQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageContextGroupNodeHtmlAstChildrenTagNameQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageContextGroupNodeHtmlAstChildrenPropertiesInputObject {
+	id?: SitePageContextGroupNodeHtmlAstChildrenPropertiesIdQueryString | null;
+	size?: SitePageContextGroupNodeHtmlAstChildrenPropertiesSizeQueryString | null;
+	className?: SitePageContextGroupNodeHtmlAstChildrenPropertiesClassNameQueryList | null;
+	dataLanguage?: SitePageContextGroupNodeHtmlAstChildrenPropertiesDataLanguageQueryString | null;
+	src?: SitePageContextGroupNodeHtmlAstChildrenPropertiesSrcQueryString | null;
+	style?: SitePageContextGroupNodeHtmlAstChildrenPropertiesStyleQueryString | null;
+	sandbox?: SitePageContextGroupNodeHtmlAstChildrenPropertiesSandboxQueryList | null;
+	title?: SitePageContextGroupNodeHtmlAstChildrenPropertiesTitleQueryString | null;
+	width?: SitePageContextGroupNodeHtmlAstChildrenPropertiesWidthQueryInteger | null;
+	height?: SitePageContextGroupNodeHtmlAstChildrenPropertiesHeightQueryInteger | null;
+	frameBorder?: SitePageContextGroupNodeHtmlAstChildrenPropertiesFrameBorderQueryString | null;
+	allow?: SitePageContextGroupNodeHtmlAstChildrenPropertiesAllowQueryString | null;
+	allowFullScreen?: SitePageContextGroupNodeHtmlAstChildrenPropertiesAllowFullScreenQueryBoolean | null;
+	attr?: SitePageContextGroupNodeHtmlAstChildrenPropertiesAttrQueryString | null;
+}
+
+export interface SitePageContextGroupNodeHtmlAstChildrenPropertiesIdQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageContextGroupNodeHtmlAstChildrenPropertiesSizeQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageContextGroupNodeHtmlAstChildrenPropertiesClassNameQueryList {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageContextGroupNodeHtmlAstChildrenPropertiesDataLanguageQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageContextGroupNodeHtmlAstChildrenPropertiesSrcQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageContextGroupNodeHtmlAstChildrenPropertiesStyleQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageContextGroupNodeHtmlAstChildrenPropertiesSandboxQueryList {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageContextGroupNodeHtmlAstChildrenPropertiesTitleQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageContextGroupNodeHtmlAstChildrenPropertiesWidthQueryInteger {
 	eq?: number | null;
 	ne?: number | null;
 	gt?: number | null;
@@ -5259,9 +5976,10 @@ export interface sitePageContextGroupNodeHtmlAstChildrenPropertiesWidthQueryInte
 	lt?: number | null;
 	lte?: number | null;
 	in?: (number | null)[] | null;
+	nin?: (number | null)[] | null;
 }
 
-export interface sitePageContextGroupNodeHtmlAstChildrenPropertiesHeightQueryInteger {
+export interface SitePageContextGroupNodeHtmlAstChildrenPropertiesHeightQueryInteger {
 	eq?: number | null;
 	ne?: number | null;
 	gt?: number | null;
@@ -5269,1481 +5987,1938 @@ export interface sitePageContextGroupNodeHtmlAstChildrenPropertiesHeightQueryInt
 	lt?: number | null;
 	lte?: number | null;
 	in?: (number | null)[] | null;
+	nin?: (number | null)[] | null;
 }
 
-export interface sitePageContextGroupNodeHtmlAstChildrenPropertiesFrameBorderQueryString {
+export interface SitePageContextGroupNodeHtmlAstChildrenPropertiesFrameBorderQueryString {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePageContextGroupNodeHtmlAstChildrenPropertiesAllowQueryString {
+export interface SitePageContextGroupNodeHtmlAstChildrenPropertiesAllowQueryString {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePageContextGroupNodeHtmlAstChildrenPropertiesAllowFullScreenQueryBoolean {
+export interface SitePageContextGroupNodeHtmlAstChildrenPropertiesAllowFullScreenQueryBoolean {
 	eq?: boolean | null;
 	ne?: boolean | null;
 	in?: (boolean | null)[] | null;
+	nin?: (boolean | null)[] | null;
 }
 
-export interface sitePageContextGroupNodeHtmlAstChildrenChildrenQueryList {
-	elemMatch?: sitePageContextGroupNodeHtmlAstChildrenChildrenInputObject | null;
-}
-
-export interface sitePageContextGroupNodeHtmlAstChildrenChildrenInputObject {
-	type?: sitePageContextGroupNodeHtmlAstChildrenChildrenTypeQueryString | null;
-	value?: sitePageContextGroupNodeHtmlAstChildrenChildrenValueQueryString | null;
-	tagName?: sitePageContextGroupNodeHtmlAstChildrenChildrenTagNameQueryString | null;
-	properties?: sitePageContextGroupNodeHtmlAstChildrenChildrenPropertiesInputObject | null;
-	children?: sitePageContextGroupNodeHtmlAstChildrenChildrenChildrenQueryList | null;
-}
-
-export interface sitePageContextGroupNodeHtmlAstChildrenChildrenTypeQueryString {
+export interface SitePageContextGroupNodeHtmlAstChildrenPropertiesAttrQueryString {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePageContextGroupNodeHtmlAstChildrenChildrenValueQueryString {
+export interface SitePageContextGroupNodeHtmlAstChildrenChildrenQueryList {
+	elemMatch?: SitePageContextGroupNodeHtmlAstChildrenChildrenInputObject | null;
+}
+
+export interface SitePageContextGroupNodeHtmlAstChildrenChildrenInputObject {
+	type?: SitePageContextGroupNodeHtmlAstChildrenChildrenTypeQueryString | null;
+	tagName?: SitePageContextGroupNodeHtmlAstChildrenChildrenTagNameQueryString | null;
+	properties?: SitePageContextGroupNodeHtmlAstChildrenChildrenPropertiesInputObject | null;
+	children?: SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenQueryList | null;
+	value?: SitePageContextGroupNodeHtmlAstChildrenChildrenValueQueryString | null;
+}
+
+export interface SitePageContextGroupNodeHtmlAstChildrenChildrenTypeQueryString {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePageContextGroupNodeHtmlAstChildrenChildrenTagNameQueryString {
+export interface SitePageContextGroupNodeHtmlAstChildrenChildrenTagNameQueryString {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePageContextGroupNodeHtmlAstChildrenChildrenPropertiesInputObject {
-	href?: sitePageContextGroupNodeHtmlAstChildrenChildrenPropertiesHrefQueryString | null;
-	title?: sitePageContextGroupNodeHtmlAstChildrenChildrenPropertiesTitleQueryString | null;
-	id?: sitePageContextGroupNodeHtmlAstChildrenChildrenPropertiesIdQueryString | null;
-	quote?: sitePageContextGroupNodeHtmlAstChildrenChildrenPropertiesQuoteQueryString | null;
-	author?: sitePageContextGroupNodeHtmlAstChildrenChildrenPropertiesAuthorQueryString | null;
-	from?: sitePageContextGroupNodeHtmlAstChildrenChildrenPropertiesFromQueryString | null;
-	position?: sitePageContextGroupNodeHtmlAstChildrenChildrenPropertiesPositionQueryString | null;
-	className?: sitePageContextGroupNodeHtmlAstChildrenChildrenPropertiesClassNameQueryList | null;
-	alt?: sitePageContextGroupNodeHtmlAstChildrenChildrenPropertiesAltQueryString | null;
-	src?: sitePageContextGroupNodeHtmlAstChildrenChildrenPropertiesSrcQueryString | null;
+export interface SitePageContextGroupNodeHtmlAstChildrenChildrenPropertiesInputObject {
+	href?: SitePageContextGroupNodeHtmlAstChildrenChildrenPropertiesHrefQueryString | null;
+	ariaHidden?: SitePageContextGroupNodeHtmlAstChildrenChildrenPropertiesAriaHiddenQueryBoolean | null;
+	className?: SitePageContextGroupNodeHtmlAstChildrenChildrenPropertiesClassNameQueryList | null;
+	role?: SitePageContextGroupNodeHtmlAstChildrenChildrenPropertiesRoleQueryString | null;
+	ariaLabelledBy?: SitePageContextGroupNodeHtmlAstChildrenChildrenPropertiesAriaLabelledByQueryList | null;
+	id?: SitePageContextGroupNodeHtmlAstChildrenChildrenPropertiesIdQueryString | null;
+	quote?: SitePageContextGroupNodeHtmlAstChildrenChildrenPropertiesQuoteQueryString | null;
+	author?: SitePageContextGroupNodeHtmlAstChildrenChildrenPropertiesAuthorQueryString | null;
+	from?: SitePageContextGroupNodeHtmlAstChildrenChildrenPropertiesFromQueryString | null;
+	position?: SitePageContextGroupNodeHtmlAstChildrenChildrenPropertiesPositionQueryString | null;
+	title?: SitePageContextGroupNodeHtmlAstChildrenChildrenPropertiesTitleQueryString | null;
+	src?: SitePageContextGroupNodeHtmlAstChildrenChildrenPropertiesSrcQueryString | null;
+	alt?: SitePageContextGroupNodeHtmlAstChildrenChildrenPropertiesAltQueryString | null;
 }
 
-export interface sitePageContextGroupNodeHtmlAstChildrenChildrenPropertiesHrefQueryString {
+export interface SitePageContextGroupNodeHtmlAstChildrenChildrenPropertiesHrefQueryString {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePageContextGroupNodeHtmlAstChildrenChildrenPropertiesTitleQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePageContextGroupNodeHtmlAstChildrenChildrenPropertiesIdQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePageContextGroupNodeHtmlAstChildrenChildrenPropertiesQuoteQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePageContextGroupNodeHtmlAstChildrenChildrenPropertiesAuthorQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePageContextGroupNodeHtmlAstChildrenChildrenPropertiesFromQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePageContextGroupNodeHtmlAstChildrenChildrenPropertiesPositionQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePageContextGroupNodeHtmlAstChildrenChildrenPropertiesClassNameQueryList {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePageContextGroupNodeHtmlAstChildrenChildrenPropertiesAltQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePageContextGroupNodeHtmlAstChildrenChildrenPropertiesSrcQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePageContextGroupNodeHtmlAstChildrenChildrenChildrenQueryList {
-	elemMatch?: sitePageContextGroupNodeHtmlAstChildrenChildrenChildrenInputObject | null;
-}
-
-export interface sitePageContextGroupNodeHtmlAstChildrenChildrenChildrenInputObject {
-	type?: sitePageContextGroupNodeHtmlAstChildrenChildrenChildrenTypeQueryString | null;
-	value?: sitePageContextGroupNodeHtmlAstChildrenChildrenChildrenValueQueryString | null;
-	tagName?: sitePageContextGroupNodeHtmlAstChildrenChildrenChildrenTagNameQueryString | null;
-	properties?: sitePageContextGroupNodeHtmlAstChildrenChildrenChildrenPropertiesInputObject | null;
-	children?: sitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenQueryList | null;
-}
-
-export interface sitePageContextGroupNodeHtmlAstChildrenChildrenChildrenTypeQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePageContextGroupNodeHtmlAstChildrenChildrenChildrenValueQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePageContextGroupNodeHtmlAstChildrenChildrenChildrenTagNameQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePageContextGroupNodeHtmlAstChildrenChildrenChildrenPropertiesInputObject {
-	href?: sitePageContextGroupNodeHtmlAstChildrenChildrenChildrenPropertiesHrefQueryString | null;
-	className?: sitePageContextGroupNodeHtmlAstChildrenChildrenChildrenPropertiesClassNameQueryList | null;
-	id?: sitePageContextGroupNodeHtmlAstChildrenChildrenChildrenPropertiesIdQueryString | null;
-}
-
-export interface sitePageContextGroupNodeHtmlAstChildrenChildrenChildrenPropertiesHrefQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePageContextGroupNodeHtmlAstChildrenChildrenChildrenPropertiesClassNameQueryList {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePageContextGroupNodeHtmlAstChildrenChildrenChildrenPropertiesIdQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenQueryList {
-	elemMatch?: sitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenInputObject | null;
-}
-
-export interface sitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenInputObject {
-	type?: sitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenTypeQueryString | null;
-	value?: sitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenValueQueryString | null;
-	tagName?: sitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenTagNameQueryString | null;
-	properties?: sitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenPropertiesInputObject | null;
-	children?: sitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenQueryList | null;
-}
-
-export interface sitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenTypeQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenValueQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenTagNameQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenPropertiesInputObject {
-	href?: sitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenPropertiesHrefQueryString | null;
-	className?: sitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenPropertiesClassNameQueryList | null;
-}
-
-export interface sitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenPropertiesHrefQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenPropertiesClassNameQueryList {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenQueryList {
-	elemMatch?: sitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenInputObject | null;
-}
-
-export interface sitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenInputObject {
-	type?: sitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenTypeQueryString | null;
-	tagName?: sitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenTagNameQueryString | null;
-	properties?: sitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenPropertiesInputObject | null;
-	children?: sitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenQueryList | null;
-	value?: sitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenValueQueryString | null;
-}
-
-export interface sitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenTypeQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenTagNameQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenPropertiesInputObject {
-	href?: sitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenPropertiesHrefQueryString | null;
-	className?: sitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenPropertiesClassNameQueryList | null;
-	id?: sitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenPropertiesIdQueryString | null;
-}
-
-export interface sitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenPropertiesHrefQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenPropertiesClassNameQueryList {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenPropertiesIdQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenQueryList {
-	elemMatch?: sitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenInputObject | null;
-}
-
-export interface sitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenInputObject {
-	type?: sitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenTypeQueryString | null;
-	value?: sitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenValueQueryString | null;
-	tagName?: sitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenTagNameQueryString | null;
-	properties?: sitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenPropertiesInputObject | null;
-	children?: sitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenChildrenQueryList | null;
-}
-
-export interface sitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenTypeQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenValueQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenTagNameQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenPropertiesInputObject {
-	className?: sitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenPropertiesClassNameQueryList | null;
-	href?: sitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenPropertiesHrefQueryString | null;
-}
-
-export interface sitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenPropertiesClassNameQueryList {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenPropertiesHrefQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenChildrenQueryList {
-	elemMatch?: sitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenChildrenInputObject | null;
-}
-
-export interface sitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenChildrenInputObject {
-	type?: sitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenChildrenTypeQueryString | null;
-	value?: sitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenChildrenValueQueryString | null;
-}
-
-export interface sitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenChildrenTypeQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenChildrenValueQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenValueQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePageContextGroupNodeHtmlAstChildrenValueQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePageContextGroupNodeHtmlAstDataInputObject {
-	quirksMode?: sitePageContextGroupNodeHtmlAstDataQuirksModeQueryBoolean | null;
-}
-
-export interface sitePageContextGroupNodeHtmlAstDataQuirksModeQueryBoolean {
+export interface SitePageContextGroupNodeHtmlAstChildrenChildrenPropertiesAriaHiddenQueryBoolean {
 	eq?: boolean | null;
 	ne?: boolean | null;
 	in?: (boolean | null)[] | null;
+	nin?: (boolean | null)[] | null;
 }
 
-export interface sitePageContextGroupNodeHtmlAstTagNameQueryString {
+export interface SitePageContextGroupNodeHtmlAstChildrenChildrenPropertiesClassNameQueryList {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePageContextGroupNodeExcerptQueryString {
+export interface SitePageContextGroupNodeHtmlAstChildrenChildrenPropertiesRoleQueryString {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePageContextGroupNodeTimeToReadQueryInteger {
-	eq?: number | null;
-	ne?: number | null;
-	gt?: number | null;
-	gte?: number | null;
-	lt?: number | null;
-	lte?: number | null;
-	in?: (number | null)[] | null;
-}
-
-export interface sitePageContextGroupNodeCountInputObject {
-	words?: sitePageContextGroupNodeCountWordsQueryInteger | null;
-}
-
-export interface sitePageContextGroupNodeCountWordsQueryInteger {
-	eq?: number | null;
-	ne?: number | null;
-	gt?: number | null;
-	gte?: number | null;
-	lt?: number | null;
-	lte?: number | null;
-	in?: (number | null)[] | null;
-}
-
-export interface sitePageContextGroupNodeFileAbsolutePathQueryString {
+export interface SitePageContextGroupNodeHtmlAstChildrenChildrenPropertiesAriaLabelledByQueryList {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePageContextGroupNodeParentInputObject {
-	birthTime?: sitePageContextGroupNodeParentBirthTimeQueryString | null;
-	relativeDirectory?: sitePageContextGroupNodeParentRelativeDirectoryQueryString | null;
-	name?: sitePageContextGroupNodeParentNameQueryString | null;
-}
-
-export interface sitePageContextGroupNodeParentBirthTimeQueryString {
+export interface SitePageContextGroupNodeHtmlAstChildrenChildrenPropertiesIdQueryString {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePageContextGroupNodeParentRelativeDirectoryQueryString {
+export interface SitePageContextGroupNodeHtmlAstChildrenChildrenPropertiesQuoteQueryString {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePageContextGroupNodeParentNameQueryString {
+export interface SitePageContextGroupNodeHtmlAstChildrenChildrenPropertiesAuthorQueryString {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePageContextGroupNodeFrontmatterInputObject {
-	title?: sitePageContextGroupNodeFrontmatterTitleQueryString | null;
-	description?: sitePageContextGroupNodeFrontmatterDescriptionQueryString | null;
-	date?: sitePageContextGroupNodeFrontmatterDateQueryString | null;
-	authors?: sitePageContextGroupNodeFrontmatterAuthorsQueryList | null;
-	link?: sitePageContextGroupNodeFrontmatterLinkQueryString | null;
-}
-
-export interface sitePageContextGroupNodeFrontmatterTitleQueryString {
+export interface SitePageContextGroupNodeHtmlAstChildrenChildrenPropertiesFromQueryString {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePageContextGroupNodeFrontmatterDescriptionQueryString {
+export interface SitePageContextGroupNodeHtmlAstChildrenChildrenPropertiesPositionQueryString {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePageContextGroupNodeFrontmatterDateQueryString {
+export interface SitePageContextGroupNodeHtmlAstChildrenChildrenPropertiesTitleQueryString {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePageContextGroupNodeFrontmatterAuthorsQueryList {
-	elemMatch?: sitePageContextGroupNodeFrontmatterAuthorsInputObject | null;
-}
-
-export interface sitePageContextGroupNodeFrontmatterAuthorsInputObject {
-	name?: sitePageContextGroupNodeFrontmatterAuthorsNameQueryString | null;
-	url?: sitePageContextGroupNodeFrontmatterAuthorsUrlQueryString | null;
-}
-
-export interface sitePageContextGroupNodeFrontmatterAuthorsNameQueryString {
+export interface SitePageContextGroupNodeHtmlAstChildrenChildrenPropertiesSrcQueryString {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePageContextGroupNodeFrontmatterAuthorsUrlQueryString {
+export interface SitePageContextGroupNodeHtmlAstChildrenChildrenPropertiesAltQueryString {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePageContextGroupNodeFrontmatterLinkQueryString {
+export interface SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenQueryList {
+	elemMatch?: SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenInputObject | null;
+}
+
+export interface SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenInputObject {
+	type?: SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenTypeQueryString | null;
+	tagName?: SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenTagNameQueryString | null;
+	properties?: SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenPropertiesInputObject | null;
+	children?: SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenQueryList | null;
+	value?: SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenValueQueryString | null;
+}
+
+export interface SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenTypeQueryString {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePageContextPathPrefixQueryString {
+export interface SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenTagNameQueryString {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePageContextAdditionalContextInputObject {
-	listTitle?: sitePageContextAdditionalContextListTitleQueryString | null;
+export interface SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenPropertiesInputObject {
+	ariaHidden?: SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenPropertiesAriaHiddenQueryString | null;
+	height?: SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenPropertiesHeightQueryString | null;
+	version?: SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenPropertiesVersionQueryString | null;
+	viewBox?: SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenPropertiesViewBoxQueryString | null;
+	width?: SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenPropertiesWidthQueryString | null;
+	href?: SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenPropertiesHrefQueryString | null;
+	className?: SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenPropertiesClassNameQueryList | null;
+	id?: SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenPropertiesIdQueryString | null;
 }
 
-export interface sitePageContextAdditionalContextListTitleQueryString {
+export interface SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenPropertiesAriaHiddenQueryString {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePageContextMarkdownPathQueryString {
+export interface SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenPropertiesHeightQueryString {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePagePluginCreatorInputObject {
-	resolve?: sitePagePluginCreatorResolveQueryString | null;
-	id?: sitePagePluginCreatorIdQueryString | null;
-	name?: sitePagePluginCreatorNameQueryString | null;
-	version?: sitePagePluginCreatorVersionQueryString | null;
-	pluginOptions?: sitePagePluginCreatorPluginOptionsInputObject | null;
-	nodeAPIs?: sitePagePluginCreatorNodeApIsQueryList | null;
-	browserAPIs?: sitePagePluginCreatorBrowserApIsQueryList | null;
-	ssrAPIs?: sitePagePluginCreatorSsrApIsQueryList | null;
-	pluginFilepath?: sitePagePluginCreatorPluginFilepathQueryString | null;
-	packageJson?: sitePagePluginCreatorPackageJsonInputObject | null;
-	parent?: sitePagePluginCreatorParentQueryString | null;
-	internal?: sitePagePluginCreatorInternalInputObject | null;
-}
-
-export interface sitePagePluginCreatorResolveQueryString {
+export interface SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenPropertiesVersionQueryString {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePagePluginCreatorIdQueryString {
+export interface SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenPropertiesViewBoxQueryString {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePagePluginCreatorNameQueryString {
+export interface SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenPropertiesWidthQueryString {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePagePluginCreatorVersionQueryString {
+export interface SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenPropertiesHrefQueryString {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePagePluginCreatorPluginOptionsInputObject {
-	plugins?: sitePagePluginCreatorPluginOptionsPluginsQueryList | null;
-	name?: sitePagePluginCreatorPluginOptionsNameQueryString | null;
-	path?: sitePagePluginCreatorPluginOptionsPathQueryString | null;
-	emojiConversion?: sitePagePluginCreatorPluginOptionsEmojiConversionQueryString | null;
-	maxWidth?: sitePagePluginCreatorPluginOptionsMaxWidthQueryInteger | null;
-	wrapperStyle?: sitePagePluginCreatorPluginOptionsWrapperStyleQueryString | null;
-	backgroundColor?: sitePagePluginCreatorPluginOptionsBackgroundColorQueryString | null;
-	linkImagesToOriginal?: sitePagePluginCreatorPluginOptionsLinkImagesToOriginalQueryBoolean | null;
-	showCaptions?: sitePagePluginCreatorPluginOptionsShowCaptionsQueryBoolean | null;
-	pathPrefix?: sitePagePluginCreatorPluginOptionsPathPrefixQueryString | null;
-	inlineCodeMarker?: sitePagePluginCreatorPluginOptionsInlineCodeMarkerQueryString | null;
-	short_name?: sitePagePluginCreatorPluginOptionsShortNameQueryString | null;
-	start_url?: sitePagePluginCreatorPluginOptionsStartUrlQueryString | null;
-	background_color?: sitePagePluginCreatorPluginOptionsBackgroundColorQueryString_2 | null;
-	theme_color?: sitePagePluginCreatorPluginOptionsThemeColorQueryString | null;
-	display?: sitePagePluginCreatorPluginOptionsDisplayQueryString | null;
-	icon?: sitePagePluginCreatorPluginOptionsIconQueryString | null;
-	logo?: sitePagePluginCreatorPluginOptionsLogoQueryString | null;
-	injectHTML?: sitePagePluginCreatorPluginOptionsInjectHtmlQueryBoolean | null;
-	icons?: sitePagePluginCreatorPluginOptionsIconsInputObject | null;
-	pathToConfigModule?: sitePagePluginCreatorPluginOptionsPathToConfigModuleQueryString | null;
-	omitGoogleFont?: sitePagePluginCreatorPluginOptionsOmitGoogleFontQueryBoolean | null;
-	query?: sitePagePluginCreatorPluginOptionsQueryQueryString | null;
-	feeds?: sitePagePluginCreatorPluginOptionsFeedsQueryList | null;
-	pathCheck?: sitePagePluginCreatorPluginOptionsPathCheckQueryBoolean | null;
-}
-
-export interface sitePagePluginCreatorPluginOptionsPluginsQueryList {
-	elemMatch?: sitePagePluginCreatorPluginOptionsPluginsInputObject | null;
-}
-
-export interface sitePagePluginCreatorPluginOptionsPluginsInputObject {
-	resolve?: sitePagePluginCreatorPluginOptionsPluginsResolveQueryString | null;
-	id?: sitePagePluginCreatorPluginOptionsPluginsIdQueryString | null;
-	name?: sitePagePluginCreatorPluginOptionsPluginsNameQueryString | null;
-	version?: sitePagePluginCreatorPluginOptionsPluginsVersionQueryString | null;
-	pluginOptions?: sitePagePluginCreatorPluginOptionsPluginsPluginOptionsInputObject | null;
-	pluginFilepath?: sitePagePluginCreatorPluginOptionsPluginsPluginFilepathQueryString | null;
-}
-
-export interface sitePagePluginCreatorPluginOptionsPluginsResolveQueryString {
+export interface SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenPropertiesClassNameQueryList {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePagePluginCreatorPluginOptionsPluginsIdQueryString {
+export interface SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenPropertiesIdQueryString {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePagePluginCreatorPluginOptionsPluginsNameQueryString {
+export interface SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenQueryList {
+	elemMatch?: SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenInputObject | null;
+}
+
+export interface SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenInputObject {
+	type?: SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenTypeQueryString | null;
+	tagName?: SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenTagNameQueryString | null;
+	properties?: SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenPropertiesInputObject | null;
+	children?: SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenQueryList | null;
+	value?: SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenValueQueryString | null;
+}
+
+export interface SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenTypeQueryString {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePagePluginCreatorPluginOptionsPluginsVersionQueryString {
+export interface SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenTagNameQueryString {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePagePluginCreatorPluginOptionsPluginsPluginOptionsInputObject {
-	emojiConversion?: sitePagePluginCreatorPluginOptionsPluginsPluginOptionsEmojiConversionQueryString | null;
-	maxWidth?: sitePagePluginCreatorPluginOptionsPluginsPluginOptionsMaxWidthQueryInteger | null;
-	wrapperStyle?: sitePagePluginCreatorPluginOptionsPluginsPluginOptionsWrapperStyleQueryString | null;
-	backgroundColor?: sitePagePluginCreatorPluginOptionsPluginsPluginOptionsBackgroundColorQueryString | null;
-	linkImagesToOriginal?: sitePagePluginCreatorPluginOptionsPluginsPluginOptionsLinkImagesToOriginalQueryBoolean | null;
-	showCaptions?: sitePagePluginCreatorPluginOptionsPluginsPluginOptionsShowCaptionsQueryBoolean | null;
-	pathPrefix?: sitePagePluginCreatorPluginOptionsPluginsPluginOptionsPathPrefixQueryString | null;
-	inlineCodeMarker?: sitePagePluginCreatorPluginOptionsPluginsPluginOptionsInlineCodeMarkerQueryString | null;
+export interface SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenPropertiesInputObject {
+	fillRule?: SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenPropertiesFillRuleQueryString | null;
+	d?: SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenPropertiesDQueryString | null;
+	href?: SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenPropertiesHrefQueryString | null;
+	className?: SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenPropertiesClassNameQueryList | null;
 }
 
-export interface sitePagePluginCreatorPluginOptionsPluginsPluginOptionsEmojiConversionQueryString {
+export interface SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenPropertiesFillRuleQueryString {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePagePluginCreatorPluginOptionsPluginsPluginOptionsMaxWidthQueryInteger {
-	eq?: number | null;
-	ne?: number | null;
-	gt?: number | null;
-	gte?: number | null;
-	lt?: number | null;
-	lte?: number | null;
-	in?: (number | null)[] | null;
-}
-
-export interface sitePagePluginCreatorPluginOptionsPluginsPluginOptionsWrapperStyleQueryString {
+export interface SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenPropertiesDQueryString {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePagePluginCreatorPluginOptionsPluginsPluginOptionsBackgroundColorQueryString {
+export interface SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenPropertiesHrefQueryString {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePagePluginCreatorPluginOptionsPluginsPluginOptionsLinkImagesToOriginalQueryBoolean {
+export interface SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenPropertiesClassNameQueryList {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenQueryList {
+	elemMatch?: SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenInputObject | null;
+}
+
+export interface SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenInputObject {
+	type?: SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenTypeQueryString | null;
+	value?: SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenValueQueryString | null;
+	tagName?: SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenTagNameQueryString | null;
+	properties?: SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenPropertiesInputObject | null;
+	children?: SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenQueryList | null;
+}
+
+export interface SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenTypeQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenValueQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenTagNameQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenPropertiesInputObject {
+	href?: SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenPropertiesHrefQueryString | null;
+	className?: SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenPropertiesClassNameQueryList | null;
+	id?: SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenPropertiesIdQueryString | null;
+}
+
+export interface SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenPropertiesHrefQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenPropertiesClassNameQueryList {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenPropertiesIdQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenQueryList {
+	elemMatch?: SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenInputObject | null;
+}
+
+export interface SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenInputObject {
+	type?: SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenTypeQueryString | null;
+	value?: SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenValueQueryString | null;
+	tagName?: SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenTagNameQueryString | null;
+	properties?: SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenPropertiesInputObject | null;
+	children?: SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenChildrenQueryList | null;
+}
+
+export interface SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenTypeQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenValueQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenTagNameQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenPropertiesInputObject {
+	className?: SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenPropertiesClassNameQueryList | null;
+	href?: SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenPropertiesHrefQueryString | null;
+}
+
+export interface SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenPropertiesClassNameQueryList {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenPropertiesHrefQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenChildrenQueryList {
+	elemMatch?: SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenChildrenInputObject | null;
+}
+
+export interface SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenChildrenInputObject {
+	type?: SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenChildrenTypeQueryString | null;
+	value?: SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenChildrenValueQueryString | null;
+}
+
+export interface SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenChildrenTypeQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenChildrenValueQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenValueQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenValueQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageContextGroupNodeHtmlAstChildrenChildrenValueQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageContextGroupNodeHtmlAstChildrenValueQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageContextGroupNodeHtmlAstDataInputObject {
+	quirksMode?: SitePageContextGroupNodeHtmlAstDataQuirksModeQueryBoolean | null;
+}
+
+export interface SitePageContextGroupNodeHtmlAstDataQuirksModeQueryBoolean {
 	eq?: boolean | null;
 	ne?: boolean | null;
 	in?: (boolean | null)[] | null;
+	nin?: (boolean | null)[] | null;
 }
 
-export interface sitePagePluginCreatorPluginOptionsPluginsPluginOptionsShowCaptionsQueryBoolean {
+export interface SitePageContextGroupNodeHtmlAstTagNameQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageContextGroupNodeExcerptQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageContextGroupNodeTimeToReadQueryInteger {
+	eq?: number | null;
+	ne?: number | null;
+	gt?: number | null;
+	gte?: number | null;
+	lt?: number | null;
+	lte?: number | null;
+	in?: (number | null)[] | null;
+	nin?: (number | null)[] | null;
+}
+
+export interface SitePageContextGroupNodeCountInputObject {
+	words?: SitePageContextGroupNodeCountWordsQueryInteger | null;
+}
+
+export interface SitePageContextGroupNodeCountWordsQueryInteger {
+	eq?: number | null;
+	ne?: number | null;
+	gt?: number | null;
+	gte?: number | null;
+	lt?: number | null;
+	lte?: number | null;
+	in?: (number | null)[] | null;
+	nin?: (number | null)[] | null;
+}
+
+export interface SitePageContextGroupNodeFileAbsolutePathQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageContextGroupNodeParentInputObject {
+	birthTime?: SitePageContextGroupNodeParentBirthTimeQueryString | null;
+	relativeDirectory?: SitePageContextGroupNodeParentRelativeDirectoryQueryString | null;
+	name?: SitePageContextGroupNodeParentNameQueryString | null;
+}
+
+export interface SitePageContextGroupNodeParentBirthTimeQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageContextGroupNodeParentRelativeDirectoryQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageContextGroupNodeParentNameQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageContextGroupNodeFrontmatterInputObject {
+	title?: SitePageContextGroupNodeFrontmatterTitleQueryString | null;
+	description?: SitePageContextGroupNodeFrontmatterDescriptionQueryString | null;
+	date?: SitePageContextGroupNodeFrontmatterDateQueryString | null;
+	authors?: SitePageContextGroupNodeFrontmatterAuthorsQueryList | null;
+	link?: SitePageContextGroupNodeFrontmatterLinkQueryString | null;
+}
+
+export interface SitePageContextGroupNodeFrontmatterTitleQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageContextGroupNodeFrontmatterDescriptionQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageContextGroupNodeFrontmatterDateQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageContextGroupNodeFrontmatterAuthorsQueryList {
+	elemMatch?: SitePageContextGroupNodeFrontmatterAuthorsInputObject | null;
+}
+
+export interface SitePageContextGroupNodeFrontmatterAuthorsInputObject {
+	name?: SitePageContextGroupNodeFrontmatterAuthorsNameQueryString | null;
+	url?: SitePageContextGroupNodeFrontmatterAuthorsUrlQueryString | null;
+}
+
+export interface SitePageContextGroupNodeFrontmatterAuthorsNameQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageContextGroupNodeFrontmatterAuthorsUrlQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageContextGroupNodeFrontmatterLinkQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageContextPathPrefixQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageContextAdditionalContextInputObject {
+	listTitle?: SitePageContextAdditionalContextListTitleQueryString | null;
+}
+
+export interface SitePageContextAdditionalContextListTitleQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageContextMarkdownPathQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePagePluginCreatorInputObject {
+	resolve?: SitePagePluginCreatorResolveQueryString | null;
+	id?: SitePagePluginCreatorIdQueryString | null;
+	name?: SitePagePluginCreatorNameQueryString | null;
+	version?: SitePagePluginCreatorVersionQueryString | null;
+	pluginOptions?: SitePagePluginCreatorPluginOptionsInputObject | null;
+	nodeAPIs?: SitePagePluginCreatorNodeApIsQueryList | null;
+	browserAPIs?: SitePagePluginCreatorBrowserApIsQueryList | null;
+	ssrAPIs?: SitePagePluginCreatorSsrApIsQueryList | null;
+	pluginFilepath?: SitePagePluginCreatorPluginFilepathQueryString | null;
+	packageJson?: SitePagePluginCreatorPackageJsonInputObject | null;
+	parent?: SitePagePluginCreatorParentQueryString | null;
+	internal?: SitePagePluginCreatorInternalInputObject | null;
+}
+
+export interface SitePagePluginCreatorResolveQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePagePluginCreatorIdQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePagePluginCreatorNameQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePagePluginCreatorVersionQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePagePluginCreatorPluginOptionsInputObject {
+	plugins?: SitePagePluginCreatorPluginOptionsPluginsQueryList | null;
+	production?: SitePagePluginCreatorPluginOptionsProductionQueryBoolean | null;
+	analyzerMode?: SitePagePluginCreatorPluginOptionsAnalyzerModeQueryString | null;
+	defaultSizes?: SitePagePluginCreatorPluginOptionsDefaultSizesQueryString | null;
+	openAnalyzer?: SitePagePluginCreatorPluginOptionsOpenAnalyzerQueryBoolean | null;
+	name?: SitePagePluginCreatorPluginOptionsNameQueryString | null;
+	path?: SitePagePluginCreatorPluginOptionsPathQueryString | null;
+	maxWidth?: SitePagePluginCreatorPluginOptionsMaxWidthQueryInteger | null;
+	wrapperStyle?: SitePagePluginCreatorPluginOptionsWrapperStyleQueryString | null;
+	backgroundColor?: SitePagePluginCreatorPluginOptionsBackgroundColorQueryString | null;
+	linkImagesToOriginal?: SitePagePluginCreatorPluginOptionsLinkImagesToOriginalQueryBoolean | null;
+	showCaptions?: SitePagePluginCreatorPluginOptionsShowCaptionsQueryBoolean | null;
+	pathPrefix?: SitePagePluginCreatorPluginOptionsPathPrefixQueryString | null;
+	withWebp?: SitePagePluginCreatorPluginOptionsWithWebpQueryBoolean | null;
+	inlineCodeMarker?: SitePagePluginCreatorPluginOptionsInlineCodeMarkerQueryString | null;
+	pathToConfigModule?: SitePagePluginCreatorPluginOptionsPathToConfigModuleQueryString | null;
+	omitGoogleFont?: SitePagePluginCreatorPluginOptionsOmitGoogleFontQueryBoolean | null;
+	query?: SitePagePluginCreatorPluginOptionsQueryQueryString | null;
+	feeds?: SitePagePluginCreatorPluginOptionsFeedsQueryList | null;
+	headers?: SitePagePluginCreatorPluginOptionsHeadersInputObject | null;
+	allPageHeaders?: SitePagePluginCreatorPluginOptionsAllPageHeadersQueryList | null;
+	short_name?: SitePagePluginCreatorPluginOptionsShortNameQueryString | null;
+	start_url?: SitePagePluginCreatorPluginOptionsStartUrlQueryString | null;
+	background_color?: SitePagePluginCreatorPluginOptionsBackgroundColorQueryString_2 | null;
+	theme_color?: SitePagePluginCreatorPluginOptionsThemeColorQueryString | null;
+	display?: SitePagePluginCreatorPluginOptionsDisplayQueryString | null;
+	icon?: SitePagePluginCreatorPluginOptionsIconQueryString | null;
+	pathCheck?: SitePagePluginCreatorPluginOptionsPathCheckQueryBoolean | null;
+}
+
+export interface SitePagePluginCreatorPluginOptionsPluginsQueryList {
+	elemMatch?: SitePagePluginCreatorPluginOptionsPluginsInputObject | null;
+}
+
+export interface SitePagePluginCreatorPluginOptionsPluginsInputObject {
+	resolve?: SitePagePluginCreatorPluginOptionsPluginsResolveQueryString | null;
+	id?: SitePagePluginCreatorPluginOptionsPluginsIdQueryString | null;
+	name?: SitePagePluginCreatorPluginOptionsPluginsNameQueryString | null;
+	version?: SitePagePluginCreatorPluginOptionsPluginsVersionQueryString | null;
+	pluginOptions?: SitePagePluginCreatorPluginOptionsPluginsPluginOptionsInputObject | null;
+	browserAPIs?: SitePagePluginCreatorPluginOptionsPluginsBrowserApIsQueryList | null;
+	ssrAPIs?: SitePagePluginCreatorPluginOptionsPluginsSsrApIsQueryList | null;
+	pluginFilepath?: SitePagePluginCreatorPluginOptionsPluginsPluginFilepathQueryString | null;
+}
+
+export interface SitePagePluginCreatorPluginOptionsPluginsResolveQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePagePluginCreatorPluginOptionsPluginsIdQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePagePluginCreatorPluginOptionsPluginsNameQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePagePluginCreatorPluginOptionsPluginsVersionQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePagePluginCreatorPluginOptionsPluginsPluginOptionsInputObject {
+	maxWidth?: SitePagePluginCreatorPluginOptionsPluginsPluginOptionsMaxWidthQueryInteger | null;
+	wrapperStyle?: SitePagePluginCreatorPluginOptionsPluginsPluginOptionsWrapperStyleQueryString | null;
+	backgroundColor?: SitePagePluginCreatorPluginOptionsPluginsPluginOptionsBackgroundColorQueryString | null;
+	linkImagesToOriginal?: SitePagePluginCreatorPluginOptionsPluginsPluginOptionsLinkImagesToOriginalQueryBoolean | null;
+	showCaptions?: SitePagePluginCreatorPluginOptionsPluginsPluginOptionsShowCaptionsQueryBoolean | null;
+	pathPrefix?: SitePagePluginCreatorPluginOptionsPluginsPluginOptionsPathPrefixQueryString | null;
+	withWebp?: SitePagePluginCreatorPluginOptionsPluginsPluginOptionsWithWebpQueryBoolean | null;
+	inlineCodeMarker?: SitePagePluginCreatorPluginOptionsPluginsPluginOptionsInlineCodeMarkerQueryString | null;
+}
+
+export interface SitePagePluginCreatorPluginOptionsPluginsPluginOptionsMaxWidthQueryInteger {
+	eq?: number | null;
+	ne?: number | null;
+	gt?: number | null;
+	gte?: number | null;
+	lt?: number | null;
+	lte?: number | null;
+	in?: (number | null)[] | null;
+	nin?: (number | null)[] | null;
+}
+
+export interface SitePagePluginCreatorPluginOptionsPluginsPluginOptionsWrapperStyleQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePagePluginCreatorPluginOptionsPluginsPluginOptionsBackgroundColorQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePagePluginCreatorPluginOptionsPluginsPluginOptionsLinkImagesToOriginalQueryBoolean {
 	eq?: boolean | null;
 	ne?: boolean | null;
 	in?: (boolean | null)[] | null;
+	nin?: (boolean | null)[] | null;
 }
 
-export interface sitePagePluginCreatorPluginOptionsPluginsPluginOptionsPathPrefixQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePagePluginCreatorPluginOptionsPluginsPluginOptionsInlineCodeMarkerQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePagePluginCreatorPluginOptionsPluginsPluginFilepathQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePagePluginCreatorPluginOptionsNameQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePagePluginCreatorPluginOptionsPathQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePagePluginCreatorPluginOptionsEmojiConversionQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePagePluginCreatorPluginOptionsMaxWidthQueryInteger {
-	eq?: number | null;
-	ne?: number | null;
-	gt?: number | null;
-	gte?: number | null;
-	lt?: number | null;
-	lte?: number | null;
-	in?: (number | null)[] | null;
-}
-
-export interface sitePagePluginCreatorPluginOptionsWrapperStyleQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePagePluginCreatorPluginOptionsBackgroundColorQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePagePluginCreatorPluginOptionsLinkImagesToOriginalQueryBoolean {
+export interface SitePagePluginCreatorPluginOptionsPluginsPluginOptionsShowCaptionsQueryBoolean {
 	eq?: boolean | null;
 	ne?: boolean | null;
 	in?: (boolean | null)[] | null;
+	nin?: (boolean | null)[] | null;
 }
 
-export interface sitePagePluginCreatorPluginOptionsShowCaptionsQueryBoolean {
+export interface SitePagePluginCreatorPluginOptionsPluginsPluginOptionsPathPrefixQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePagePluginCreatorPluginOptionsPluginsPluginOptionsWithWebpQueryBoolean {
 	eq?: boolean | null;
 	ne?: boolean | null;
 	in?: (boolean | null)[] | null;
+	nin?: (boolean | null)[] | null;
 }
 
-export interface sitePagePluginCreatorPluginOptionsPathPrefixQueryString {
+export interface SitePagePluginCreatorPluginOptionsPluginsPluginOptionsInlineCodeMarkerQueryString {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePagePluginCreatorPluginOptionsInlineCodeMarkerQueryString {
+export interface SitePagePluginCreatorPluginOptionsPluginsBrowserApIsQueryList {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePagePluginCreatorPluginOptionsShortNameQueryString {
+export interface SitePagePluginCreatorPluginOptionsPluginsSsrApIsQueryList {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePagePluginCreatorPluginOptionsStartUrlQueryString {
+export interface SitePagePluginCreatorPluginOptionsPluginsPluginFilepathQueryString {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePagePluginCreatorPluginOptionsBackgroundColorQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePagePluginCreatorPluginOptionsThemeColorQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePagePluginCreatorPluginOptionsDisplayQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePagePluginCreatorPluginOptionsIconQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePagePluginCreatorPluginOptionsLogoQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePagePluginCreatorPluginOptionsInjectHtmlQueryBoolean {
+export interface SitePagePluginCreatorPluginOptionsProductionQueryBoolean {
 	eq?: boolean | null;
 	ne?: boolean | null;
 	in?: (boolean | null)[] | null;
+	nin?: (boolean | null)[] | null;
 }
 
-export interface sitePagePluginCreatorPluginOptionsIconsInputObject {
-	android?: sitePagePluginCreatorPluginOptionsIconsAndroidQueryBoolean | null;
-	appleIcon?: sitePagePluginCreatorPluginOptionsIconsAppleIconQueryBoolean | null;
-	appleStartup?: sitePagePluginCreatorPluginOptionsIconsAppleStartupQueryBoolean | null;
-	coast?: sitePagePluginCreatorPluginOptionsIconsCoastQueryBoolean | null;
-	favicons?: sitePagePluginCreatorPluginOptionsIconsFaviconsQueryBoolean | null;
-	firefox?: sitePagePluginCreatorPluginOptionsIconsFirefoxQueryBoolean | null;
-	twitter?: sitePagePluginCreatorPluginOptionsIconsTwitterQueryBoolean | null;
-	yandex?: sitePagePluginCreatorPluginOptionsIconsYandexQueryBoolean | null;
-	windows?: sitePagePluginCreatorPluginOptionsIconsWindowsQueryBoolean | null;
+export interface SitePagePluginCreatorPluginOptionsAnalyzerModeQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePagePluginCreatorPluginOptionsIconsAndroidQueryBoolean {
+export interface SitePagePluginCreatorPluginOptionsDefaultSizesQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePagePluginCreatorPluginOptionsOpenAnalyzerQueryBoolean {
 	eq?: boolean | null;
 	ne?: boolean | null;
 	in?: (boolean | null)[] | null;
+	nin?: (boolean | null)[] | null;
 }
 
-export interface sitePagePluginCreatorPluginOptionsIconsAppleIconQueryBoolean {
+export interface SitePagePluginCreatorPluginOptionsNameQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePagePluginCreatorPluginOptionsPathQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePagePluginCreatorPluginOptionsMaxWidthQueryInteger {
+	eq?: number | null;
+	ne?: number | null;
+	gt?: number | null;
+	gte?: number | null;
+	lt?: number | null;
+	lte?: number | null;
+	in?: (number | null)[] | null;
+	nin?: (number | null)[] | null;
+}
+
+export interface SitePagePluginCreatorPluginOptionsWrapperStyleQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePagePluginCreatorPluginOptionsBackgroundColorQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePagePluginCreatorPluginOptionsLinkImagesToOriginalQueryBoolean {
 	eq?: boolean | null;
 	ne?: boolean | null;
 	in?: (boolean | null)[] | null;
+	nin?: (boolean | null)[] | null;
 }
 
-export interface sitePagePluginCreatorPluginOptionsIconsAppleStartupQueryBoolean {
+export interface SitePagePluginCreatorPluginOptionsShowCaptionsQueryBoolean {
 	eq?: boolean | null;
 	ne?: boolean | null;
 	in?: (boolean | null)[] | null;
+	nin?: (boolean | null)[] | null;
 }
 
-export interface sitePagePluginCreatorPluginOptionsIconsCoastQueryBoolean {
+export interface SitePagePluginCreatorPluginOptionsPathPrefixQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePagePluginCreatorPluginOptionsWithWebpQueryBoolean {
 	eq?: boolean | null;
 	ne?: boolean | null;
 	in?: (boolean | null)[] | null;
+	nin?: (boolean | null)[] | null;
 }
 
-export interface sitePagePluginCreatorPluginOptionsIconsFaviconsQueryBoolean {
+export interface SitePagePluginCreatorPluginOptionsInlineCodeMarkerQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePagePluginCreatorPluginOptionsPathToConfigModuleQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePagePluginCreatorPluginOptionsOmitGoogleFontQueryBoolean {
 	eq?: boolean | null;
 	ne?: boolean | null;
 	in?: (boolean | null)[] | null;
+	nin?: (boolean | null)[] | null;
 }
 
-export interface sitePagePluginCreatorPluginOptionsIconsFirefoxQueryBoolean {
+export interface SitePagePluginCreatorPluginOptionsQueryQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePagePluginCreatorPluginOptionsFeedsQueryList {
+	elemMatch?: SitePagePluginCreatorPluginOptionsFeedsInputObject | null;
+}
+
+export interface SitePagePluginCreatorPluginOptionsFeedsInputObject {
+	query?: SitePagePluginCreatorPluginOptionsFeedsQueryQueryString | null;
+	output?: SitePagePluginCreatorPluginOptionsFeedsOutputQueryString | null;
+}
+
+export interface SitePagePluginCreatorPluginOptionsFeedsQueryQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePagePluginCreatorPluginOptionsFeedsOutputQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePagePluginCreatorPluginOptionsHeadersInputObject {
+	_xxjs?: SitePagePluginCreatorPluginOptionsHeadersJsQueryList | null;
+	_sw_js?: SitePagePluginCreatorPluginOptionsHeadersSwJsQueryList | null;
+	_xxwebmanifest?: SitePagePluginCreatorPluginOptionsHeadersWebmanifestQueryList | null;
+	_xxcss?: SitePagePluginCreatorPluginOptionsHeadersCssQueryList | null;
+	_xxpng?: SitePagePluginCreatorPluginOptionsHeadersPngQueryList | null;
+	_xxjpg?: SitePagePluginCreatorPluginOptionsHeadersJpgQueryList | null;
+	_xxjpeg?: SitePagePluginCreatorPluginOptionsHeadersJpegQueryList | null;
+	_xxgif?: SitePagePluginCreatorPluginOptionsHeadersGifQueryList | null;
+	_xxsvg?: SitePagePluginCreatorPluginOptionsHeadersSvgQueryList | null;
+}
+
+export interface SitePagePluginCreatorPluginOptionsHeadersJsQueryList {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePagePluginCreatorPluginOptionsHeadersSwJsQueryList {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePagePluginCreatorPluginOptionsHeadersWebmanifestQueryList {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePagePluginCreatorPluginOptionsHeadersCssQueryList {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePagePluginCreatorPluginOptionsHeadersPngQueryList {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePagePluginCreatorPluginOptionsHeadersJpgQueryList {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePagePluginCreatorPluginOptionsHeadersJpegQueryList {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePagePluginCreatorPluginOptionsHeadersGifQueryList {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePagePluginCreatorPluginOptionsHeadersSvgQueryList {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePagePluginCreatorPluginOptionsAllPageHeadersQueryList {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePagePluginCreatorPluginOptionsShortNameQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePagePluginCreatorPluginOptionsStartUrlQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePagePluginCreatorPluginOptionsBackgroundColorQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePagePluginCreatorPluginOptionsThemeColorQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePagePluginCreatorPluginOptionsDisplayQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePagePluginCreatorPluginOptionsIconQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePagePluginCreatorPluginOptionsPathCheckQueryBoolean {
 	eq?: boolean | null;
 	ne?: boolean | null;
 	in?: (boolean | null)[] | null;
+	nin?: (boolean | null)[] | null;
 }
 
-export interface sitePagePluginCreatorPluginOptionsIconsTwitterQueryBoolean {
+export interface SitePagePluginCreatorNodeApIsQueryList {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePagePluginCreatorBrowserApIsQueryList {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePagePluginCreatorSsrApIsQueryList {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePagePluginCreatorPluginFilepathQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePagePluginCreatorPackageJsonInputObject {
+	name?: SitePagePluginCreatorPackageJsonNameQueryString | null;
+	description?: SitePagePluginCreatorPackageJsonDescriptionQueryString | null;
+	version?: SitePagePluginCreatorPackageJsonVersionQueryString | null;
+	main?: SitePagePluginCreatorPackageJsonMainQueryString | null;
+	author?: SitePagePluginCreatorPackageJsonAuthorQueryString | null;
+	license?: SitePagePluginCreatorPackageJsonLicenseQueryString | null;
+	dependencies?: SitePagePluginCreatorPackageJsonDependenciesQueryList | null;
+	devDependencies?: SitePagePluginCreatorPackageJsonDevDependenciesQueryList | null;
+	peerDependencies?: SitePagePluginCreatorPackageJsonPeerDependenciesQueryList | null;
+	keywords?: SitePagePluginCreatorPackageJsonKeywordsQueryList | null;
+}
+
+export interface SitePagePluginCreatorPackageJsonNameQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePagePluginCreatorPackageJsonDescriptionQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePagePluginCreatorPackageJsonVersionQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePagePluginCreatorPackageJsonMainQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePagePluginCreatorPackageJsonAuthorQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePagePluginCreatorPackageJsonLicenseQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePagePluginCreatorPackageJsonDependenciesQueryList {
+	elemMatch?: SitePagePluginCreatorPackageJsonDependenciesInputObject | null;
+}
+
+export interface SitePagePluginCreatorPackageJsonDependenciesInputObject {
+	name?: SitePagePluginCreatorPackageJsonDependenciesNameQueryString | null;
+	version?: SitePagePluginCreatorPackageJsonDependenciesVersionQueryString | null;
+}
+
+export interface SitePagePluginCreatorPackageJsonDependenciesNameQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePagePluginCreatorPackageJsonDependenciesVersionQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePagePluginCreatorPackageJsonDevDependenciesQueryList {
+	elemMatch?: SitePagePluginCreatorPackageJsonDevDependenciesInputObject | null;
+}
+
+export interface SitePagePluginCreatorPackageJsonDevDependenciesInputObject {
+	name?: SitePagePluginCreatorPackageJsonDevDependenciesNameQueryString | null;
+	version?: SitePagePluginCreatorPackageJsonDevDependenciesVersionQueryString | null;
+}
+
+export interface SitePagePluginCreatorPackageJsonDevDependenciesNameQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePagePluginCreatorPackageJsonDevDependenciesVersionQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePagePluginCreatorPackageJsonPeerDependenciesQueryList {
+	elemMatch?: SitePagePluginCreatorPackageJsonPeerDependenciesInputObject | null;
+}
+
+export interface SitePagePluginCreatorPackageJsonPeerDependenciesInputObject {
+	name?: SitePagePluginCreatorPackageJsonPeerDependenciesNameQueryString | null;
+	version?: SitePagePluginCreatorPackageJsonPeerDependenciesVersionQueryString | null;
+}
+
+export interface SitePagePluginCreatorPackageJsonPeerDependenciesNameQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePagePluginCreatorPackageJsonPeerDependenciesVersionQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePagePluginCreatorPackageJsonKeywordsQueryList {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePagePluginCreatorParentQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePagePluginCreatorInternalInputObject {
+	contentDigest?: SitePagePluginCreatorInternalContentDigestQueryString | null;
+	type?: SitePagePluginCreatorInternalTypeQueryString | null;
+	owner?: SitePagePluginCreatorInternalOwnerQueryString | null;
+}
+
+export interface SitePagePluginCreatorInternalContentDigestQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePagePluginCreatorInternalTypeQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePagePluginCreatorInternalOwnerQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePagePluginCreatorIdQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageComponentPathQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageIdQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageInternalInputObject_2 {
+	type?: SitePageInternalTypeQueryString_2 | null;
+	contentDigest?: SitePageInternalContentDigestQueryString_2 | null;
+	description?: SitePageInternalDescriptionQueryString | null;
+	owner?: SitePageInternalOwnerQueryString_2 | null;
+}
+
+export interface SitePageInternalTypeQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageInternalContentDigestQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageInternalDescriptionQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageInternalOwnerQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePluginResolveQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePluginIdQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePluginNameQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePluginVersionQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePluginPluginOptionsInputObject_2 {
+	plugins?: SitePluginPluginOptionsPluginsQueryList_2 | null;
+	production?: SitePluginPluginOptionsProductionQueryBoolean_2 | null;
+	analyzerMode?: SitePluginPluginOptionsAnalyzerModeQueryString_2 | null;
+	defaultSizes?: SitePluginPluginOptionsDefaultSizesQueryString_2 | null;
+	openAnalyzer?: SitePluginPluginOptionsOpenAnalyzerQueryBoolean_2 | null;
+	name?: SitePluginPluginOptionsNameQueryString_2 | null;
+	path?: SitePluginPluginOptionsPathQueryString_2 | null;
+	maxWidth?: SitePluginPluginOptionsMaxWidthQueryInteger_2 | null;
+	wrapperStyle?: SitePluginPluginOptionsWrapperStyleQueryString_2 | null;
+	backgroundColor?: SitePluginPluginOptionsBackgroundColorQueryString_3 | null;
+	linkImagesToOriginal?: SitePluginPluginOptionsLinkImagesToOriginalQueryBoolean_2 | null;
+	showCaptions?: SitePluginPluginOptionsShowCaptionsQueryBoolean_2 | null;
+	pathPrefix?: SitePluginPluginOptionsPathPrefixQueryString_2 | null;
+	withWebp?: SitePluginPluginOptionsWithWebpQueryBoolean_2 | null;
+	inlineCodeMarker?: SitePluginPluginOptionsInlineCodeMarkerQueryString_2 | null;
+	pathToConfigModule?: SitePluginPluginOptionsPathToConfigModuleQueryString_2 | null;
+	omitGoogleFont?: SitePluginPluginOptionsOmitGoogleFontQueryBoolean_2 | null;
+	query?: SitePluginPluginOptionsQueryQueryString_2 | null;
+	feeds?: SitePluginPluginOptionsFeedsQueryList_2 | null;
+	headers?: SitePluginPluginOptionsHeadersInputObject_2 | null;
+	allPageHeaders?: SitePluginPluginOptionsAllPageHeadersQueryList_2 | null;
+	short_name?: SitePluginPluginOptionsShortNameQueryString_2 | null;
+	start_url?: SitePluginPluginOptionsStartUrlQueryString_2 | null;
+	background_color?: SitePluginPluginOptionsBackgroundColorQueryString_4 | null;
+	theme_color?: SitePluginPluginOptionsThemeColorQueryString_2 | null;
+	display?: SitePluginPluginOptionsDisplayQueryString_2 | null;
+	icon?: SitePluginPluginOptionsIconQueryString_2 | null;
+	pathCheck?: SitePluginPluginOptionsPathCheckQueryBoolean_2 | null;
+}
+
+export interface SitePluginPluginOptionsPluginsQueryList_2 {
+	elemMatch?: SitePluginPluginOptionsPluginsInputObject_2 | null;
+}
+
+export interface SitePluginPluginOptionsPluginsInputObject_2 {
+	resolve?: SitePluginPluginOptionsPluginsResolveQueryString_2 | null;
+	id?: SitePluginPluginOptionsPluginsIdQueryString_2 | null;
+	name?: SitePluginPluginOptionsPluginsNameQueryString_2 | null;
+	version?: SitePluginPluginOptionsPluginsVersionQueryString_2 | null;
+	pluginOptions?: SitePluginPluginOptionsPluginsPluginOptionsInputObject_2 | null;
+	browserAPIs?: SitePluginPluginOptionsPluginsBrowserApIsQueryList_2 | null;
+	ssrAPIs?: SitePluginPluginOptionsPluginsSsrApIsQueryList_2 | null;
+	pluginFilepath?: SitePluginPluginOptionsPluginsPluginFilepathQueryString_2 | null;
+}
+
+export interface SitePluginPluginOptionsPluginsResolveQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePluginPluginOptionsPluginsIdQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePluginPluginOptionsPluginsNameQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePluginPluginOptionsPluginsVersionQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePluginPluginOptionsPluginsPluginOptionsInputObject_2 {
+	maxWidth?: SitePluginPluginOptionsPluginsPluginOptionsMaxWidthQueryInteger_2 | null;
+	wrapperStyle?: SitePluginPluginOptionsPluginsPluginOptionsWrapperStyleQueryString_2 | null;
+	backgroundColor?: SitePluginPluginOptionsPluginsPluginOptionsBackgroundColorQueryString_2 | null;
+	linkImagesToOriginal?: SitePluginPluginOptionsPluginsPluginOptionsLinkImagesToOriginalQueryBoolean_2 | null;
+	showCaptions?: SitePluginPluginOptionsPluginsPluginOptionsShowCaptionsQueryBoolean_2 | null;
+	pathPrefix?: SitePluginPluginOptionsPluginsPluginOptionsPathPrefixQueryString_2 | null;
+	withWebp?: SitePluginPluginOptionsPluginsPluginOptionsWithWebpQueryBoolean_2 | null;
+	inlineCodeMarker?: SitePluginPluginOptionsPluginsPluginOptionsInlineCodeMarkerQueryString_2 | null;
+}
+
+export interface SitePluginPluginOptionsPluginsPluginOptionsMaxWidthQueryInteger_2 {
+	eq?: number | null;
+	ne?: number | null;
+	gt?: number | null;
+	gte?: number | null;
+	lt?: number | null;
+	lte?: number | null;
+	in?: (number | null)[] | null;
+	nin?: (number | null)[] | null;
+}
+
+export interface SitePluginPluginOptionsPluginsPluginOptionsWrapperStyleQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePluginPluginOptionsPluginsPluginOptionsBackgroundColorQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePluginPluginOptionsPluginsPluginOptionsLinkImagesToOriginalQueryBoolean_2 {
 	eq?: boolean | null;
 	ne?: boolean | null;
 	in?: (boolean | null)[] | null;
+	nin?: (boolean | null)[] | null;
 }
 
-export interface sitePagePluginCreatorPluginOptionsIconsYandexQueryBoolean {
+export interface SitePluginPluginOptionsPluginsPluginOptionsShowCaptionsQueryBoolean_2 {
 	eq?: boolean | null;
 	ne?: boolean | null;
 	in?: (boolean | null)[] | null;
+	nin?: (boolean | null)[] | null;
 }
 
-export interface sitePagePluginCreatorPluginOptionsIconsWindowsQueryBoolean {
+export interface SitePluginPluginOptionsPluginsPluginOptionsPathPrefixQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePluginPluginOptionsPluginsPluginOptionsWithWebpQueryBoolean_2 {
 	eq?: boolean | null;
 	ne?: boolean | null;
 	in?: (boolean | null)[] | null;
+	nin?: (boolean | null)[] | null;
 }
 
-export interface sitePagePluginCreatorPluginOptionsPathToConfigModuleQueryString {
+export interface SitePluginPluginOptionsPluginsPluginOptionsInlineCodeMarkerQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePagePluginCreatorPluginOptionsOmitGoogleFontQueryBoolean {
+export interface SitePluginPluginOptionsPluginsBrowserApIsQueryList_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePluginPluginOptionsPluginsSsrApIsQueryList_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePluginPluginOptionsPluginsPluginFilepathQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePluginPluginOptionsProductionQueryBoolean_2 {
 	eq?: boolean | null;
 	ne?: boolean | null;
 	in?: (boolean | null)[] | null;
+	nin?: (boolean | null)[] | null;
 }
 
-export interface sitePagePluginCreatorPluginOptionsQueryQueryString {
+export interface SitePluginPluginOptionsAnalyzerModeQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePagePluginCreatorPluginOptionsFeedsQueryList {
-	elemMatch?: sitePagePluginCreatorPluginOptionsFeedsInputObject | null;
-}
-
-export interface sitePagePluginCreatorPluginOptionsFeedsInputObject {
-	query?: sitePagePluginCreatorPluginOptionsFeedsQueryQueryString | null;
-	output?: sitePagePluginCreatorPluginOptionsFeedsOutputQueryString | null;
-}
-
-export interface sitePagePluginCreatorPluginOptionsFeedsQueryQueryString {
+export interface SitePluginPluginOptionsDefaultSizesQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePagePluginCreatorPluginOptionsFeedsOutputQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePagePluginCreatorPluginOptionsPathCheckQueryBoolean {
+export interface SitePluginPluginOptionsOpenAnalyzerQueryBoolean_2 {
 	eq?: boolean | null;
 	ne?: boolean | null;
 	in?: (boolean | null)[] | null;
+	nin?: (boolean | null)[] | null;
 }
 
-export interface sitePagePluginCreatorNodeApIsQueryList {
+export interface SitePluginPluginOptionsNameQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePagePluginCreatorBrowserApIsQueryList {
+export interface SitePluginPluginOptionsPathQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePagePluginCreatorSsrApIsQueryList {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePagePluginCreatorPluginFilepathQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePagePluginCreatorPackageJsonInputObject {
-	name?: sitePagePluginCreatorPackageJsonNameQueryString | null;
-	description?: sitePagePluginCreatorPackageJsonDescriptionQueryString | null;
-	version?: sitePagePluginCreatorPackageJsonVersionQueryString | null;
-	main?: sitePagePluginCreatorPackageJsonMainQueryString | null;
-	author?: sitePagePluginCreatorPackageJsonAuthorQueryString | null;
-	license?: sitePagePluginCreatorPackageJsonLicenseQueryString | null;
-	dependencies?: sitePagePluginCreatorPackageJsonDependenciesQueryList | null;
-	devDependencies?: sitePagePluginCreatorPackageJsonDevDependenciesQueryList | null;
-	peerDependencies?: sitePagePluginCreatorPackageJsonPeerDependenciesQueryList | null;
-	keywords?: sitePagePluginCreatorPackageJsonKeywordsQueryList | null;
-}
-
-export interface sitePagePluginCreatorPackageJsonNameQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePagePluginCreatorPackageJsonDescriptionQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePagePluginCreatorPackageJsonVersionQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePagePluginCreatorPackageJsonMainQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePagePluginCreatorPackageJsonAuthorQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePagePluginCreatorPackageJsonLicenseQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePagePluginCreatorPackageJsonDependenciesQueryList {
-	elemMatch?: sitePagePluginCreatorPackageJsonDependenciesInputObject | null;
-}
-
-export interface sitePagePluginCreatorPackageJsonDependenciesInputObject {
-	name?: sitePagePluginCreatorPackageJsonDependenciesNameQueryString | null;
-	version?: sitePagePluginCreatorPackageJsonDependenciesVersionQueryString | null;
-}
-
-export interface sitePagePluginCreatorPackageJsonDependenciesNameQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePagePluginCreatorPackageJsonDependenciesVersionQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePagePluginCreatorPackageJsonDevDependenciesQueryList {
-	elemMatch?: sitePagePluginCreatorPackageJsonDevDependenciesInputObject | null;
-}
-
-export interface sitePagePluginCreatorPackageJsonDevDependenciesInputObject {
-	name?: sitePagePluginCreatorPackageJsonDevDependenciesNameQueryString | null;
-	version?: sitePagePluginCreatorPackageJsonDevDependenciesVersionQueryString | null;
-}
-
-export interface sitePagePluginCreatorPackageJsonDevDependenciesNameQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePagePluginCreatorPackageJsonDevDependenciesVersionQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePagePluginCreatorPackageJsonPeerDependenciesQueryList {
-	elemMatch?: sitePagePluginCreatorPackageJsonPeerDependenciesInputObject | null;
-}
-
-export interface sitePagePluginCreatorPackageJsonPeerDependenciesInputObject {
-	name?: sitePagePluginCreatorPackageJsonPeerDependenciesNameQueryString | null;
-	version?: sitePagePluginCreatorPackageJsonPeerDependenciesVersionQueryString | null;
-}
-
-export interface sitePagePluginCreatorPackageJsonPeerDependenciesNameQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePagePluginCreatorPackageJsonPeerDependenciesVersionQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePagePluginCreatorPackageJsonKeywordsQueryList {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePagePluginCreatorParentQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePagePluginCreatorInternalInputObject {
-	contentDigest?: sitePagePluginCreatorInternalContentDigestQueryString | null;
-	type?: sitePagePluginCreatorInternalTypeQueryString | null;
-	owner?: sitePagePluginCreatorInternalOwnerQueryString | null;
-}
-
-export interface sitePagePluginCreatorInternalContentDigestQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePagePluginCreatorInternalTypeQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePagePluginCreatorInternalOwnerQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePagePluginCreatorIdQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePageComponentPathQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePageIdQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePageInternalInputObject_2 {
-	type?: sitePageInternalTypeQueryString_2 | null;
-	contentDigest?: sitePageInternalContentDigestQueryString_2 | null;
-	description?: sitePageInternalDescriptionQueryString | null;
-	owner?: sitePageInternalOwnerQueryString_2 | null;
-}
-
-export interface sitePageInternalTypeQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePageInternalContentDigestQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePageInternalDescriptionQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePageInternalOwnerQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePluginResolveQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePluginIdQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePluginNameQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePluginVersionQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePluginPluginOptionsInputObject_2 {
-	plugins?: sitePluginPluginOptionsPluginsQueryList_2 | null;
-	name?: sitePluginPluginOptionsNameQueryString_2 | null;
-	path?: sitePluginPluginOptionsPathQueryString_2 | null;
-	emojiConversion?: sitePluginPluginOptionsEmojiConversionQueryString_2 | null;
-	maxWidth?: sitePluginPluginOptionsMaxWidthQueryInteger_2 | null;
-	wrapperStyle?: sitePluginPluginOptionsWrapperStyleQueryString | null;
-	backgroundColor?: sitePluginPluginOptionsBackgroundColorQueryString_2 | null;
-	linkImagesToOriginal?: sitePluginPluginOptionsLinkImagesToOriginalQueryBoolean | null;
-	showCaptions?: sitePluginPluginOptionsShowCaptionsQueryBoolean | null;
-	pathPrefix?: sitePluginPluginOptionsPathPrefixQueryString | null;
-	inlineCodeMarker?: sitePluginPluginOptionsInlineCodeMarkerQueryString_2 | null;
-	short_name?: sitePluginPluginOptionsShortNameQueryString_2 | null;
-	start_url?: sitePluginPluginOptionsStartUrlQueryString_2 | null;
-	background_color?: sitePluginPluginOptionsBackgroundColorQueryString_3 | null;
-	theme_color?: sitePluginPluginOptionsThemeColorQueryString_2 | null;
-	display?: sitePluginPluginOptionsDisplayQueryString_2 | null;
-	icon?: sitePluginPluginOptionsIconQueryString_2 | null;
-	logo?: sitePluginPluginOptionsLogoQueryString_2 | null;
-	injectHTML?: sitePluginPluginOptionsInjectHtmlQueryBoolean_2 | null;
-	icons?: sitePluginPluginOptionsIconsInputObject_2 | null;
-	pathToConfigModule?: sitePluginPluginOptionsPathToConfigModuleQueryString_2 | null;
-	omitGoogleFont?: sitePluginPluginOptionsOmitGoogleFontQueryBoolean_2 | null;
-	query?: sitePluginPluginOptionsQueryQueryString_2 | null;
-	feeds?: sitePluginPluginOptionsFeedsQueryList_2 | null;
-	pathCheck?: sitePluginPluginOptionsPathCheckQueryBoolean_2 | null;
-}
-
-export interface sitePluginPluginOptionsPluginsQueryList_2 {
-	elemMatch?: sitePluginPluginOptionsPluginsInputObject_2 | null;
-}
-
-export interface sitePluginPluginOptionsPluginsInputObject_2 {
-	resolve?: sitePluginPluginOptionsPluginsResolveQueryString_2 | null;
-	id?: sitePluginPluginOptionsPluginsIdQueryString_2 | null;
-	name?: sitePluginPluginOptionsPluginsNameQueryString_2 | null;
-	version?: sitePluginPluginOptionsPluginsVersionQueryString_2 | null;
-	pluginOptions?: sitePluginPluginOptionsPluginsPluginOptionsInputObject_2 | null;
-	pluginFilepath?: sitePluginPluginOptionsPluginsPluginFilepathQueryString_2 | null;
-}
-
-export interface sitePluginPluginOptionsPluginsResolveQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePluginPluginOptionsPluginsIdQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePluginPluginOptionsPluginsNameQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePluginPluginOptionsPluginsVersionQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePluginPluginOptionsPluginsPluginOptionsInputObject_2 {
-	emojiConversion?: sitePluginPluginOptionsPluginsPluginOptionsEmojiConversionQueryString_2 | null;
-	maxWidth?: sitePluginPluginOptionsPluginsPluginOptionsMaxWidthQueryInteger_2 | null;
-	wrapperStyle?: sitePluginPluginOptionsPluginsPluginOptionsWrapperStyleQueryString | null;
-	backgroundColor?: sitePluginPluginOptionsPluginsPluginOptionsBackgroundColorQueryString | null;
-	linkImagesToOriginal?: sitePluginPluginOptionsPluginsPluginOptionsLinkImagesToOriginalQueryBoolean | null;
-	showCaptions?: sitePluginPluginOptionsPluginsPluginOptionsShowCaptionsQueryBoolean | null;
-	pathPrefix?: sitePluginPluginOptionsPluginsPluginOptionsPathPrefixQueryString | null;
-	inlineCodeMarker?: sitePluginPluginOptionsPluginsPluginOptionsInlineCodeMarkerQueryString_2 | null;
-}
-
-export interface sitePluginPluginOptionsPluginsPluginOptionsEmojiConversionQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePluginPluginOptionsPluginsPluginOptionsMaxWidthQueryInteger_2 {
+export interface SitePluginPluginOptionsMaxWidthQueryInteger_2 {
 	eq?: number | null;
 	ne?: number | null;
 	gt?: number | null;
@@ -6751,720 +7926,1622 @@ export interface sitePluginPluginOptionsPluginsPluginOptionsMaxWidthQueryInteger
 	lt?: number | null;
 	lte?: number | null;
 	in?: (number | null)[] | null;
+	nin?: (number | null)[] | null;
 }
 
-export interface sitePluginPluginOptionsPluginsPluginOptionsWrapperStyleQueryString {
+export interface SitePluginPluginOptionsWrapperStyleQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePluginPluginOptionsPluginsPluginOptionsBackgroundColorQueryString {
+export interface SitePluginPluginOptionsBackgroundColorQueryString_3 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePluginPluginOptionsPluginsPluginOptionsLinkImagesToOriginalQueryBoolean {
+export interface SitePluginPluginOptionsLinkImagesToOriginalQueryBoolean_2 {
 	eq?: boolean | null;
 	ne?: boolean | null;
 	in?: (boolean | null)[] | null;
+	nin?: (boolean | null)[] | null;
 }
 
-export interface sitePluginPluginOptionsPluginsPluginOptionsShowCaptionsQueryBoolean {
+export interface SitePluginPluginOptionsShowCaptionsQueryBoolean_2 {
 	eq?: boolean | null;
 	ne?: boolean | null;
 	in?: (boolean | null)[] | null;
+	nin?: (boolean | null)[] | null;
 }
 
-export interface sitePluginPluginOptionsPluginsPluginOptionsPathPrefixQueryString {
+export interface SitePluginPluginOptionsPathPrefixQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePluginPluginOptionsPluginsPluginOptionsInlineCodeMarkerQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePluginPluginOptionsPluginsPluginFilepathQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePluginPluginOptionsNameQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePluginPluginOptionsPathQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePluginPluginOptionsEmojiConversionQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePluginPluginOptionsMaxWidthQueryInteger_2 {
-	eq?: number | null;
-	ne?: number | null;
-	gt?: number | null;
-	gte?: number | null;
-	lt?: number | null;
-	lte?: number | null;
-	in?: (number | null)[] | null;
-}
-
-export interface sitePluginPluginOptionsWrapperStyleQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePluginPluginOptionsBackgroundColorQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePluginPluginOptionsLinkImagesToOriginalQueryBoolean {
+export interface SitePluginPluginOptionsWithWebpQueryBoolean_2 {
 	eq?: boolean | null;
 	ne?: boolean | null;
 	in?: (boolean | null)[] | null;
+	nin?: (boolean | null)[] | null;
 }
 
-export interface sitePluginPluginOptionsShowCaptionsQueryBoolean {
+export interface SitePluginPluginOptionsInlineCodeMarkerQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePluginPluginOptionsPathToConfigModuleQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePluginPluginOptionsOmitGoogleFontQueryBoolean_2 {
 	eq?: boolean | null;
 	ne?: boolean | null;
 	in?: (boolean | null)[] | null;
+	nin?: (boolean | null)[] | null;
 }
 
-export interface sitePluginPluginOptionsPathPrefixQueryString {
+export interface SitePluginPluginOptionsQueryQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePluginPluginOptionsInlineCodeMarkerQueryString_2 {
+export interface SitePluginPluginOptionsFeedsQueryList_2 {
+	elemMatch?: SitePluginPluginOptionsFeedsInputObject_2 | null;
+}
+
+export interface SitePluginPluginOptionsFeedsInputObject_2 {
+	query?: SitePluginPluginOptionsFeedsQueryQueryString_2 | null;
+	output?: SitePluginPluginOptionsFeedsOutputQueryString_2 | null;
+}
+
+export interface SitePluginPluginOptionsFeedsQueryQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePluginPluginOptionsShortNameQueryString_2 {
+export interface SitePluginPluginOptionsFeedsOutputQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePluginPluginOptionsStartUrlQueryString_2 {
+export interface SitePluginPluginOptionsHeadersInputObject_2 {
+	_xxjs?: SitePluginPluginOptionsHeadersJsQueryList_2 | null;
+	_sw_js?: SitePluginPluginOptionsHeadersSwJsQueryList_2 | null;
+	_xxwebmanifest?: SitePluginPluginOptionsHeadersWebmanifestQueryList_2 | null;
+	_xxcss?: SitePluginPluginOptionsHeadersCssQueryList_2 | null;
+	_xxpng?: SitePluginPluginOptionsHeadersPngQueryList_2 | null;
+	_xxjpg?: SitePluginPluginOptionsHeadersJpgQueryList_2 | null;
+	_xxjpeg?: SitePluginPluginOptionsHeadersJpegQueryList_2 | null;
+	_xxgif?: SitePluginPluginOptionsHeadersGifQueryList_2 | null;
+	_xxsvg?: SitePluginPluginOptionsHeadersSvgQueryList_2 | null;
+}
+
+export interface SitePluginPluginOptionsHeadersJsQueryList_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePluginPluginOptionsBackgroundColorQueryString_3 {
+export interface SitePluginPluginOptionsHeadersSwJsQueryList_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePluginPluginOptionsThemeColorQueryString_2 {
+export interface SitePluginPluginOptionsHeadersWebmanifestQueryList_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePluginPluginOptionsDisplayQueryString_2 {
+export interface SitePluginPluginOptionsHeadersCssQueryList_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePluginPluginOptionsIconQueryString_2 {
+export interface SitePluginPluginOptionsHeadersPngQueryList_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePluginPluginOptionsLogoQueryString_2 {
+export interface SitePluginPluginOptionsHeadersJpgQueryList_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePluginPluginOptionsInjectHtmlQueryBoolean_2 {
+export interface SitePluginPluginOptionsHeadersJpegQueryList_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePluginPluginOptionsHeadersGifQueryList_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePluginPluginOptionsHeadersSvgQueryList_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePluginPluginOptionsAllPageHeadersQueryList_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePluginPluginOptionsShortNameQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePluginPluginOptionsStartUrlQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePluginPluginOptionsBackgroundColorQueryString_4 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePluginPluginOptionsThemeColorQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePluginPluginOptionsDisplayQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePluginPluginOptionsIconQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePluginPluginOptionsPathCheckQueryBoolean_2 {
 	eq?: boolean | null;
 	ne?: boolean | null;
 	in?: (boolean | null)[] | null;
+	nin?: (boolean | null)[] | null;
 }
 
-export interface sitePluginPluginOptionsIconsInputObject_2 {
-	android?: sitePluginPluginOptionsIconsAndroidQueryBoolean_2 | null;
-	appleIcon?: sitePluginPluginOptionsIconsAppleIconQueryBoolean_2 | null;
-	appleStartup?: sitePluginPluginOptionsIconsAppleStartupQueryBoolean_2 | null;
-	coast?: sitePluginPluginOptionsIconsCoastQueryBoolean_2 | null;
-	favicons?: sitePluginPluginOptionsIconsFaviconsQueryBoolean_2 | null;
-	firefox?: sitePluginPluginOptionsIconsFirefoxQueryBoolean_2 | null;
-	twitter?: sitePluginPluginOptionsIconsTwitterQueryBoolean_2 | null;
-	yandex?: sitePluginPluginOptionsIconsYandexQueryBoolean_2 | null;
-	windows?: sitePluginPluginOptionsIconsWindowsQueryBoolean_2 | null;
+export interface SitePluginNodeApIsQueryList_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePluginPluginOptionsIconsAndroidQueryBoolean_2 {
+export interface SitePluginBrowserApIsQueryList_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePluginSsrApIsQueryList_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePluginPluginFilepathQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePluginPackageJsonInputObject_2 {
+	name?: SitePluginPackageJsonNameQueryString_2 | null;
+	description?: SitePluginPackageJsonDescriptionQueryString_2 | null;
+	version?: SitePluginPackageJsonVersionQueryString_2 | null;
+	main?: SitePluginPackageJsonMainQueryString_2 | null;
+	author?: SitePluginPackageJsonAuthorQueryString_2 | null;
+	license?: SitePluginPackageJsonLicenseQueryString_2 | null;
+	dependencies?: SitePluginPackageJsonDependenciesQueryList_2 | null;
+	devDependencies?: SitePluginPackageJsonDevDependenciesQueryList_2 | null;
+	peerDependencies?: SitePluginPackageJsonPeerDependenciesQueryList_2 | null;
+	keywords?: SitePluginPackageJsonKeywordsQueryList_2 | null;
+}
+
+export interface SitePluginPackageJsonNameQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePluginPackageJsonDescriptionQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePluginPackageJsonVersionQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePluginPackageJsonMainQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePluginPackageJsonAuthorQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePluginPackageJsonLicenseQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePluginPackageJsonDependenciesQueryList_2 {
+	elemMatch?: SitePluginPackageJsonDependenciesInputObject_2 | null;
+}
+
+export interface SitePluginPackageJsonDependenciesInputObject_2 {
+	name?: SitePluginPackageJsonDependenciesNameQueryString_2 | null;
+	version?: SitePluginPackageJsonDependenciesVersionQueryString_2 | null;
+}
+
+export interface SitePluginPackageJsonDependenciesNameQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePluginPackageJsonDependenciesVersionQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePluginPackageJsonDevDependenciesQueryList_2 {
+	elemMatch?: SitePluginPackageJsonDevDependenciesInputObject_2 | null;
+}
+
+export interface SitePluginPackageJsonDevDependenciesInputObject_2 {
+	name?: SitePluginPackageJsonDevDependenciesNameQueryString_2 | null;
+	version?: SitePluginPackageJsonDevDependenciesVersionQueryString_2 | null;
+}
+
+export interface SitePluginPackageJsonDevDependenciesNameQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePluginPackageJsonDevDependenciesVersionQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePluginPackageJsonPeerDependenciesQueryList_2 {
+	elemMatch?: SitePluginPackageJsonPeerDependenciesInputObject_2 | null;
+}
+
+export interface SitePluginPackageJsonPeerDependenciesInputObject_2 {
+	name?: SitePluginPackageJsonPeerDependenciesNameQueryString_2 | null;
+	version?: SitePluginPackageJsonPeerDependenciesVersionQueryString_2 | null;
+}
+
+export interface SitePluginPackageJsonPeerDependenciesNameQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePluginPackageJsonPeerDependenciesVersionQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePluginPackageJsonKeywordsQueryList_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePluginInternalInputObject_2 {
+	contentDigest?: SitePluginInternalContentDigestQueryString_2 | null;
+	type?: SitePluginInternalTypeQueryString_2 | null;
+	owner?: SitePluginInternalOwnerQueryString_2 | null;
+}
+
+export interface SitePluginInternalContentDigestQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePluginInternalTypeQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePluginInternalOwnerQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SiteSiteMetadataInputObject_2 {
+	title?: SiteSiteMetadataTitleQueryString_2 | null;
+	siteUrl?: SiteSiteMetadataSiteUrlQueryString_2 | null;
+	sourceUrl?: SiteSiteMetadataSourceUrlQueryString_2 | null;
+	description?: SiteSiteMetadataDescriptionQueryString_2 | null;
+}
+
+export interface SiteSiteMetadataTitleQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SiteSiteMetadataSiteUrlQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SiteSiteMetadataSourceUrlQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SiteSiteMetadataDescriptionQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePortQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SiteHostQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePathPrefixQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePolyfillQueryBoolean_2 {
 	eq?: boolean | null;
 	ne?: boolean | null;
 	in?: (boolean | null)[] | null;
+	nin?: (boolean | null)[] | null;
 }
 
-export interface sitePluginPluginOptionsIconsAppleIconQueryBoolean_2 {
+export interface SiteBuildTimeQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SiteIdQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SiteInternalInputObject_2 {
+	contentDigest?: SiteInternalContentDigestQueryString_2 | null;
+	type?: SiteInternalTypeQueryString_2 | null;
+	owner?: SiteInternalOwnerQueryString_2 | null;
+}
+
+export interface SiteInternalContentDigestQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SiteInternalTypeQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SiteInternalOwnerQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface DirectoryIdQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface DirectoryInternalInputObject_2 {
+	contentDigest?: DirectoryInternalContentDigestQueryString_2 | null;
+	type?: DirectoryInternalTypeQueryString_2 | null;
+	description?: DirectoryInternalDescriptionQueryString_2 | null;
+	owner?: DirectoryInternalOwnerQueryString_2 | null;
+}
+
+export interface DirectoryInternalContentDigestQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface DirectoryInternalTypeQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface DirectoryInternalDescriptionQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface DirectoryInternalOwnerQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface DirectorySourceInstanceNameQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface DirectoryAbsolutePathQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface DirectoryRelativePathQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface DirectoryExtensionQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface DirectorySizeQueryInteger_2 {
+	eq?: number | null;
+	ne?: number | null;
+	gt?: number | null;
+	gte?: number | null;
+	lt?: number | null;
+	lte?: number | null;
+	in?: (number | null)[] | null;
+	nin?: (number | null)[] | null;
+}
+
+export interface DirectoryPrettySizeQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface DirectoryModifiedTimeQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface DirectoryAccessTimeQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface DirectoryChangeTimeQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface DirectoryBirthTimeQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface DirectoryRootQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface DirectoryDirQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface DirectoryBaseQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface DirectoryExtQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface DirectoryNameQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface DirectoryRelativeDirectoryQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface DirectoryDevQueryInteger_2 {
+	eq?: number | null;
+	ne?: number | null;
+	gt?: number | null;
+	gte?: number | null;
+	lt?: number | null;
+	lte?: number | null;
+	in?: (number | null)[] | null;
+	nin?: (number | null)[] | null;
+}
+
+export interface DirectoryModeQueryInteger_2 {
+	eq?: number | null;
+	ne?: number | null;
+	gt?: number | null;
+	gte?: number | null;
+	lt?: number | null;
+	lte?: number | null;
+	in?: (number | null)[] | null;
+	nin?: (number | null)[] | null;
+}
+
+export interface DirectoryNlinkQueryInteger_2 {
+	eq?: number | null;
+	ne?: number | null;
+	gt?: number | null;
+	gte?: number | null;
+	lt?: number | null;
+	lte?: number | null;
+	in?: (number | null)[] | null;
+	nin?: (number | null)[] | null;
+}
+
+export interface DirectoryUidQueryInteger_2 {
+	eq?: number | null;
+	ne?: number | null;
+	gt?: number | null;
+	gte?: number | null;
+	lt?: number | null;
+	lte?: number | null;
+	in?: (number | null)[] | null;
+	nin?: (number | null)[] | null;
+}
+
+export interface DirectoryGidQueryInteger_2 {
+	eq?: number | null;
+	ne?: number | null;
+	gt?: number | null;
+	gte?: number | null;
+	lt?: number | null;
+	lte?: number | null;
+	in?: (number | null)[] | null;
+	nin?: (number | null)[] | null;
+}
+
+export interface DirectoryRdevQueryInteger_2 {
+	eq?: number | null;
+	ne?: number | null;
+	gt?: number | null;
+	gte?: number | null;
+	lt?: number | null;
+	lte?: number | null;
+	in?: (number | null)[] | null;
+	nin?: (number | null)[] | null;
+}
+
+export interface DirectoryBlksizeQueryInteger_2 {
+	eq?: number | null;
+	ne?: number | null;
+	gt?: number | null;
+	gte?: number | null;
+	lt?: number | null;
+	lte?: number | null;
+	in?: (number | null)[] | null;
+	nin?: (number | null)[] | null;
+}
+
+export interface DirectoryInoQueryInteger_2 {
+	eq?: number | null;
+	ne?: number | null;
+	gt?: number | null;
+	gte?: number | null;
+	lt?: number | null;
+	lte?: number | null;
+	in?: (number | null)[] | null;
+	nin?: (number | null)[] | null;
+}
+
+export interface DirectoryBlocksQueryInteger_2 {
+	eq?: number | null;
+	ne?: number | null;
+	gt?: number | null;
+	gte?: number | null;
+	lt?: number | null;
+	lte?: number | null;
+	in?: (number | null)[] | null;
+	nin?: (number | null)[] | null;
+}
+
+export interface DirectoryAtimeMsQueryFloat_2 {
+	eq?: number | null;
+	ne?: number | null;
+	gt?: number | null;
+	gte?: number | null;
+	lt?: number | null;
+	lte?: number | null;
+	in?: (number | null)[] | null;
+	nin?: (number | null)[] | null;
+}
+
+export interface DirectoryMtimeMsQueryFloat_2 {
+	eq?: number | null;
+	ne?: number | null;
+	gt?: number | null;
+	gte?: number | null;
+	lt?: number | null;
+	lte?: number | null;
+	in?: (number | null)[] | null;
+	nin?: (number | null)[] | null;
+}
+
+export interface DirectoryCtimeMsQueryFloat_2 {
+	eq?: number | null;
+	ne?: number | null;
+	gt?: number | null;
+	gte?: number | null;
+	lt?: number | null;
+	lte?: number | null;
+	in?: (number | null)[] | null;
+	nin?: (number | null)[] | null;
+}
+
+export interface DirectoryBirthtimeMsQueryFloat_2 {
+	eq?: number | null;
+	ne?: number | null;
+	gt?: number | null;
+	gte?: number | null;
+	lt?: number | null;
+	lte?: number | null;
+	in?: (number | null)[] | null;
+	nin?: (number | null)[] | null;
+}
+
+export interface DirectoryAtimeQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface DirectoryMtimeQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface DirectoryCtimeQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface DirectoryBirthtimeQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface FileIdQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface FileInternalInputObject_2 {
+	contentDigest?: FileInternalContentDigestQueryString_2 | null;
+	type?: FileInternalTypeQueryString_2 | null;
+	mediaType?: FileInternalMediaTypeQueryString_2 | null;
+	description?: FileInternalDescriptionQueryString_2 | null;
+	owner?: FileInternalOwnerQueryString_2 | null;
+}
+
+export interface FileInternalContentDigestQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface FileInternalTypeQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface FileInternalMediaTypeQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface FileInternalDescriptionQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface FileInternalOwnerQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface FileSourceInstanceNameQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface FileAbsolutePathQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface FileRelativePathQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface FileExtensionQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface FileSizeQueryInteger_2 {
+	eq?: number | null;
+	ne?: number | null;
+	gt?: number | null;
+	gte?: number | null;
+	lt?: number | null;
+	lte?: number | null;
+	in?: (number | null)[] | null;
+	nin?: (number | null)[] | null;
+}
+
+export interface FilePrettySizeQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface FileModifiedTimeQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface FileAccessTimeQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface FileChangeTimeQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface FileBirthTimeQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface FileRootQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface FileDirQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface FileBaseQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface FileExtQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface FileNameQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface FileRelativeDirectoryQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface FileDevQueryInteger_2 {
+	eq?: number | null;
+	ne?: number | null;
+	gt?: number | null;
+	gte?: number | null;
+	lt?: number | null;
+	lte?: number | null;
+	in?: (number | null)[] | null;
+	nin?: (number | null)[] | null;
+}
+
+export interface FileModeQueryInteger_2 {
+	eq?: number | null;
+	ne?: number | null;
+	gt?: number | null;
+	gte?: number | null;
+	lt?: number | null;
+	lte?: number | null;
+	in?: (number | null)[] | null;
+	nin?: (number | null)[] | null;
+}
+
+export interface FileNlinkQueryInteger_2 {
+	eq?: number | null;
+	ne?: number | null;
+	gt?: number | null;
+	gte?: number | null;
+	lt?: number | null;
+	lte?: number | null;
+	in?: (number | null)[] | null;
+	nin?: (number | null)[] | null;
+}
+
+export interface FileUidQueryInteger_2 {
+	eq?: number | null;
+	ne?: number | null;
+	gt?: number | null;
+	gte?: number | null;
+	lt?: number | null;
+	lte?: number | null;
+	in?: (number | null)[] | null;
+	nin?: (number | null)[] | null;
+}
+
+export interface FileGidQueryInteger_2 {
+	eq?: number | null;
+	ne?: number | null;
+	gt?: number | null;
+	gte?: number | null;
+	lt?: number | null;
+	lte?: number | null;
+	in?: (number | null)[] | null;
+	nin?: (number | null)[] | null;
+}
+
+export interface FileRdevQueryInteger_2 {
+	eq?: number | null;
+	ne?: number | null;
+	gt?: number | null;
+	gte?: number | null;
+	lt?: number | null;
+	lte?: number | null;
+	in?: (number | null)[] | null;
+	nin?: (number | null)[] | null;
+}
+
+export interface FileBlksizeQueryInteger_2 {
+	eq?: number | null;
+	ne?: number | null;
+	gt?: number | null;
+	gte?: number | null;
+	lt?: number | null;
+	lte?: number | null;
+	in?: (number | null)[] | null;
+	nin?: (number | null)[] | null;
+}
+
+export interface FileInoQueryInteger_2 {
+	eq?: number | null;
+	ne?: number | null;
+	gt?: number | null;
+	gte?: number | null;
+	lt?: number | null;
+	lte?: number | null;
+	in?: (number | null)[] | null;
+	nin?: (number | null)[] | null;
+}
+
+export interface FileBlocksQueryInteger_2 {
+	eq?: number | null;
+	ne?: number | null;
+	gt?: number | null;
+	gte?: number | null;
+	lt?: number | null;
+	lte?: number | null;
+	in?: (number | null)[] | null;
+	nin?: (number | null)[] | null;
+}
+
+export interface FileAtimeMsQueryFloat_2 {
+	eq?: number | null;
+	ne?: number | null;
+	gt?: number | null;
+	gte?: number | null;
+	lt?: number | null;
+	lte?: number | null;
+	in?: (number | null)[] | null;
+	nin?: (number | null)[] | null;
+}
+
+export interface FileMtimeMsQueryFloat_2 {
+	eq?: number | null;
+	ne?: number | null;
+	gt?: number | null;
+	gte?: number | null;
+	lt?: number | null;
+	lte?: number | null;
+	in?: (number | null)[] | null;
+	nin?: (number | null)[] | null;
+}
+
+export interface FileCtimeMsQueryFloat_2 {
+	eq?: number | null;
+	ne?: number | null;
+	gt?: number | null;
+	gte?: number | null;
+	lt?: number | null;
+	lte?: number | null;
+	in?: (number | null)[] | null;
+	nin?: (number | null)[] | null;
+}
+
+export interface FileBirthtimeMsQueryFloat_2 {
+	eq?: number | null;
+	ne?: number | null;
+	gt?: number | null;
+	gte?: number | null;
+	lt?: number | null;
+	lte?: number | null;
+	in?: (number | null)[] | null;
+	nin?: (number | null)[] | null;
+}
+
+export interface FileAtimeQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface FileMtimeQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface FileCtimeQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface FileBirthtimeQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface PublicUrlQueryString_3 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface MarkdownRemarkIdQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface MarkdownRemarkInternalInputObject_2 {
+	content?: MarkdownRemarkInternalContentQueryString_2 | null;
+	type?: MarkdownRemarkInternalTypeQueryString_2 | null;
+	contentDigest?: MarkdownRemarkInternalContentDigestQueryString_2 | null;
+	owner?: MarkdownRemarkInternalOwnerQueryString_2 | null;
+}
+
+export interface MarkdownRemarkInternalContentQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface MarkdownRemarkInternalTypeQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface MarkdownRemarkInternalContentDigestQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface MarkdownRemarkInternalOwnerQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface MarkdownRemarkFrontmatterInputObject_2 {
+	title?: MarkdownRemarkFrontmatterTitleQueryString_2 | null;
+	link?: MarkdownRemarkFrontmatterLinkQueryString_2 | null;
+	date?: MarkdownRemarkFrontmatterDateQueryString_2 | null;
+	authors?: MarkdownRemarkFrontmatterAuthorsQueryList_2 | null;
+	_PARENT?: MarkdownRemarkFrontmatterParentQueryString_2 | null;
+	description?: MarkdownRemarkFrontmatterDescriptionQueryString_2 | null;
+	draft?: MarkdownRemarkFrontmatterDraftQueryBoolean_2 | null;
+	toc?: MarkdownRemarkFrontmatterTocQueryBoolean_2 | null;
+	type?: MarkdownRemarkFrontmatterTypeQueryString_2 | null;
+}
+
+export interface MarkdownRemarkFrontmatterTitleQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface MarkdownRemarkFrontmatterLinkQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface MarkdownRemarkFrontmatterDateQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface MarkdownRemarkFrontmatterAuthorsQueryList_2 {
+	elemMatch?: MarkdownRemarkFrontmatterAuthorsInputObject_2 | null;
+}
+
+export interface MarkdownRemarkFrontmatterAuthorsInputObject_2 {
+	name?: MarkdownRemarkFrontmatterAuthorsNameQueryString_2 | null;
+	url?: MarkdownRemarkFrontmatterAuthorsUrlQueryString_2 | null;
+}
+
+export interface MarkdownRemarkFrontmatterAuthorsNameQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface MarkdownRemarkFrontmatterAuthorsUrlQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface MarkdownRemarkFrontmatterParentQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface MarkdownRemarkFrontmatterDescriptionQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface MarkdownRemarkFrontmatterDraftQueryBoolean_2 {
 	eq?: boolean | null;
 	ne?: boolean | null;
 	in?: (boolean | null)[] | null;
+	nin?: (boolean | null)[] | null;
 }
 
-export interface sitePluginPluginOptionsIconsAppleStartupQueryBoolean_2 {
+export interface MarkdownRemarkFrontmatterTocQueryBoolean_2 {
 	eq?: boolean | null;
 	ne?: boolean | null;
 	in?: (boolean | null)[] | null;
+	nin?: (boolean | null)[] | null;
 }
 
-export interface sitePluginPluginOptionsIconsCoastQueryBoolean_2 {
-	eq?: boolean | null;
-	ne?: boolean | null;
-	in?: (boolean | null)[] | null;
-}
-
-export interface sitePluginPluginOptionsIconsFaviconsQueryBoolean_2 {
-	eq?: boolean | null;
-	ne?: boolean | null;
-	in?: (boolean | null)[] | null;
-}
-
-export interface sitePluginPluginOptionsIconsFirefoxQueryBoolean_2 {
-	eq?: boolean | null;
-	ne?: boolean | null;
-	in?: (boolean | null)[] | null;
-}
-
-export interface sitePluginPluginOptionsIconsTwitterQueryBoolean_2 {
-	eq?: boolean | null;
-	ne?: boolean | null;
-	in?: (boolean | null)[] | null;
-}
-
-export interface sitePluginPluginOptionsIconsYandexQueryBoolean_2 {
-	eq?: boolean | null;
-	ne?: boolean | null;
-	in?: (boolean | null)[] | null;
-}
-
-export interface sitePluginPluginOptionsIconsWindowsQueryBoolean_2 {
-	eq?: boolean | null;
-	ne?: boolean | null;
-	in?: (boolean | null)[] | null;
-}
-
-export interface sitePluginPluginOptionsPathToConfigModuleQueryString_2 {
+export interface MarkdownRemarkFrontmatterTypeQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePluginPluginOptionsOmitGoogleFontQueryBoolean_2 {
-	eq?: boolean | null;
-	ne?: boolean | null;
-	in?: (boolean | null)[] | null;
-}
-
-export interface sitePluginPluginOptionsQueryQueryString_2 {
+export interface ExcerptQueryString_3 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePluginPluginOptionsFeedsQueryList_2 {
-	elemMatch?: sitePluginPluginOptionsFeedsInputObject_2 | null;
-}
-
-export interface sitePluginPluginOptionsFeedsInputObject_2 {
-	query?: sitePluginPluginOptionsFeedsQueryQueryString_2 | null;
-	output?: sitePluginPluginOptionsFeedsOutputQueryString_2 | null;
-}
-
-export interface sitePluginPluginOptionsFeedsQueryQueryString_2 {
+export interface MarkdownRemarkRawMarkdownBodyQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePluginPluginOptionsFeedsOutputQueryString_2 {
+export interface MarkdownRemarkFileAbsolutePathQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePluginPluginOptionsPathCheckQueryBoolean_2 {
-	eq?: boolean | null;
-	ne?: boolean | null;
-	in?: (boolean | null)[] | null;
-}
-
-export interface sitePluginNodeApIsQueryList_2 {
+export interface HtmlQueryString_3 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePluginBrowserApIsQueryList_2 {
+export interface HeadingsQueryList_3 {
+	elemMatch?: HeadingsListElemTypeName_3 | null;
+}
+
+export interface HeadingsListElemTypeName_3 {
+	value?: HeadingsListElemValueQueryString_3 | null;
+	depth?: HeadingsListElemDepthQueryInt_3 | null;
+}
+
+export interface HeadingsListElemValueQueryString_3 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface sitePluginSsrApIsQueryList_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePluginPluginFilepathQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePluginPackageJsonInputObject_2 {
-	name?: sitePluginPackageJsonNameQueryString_2 | null;
-	description?: sitePluginPackageJsonDescriptionQueryString_2 | null;
-	version?: sitePluginPackageJsonVersionQueryString_2 | null;
-	main?: sitePluginPackageJsonMainQueryString_2 | null;
-	author?: sitePluginPackageJsonAuthorQueryString_2 | null;
-	license?: sitePluginPackageJsonLicenseQueryString_2 | null;
-	dependencies?: sitePluginPackageJsonDependenciesQueryList_2 | null;
-	devDependencies?: sitePluginPackageJsonDevDependenciesQueryList_2 | null;
-	peerDependencies?: sitePluginPackageJsonPeerDependenciesQueryList_2 | null;
-	keywords?: sitePluginPackageJsonKeywordsQueryList_2 | null;
-}
-
-export interface sitePluginPackageJsonNameQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePluginPackageJsonDescriptionQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePluginPackageJsonVersionQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePluginPackageJsonMainQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePluginPackageJsonAuthorQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePluginPackageJsonLicenseQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePluginPackageJsonDependenciesQueryList_2 {
-	elemMatch?: sitePluginPackageJsonDependenciesInputObject_2 | null;
-}
-
-export interface sitePluginPackageJsonDependenciesInputObject_2 {
-	name?: sitePluginPackageJsonDependenciesNameQueryString_2 | null;
-	version?: sitePluginPackageJsonDependenciesVersionQueryString_2 | null;
-}
-
-export interface sitePluginPackageJsonDependenciesNameQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePluginPackageJsonDependenciesVersionQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePluginPackageJsonDevDependenciesQueryList_2 {
-	elemMatch?: sitePluginPackageJsonDevDependenciesInputObject_2 | null;
-}
-
-export interface sitePluginPackageJsonDevDependenciesInputObject_2 {
-	name?: sitePluginPackageJsonDevDependenciesNameQueryString_2 | null;
-	version?: sitePluginPackageJsonDevDependenciesVersionQueryString_2 | null;
-}
-
-export interface sitePluginPackageJsonDevDependenciesNameQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePluginPackageJsonDevDependenciesVersionQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePluginPackageJsonPeerDependenciesQueryList_2 {
-	elemMatch?: sitePluginPackageJsonPeerDependenciesInputObject_2 | null;
-}
-
-export interface sitePluginPackageJsonPeerDependenciesInputObject_2 {
-	name?: sitePluginPackageJsonPeerDependenciesNameQueryString_2 | null;
-	version?: sitePluginPackageJsonPeerDependenciesVersionQueryString_2 | null;
-}
-
-export interface sitePluginPackageJsonPeerDependenciesNameQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePluginPackageJsonPeerDependenciesVersionQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePluginPackageJsonKeywordsQueryList_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePluginInternalInputObject_2 {
-	contentDigest?: sitePluginInternalContentDigestQueryString_2 | null;
-	type?: sitePluginInternalTypeQueryString_2 | null;
-	owner?: sitePluginInternalOwnerQueryString_2 | null;
-}
-
-export interface sitePluginInternalContentDigestQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePluginInternalTypeQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePluginInternalOwnerQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface siteSiteMetadataInputObject_2 {
-	title?: siteSiteMetadataTitleQueryString_2 | null;
-	siteUrl?: siteSiteMetadataSiteUrlQueryString_2 | null;
-	sourceUrl?: siteSiteMetadataSourceUrlQueryString_2 | null;
-	description?: siteSiteMetadataDescriptionQueryString_2 | null;
-}
-
-export interface siteSiteMetadataTitleQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface siteSiteMetadataSiteUrlQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface siteSiteMetadataSourceUrlQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface siteSiteMetadataDescriptionQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePortQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface siteHostQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePathPrefixQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface sitePolyfillQueryBoolean_2 {
-	eq?: boolean | null;
-	ne?: boolean | null;
-	in?: (boolean | null)[] | null;
-}
-
-export interface siteBuildTimeQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface siteIdQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface siteInternalInputObject_2 {
-	contentDigest?: siteInternalContentDigestQueryString_2 | null;
-	type?: siteInternalTypeQueryString_2 | null;
-	owner?: siteInternalOwnerQueryString_2 | null;
-}
-
-export interface siteInternalContentDigestQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface siteInternalTypeQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface siteInternalOwnerQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface directoryIdQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface directoryInternalInputObject_2 {
-	contentDigest?: directoryInternalContentDigestQueryString_2 | null;
-	type?: directoryInternalTypeQueryString_2 | null;
-	description?: directoryInternalDescriptionQueryString_2 | null;
-	owner?: directoryInternalOwnerQueryString_2 | null;
-}
-
-export interface directoryInternalContentDigestQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface directoryInternalTypeQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface directoryInternalDescriptionQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface directoryInternalOwnerQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface directorySourceInstanceNameQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface directoryAbsolutePathQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface directoryRelativePathQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface directoryExtensionQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface directorySizeQueryInteger_2 {
+export interface HeadingsListElemDepthQueryInt_3 {
 	eq?: number | null;
 	ne?: number | null;
 	gt?: number | null;
@@ -7472,97 +9549,10 @@ export interface directorySizeQueryInteger_2 {
 	lt?: number | null;
 	lte?: number | null;
 	in?: (number | null)[] | null;
+	nin?: (number | null)[] | null;
 }
 
-export interface directoryPrettySizeQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface directoryModifiedTimeQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface directoryAccessTimeQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface directoryChangeTimeQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface directoryBirthTimeQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface directoryRootQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface directoryDirQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface directoryBaseQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface directoryExtQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface directoryNameQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface directoryRelativeDirectoryQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface directoryDevQueryInteger_2 {
+export interface TimeToReadQueryInt_3 {
 	eq?: number | null;
 	ne?: number | null;
 	gt?: number | null;
@@ -7570,9 +9560,25 @@ export interface directoryDevQueryInteger_2 {
 	lt?: number | null;
 	lte?: number | null;
 	in?: (number | null)[] | null;
+	nin?: (number | null)[] | null;
 }
 
-export interface directoryModeQueryInteger_2 {
+export interface TableOfContentsQueryString_3 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface WordCountTypeName_3 {
+	paragraphs?: WordCountParagraphsQueryInt_3 | null;
+	sentences?: WordCountSentencesQueryInt_3 | null;
+	words?: WordCountWordsQueryInt_3 | null;
+}
+
+export interface WordCountParagraphsQueryInt_3 {
 	eq?: number | null;
 	ne?: number | null;
 	gt?: number | null;
@@ -7580,9 +9586,10 @@ export interface directoryModeQueryInteger_2 {
 	lt?: number | null;
 	lte?: number | null;
 	in?: (number | null)[] | null;
+	nin?: (number | null)[] | null;
 }
 
-export interface directoryNlinkQueryInteger_2 {
+export interface WordCountSentencesQueryInt_3 {
 	eq?: number | null;
 	ne?: number | null;
 	gt?: number | null;
@@ -7590,9 +9597,10 @@ export interface directoryNlinkQueryInteger_2 {
 	lt?: number | null;
 	lte?: number | null;
 	in?: (number | null)[] | null;
+	nin?: (number | null)[] | null;
 }
 
-export interface directoryUidQueryInteger_2 {
+export interface WordCountWordsQueryInt_3 {
 	eq?: number | null;
 	ne?: number | null;
 	gt?: number | null;
@@ -7600,9 +9608,88 @@ export interface directoryUidQueryInteger_2 {
 	lt?: number | null;
 	lte?: number | null;
 	in?: (number | null)[] | null;
+	nin?: (number | null)[] | null;
 }
 
-export interface directoryGidQueryInteger_2 {
+export interface TodoJsonTitleQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface TodoJsonTagsQueryList_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface TodoJsonIdQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface TodoJsonInternalInputObject_2 {
+	contentDigest?: TodoJsonInternalContentDigestQueryString_2 | null;
+	type?: TodoJsonInternalTypeQueryString_2 | null;
+	owner?: TodoJsonInternalOwnerQueryString_2 | null;
+}
+
+export interface TodoJsonInternalContentDigestQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface TodoJsonInternalTypeQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface TodoJsonInternalOwnerQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface InterestsJsonSubjectsQueryList_2 {
+	elemMatch?: InterestsJsonSubjectsInputObject_2 | null;
+}
+
+export interface InterestsJsonSubjectsInputObject_2 {
+	name?: InterestsJsonSubjectsNameQueryString_2 | null;
+	intensity?: InterestsJsonSubjectsIntensityQueryInteger_2 | null;
+}
+
+export interface InterestsJsonSubjectsNameQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface InterestsJsonSubjectsIntensityQueryInteger_2 {
 	eq?: number | null;
 	ne?: number | null;
 	gt?: number | null;
@@ -7610,9 +9697,175 @@ export interface directoryGidQueryInteger_2 {
 	lt?: number | null;
 	lte?: number | null;
 	in?: (number | null)[] | null;
+	nin?: (number | null)[] | null;
 }
 
-export interface directoryRdevQueryInteger_2 {
+export interface InterestsJsonIdQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface InterestsJsonInternalInputObject_2 {
+	contentDigest?: InterestsJsonInternalContentDigestQueryString_2 | null;
+	type?: InterestsJsonInternalTypeQueryString_2 | null;
+	owner?: InterestsJsonInternalOwnerQueryString_2 | null;
+}
+
+export interface InterestsJsonInternalContentDigestQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface InterestsJsonInternalTypeQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface InterestsJsonInternalOwnerQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface OrganizationJsonNameQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface OrganizationJsonUrlQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface OrganizationJsonLogoQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface OrganizationJsonTelephoneQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface OrganizationJsonIdQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface OrganizationJsonInternalInputObject_2 {
+	contentDigest?: OrganizationJsonInternalContentDigestQueryString_2 | null;
+	type?: OrganizationJsonInternalTypeQueryString_2 | null;
+	owner?: OrganizationJsonInternalOwnerQueryString_2 | null;
+	fieldOwners?: OrganizationJsonInternalFieldOwnersInputObject_2 | null;
+}
+
+export interface OrganizationJsonInternalContentDigestQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface OrganizationJsonInternalTypeQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface OrganizationJsonInternalOwnerQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface OrganizationJsonInternalFieldOwnersInputObject_2 {
+	logo_image?: OrganizationJsonInternalFieldOwnersLogoImageQueryString_2 | null;
+}
+
+export interface OrganizationJsonInternalFieldOwnersLogoImageQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface OrganizationJsonFieldsInputObject_2 {
+	logo_image?: OrganizationJsonFieldsLogoImageQueryString_2 | null;
+}
+
+export interface OrganizationJsonFieldsLogoImageQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SkillsJsonLanguagesQueryList_2 {
+	elemMatch?: SkillsJsonLanguagesInputObject_2 | null;
+}
+
+export interface SkillsJsonLanguagesInputObject_2 {
+	name?: SkillsJsonLanguagesNameQueryString_2 | null;
+	intensity?: SkillsJsonLanguagesIntensityQueryInteger_2 | null;
+}
+
+export interface SkillsJsonLanguagesNameQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SkillsJsonLanguagesIntensityQueryInteger_2 {
 	eq?: number | null;
 	ne?: number | null;
 	gt?: number | null;
@@ -7620,9 +9873,28 @@ export interface directoryRdevQueryInteger_2 {
 	lt?: number | null;
 	lte?: number | null;
 	in?: (number | null)[] | null;
+	nin?: (number | null)[] | null;
 }
 
-export interface directoryBlksizeQueryInteger_2 {
+export interface SkillsJsonTechnicalQueryList_2 {
+	elemMatch?: SkillsJsonTechnicalInputObject_2 | null;
+}
+
+export interface SkillsJsonTechnicalInputObject_2 {
+	name?: SkillsJsonTechnicalNameQueryString_2 | null;
+	intensity?: SkillsJsonTechnicalIntensityQueryInteger_2 | null;
+}
+
+export interface SkillsJsonTechnicalNameQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SkillsJsonTechnicalIntensityQueryInteger_2 {
 	eq?: number | null;
 	ne?: number | null;
 	gt?: number | null;
@@ -7630,9 +9902,28 @@ export interface directoryBlksizeQueryInteger_2 {
 	lt?: number | null;
 	lte?: number | null;
 	in?: (number | null)[] | null;
+	nin?: (number | null)[] | null;
 }
 
-export interface directoryInoQueryInteger_2 {
+export interface SkillsJsonSoftQueryList_2 {
+	elemMatch?: SkillsJsonSoftInputObject_2 | null;
+}
+
+export interface SkillsJsonSoftInputObject_2 {
+	name?: SkillsJsonSoftNameQueryString_2 | null;
+	intensity?: SkillsJsonSoftIntensityQueryInteger_2 | null;
+}
+
+export interface SkillsJsonSoftNameQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SkillsJsonSoftIntensityQueryInteger_2 {
 	eq?: number | null;
 	ne?: number | null;
 	gt?: number | null;
@@ -7640,1561 +9931,640 @@ export interface directoryInoQueryInteger_2 {
 	lt?: number | null;
 	lte?: number | null;
 	in?: (number | null)[] | null;
+	nin?: (number | null)[] | null;
 }
 
-export interface directoryBlocksQueryInteger_2 {
-	eq?: number | null;
-	ne?: number | null;
-	gt?: number | null;
-	gte?: number | null;
-	lt?: number | null;
-	lte?: number | null;
-	in?: (number | null)[] | null;
-}
-
-export interface directoryAtimeMsQueryFloat_2 {
-	eq?: number | null;
-	ne?: number | null;
-	gt?: number | null;
-	gte?: number | null;
-	lt?: number | null;
-	lte?: number | null;
-	in?: (number | null)[] | null;
-}
-
-export interface directoryMtimeMsQueryFloat_2 {
-	eq?: number | null;
-	ne?: number | null;
-	gt?: number | null;
-	gte?: number | null;
-	lt?: number | null;
-	lte?: number | null;
-	in?: (number | null)[] | null;
-}
-
-export interface directoryCtimeMsQueryFloat_2 {
-	eq?: number | null;
-	ne?: number | null;
-	gt?: number | null;
-	gte?: number | null;
-	lt?: number | null;
-	lte?: number | null;
-	in?: (number | null)[] | null;
-}
-
-export interface directoryBirthtimeMsQueryFloat_2 {
-	eq?: number | null;
-	ne?: number | null;
-	gt?: number | null;
-	gte?: number | null;
-	lt?: number | null;
-	lte?: number | null;
-	in?: (number | null)[] | null;
-}
-
-export interface directoryAtimeQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface directoryMtimeQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface directoryCtimeQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface directoryBirthtimeQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface fileIdQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface fileInternalInputObject_2 {
-	contentDigest?: fileInternalContentDigestQueryString_2 | null;
-	type?: fileInternalTypeQueryString_2 | null;
-	mediaType?: fileInternalMediaTypeQueryString_2 | null;
-	description?: fileInternalDescriptionQueryString_2 | null;
-	owner?: fileInternalOwnerQueryString_2 | null;
-}
-
-export interface fileInternalContentDigestQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface fileInternalTypeQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface fileInternalMediaTypeQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface fileInternalDescriptionQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface fileInternalOwnerQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface fileSourceInstanceNameQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface fileAbsolutePathQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface fileRelativePathQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface fileExtensionQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface fileSizeQueryInteger_2 {
-	eq?: number | null;
-	ne?: number | null;
-	gt?: number | null;
-	gte?: number | null;
-	lt?: number | null;
-	lte?: number | null;
-	in?: (number | null)[] | null;
-}
-
-export interface filePrettySizeQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface fileModifiedTimeQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface fileAccessTimeQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface fileChangeTimeQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface fileBirthTimeQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface fileRootQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface fileDirQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface fileBaseQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface fileExtQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface fileNameQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface fileRelativeDirectoryQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface fileDevQueryInteger_2 {
-	eq?: number | null;
-	ne?: number | null;
-	gt?: number | null;
-	gte?: number | null;
-	lt?: number | null;
-	lte?: number | null;
-	in?: (number | null)[] | null;
-}
-
-export interface fileModeQueryInteger_2 {
-	eq?: number | null;
-	ne?: number | null;
-	gt?: number | null;
-	gte?: number | null;
-	lt?: number | null;
-	lte?: number | null;
-	in?: (number | null)[] | null;
-}
-
-export interface fileNlinkQueryInteger_2 {
-	eq?: number | null;
-	ne?: number | null;
-	gt?: number | null;
-	gte?: number | null;
-	lt?: number | null;
-	lte?: number | null;
-	in?: (number | null)[] | null;
-}
-
-export interface fileUidQueryInteger_2 {
-	eq?: number | null;
-	ne?: number | null;
-	gt?: number | null;
-	gte?: number | null;
-	lt?: number | null;
-	lte?: number | null;
-	in?: (number | null)[] | null;
-}
-
-export interface fileGidQueryInteger_2 {
-	eq?: number | null;
-	ne?: number | null;
-	gt?: number | null;
-	gte?: number | null;
-	lt?: number | null;
-	lte?: number | null;
-	in?: (number | null)[] | null;
-}
-
-export interface fileRdevQueryInteger_2 {
-	eq?: number | null;
-	ne?: number | null;
-	gt?: number | null;
-	gte?: number | null;
-	lt?: number | null;
-	lte?: number | null;
-	in?: (number | null)[] | null;
-}
-
-export interface fileBlksizeQueryInteger_2 {
-	eq?: number | null;
-	ne?: number | null;
-	gt?: number | null;
-	gte?: number | null;
-	lt?: number | null;
-	lte?: number | null;
-	in?: (number | null)[] | null;
-}
-
-export interface fileInoQueryInteger_2 {
-	eq?: number | null;
-	ne?: number | null;
-	gt?: number | null;
-	gte?: number | null;
-	lt?: number | null;
-	lte?: number | null;
-	in?: (number | null)[] | null;
-}
-
-export interface fileBlocksQueryInteger_2 {
-	eq?: number | null;
-	ne?: number | null;
-	gt?: number | null;
-	gte?: number | null;
-	lt?: number | null;
-	lte?: number | null;
-	in?: (number | null)[] | null;
-}
-
-export interface fileAtimeMsQueryFloat_2 {
-	eq?: number | null;
-	ne?: number | null;
-	gt?: number | null;
-	gte?: number | null;
-	lt?: number | null;
-	lte?: number | null;
-	in?: (number | null)[] | null;
-}
-
-export interface fileMtimeMsQueryFloat_2 {
-	eq?: number | null;
-	ne?: number | null;
-	gt?: number | null;
-	gte?: number | null;
-	lt?: number | null;
-	lte?: number | null;
-	in?: (number | null)[] | null;
-}
-
-export interface fileCtimeMsQueryFloat_2 {
-	eq?: number | null;
-	ne?: number | null;
-	gt?: number | null;
-	gte?: number | null;
-	lt?: number | null;
-	lte?: number | null;
-	in?: (number | null)[] | null;
-}
-
-export interface fileBirthtimeMsQueryFloat_2 {
-	eq?: number | null;
-	ne?: number | null;
-	gt?: number | null;
-	gte?: number | null;
-	lt?: number | null;
-	lte?: number | null;
-	in?: (number | null)[] | null;
-}
-
-export interface fileAtimeQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface fileMtimeQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface fileCtimeQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface fileBirthtimeQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface publicUrlQueryString_3 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface markdownRemarkIdQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface markdownRemarkInternalInputObject_2 {
-	content?: markdownRemarkInternalContentQueryString_2 | null;
-	type?: markdownRemarkInternalTypeQueryString_2 | null;
-	contentDigest?: markdownRemarkInternalContentDigestQueryString_2 | null;
-	owner?: markdownRemarkInternalOwnerQueryString_2 | null;
-}
-
-export interface markdownRemarkInternalContentQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface markdownRemarkInternalTypeQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface markdownRemarkInternalContentDigestQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface markdownRemarkInternalOwnerQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface markdownRemarkFrontmatterInputObject_2 {
-	title?: markdownRemarkFrontmatterTitleQueryString_2 | null;
-	link?: markdownRemarkFrontmatterLinkQueryString_2 | null;
-	date?: markdownRemarkFrontmatterDateQueryString_2 | null;
-	authors?: markdownRemarkFrontmatterAuthorsQueryList_2 | null;
-	_PARENT?: markdownRemarkFrontmatterParentQueryString_3 | null;
-	parent?: markdownRemarkFrontmatterParentQueryString_4 | null;
-	description?: markdownRemarkFrontmatterDescriptionQueryString_2 | null;
-	type?: markdownRemarkFrontmatterTypeQueryString_2 | null;
-	draft?: markdownRemarkFrontmatterDraftQueryBoolean_2 | null;
-}
-
-export interface markdownRemarkFrontmatterTitleQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface markdownRemarkFrontmatterLinkQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface markdownRemarkFrontmatterDateQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface markdownRemarkFrontmatterAuthorsQueryList_2 {
-	elemMatch?: markdownRemarkFrontmatterAuthorsInputObject_2 | null;
-}
-
-export interface markdownRemarkFrontmatterAuthorsInputObject_2 {
-	name?: markdownRemarkFrontmatterAuthorsNameQueryString_2 | null;
-	url?: markdownRemarkFrontmatterAuthorsUrlQueryString_2 | null;
-}
-
-export interface markdownRemarkFrontmatterAuthorsNameQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface markdownRemarkFrontmatterAuthorsUrlQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface markdownRemarkFrontmatterParentQueryString_3 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface markdownRemarkFrontmatterParentQueryString_4 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface markdownRemarkFrontmatterDescriptionQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface markdownRemarkFrontmatterTypeQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface markdownRemarkFrontmatterDraftQueryBoolean_2 {
-	eq?: boolean | null;
-	ne?: boolean | null;
-	in?: (boolean | null)[] | null;
-}
-
-export interface excerptQueryString_3 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface markdownRemarkRawMarkdownBodyQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface markdownRemarkFileAbsolutePathQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface htmlQueryString_3 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface headingsQueryList_3 {
-	elemMatch?: headingsListElemTypeName_3 | null;
-}
-
-export interface headingsListElemTypeName_3 {
-	value?: headingsListElemValueQueryString_3 | null;
-	depth?: headingsListElemDepthQueryInt_3 | null;
-}
-
-export interface headingsListElemValueQueryString_3 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface headingsListElemDepthQueryInt_3 {
-	eq?: number | null;
-	ne?: number | null;
-	gt?: number | null;
-	gte?: number | null;
-	lt?: number | null;
-	lte?: number | null;
-	in?: (number | null)[] | null;
-}
-
-export interface timeToReadQueryInt_3 {
-	eq?: number | null;
-	ne?: number | null;
-	gt?: number | null;
-	gte?: number | null;
-	lt?: number | null;
-	lte?: number | null;
-	in?: (number | null)[] | null;
-}
-
-export interface tableOfContentsQueryString_3 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface wordCountTypeName_3 {
-	paragraphs?: wordCountParagraphsQueryInt_3 | null;
-	sentences?: wordCountSentencesQueryInt_3 | null;
-	words?: wordCountWordsQueryInt_3 | null;
-}
-
-export interface wordCountParagraphsQueryInt_3 {
-	eq?: number | null;
-	ne?: number | null;
-	gt?: number | null;
-	gte?: number | null;
-	lt?: number | null;
-	lte?: number | null;
-	in?: (number | null)[] | null;
-}
-
-export interface wordCountSentencesQueryInt_3 {
-	eq?: number | null;
-	ne?: number | null;
-	gt?: number | null;
-	gte?: number | null;
-	lt?: number | null;
-	lte?: number | null;
-	in?: (number | null)[] | null;
-}
-
-export interface wordCountWordsQueryInt_3 {
-	eq?: number | null;
-	ne?: number | null;
-	gt?: number | null;
-	gte?: number | null;
-	lt?: number | null;
-	lte?: number | null;
-	in?: (number | null)[] | null;
-}
-
-export interface todoJsonTitleQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface todoJsonTagsQueryList_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface todoJsonIdQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface todoJsonInternalInputObject_2 {
-	contentDigest?: todoJsonInternalContentDigestQueryString_2 | null;
-	type?: todoJsonInternalTypeQueryString_2 | null;
-	owner?: todoJsonInternalOwnerQueryString_2 | null;
-}
-
-export interface todoJsonInternalContentDigestQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface todoJsonInternalTypeQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface todoJsonInternalOwnerQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface organizationJsonNameQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface organizationJsonUrlQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface organizationJsonLogoQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface organizationJsonTelephoneQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface organizationJsonIdQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface organizationJsonInternalInputObject_2 {
-	contentDigest?: organizationJsonInternalContentDigestQueryString_2 | null;
-	type?: organizationJsonInternalTypeQueryString_2 | null;
-	owner?: organizationJsonInternalOwnerQueryString_2 | null;
-	fieldOwners?: organizationJsonInternalFieldOwnersInputObject_2 | null;
-}
-
-export interface organizationJsonInternalContentDigestQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface organizationJsonInternalTypeQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface organizationJsonInternalOwnerQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-}
-
-export interface organizationJsonInternalFieldOwnersInputObject_2 {
-	logo_image?: organizationJsonInternalFieldOwnersLogoImageQueryString_2 | null;
-}
-
-export interface organizationJsonInternalFieldOwnersLogoImageQueryString_2 {
+export interface SkillsJsonIdQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface organizationJsonFieldsInputObject_2 {
-	logo_image?: organizationJsonFieldsLogoImageQueryString_2 | null;
+export interface SkillsJsonInternalInputObject_2 {
+	contentDigest?: SkillsJsonInternalContentDigestQueryString_2 | null;
+	type?: SkillsJsonInternalTypeQueryString_2 | null;
+	owner?: SkillsJsonInternalOwnerQueryString_2 | null;
 }
 
-export interface organizationJsonFieldsLogoImageQueryString_2 {
+export interface SkillsJsonInternalContentDigestQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface experiencesJsonWorkQueryList_2 {
-	elemMatch?: experiencesJsonWorkInputObject_2 | null;
-}
-
-export interface experiencesJsonWorkInputObject_2 {
-	company?: experiencesJsonWorkCompanyQueryString_2 | null;
-	link?: experiencesJsonWorkLinkQueryString_2 | null;
-	image?: experiencesJsonWorkImageQueryString_2 | null;
-	period?: experiencesJsonWorkPeriodQueryString_2 | null;
-	role?: experiencesJsonWorkRoleQueryString_2 | null;
-	tasks?: experiencesJsonWorkTasksQueryList_2 | null;
-}
-
-export interface experiencesJsonWorkCompanyQueryString_2 {
+export interface SkillsJsonInternalTypeQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface experiencesJsonWorkLinkQueryString_2 {
+export interface SkillsJsonInternalOwnerQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface experiencesJsonWorkImageQueryString_2 {
+export interface CompetencesJsonNameQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface experiencesJsonWorkPeriodQueryString_2 {
+export interface CompetencesJsonDescriptionQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface experiencesJsonWorkRoleQueryString_2 {
+export interface CompetencesJsonIdQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface experiencesJsonWorkTasksQueryList_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
+export interface CompetencesJsonInternalInputObject_2 {
+	contentDigest?: CompetencesJsonInternalContentDigestQueryString_2 | null;
+	type?: CompetencesJsonInternalTypeQueryString_2 | null;
+	owner?: CompetencesJsonInternalOwnerQueryString_2 | null;
 }
 
-export interface experiencesJsonIdQueryString_2 {
+export interface CompetencesJsonInternalContentDigestQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
-}
-
-export interface experiencesJsonInternalInputObject_2 {
-	contentDigest?: experiencesJsonInternalContentDigestQueryString_2 | null;
-	type?: experiencesJsonInternalTypeQueryString_2 | null;
-	owner?: experiencesJsonInternalOwnerQueryString_2 | null;
-	fieldOwners?: experiencesJsonInternalFieldOwnersInputObject_2 | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface experiencesJsonInternalContentDigestQueryString_2 {
+export interface CompetencesJsonInternalTypeQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface experiencesJsonInternalTypeQueryString_2 {
+export interface CompetencesJsonInternalOwnerQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface experiencesJsonInternalOwnerQueryString_2 {
+export interface PersonalJsonNameQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
-}
-
-export interface experiencesJsonInternalFieldOwnersInputObject_2 {
-	image_image?: experiencesJsonInternalFieldOwnersImageImageQueryString_2 | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface experiencesJsonInternalFieldOwnersImageImageQueryString_2 {
+export interface PersonalJsonEmailQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
-}
-
-export interface experiencesJsonFieldsInputObject_2 {
-	image_image?: experiencesJsonFieldsImageImageQueryList_2 | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface experiencesJsonFieldsImageImageQueryList_2 {
+export interface PersonalJsonJobTitleQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface competencesJsonNameQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
+export interface PersonalJsonSocialQueryList_2 {
+	elemMatch?: PersonalJsonSocialInputObject_2 | null;
 }
 
-export interface competencesJsonDescriptionQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
+export interface PersonalJsonSocialInputObject_2 {
+	serviceName?: PersonalJsonSocialServiceNameQueryString_2 | null;
+	icon?: PersonalJsonSocialIconQueryString_2 | null;
+	url?: PersonalJsonSocialUrlQueryString_2 | null;
 }
 
-export interface competencesJsonIdQueryString_2 {
+export interface PersonalJsonSocialServiceNameQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
-}
-
-export interface competencesJsonInternalInputObject_2 {
-	contentDigest?: competencesJsonInternalContentDigestQueryString_2 | null;
-	type?: competencesJsonInternalTypeQueryString_2 | null;
-	owner?: competencesJsonInternalOwnerQueryString_2 | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface competencesJsonInternalContentDigestQueryString_2 {
+export interface PersonalJsonSocialIconQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface competencesJsonInternalTypeQueryString_2 {
+export interface PersonalJsonSocialUrlQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface competencesJsonInternalOwnerQueryString_2 {
+export interface PersonalJsonIdQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
-}
-
-export interface interestsJsonSubjectsQueryList_2 {
-	elemMatch?: interestsJsonSubjectsInputObject_2 | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface interestsJsonSubjectsInputObject_2 {
-	name?: interestsJsonSubjectsNameQueryString_2 | null;
-	intensity?: interestsJsonSubjectsIntensityQueryInteger_2 | null;
+export interface PersonalJsonInternalInputObject_2 {
+	contentDigest?: PersonalJsonInternalContentDigestQueryString_2 | null;
+	type?: PersonalJsonInternalTypeQueryString_2 | null;
+	owner?: PersonalJsonInternalOwnerQueryString_2 | null;
 }
 
-export interface interestsJsonSubjectsNameQueryString_2 {
+export interface PersonalJsonInternalContentDigestQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
-}
-
-export interface interestsJsonSubjectsIntensityQueryInteger_2 {
-	eq?: number | null;
-	ne?: number | null;
-	gt?: number | null;
-	gte?: number | null;
-	lt?: number | null;
-	lte?: number | null;
-	in?: (number | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface interestsJsonIdQueryString_2 {
+export interface PersonalJsonInternalTypeQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
-}
-
-export interface interestsJsonInternalInputObject_2 {
-	contentDigest?: interestsJsonInternalContentDigestQueryString_2 | null;
-	type?: interestsJsonInternalTypeQueryString_2 | null;
-	owner?: interestsJsonInternalOwnerQueryString_2 | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface interestsJsonInternalContentDigestQueryString_2 {
+export interface PersonalJsonInternalOwnerQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface interestsJsonInternalTypeQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
+export interface ExperiencesJsonWorkQueryList_2 {
+	elemMatch?: ExperiencesJsonWorkInputObject_2 | null;
 }
 
-export interface interestsJsonInternalOwnerQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
+export interface ExperiencesJsonWorkInputObject_2 {
+	company?: ExperiencesJsonWorkCompanyQueryString_2 | null;
+	link?: ExperiencesJsonWorkLinkQueryString_2 | null;
+	image?: ExperiencesJsonWorkImageQueryString_2 | null;
+	period?: ExperiencesJsonWorkPeriodQueryList_2 | null;
+	role?: ExperiencesJsonWorkRoleQueryString_2 | null;
+	skills?: ExperiencesJsonWorkSkillsQueryList_2 | null;
+	projects?: ExperiencesJsonWorkProjectsQueryList_2 | null;
 }
 
-export interface personalJsonNameQueryString_2 {
+export interface ExperiencesJsonWorkCompanyQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface personalJsonEmailQueryString_2 {
+export interface ExperiencesJsonWorkLinkQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface personalJsonJobTitleQueryString_2 {
+export interface ExperiencesJsonWorkImageQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
-}
-
-export interface personalJsonSocialQueryList_2 {
-	elemMatch?: personalJsonSocialInputObject_2 | null;
-}
-
-export interface personalJsonSocialInputObject_2 {
-	serviceName?: personalJsonSocialServiceNameQueryString_2 | null;
-	icon?: personalJsonSocialIconQueryString_2 | null;
-	url?: personalJsonSocialUrlQueryString_2 | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface personalJsonSocialServiceNameQueryString_2 {
+export interface ExperiencesJsonWorkPeriodQueryList_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface personalJsonSocialIconQueryString_2 {
+export interface ExperiencesJsonWorkRoleQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface personalJsonSocialUrlQueryString_2 {
+export interface ExperiencesJsonWorkSkillsQueryList_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface personalJsonIdQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
+export interface ExperiencesJsonWorkProjectsQueryList_2 {
+	elemMatch?: ExperiencesJsonWorkProjectsInputObject_2 | null;
 }
 
-export interface personalJsonInternalInputObject_2 {
-	contentDigest?: personalJsonInternalContentDigestQueryString_2 | null;
-	type?: personalJsonInternalTypeQueryString_2 | null;
-	owner?: personalJsonInternalOwnerQueryString_2 | null;
+export interface ExperiencesJsonWorkProjectsInputObject_2 {
+	name?: ExperiencesJsonWorkProjectsNameQueryString_2 | null;
+	url?: ExperiencesJsonWorkProjectsUrlQueryString_2 | null;
+	description?: ExperiencesJsonWorkProjectsDescriptionQueryString_2 | null;
 }
 
-export interface personalJsonInternalContentDigestQueryString_2 {
+export interface ExperiencesJsonWorkProjectsNameQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface personalJsonInternalTypeQueryString_2 {
+export interface ExperiencesJsonWorkProjectsUrlQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface personalJsonInternalOwnerQueryString_2 {
+export interface ExperiencesJsonWorkProjectsDescriptionQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
-}
-
-export interface skillsJsonLanguagesQueryList_2 {
-	elemMatch?: skillsJsonLanguagesInputObject_2 | null;
-}
-
-export interface skillsJsonLanguagesInputObject_2 {
-	name?: skillsJsonLanguagesNameQueryString_2 | null;
-	intensity?: skillsJsonLanguagesIntensityQueryInteger_2 | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface skillsJsonLanguagesNameQueryString_2 {
+export interface ExperiencesJsonIdQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface skillsJsonLanguagesIntensityQueryInteger_2 {
-	eq?: number | null;
-	ne?: number | null;
-	gt?: number | null;
-	gte?: number | null;
-	lt?: number | null;
-	lte?: number | null;
-	in?: (number | null)[] | null;
+export interface ExperiencesJsonInternalInputObject_2 {
+	contentDigest?: ExperiencesJsonInternalContentDigestQueryString_2 | null;
+	type?: ExperiencesJsonInternalTypeQueryString_2 | null;
+	owner?: ExperiencesJsonInternalOwnerQueryString_2 | null;
+	fieldOwners?: ExperiencesJsonInternalFieldOwnersInputObject_2 | null;
 }
 
-export interface skillsJsonTechnicalQueryList_2 {
-	elemMatch?: skillsJsonTechnicalInputObject_2 | null;
-}
-
-export interface skillsJsonTechnicalInputObject_2 {
-	name?: skillsJsonTechnicalNameQueryString_2 | null;
-	intensity?: skillsJsonTechnicalIntensityQueryInteger_2 | null;
-}
-
-export interface skillsJsonTechnicalNameQueryString_2 {
+export interface ExperiencesJsonInternalContentDigestQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
-}
-
-export interface skillsJsonTechnicalIntensityQueryInteger_2 {
-	eq?: number | null;
-	ne?: number | null;
-	gt?: number | null;
-	gte?: number | null;
-	lt?: number | null;
-	lte?: number | null;
-	in?: (number | null)[] | null;
-}
-
-export interface skillsJsonSoftQueryList_2 {
-	elemMatch?: skillsJsonSoftInputObject_2 | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface skillsJsonSoftInputObject_2 {
-	name?: skillsJsonSoftNameQueryString_2 | null;
-	intensity?: skillsJsonSoftIntensityQueryInteger_2 | null;
-}
-
-export interface skillsJsonSoftNameQueryString_2 {
+export interface ExperiencesJsonInternalTypeQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
-}
-
-export interface skillsJsonSoftIntensityQueryInteger_2 {
-	eq?: number | null;
-	ne?: number | null;
-	gt?: number | null;
-	gte?: number | null;
-	lt?: number | null;
-	lte?: number | null;
-	in?: (number | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface skillsJsonIdQueryString_2 {
+export interface ExperiencesJsonInternalOwnerQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface skillsJsonInternalInputObject_2 {
-	contentDigest?: skillsJsonInternalContentDigestQueryString_2 | null;
-	type?: skillsJsonInternalTypeQueryString_2 | null;
-	owner?: skillsJsonInternalOwnerQueryString_2 | null;
+export interface ExperiencesJsonInternalFieldOwnersInputObject_2 {
+	image_image?: ExperiencesJsonInternalFieldOwnersImageImageQueryString_2 | null;
 }
 
-export interface skillsJsonInternalContentDigestQueryString_2 {
+export interface ExperiencesJsonInternalFieldOwnersImageImageQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
-export interface skillsJsonInternalTypeQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
+export interface ExperiencesJsonFieldsInputObject_2 {
+	image_image?: ExperiencesJsonFieldsImageImageQueryList_2 | null;
 }
 
-export interface skillsJsonInternalOwnerQueryString_2 {
+export interface ExperiencesJsonFieldsImageImageQueryList_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
 	glob?: string | null;
 	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 export interface AllSitePageQueryArgs {
 	skip?: number | null;
 	limit?: number | null;
-	sort?: sitePageConnectionSort | null;
-	filter?: filterSitePage | null;
+	sort?: SitePageConnectionSort | null;
+	filter?: FilterSitePage | null;
 }
 export interface AllSitePluginQueryArgs {
 	skip?: number | null;
 	limit?: number | null;
-	sort?: sitePluginConnectionSort | null;
-	filter?: filterSitePlugin | null;
+	sort?: SitePluginConnectionSort | null;
+	filter?: FilterSitePlugin | null;
 }
 export interface AllDirectoryQueryArgs {
 	skip?: number | null;
 	limit?: number | null;
-	sort?: directoryConnectionSort | null;
-	filter?: filterDirectory | null;
+	sort?: DirectoryConnectionSort | null;
+	filter?: FilterDirectory | null;
 }
 export interface AllFileQueryArgs {
 	skip?: number | null;
 	limit?: number | null;
-	sort?: fileConnectionSort | null;
-	filter?: filterFile | null;
+	sort?: FileConnectionSort | null;
+	filter?: FilterFile | null;
 }
 export interface AllMarkdownRemarkQueryArgs {
 	skip?: number | null;
 	limit?: number | null;
-	sort?: markdownRemarkConnectionSort | null;
-	filter?: filterMarkdownRemark | null;
+	sort?: MarkdownRemarkConnectionSort | null;
+	filter?: FilterMarkdownRemark | null;
 }
 export interface AllTodoJsonQueryArgs {
 	skip?: number | null;
 	limit?: number | null;
-	sort?: todoJsonConnectionSort | null;
-	filter?: filterTodoJson | null;
-}
-export interface AllOrganizationJsonQueryArgs {
-	skip?: number | null;
-	limit?: number | null;
-	sort?: organizationJsonConnectionSort | null;
-	filter?: filterOrganizationJson | null;
-}
-export interface AllExperiencesJsonQueryArgs {
-	skip?: number | null;
-	limit?: number | null;
-	sort?: experiencesJsonConnectionSort | null;
-	filter?: filterExperiencesJson | null;
-}
-export interface AllCompetencesJsonQueryArgs {
-	skip?: number | null;
-	limit?: number | null;
-	sort?: competencesJsonConnectionSort | null;
-	filter?: filterCompetencesJson | null;
+	sort?: TodoJsonConnectionSort | null;
+	filter?: FilterTodoJson | null;
 }
 export interface AllInterestsJsonQueryArgs {
 	skip?: number | null;
 	limit?: number | null;
-	sort?: interestsJsonConnectionSort | null;
-	filter?: filterInterestsJson | null;
+	sort?: InterestsJsonConnectionSort | null;
+	filter?: FilterInterestsJson | null;
 }
-export interface AllPersonalJsonQueryArgs {
+export interface AllOrganizationJsonQueryArgs {
 	skip?: number | null;
 	limit?: number | null;
-	sort?: personalJsonConnectionSort | null;
-	filter?: filterPersonalJson | null;
+	sort?: OrganizationJsonConnectionSort | null;
+	filter?: FilterOrganizationJson | null;
 }
 export interface AllSkillsJsonQueryArgs {
 	skip?: number | null;
 	limit?: number | null;
-	sort?: skillsJsonConnectionSort | null;
-	filter?: filterSkillsJson | null;
+	sort?: SkillsJsonConnectionSort | null;
+	filter?: FilterSkillsJson | null;
+}
+export interface AllCompetencesJsonQueryArgs {
+	skip?: number | null;
+	limit?: number | null;
+	sort?: CompetencesJsonConnectionSort | null;
+	filter?: FilterCompetencesJson | null;
+}
+export interface AllPersonalJsonQueryArgs {
+	skip?: number | null;
+	limit?: number | null;
+	sort?: PersonalJsonConnectionSort | null;
+	filter?: FilterPersonalJson | null;
+}
+export interface AllExperiencesJsonQueryArgs {
+	skip?: number | null;
+	limit?: number | null;
+	sort?: ExperiencesJsonConnectionSort | null;
+	filter?: FilterExperiencesJson | null;
 }
 export interface SitePageQueryArgs {
-	jsonName?: sitePageJsonNameQueryString | null;
-	internalComponentName?: sitePageInternalComponentNameQueryString | null;
-	path?: sitePagePathQueryString_2 | null;
-	component?: sitePageComponentQueryString | null;
-	componentChunkName?: sitePageComponentChunkNameQueryString | null;
-	context?: sitePageContextInputObject | null;
-	pluginCreator?: sitePagePluginCreatorInputObject | null;
-	pluginCreatorId?: sitePagePluginCreatorIdQueryString_2 | null;
-	componentPath?: sitePageComponentPathQueryString | null;
-	id?: sitePageIdQueryString_2 | null;
-	internal?: sitePageInternalInputObject_2 | null;
+	jsonName?: SitePageJsonNameQueryString | null;
+	internalComponentName?: SitePageInternalComponentNameQueryString | null;
+	path?: SitePagePathQueryString_2 | null;
+	component?: SitePageComponentQueryString | null;
+	componentChunkName?: SitePageComponentChunkNameQueryString | null;
+	context?: SitePageContextInputObject | null;
+	pluginCreator?: SitePagePluginCreatorInputObject | null;
+	pluginCreatorId?: SitePagePluginCreatorIdQueryString_2 | null;
+	componentPath?: SitePageComponentPathQueryString | null;
+	id?: SitePageIdQueryString_2 | null;
+	internal?: SitePageInternalInputObject_2 | null;
 }
 export interface SitePluginQueryArgs {
-	resolve?: sitePluginResolveQueryString_2 | null;
-	id?: sitePluginIdQueryString_2 | null;
-	name?: sitePluginNameQueryString_2 | null;
-	version?: sitePluginVersionQueryString_2 | null;
-	pluginOptions?: sitePluginPluginOptionsInputObject_2 | null;
-	nodeAPIs?: sitePluginNodeApIsQueryList_2 | null;
-	browserAPIs?: sitePluginBrowserApIsQueryList_2 | null;
-	ssrAPIs?: sitePluginSsrApIsQueryList_2 | null;
-	pluginFilepath?: sitePluginPluginFilepathQueryString_2 | null;
-	packageJson?: sitePluginPackageJsonInputObject_2 | null;
-	internal?: sitePluginInternalInputObject_2 | null;
+	resolve?: SitePluginResolveQueryString_2 | null;
+	id?: SitePluginIdQueryString_2 | null;
+	name?: SitePluginNameQueryString_2 | null;
+	version?: SitePluginVersionQueryString_2 | null;
+	pluginOptions?: SitePluginPluginOptionsInputObject_2 | null;
+	nodeAPIs?: SitePluginNodeApIsQueryList_2 | null;
+	browserAPIs?: SitePluginBrowserApIsQueryList_2 | null;
+	ssrAPIs?: SitePluginSsrApIsQueryList_2 | null;
+	pluginFilepath?: SitePluginPluginFilepathQueryString_2 | null;
+	packageJson?: SitePluginPackageJsonInputObject_2 | null;
+	internal?: SitePluginInternalInputObject_2 | null;
 }
 export interface SiteQueryArgs {
-	siteMetadata?: siteSiteMetadataInputObject_2 | null;
-	port?: sitePortQueryString_2 | null;
-	host?: siteHostQueryString_2 | null;
-	pathPrefix?: sitePathPrefixQueryString_2 | null;
-	polyfill?: sitePolyfillQueryBoolean_2 | null;
-	buildTime?: siteBuildTimeQueryString_2 | null;
-	id?: siteIdQueryString_2 | null;
-	internal?: siteInternalInputObject_2 | null;
+	siteMetadata?: SiteSiteMetadataInputObject_2 | null;
+	port?: SitePortQueryString_2 | null;
+	host?: SiteHostQueryString_2 | null;
+	pathPrefix?: SitePathPrefixQueryString_2 | null;
+	polyfill?: SitePolyfillQueryBoolean_2 | null;
+	buildTime?: SiteBuildTimeQueryString_2 | null;
+	id?: SiteIdQueryString_2 | null;
+	internal?: SiteInternalInputObject_2 | null;
 }
 export interface DirectoryQueryArgs {
-	id?: directoryIdQueryString_2 | null;
-	internal?: directoryInternalInputObject_2 | null;
-	sourceInstanceName?: directorySourceInstanceNameQueryString_2 | null;
-	absolutePath?: directoryAbsolutePathQueryString_2 | null;
-	relativePath?: directoryRelativePathQueryString_2 | null;
-	extension?: directoryExtensionQueryString_2 | null;
-	size?: directorySizeQueryInteger_2 | null;
-	prettySize?: directoryPrettySizeQueryString_2 | null;
-	modifiedTime?: directoryModifiedTimeQueryString_2 | null;
-	accessTime?: directoryAccessTimeQueryString_2 | null;
-	changeTime?: directoryChangeTimeQueryString_2 | null;
-	birthTime?: directoryBirthTimeQueryString_2 | null;
-	root?: directoryRootQueryString_2 | null;
-	dir?: directoryDirQueryString_2 | null;
-	base?: directoryBaseQueryString_2 | null;
-	ext?: directoryExtQueryString_2 | null;
-	name?: directoryNameQueryString_2 | null;
-	relativeDirectory?: directoryRelativeDirectoryQueryString_2 | null;
-	dev?: directoryDevQueryInteger_2 | null;
-	mode?: directoryModeQueryInteger_2 | null;
-	nlink?: directoryNlinkQueryInteger_2 | null;
-	uid?: directoryUidQueryInteger_2 | null;
-	gid?: directoryGidQueryInteger_2 | null;
-	rdev?: directoryRdevQueryInteger_2 | null;
-	blksize?: directoryBlksizeQueryInteger_2 | null;
-	ino?: directoryInoQueryInteger_2 | null;
-	blocks?: directoryBlocksQueryInteger_2 | null;
-	atimeMs?: directoryAtimeMsQueryFloat_2 | null;
-	mtimeMs?: directoryMtimeMsQueryFloat_2 | null;
-	ctimeMs?: directoryCtimeMsQueryFloat_2 | null;
-	birthtimeMs?: directoryBirthtimeMsQueryFloat_2 | null;
-	atime?: directoryAtimeQueryString_2 | null;
-	mtime?: directoryMtimeQueryString_2 | null;
-	ctime?: directoryCtimeQueryString_2 | null;
-	birthtime?: directoryBirthtimeQueryString_2 | null;
+	id?: DirectoryIdQueryString_2 | null;
+	internal?: DirectoryInternalInputObject_2 | null;
+	sourceInstanceName?: DirectorySourceInstanceNameQueryString_2 | null;
+	absolutePath?: DirectoryAbsolutePathQueryString_2 | null;
+	relativePath?: DirectoryRelativePathQueryString_2 | null;
+	extension?: DirectoryExtensionQueryString_2 | null;
+	size?: DirectorySizeQueryInteger_2 | null;
+	prettySize?: DirectoryPrettySizeQueryString_2 | null;
+	modifiedTime?: DirectoryModifiedTimeQueryString_2 | null;
+	accessTime?: DirectoryAccessTimeQueryString_2 | null;
+	changeTime?: DirectoryChangeTimeQueryString_2 | null;
+	birthTime?: DirectoryBirthTimeQueryString_2 | null;
+	root?: DirectoryRootQueryString_2 | null;
+	dir?: DirectoryDirQueryString_2 | null;
+	base?: DirectoryBaseQueryString_2 | null;
+	ext?: DirectoryExtQueryString_2 | null;
+	name?: DirectoryNameQueryString_2 | null;
+	relativeDirectory?: DirectoryRelativeDirectoryQueryString_2 | null;
+	dev?: DirectoryDevQueryInteger_2 | null;
+	mode?: DirectoryModeQueryInteger_2 | null;
+	nlink?: DirectoryNlinkQueryInteger_2 | null;
+	uid?: DirectoryUidQueryInteger_2 | null;
+	gid?: DirectoryGidQueryInteger_2 | null;
+	rdev?: DirectoryRdevQueryInteger_2 | null;
+	blksize?: DirectoryBlksizeQueryInteger_2 | null;
+	ino?: DirectoryInoQueryInteger_2 | null;
+	blocks?: DirectoryBlocksQueryInteger_2 | null;
+	atimeMs?: DirectoryAtimeMsQueryFloat_2 | null;
+	mtimeMs?: DirectoryMtimeMsQueryFloat_2 | null;
+	ctimeMs?: DirectoryCtimeMsQueryFloat_2 | null;
+	birthtimeMs?: DirectoryBirthtimeMsQueryFloat_2 | null;
+	atime?: DirectoryAtimeQueryString_2 | null;
+	mtime?: DirectoryMtimeQueryString_2 | null;
+	ctime?: DirectoryCtimeQueryString_2 | null;
+	birthtime?: DirectoryBirthtimeQueryString_2 | null;
 }
 export interface FileQueryArgs {
-	id?: fileIdQueryString_2 | null;
-	internal?: fileInternalInputObject_2 | null;
-	sourceInstanceName?: fileSourceInstanceNameQueryString_2 | null;
-	absolutePath?: fileAbsolutePathQueryString_2 | null;
-	relativePath?: fileRelativePathQueryString_2 | null;
-	extension?: fileExtensionQueryString_2 | null;
-	size?: fileSizeQueryInteger_2 | null;
-	prettySize?: filePrettySizeQueryString_2 | null;
-	modifiedTime?: fileModifiedTimeQueryString_2 | null;
-	accessTime?: fileAccessTimeQueryString_2 | null;
-	changeTime?: fileChangeTimeQueryString_2 | null;
-	birthTime?: fileBirthTimeQueryString_2 | null;
-	root?: fileRootQueryString_2 | null;
-	dir?: fileDirQueryString_2 | null;
-	base?: fileBaseQueryString_2 | null;
-	ext?: fileExtQueryString_2 | null;
-	name?: fileNameQueryString_2 | null;
-	relativeDirectory?: fileRelativeDirectoryQueryString_2 | null;
-	dev?: fileDevQueryInteger_2 | null;
-	mode?: fileModeQueryInteger_2 | null;
-	nlink?: fileNlinkQueryInteger_2 | null;
-	uid?: fileUidQueryInteger_2 | null;
-	gid?: fileGidQueryInteger_2 | null;
-	rdev?: fileRdevQueryInteger_2 | null;
-	blksize?: fileBlksizeQueryInteger_2 | null;
-	ino?: fileInoQueryInteger_2 | null;
-	blocks?: fileBlocksQueryInteger_2 | null;
-	atimeMs?: fileAtimeMsQueryFloat_2 | null;
-	mtimeMs?: fileMtimeMsQueryFloat_2 | null;
-	ctimeMs?: fileCtimeMsQueryFloat_2 | null;
-	birthtimeMs?: fileBirthtimeMsQueryFloat_2 | null;
-	atime?: fileAtimeQueryString_2 | null;
-	mtime?: fileMtimeQueryString_2 | null;
-	ctime?: fileCtimeQueryString_2 | null;
-	birthtime?: fileBirthtimeQueryString_2 | null;
-	publicURL?: publicUrlQueryString_3 | null;
+	id?: FileIdQueryString_2 | null;
+	internal?: FileInternalInputObject_2 | null;
+	sourceInstanceName?: FileSourceInstanceNameQueryString_2 | null;
+	absolutePath?: FileAbsolutePathQueryString_2 | null;
+	relativePath?: FileRelativePathQueryString_2 | null;
+	extension?: FileExtensionQueryString_2 | null;
+	size?: FileSizeQueryInteger_2 | null;
+	prettySize?: FilePrettySizeQueryString_2 | null;
+	modifiedTime?: FileModifiedTimeQueryString_2 | null;
+	accessTime?: FileAccessTimeQueryString_2 | null;
+	changeTime?: FileChangeTimeQueryString_2 | null;
+	birthTime?: FileBirthTimeQueryString_2 | null;
+	root?: FileRootQueryString_2 | null;
+	dir?: FileDirQueryString_2 | null;
+	base?: FileBaseQueryString_2 | null;
+	ext?: FileExtQueryString_2 | null;
+	name?: FileNameQueryString_2 | null;
+	relativeDirectory?: FileRelativeDirectoryQueryString_2 | null;
+	dev?: FileDevQueryInteger_2 | null;
+	mode?: FileModeQueryInteger_2 | null;
+	nlink?: FileNlinkQueryInteger_2 | null;
+	uid?: FileUidQueryInteger_2 | null;
+	gid?: FileGidQueryInteger_2 | null;
+	rdev?: FileRdevQueryInteger_2 | null;
+	blksize?: FileBlksizeQueryInteger_2 | null;
+	ino?: FileInoQueryInteger_2 | null;
+	blocks?: FileBlocksQueryInteger_2 | null;
+	atimeMs?: FileAtimeMsQueryFloat_2 | null;
+	mtimeMs?: FileMtimeMsQueryFloat_2 | null;
+	ctimeMs?: FileCtimeMsQueryFloat_2 | null;
+	birthtimeMs?: FileBirthtimeMsQueryFloat_2 | null;
+	atime?: FileAtimeQueryString_2 | null;
+	mtime?: FileMtimeQueryString_2 | null;
+	ctime?: FileCtimeQueryString_2 | null;
+	birthtime?: FileBirthtimeQueryString_2 | null;
+	publicURL?: PublicUrlQueryString_3 | null;
 }
 export interface MarkdownRemarkQueryArgs {
-	id?: markdownRemarkIdQueryString_2 | null;
-	internal?: markdownRemarkInternalInputObject_2 | null;
-	frontmatter?: markdownRemarkFrontmatterInputObject_2 | null;
-	excerpt?: excerptQueryString_3 | null;
-	rawMarkdownBody?: markdownRemarkRawMarkdownBodyQueryString_2 | null;
-	fileAbsolutePath?: markdownRemarkFileAbsolutePathQueryString_2 | null;
-	html?: htmlQueryString_3 | null;
-	headings?: headingsQueryList_3 | null;
-	timeToRead?: timeToReadQueryInt_3 | null;
-	tableOfContents?: tableOfContentsQueryString_3 | null;
-	wordCount?: wordCountTypeName_3 | null;
+	id?: MarkdownRemarkIdQueryString_2 | null;
+	internal?: MarkdownRemarkInternalInputObject_2 | null;
+	frontmatter?: MarkdownRemarkFrontmatterInputObject_2 | null;
+	excerpt?: ExcerptQueryString_3 | null;
+	rawMarkdownBody?: MarkdownRemarkRawMarkdownBodyQueryString_2 | null;
+	fileAbsolutePath?: MarkdownRemarkFileAbsolutePathQueryString_2 | null;
+	html?: HtmlQueryString_3 | null;
+	headings?: HeadingsQueryList_3 | null;
+	timeToRead?: TimeToReadQueryInt_3 | null;
+	tableOfContents?: TableOfContentsQueryString_3 | null;
+	wordCount?: WordCountTypeName_3 | null;
 }
 export interface TodoJsonQueryArgs {
-	title?: todoJsonTitleQueryString_2 | null;
-	tags?: todoJsonTagsQueryList_2 | null;
-	id?: todoJsonIdQueryString_2 | null;
-	internal?: todoJsonInternalInputObject_2 | null;
-}
-export interface OrganizationJsonQueryArgs {
-	name?: organizationJsonNameQueryString_2 | null;
-	url?: organizationJsonUrlQueryString_2 | null;
-	logo?: organizationJsonLogoQueryString_2 | null;
-	telephone?: organizationJsonTelephoneQueryString_2 | null;
-	id?: organizationJsonIdQueryString_2 | null;
-	internal?: organizationJsonInternalInputObject_2 | null;
-	fields?: organizationJsonFieldsInputObject_2 | null;
-}
-export interface ExperiencesJsonQueryArgs {
-	work?: experiencesJsonWorkQueryList_2 | null;
-	id?: experiencesJsonIdQueryString_2 | null;
-	internal?: experiencesJsonInternalInputObject_2 | null;
-	fields?: experiencesJsonFieldsInputObject_2 | null;
-}
-export interface CompetencesJsonQueryArgs {
-	name?: competencesJsonNameQueryString_2 | null;
-	description?: competencesJsonDescriptionQueryString_2 | null;
-	id?: competencesJsonIdQueryString_2 | null;
-	internal?: competencesJsonInternalInputObject_2 | null;
+	title?: TodoJsonTitleQueryString_2 | null;
+	tags?: TodoJsonTagsQueryList_2 | null;
+	id?: TodoJsonIdQueryString_2 | null;
+	internal?: TodoJsonInternalInputObject_2 | null;
 }
 export interface InterestsJsonQueryArgs {
-	subjects?: interestsJsonSubjectsQueryList_2 | null;
-	id?: interestsJsonIdQueryString_2 | null;
-	internal?: interestsJsonInternalInputObject_2 | null;
+	subjects?: InterestsJsonSubjectsQueryList_2 | null;
+	id?: InterestsJsonIdQueryString_2 | null;
+	internal?: InterestsJsonInternalInputObject_2 | null;
 }
-export interface PersonalJsonQueryArgs {
-	name?: personalJsonNameQueryString_2 | null;
-	email?: personalJsonEmailQueryString_2 | null;
-	jobTitle?: personalJsonJobTitleQueryString_2 | null;
-	social?: personalJsonSocialQueryList_2 | null;
-	id?: personalJsonIdQueryString_2 | null;
-	internal?: personalJsonInternalInputObject_2 | null;
+export interface OrganizationJsonQueryArgs {
+	name?: OrganizationJsonNameQueryString_2 | null;
+	url?: OrganizationJsonUrlQueryString_2 | null;
+	logo?: OrganizationJsonLogoQueryString_2 | null;
+	telephone?: OrganizationJsonTelephoneQueryString_2 | null;
+	id?: OrganizationJsonIdQueryString_2 | null;
+	internal?: OrganizationJsonInternalInputObject_2 | null;
+	fields?: OrganizationJsonFieldsInputObject_2 | null;
 }
 export interface SkillsJsonQueryArgs {
-	languages?: skillsJsonLanguagesQueryList_2 | null;
-	technical?: skillsJsonTechnicalQueryList_2 | null;
-	soft?: skillsJsonSoftQueryList_2 | null;
-	id?: skillsJsonIdQueryString_2 | null;
-	internal?: skillsJsonInternalInputObject_2 | null;
+	languages?: SkillsJsonLanguagesQueryList_2 | null;
+	technical?: SkillsJsonTechnicalQueryList_2 | null;
+	soft?: SkillsJsonSoftQueryList_2 | null;
+	id?: SkillsJsonIdQueryString_2 | null;
+	internal?: SkillsJsonInternalInputObject_2 | null;
+}
+export interface CompetencesJsonQueryArgs {
+	name?: CompetencesJsonNameQueryString_2 | null;
+	description?: CompetencesJsonDescriptionQueryString_2 | null;
+	id?: CompetencesJsonIdQueryString_2 | null;
+	internal?: CompetencesJsonInternalInputObject_2 | null;
+}
+export interface PersonalJsonQueryArgs {
+	name?: PersonalJsonNameQueryString_2 | null;
+	email?: PersonalJsonEmailQueryString_2 | null;
+	jobTitle?: PersonalJsonJobTitleQueryString_2 | null;
+	social?: PersonalJsonSocialQueryList_2 | null;
+	id?: PersonalJsonIdQueryString_2 | null;
+	internal?: PersonalJsonInternalInputObject_2 | null;
+}
+export interface ExperiencesJsonQueryArgs {
+	work?: ExperiencesJsonWorkQueryList_2 | null;
+	id?: ExperiencesJsonIdQueryString_2 | null;
+	internal?: ExperiencesJsonInternalInputObject_2 | null;
+	fields?: ExperiencesJsonFieldsInputObject_2 | null;
 }
 export interface DistinctSitePageConnectionArgs {
-	field?: sitePageDistinctEnum | null;
+	field?: SitePageDistinctEnum | null;
 }
 export interface GroupSitePageConnectionArgs {
 	skip?: number | null;
 	limit?: number | null;
-	field?: sitePageGroupEnum | null;
+	field?: SitePageGroupEnum | null;
 }
 export interface BirthTimeParentArgs {
 	formatString?:
@@ -9225,20 +10595,20 @@ export interface DateFrontmatter_2Args {
 		| null /** Configures the locale Moment.js will use to format the date. */;
 }
 export interface DistinctSitePluginConnectionArgs {
-	field?: sitePluginDistinctEnum | null;
+	field?: SitePluginDistinctEnum | null;
 }
 export interface GroupSitePluginConnectionArgs {
 	skip?: number | null;
 	limit?: number | null;
-	field?: sitePluginGroupEnum | null;
+	field?: SitePluginGroupEnum | null;
 }
 export interface DistinctDirectoryConnectionArgs {
-	field?: directoryDistinctEnum | null;
+	field?: DirectoryDistinctEnum | null;
 }
 export interface GroupDirectoryConnectionArgs {
 	skip?: number | null;
 	limit?: number | null;
-	field?: directoryGroupEnum | null;
+	field?: DirectoryGroupEnum | null;
 }
 export interface ModifiedTimeDirectoryArgs {
 	formatString?:
@@ -9353,12 +10723,12 @@ export interface BirthtimeDirectoryArgs {
 		| null /** Configures the locale Moment.js will use to format the date. */;
 }
 export interface DistinctFileConnectionArgs {
-	field?: fileDistinctEnum | null;
+	field?: FileDistinctEnum | null;
 }
 export interface GroupFileConnectionArgs {
 	skip?: number | null;
 	limit?: number | null;
-	field?: fileGroupEnum | null;
+	field?: FileGroupEnum | null;
 }
 export interface ModifiedTimeFileArgs {
 	formatString?:
@@ -9474,9 +10844,13 @@ export interface BirthtimeFileArgs {
 }
 export interface ExcerptMarkdownRemarkArgs {
 	pruneLength?: number | null;
+	truncate?: boolean | null;
 }
 export interface HeadingsMarkdownRemarkArgs {
 	depth?: HeadingLevels | null;
+}
+export interface TableOfContentsMarkdownRemarkArgs {
+	pathToSlugField?: string | null;
 }
 export interface DateFrontmatter_3Args {
 	formatString?:
@@ -9493,68 +10867,68 @@ export interface DateFrontmatter_3Args {
 		| null /** Configures the locale Moment.js will use to format the date. */;
 }
 export interface DistinctMarkdownRemarkConnectionArgs {
-	field?: markdownRemarkDistinctEnum | null;
+	field?: MarkdownRemarkDistinctEnum | null;
 }
 export interface GroupMarkdownRemarkConnectionArgs {
 	skip?: number | null;
 	limit?: number | null;
-	field?: markdownRemarkGroupEnum | null;
+	field?: MarkdownRemarkGroupEnum | null;
 }
 export interface DistinctTodoJsonConnectionArgs {
-	field?: todoJsonDistinctEnum | null;
+	field?: TodoJsonDistinctEnum | null;
 }
 export interface GroupTodoJsonConnectionArgs {
 	skip?: number | null;
 	limit?: number | null;
-	field?: todoJsonGroupEnum | null;
-}
-export interface DistinctOrganizationJsonConnectionArgs {
-	field?: organizationJsonDistinctEnum | null;
-}
-export interface GroupOrganizationJsonConnectionArgs {
-	skip?: number | null;
-	limit?: number | null;
-	field?: organizationJsonGroupEnum | null;
-}
-export interface DistinctExperiencesJsonConnectionArgs {
-	field?: experiencesJsonDistinctEnum | null;
-}
-export interface GroupExperiencesJsonConnectionArgs {
-	skip?: number | null;
-	limit?: number | null;
-	field?: experiencesJsonGroupEnum | null;
-}
-export interface DistinctCompetencesJsonConnectionArgs {
-	field?: competencesJsonDistinctEnum | null;
-}
-export interface GroupCompetencesJsonConnectionArgs {
-	skip?: number | null;
-	limit?: number | null;
-	field?: competencesJsonGroupEnum | null;
+	field?: TodoJsonGroupEnum | null;
 }
 export interface DistinctInterestsJsonConnectionArgs {
-	field?: interestsJsonDistinctEnum | null;
+	field?: InterestsJsonDistinctEnum | null;
 }
 export interface GroupInterestsJsonConnectionArgs {
 	skip?: number | null;
 	limit?: number | null;
-	field?: interestsJsonGroupEnum | null;
+	field?: InterestsJsonGroupEnum | null;
 }
-export interface DistinctPersonalJsonConnectionArgs {
-	field?: personalJsonDistinctEnum | null;
+export interface DistinctOrganizationJsonConnectionArgs {
+	field?: OrganizationJsonDistinctEnum | null;
 }
-export interface GroupPersonalJsonConnectionArgs {
+export interface GroupOrganizationJsonConnectionArgs {
 	skip?: number | null;
 	limit?: number | null;
-	field?: personalJsonGroupEnum | null;
+	field?: OrganizationJsonGroupEnum | null;
 }
 export interface DistinctSkillsJsonConnectionArgs {
-	field?: skillsJsonDistinctEnum | null;
+	field?: SkillsJsonDistinctEnum | null;
 }
 export interface GroupSkillsJsonConnectionArgs {
 	skip?: number | null;
 	limit?: number | null;
-	field?: skillsJsonGroupEnum | null;
+	field?: SkillsJsonGroupEnum | null;
+}
+export interface DistinctCompetencesJsonConnectionArgs {
+	field?: CompetencesJsonDistinctEnum | null;
+}
+export interface GroupCompetencesJsonConnectionArgs {
+	skip?: number | null;
+	limit?: number | null;
+	field?: CompetencesJsonGroupEnum | null;
+}
+export interface DistinctPersonalJsonConnectionArgs {
+	field?: PersonalJsonDistinctEnum | null;
+}
+export interface GroupPersonalJsonConnectionArgs {
+	skip?: number | null;
+	limit?: number | null;
+	field?: PersonalJsonGroupEnum | null;
+}
+export interface DistinctExperiencesJsonConnectionArgs {
+	field?: ExperiencesJsonDistinctEnum | null;
+}
+export interface GroupExperiencesJsonConnectionArgs {
+	skip?: number | null;
+	limit?: number | null;
+	field?: ExperiencesJsonGroupEnum | null;
 }
 export interface PortSiteArgs {
 	formatString?:
@@ -9606,12 +10980,12 @@ export enum SitePageConnectionSortByFieldsEnum {
 	internal___owner = "internal___owner",
 }
 
-export enum sitePageConnectionSortOrderValues {
+export enum SitePageConnectionSortOrderValues {
 	ASC = "ASC",
 	DESC = "DESC",
 }
 
-export enum sitePageDistinctEnum {
+export enum SitePageDistinctEnum {
 	jsonName = "jsonName",
 	internalComponentName = "internalComponentName",
 	path = "path",
@@ -9632,7 +11006,7 @@ export enum sitePageDistinctEnum {
 	internal___owner = "internal___owner",
 }
 
-export enum sitePageGroupEnum {
+export enum SitePageGroupEnum {
 	jsonName = "jsonName",
 	internalComponentName = "internalComponentName",
 	path = "path",
@@ -9659,37 +11033,40 @@ export enum SitePluginConnectionSortByFieldsEnum {
 	name = "name",
 	version = "version",
 	pluginOptions___plugins = "pluginOptions___plugins",
+	pluginOptions___production = "pluginOptions___production",
+	pluginOptions___analyzerMode = "pluginOptions___analyzerMode",
+	pluginOptions___defaultSizes = "pluginOptions___defaultSizes",
+	pluginOptions___openAnalyzer = "pluginOptions___openAnalyzer",
 	pluginOptions___name = "pluginOptions___name",
 	pluginOptions___path = "pluginOptions___path",
-	pluginOptions___emojiConversion = "pluginOptions___emojiConversion",
 	pluginOptions___maxWidth = "pluginOptions___maxWidth",
 	pluginOptions___wrapperStyle = "pluginOptions___wrapperStyle",
 	pluginOptions___backgroundColor = "pluginOptions___backgroundColor",
 	pluginOptions___linkImagesToOriginal = "pluginOptions___linkImagesToOriginal",
 	pluginOptions___showCaptions = "pluginOptions___showCaptions",
 	pluginOptions___pathPrefix = "pluginOptions___pathPrefix",
+	pluginOptions___withWebp = "pluginOptions___withWebp",
 	pluginOptions___inlineCodeMarker = "pluginOptions___inlineCodeMarker",
+	pluginOptions___pathToConfigModule = "pluginOptions___pathToConfigModule",
+	pluginOptions___omitGoogleFont = "pluginOptions___omitGoogleFont",
+	pluginOptions___query = "pluginOptions___query",
+	pluginOptions___feeds = "pluginOptions___feeds",
+	pluginOptions___headers______js = "pluginOptions___headers______js",
+	pluginOptions___headers____sw_js = "pluginOptions___headers____sw_js",
+	pluginOptions___headers______webmanifest = "pluginOptions___headers______webmanifest",
+	pluginOptions___headers______css = "pluginOptions___headers______css",
+	pluginOptions___headers______png = "pluginOptions___headers______png",
+	pluginOptions___headers______jpg = "pluginOptions___headers______jpg",
+	pluginOptions___headers______jpeg = "pluginOptions___headers______jpeg",
+	pluginOptions___headers______gif = "pluginOptions___headers______gif",
+	pluginOptions___headers______svg = "pluginOptions___headers______svg",
+	pluginOptions___allPageHeaders = "pluginOptions___allPageHeaders",
 	pluginOptions___short_name = "pluginOptions___short_name",
 	pluginOptions___start_url = "pluginOptions___start_url",
 	pluginOptions___background_color = "pluginOptions___background_color",
 	pluginOptions___theme_color = "pluginOptions___theme_color",
 	pluginOptions___display = "pluginOptions___display",
 	pluginOptions___icon = "pluginOptions___icon",
-	pluginOptions___logo = "pluginOptions___logo",
-	pluginOptions___injectHTML = "pluginOptions___injectHTML",
-	pluginOptions___icons___android = "pluginOptions___icons___android",
-	pluginOptions___icons___appleIcon = "pluginOptions___icons___appleIcon",
-	pluginOptions___icons___appleStartup = "pluginOptions___icons___appleStartup",
-	pluginOptions___icons___coast = "pluginOptions___icons___coast",
-	pluginOptions___icons___favicons = "pluginOptions___icons___favicons",
-	pluginOptions___icons___firefox = "pluginOptions___icons___firefox",
-	pluginOptions___icons___twitter = "pluginOptions___icons___twitter",
-	pluginOptions___icons___yandex = "pluginOptions___icons___yandex",
-	pluginOptions___icons___windows = "pluginOptions___icons___windows",
-	pluginOptions___pathToConfigModule = "pluginOptions___pathToConfigModule",
-	pluginOptions___omitGoogleFont = "pluginOptions___omitGoogleFont",
-	pluginOptions___query = "pluginOptions___query",
-	pluginOptions___feeds = "pluginOptions___feeds",
 	pluginOptions___pathCheck = "pluginOptions___pathCheck",
 	nodeAPIs = "nodeAPIs",
 	browserAPIs = "browserAPIs",
@@ -9711,48 +11088,51 @@ export enum SitePluginConnectionSortByFieldsEnum {
 	internal___owner = "internal___owner",
 }
 
-export enum sitePluginConnectionSortOrderValues {
+export enum SitePluginConnectionSortOrderValues {
 	ASC = "ASC",
 	DESC = "DESC",
 }
 
-export enum sitePluginDistinctEnum {
+export enum SitePluginDistinctEnum {
 	resolve = "resolve",
 	id = "id",
 	name = "name",
 	version = "version",
 	pluginOptions___plugins = "pluginOptions___plugins",
+	pluginOptions___production = "pluginOptions___production",
+	pluginOptions___analyzerMode = "pluginOptions___analyzerMode",
+	pluginOptions___defaultSizes = "pluginOptions___defaultSizes",
+	pluginOptions___openAnalyzer = "pluginOptions___openAnalyzer",
 	pluginOptions___name = "pluginOptions___name",
 	pluginOptions___path = "pluginOptions___path",
-	pluginOptions___emojiConversion = "pluginOptions___emojiConversion",
 	pluginOptions___maxWidth = "pluginOptions___maxWidth",
 	pluginOptions___wrapperStyle = "pluginOptions___wrapperStyle",
 	pluginOptions___backgroundColor = "pluginOptions___backgroundColor",
 	pluginOptions___linkImagesToOriginal = "pluginOptions___linkImagesToOriginal",
 	pluginOptions___showCaptions = "pluginOptions___showCaptions",
 	pluginOptions___pathPrefix = "pluginOptions___pathPrefix",
+	pluginOptions___withWebp = "pluginOptions___withWebp",
 	pluginOptions___inlineCodeMarker = "pluginOptions___inlineCodeMarker",
+	pluginOptions___pathToConfigModule = "pluginOptions___pathToConfigModule",
+	pluginOptions___omitGoogleFont = "pluginOptions___omitGoogleFont",
+	pluginOptions___query = "pluginOptions___query",
+	pluginOptions___feeds = "pluginOptions___feeds",
+	pluginOptions___headers______js = "pluginOptions___headers______js",
+	pluginOptions___headers____sw_js = "pluginOptions___headers____sw_js",
+	pluginOptions___headers______webmanifest = "pluginOptions___headers______webmanifest",
+	pluginOptions___headers______css = "pluginOptions___headers______css",
+	pluginOptions___headers______png = "pluginOptions___headers______png",
+	pluginOptions___headers______jpg = "pluginOptions___headers______jpg",
+	pluginOptions___headers______jpeg = "pluginOptions___headers______jpeg",
+	pluginOptions___headers______gif = "pluginOptions___headers______gif",
+	pluginOptions___headers______svg = "pluginOptions___headers______svg",
+	pluginOptions___allPageHeaders = "pluginOptions___allPageHeaders",
 	pluginOptions___short_name = "pluginOptions___short_name",
 	pluginOptions___start_url = "pluginOptions___start_url",
 	pluginOptions___background_color = "pluginOptions___background_color",
 	pluginOptions___theme_color = "pluginOptions___theme_color",
 	pluginOptions___display = "pluginOptions___display",
 	pluginOptions___icon = "pluginOptions___icon",
-	pluginOptions___logo = "pluginOptions___logo",
-	pluginOptions___injectHTML = "pluginOptions___injectHTML",
-	pluginOptions___icons___android = "pluginOptions___icons___android",
-	pluginOptions___icons___appleIcon = "pluginOptions___icons___appleIcon",
-	pluginOptions___icons___appleStartup = "pluginOptions___icons___appleStartup",
-	pluginOptions___icons___coast = "pluginOptions___icons___coast",
-	pluginOptions___icons___favicons = "pluginOptions___icons___favicons",
-	pluginOptions___icons___firefox = "pluginOptions___icons___firefox",
-	pluginOptions___icons___twitter = "pluginOptions___icons___twitter",
-	pluginOptions___icons___yandex = "pluginOptions___icons___yandex",
-	pluginOptions___icons___windows = "pluginOptions___icons___windows",
-	pluginOptions___pathToConfigModule = "pluginOptions___pathToConfigModule",
-	pluginOptions___omitGoogleFont = "pluginOptions___omitGoogleFont",
-	pluginOptions___query = "pluginOptions___query",
-	pluginOptions___feeds = "pluginOptions___feeds",
 	pluginOptions___pathCheck = "pluginOptions___pathCheck",
 	nodeAPIs = "nodeAPIs",
 	browserAPIs = "browserAPIs",
@@ -9774,43 +11154,46 @@ export enum sitePluginDistinctEnum {
 	internal___owner = "internal___owner",
 }
 
-export enum sitePluginGroupEnum {
+export enum SitePluginGroupEnum {
 	resolve = "resolve",
 	id = "id",
 	name = "name",
 	version = "version",
 	pluginOptions___plugins = "pluginOptions___plugins",
+	pluginOptions___production = "pluginOptions___production",
+	pluginOptions___analyzerMode = "pluginOptions___analyzerMode",
+	pluginOptions___defaultSizes = "pluginOptions___defaultSizes",
+	pluginOptions___openAnalyzer = "pluginOptions___openAnalyzer",
 	pluginOptions___name = "pluginOptions___name",
 	pluginOptions___path = "pluginOptions___path",
-	pluginOptions___emojiConversion = "pluginOptions___emojiConversion",
 	pluginOptions___maxWidth = "pluginOptions___maxWidth",
 	pluginOptions___wrapperStyle = "pluginOptions___wrapperStyle",
 	pluginOptions___backgroundColor = "pluginOptions___backgroundColor",
 	pluginOptions___linkImagesToOriginal = "pluginOptions___linkImagesToOriginal",
 	pluginOptions___showCaptions = "pluginOptions___showCaptions",
 	pluginOptions___pathPrefix = "pluginOptions___pathPrefix",
+	pluginOptions___withWebp = "pluginOptions___withWebp",
 	pluginOptions___inlineCodeMarker = "pluginOptions___inlineCodeMarker",
+	pluginOptions___pathToConfigModule = "pluginOptions___pathToConfigModule",
+	pluginOptions___omitGoogleFont = "pluginOptions___omitGoogleFont",
+	pluginOptions___query = "pluginOptions___query",
+	pluginOptions___feeds = "pluginOptions___feeds",
+	pluginOptions___headers______js = "pluginOptions___headers______js",
+	pluginOptions___headers____sw_js = "pluginOptions___headers____sw_js",
+	pluginOptions___headers______webmanifest = "pluginOptions___headers______webmanifest",
+	pluginOptions___headers______css = "pluginOptions___headers______css",
+	pluginOptions___headers______png = "pluginOptions___headers______png",
+	pluginOptions___headers______jpg = "pluginOptions___headers______jpg",
+	pluginOptions___headers______jpeg = "pluginOptions___headers______jpeg",
+	pluginOptions___headers______gif = "pluginOptions___headers______gif",
+	pluginOptions___headers______svg = "pluginOptions___headers______svg",
+	pluginOptions___allPageHeaders = "pluginOptions___allPageHeaders",
 	pluginOptions___short_name = "pluginOptions___short_name",
 	pluginOptions___start_url = "pluginOptions___start_url",
 	pluginOptions___background_color = "pluginOptions___background_color",
 	pluginOptions___theme_color = "pluginOptions___theme_color",
 	pluginOptions___display = "pluginOptions___display",
 	pluginOptions___icon = "pluginOptions___icon",
-	pluginOptions___logo = "pluginOptions___logo",
-	pluginOptions___injectHTML = "pluginOptions___injectHTML",
-	pluginOptions___icons___android = "pluginOptions___icons___android",
-	pluginOptions___icons___appleIcon = "pluginOptions___icons___appleIcon",
-	pluginOptions___icons___appleStartup = "pluginOptions___icons___appleStartup",
-	pluginOptions___icons___coast = "pluginOptions___icons___coast",
-	pluginOptions___icons___favicons = "pluginOptions___icons___favicons",
-	pluginOptions___icons___firefox = "pluginOptions___icons___firefox",
-	pluginOptions___icons___twitter = "pluginOptions___icons___twitter",
-	pluginOptions___icons___yandex = "pluginOptions___icons___yandex",
-	pluginOptions___icons___windows = "pluginOptions___icons___windows",
-	pluginOptions___pathToConfigModule = "pluginOptions___pathToConfigModule",
-	pluginOptions___omitGoogleFont = "pluginOptions___omitGoogleFont",
-	pluginOptions___query = "pluginOptions___query",
-	pluginOptions___feeds = "pluginOptions___feeds",
 	pluginOptions___pathCheck = "pluginOptions___pathCheck",
 	nodeAPIs = "nodeAPIs",
 	browserAPIs = "browserAPIs",
@@ -9874,12 +11257,12 @@ export enum DirectoryConnectionSortByFieldsEnum {
 	birthtime = "birthtime",
 }
 
-export enum directoryConnectionSortOrderValues {
+export enum DirectoryConnectionSortOrderValues {
 	ASC = "ASC",
 	DESC = "DESC",
 }
 
-export enum directoryDistinctEnum {
+export enum DirectoryDistinctEnum {
 	id = "id",
 	parent = "parent",
 	internal___contentDigest = "internal___contentDigest",
@@ -9921,7 +11304,7 @@ export enum directoryDistinctEnum {
 	birthtime = "birthtime",
 }
 
-export enum directoryGroupEnum {
+export enum DirectoryGroupEnum {
 	id = "id",
 	parent = "parent",
 	internal___contentDigest = "internal___contentDigest",
@@ -10008,7 +11391,7 @@ export enum FileConnectionSortByFieldsEnum {
 	publicURL = "publicURL",
 }
 
-export enum fileConnectionSortOrderValues {
+export enum FileConnectionSortOrderValues {
 	ASC = "ASC",
 	DESC = "DESC",
 }
@@ -10022,7 +11405,7 @@ export enum HeadingLevels {
 	h6 = "h6",
 }
 
-export enum fileDistinctEnum {
+export enum FileDistinctEnum {
 	id = "id",
 	children = "children",
 	parent = "parent",
@@ -10066,7 +11449,7 @@ export enum fileDistinctEnum {
 	birthtime = "birthtime",
 }
 
-export enum fileGroupEnum {
+export enum FileGroupEnum {
 	id = "id",
 	children = "children",
 	parent = "parent",
@@ -10122,10 +11505,10 @@ export enum MarkdownRemarkConnectionSortByFieldsEnum {
 	frontmatter___date = "frontmatter___date",
 	frontmatter___authors = "frontmatter___authors",
 	frontmatter____PARENT = "frontmatter____PARENT",
-	frontmatter___parent = "frontmatter___parent",
 	frontmatter___description = "frontmatter___description",
-	frontmatter___type = "frontmatter___type",
 	frontmatter___draft = "frontmatter___draft",
+	frontmatter___toc = "frontmatter___toc",
+	frontmatter___type = "frontmatter___type",
 	excerpt = "excerpt",
 	rawMarkdownBody = "rawMarkdownBody",
 	fileAbsolutePath = "fileAbsolutePath",
@@ -10138,12 +11521,12 @@ export enum MarkdownRemarkConnectionSortByFieldsEnum {
 	wordCount___words = "wordCount___words",
 }
 
-export enum markdownRemarkConnectionSortOrderValues {
+export enum MarkdownRemarkConnectionSortOrderValues {
 	ASC = "ASC",
 	DESC = "DESC",
 }
 
-export enum markdownRemarkDistinctEnum {
+export enum MarkdownRemarkDistinctEnum {
 	id = "id",
 	parent = "parent",
 	internal___content = "internal___content",
@@ -10155,16 +11538,16 @@ export enum markdownRemarkDistinctEnum {
 	frontmatter___date = "frontmatter___date",
 	frontmatter___authors = "frontmatter___authors",
 	frontmatter____PARENT = "frontmatter____PARENT",
-	frontmatter___parent = "frontmatter___parent",
 	frontmatter___description = "frontmatter___description",
-	frontmatter___type = "frontmatter___type",
 	frontmatter___draft = "frontmatter___draft",
+	frontmatter___toc = "frontmatter___toc",
+	frontmatter___type = "frontmatter___type",
 	excerpt = "excerpt",
 	rawMarkdownBody = "rawMarkdownBody",
 	fileAbsolutePath = "fileAbsolutePath",
 }
 
-export enum markdownRemarkGroupEnum {
+export enum MarkdownRemarkGroupEnum {
 	id = "id",
 	parent = "parent",
 	internal___content = "internal___content",
@@ -10176,10 +11559,10 @@ export enum markdownRemarkGroupEnum {
 	frontmatter___date = "frontmatter___date",
 	frontmatter___authors = "frontmatter___authors",
 	frontmatter____PARENT = "frontmatter____PARENT",
-	frontmatter___parent = "frontmatter___parent",
 	frontmatter___description = "frontmatter___description",
-	frontmatter___type = "frontmatter___type",
 	frontmatter___draft = "frontmatter___draft",
+	frontmatter___toc = "frontmatter___toc",
+	frontmatter___type = "frontmatter___type",
 	excerpt = "excerpt",
 	rawMarkdownBody = "rawMarkdownBody",
 	fileAbsolutePath = "fileAbsolutePath",
@@ -10195,12 +11578,12 @@ export enum TodoJsonConnectionSortByFieldsEnum {
 	internal___owner = "internal___owner",
 }
 
-export enum todoJsonConnectionSortOrderValues {
+export enum TodoJsonConnectionSortOrderValues {
 	ASC = "ASC",
 	DESC = "DESC",
 }
 
-export enum todoJsonDistinctEnum {
+export enum TodoJsonDistinctEnum {
 	title = "title",
 	tags = "tags",
 	id = "id",
@@ -10210,9 +11593,41 @@ export enum todoJsonDistinctEnum {
 	internal___owner = "internal___owner",
 }
 
-export enum todoJsonGroupEnum {
+export enum TodoJsonGroupEnum {
 	title = "title",
 	tags = "tags",
+	id = "id",
+	parent = "parent",
+	internal___contentDigest = "internal___contentDigest",
+	internal___type = "internal___type",
+	internal___owner = "internal___owner",
+}
+
+export enum InterestsJsonConnectionSortByFieldsEnum {
+	subjects = "subjects",
+	id = "id",
+	parent = "parent",
+	internal___contentDigest = "internal___contentDigest",
+	internal___type = "internal___type",
+	internal___owner = "internal___owner",
+}
+
+export enum InterestsJsonConnectionSortOrderValues {
+	ASC = "ASC",
+	DESC = "DESC",
+}
+
+export enum InterestsJsonDistinctEnum {
+	subjects = "subjects",
+	id = "id",
+	parent = "parent",
+	internal___contentDigest = "internal___contentDigest",
+	internal___type = "internal___type",
+	internal___owner = "internal___owner",
+}
+
+export enum InterestsJsonGroupEnum {
+	subjects = "subjects",
 	id = "id",
 	parent = "parent",
 	internal___contentDigest = "internal___contentDigest",
@@ -10234,12 +11649,12 @@ export enum OrganizationJsonConnectionSortByFieldsEnum {
 	fields___logo_image = "fields___logo_image",
 }
 
-export enum organizationJsonConnectionSortOrderValues {
+export enum OrganizationJsonConnectionSortOrderValues {
 	ASC = "ASC",
 	DESC = "DESC",
 }
 
-export enum organizationJsonDistinctEnum {
+export enum OrganizationJsonDistinctEnum {
 	name = "name",
 	url = "url",
 	logo = "logo",
@@ -10253,7 +11668,7 @@ export enum organizationJsonDistinctEnum {
 	fields___logo_image = "fields___logo_image",
 }
 
-export enum organizationJsonGroupEnum {
+export enum OrganizationJsonGroupEnum {
 	name = "name",
 	url = "url",
 	logo = "logo",
@@ -10267,42 +11682,42 @@ export enum organizationJsonGroupEnum {
 	fields___logo_image = "fields___logo_image",
 }
 
-export enum ExperiencesJsonConnectionSortByFieldsEnum {
-	work = "work",
+export enum SkillsJsonConnectionSortByFieldsEnum {
+	languages = "languages",
+	technical = "technical",
+	soft = "soft",
 	id = "id",
 	parent = "parent",
 	internal___contentDigest = "internal___contentDigest",
 	internal___type = "internal___type",
 	internal___owner = "internal___owner",
-	internal___fieldOwners___image_image = "internal___fieldOwners___image_image",
-	fields___image_image = "fields___image_image",
 }
 
-export enum experiencesJsonConnectionSortOrderValues {
+export enum SkillsJsonConnectionSortOrderValues {
 	ASC = "ASC",
 	DESC = "DESC",
 }
 
-export enum experiencesJsonDistinctEnum {
-	work = "work",
+export enum SkillsJsonDistinctEnum {
+	languages = "languages",
+	technical = "technical",
+	soft = "soft",
 	id = "id",
 	parent = "parent",
 	internal___contentDigest = "internal___contentDigest",
 	internal___type = "internal___type",
 	internal___owner = "internal___owner",
-	internal___fieldOwners___image_image = "internal___fieldOwners___image_image",
-	fields___image_image = "fields___image_image",
 }
 
-export enum experiencesJsonGroupEnum {
-	work = "work",
+export enum SkillsJsonGroupEnum {
+	languages = "languages",
+	technical = "technical",
+	soft = "soft",
 	id = "id",
 	parent = "parent",
 	internal___contentDigest = "internal___contentDigest",
 	internal___type = "internal___type",
 	internal___owner = "internal___owner",
-	internal___fieldOwners___image_image = "internal___fieldOwners___image_image",
-	fields___image_image = "fields___image_image",
 }
 
 export enum CompetencesJsonConnectionSortByFieldsEnum {
@@ -10315,12 +11730,12 @@ export enum CompetencesJsonConnectionSortByFieldsEnum {
 	internal___owner = "internal___owner",
 }
 
-export enum competencesJsonConnectionSortOrderValues {
+export enum CompetencesJsonConnectionSortOrderValues {
 	ASC = "ASC",
 	DESC = "DESC",
 }
 
-export enum competencesJsonDistinctEnum {
+export enum CompetencesJsonDistinctEnum {
 	name = "name",
 	description = "description",
 	id = "id",
@@ -10330,41 +11745,9 @@ export enum competencesJsonDistinctEnum {
 	internal___owner = "internal___owner",
 }
 
-export enum competencesJsonGroupEnum {
+export enum CompetencesJsonGroupEnum {
 	name = "name",
 	description = "description",
-	id = "id",
-	parent = "parent",
-	internal___contentDigest = "internal___contentDigest",
-	internal___type = "internal___type",
-	internal___owner = "internal___owner",
-}
-
-export enum InterestsJsonConnectionSortByFieldsEnum {
-	subjects = "subjects",
-	id = "id",
-	parent = "parent",
-	internal___contentDigest = "internal___contentDigest",
-	internal___type = "internal___type",
-	internal___owner = "internal___owner",
-}
-
-export enum interestsJsonConnectionSortOrderValues {
-	ASC = "ASC",
-	DESC = "DESC",
-}
-
-export enum interestsJsonDistinctEnum {
-	subjects = "subjects",
-	id = "id",
-	parent = "parent",
-	internal___contentDigest = "internal___contentDigest",
-	internal___type = "internal___type",
-	internal___owner = "internal___owner",
-}
-
-export enum interestsJsonGroupEnum {
-	subjects = "subjects",
 	id = "id",
 	parent = "parent",
 	internal___contentDigest = "internal___contentDigest",
@@ -10384,12 +11767,12 @@ export enum PersonalJsonConnectionSortByFieldsEnum {
 	internal___owner = "internal___owner",
 }
 
-export enum personalJsonConnectionSortOrderValues {
+export enum PersonalJsonConnectionSortOrderValues {
 	ASC = "ASC",
 	DESC = "DESC",
 }
 
-export enum personalJsonDistinctEnum {
+export enum PersonalJsonDistinctEnum {
 	name = "name",
 	email = "email",
 	jobTitle = "jobTitle",
@@ -10401,7 +11784,7 @@ export enum personalJsonDistinctEnum {
 	internal___owner = "internal___owner",
 }
 
-export enum personalJsonGroupEnum {
+export enum PersonalJsonGroupEnum {
 	name = "name",
 	email = "email",
 	jobTitle = "jobTitle",
@@ -10413,771 +11796,1450 @@ export enum personalJsonGroupEnum {
 	internal___owner = "internal___owner",
 }
 
-export enum SkillsJsonConnectionSortByFieldsEnum {
-	languages = "languages",
-	technical = "technical",
-	soft = "soft",
+export enum ExperiencesJsonConnectionSortByFieldsEnum {
+	work = "work",
 	id = "id",
 	parent = "parent",
 	internal___contentDigest = "internal___contentDigest",
 	internal___type = "internal___type",
 	internal___owner = "internal___owner",
+	internal___fieldOwners___image_image = "internal___fieldOwners___image_image",
+	fields___image_image = "fields___image_image",
 }
 
-export enum skillsJsonConnectionSortOrderValues {
+export enum ExperiencesJsonConnectionSortOrderValues {
 	ASC = "ASC",
 	DESC = "DESC",
 }
 
-export enum skillsJsonDistinctEnum {
-	languages = "languages",
-	technical = "technical",
-	soft = "soft",
+export enum ExperiencesJsonDistinctEnum {
+	work = "work",
 	id = "id",
 	parent = "parent",
 	internal___contentDigest = "internal___contentDigest",
 	internal___type = "internal___type",
 	internal___owner = "internal___owner",
+	internal___fieldOwners___image_image = "internal___fieldOwners___image_image",
+	fields___image_image = "fields___image_image",
 }
 
-export enum skillsJsonGroupEnum {
-	languages = "languages",
-	technical = "technical",
-	soft = "soft",
+export enum ExperiencesJsonGroupEnum {
+	work = "work",
 	id = "id",
 	parent = "parent",
 	internal___contentDigest = "internal___contentDigest",
 	internal___type = "internal___type",
 	internal___owner = "internal___owner",
+	internal___fieldOwners___image_image = "internal___fieldOwners___image_image",
+	fields___image_image = "fields___image_image",
 }
 
 export namespace QueryResolvers {
-	export interface Resolvers {
-		allSitePage?: AllSitePageResolver /** Connection to all SitePage nodes */;
-		allSitePlugin?: AllSitePluginResolver /** Connection to all SitePlugin nodes */;
-		allDirectory?: AllDirectoryResolver /** Connection to all Directory nodes */;
-		allFile?: AllFileResolver /** Connection to all File nodes */;
-		allMarkdownRemark?: AllMarkdownRemarkResolver /** Connection to all MarkdownRemark nodes */;
-		allTodoJson?: AllTodoJsonResolver /** Connection to all TodoJson nodes */;
-		allOrganizationJson?: AllOrganizationJsonResolver /** Connection to all OrganizationJson nodes */;
-		allExperiencesJson?: AllExperiencesJsonResolver /** Connection to all ExperiencesJson nodes */;
-		allCompetencesJson?: AllCompetencesJsonResolver /** Connection to all CompetencesJson nodes */;
-		allInterestsJson?: AllInterestsJsonResolver /** Connection to all InterestsJson nodes */;
-		allPersonalJson?: AllPersonalJsonResolver /** Connection to all PersonalJson nodes */;
-		allSkillsJson?: AllSkillsJsonResolver /** Connection to all SkillsJson nodes */;
-		sitePage?: SitePageResolver;
-		sitePlugin?: SitePluginResolver;
-		site?: SiteResolver;
-		directory?: DirectoryResolver;
-		file?: FileResolver;
-		markdownRemark?: MarkdownRemarkResolver;
-		todoJson?: TodoJsonResolver;
-		organizationJson?: OrganizationJsonResolver;
-		experiencesJson?: ExperiencesJsonResolver;
-		competencesJson?: CompetencesJsonResolver;
-		interestsJson?: InterestsJsonResolver;
-		personalJson?: PersonalJsonResolver;
-		skillsJson?: SkillsJsonResolver;
+	export interface Resolvers<Context = any> {
+		allSitePage?: AllSitePageResolver<
+			SitePageConnection | null,
+			any,
+			Context
+		> /** Connection to all SitePage nodes */;
+		allSitePlugin?: AllSitePluginResolver<
+			SitePluginConnection | null,
+			any,
+			Context
+		> /** Connection to all SitePlugin nodes */;
+		allDirectory?: AllDirectoryResolver<
+			DirectoryConnection | null,
+			any,
+			Context
+		> /** Connection to all Directory nodes */;
+		allFile?: AllFileResolver<
+			FileConnection | null,
+			any,
+			Context
+		> /** Connection to all File nodes */;
+		allMarkdownRemark?: AllMarkdownRemarkResolver<
+			MarkdownRemarkConnection | null,
+			any,
+			Context
+		> /** Connection to all MarkdownRemark nodes */;
+		allTodoJson?: AllTodoJsonResolver<
+			TodoJsonConnection | null,
+			any,
+			Context
+		> /** Connection to all TodoJson nodes */;
+		allInterestsJson?: AllInterestsJsonResolver<
+			InterestsJsonConnection | null,
+			any,
+			Context
+		> /** Connection to all InterestsJson nodes */;
+		allOrganizationJson?: AllOrganizationJsonResolver<
+			OrganizationJsonConnection | null,
+			any,
+			Context
+		> /** Connection to all OrganizationJson nodes */;
+		allSkillsJson?: AllSkillsJsonResolver<
+			SkillsJsonConnection | null,
+			any,
+			Context
+		> /** Connection to all SkillsJson nodes */;
+		allCompetencesJson?: AllCompetencesJsonResolver<
+			CompetencesJsonConnection | null,
+			any,
+			Context
+		> /** Connection to all CompetencesJson nodes */;
+		allPersonalJson?: AllPersonalJsonResolver<
+			PersonalJsonConnection | null,
+			any,
+			Context
+		> /** Connection to all PersonalJson nodes */;
+		allExperiencesJson?: AllExperiencesJsonResolver<
+			ExperiencesJsonConnection | null,
+			any,
+			Context
+		> /** Connection to all ExperiencesJson nodes */;
+		sitePage?: SitePageResolver<SitePage | null, any, Context>;
+		sitePlugin?: SitePluginResolver<SitePlugin | null, any, Context>;
+		site?: SiteResolver<Site | null, any, Context>;
+		directory?: DirectoryResolver<Directory | null, any, Context>;
+		file?: FileResolver<File | null, any, Context>;
+		markdownRemark?: MarkdownRemarkResolver<
+			MarkdownRemark | null,
+			any,
+			Context
+		>;
+		todoJson?: TodoJsonResolver<TodoJson | null, any, Context>;
+		interestsJson?: InterestsJsonResolver<
+			InterestsJson | null,
+			any,
+			Context
+		>;
+		organizationJson?: OrganizationJsonResolver<
+			OrganizationJson | null,
+			any,
+			Context
+		>;
+		skillsJson?: SkillsJsonResolver<SkillsJson | null, any, Context>;
+		competencesJson?: CompetencesJsonResolver<
+			CompetencesJson | null,
+			any,
+			Context
+		>;
+		personalJson?: PersonalJsonResolver<PersonalJson | null, any, Context>;
+		experiencesJson?: ExperiencesJsonResolver<
+			ExperiencesJson | null,
+			any,
+			Context
+		>;
 	}
 
-	export type AllSitePageResolver = Resolver<
-		SitePageConnection | null,
-		AllSitePageArgs
-	>;
+	export type AllSitePageResolver<
+		R = SitePageConnection | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context, AllSitePageArgs>;
 	export interface AllSitePageArgs {
 		skip?: number | null;
 		limit?: number | null;
-		sort?: sitePageConnectionSort | null;
-		filter?: filterSitePage | null;
+		sort?: SitePageConnectionSort | null;
+		filter?: FilterSitePage | null;
 	}
 
-	export type AllSitePluginResolver = Resolver<
-		SitePluginConnection | null,
-		AllSitePluginArgs
-	>;
+	export type AllSitePluginResolver<
+		R = SitePluginConnection | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context, AllSitePluginArgs>;
 	export interface AllSitePluginArgs {
 		skip?: number | null;
 		limit?: number | null;
-		sort?: sitePluginConnectionSort | null;
-		filter?: filterSitePlugin | null;
+		sort?: SitePluginConnectionSort | null;
+		filter?: FilterSitePlugin | null;
 	}
 
-	export type AllDirectoryResolver = Resolver<
-		DirectoryConnection | null,
-		AllDirectoryArgs
-	>;
+	export type AllDirectoryResolver<
+		R = DirectoryConnection | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context, AllDirectoryArgs>;
 	export interface AllDirectoryArgs {
 		skip?: number | null;
 		limit?: number | null;
-		sort?: directoryConnectionSort | null;
-		filter?: filterDirectory | null;
+		sort?: DirectoryConnectionSort | null;
+		filter?: FilterDirectory | null;
 	}
 
-	export type AllFileResolver = Resolver<FileConnection | null, AllFileArgs>;
+	export type AllFileResolver<
+		R = FileConnection | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context, AllFileArgs>;
 	export interface AllFileArgs {
 		skip?: number | null;
 		limit?: number | null;
-		sort?: fileConnectionSort | null;
-		filter?: filterFile | null;
+		sort?: FileConnectionSort | null;
+		filter?: FilterFile | null;
 	}
 
-	export type AllMarkdownRemarkResolver = Resolver<
-		MarkdownRemarkConnection | null,
-		AllMarkdownRemarkArgs
-	>;
+	export type AllMarkdownRemarkResolver<
+		R = MarkdownRemarkConnection | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context, AllMarkdownRemarkArgs>;
 	export interface AllMarkdownRemarkArgs {
 		skip?: number | null;
 		limit?: number | null;
-		sort?: markdownRemarkConnectionSort | null;
-		filter?: filterMarkdownRemark | null;
+		sort?: MarkdownRemarkConnectionSort | null;
+		filter?: FilterMarkdownRemark | null;
 	}
 
-	export type AllTodoJsonResolver = Resolver<
-		TodoJsonConnection | null,
-		AllTodoJsonArgs
-	>;
+	export type AllTodoJsonResolver<
+		R = TodoJsonConnection | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context, AllTodoJsonArgs>;
 	export interface AllTodoJsonArgs {
 		skip?: number | null;
 		limit?: number | null;
-		sort?: todoJsonConnectionSort | null;
-		filter?: filterTodoJson | null;
+		sort?: TodoJsonConnectionSort | null;
+		filter?: FilterTodoJson | null;
 	}
 
-	export type AllOrganizationJsonResolver = Resolver<
-		OrganizationJsonConnection | null,
-		AllOrganizationJsonArgs
-	>;
-	export interface AllOrganizationJsonArgs {
-		skip?: number | null;
-		limit?: number | null;
-		sort?: organizationJsonConnectionSort | null;
-		filter?: filterOrganizationJson | null;
-	}
-
-	export type AllExperiencesJsonResolver = Resolver<
-		ExperiencesJsonConnection | null,
-		AllExperiencesJsonArgs
-	>;
-	export interface AllExperiencesJsonArgs {
-		skip?: number | null;
-		limit?: number | null;
-		sort?: experiencesJsonConnectionSort | null;
-		filter?: filterExperiencesJson | null;
-	}
-
-	export type AllCompetencesJsonResolver = Resolver<
-		CompetencesJsonConnection | null,
-		AllCompetencesJsonArgs
-	>;
-	export interface AllCompetencesJsonArgs {
-		skip?: number | null;
-		limit?: number | null;
-		sort?: competencesJsonConnectionSort | null;
-		filter?: filterCompetencesJson | null;
-	}
-
-	export type AllInterestsJsonResolver = Resolver<
-		InterestsJsonConnection | null,
-		AllInterestsJsonArgs
-	>;
+	export type AllInterestsJsonResolver<
+		R = InterestsJsonConnection | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context, AllInterestsJsonArgs>;
 	export interface AllInterestsJsonArgs {
 		skip?: number | null;
 		limit?: number | null;
-		sort?: interestsJsonConnectionSort | null;
-		filter?: filterInterestsJson | null;
+		sort?: InterestsJsonConnectionSort | null;
+		filter?: FilterInterestsJson | null;
 	}
 
-	export type AllPersonalJsonResolver = Resolver<
-		PersonalJsonConnection | null,
-		AllPersonalJsonArgs
-	>;
-	export interface AllPersonalJsonArgs {
+	export type AllOrganizationJsonResolver<
+		R = OrganizationJsonConnection | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context, AllOrganizationJsonArgs>;
+	export interface AllOrganizationJsonArgs {
 		skip?: number | null;
 		limit?: number | null;
-		sort?: personalJsonConnectionSort | null;
-		filter?: filterPersonalJson | null;
+		sort?: OrganizationJsonConnectionSort | null;
+		filter?: FilterOrganizationJson | null;
 	}
 
-	export type AllSkillsJsonResolver = Resolver<
-		SkillsJsonConnection | null,
-		AllSkillsJsonArgs
-	>;
+	export type AllSkillsJsonResolver<
+		R = SkillsJsonConnection | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context, AllSkillsJsonArgs>;
 	export interface AllSkillsJsonArgs {
 		skip?: number | null;
 		limit?: number | null;
-		sort?: skillsJsonConnectionSort | null;
-		filter?: filterSkillsJson | null;
+		sort?: SkillsJsonConnectionSort | null;
+		filter?: FilterSkillsJson | null;
 	}
 
-	export type SitePageResolver = Resolver<SitePage | null, SitePageArgs>;
+	export type AllCompetencesJsonResolver<
+		R = CompetencesJsonConnection | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context, AllCompetencesJsonArgs>;
+	export interface AllCompetencesJsonArgs {
+		skip?: number | null;
+		limit?: number | null;
+		sort?: CompetencesJsonConnectionSort | null;
+		filter?: FilterCompetencesJson | null;
+	}
+
+	export type AllPersonalJsonResolver<
+		R = PersonalJsonConnection | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context, AllPersonalJsonArgs>;
+	export interface AllPersonalJsonArgs {
+		skip?: number | null;
+		limit?: number | null;
+		sort?: PersonalJsonConnectionSort | null;
+		filter?: FilterPersonalJson | null;
+	}
+
+	export type AllExperiencesJsonResolver<
+		R = ExperiencesJsonConnection | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context, AllExperiencesJsonArgs>;
+	export interface AllExperiencesJsonArgs {
+		skip?: number | null;
+		limit?: number | null;
+		sort?: ExperiencesJsonConnectionSort | null;
+		filter?: FilterExperiencesJson | null;
+	}
+
+	export type SitePageResolver<
+		R = SitePage | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context, SitePageArgs>;
 	export interface SitePageArgs {
-		jsonName?: sitePageJsonNameQueryString | null;
-		internalComponentName?: sitePageInternalComponentNameQueryString | null;
-		path?: sitePagePathQueryString_2 | null;
-		component?: sitePageComponentQueryString | null;
-		componentChunkName?: sitePageComponentChunkNameQueryString | null;
-		context?: sitePageContextInputObject | null;
-		pluginCreator?: sitePagePluginCreatorInputObject | null;
-		pluginCreatorId?: sitePagePluginCreatorIdQueryString_2 | null;
-		componentPath?: sitePageComponentPathQueryString | null;
-		id?: sitePageIdQueryString_2 | null;
-		internal?: sitePageInternalInputObject_2 | null;
+		jsonName?: SitePageJsonNameQueryString | null;
+		internalComponentName?: SitePageInternalComponentNameQueryString | null;
+		path?: SitePagePathQueryString_2 | null;
+		component?: SitePageComponentQueryString | null;
+		componentChunkName?: SitePageComponentChunkNameQueryString | null;
+		context?: SitePageContextInputObject | null;
+		pluginCreator?: SitePagePluginCreatorInputObject | null;
+		pluginCreatorId?: SitePagePluginCreatorIdQueryString_2 | null;
+		componentPath?: SitePageComponentPathQueryString | null;
+		id?: SitePageIdQueryString_2 | null;
+		internal?: SitePageInternalInputObject_2 | null;
 	}
 
-	export type SitePluginResolver = Resolver<
-		SitePlugin | null,
-		SitePluginArgs
-	>;
+	export type SitePluginResolver<
+		R = SitePlugin | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context, SitePluginArgs>;
 	export interface SitePluginArgs {
-		resolve?: sitePluginResolveQueryString_2 | null;
-		id?: sitePluginIdQueryString_2 | null;
-		name?: sitePluginNameQueryString_2 | null;
-		version?: sitePluginVersionQueryString_2 | null;
-		pluginOptions?: sitePluginPluginOptionsInputObject_2 | null;
-		nodeAPIs?: sitePluginNodeApIsQueryList_2 | null;
-		browserAPIs?: sitePluginBrowserApIsQueryList_2 | null;
-		ssrAPIs?: sitePluginSsrApIsQueryList_2 | null;
-		pluginFilepath?: sitePluginPluginFilepathQueryString_2 | null;
-		packageJson?: sitePluginPackageJsonInputObject_2 | null;
-		internal?: sitePluginInternalInputObject_2 | null;
+		resolve?: SitePluginResolveQueryString_2 | null;
+		id?: SitePluginIdQueryString_2 | null;
+		name?: SitePluginNameQueryString_2 | null;
+		version?: SitePluginVersionQueryString_2 | null;
+		pluginOptions?: SitePluginPluginOptionsInputObject_2 | null;
+		nodeAPIs?: SitePluginNodeApIsQueryList_2 | null;
+		browserAPIs?: SitePluginBrowserApIsQueryList_2 | null;
+		ssrAPIs?: SitePluginSsrApIsQueryList_2 | null;
+		pluginFilepath?: SitePluginPluginFilepathQueryString_2 | null;
+		packageJson?: SitePluginPackageJsonInputObject_2 | null;
+		internal?: SitePluginInternalInputObject_2 | null;
 	}
 
-	export type SiteResolver = Resolver<Site | null, SiteArgs>;
+	export type SiteResolver<
+		R = Site | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context, SiteArgs>;
 	export interface SiteArgs {
-		siteMetadata?: siteSiteMetadataInputObject_2 | null;
-		port?: sitePortQueryString_2 | null;
-		host?: siteHostQueryString_2 | null;
-		pathPrefix?: sitePathPrefixQueryString_2 | null;
-		polyfill?: sitePolyfillQueryBoolean_2 | null;
-		buildTime?: siteBuildTimeQueryString_2 | null;
-		id?: siteIdQueryString_2 | null;
-		internal?: siteInternalInputObject_2 | null;
+		siteMetadata?: SiteSiteMetadataInputObject_2 | null;
+		port?: SitePortQueryString_2 | null;
+		host?: SiteHostQueryString_2 | null;
+		pathPrefix?: SitePathPrefixQueryString_2 | null;
+		polyfill?: SitePolyfillQueryBoolean_2 | null;
+		buildTime?: SiteBuildTimeQueryString_2 | null;
+		id?: SiteIdQueryString_2 | null;
+		internal?: SiteInternalInputObject_2 | null;
 	}
 
-	export type DirectoryResolver = Resolver<Directory | null, DirectoryArgs>;
+	export type DirectoryResolver<
+		R = Directory | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context, DirectoryArgs>;
 	export interface DirectoryArgs {
-		id?: directoryIdQueryString_2 | null;
-		internal?: directoryInternalInputObject_2 | null;
-		sourceInstanceName?: directorySourceInstanceNameQueryString_2 | null;
-		absolutePath?: directoryAbsolutePathQueryString_2 | null;
-		relativePath?: directoryRelativePathQueryString_2 | null;
-		extension?: directoryExtensionQueryString_2 | null;
-		size?: directorySizeQueryInteger_2 | null;
-		prettySize?: directoryPrettySizeQueryString_2 | null;
-		modifiedTime?: directoryModifiedTimeQueryString_2 | null;
-		accessTime?: directoryAccessTimeQueryString_2 | null;
-		changeTime?: directoryChangeTimeQueryString_2 | null;
-		birthTime?: directoryBirthTimeQueryString_2 | null;
-		root?: directoryRootQueryString_2 | null;
-		dir?: directoryDirQueryString_2 | null;
-		base?: directoryBaseQueryString_2 | null;
-		ext?: directoryExtQueryString_2 | null;
-		name?: directoryNameQueryString_2 | null;
-		relativeDirectory?: directoryRelativeDirectoryQueryString_2 | null;
-		dev?: directoryDevQueryInteger_2 | null;
-		mode?: directoryModeQueryInteger_2 | null;
-		nlink?: directoryNlinkQueryInteger_2 | null;
-		uid?: directoryUidQueryInteger_2 | null;
-		gid?: directoryGidQueryInteger_2 | null;
-		rdev?: directoryRdevQueryInteger_2 | null;
-		blksize?: directoryBlksizeQueryInteger_2 | null;
-		ino?: directoryInoQueryInteger_2 | null;
-		blocks?: directoryBlocksQueryInteger_2 | null;
-		atimeMs?: directoryAtimeMsQueryFloat_2 | null;
-		mtimeMs?: directoryMtimeMsQueryFloat_2 | null;
-		ctimeMs?: directoryCtimeMsQueryFloat_2 | null;
-		birthtimeMs?: directoryBirthtimeMsQueryFloat_2 | null;
-		atime?: directoryAtimeQueryString_2 | null;
-		mtime?: directoryMtimeQueryString_2 | null;
-		ctime?: directoryCtimeQueryString_2 | null;
-		birthtime?: directoryBirthtimeQueryString_2 | null;
+		id?: DirectoryIdQueryString_2 | null;
+		internal?: DirectoryInternalInputObject_2 | null;
+		sourceInstanceName?: DirectorySourceInstanceNameQueryString_2 | null;
+		absolutePath?: DirectoryAbsolutePathQueryString_2 | null;
+		relativePath?: DirectoryRelativePathQueryString_2 | null;
+		extension?: DirectoryExtensionQueryString_2 | null;
+		size?: DirectorySizeQueryInteger_2 | null;
+		prettySize?: DirectoryPrettySizeQueryString_2 | null;
+		modifiedTime?: DirectoryModifiedTimeQueryString_2 | null;
+		accessTime?: DirectoryAccessTimeQueryString_2 | null;
+		changeTime?: DirectoryChangeTimeQueryString_2 | null;
+		birthTime?: DirectoryBirthTimeQueryString_2 | null;
+		root?: DirectoryRootQueryString_2 | null;
+		dir?: DirectoryDirQueryString_2 | null;
+		base?: DirectoryBaseQueryString_2 | null;
+		ext?: DirectoryExtQueryString_2 | null;
+		name?: DirectoryNameQueryString_2 | null;
+		relativeDirectory?: DirectoryRelativeDirectoryQueryString_2 | null;
+		dev?: DirectoryDevQueryInteger_2 | null;
+		mode?: DirectoryModeQueryInteger_2 | null;
+		nlink?: DirectoryNlinkQueryInteger_2 | null;
+		uid?: DirectoryUidQueryInteger_2 | null;
+		gid?: DirectoryGidQueryInteger_2 | null;
+		rdev?: DirectoryRdevQueryInteger_2 | null;
+		blksize?: DirectoryBlksizeQueryInteger_2 | null;
+		ino?: DirectoryInoQueryInteger_2 | null;
+		blocks?: DirectoryBlocksQueryInteger_2 | null;
+		atimeMs?: DirectoryAtimeMsQueryFloat_2 | null;
+		mtimeMs?: DirectoryMtimeMsQueryFloat_2 | null;
+		ctimeMs?: DirectoryCtimeMsQueryFloat_2 | null;
+		birthtimeMs?: DirectoryBirthtimeMsQueryFloat_2 | null;
+		atime?: DirectoryAtimeQueryString_2 | null;
+		mtime?: DirectoryMtimeQueryString_2 | null;
+		ctime?: DirectoryCtimeQueryString_2 | null;
+		birthtime?: DirectoryBirthtimeQueryString_2 | null;
 	}
 
-	export type FileResolver = Resolver<File | null, FileArgs>;
+	export type FileResolver<
+		R = File | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context, FileArgs>;
 	export interface FileArgs {
-		id?: fileIdQueryString_2 | null;
-		internal?: fileInternalInputObject_2 | null;
-		sourceInstanceName?: fileSourceInstanceNameQueryString_2 | null;
-		absolutePath?: fileAbsolutePathQueryString_2 | null;
-		relativePath?: fileRelativePathQueryString_2 | null;
-		extension?: fileExtensionQueryString_2 | null;
-		size?: fileSizeQueryInteger_2 | null;
-		prettySize?: filePrettySizeQueryString_2 | null;
-		modifiedTime?: fileModifiedTimeQueryString_2 | null;
-		accessTime?: fileAccessTimeQueryString_2 | null;
-		changeTime?: fileChangeTimeQueryString_2 | null;
-		birthTime?: fileBirthTimeQueryString_2 | null;
-		root?: fileRootQueryString_2 | null;
-		dir?: fileDirQueryString_2 | null;
-		base?: fileBaseQueryString_2 | null;
-		ext?: fileExtQueryString_2 | null;
-		name?: fileNameQueryString_2 | null;
-		relativeDirectory?: fileRelativeDirectoryQueryString_2 | null;
-		dev?: fileDevQueryInteger_2 | null;
-		mode?: fileModeQueryInteger_2 | null;
-		nlink?: fileNlinkQueryInteger_2 | null;
-		uid?: fileUidQueryInteger_2 | null;
-		gid?: fileGidQueryInteger_2 | null;
-		rdev?: fileRdevQueryInteger_2 | null;
-		blksize?: fileBlksizeQueryInteger_2 | null;
-		ino?: fileInoQueryInteger_2 | null;
-		blocks?: fileBlocksQueryInteger_2 | null;
-		atimeMs?: fileAtimeMsQueryFloat_2 | null;
-		mtimeMs?: fileMtimeMsQueryFloat_2 | null;
-		ctimeMs?: fileCtimeMsQueryFloat_2 | null;
-		birthtimeMs?: fileBirthtimeMsQueryFloat_2 | null;
-		atime?: fileAtimeQueryString_2 | null;
-		mtime?: fileMtimeQueryString_2 | null;
-		ctime?: fileCtimeQueryString_2 | null;
-		birthtime?: fileBirthtimeQueryString_2 | null;
-		publicURL?: publicUrlQueryString_3 | null;
+		id?: FileIdQueryString_2 | null;
+		internal?: FileInternalInputObject_2 | null;
+		sourceInstanceName?: FileSourceInstanceNameQueryString_2 | null;
+		absolutePath?: FileAbsolutePathQueryString_2 | null;
+		relativePath?: FileRelativePathQueryString_2 | null;
+		extension?: FileExtensionQueryString_2 | null;
+		size?: FileSizeQueryInteger_2 | null;
+		prettySize?: FilePrettySizeQueryString_2 | null;
+		modifiedTime?: FileModifiedTimeQueryString_2 | null;
+		accessTime?: FileAccessTimeQueryString_2 | null;
+		changeTime?: FileChangeTimeQueryString_2 | null;
+		birthTime?: FileBirthTimeQueryString_2 | null;
+		root?: FileRootQueryString_2 | null;
+		dir?: FileDirQueryString_2 | null;
+		base?: FileBaseQueryString_2 | null;
+		ext?: FileExtQueryString_2 | null;
+		name?: FileNameQueryString_2 | null;
+		relativeDirectory?: FileRelativeDirectoryQueryString_2 | null;
+		dev?: FileDevQueryInteger_2 | null;
+		mode?: FileModeQueryInteger_2 | null;
+		nlink?: FileNlinkQueryInteger_2 | null;
+		uid?: FileUidQueryInteger_2 | null;
+		gid?: FileGidQueryInteger_2 | null;
+		rdev?: FileRdevQueryInteger_2 | null;
+		blksize?: FileBlksizeQueryInteger_2 | null;
+		ino?: FileInoQueryInteger_2 | null;
+		blocks?: FileBlocksQueryInteger_2 | null;
+		atimeMs?: FileAtimeMsQueryFloat_2 | null;
+		mtimeMs?: FileMtimeMsQueryFloat_2 | null;
+		ctimeMs?: FileCtimeMsQueryFloat_2 | null;
+		birthtimeMs?: FileBirthtimeMsQueryFloat_2 | null;
+		atime?: FileAtimeQueryString_2 | null;
+		mtime?: FileMtimeQueryString_2 | null;
+		ctime?: FileCtimeQueryString_2 | null;
+		birthtime?: FileBirthtimeQueryString_2 | null;
+		publicURL?: PublicUrlQueryString_3 | null;
 	}
 
-	export type MarkdownRemarkResolver = Resolver<
-		MarkdownRemark | null,
-		MarkdownRemarkArgs
-	>;
+	export type MarkdownRemarkResolver<
+		R = MarkdownRemark | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context, MarkdownRemarkArgs>;
 	export interface MarkdownRemarkArgs {
-		id?: markdownRemarkIdQueryString_2 | null;
-		internal?: markdownRemarkInternalInputObject_2 | null;
-		frontmatter?: markdownRemarkFrontmatterInputObject_2 | null;
-		excerpt?: excerptQueryString_3 | null;
-		rawMarkdownBody?: markdownRemarkRawMarkdownBodyQueryString_2 | null;
-		fileAbsolutePath?: markdownRemarkFileAbsolutePathQueryString_2 | null;
-		html?: htmlQueryString_3 | null;
-		headings?: headingsQueryList_3 | null;
-		timeToRead?: timeToReadQueryInt_3 | null;
-		tableOfContents?: tableOfContentsQueryString_3 | null;
-		wordCount?: wordCountTypeName_3 | null;
+		id?: MarkdownRemarkIdQueryString_2 | null;
+		internal?: MarkdownRemarkInternalInputObject_2 | null;
+		frontmatter?: MarkdownRemarkFrontmatterInputObject_2 | null;
+		excerpt?: ExcerptQueryString_3 | null;
+		rawMarkdownBody?: MarkdownRemarkRawMarkdownBodyQueryString_2 | null;
+		fileAbsolutePath?: MarkdownRemarkFileAbsolutePathQueryString_2 | null;
+		html?: HtmlQueryString_3 | null;
+		headings?: HeadingsQueryList_3 | null;
+		timeToRead?: TimeToReadQueryInt_3 | null;
+		tableOfContents?: TableOfContentsQueryString_3 | null;
+		wordCount?: WordCountTypeName_3 | null;
 	}
 
-	export type TodoJsonResolver = Resolver<TodoJson | null, TodoJsonArgs>;
+	export type TodoJsonResolver<
+		R = TodoJson | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context, TodoJsonArgs>;
 	export interface TodoJsonArgs {
-		title?: todoJsonTitleQueryString_2 | null;
-		tags?: todoJsonTagsQueryList_2 | null;
-		id?: todoJsonIdQueryString_2 | null;
-		internal?: todoJsonInternalInputObject_2 | null;
+		title?: TodoJsonTitleQueryString_2 | null;
+		tags?: TodoJsonTagsQueryList_2 | null;
+		id?: TodoJsonIdQueryString_2 | null;
+		internal?: TodoJsonInternalInputObject_2 | null;
 	}
 
-	export type OrganizationJsonResolver = Resolver<
-		OrganizationJson | null,
-		OrganizationJsonArgs
-	>;
-	export interface OrganizationJsonArgs {
-		name?: organizationJsonNameQueryString_2 | null;
-		url?: organizationJsonUrlQueryString_2 | null;
-		logo?: organizationJsonLogoQueryString_2 | null;
-		telephone?: organizationJsonTelephoneQueryString_2 | null;
-		id?: organizationJsonIdQueryString_2 | null;
-		internal?: organizationJsonInternalInputObject_2 | null;
-		fields?: organizationJsonFieldsInputObject_2 | null;
-	}
-
-	export type ExperiencesJsonResolver = Resolver<
-		ExperiencesJson | null,
-		ExperiencesJsonArgs
-	>;
-	export interface ExperiencesJsonArgs {
-		work?: experiencesJsonWorkQueryList_2 | null;
-		id?: experiencesJsonIdQueryString_2 | null;
-		internal?: experiencesJsonInternalInputObject_2 | null;
-		fields?: experiencesJsonFieldsInputObject_2 | null;
-	}
-
-	export type CompetencesJsonResolver = Resolver<
-		CompetencesJson | null,
-		CompetencesJsonArgs
-	>;
-	export interface CompetencesJsonArgs {
-		name?: competencesJsonNameQueryString_2 | null;
-		description?: competencesJsonDescriptionQueryString_2 | null;
-		id?: competencesJsonIdQueryString_2 | null;
-		internal?: competencesJsonInternalInputObject_2 | null;
-	}
-
-	export type InterestsJsonResolver = Resolver<
-		InterestsJson | null,
-		InterestsJsonArgs
-	>;
+	export type InterestsJsonResolver<
+		R = InterestsJson | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context, InterestsJsonArgs>;
 	export interface InterestsJsonArgs {
-		subjects?: interestsJsonSubjectsQueryList_2 | null;
-		id?: interestsJsonIdQueryString_2 | null;
-		internal?: interestsJsonInternalInputObject_2 | null;
+		subjects?: InterestsJsonSubjectsQueryList_2 | null;
+		id?: InterestsJsonIdQueryString_2 | null;
+		internal?: InterestsJsonInternalInputObject_2 | null;
 	}
 
-	export type PersonalJsonResolver = Resolver<
-		PersonalJson | null,
-		PersonalJsonArgs
-	>;
-	export interface PersonalJsonArgs {
-		name?: personalJsonNameQueryString_2 | null;
-		email?: personalJsonEmailQueryString_2 | null;
-		jobTitle?: personalJsonJobTitleQueryString_2 | null;
-		social?: personalJsonSocialQueryList_2 | null;
-		id?: personalJsonIdQueryString_2 | null;
-		internal?: personalJsonInternalInputObject_2 | null;
+	export type OrganizationJsonResolver<
+		R = OrganizationJson | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context, OrganizationJsonArgs>;
+	export interface OrganizationJsonArgs {
+		name?: OrganizationJsonNameQueryString_2 | null;
+		url?: OrganizationJsonUrlQueryString_2 | null;
+		logo?: OrganizationJsonLogoQueryString_2 | null;
+		telephone?: OrganizationJsonTelephoneQueryString_2 | null;
+		id?: OrganizationJsonIdQueryString_2 | null;
+		internal?: OrganizationJsonInternalInputObject_2 | null;
+		fields?: OrganizationJsonFieldsInputObject_2 | null;
 	}
 
-	export type SkillsJsonResolver = Resolver<
-		SkillsJson | null,
-		SkillsJsonArgs
-	>;
+	export type SkillsJsonResolver<
+		R = SkillsJson | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context, SkillsJsonArgs>;
 	export interface SkillsJsonArgs {
-		languages?: skillsJsonLanguagesQueryList_2 | null;
-		technical?: skillsJsonTechnicalQueryList_2 | null;
-		soft?: skillsJsonSoftQueryList_2 | null;
-		id?: skillsJsonIdQueryString_2 | null;
-		internal?: skillsJsonInternalInputObject_2 | null;
+		languages?: SkillsJsonLanguagesQueryList_2 | null;
+		technical?: SkillsJsonTechnicalQueryList_2 | null;
+		soft?: SkillsJsonSoftQueryList_2 | null;
+		id?: SkillsJsonIdQueryString_2 | null;
+		internal?: SkillsJsonInternalInputObject_2 | null;
 	}
-} /** A connection to a list of items. */
+
+	export type CompetencesJsonResolver<
+		R = CompetencesJson | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context, CompetencesJsonArgs>;
+	export interface CompetencesJsonArgs {
+		name?: CompetencesJsonNameQueryString_2 | null;
+		description?: CompetencesJsonDescriptionQueryString_2 | null;
+		id?: CompetencesJsonIdQueryString_2 | null;
+		internal?: CompetencesJsonInternalInputObject_2 | null;
+	}
+
+	export type PersonalJsonResolver<
+		R = PersonalJson | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context, PersonalJsonArgs>;
+	export interface PersonalJsonArgs {
+		name?: PersonalJsonNameQueryString_2 | null;
+		email?: PersonalJsonEmailQueryString_2 | null;
+		jobTitle?: PersonalJsonJobTitleQueryString_2 | null;
+		social?: PersonalJsonSocialQueryList_2 | null;
+		id?: PersonalJsonIdQueryString_2 | null;
+		internal?: PersonalJsonInternalInputObject_2 | null;
+	}
+
+	export type ExperiencesJsonResolver<
+		R = ExperiencesJson | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context, ExperiencesJsonArgs>;
+	export interface ExperiencesJsonArgs {
+		work?: ExperiencesJsonWorkQueryList_2 | null;
+		id?: ExperiencesJsonIdQueryString_2 | null;
+		internal?: ExperiencesJsonInternalInputObject_2 | null;
+		fields?: ExperiencesJsonFieldsInputObject_2 | null;
+	}
+}
+/** A connection to a list of items. */
 export namespace SitePageConnectionResolvers {
-	export interface Resolvers {
-		pageInfo?: PageInfoResolver /** Information to aid in pagination. */;
-		edges?: EdgesResolver /** A list of edges. */;
-		totalCount?: TotalCountResolver;
-		distinct?: DistinctResolver;
-		group?: GroupResolver;
+	export interface Resolvers<Context = any> {
+		pageInfo?: PageInfoResolver<
+			PageInfo,
+			any,
+			Context
+		> /** Information to aid in pagination. */;
+		edges?: EdgesResolver<
+			(SitePageEdge | null)[] | null,
+			any,
+			Context
+		> /** A list of edges. */;
+		totalCount?: TotalCountResolver<number | null, any, Context>;
+		distinct?: DistinctResolver<(string | null)[] | null, any, Context>;
+		group?: GroupResolver<
+			(SitePageGroupConnectionConnection | null)[] | null,
+			any,
+			Context
+		>;
 	}
 
-	export type PageInfoResolver = Resolver<PageInfo>;
-	export type EdgesResolver = Resolver<(SitePageEdge | null)[] | null>;
-	export type TotalCountResolver = Resolver<number | null>;
-	export type DistinctResolver = Resolver<
-		(string | null)[] | null,
-		DistinctArgs
-	>;
+	export type PageInfoResolver<
+		R = PageInfo,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type EdgesResolver<
+		R = (SitePageEdge | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type TotalCountResolver<
+		R = number | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type DistinctResolver<
+		R = (string | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context, DistinctArgs>;
 	export interface DistinctArgs {
-		field?: sitePageDistinctEnum | null;
+		field?: SitePageDistinctEnum | null;
 	}
 
-	export type GroupResolver = Resolver<
-		(sitePageGroupConnectionConnection | null)[] | null,
-		GroupArgs
-	>;
+	export type GroupResolver<
+		R = (SitePageGroupConnectionConnection | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context, GroupArgs>;
 	export interface GroupArgs {
 		skip?: number | null;
 		limit?: number | null;
-		field?: sitePageGroupEnum | null;
+		field?: SitePageGroupEnum | null;
 	}
-} /** Information about pagination in a connection. */
+}
+/** Information about pagination in a connection. */
 export namespace PageInfoResolvers {
-	export interface Resolvers {
-		hasNextPage?: HasNextPageResolver /** When paginating, are there more items? */;
+	export interface Resolvers<Context = any> {
+		hasNextPage?: HasNextPageResolver<
+			boolean,
+			any,
+			Context
+		> /** When paginating, are there more items? */;
 	}
 
-	export type HasNextPageResolver = Resolver<boolean>;
-} /** An edge in a connection. */
+	export type HasNextPageResolver<
+		R = boolean,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+}
+/** An edge in a connection. */
 export namespace SitePageEdgeResolvers {
-	export interface Resolvers {
-		node?: NodeResolver /** The item at the end of the edge */;
-		next?: NextResolver /** The next edge in the connection */;
-		previous?: PreviousResolver /** The previous edge in the connection */;
+	export interface Resolvers<Context = any> {
+		node?: NodeResolver<
+			SitePage | null,
+			any,
+			Context
+		> /** The item at the end of the edge */;
+		next?: NextResolver<
+			SitePage | null,
+			any,
+			Context
+		> /** The next edge in the connection */;
+		previous?: PreviousResolver<
+			SitePage | null,
+			any,
+			Context
+		> /** The previous edge in the connection */;
 	}
 
-	export type NodeResolver = Resolver<SitePage | null>;
-	export type NextResolver = Resolver<SitePage | null>;
-	export type PreviousResolver = Resolver<SitePage | null>;
-} /** Node of type SitePage */
+	export type NodeResolver<
+		R = SitePage | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type NextResolver<
+		R = SitePage | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type PreviousResolver<
+		R = SitePage | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+}
+/** Node of type SitePage */
 export namespace SitePageResolvers {
-	export interface Resolvers {
-		id?: IdResolver /** The id of this node. */;
-		parent?: ParentResolver /** The parent of this node. */;
-		children?: ChildrenResolver /** The children of this node. */;
-		jsonName?: JsonNameResolver;
-		internalComponentName?: InternalComponentNameResolver;
-		path?: PathResolver;
-		component?: ComponentResolver;
-		componentChunkName?: ComponentChunkNameResolver;
-		context?: ContextResolver;
-		pluginCreator?: PluginCreatorResolver;
-		pluginCreatorId?: PluginCreatorIdResolver;
-		componentPath?: ComponentPathResolver;
-		internal?: InternalResolver;
+	export interface Resolvers<Context = any> {
+		id?: IdResolver<string, any, Context> /** The id of this node. */;
+		parent?: ParentResolver<
+			Node | null,
+			any,
+			Context
+		> /** The parent of this node. */;
+		children?: ChildrenResolver<
+			(Node | null)[] | null,
+			any,
+			Context
+		> /** The children of this node. */;
+		jsonName?: JsonNameResolver<string | null, any, Context>;
+		internalComponentName?: InternalComponentNameResolver<
+			string | null,
+			any,
+			Context
+		>;
+		path?: PathResolver<string | null, any, Context>;
+		component?: ComponentResolver<string | null, any, Context>;
+		componentChunkName?: ComponentChunkNameResolver<
+			string | null,
+			any,
+			Context
+		>;
+		context?: ContextResolver<Context | null, any, Context>;
+		pluginCreator?: PluginCreatorResolver<SitePlugin | null, any, Context>;
+		pluginCreatorId?: PluginCreatorIdResolver<string | null, any, Context>;
+		componentPath?: ComponentPathResolver<string | null, any, Context>;
+		internal?: InternalResolver<Internal_14 | null, any, Context>;
 	}
 
-	export type IdResolver = Resolver<string>;
-	export type ParentResolver = Resolver<Node | null>;
-	export type ChildrenResolver = Resolver<(Node | null)[] | null>;
-	export type JsonNameResolver = Resolver<string | null>;
-	export type InternalComponentNameResolver = Resolver<string | null>;
-	export type PathResolver = Resolver<string | null>;
-	export type ComponentResolver = Resolver<string | null>;
-	export type ComponentChunkNameResolver = Resolver<string | null>;
-	export type ContextResolver = Resolver<context | null>;
-	export type PluginCreatorResolver = Resolver<SitePlugin | null>;
-	export type PluginCreatorIdResolver = Resolver<string | null>;
-	export type ComponentPathResolver = Resolver<string | null>;
-	export type InternalResolver = Resolver<internal_14 | null>;
+	export type IdResolver<R = string, Parent = any, Context = any> = Resolver<
+		R,
+		Parent,
+		Context
+	>;
+	export type ParentResolver<
+		R = Node | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type ChildrenResolver<
+		R = (Node | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type JsonNameResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type InternalComponentNameResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type PathResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type ComponentResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type ComponentChunkNameResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type ContextResolver<
+		R = Context | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type PluginCreatorResolver<
+		R = SitePlugin | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type PluginCreatorIdResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type ComponentPathResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type InternalResolver<
+		R = Internal_14 | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
 }
-export namespace contextResolvers {
-	export interface Resolvers {
-		group?: GroupResolver;
-		pathPrefix?: PathPrefixResolver;
-		additionalContext?: AdditionalContextResolver;
-		markdownPath?: MarkdownPathResolver;
+
+export namespace ContextResolvers {
+	export interface Resolvers<Context = any> {
+		group?: GroupResolver<(Group | null)[] | null, any, Context>;
+		pathPrefix?: PathPrefixResolver<string | null, any, Context>;
+		additionalContext?: AdditionalContextResolver<
+			AdditionalContext | null,
+			any,
+			Context
+		>;
+		markdownPath?: MarkdownPathResolver<string | null, any, Context>;
 	}
 
-	export type GroupResolver = Resolver<(group | null)[] | null>;
-	export type PathPrefixResolver = Resolver<string | null>;
-	export type AdditionalContextResolver = Resolver<additionalContext | null>;
-	export type MarkdownPathResolver = Resolver<string | null>;
+	export type GroupResolver<
+		R = (Group | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type PathPrefixResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type AdditionalContextResolver<
+		R = AdditionalContext | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type MarkdownPathResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
 }
-export namespace groupResolvers {
-	export interface Resolvers {
-		node?: NodeResolver;
+
+export namespace GroupResolvers {
+	export interface Resolvers<Context = any> {
+		node?: NodeResolver<Node | null, any, Context>;
 	}
 
-	export type NodeResolver = Resolver<node | null>;
+	export type NodeResolver<
+		R = Node | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
 }
-export namespace nodeResolvers {
-	export interface Resolvers {
-		htmlAst?: HtmlAstResolver;
-		excerpt?: ExcerptResolver;
-		timeToRead?: TimeToReadResolver;
-		count?: CountResolver;
-		fileAbsolutePath?: FileAbsolutePathResolver;
-		parent?: ParentResolver;
-		frontmatter?: FrontmatterResolver;
+
+export namespace NodeResolvers {
+	export interface Resolvers<Context = any> {
+		htmlAst?: HtmlAstResolver<HtmlAst | null, any, Context>;
+		excerpt?: ExcerptResolver<string | null, any, Context>;
+		timeToRead?: TimeToReadResolver<number | null, any, Context>;
+		count?: CountResolver<Count | null, any, Context>;
+		fileAbsolutePath?: FileAbsolutePathResolver<
+			string | null,
+			any,
+			Context
+		>;
+		parent?: ParentResolver<Parent | null, any, Context>;
+		frontmatter?: FrontmatterResolver<Frontmatter_2 | null, any, Context>;
 	}
 
-	export type HtmlAstResolver = Resolver<htmlAst | null>;
-	export type ExcerptResolver = Resolver<string | null>;
-	export type TimeToReadResolver = Resolver<number | null>;
-	export type CountResolver = Resolver<count | null>;
-	export type FileAbsolutePathResolver = Resolver<string | null>;
-	export type ParentResolver = Resolver<parent | null>;
-	export type FrontmatterResolver = Resolver<frontmatter_2 | null>;
+	export type HtmlAstResolver<
+		R = HtmlAst | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type ExcerptResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type TimeToReadResolver<
+		R = number | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type CountResolver<
+		R = Count | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type FileAbsolutePathResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type ParentResolver<
+		R = Parent | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type FrontmatterResolver<
+		R = Frontmatter_2 | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
 }
-export namespace htmlAstResolvers {
-	export interface Resolvers {
-		type?: TypeResolver;
-		children?: ChildrenResolver;
-		data?: DataResolver;
-		tagName?: TagNameResolver;
+
+export namespace HtmlAstResolvers {
+	export interface Resolvers<Context = any> {
+		type?: TypeResolver<string | null, any, Context>;
+		children?: ChildrenResolver<(Children | null)[] | null, any, Context>;
+		data?: DataResolver<Data | null, any, Context>;
+		tagName?: TagNameResolver<string | null, any, Context>;
 	}
 
-	export type TypeResolver = Resolver<string | null>;
-	export type ChildrenResolver = Resolver<(children | null)[] | null>;
-	export type DataResolver = Resolver<data | null>;
-	export type TagNameResolver = Resolver<string | null>;
+	export type TypeResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type ChildrenResolver<
+		R = (Children | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type DataResolver<
+		R = Data | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type TagNameResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
 }
-export namespace childrenResolvers {
-	export interface Resolvers {
-		type?: TypeResolver;
-		tagName?: TagNameResolver;
-		properties?: PropertiesResolver;
-		children?: ChildrenResolver;
-		value?: ValueResolver;
+
+export namespace ChildrenResolvers {
+	export interface Resolvers<Context = any> {
+		type?: TypeResolver<string | null, any, Context>;
+		tagName?: TagNameResolver<string | null, any, Context>;
+		properties?: PropertiesResolver<Properties | null, any, Context>;
+		children?: ChildrenResolver<(Children_2 | null)[] | null, any, Context>;
+		value?: ValueResolver<string | null, any, Context>;
 	}
 
-	export type TypeResolver = Resolver<string | null>;
-	export type TagNameResolver = Resolver<string | null>;
-	export type PropertiesResolver = Resolver<properties | null>;
-	export type ChildrenResolver = Resolver<(children_2 | null)[] | null>;
-	export type ValueResolver = Resolver<string | null>;
+	export type TypeResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type TagNameResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type PropertiesResolver<
+		R = Properties | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type ChildrenResolver<
+		R = (Children_2 | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type ValueResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
 }
-export namespace propertiesResolvers {
-	export interface Resolvers {
-		src?: SrcResolver;
-		title?: TitleResolver;
-		attr?: AttrResolver;
-		size?: SizeResolver;
-		className?: ClassNameResolver;
-		dataLanguage?: DataLanguageResolver;
-		style?: StyleResolver;
-		sandbox?: SandboxResolver;
-		width?: WidthResolver;
-		height?: HeightResolver;
-		frameBorder?: FrameBorderResolver;
-		allow?: AllowResolver;
-		allowFullScreen?: AllowFullScreenResolver;
+
+export namespace PropertiesResolvers {
+	export interface Resolvers<Context = any> {
+		id?: IdResolver<string | null, any, Context>;
+		size?: SizeResolver<string | null, any, Context>;
+		className?: ClassNameResolver<(string | null)[] | null, any, Context>;
+		dataLanguage?: DataLanguageResolver<string | null, any, Context>;
+		src?: SrcResolver<string | null, any, Context>;
+		style?: StyleResolver<string | null, any, Context>;
+		sandbox?: SandboxResolver<(string | null)[] | null, any, Context>;
+		title?: TitleResolver<string | null, any, Context>;
+		width?: WidthResolver<number | null, any, Context>;
+		height?: HeightResolver<number | null, any, Context>;
+		frameBorder?: FrameBorderResolver<string | null, any, Context>;
+		allow?: AllowResolver<string | null, any, Context>;
+		allowFullScreen?: AllowFullScreenResolver<boolean | null, any, Context>;
+		attr?: AttrResolver<string | null, any, Context>;
 	}
 
-	export type SrcResolver = Resolver<string | null>;
-	export type TitleResolver = Resolver<string | null>;
-	export type AttrResolver = Resolver<string | null>;
-	export type SizeResolver = Resolver<string | null>;
-	export type ClassNameResolver = Resolver<(string | null)[] | null>;
-	export type DataLanguageResolver = Resolver<string | null>;
-	export type StyleResolver = Resolver<string | null>;
-	export type SandboxResolver = Resolver<(string | null)[] | null>;
-	export type WidthResolver = Resolver<number | null>;
-	export type HeightResolver = Resolver<number | null>;
-	export type FrameBorderResolver = Resolver<string | null>;
-	export type AllowResolver = Resolver<string | null>;
-	export type AllowFullScreenResolver = Resolver<boolean | null>;
+	export type IdResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type SizeResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type ClassNameResolver<
+		R = (string | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type DataLanguageResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type SrcResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type StyleResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type SandboxResolver<
+		R = (string | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type TitleResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type WidthResolver<
+		R = number | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type HeightResolver<
+		R = number | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type FrameBorderResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type AllowResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type AllowFullScreenResolver<
+		R = boolean | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type AttrResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
 }
-export namespace children_2Resolvers {
-	export interface Resolvers {
-		type?: TypeResolver;
-		value?: ValueResolver;
-		tagName?: TagNameResolver;
-		properties?: PropertiesResolver;
-		children?: ChildrenResolver;
+
+export namespace Children_2Resolvers {
+	export interface Resolvers<Context = any> {
+		type?: TypeResolver<string | null, any, Context>;
+		tagName?: TagNameResolver<string | null, any, Context>;
+		properties?: PropertiesResolver<Properties_2 | null, any, Context>;
+		children?: ChildrenResolver<(Children_3 | null)[] | null, any, Context>;
+		value?: ValueResolver<string | null, any, Context>;
 	}
 
-	export type TypeResolver = Resolver<string | null>;
-	export type ValueResolver = Resolver<string | null>;
-	export type TagNameResolver = Resolver<string | null>;
-	export type PropertiesResolver = Resolver<properties_2 | null>;
-	export type ChildrenResolver = Resolver<(children_3 | null)[] | null>;
+	export type TypeResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type TagNameResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type PropertiesResolver<
+		R = Properties_2 | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type ChildrenResolver<
+		R = (Children_3 | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type ValueResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
 }
-export namespace properties_2Resolvers {
-	export interface Resolvers {
-		href?: HrefResolver;
-		title?: TitleResolver;
-		id?: IdResolver;
-		quote?: QuoteResolver;
-		author?: AuthorResolver;
-		from?: FromResolver;
-		position?: PositionResolver;
-		className?: ClassNameResolver;
-		alt?: AltResolver;
-		src?: SrcResolver;
+
+export namespace Properties_2Resolvers {
+	export interface Resolvers<Context = any> {
+		href?: HrefResolver<string | null, any, Context>;
+		ariaHidden?: AriaHiddenResolver<boolean | null, any, Context>;
+		className?: ClassNameResolver<(string | null)[] | null, any, Context>;
+		role?: RoleResolver<string | null, any, Context>;
+		ariaLabelledBy?: AriaLabelledByResolver<
+			(string | null)[] | null,
+			any,
+			Context
+		>;
+		id?: IdResolver<string | null, any, Context>;
+		quote?: QuoteResolver<string | null, any, Context>;
+		author?: AuthorResolver<string | null, any, Context>;
+		from?: FromResolver<string | null, any, Context>;
+		position?: PositionResolver<string | null, any, Context>;
+		title?: TitleResolver<string | null, any, Context>;
+		src?: SrcResolver<string | null, any, Context>;
+		alt?: AltResolver<string | null, any, Context>;
 	}
 
-	export type HrefResolver = Resolver<string | null>;
-	export type TitleResolver = Resolver<string | null>;
-	export type IdResolver = Resolver<string | null>;
-	export type QuoteResolver = Resolver<string | null>;
-	export type AuthorResolver = Resolver<string | null>;
-	export type FromResolver = Resolver<string | null>;
-	export type PositionResolver = Resolver<string | null>;
-	export type ClassNameResolver = Resolver<(string | null)[] | null>;
-	export type AltResolver = Resolver<string | null>;
-	export type SrcResolver = Resolver<string | null>;
+	export type HrefResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type AriaHiddenResolver<
+		R = boolean | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type ClassNameResolver<
+		R = (string | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type RoleResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type AriaLabelledByResolver<
+		R = (string | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type IdResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type QuoteResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type AuthorResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type FromResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type PositionResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type TitleResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type SrcResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type AltResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
 }
-export namespace children_3Resolvers {
-	export interface Resolvers {
-		type?: TypeResolver;
-		value?: ValueResolver;
-		tagName?: TagNameResolver;
-		properties?: PropertiesResolver;
-		children?: ChildrenResolver;
+
+export namespace Children_3Resolvers {
+	export interface Resolvers<Context = any> {
+		type?: TypeResolver<string | null, any, Context>;
+		tagName?: TagNameResolver<string | null, any, Context>;
+		properties?: PropertiesResolver<Properties_3 | null, any, Context>;
+		children?: ChildrenResolver<(Children_4 | null)[] | null, any, Context>;
+		value?: ValueResolver<string | null, any, Context>;
 	}
 
-	export type TypeResolver = Resolver<string | null>;
-	export type ValueResolver = Resolver<string | null>;
-	export type TagNameResolver = Resolver<string | null>;
-	export type PropertiesResolver = Resolver<properties_3 | null>;
-	export type ChildrenResolver = Resolver<(children_4 | null)[] | null>;
+	export type TypeResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type TagNameResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type PropertiesResolver<
+		R = Properties_3 | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type ChildrenResolver<
+		R = (Children_4 | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type ValueResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
 }
-export namespace properties_3Resolvers {
-	export interface Resolvers {
-		href?: HrefResolver;
-		className?: ClassNameResolver;
-		id?: IdResolver;
+
+export namespace Properties_3Resolvers {
+	export interface Resolvers<Context = any> {
+		ariaHidden?: AriaHiddenResolver<string | null, any, Context>;
+		height?: HeightResolver<string | null, any, Context>;
+		version?: VersionResolver<string | null, any, Context>;
+		viewBox?: ViewBoxResolver<string | null, any, Context>;
+		width?: WidthResolver<string | null, any, Context>;
+		href?: HrefResolver<string | null, any, Context>;
+		className?: ClassNameResolver<(string | null)[] | null, any, Context>;
+		id?: IdResolver<string | null, any, Context>;
 	}
 
-	export type HrefResolver = Resolver<string | null>;
-	export type ClassNameResolver = Resolver<(string | null)[] | null>;
-	export type IdResolver = Resolver<string | null>;
+	export type AriaHiddenResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type HeightResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type VersionResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type ViewBoxResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type WidthResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type HrefResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type ClassNameResolver<
+		R = (string | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type IdResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
 }
-export namespace children_4Resolvers {
-	export interface Resolvers {
-		type?: TypeResolver;
-		value?: ValueResolver;
-		tagName?: TagNameResolver;
-		properties?: PropertiesResolver;
-		children?: ChildrenResolver;
+
+export namespace Children_4Resolvers {
+	export interface Resolvers<Context = any> {
+		type?: TypeResolver<string | null, any, Context>;
+		tagName?: TagNameResolver<string | null, any, Context>;
+		properties?: PropertiesResolver<Properties_4 | null, any, Context>;
+		children?: ChildrenResolver<(Children_5 | null)[] | null, any, Context>;
+		value?: ValueResolver<string | null, any, Context>;
 	}
 
-	export type TypeResolver = Resolver<string | null>;
-	export type ValueResolver = Resolver<string | null>;
-	export type TagNameResolver = Resolver<string | null>;
-	export type PropertiesResolver = Resolver<properties_4 | null>;
-	export type ChildrenResolver = Resolver<(children_5 | null)[] | null>;
+	export type TypeResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type TagNameResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type PropertiesResolver<
+		R = Properties_4 | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type ChildrenResolver<
+		R = (Children_5 | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type ValueResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
 }
-export namespace properties_4Resolvers {
-	export interface Resolvers {
-		href?: HrefResolver;
-		className?: ClassNameResolver;
+
+export namespace Properties_4Resolvers {
+	export interface Resolvers<Context = any> {
+		fillRule?: FillRuleResolver<string | null, any, Context>;
+		d?: DResolver<string | null, any, Context>;
+		href?: HrefResolver<string | null, any, Context>;
+		className?: ClassNameResolver<(string | null)[] | null, any, Context>;
 	}
 
-	export type HrefResolver = Resolver<string | null>;
-	export type ClassNameResolver = Resolver<(string | null)[] | null>;
+	export type FillRuleResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type DResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type HrefResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type ClassNameResolver<
+		R = (string | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
 }
-export namespace children_5Resolvers {
-	export interface Resolvers {
-		type?: TypeResolver;
-		tagName?: TagNameResolver;
-		properties?: PropertiesResolver;
-		children?: ChildrenResolver;
-		value?: ValueResolver;
+
+export namespace Children_5Resolvers {
+	export interface Resolvers<Context = any> {
+		type?: TypeResolver<string | null, any, Context>;
+		value?: ValueResolver<string | null, any, Context>;
+		tagName?: TagNameResolver<string | null, any, Context>;
+		properties?: PropertiesResolver<Properties_5 | null, any, Context>;
+		children?: ChildrenResolver<(Children_6 | null)[] | null, any, Context>;
 	}
 
-	export type TypeResolver = Resolver<string | null>;
-	export type TagNameResolver = Resolver<string | null>;
-	export type PropertiesResolver = Resolver<properties_5 | null>;
-	export type ChildrenResolver = Resolver<(children_6 | null)[] | null>;
-	export type ValueResolver = Resolver<string | null>;
+	export type TypeResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type ValueResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type TagNameResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type PropertiesResolver<
+		R = Properties_5 | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type ChildrenResolver<
+		R = (Children_6 | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
 }
-export namespace properties_5Resolvers {
-	export interface Resolvers {
-		href?: HrefResolver;
-		className?: ClassNameResolver;
-		id?: IdResolver;
+
+export namespace Properties_5Resolvers {
+	export interface Resolvers<Context = any> {
+		href?: HrefResolver<string | null, any, Context>;
+		className?: ClassNameResolver<(string | null)[] | null, any, Context>;
+		id?: IdResolver<string | null, any, Context>;
 	}
 
-	export type HrefResolver = Resolver<string | null>;
-	export type ClassNameResolver = Resolver<(string | null)[] | null>;
-	export type IdResolver = Resolver<string | null>;
+	export type HrefResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type ClassNameResolver<
+		R = (string | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type IdResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
 }
-export namespace children_6Resolvers {
-	export interface Resolvers {
-		type?: TypeResolver;
-		value?: ValueResolver;
-		tagName?: TagNameResolver;
-		properties?: PropertiesResolver;
-		children?: ChildrenResolver;
+
+export namespace Children_6Resolvers {
+	export interface Resolvers<Context = any> {
+		type?: TypeResolver<string | null, any, Context>;
+		value?: ValueResolver<string | null, any, Context>;
+		tagName?: TagNameResolver<string | null, any, Context>;
+		properties?: PropertiesResolver<Properties_6 | null, any, Context>;
+		children?: ChildrenResolver<(Children_7 | null)[] | null, any, Context>;
 	}
 
-	export type TypeResolver = Resolver<string | null>;
-	export type ValueResolver = Resolver<string | null>;
-	export type TagNameResolver = Resolver<string | null>;
-	export type PropertiesResolver = Resolver<properties_6 | null>;
-	export type ChildrenResolver = Resolver<(children_7 | null)[] | null>;
+	export type TypeResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type ValueResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type TagNameResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type PropertiesResolver<
+		R = Properties_6 | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type ChildrenResolver<
+		R = (Children_7 | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
 }
-export namespace properties_6Resolvers {
-	export interface Resolvers {
-		className?: ClassNameResolver;
-		href?: HrefResolver;
+
+export namespace Properties_6Resolvers {
+	export interface Resolvers<Context = any> {
+		className?: ClassNameResolver<(string | null)[] | null, any, Context>;
+		href?: HrefResolver<string | null, any, Context>;
 	}
 
-	export type ClassNameResolver = Resolver<(string | null)[] | null>;
-	export type HrefResolver = Resolver<string | null>;
+	export type ClassNameResolver<
+		R = (string | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type HrefResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
 }
-export namespace children_7Resolvers {
-	export interface Resolvers {
-		type?: TypeResolver;
-		value?: ValueResolver;
+
+export namespace Children_7Resolvers {
+	export interface Resolvers<Context = any> {
+		type?: TypeResolver<string | null, any, Context>;
+		value?: ValueResolver<string | null, any, Context>;
 	}
 
-	export type TypeResolver = Resolver<string | null>;
-	export type ValueResolver = Resolver<string | null>;
+	export type TypeResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type ValueResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
 }
-export namespace dataResolvers {
-	export interface Resolvers {
-		quirksMode?: QuirksModeResolver;
+
+export namespace DataResolvers {
+	export interface Resolvers<Context = any> {
+		quirksMode?: QuirksModeResolver<boolean | null, any, Context>;
 	}
 
-	export type QuirksModeResolver = Resolver<boolean | null>;
+	export type QuirksModeResolver<
+		R = boolean | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
 }
-export namespace countResolvers {
-	export interface Resolvers {
-		words?: WordsResolver;
+
+export namespace CountResolvers {
+	export interface Resolvers<Context = any> {
+		words?: WordsResolver<number | null, any, Context>;
 	}
 
-	export type WordsResolver = Resolver<number | null>;
+	export type WordsResolver<
+		R = number | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
 }
-export namespace parentResolvers {
-	export interface Resolvers {
-		birthTime?: BirthTimeResolver;
-		relativeDirectory?: RelativeDirectoryResolver;
-		name?: NameResolver;
+
+export namespace ParentResolvers {
+	export interface Resolvers<Context = any> {
+		birthTime?: BirthTimeResolver<Date | null, any, Context>;
+		relativeDirectory?: RelativeDirectoryResolver<
+			string | null,
+			any,
+			Context
+		>;
+		name?: NameResolver<string | null, any, Context>;
 	}
 
-	export type BirthTimeResolver = Resolver<Date | null, BirthTimeArgs>;
+	export type BirthTimeResolver<
+		R = Date | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context, BirthTimeArgs>;
 	export interface BirthTimeArgs {
 		formatString?:
 			| string
@@ -11193,21 +13255,42 @@ export namespace parentResolvers {
 			| null /** Configures the locale Moment.js will use to format the date. */;
 	}
 
-	export type RelativeDirectoryResolver = Resolver<string | null>;
-	export type NameResolver = Resolver<string | null>;
+	export type RelativeDirectoryResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type NameResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
 }
-export namespace frontmatter_2Resolvers {
-	export interface Resolvers {
-		title?: TitleResolver;
-		description?: DescriptionResolver;
-		date?: DateResolver;
-		authors?: AuthorsResolver;
-		link?: LinkResolver;
+
+export namespace Frontmatter_2Resolvers {
+	export interface Resolvers<Context = any> {
+		title?: TitleResolver<string | null, any, Context>;
+		description?: DescriptionResolver<string | null, any, Context>;
+		date?: DateResolver<Date | null, any, Context>;
+		authors?: AuthorsResolver<(Authors_2 | null)[] | null, any, Context>;
+		link?: LinkResolver<string | null, any, Context>;
 	}
 
-	export type TitleResolver = Resolver<string | null>;
-	export type DescriptionResolver = Resolver<string | null>;
-	export type DateResolver = Resolver<Date | null, DateArgs>;
+	export type TitleResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type DescriptionResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type DateResolver<
+		R = Date | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context, DateArgs>;
 	export interface DateArgs {
 		formatString?:
 			| string
@@ -11223,453 +13306,1188 @@ export namespace frontmatter_2Resolvers {
 			| null /** Configures the locale Moment.js will use to format the date. */;
 	}
 
-	export type AuthorsResolver = Resolver<(authors_2 | null)[] | null>;
-	export type LinkResolver = Resolver<string | null>;
+	export type AuthorsResolver<
+		R = (Authors_2 | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type LinkResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
 }
-export namespace authors_2Resolvers {
-	export interface Resolvers {
-		name?: NameResolver;
-		url?: UrlResolver;
+
+export namespace Authors_2Resolvers {
+	export interface Resolvers<Context = any> {
+		name?: NameResolver<string | null, any, Context>;
+		url?: UrlResolver<string | null, any, Context>;
 	}
 
-	export type NameResolver = Resolver<string | null>;
-	export type UrlResolver = Resolver<string | null>;
+	export type NameResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type UrlResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
 }
-export namespace additionalContextResolvers {
-	export interface Resolvers {
-		listTitle?: ListTitleResolver;
+
+export namespace AdditionalContextResolvers {
+	export interface Resolvers<Context = any> {
+		listTitle?: ListTitleResolver<string | null, any, Context>;
 	}
 
-	export type ListTitleResolver = Resolver<string | null>;
-} /** Node of type SitePlugin */
+	export type ListTitleResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+}
+/** Node of type SitePlugin */
 export namespace SitePluginResolvers {
-	export interface Resolvers {
-		id?: IdResolver /** The id of this node. */;
-		parent?: ParentResolver /** The parent of this node. */;
-		children?: ChildrenResolver /** The children of this node. */;
-		resolve?: ResolveResolver;
-		name?: NameResolver;
-		version?: VersionResolver;
-		pluginOptions?: PluginOptionsResolver;
-		nodeAPIs?: NodeAPIsResolver;
-		browserAPIs?: BrowserAPIsResolver;
-		ssrAPIs?: SsrAPIsResolver;
-		pluginFilepath?: PluginFilepathResolver;
-		packageJson?: PackageJsonResolver;
-		internal?: InternalResolver;
+	export interface Resolvers<Context = any> {
+		id?: IdResolver<string, any, Context> /** The id of this node. */;
+		parent?: ParentResolver<
+			Node | null,
+			any,
+			Context
+		> /** The parent of this node. */;
+		children?: ChildrenResolver<
+			(Node | null)[] | null,
+			any,
+			Context
+		> /** The children of this node. */;
+		resolve?: ResolveResolver<string | null, any, Context>;
+		name?: NameResolver<string | null, any, Context>;
+		version?: VersionResolver<string | null, any, Context>;
+		pluginOptions?: PluginOptionsResolver<
+			PluginOptions_3 | null,
+			any,
+			Context
+		>;
+		nodeAPIs?: NodeApIsResolver<(string | null)[] | null, any, Context>;
+		browserAPIs?: BrowserApIsResolver<
+			(string | null)[] | null,
+			any,
+			Context
+		>;
+		ssrAPIs?: SsrApIsResolver<(string | null)[] | null, any, Context>;
+		pluginFilepath?: PluginFilepathResolver<string | null, any, Context>;
+		packageJson?: PackageJsonResolver<PackageJson_2 | null, any, Context>;
+		internal?: InternalResolver<Internal_15 | null, any, Context>;
 	}
 
-	export type IdResolver = Resolver<string>;
-	export type ParentResolver = Resolver<Node | null>;
-	export type ChildrenResolver = Resolver<(Node | null)[] | null>;
-	export type ResolveResolver = Resolver<string | null>;
-	export type NameResolver = Resolver<string | null>;
-	export type VersionResolver = Resolver<string | null>;
-	export type PluginOptionsResolver = Resolver<pluginOptions_3 | null>;
-	export type NodeAPIsResolver = Resolver<(string | null)[] | null>;
-	export type BrowserAPIsResolver = Resolver<(string | null)[] | null>;
-	export type SsrAPIsResolver = Resolver<(string | null)[] | null>;
-	export type PluginFilepathResolver = Resolver<string | null>;
-	export type PackageJsonResolver = Resolver<packageJson_2 | null>;
-	export type InternalResolver = Resolver<internal_15 | null>;
-}
-export namespace pluginOptions_3Resolvers {
-	export interface Resolvers {
-		plugins?: PluginsResolver;
-		name?: NameResolver;
-		path?: PathResolver;
-		emojiConversion?: EmojiConversionResolver;
-		maxWidth?: MaxWidthResolver;
-		wrapperStyle?: WrapperStyleResolver;
-		backgroundColor?: BackgroundColorResolver;
-		linkImagesToOriginal?: LinkImagesToOriginalResolver;
-		showCaptions?: ShowCaptionsResolver;
-		pathPrefix?: PathPrefixResolver;
-		inlineCodeMarker?: InlineCodeMarkerResolver;
-		short_name?: Short_nameResolver;
-		start_url?: Start_urlResolver;
-		background_color?: Background_colorResolver;
-		theme_color?: Theme_colorResolver;
-		display?: DisplayResolver;
-		icon?: IconResolver;
-		logo?: LogoResolver;
-		injectHTML?: InjectHTMLResolver;
-		icons?: IconsResolver;
-		pathToConfigModule?: PathToConfigModuleResolver;
-		omitGoogleFont?: OmitGoogleFontResolver;
-		query?: QueryResolver;
-		feeds?: FeedsResolver;
-		pathCheck?: PathCheckResolver;
-	}
-
-	export type PluginsResolver = Resolver<(plugins_2 | null)[] | null>;
-	export type NameResolver = Resolver<string | null>;
-	export type PathResolver = Resolver<string | null>;
-	export type EmojiConversionResolver = Resolver<string | null>;
-	export type MaxWidthResolver = Resolver<number | null>;
-	export type WrapperStyleResolver = Resolver<string | null>;
-	export type BackgroundColorResolver = Resolver<string | null>;
-	export type LinkImagesToOriginalResolver = Resolver<boolean | null>;
-	export type ShowCaptionsResolver = Resolver<boolean | null>;
-	export type PathPrefixResolver = Resolver<string | null>;
-	export type InlineCodeMarkerResolver = Resolver<string | null>;
-	export type Short_nameResolver = Resolver<string | null>;
-	export type Start_urlResolver = Resolver<string | null>;
-	export type Background_colorResolver = Resolver<string | null>;
-	export type Theme_colorResolver = Resolver<string | null>;
-	export type DisplayResolver = Resolver<string | null>;
-	export type IconResolver = Resolver<string | null>;
-	export type LogoResolver = Resolver<string | null>;
-	export type InjectHTMLResolver = Resolver<boolean | null>;
-	export type IconsResolver = Resolver<icons_2 | null>;
-	export type PathToConfigModuleResolver = Resolver<string | null>;
-	export type OmitGoogleFontResolver = Resolver<boolean | null>;
-	export type QueryResolver = Resolver<string | null>;
-	export type FeedsResolver = Resolver<(feeds_2 | null)[] | null>;
-	export type PathCheckResolver = Resolver<boolean | null>;
-}
-export namespace plugins_2Resolvers {
-	export interface Resolvers {
-		resolve?: ResolveResolver;
-		id?: IdResolver;
-		name?: NameResolver;
-		version?: VersionResolver;
-		pluginOptions?: PluginOptionsResolver;
-		pluginFilepath?: PluginFilepathResolver;
-	}
-
-	export type ResolveResolver = Resolver<string | null>;
-	export type IdResolver = Resolver<string | null>;
-	export type NameResolver = Resolver<string | null>;
-	export type VersionResolver = Resolver<string | null>;
-	export type PluginOptionsResolver = Resolver<pluginOptions_4 | null>;
-	export type PluginFilepathResolver = Resolver<string | null>;
-}
-export namespace pluginOptions_4Resolvers {
-	export interface Resolvers {
-		emojiConversion?: EmojiConversionResolver;
-		maxWidth?: MaxWidthResolver;
-		wrapperStyle?: WrapperStyleResolver;
-		backgroundColor?: BackgroundColorResolver;
-		linkImagesToOriginal?: LinkImagesToOriginalResolver;
-		showCaptions?: ShowCaptionsResolver;
-		pathPrefix?: PathPrefixResolver;
-		inlineCodeMarker?: InlineCodeMarkerResolver;
-	}
-
-	export type EmojiConversionResolver = Resolver<string | null>;
-	export type MaxWidthResolver = Resolver<number | null>;
-	export type WrapperStyleResolver = Resolver<string | null>;
-	export type BackgroundColorResolver = Resolver<string | null>;
-	export type LinkImagesToOriginalResolver = Resolver<boolean | null>;
-	export type ShowCaptionsResolver = Resolver<boolean | null>;
-	export type PathPrefixResolver = Resolver<string | null>;
-	export type InlineCodeMarkerResolver = Resolver<string | null>;
-}
-export namespace icons_2Resolvers {
-	export interface Resolvers {
-		android?: AndroidResolver;
-		appleIcon?: AppleIconResolver;
-		appleStartup?: AppleStartupResolver;
-		coast?: CoastResolver;
-		favicons?: FaviconsResolver;
-		firefox?: FirefoxResolver;
-		twitter?: TwitterResolver;
-		yandex?: YandexResolver;
-		windows?: WindowsResolver;
-	}
-
-	export type AndroidResolver = Resolver<boolean | null>;
-	export type AppleIconResolver = Resolver<boolean | null>;
-	export type AppleStartupResolver = Resolver<boolean | null>;
-	export type CoastResolver = Resolver<boolean | null>;
-	export type FaviconsResolver = Resolver<boolean | null>;
-	export type FirefoxResolver = Resolver<boolean | null>;
-	export type TwitterResolver = Resolver<boolean | null>;
-	export type YandexResolver = Resolver<boolean | null>;
-	export type WindowsResolver = Resolver<boolean | null>;
-}
-export namespace feeds_2Resolvers {
-	export interface Resolvers {
-		query?: QueryResolver;
-		output?: OutputResolver;
-	}
-
-	export type QueryResolver = Resolver<string | null>;
-	export type OutputResolver = Resolver<string | null>;
-}
-export namespace packageJson_2Resolvers {
-	export interface Resolvers {
-		name?: NameResolver;
-		description?: DescriptionResolver;
-		version?: VersionResolver;
-		main?: MainResolver;
-		author?: AuthorResolver;
-		license?: LicenseResolver;
-		dependencies?: DependenciesResolver;
-		devDependencies?: DevDependenciesResolver;
-		peerDependencies?: PeerDependenciesResolver;
-		keywords?: KeywordsResolver;
-	}
-
-	export type NameResolver = Resolver<string | null>;
-	export type DescriptionResolver = Resolver<string | null>;
-	export type VersionResolver = Resolver<string | null>;
-	export type MainResolver = Resolver<string | null>;
-	export type AuthorResolver = Resolver<string | null>;
-	export type LicenseResolver = Resolver<string | null>;
-	export type DependenciesResolver = Resolver<
-		(dependencies_2 | null)[] | null
+	export type IdResolver<R = string, Parent = any, Context = any> = Resolver<
+		R,
+		Parent,
+		Context
 	>;
-	export type DevDependenciesResolver = Resolver<
-		(devDependencies_2 | null)[] | null
-	>;
-	export type PeerDependenciesResolver = Resolver<
-		(peerDependencies_2 | null)[] | null
-	>;
-	export type KeywordsResolver = Resolver<(string | null)[] | null>;
+	export type ParentResolver<
+		R = Node | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type ChildrenResolver<
+		R = (Node | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type ResolveResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type NameResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type VersionResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type PluginOptionsResolver<
+		R = PluginOptions_3 | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type NodeApIsResolver<
+		R = (string | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type BrowserApIsResolver<
+		R = (string | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type SsrApIsResolver<
+		R = (string | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type PluginFilepathResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type PackageJsonResolver<
+		R = PackageJson_2 | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type InternalResolver<
+		R = Internal_15 | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
 }
-export namespace dependencies_2Resolvers {
-	export interface Resolvers {
-		name?: NameResolver;
-		version?: VersionResolver;
+
+export namespace PluginOptions_3Resolvers {
+	export interface Resolvers<Context = any> {
+		plugins?: PluginsResolver<(Plugins_2 | null)[] | null, any, Context>;
+		production?: ProductionResolver<boolean | null, any, Context>;
+		analyzerMode?: AnalyzerModeResolver<string | null, any, Context>;
+		defaultSizes?: DefaultSizesResolver<string | null, any, Context>;
+		openAnalyzer?: OpenAnalyzerResolver<boolean | null, any, Context>;
+		name?: NameResolver<string | null, any, Context>;
+		path?: PathResolver<string | null, any, Context>;
+		maxWidth?: MaxWidthResolver<number | null, any, Context>;
+		wrapperStyle?: WrapperStyleResolver<string | null, any, Context>;
+		backgroundColor?: BackgroundColorResolver<string | null, any, Context>;
+		linkImagesToOriginal?: LinkImagesToOriginalResolver<
+			boolean | null,
+			any,
+			Context
+		>;
+		showCaptions?: ShowCaptionsResolver<boolean | null, any, Context>;
+		pathPrefix?: PathPrefixResolver<string | null, any, Context>;
+		withWebp?: WithWebpResolver<boolean | null, any, Context>;
+		inlineCodeMarker?: InlineCodeMarkerResolver<
+			string | null,
+			any,
+			Context
+		>;
+		pathToConfigModule?: PathToConfigModuleResolver<
+			string | null,
+			any,
+			Context
+		>;
+		omitGoogleFont?: OmitGoogleFontResolver<boolean | null, any, Context>;
+		query?: QueryResolver<string | null, any, Context>;
+		feeds?: FeedsResolver<(Feeds_2 | null)[] | null, any, Context>;
+		headers?: HeadersResolver<Headers_2 | null, any, Context>;
+		allPageHeaders?: AllPageHeadersResolver<
+			(string | null)[] | null,
+			any,
+			Context
+		>;
+		short_name?: ShortNameResolver<string | null, any, Context>;
+		start_url?: StartUrlResolver<string | null, any, Context>;
+		background_color?: BackgroundColorResolver<string | null, any, Context>;
+		theme_color?: ThemeColorResolver<string | null, any, Context>;
+		display?: DisplayResolver<string | null, any, Context>;
+		icon?: IconResolver<string | null, any, Context>;
+		pathCheck?: PathCheckResolver<boolean | null, any, Context>;
 	}
 
-	export type NameResolver = Resolver<string | null>;
-	export type VersionResolver = Resolver<string | null>;
+	export type PluginsResolver<
+		R = (Plugins_2 | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type ProductionResolver<
+		R = boolean | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type AnalyzerModeResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type DefaultSizesResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type OpenAnalyzerResolver<
+		R = boolean | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type NameResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type PathResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type MaxWidthResolver<
+		R = number | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type WrapperStyleResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type BackgroundColorResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type LinkImagesToOriginalResolver<
+		R = boolean | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type ShowCaptionsResolver<
+		R = boolean | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type PathPrefixResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type WithWebpResolver<
+		R = boolean | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type InlineCodeMarkerResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type PathToConfigModuleResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type OmitGoogleFontResolver<
+		R = boolean | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type QueryResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type FeedsResolver<
+		R = (Feeds_2 | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type HeadersResolver<
+		R = Headers_2 | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type AllPageHeadersResolver<
+		R = (string | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type ShortNameResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type StartUrlResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type BackgroundColorResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type ThemeColorResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type DisplayResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type IconResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type PathCheckResolver<
+		R = boolean | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
 }
-export namespace devDependencies_2Resolvers {
-	export interface Resolvers {
-		name?: NameResolver;
-		version?: VersionResolver;
+
+export namespace Plugins_2Resolvers {
+	export interface Resolvers<Context = any> {
+		resolve?: ResolveResolver<string | null, any, Context>;
+		id?: IdResolver<string | null, any, Context>;
+		name?: NameResolver<string | null, any, Context>;
+		version?: VersionResolver<string | null, any, Context>;
+		pluginOptions?: PluginOptionsResolver<
+			PluginOptions_4 | null,
+			any,
+			Context
+		>;
+		browserAPIs?: BrowserApIsResolver<
+			(string | null)[] | null,
+			any,
+			Context
+		>;
+		ssrAPIs?: SsrApIsResolver<(string | null)[] | null, any, Context>;
+		pluginFilepath?: PluginFilepathResolver<string | null, any, Context>;
 	}
 
-	export type NameResolver = Resolver<string | null>;
-	export type VersionResolver = Resolver<string | null>;
+	export type ResolveResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type IdResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type NameResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type VersionResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type PluginOptionsResolver<
+		R = PluginOptions_4 | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type BrowserApIsResolver<
+		R = (string | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type SsrApIsResolver<
+		R = (string | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type PluginFilepathResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
 }
-export namespace peerDependencies_2Resolvers {
-	export interface Resolvers {
-		name?: NameResolver;
-		version?: VersionResolver;
+
+export namespace PluginOptions_4Resolvers {
+	export interface Resolvers<Context = any> {
+		maxWidth?: MaxWidthResolver<number | null, any, Context>;
+		wrapperStyle?: WrapperStyleResolver<string | null, any, Context>;
+		backgroundColor?: BackgroundColorResolver<string | null, any, Context>;
+		linkImagesToOriginal?: LinkImagesToOriginalResolver<
+			boolean | null,
+			any,
+			Context
+		>;
+		showCaptions?: ShowCaptionsResolver<boolean | null, any, Context>;
+		pathPrefix?: PathPrefixResolver<string | null, any, Context>;
+		withWebp?: WithWebpResolver<boolean | null, any, Context>;
+		inlineCodeMarker?: InlineCodeMarkerResolver<
+			string | null,
+			any,
+			Context
+		>;
 	}
 
-	export type NameResolver = Resolver<string | null>;
-	export type VersionResolver = Resolver<string | null>;
+	export type MaxWidthResolver<
+		R = number | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type WrapperStyleResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type BackgroundColorResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type LinkImagesToOriginalResolver<
+		R = boolean | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type ShowCaptionsResolver<
+		R = boolean | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type PathPrefixResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type WithWebpResolver<
+		R = boolean | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type InlineCodeMarkerResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
 }
-export namespace internal_15Resolvers {
-	export interface Resolvers {
-		contentDigest?: ContentDigestResolver;
-		type?: TypeResolver;
-		owner?: OwnerResolver;
+
+export namespace Feeds_2Resolvers {
+	export interface Resolvers<Context = any> {
+		query?: QueryResolver<string | null, any, Context>;
+		output?: OutputResolver<string | null, any, Context>;
 	}
 
-	export type ContentDigestResolver = Resolver<string | null>;
-	export type TypeResolver = Resolver<string | null>;
-	export type OwnerResolver = Resolver<string | null>;
+	export type QueryResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type OutputResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
 }
-export namespace internal_14Resolvers {
-	export interface Resolvers {
-		type?: TypeResolver;
-		contentDigest?: ContentDigestResolver;
-		description?: DescriptionResolver;
-		owner?: OwnerResolver;
+
+export namespace Headers_2Resolvers {
+	export interface Resolvers<Context = any> {
+		_xxjs?: XxjsResolver<(string | null)[] | null, any, Context>;
+		_sw_js?: SwJsResolver<(string | null)[] | null, any, Context>;
+		_xxwebmanifest?: XxwebmanifestResolver<
+			(string | null)[] | null,
+			any,
+			Context
+		>;
+		_xxcss?: XxcssResolver<(string | null)[] | null, any, Context>;
+		_xxpng?: XxpngResolver<(string | null)[] | null, any, Context>;
+		_xxjpg?: XxjpgResolver<(string | null)[] | null, any, Context>;
+		_xxjpeg?: XxjpegResolver<(string | null)[] | null, any, Context>;
+		_xxgif?: XxgifResolver<(string | null)[] | null, any, Context>;
+		_xxsvg?: XxsvgResolver<(string | null)[] | null, any, Context>;
 	}
 
-	export type TypeResolver = Resolver<string | null>;
-	export type ContentDigestResolver = Resolver<string | null>;
-	export type DescriptionResolver = Resolver<string | null>;
-	export type OwnerResolver = Resolver<string | null>;
-} /** A connection to a list of items. */
-export namespace sitePageGroupConnectionConnectionResolvers {
-	export interface Resolvers {
-		pageInfo?: PageInfoResolver /** Information to aid in pagination. */;
-		edges?: EdgesResolver /** A list of edges. */;
-		field?: FieldResolver;
-		fieldValue?: FieldValueResolver;
-		totalCount?: TotalCountResolver;
+	export type XxjsResolver<
+		R = (string | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type SwJsResolver<
+		R = (string | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type XxwebmanifestResolver<
+		R = (string | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type XxcssResolver<
+		R = (string | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type XxpngResolver<
+		R = (string | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type XxjpgResolver<
+		R = (string | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type XxjpegResolver<
+		R = (string | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type XxgifResolver<
+		R = (string | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type XxsvgResolver<
+		R = (string | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+}
+
+export namespace PackageJson_2Resolvers {
+	export interface Resolvers<Context = any> {
+		name?: NameResolver<string | null, any, Context>;
+		description?: DescriptionResolver<string | null, any, Context>;
+		version?: VersionResolver<string | null, any, Context>;
+		main?: MainResolver<string | null, any, Context>;
+		author?: AuthorResolver<string | null, any, Context>;
+		license?: LicenseResolver<string | null, any, Context>;
+		dependencies?: DependenciesResolver<
+			(Dependencies_2 | null)[] | null,
+			any,
+			Context
+		>;
+		devDependencies?: DevDependenciesResolver<
+			(DevDependencies_2 | null)[] | null,
+			any,
+			Context
+		>;
+		peerDependencies?: PeerDependenciesResolver<
+			(PeerDependencies_2 | null)[] | null,
+			any,
+			Context
+		>;
+		keywords?: KeywordsResolver<(string | null)[] | null, any, Context>;
 	}
 
-	export type PageInfoResolver = Resolver<PageInfo>;
-	export type EdgesResolver = Resolver<
-		(sitePageGroupConnectionEdge | null)[] | null
-	>;
-	export type FieldResolver = Resolver<string | null>;
-	export type FieldValueResolver = Resolver<string | null>;
-	export type TotalCountResolver = Resolver<number | null>;
-} /** An edge in a connection. */
-export namespace sitePageGroupConnectionEdgeResolvers {
-	export interface Resolvers {
-		node?: NodeResolver /** The item at the end of the edge */;
-		next?: NextResolver /** The next edge in the connection */;
-		previous?: PreviousResolver /** The previous edge in the connection */;
+	export type NameResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type DescriptionResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type VersionResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type MainResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type AuthorResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type LicenseResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type DependenciesResolver<
+		R = (Dependencies_2 | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type DevDependenciesResolver<
+		R = (DevDependencies_2 | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type PeerDependenciesResolver<
+		R = (PeerDependencies_2 | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type KeywordsResolver<
+		R = (string | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+}
+
+export namespace Dependencies_2Resolvers {
+	export interface Resolvers<Context = any> {
+		name?: NameResolver<string | null, any, Context>;
+		version?: VersionResolver<string | null, any, Context>;
 	}
 
-	export type NodeResolver = Resolver<SitePage | null>;
-	export type NextResolver = Resolver<SitePage | null>;
-	export type PreviousResolver = Resolver<SitePage | null>;
-} /** A connection to a list of items. */
+	export type NameResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type VersionResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+}
+
+export namespace DevDependencies_2Resolvers {
+	export interface Resolvers<Context = any> {
+		name?: NameResolver<string | null, any, Context>;
+		version?: VersionResolver<string | null, any, Context>;
+	}
+
+	export type NameResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type VersionResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+}
+
+export namespace PeerDependencies_2Resolvers {
+	export interface Resolvers<Context = any> {
+		name?: NameResolver<string | null, any, Context>;
+		version?: VersionResolver<string | null, any, Context>;
+	}
+
+	export type NameResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type VersionResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+}
+
+export namespace Internal_15Resolvers {
+	export interface Resolvers<Context = any> {
+		contentDigest?: ContentDigestResolver<string | null, any, Context>;
+		type?: TypeResolver<string | null, any, Context>;
+		owner?: OwnerResolver<string | null, any, Context>;
+	}
+
+	export type ContentDigestResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type TypeResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type OwnerResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+}
+
+export namespace Internal_14Resolvers {
+	export interface Resolvers<Context = any> {
+		type?: TypeResolver<string | null, any, Context>;
+		contentDigest?: ContentDigestResolver<string | null, any, Context>;
+		description?: DescriptionResolver<string | null, any, Context>;
+		owner?: OwnerResolver<string | null, any, Context>;
+	}
+
+	export type TypeResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type ContentDigestResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type DescriptionResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type OwnerResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+}
+/** A connection to a list of items. */
+export namespace SitePageGroupConnectionConnectionResolvers {
+	export interface Resolvers<Context = any> {
+		pageInfo?: PageInfoResolver<
+			PageInfo,
+			any,
+			Context
+		> /** Information to aid in pagination. */;
+		edges?: EdgesResolver<
+			(SitePageGroupConnectionEdge | null)[] | null,
+			any,
+			Context
+		> /** A list of edges. */;
+		field?: FieldResolver<string | null, any, Context>;
+		fieldValue?: FieldValueResolver<string | null, any, Context>;
+		totalCount?: TotalCountResolver<number | null, any, Context>;
+	}
+
+	export type PageInfoResolver<
+		R = PageInfo,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type EdgesResolver<
+		R = (SitePageGroupConnectionEdge | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type FieldResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type FieldValueResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type TotalCountResolver<
+		R = number | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+}
+/** An edge in a connection. */
+export namespace SitePageGroupConnectionEdgeResolvers {
+	export interface Resolvers<Context = any> {
+		node?: NodeResolver<
+			SitePage | null,
+			any,
+			Context
+		> /** The item at the end of the edge */;
+		next?: NextResolver<
+			SitePage | null,
+			any,
+			Context
+		> /** The next edge in the connection */;
+		previous?: PreviousResolver<
+			SitePage | null,
+			any,
+			Context
+		> /** The previous edge in the connection */;
+	}
+
+	export type NodeResolver<
+		R = SitePage | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type NextResolver<
+		R = SitePage | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type PreviousResolver<
+		R = SitePage | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+}
+/** A connection to a list of items. */
 export namespace SitePluginConnectionResolvers {
-	export interface Resolvers {
-		pageInfo?: PageInfoResolver /** Information to aid in pagination. */;
-		edges?: EdgesResolver /** A list of edges. */;
-		totalCount?: TotalCountResolver;
-		distinct?: DistinctResolver;
-		group?: GroupResolver;
+	export interface Resolvers<Context = any> {
+		pageInfo?: PageInfoResolver<
+			PageInfo,
+			any,
+			Context
+		> /** Information to aid in pagination. */;
+		edges?: EdgesResolver<
+			(SitePluginEdge | null)[] | null,
+			any,
+			Context
+		> /** A list of edges. */;
+		totalCount?: TotalCountResolver<number | null, any, Context>;
+		distinct?: DistinctResolver<(string | null)[] | null, any, Context>;
+		group?: GroupResolver<
+			(SitePluginGroupConnectionConnection | null)[] | null,
+			any,
+			Context
+		>;
 	}
 
-	export type PageInfoResolver = Resolver<PageInfo>;
-	export type EdgesResolver = Resolver<(SitePluginEdge | null)[] | null>;
-	export type TotalCountResolver = Resolver<number | null>;
-	export type DistinctResolver = Resolver<
-		(string | null)[] | null,
-		DistinctArgs
-	>;
+	export type PageInfoResolver<
+		R = PageInfo,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type EdgesResolver<
+		R = (SitePluginEdge | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type TotalCountResolver<
+		R = number | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type DistinctResolver<
+		R = (string | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context, DistinctArgs>;
 	export interface DistinctArgs {
-		field?: sitePluginDistinctEnum | null;
+		field?: SitePluginDistinctEnum | null;
 	}
 
-	export type GroupResolver = Resolver<
-		(sitePluginGroupConnectionConnection | null)[] | null,
-		GroupArgs
-	>;
+	export type GroupResolver<
+		R = (SitePluginGroupConnectionConnection | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context, GroupArgs>;
 	export interface GroupArgs {
 		skip?: number | null;
 		limit?: number | null;
-		field?: sitePluginGroupEnum | null;
+		field?: SitePluginGroupEnum | null;
 	}
-} /** An edge in a connection. */
+}
+/** An edge in a connection. */
 export namespace SitePluginEdgeResolvers {
-	export interface Resolvers {
-		node?: NodeResolver /** The item at the end of the edge */;
-		next?: NextResolver /** The next edge in the connection */;
-		previous?: PreviousResolver /** The previous edge in the connection */;
+	export interface Resolvers<Context = any> {
+		node?: NodeResolver<
+			SitePlugin | null,
+			any,
+			Context
+		> /** The item at the end of the edge */;
+		next?: NextResolver<
+			SitePlugin | null,
+			any,
+			Context
+		> /** The next edge in the connection */;
+		previous?: PreviousResolver<
+			SitePlugin | null,
+			any,
+			Context
+		> /** The previous edge in the connection */;
 	}
 
-	export type NodeResolver = Resolver<SitePlugin | null>;
-	export type NextResolver = Resolver<SitePlugin | null>;
-	export type PreviousResolver = Resolver<SitePlugin | null>;
-} /** A connection to a list of items. */
-export namespace sitePluginGroupConnectionConnectionResolvers {
-	export interface Resolvers {
-		pageInfo?: PageInfoResolver /** Information to aid in pagination. */;
-		edges?: EdgesResolver /** A list of edges. */;
-		field?: FieldResolver;
-		fieldValue?: FieldValueResolver;
-		totalCount?: TotalCountResolver;
+	export type NodeResolver<
+		R = SitePlugin | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type NextResolver<
+		R = SitePlugin | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type PreviousResolver<
+		R = SitePlugin | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+}
+/** A connection to a list of items. */
+export namespace SitePluginGroupConnectionConnectionResolvers {
+	export interface Resolvers<Context = any> {
+		pageInfo?: PageInfoResolver<
+			PageInfo,
+			any,
+			Context
+		> /** Information to aid in pagination. */;
+		edges?: EdgesResolver<
+			(SitePluginGroupConnectionEdge | null)[] | null,
+			any,
+			Context
+		> /** A list of edges. */;
+		field?: FieldResolver<string | null, any, Context>;
+		fieldValue?: FieldValueResolver<string | null, any, Context>;
+		totalCount?: TotalCountResolver<number | null, any, Context>;
 	}
 
-	export type PageInfoResolver = Resolver<PageInfo>;
-	export type EdgesResolver = Resolver<
-		(sitePluginGroupConnectionEdge | null)[] | null
-	>;
-	export type FieldResolver = Resolver<string | null>;
-	export type FieldValueResolver = Resolver<string | null>;
-	export type TotalCountResolver = Resolver<number | null>;
-} /** An edge in a connection. */
-export namespace sitePluginGroupConnectionEdgeResolvers {
-	export interface Resolvers {
-		node?: NodeResolver /** The item at the end of the edge */;
-		next?: NextResolver /** The next edge in the connection */;
-		previous?: PreviousResolver /** The previous edge in the connection */;
+	export type PageInfoResolver<
+		R = PageInfo,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type EdgesResolver<
+		R = (SitePluginGroupConnectionEdge | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type FieldResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type FieldValueResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type TotalCountResolver<
+		R = number | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+}
+/** An edge in a connection. */
+export namespace SitePluginGroupConnectionEdgeResolvers {
+	export interface Resolvers<Context = any> {
+		node?: NodeResolver<
+			SitePlugin | null,
+			any,
+			Context
+		> /** The item at the end of the edge */;
+		next?: NextResolver<
+			SitePlugin | null,
+			any,
+			Context
+		> /** The next edge in the connection */;
+		previous?: PreviousResolver<
+			SitePlugin | null,
+			any,
+			Context
+		> /** The previous edge in the connection */;
 	}
 
-	export type NodeResolver = Resolver<SitePlugin | null>;
-	export type NextResolver = Resolver<SitePlugin | null>;
-	export type PreviousResolver = Resolver<SitePlugin | null>;
-} /** A connection to a list of items. */
+	export type NodeResolver<
+		R = SitePlugin | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type NextResolver<
+		R = SitePlugin | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type PreviousResolver<
+		R = SitePlugin | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+}
+/** A connection to a list of items. */
 export namespace DirectoryConnectionResolvers {
-	export interface Resolvers {
-		pageInfo?: PageInfoResolver /** Information to aid in pagination. */;
-		edges?: EdgesResolver /** A list of edges. */;
-		totalCount?: TotalCountResolver;
-		distinct?: DistinctResolver;
-		group?: GroupResolver;
+	export interface Resolvers<Context = any> {
+		pageInfo?: PageInfoResolver<
+			PageInfo,
+			any,
+			Context
+		> /** Information to aid in pagination. */;
+		edges?: EdgesResolver<
+			(DirectoryEdge | null)[] | null,
+			any,
+			Context
+		> /** A list of edges. */;
+		totalCount?: TotalCountResolver<number | null, any, Context>;
+		distinct?: DistinctResolver<(string | null)[] | null, any, Context>;
+		group?: GroupResolver<
+			(DirectoryGroupConnectionConnection | null)[] | null,
+			any,
+			Context
+		>;
 	}
 
-	export type PageInfoResolver = Resolver<PageInfo>;
-	export type EdgesResolver = Resolver<(DirectoryEdge | null)[] | null>;
-	export type TotalCountResolver = Resolver<number | null>;
-	export type DistinctResolver = Resolver<
-		(string | null)[] | null,
-		DistinctArgs
-	>;
+	export type PageInfoResolver<
+		R = PageInfo,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type EdgesResolver<
+		R = (DirectoryEdge | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type TotalCountResolver<
+		R = number | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type DistinctResolver<
+		R = (string | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context, DistinctArgs>;
 	export interface DistinctArgs {
-		field?: directoryDistinctEnum | null;
+		field?: DirectoryDistinctEnum | null;
 	}
 
-	export type GroupResolver = Resolver<
-		(directoryGroupConnectionConnection | null)[] | null,
-		GroupArgs
-	>;
+	export type GroupResolver<
+		R = (DirectoryGroupConnectionConnection | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context, GroupArgs>;
 	export interface GroupArgs {
 		skip?: number | null;
 		limit?: number | null;
-		field?: directoryGroupEnum | null;
+		field?: DirectoryGroupEnum | null;
 	}
-} /** An edge in a connection. */
+}
+/** An edge in a connection. */
 export namespace DirectoryEdgeResolvers {
-	export interface Resolvers {
-		node?: NodeResolver /** The item at the end of the edge */;
-		next?: NextResolver /** The next edge in the connection */;
-		previous?: PreviousResolver /** The previous edge in the connection */;
+	export interface Resolvers<Context = any> {
+		node?: NodeResolver<
+			Directory | null,
+			any,
+			Context
+		> /** The item at the end of the edge */;
+		next?: NextResolver<
+			Directory | null,
+			any,
+			Context
+		> /** The next edge in the connection */;
+		previous?: PreviousResolver<
+			Directory | null,
+			any,
+			Context
+		> /** The previous edge in the connection */;
 	}
 
-	export type NodeResolver = Resolver<Directory | null>;
-	export type NextResolver = Resolver<Directory | null>;
-	export type PreviousResolver = Resolver<Directory | null>;
-} /** Node of type Directory */
+	export type NodeResolver<
+		R = Directory | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type NextResolver<
+		R = Directory | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type PreviousResolver<
+		R = Directory | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+}
+/** Node of type Directory */
 export namespace DirectoryResolvers {
-	export interface Resolvers {
-		id?: IdResolver /** The id of this node. */;
-		parent?: ParentResolver /** The parent of this node. */;
-		children?: ChildrenResolver /** The children of this node. */;
-		internal?: InternalResolver;
-		sourceInstanceName?: SourceInstanceNameResolver;
-		absolutePath?: AbsolutePathResolver;
-		relativePath?: RelativePathResolver;
-		extension?: ExtensionResolver;
-		size?: SizeResolver;
-		prettySize?: PrettySizeResolver;
-		modifiedTime?: ModifiedTimeResolver;
-		accessTime?: AccessTimeResolver;
-		changeTime?: ChangeTimeResolver;
-		birthTime?: BirthTimeResolver;
-		root?: RootResolver;
-		dir?: DirResolver;
-		base?: BaseResolver;
-		ext?: ExtResolver;
-		name?: NameResolver;
-		relativeDirectory?: RelativeDirectoryResolver;
-		dev?: DevResolver;
-		mode?: ModeResolver;
-		nlink?: NlinkResolver;
-		uid?: UidResolver;
-		gid?: GidResolver;
-		rdev?: RdevResolver;
-		blksize?: BlksizeResolver;
-		ino?: InoResolver;
-		blocks?: BlocksResolver;
-		atimeMs?: AtimeMsResolver;
-		mtimeMs?: MtimeMsResolver;
-		ctimeMs?: CtimeMsResolver;
-		birthtimeMs?: BirthtimeMsResolver;
-		atime?: AtimeResolver;
-		mtime?: MtimeResolver;
-		ctime?: CtimeResolver;
-		birthtime?: BirthtimeResolver;
+	export interface Resolvers<Context = any> {
+		id?: IdResolver<string, any, Context> /** The id of this node. */;
+		parent?: ParentResolver<
+			Node | null,
+			any,
+			Context
+		> /** The parent of this node. */;
+		children?: ChildrenResolver<
+			(Node | null)[] | null,
+			any,
+			Context
+		> /** The children of this node. */;
+		internal?: InternalResolver<Internal_16 | null, any, Context>;
+		sourceInstanceName?: SourceInstanceNameResolver<
+			string | null,
+			any,
+			Context
+		>;
+		absolutePath?: AbsolutePathResolver<string | null, any, Context>;
+		relativePath?: RelativePathResolver<string | null, any, Context>;
+		extension?: ExtensionResolver<string | null, any, Context>;
+		size?: SizeResolver<number | null, any, Context>;
+		prettySize?: PrettySizeResolver<string | null, any, Context>;
+		modifiedTime?: ModifiedTimeResolver<Date | null, any, Context>;
+		accessTime?: AccessTimeResolver<Date | null, any, Context>;
+		changeTime?: ChangeTimeResolver<Date | null, any, Context>;
+		birthTime?: BirthTimeResolver<Date | null, any, Context>;
+		root?: RootResolver<string | null, any, Context>;
+		dir?: DirResolver<string | null, any, Context>;
+		base?: BaseResolver<string | null, any, Context>;
+		ext?: ExtResolver<string | null, any, Context>;
+		name?: NameResolver<string | null, any, Context>;
+		relativeDirectory?: RelativeDirectoryResolver<
+			string | null,
+			any,
+			Context
+		>;
+		dev?: DevResolver<number | null, any, Context>;
+		mode?: ModeResolver<number | null, any, Context>;
+		nlink?: NlinkResolver<number | null, any, Context>;
+		uid?: UidResolver<number | null, any, Context>;
+		gid?: GidResolver<number | null, any, Context>;
+		rdev?: RdevResolver<number | null, any, Context>;
+		blksize?: BlksizeResolver<number | null, any, Context>;
+		ino?: InoResolver<number | null, any, Context>;
+		blocks?: BlocksResolver<number | null, any, Context>;
+		atimeMs?: AtimeMsResolver<number | null, any, Context>;
+		mtimeMs?: MtimeMsResolver<number | null, any, Context>;
+		ctimeMs?: CtimeMsResolver<number | null, any, Context>;
+		birthtimeMs?: BirthtimeMsResolver<number | null, any, Context>;
+		atime?: AtimeResolver<Date | null, any, Context>;
+		mtime?: MtimeResolver<Date | null, any, Context>;
+		ctime?: CtimeResolver<Date | null, any, Context>;
+		birthtime?: BirthtimeResolver<Date | null, any, Context>;
 	}
 
-	export type IdResolver = Resolver<string>;
-	export type ParentResolver = Resolver<Node | null>;
-	export type ChildrenResolver = Resolver<(Node | null)[] | null>;
-	export type InternalResolver = Resolver<internal_16 | null>;
-	export type SourceInstanceNameResolver = Resolver<string | null>;
-	export type AbsolutePathResolver = Resolver<string | null>;
-	export type RelativePathResolver = Resolver<string | null>;
-	export type ExtensionResolver = Resolver<string | null>;
-	export type SizeResolver = Resolver<number | null>;
-	export type PrettySizeResolver = Resolver<string | null>;
-	export type ModifiedTimeResolver = Resolver<Date | null, ModifiedTimeArgs>;
+	export type IdResolver<R = string, Parent = any, Context = any> = Resolver<
+		R,
+		Parent,
+		Context
+	>;
+	export type ParentResolver<
+		R = Node | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type ChildrenResolver<
+		R = (Node | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type InternalResolver<
+		R = Internal_16 | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type SourceInstanceNameResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type AbsolutePathResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type RelativePathResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type ExtensionResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type SizeResolver<
+		R = number | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type PrettySizeResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type ModifiedTimeResolver<
+		R = Date | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context, ModifiedTimeArgs>;
 	export interface ModifiedTimeArgs {
 		formatString?:
 			| string
@@ -11685,7 +14503,11 @@ export namespace DirectoryResolvers {
 			| null /** Configures the locale Moment.js will use to format the date. */;
 	}
 
-	export type AccessTimeResolver = Resolver<Date | null, AccessTimeArgs>;
+	export type AccessTimeResolver<
+		R = Date | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context, AccessTimeArgs>;
 	export interface AccessTimeArgs {
 		formatString?:
 			| string
@@ -11701,7 +14523,11 @@ export namespace DirectoryResolvers {
 			| null /** Configures the locale Moment.js will use to format the date. */;
 	}
 
-	export type ChangeTimeResolver = Resolver<Date | null, ChangeTimeArgs>;
+	export type ChangeTimeResolver<
+		R = Date | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context, ChangeTimeArgs>;
 	export interface ChangeTimeArgs {
 		formatString?:
 			| string
@@ -11717,7 +14543,11 @@ export namespace DirectoryResolvers {
 			| null /** Configures the locale Moment.js will use to format the date. */;
 	}
 
-	export type BirthTimeResolver = Resolver<Date | null, BirthTimeArgs>;
+	export type BirthTimeResolver<
+		R = Date | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context, BirthTimeArgs>;
 	export interface BirthTimeArgs {
 		formatString?:
 			| string
@@ -11733,26 +14563,106 @@ export namespace DirectoryResolvers {
 			| null /** Configures the locale Moment.js will use to format the date. */;
 	}
 
-	export type RootResolver = Resolver<string | null>;
-	export type DirResolver = Resolver<string | null>;
-	export type BaseResolver = Resolver<string | null>;
-	export type ExtResolver = Resolver<string | null>;
-	export type NameResolver = Resolver<string | null>;
-	export type RelativeDirectoryResolver = Resolver<string | null>;
-	export type DevResolver = Resolver<number | null>;
-	export type ModeResolver = Resolver<number | null>;
-	export type NlinkResolver = Resolver<number | null>;
-	export type UidResolver = Resolver<number | null>;
-	export type GidResolver = Resolver<number | null>;
-	export type RdevResolver = Resolver<number | null>;
-	export type BlksizeResolver = Resolver<number | null>;
-	export type InoResolver = Resolver<number | null>;
-	export type BlocksResolver = Resolver<number | null>;
-	export type AtimeMsResolver = Resolver<number | null>;
-	export type MtimeMsResolver = Resolver<number | null>;
-	export type CtimeMsResolver = Resolver<number | null>;
-	export type BirthtimeMsResolver = Resolver<number | null>;
-	export type AtimeResolver = Resolver<Date | null, AtimeArgs>;
+	export type RootResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type DirResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type BaseResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type ExtResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type NameResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type RelativeDirectoryResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type DevResolver<
+		R = number | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type ModeResolver<
+		R = number | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type NlinkResolver<
+		R = number | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type UidResolver<
+		R = number | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type GidResolver<
+		R = number | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type RdevResolver<
+		R = number | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type BlksizeResolver<
+		R = number | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type InoResolver<
+		R = number | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type BlocksResolver<
+		R = number | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type AtimeMsResolver<
+		R = number | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type MtimeMsResolver<
+		R = number | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type CtimeMsResolver<
+		R = number | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type BirthtimeMsResolver<
+		R = number | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type AtimeResolver<
+		R = Date | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context, AtimeArgs>;
 	export interface AtimeArgs {
 		formatString?:
 			| string
@@ -11768,7 +14678,11 @@ export namespace DirectoryResolvers {
 			| null /** Configures the locale Moment.js will use to format the date. */;
 	}
 
-	export type MtimeResolver = Resolver<Date | null, MtimeArgs>;
+	export type MtimeResolver<
+		R = Date | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context, MtimeArgs>;
 	export interface MtimeArgs {
 		formatString?:
 			| string
@@ -11784,7 +14698,11 @@ export namespace DirectoryResolvers {
 			| null /** Configures the locale Moment.js will use to format the date. */;
 	}
 
-	export type CtimeResolver = Resolver<Date | null, CtimeArgs>;
+	export type CtimeResolver<
+		R = Date | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context, CtimeArgs>;
 	export interface CtimeArgs {
 		formatString?:
 			| string
@@ -11800,7 +14718,11 @@ export namespace DirectoryResolvers {
 			| null /** Configures the locale Moment.js will use to format the date. */;
 	}
 
-	export type BirthtimeResolver = Resolver<Date | null, BirthtimeArgs>;
+	export type BirthtimeResolver<
+		R = Date | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context, BirthtimeArgs>;
 	export interface BirthtimeArgs {
 		formatString?:
 			| string
@@ -11816,159 +14738,407 @@ export namespace DirectoryResolvers {
 			| null /** Configures the locale Moment.js will use to format the date. */;
 	}
 }
-export namespace internal_16Resolvers {
-	export interface Resolvers {
-		contentDigest?: ContentDigestResolver;
-		type?: TypeResolver;
-		description?: DescriptionResolver;
-		owner?: OwnerResolver;
+
+export namespace Internal_16Resolvers {
+	export interface Resolvers<Context = any> {
+		contentDigest?: ContentDigestResolver<string | null, any, Context>;
+		type?: TypeResolver<string | null, any, Context>;
+		description?: DescriptionResolver<string | null, any, Context>;
+		owner?: OwnerResolver<string | null, any, Context>;
 	}
 
-	export type ContentDigestResolver = Resolver<string | null>;
-	export type TypeResolver = Resolver<string | null>;
-	export type DescriptionResolver = Resolver<string | null>;
-	export type OwnerResolver = Resolver<string | null>;
-} /** A connection to a list of items. */
-export namespace directoryGroupConnectionConnectionResolvers {
-	export interface Resolvers {
-		pageInfo?: PageInfoResolver /** Information to aid in pagination. */;
-		edges?: EdgesResolver /** A list of edges. */;
-		field?: FieldResolver;
-		fieldValue?: FieldValueResolver;
-		totalCount?: TotalCountResolver;
+	export type ContentDigestResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type TypeResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type DescriptionResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type OwnerResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+}
+/** A connection to a list of items. */
+export namespace DirectoryGroupConnectionConnectionResolvers {
+	export interface Resolvers<Context = any> {
+		pageInfo?: PageInfoResolver<
+			PageInfo,
+			any,
+			Context
+		> /** Information to aid in pagination. */;
+		edges?: EdgesResolver<
+			(DirectoryGroupConnectionEdge | null)[] | null,
+			any,
+			Context
+		> /** A list of edges. */;
+		field?: FieldResolver<string | null, any, Context>;
+		fieldValue?: FieldValueResolver<string | null, any, Context>;
+		totalCount?: TotalCountResolver<number | null, any, Context>;
 	}
 
-	export type PageInfoResolver = Resolver<PageInfo>;
-	export type EdgesResolver = Resolver<
-		(directoryGroupConnectionEdge | null)[] | null
-	>;
-	export type FieldResolver = Resolver<string | null>;
-	export type FieldValueResolver = Resolver<string | null>;
-	export type TotalCountResolver = Resolver<number | null>;
-} /** An edge in a connection. */
-export namespace directoryGroupConnectionEdgeResolvers {
-	export interface Resolvers {
-		node?: NodeResolver /** The item at the end of the edge */;
-		next?: NextResolver /** The next edge in the connection */;
-		previous?: PreviousResolver /** The previous edge in the connection */;
+	export type PageInfoResolver<
+		R = PageInfo,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type EdgesResolver<
+		R = (DirectoryGroupConnectionEdge | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type FieldResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type FieldValueResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type TotalCountResolver<
+		R = number | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+}
+/** An edge in a connection. */
+export namespace DirectoryGroupConnectionEdgeResolvers {
+	export interface Resolvers<Context = any> {
+		node?: NodeResolver<
+			Directory | null,
+			any,
+			Context
+		> /** The item at the end of the edge */;
+		next?: NextResolver<
+			Directory | null,
+			any,
+			Context
+		> /** The next edge in the connection */;
+		previous?: PreviousResolver<
+			Directory | null,
+			any,
+			Context
+		> /** The previous edge in the connection */;
 	}
 
-	export type NodeResolver = Resolver<Directory | null>;
-	export type NextResolver = Resolver<Directory | null>;
-	export type PreviousResolver = Resolver<Directory | null>;
-} /** A connection to a list of items. */
+	export type NodeResolver<
+		R = Directory | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type NextResolver<
+		R = Directory | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type PreviousResolver<
+		R = Directory | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+}
+/** A connection to a list of items. */
 export namespace FileConnectionResolvers {
-	export interface Resolvers {
-		pageInfo?: PageInfoResolver /** Information to aid in pagination. */;
-		edges?: EdgesResolver /** A list of edges. */;
-		totalCount?: TotalCountResolver;
-		distinct?: DistinctResolver;
-		group?: GroupResolver;
+	export interface Resolvers<Context = any> {
+		pageInfo?: PageInfoResolver<
+			PageInfo,
+			any,
+			Context
+		> /** Information to aid in pagination. */;
+		edges?: EdgesResolver<
+			(FileEdge | null)[] | null,
+			any,
+			Context
+		> /** A list of edges. */;
+		totalCount?: TotalCountResolver<number | null, any, Context>;
+		distinct?: DistinctResolver<(string | null)[] | null, any, Context>;
+		group?: GroupResolver<
+			(FileGroupConnectionConnection | null)[] | null,
+			any,
+			Context
+		>;
 	}
 
-	export type PageInfoResolver = Resolver<PageInfo>;
-	export type EdgesResolver = Resolver<(FileEdge | null)[] | null>;
-	export type TotalCountResolver = Resolver<number | null>;
-	export type DistinctResolver = Resolver<
-		(string | null)[] | null,
-		DistinctArgs
-	>;
+	export type PageInfoResolver<
+		R = PageInfo,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type EdgesResolver<
+		R = (FileEdge | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type TotalCountResolver<
+		R = number | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type DistinctResolver<
+		R = (string | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context, DistinctArgs>;
 	export interface DistinctArgs {
-		field?: fileDistinctEnum | null;
+		field?: FileDistinctEnum | null;
 	}
 
-	export type GroupResolver = Resolver<
-		(fileGroupConnectionConnection | null)[] | null,
-		GroupArgs
-	>;
+	export type GroupResolver<
+		R = (FileGroupConnectionConnection | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context, GroupArgs>;
 	export interface GroupArgs {
 		skip?: number | null;
 		limit?: number | null;
-		field?: fileGroupEnum | null;
+		field?: FileGroupEnum | null;
 	}
-} /** An edge in a connection. */
+}
+/** An edge in a connection. */
 export namespace FileEdgeResolvers {
-	export interface Resolvers {
-		node?: NodeResolver /** The item at the end of the edge */;
-		next?: NextResolver /** The next edge in the connection */;
-		previous?: PreviousResolver /** The previous edge in the connection */;
+	export interface Resolvers<Context = any> {
+		node?: NodeResolver<
+			File | null,
+			any,
+			Context
+		> /** The item at the end of the edge */;
+		next?: NextResolver<
+			File | null,
+			any,
+			Context
+		> /** The next edge in the connection */;
+		previous?: PreviousResolver<
+			File | null,
+			any,
+			Context
+		> /** The previous edge in the connection */;
 	}
 
-	export type NodeResolver = Resolver<File | null>;
-	export type NextResolver = Resolver<File | null>;
-	export type PreviousResolver = Resolver<File | null>;
-} /** Node of type File */
+	export type NodeResolver<
+		R = File | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type NextResolver<
+		R = File | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type PreviousResolver<
+		R = File | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+}
+/** Node of type File */
 export namespace FileResolvers {
-	export interface Resolvers {
-		id?: IdResolver /** The id of this node. */;
-		parent?: ParentResolver /** The parent of this node. */;
-		children?: ChildrenResolver /** The children of this node. */;
-		childMarkdownRemark?: ChildMarkdownRemarkResolver /** The child of this node of type markdownRemark */;
-		childrenTodoJson?: ChildrenTodoJsonResolver /** The children of this node of type todoJson */;
-		childOrganizationJson?: ChildOrganizationJsonResolver /** The child of this node of type organizationJson */;
-		childExperiencesJson?: ChildExperiencesJsonResolver /** The child of this node of type experiencesJson */;
-		childrenCompetencesJson?: ChildrenCompetencesJsonResolver /** The children of this node of type competencesJson */;
-		childInterestsJson?: ChildInterestsJsonResolver /** The child of this node of type interestsJson */;
-		childPersonalJson?: ChildPersonalJsonResolver /** The child of this node of type personalJson */;
-		childSkillsJson?: ChildSkillsJsonResolver /** The child of this node of type skillsJson */;
-		internal?: InternalResolver;
-		sourceInstanceName?: SourceInstanceNameResolver;
-		absolutePath?: AbsolutePathResolver;
-		relativePath?: RelativePathResolver;
-		extension?: ExtensionResolver;
-		size?: SizeResolver;
-		prettySize?: PrettySizeResolver;
-		modifiedTime?: ModifiedTimeResolver;
-		accessTime?: AccessTimeResolver;
-		changeTime?: ChangeTimeResolver;
-		birthTime?: BirthTimeResolver;
-		root?: RootResolver;
-		dir?: DirResolver;
-		base?: BaseResolver;
-		ext?: ExtResolver;
-		name?: NameResolver;
-		relativeDirectory?: RelativeDirectoryResolver;
-		dev?: DevResolver;
-		mode?: ModeResolver;
-		nlink?: NlinkResolver;
-		uid?: UidResolver;
-		gid?: GidResolver;
-		rdev?: RdevResolver;
-		blksize?: BlksizeResolver;
-		ino?: InoResolver;
-		blocks?: BlocksResolver;
-		atimeMs?: AtimeMsResolver;
-		mtimeMs?: MtimeMsResolver;
-		ctimeMs?: CtimeMsResolver;
-		birthtimeMs?: BirthtimeMsResolver;
-		atime?: AtimeResolver;
-		mtime?: MtimeResolver;
-		ctime?: CtimeResolver;
-		birthtime?: BirthtimeResolver;
-		publicURL?: PublicURLResolver /** Copy file to static directory and return public url to it */;
+	export interface Resolvers<Context = any> {
+		id?: IdResolver<string, any, Context> /** The id of this node. */;
+		parent?: ParentResolver<
+			Node | null,
+			any,
+			Context
+		> /** The parent of this node. */;
+		children?: ChildrenResolver<
+			(Node | null)[] | null,
+			any,
+			Context
+		> /** The children of this node. */;
+		childrenTodoJson?: ChildrenTodoJsonResolver<
+			(TodoJson | null)[] | null,
+			any,
+			Context
+		> /** The children of this node of type todoJson */;
+		childMarkdownRemark?: ChildMarkdownRemarkResolver<
+			MarkdownRemark | null,
+			any,
+			Context
+		> /** The child of this node of type markdownRemark */;
+		childExperiencesJson?: ChildExperiencesJsonResolver<
+			ExperiencesJson | null,
+			any,
+			Context
+		> /** The child of this node of type experiencesJson */;
+		childInterestsJson?: ChildInterestsJsonResolver<
+			InterestsJson | null,
+			any,
+			Context
+		> /** The child of this node of type interestsJson */;
+		childOrganizationJson?: ChildOrganizationJsonResolver<
+			OrganizationJson | null,
+			any,
+			Context
+		> /** The child of this node of type organizationJson */;
+		childSkillsJson?: ChildSkillsJsonResolver<
+			SkillsJson | null,
+			any,
+			Context
+		> /** The child of this node of type skillsJson */;
+		childPersonalJson?: ChildPersonalJsonResolver<
+			PersonalJson | null,
+			any,
+			Context
+		> /** The child of this node of type personalJson */;
+		childrenCompetencesJson?: ChildrenCompetencesJsonResolver<
+			(CompetencesJson | null)[] | null,
+			any,
+			Context
+		> /** The children of this node of type competencesJson */;
+		internal?: InternalResolver<Internal_17 | null, any, Context>;
+		sourceInstanceName?: SourceInstanceNameResolver<
+			string | null,
+			any,
+			Context
+		>;
+		absolutePath?: AbsolutePathResolver<string | null, any, Context>;
+		relativePath?: RelativePathResolver<string | null, any, Context>;
+		extension?: ExtensionResolver<string | null, any, Context>;
+		size?: SizeResolver<number | null, any, Context>;
+		prettySize?: PrettySizeResolver<string | null, any, Context>;
+		modifiedTime?: ModifiedTimeResolver<Date | null, any, Context>;
+		accessTime?: AccessTimeResolver<Date | null, any, Context>;
+		changeTime?: ChangeTimeResolver<Date | null, any, Context>;
+		birthTime?: BirthTimeResolver<Date | null, any, Context>;
+		root?: RootResolver<string | null, any, Context>;
+		dir?: DirResolver<string | null, any, Context>;
+		base?: BaseResolver<string | null, any, Context>;
+		ext?: ExtResolver<string | null, any, Context>;
+		name?: NameResolver<string | null, any, Context>;
+		relativeDirectory?: RelativeDirectoryResolver<
+			string | null,
+			any,
+			Context
+		>;
+		dev?: DevResolver<number | null, any, Context>;
+		mode?: ModeResolver<number | null, any, Context>;
+		nlink?: NlinkResolver<number | null, any, Context>;
+		uid?: UidResolver<number | null, any, Context>;
+		gid?: GidResolver<number | null, any, Context>;
+		rdev?: RdevResolver<number | null, any, Context>;
+		blksize?: BlksizeResolver<number | null, any, Context>;
+		ino?: InoResolver<number | null, any, Context>;
+		blocks?: BlocksResolver<number | null, any, Context>;
+		atimeMs?: AtimeMsResolver<number | null, any, Context>;
+		mtimeMs?: MtimeMsResolver<number | null, any, Context>;
+		ctimeMs?: CtimeMsResolver<number | null, any, Context>;
+		birthtimeMs?: BirthtimeMsResolver<number | null, any, Context>;
+		atime?: AtimeResolver<Date | null, any, Context>;
+		mtime?: MtimeResolver<Date | null, any, Context>;
+		ctime?: CtimeResolver<Date | null, any, Context>;
+		birthtime?: BirthtimeResolver<Date | null, any, Context>;
+		publicURL?: PublicUrlResolver<
+			string | null,
+			any,
+			Context
+		> /** Copy file to static directory and return public url to it */;
 	}
 
-	export type IdResolver = Resolver<string>;
-	export type ParentResolver = Resolver<Node | null>;
-	export type ChildrenResolver = Resolver<(Node | null)[] | null>;
-	export type ChildMarkdownRemarkResolver = Resolver<MarkdownRemark | null>;
-	export type ChildrenTodoJsonResolver = Resolver<(TodoJson | null)[] | null>;
-	export type ChildOrganizationJsonResolver = Resolver<OrganizationJson | null>;
-	export type ChildExperiencesJsonResolver = Resolver<ExperiencesJson | null>;
-	export type ChildrenCompetencesJsonResolver = Resolver<
-		(CompetencesJson | null)[] | null
+	export type IdResolver<R = string, Parent = any, Context = any> = Resolver<
+		R,
+		Parent,
+		Context
 	>;
-	export type ChildInterestsJsonResolver = Resolver<InterestsJson | null>;
-	export type ChildPersonalJsonResolver = Resolver<PersonalJson | null>;
-	export type ChildSkillsJsonResolver = Resolver<SkillsJson | null>;
-	export type InternalResolver = Resolver<internal_17 | null>;
-	export type SourceInstanceNameResolver = Resolver<string | null>;
-	export type AbsolutePathResolver = Resolver<string | null>;
-	export type RelativePathResolver = Resolver<string | null>;
-	export type ExtensionResolver = Resolver<string | null>;
-	export type SizeResolver = Resolver<number | null>;
-	export type PrettySizeResolver = Resolver<string | null>;
-	export type ModifiedTimeResolver = Resolver<Date | null, ModifiedTimeArgs>;
+	export type ParentResolver<
+		R = Node | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type ChildrenResolver<
+		R = (Node | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type ChildrenTodoJsonResolver<
+		R = (TodoJson | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type ChildMarkdownRemarkResolver<
+		R = MarkdownRemark | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type ChildExperiencesJsonResolver<
+		R = ExperiencesJson | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type ChildInterestsJsonResolver<
+		R = InterestsJson | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type ChildOrganizationJsonResolver<
+		R = OrganizationJson | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type ChildSkillsJsonResolver<
+		R = SkillsJson | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type ChildPersonalJsonResolver<
+		R = PersonalJson | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type ChildrenCompetencesJsonResolver<
+		R = (CompetencesJson | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type InternalResolver<
+		R = Internal_17 | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type SourceInstanceNameResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type AbsolutePathResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type RelativePathResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type ExtensionResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type SizeResolver<
+		R = number | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type PrettySizeResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type ModifiedTimeResolver<
+		R = Date | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context, ModifiedTimeArgs>;
 	export interface ModifiedTimeArgs {
 		formatString?:
 			| string
@@ -11984,7 +15154,11 @@ export namespace FileResolvers {
 			| null /** Configures the locale Moment.js will use to format the date. */;
 	}
 
-	export type AccessTimeResolver = Resolver<Date | null, AccessTimeArgs>;
+	export type AccessTimeResolver<
+		R = Date | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context, AccessTimeArgs>;
 	export interface AccessTimeArgs {
 		formatString?:
 			| string
@@ -12000,7 +15174,11 @@ export namespace FileResolvers {
 			| null /** Configures the locale Moment.js will use to format the date. */;
 	}
 
-	export type ChangeTimeResolver = Resolver<Date | null, ChangeTimeArgs>;
+	export type ChangeTimeResolver<
+		R = Date | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context, ChangeTimeArgs>;
 	export interface ChangeTimeArgs {
 		formatString?:
 			| string
@@ -12016,7 +15194,11 @@ export namespace FileResolvers {
 			| null /** Configures the locale Moment.js will use to format the date. */;
 	}
 
-	export type BirthTimeResolver = Resolver<Date | null, BirthTimeArgs>;
+	export type BirthTimeResolver<
+		R = Date | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context, BirthTimeArgs>;
 	export interface BirthTimeArgs {
 		formatString?:
 			| string
@@ -12032,26 +15214,106 @@ export namespace FileResolvers {
 			| null /** Configures the locale Moment.js will use to format the date. */;
 	}
 
-	export type RootResolver = Resolver<string | null>;
-	export type DirResolver = Resolver<string | null>;
-	export type BaseResolver = Resolver<string | null>;
-	export type ExtResolver = Resolver<string | null>;
-	export type NameResolver = Resolver<string | null>;
-	export type RelativeDirectoryResolver = Resolver<string | null>;
-	export type DevResolver = Resolver<number | null>;
-	export type ModeResolver = Resolver<number | null>;
-	export type NlinkResolver = Resolver<number | null>;
-	export type UidResolver = Resolver<number | null>;
-	export type GidResolver = Resolver<number | null>;
-	export type RdevResolver = Resolver<number | null>;
-	export type BlksizeResolver = Resolver<number | null>;
-	export type InoResolver = Resolver<number | null>;
-	export type BlocksResolver = Resolver<number | null>;
-	export type AtimeMsResolver = Resolver<number | null>;
-	export type MtimeMsResolver = Resolver<number | null>;
-	export type CtimeMsResolver = Resolver<number | null>;
-	export type BirthtimeMsResolver = Resolver<number | null>;
-	export type AtimeResolver = Resolver<Date | null, AtimeArgs>;
+	export type RootResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type DirResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type BaseResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type ExtResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type NameResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type RelativeDirectoryResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type DevResolver<
+		R = number | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type ModeResolver<
+		R = number | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type NlinkResolver<
+		R = number | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type UidResolver<
+		R = number | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type GidResolver<
+		R = number | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type RdevResolver<
+		R = number | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type BlksizeResolver<
+		R = number | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type InoResolver<
+		R = number | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type BlocksResolver<
+		R = number | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type AtimeMsResolver<
+		R = number | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type MtimeMsResolver<
+		R = number | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type CtimeMsResolver<
+		R = number | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type BirthtimeMsResolver<
+		R = number | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type AtimeResolver<
+		R = Date | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context, AtimeArgs>;
 	export interface AtimeArgs {
 		formatString?:
 			| string
@@ -12067,7 +15329,11 @@ export namespace FileResolvers {
 			| null /** Configures the locale Moment.js will use to format the date. */;
 	}
 
-	export type MtimeResolver = Resolver<Date | null, MtimeArgs>;
+	export type MtimeResolver<
+		R = Date | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context, MtimeArgs>;
 	export interface MtimeArgs {
 		formatString?:
 			| string
@@ -12083,7 +15349,11 @@ export namespace FileResolvers {
 			| null /** Configures the locale Moment.js will use to format the date. */;
 	}
 
-	export type CtimeResolver = Resolver<Date | null, CtimeArgs>;
+	export type CtimeResolver<
+		R = Date | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context, CtimeArgs>;
 	export interface CtimeArgs {
 		formatString?:
 			| string
@@ -12099,7 +15369,11 @@ export namespace FileResolvers {
 			| null /** Configures the locale Moment.js will use to format the date. */;
 	}
 
-	export type BirthtimeResolver = Resolver<Date | null, BirthtimeArgs>;
+	export type BirthtimeResolver<
+		R = Date | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context, BirthtimeArgs>;
 	export interface BirthtimeArgs {
 		formatString?:
 			| string
@@ -12115,81 +15389,264 @@ export namespace FileResolvers {
 			| null /** Configures the locale Moment.js will use to format the date. */;
 	}
 
-	export type PublicURLResolver = Resolver<string | null>;
-} /** Node of type MarkdownRemark */
-export namespace MarkdownRemarkResolvers {
-	export interface Resolvers {
-		id?: IdResolver /** The id of this node. */;
-		parent?: ParentResolver /** The parent of this node. */;
-		children?: ChildrenResolver /** The children of this node. */;
-		internal?: InternalResolver;
-		frontmatter?: FrontmatterResolver;
-		rawMarkdownBody?: RawMarkdownBodyResolver;
-		fileAbsolutePath?: FileAbsolutePathResolver;
-		html?: HtmlResolver;
-		htmlAst?: HtmlAstResolver;
-		excerpt?: ExcerptResolver;
-		headings?: HeadingsResolver;
-		timeToRead?: TimeToReadResolver;
-		tableOfContents?: TableOfContentsResolver;
-		wordCount?: WordCountResolver;
+	export type PublicUrlResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+}
+/** Node of type TodoJson */
+export namespace TodoJsonResolvers {
+	export interface Resolvers<Context = any> {
+		id?: IdResolver<string, any, Context> /** The id of this node. */;
+		parent?: ParentResolver<
+			Node | null,
+			any,
+			Context
+		> /** The parent of this node. */;
+		children?: ChildrenResolver<
+			(Node | null)[] | null,
+			any,
+			Context
+		> /** The children of this node. */;
+		title?: TitleResolver<string | null, any, Context>;
+		tags?: TagsResolver<(string | null)[] | null, any, Context>;
+		internal?: InternalResolver<Internal_18 | null, any, Context>;
 	}
 
-	export type IdResolver = Resolver<string>;
-	export type ParentResolver = Resolver<Node | null>;
-	export type ChildrenResolver = Resolver<(Node | null)[] | null>;
-	export type InternalResolver = Resolver<internal_18 | null>;
-	export type FrontmatterResolver = Resolver<frontmatter_3 | null>;
-	export type RawMarkdownBodyResolver = Resolver<string | null>;
-	export type FileAbsolutePathResolver = Resolver<string | null>;
-	export type HtmlResolver = Resolver<string | null>;
-	export type HtmlAstResolver = Resolver<JSON | null>;
-	export type ExcerptResolver = Resolver<string | null, ExcerptArgs>;
+	export type IdResolver<R = string, Parent = any, Context = any> = Resolver<
+		R,
+		Parent,
+		Context
+	>;
+	export type ParentResolver<
+		R = Node | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type ChildrenResolver<
+		R = (Node | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type TitleResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type TagsResolver<
+		R = (string | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type InternalResolver<
+		R = Internal_18 | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+}
+
+export namespace Internal_18Resolvers {
+	export interface Resolvers<Context = any> {
+		contentDigest?: ContentDigestResolver<string | null, any, Context>;
+		type?: TypeResolver<string | null, any, Context>;
+		owner?: OwnerResolver<string | null, any, Context>;
+	}
+
+	export type ContentDigestResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type TypeResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type OwnerResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+}
+/** Node of type MarkdownRemark */
+export namespace MarkdownRemarkResolvers {
+	export interface Resolvers<Context = any> {
+		id?: IdResolver<string, any, Context> /** The id of this node. */;
+		parent?: ParentResolver<
+			Node | null,
+			any,
+			Context
+		> /** The parent of this node. */;
+		children?: ChildrenResolver<
+			(Node | null)[] | null,
+			any,
+			Context
+		> /** The children of this node. */;
+		internal?: InternalResolver<Internal_19 | null, any, Context>;
+		frontmatter?: FrontmatterResolver<Frontmatter_3 | null, any, Context>;
+		rawMarkdownBody?: RawMarkdownBodyResolver<string | null, any, Context>;
+		fileAbsolutePath?: FileAbsolutePathResolver<
+			string | null,
+			any,
+			Context
+		>;
+		html?: HtmlResolver<string | null, any, Context>;
+		htmlAst?: HtmlAstResolver<Json | null, any, Context>;
+		excerpt?: ExcerptResolver<string | null, any, Context>;
+		headings?: HeadingsResolver<
+			(MarkdownHeading | null)[] | null,
+			any,
+			Context
+		>;
+		timeToRead?: TimeToReadResolver<number | null, any, Context>;
+		tableOfContents?: TableOfContentsResolver<string | null, any, Context>;
+		wordCount?: WordCountResolver<WordCount | null, any, Context>;
+	}
+
+	export type IdResolver<R = string, Parent = any, Context = any> = Resolver<
+		R,
+		Parent,
+		Context
+	>;
+	export type ParentResolver<
+		R = Node | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type ChildrenResolver<
+		R = (Node | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type InternalResolver<
+		R = Internal_19 | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type FrontmatterResolver<
+		R = Frontmatter_3 | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type RawMarkdownBodyResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type FileAbsolutePathResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type HtmlResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type HtmlAstResolver<
+		R = Json | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type ExcerptResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context, ExcerptArgs>;
 	export interface ExcerptArgs {
 		pruneLength?: number | null;
+		truncate?: boolean | null;
 	}
 
-	export type HeadingsResolver = Resolver<
-		(MarkdownHeading | null)[] | null,
-		HeadingsArgs
-	>;
+	export type HeadingsResolver<
+		R = (MarkdownHeading | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context, HeadingsArgs>;
 	export interface HeadingsArgs {
 		depth?: HeadingLevels | null;
 	}
 
-	export type TimeToReadResolver = Resolver<number | null>;
-	export type TableOfContentsResolver = Resolver<string | null>;
-	export type WordCountResolver = Resolver<wordCount | null>;
-}
-export namespace internal_18Resolvers {
-	export interface Resolvers {
-		content?: ContentResolver;
-		type?: TypeResolver;
-		contentDigest?: ContentDigestResolver;
-		owner?: OwnerResolver;
+	export type TimeToReadResolver<
+		R = number | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type TableOfContentsResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context, TableOfContentsArgs>;
+	export interface TableOfContentsArgs {
+		pathToSlugField?: string | null;
 	}
 
-	export type ContentResolver = Resolver<string | null>;
-	export type TypeResolver = Resolver<string | null>;
-	export type ContentDigestResolver = Resolver<string | null>;
-	export type OwnerResolver = Resolver<string | null>;
+	export type WordCountResolver<
+		R = WordCount | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
 }
-export namespace frontmatter_3Resolvers {
-	export interface Resolvers {
-		title?: TitleResolver;
-		link?: LinkResolver;
-		date?: DateResolver;
-		authors?: AuthorsResolver;
-		_PARENT?: _PARENTResolver;
-		parent?: ParentResolver;
-		description?: DescriptionResolver;
-		type?: TypeResolver;
-		draft?: DraftResolver;
+
+export namespace Internal_19Resolvers {
+	export interface Resolvers<Context = any> {
+		content?: ContentResolver<string | null, any, Context>;
+		type?: TypeResolver<string | null, any, Context>;
+		contentDigest?: ContentDigestResolver<string | null, any, Context>;
+		owner?: OwnerResolver<string | null, any, Context>;
 	}
 
-	export type TitleResolver = Resolver<string | null>;
-	export type LinkResolver = Resolver<string | null>;
-	export type DateResolver = Resolver<Date | null, DateArgs>;
+	export type ContentResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type TypeResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type ContentDigestResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type OwnerResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+}
+
+export namespace Frontmatter_3Resolvers {
+	export interface Resolvers<Context = any> {
+		title?: TitleResolver<string | null, any, Context>;
+		link?: LinkResolver<string | null, any, Context>;
+		date?: DateResolver<Date | null, any, Context>;
+		authors?: AuthorsResolver<(Authors_3 | null)[] | null, any, Context>;
+		_PARENT?: ParentResolver<string | null, any, Context>;
+		description?: DescriptionResolver<string | null, any, Context>;
+		draft?: DraftResolver<boolean | null, any, Context>;
+		toc?: TocResolver<boolean | null, any, Context>;
+		type?: TypeResolver<string | null, any, Context>;
+	}
+
+	export type TitleResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type LinkResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type DateResolver<
+		R = Date | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context, DateArgs>;
 	export interface DateArgs {
 		formatString?:
 			| string
@@ -12205,960 +15662,2363 @@ export namespace frontmatter_3Resolvers {
 			| null /** Configures the locale Moment.js will use to format the date. */;
 	}
 
-	export type AuthorsResolver = Resolver<(authors_3 | null)[] | null>;
-	export type _PARENTResolver = Resolver<string | null>;
-	export type ParentResolver = Resolver<string | null>;
-	export type DescriptionResolver = Resolver<string | null>;
-	export type TypeResolver = Resolver<string | null>;
-	export type DraftResolver = Resolver<boolean | null>;
+	export type AuthorsResolver<
+		R = (Authors_3 | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type ParentResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type DescriptionResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type DraftResolver<
+		R = boolean | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type TocResolver<
+		R = boolean | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type TypeResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
 }
-export namespace authors_3Resolvers {
-	export interface Resolvers {
-		name?: NameResolver;
-		url?: UrlResolver;
+
+export namespace Authors_3Resolvers {
+	export interface Resolvers<Context = any> {
+		name?: NameResolver<string | null, any, Context>;
+		url?: UrlResolver<string | null, any, Context>;
 	}
 
-	export type NameResolver = Resolver<string | null>;
-	export type UrlResolver = Resolver<string | null>;
+	export type NameResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type UrlResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
 }
+
 export namespace MarkdownHeadingResolvers {
-	export interface Resolvers {
-		value?: ValueResolver;
-		depth?: DepthResolver;
+	export interface Resolvers<Context = any> {
+		value?: ValueResolver<string | null, any, Context>;
+		depth?: DepthResolver<number | null, any, Context>;
 	}
 
-	export type ValueResolver = Resolver<string | null>;
-	export type DepthResolver = Resolver<number | null>;
+	export type ValueResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type DepthResolver<
+		R = number | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
 }
-export namespace wordCountResolvers {
-	export interface Resolvers {
-		paragraphs?: ParagraphsResolver;
-		sentences?: SentencesResolver;
-		words?: WordsResolver;
+
+export namespace WordCountResolvers {
+	export interface Resolvers<Context = any> {
+		paragraphs?: ParagraphsResolver<number | null, any, Context>;
+		sentences?: SentencesResolver<number | null, any, Context>;
+		words?: WordsResolver<number | null, any, Context>;
 	}
 
-	export type ParagraphsResolver = Resolver<number | null>;
-	export type SentencesResolver = Resolver<number | null>;
-	export type WordsResolver = Resolver<number | null>;
-} /** Node of type TodoJson */
-export namespace TodoJsonResolvers {
-	export interface Resolvers {
-		id?: IdResolver /** The id of this node. */;
-		parent?: ParentResolver /** The parent of this node. */;
-		children?: ChildrenResolver /** The children of this node. */;
-		title?: TitleResolver;
-		tags?: TagsResolver;
-		internal?: InternalResolver;
-	}
-
-	export type IdResolver = Resolver<string>;
-	export type ParentResolver = Resolver<Node | null>;
-	export type ChildrenResolver = Resolver<(Node | null)[] | null>;
-	export type TitleResolver = Resolver<string | null>;
-	export type TagsResolver = Resolver<(string | null)[] | null>;
-	export type InternalResolver = Resolver<internal_19 | null>;
+	export type ParagraphsResolver<
+		R = number | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type SentencesResolver<
+		R = number | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type WordsResolver<
+		R = number | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
 }
-export namespace internal_19Resolvers {
-	export interface Resolvers {
-		contentDigest?: ContentDigestResolver;
-		type?: TypeResolver;
-		owner?: OwnerResolver;
-	}
-
-	export type ContentDigestResolver = Resolver<string | null>;
-	export type TypeResolver = Resolver<string | null>;
-	export type OwnerResolver = Resolver<string | null>;
-} /** Node of type OrganizationJson */
-export namespace OrganizationJsonResolvers {
-	export interface Resolvers {
-		id?: IdResolver /** The id of this node. */;
-		parent?: ParentResolver /** The parent of this node. */;
-		children?: ChildrenResolver /** The children of this node. */;
-		name?: NameResolver;
-		url?: UrlResolver;
-		logo?: LogoResolver;
-		telephone?: TelephoneResolver;
-		internal?: InternalResolver;
-		fields?: FieldsResolver;
-	}
-
-	export type IdResolver = Resolver<string>;
-	export type ParentResolver = Resolver<Node | null>;
-	export type ChildrenResolver = Resolver<(Node | null)[] | null>;
-	export type NameResolver = Resolver<string | null>;
-	export type UrlResolver = Resolver<string | null>;
-	export type LogoResolver = Resolver<string | null>;
-	export type TelephoneResolver = Resolver<string | null>;
-	export type InternalResolver = Resolver<internal_20 | null>;
-	export type FieldsResolver = Resolver<fields_3 | null>;
-}
-export namespace internal_20Resolvers {
-	export interface Resolvers {
-		contentDigest?: ContentDigestResolver;
-		type?: TypeResolver;
-		owner?: OwnerResolver;
-		fieldOwners?: FieldOwnersResolver;
-	}
-
-	export type ContentDigestResolver = Resolver<string | null>;
-	export type TypeResolver = Resolver<string | null>;
-	export type OwnerResolver = Resolver<string | null>;
-	export type FieldOwnersResolver = Resolver<fieldOwners_3 | null>;
-}
-export namespace fieldOwners_3Resolvers {
-	export interface Resolvers {
-		logo_image?: Logo_imageResolver;
-	}
-
-	export type Logo_imageResolver = Resolver<string | null>;
-}
-export namespace fields_3Resolvers {
-	export interface Resolvers {
-		logo_image?: Logo_imageResolver;
-	}
-
-	export type Logo_imageResolver = Resolver<string | null>;
-} /** Node of type ExperiencesJson */
+/** Node of type ExperiencesJson */
 export namespace ExperiencesJsonResolvers {
-	export interface Resolvers {
-		id?: IdResolver /** The id of this node. */;
-		parent?: ParentResolver /** The parent of this node. */;
-		children?: ChildrenResolver /** The children of this node. */;
-		work?: WorkResolver;
-		internal?: InternalResolver;
-		fields?: FieldsResolver;
+	export interface Resolvers<Context = any> {
+		id?: IdResolver<string, any, Context> /** The id of this node. */;
+		parent?: ParentResolver<
+			Node | null,
+			any,
+			Context
+		> /** The parent of this node. */;
+		children?: ChildrenResolver<
+			(Node | null)[] | null,
+			any,
+			Context
+		> /** The children of this node. */;
+		work?: WorkResolver<(Work_2 | null)[] | null, any, Context>;
+		internal?: InternalResolver<Internal_20 | null, any, Context>;
+		fields?: FieldsResolver<Fields_3 | null, any, Context>;
 	}
 
-	export type IdResolver = Resolver<string>;
-	export type ParentResolver = Resolver<Node | null>;
-	export type ChildrenResolver = Resolver<(Node | null)[] | null>;
-	export type WorkResolver = Resolver<(work_2 | null)[] | null>;
-	export type InternalResolver = Resolver<internal_21 | null>;
-	export type FieldsResolver = Resolver<fields_4 | null>;
+	export type IdResolver<R = string, Parent = any, Context = any> = Resolver<
+		R,
+		Parent,
+		Context
+	>;
+	export type ParentResolver<
+		R = Node | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type ChildrenResolver<
+		R = (Node | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type WorkResolver<
+		R = (Work_2 | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type InternalResolver<
+		R = Internal_20 | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type FieldsResolver<
+		R = Fields_3 | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
 }
-export namespace work_2Resolvers {
-	export interface Resolvers {
-		company?: CompanyResolver;
-		link?: LinkResolver;
-		image?: ImageResolver;
-		period?: PeriodResolver;
-		role?: RoleResolver;
-		tasks?: TasksResolver;
+
+export namespace Work_2Resolvers {
+	export interface Resolvers<Context = any> {
+		company?: CompanyResolver<string | null, any, Context>;
+		link?: LinkResolver<string | null, any, Context>;
+		image?: ImageResolver<string | null, any, Context>;
+		period?: PeriodResolver<(string | null)[] | null, any, Context>;
+		role?: RoleResolver<string | null, any, Context>;
+		skills?: SkillsResolver<(string | null)[] | null, any, Context>;
+		projects?: ProjectsResolver<(Projects_2 | null)[] | null, any, Context>;
 	}
 
-	export type CompanyResolver = Resolver<string | null>;
-	export type LinkResolver = Resolver<string | null>;
-	export type ImageResolver = Resolver<string | null>;
-	export type PeriodResolver = Resolver<string | null>;
-	export type RoleResolver = Resolver<string | null>;
-	export type TasksResolver = Resolver<(string | null)[] | null>;
+	export type CompanyResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type LinkResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type ImageResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type PeriodResolver<
+		R = (string | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type RoleResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type SkillsResolver<
+		R = (string | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type ProjectsResolver<
+		R = (Projects_2 | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
 }
-export namespace internal_21Resolvers {
-	export interface Resolvers {
-		contentDigest?: ContentDigestResolver;
-		type?: TypeResolver;
-		owner?: OwnerResolver;
-		fieldOwners?: FieldOwnersResolver;
+
+export namespace Projects_2Resolvers {
+	export interface Resolvers<Context = any> {
+		name?: NameResolver<string | null, any, Context>;
+		url?: UrlResolver<string | null, any, Context>;
+		description?: DescriptionResolver<string | null, any, Context>;
 	}
 
-	export type ContentDigestResolver = Resolver<string | null>;
-	export type TypeResolver = Resolver<string | null>;
-	export type OwnerResolver = Resolver<string | null>;
-	export type FieldOwnersResolver = Resolver<fieldOwners_4 | null>;
+	export type NameResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type UrlResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type DescriptionResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
 }
-export namespace fieldOwners_4Resolvers {
-	export interface Resolvers {
-		image_image?: Image_imageResolver;
+
+export namespace Internal_20Resolvers {
+	export interface Resolvers<Context = any> {
+		contentDigest?: ContentDigestResolver<string | null, any, Context>;
+		type?: TypeResolver<string | null, any, Context>;
+		owner?: OwnerResolver<string | null, any, Context>;
+		fieldOwners?: FieldOwnersResolver<FieldOwners_3 | null, any, Context>;
 	}
 
-	export type Image_imageResolver = Resolver<string | null>;
+	export type ContentDigestResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type TypeResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type OwnerResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type FieldOwnersResolver<
+		R = FieldOwners_3 | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
 }
-export namespace fields_4Resolvers {
-	export interface Resolvers {
-		image_image?: Image_imageResolver;
+
+export namespace FieldOwners_3Resolvers {
+	export interface Resolvers<Context = any> {
+		image_image?: ImageImageResolver<string | null, any, Context>;
 	}
 
-	export type Image_imageResolver = Resolver<(string | null)[] | null>;
-} /** Node of type CompetencesJson */
-export namespace CompetencesJsonResolvers {
-	export interface Resolvers {
-		id?: IdResolver /** The id of this node. */;
-		parent?: ParentResolver /** The parent of this node. */;
-		children?: ChildrenResolver /** The children of this node. */;
-		name?: NameResolver;
-		description?: DescriptionResolver;
-		internal?: InternalResolver;
-	}
-
-	export type IdResolver = Resolver<string>;
-	export type ParentResolver = Resolver<Node | null>;
-	export type ChildrenResolver = Resolver<(Node | null)[] | null>;
-	export type NameResolver = Resolver<string | null>;
-	export type DescriptionResolver = Resolver<string | null>;
-	export type InternalResolver = Resolver<internal_22 | null>;
+	export type ImageImageResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
 }
-export namespace internal_22Resolvers {
-	export interface Resolvers {
-		contentDigest?: ContentDigestResolver;
-		type?: TypeResolver;
-		owner?: OwnerResolver;
+
+export namespace Fields_3Resolvers {
+	export interface Resolvers<Context = any> {
+		image_image?: ImageImageResolver<
+			(string | null)[] | null,
+			any,
+			Context
+		>;
 	}
 
-	export type ContentDigestResolver = Resolver<string | null>;
-	export type TypeResolver = Resolver<string | null>;
-	export type OwnerResolver = Resolver<string | null>;
-} /** Node of type InterestsJson */
+	export type ImageImageResolver<
+		R = (string | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+}
+/** Node of type InterestsJson */
 export namespace InterestsJsonResolvers {
-	export interface Resolvers {
-		id?: IdResolver /** The id of this node. */;
-		parent?: ParentResolver /** The parent of this node. */;
-		children?: ChildrenResolver /** The children of this node. */;
-		subjects?: SubjectsResolver;
-		internal?: InternalResolver;
+	export interface Resolvers<Context = any> {
+		id?: IdResolver<string, any, Context> /** The id of this node. */;
+		parent?: ParentResolver<
+			Node | null,
+			any,
+			Context
+		> /** The parent of this node. */;
+		children?: ChildrenResolver<
+			(Node | null)[] | null,
+			any,
+			Context
+		> /** The children of this node. */;
+		subjects?: SubjectsResolver<(Subjects_2 | null)[] | null, any, Context>;
+		internal?: InternalResolver<Internal_21 | null, any, Context>;
 	}
 
-	export type IdResolver = Resolver<string>;
-	export type ParentResolver = Resolver<Node | null>;
-	export type ChildrenResolver = Resolver<(Node | null)[] | null>;
-	export type SubjectsResolver = Resolver<(subjects_2 | null)[] | null>;
-	export type InternalResolver = Resolver<internal_23 | null>;
+	export type IdResolver<R = string, Parent = any, Context = any> = Resolver<
+		R,
+		Parent,
+		Context
+	>;
+	export type ParentResolver<
+		R = Node | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type ChildrenResolver<
+		R = (Node | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type SubjectsResolver<
+		R = (Subjects_2 | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type InternalResolver<
+		R = Internal_21 | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
 }
-export namespace subjects_2Resolvers {
-	export interface Resolvers {
-		name?: NameResolver;
-		intensity?: IntensityResolver;
+
+export namespace Subjects_2Resolvers {
+	export interface Resolvers<Context = any> {
+		name?: NameResolver<string | null, any, Context>;
+		intensity?: IntensityResolver<number | null, any, Context>;
 	}
 
-	export type NameResolver = Resolver<string | null>;
-	export type IntensityResolver = Resolver<number | null>;
+	export type NameResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type IntensityResolver<
+		R = number | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
 }
-export namespace internal_23Resolvers {
-	export interface Resolvers {
-		contentDigest?: ContentDigestResolver;
-		type?: TypeResolver;
-		owner?: OwnerResolver;
+
+export namespace Internal_21Resolvers {
+	export interface Resolvers<Context = any> {
+		contentDigest?: ContentDigestResolver<string | null, any, Context>;
+		type?: TypeResolver<string | null, any, Context>;
+		owner?: OwnerResolver<string | null, any, Context>;
 	}
 
-	export type ContentDigestResolver = Resolver<string | null>;
-	export type TypeResolver = Resolver<string | null>;
-	export type OwnerResolver = Resolver<string | null>;
-} /** Node of type PersonalJson */
-export namespace PersonalJsonResolvers {
-	export interface Resolvers {
-		id?: IdResolver /** The id of this node. */;
-		parent?: ParentResolver /** The parent of this node. */;
-		children?: ChildrenResolver /** The children of this node. */;
-		name?: NameResolver;
-		email?: EmailResolver;
-		jobTitle?: JobTitleResolver;
-		social?: SocialResolver;
-		internal?: InternalResolver;
-	}
-
-	export type IdResolver = Resolver<string>;
-	export type ParentResolver = Resolver<Node | null>;
-	export type ChildrenResolver = Resolver<(Node | null)[] | null>;
-	export type NameResolver = Resolver<string | null>;
-	export type EmailResolver = Resolver<string | null>;
-	export type JobTitleResolver = Resolver<string | null>;
-	export type SocialResolver = Resolver<(social_2 | null)[] | null>;
-	export type InternalResolver = Resolver<internal_24 | null>;
+	export type ContentDigestResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type TypeResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type OwnerResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
 }
-export namespace social_2Resolvers {
-	export interface Resolvers {
-		serviceName?: ServiceNameResolver;
-		icon?: IconResolver;
-		url?: UrlResolver;
+/** Node of type OrganizationJson */
+export namespace OrganizationJsonResolvers {
+	export interface Resolvers<Context = any> {
+		id?: IdResolver<string, any, Context> /** The id of this node. */;
+		parent?: ParentResolver<
+			Node | null,
+			any,
+			Context
+		> /** The parent of this node. */;
+		children?: ChildrenResolver<
+			(Node | null)[] | null,
+			any,
+			Context
+		> /** The children of this node. */;
+		name?: NameResolver<string | null, any, Context>;
+		url?: UrlResolver<string | null, any, Context>;
+		logo?: LogoResolver<string | null, any, Context>;
+		telephone?: TelephoneResolver<string | null, any, Context>;
+		internal?: InternalResolver<Internal_22 | null, any, Context>;
+		fields?: FieldsResolver<Fields_4 | null, any, Context>;
 	}
 
-	export type ServiceNameResolver = Resolver<string | null>;
-	export type IconResolver = Resolver<string | null>;
-	export type UrlResolver = Resolver<string | null>;
+	export type IdResolver<R = string, Parent = any, Context = any> = Resolver<
+		R,
+		Parent,
+		Context
+	>;
+	export type ParentResolver<
+		R = Node | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type ChildrenResolver<
+		R = (Node | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type NameResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type UrlResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type LogoResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type TelephoneResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type InternalResolver<
+		R = Internal_22 | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type FieldsResolver<
+		R = Fields_4 | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
 }
-export namespace internal_24Resolvers {
-	export interface Resolvers {
-		contentDigest?: ContentDigestResolver;
-		type?: TypeResolver;
-		owner?: OwnerResolver;
+
+export namespace Internal_22Resolvers {
+	export interface Resolvers<Context = any> {
+		contentDigest?: ContentDigestResolver<string | null, any, Context>;
+		type?: TypeResolver<string | null, any, Context>;
+		owner?: OwnerResolver<string | null, any, Context>;
+		fieldOwners?: FieldOwnersResolver<FieldOwners_4 | null, any, Context>;
 	}
 
-	export type ContentDigestResolver = Resolver<string | null>;
-	export type TypeResolver = Resolver<string | null>;
-	export type OwnerResolver = Resolver<string | null>;
-} /** Node of type SkillsJson */
+	export type ContentDigestResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type TypeResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type OwnerResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type FieldOwnersResolver<
+		R = FieldOwners_4 | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+}
+
+export namespace FieldOwners_4Resolvers {
+	export interface Resolvers<Context = any> {
+		logo_image?: LogoImageResolver<string | null, any, Context>;
+	}
+
+	export type LogoImageResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+}
+
+export namespace Fields_4Resolvers {
+	export interface Resolvers<Context = any> {
+		logo_image?: LogoImageResolver<string | null, any, Context>;
+	}
+
+	export type LogoImageResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+}
+/** Node of type SkillsJson */
 export namespace SkillsJsonResolvers {
-	export interface Resolvers {
-		id?: IdResolver /** The id of this node. */;
-		parent?: ParentResolver /** The parent of this node. */;
-		children?: ChildrenResolver /** The children of this node. */;
-		languages?: LanguagesResolver;
-		technical?: TechnicalResolver;
-		soft?: SoftResolver;
-		internal?: InternalResolver;
+	export interface Resolvers<Context = any> {
+		id?: IdResolver<string, any, Context> /** The id of this node. */;
+		parent?: ParentResolver<
+			Node | null,
+			any,
+			Context
+		> /** The parent of this node. */;
+		children?: ChildrenResolver<
+			(Node | null)[] | null,
+			any,
+			Context
+		> /** The children of this node. */;
+		languages?: LanguagesResolver<
+			(Languages_2 | null)[] | null,
+			any,
+			Context
+		>;
+		technical?: TechnicalResolver<
+			(Technical_2 | null)[] | null,
+			any,
+			Context
+		>;
+		soft?: SoftResolver<(Soft_2 | null)[] | null, any, Context>;
+		internal?: InternalResolver<Internal_23 | null, any, Context>;
 	}
 
-	export type IdResolver = Resolver<string>;
-	export type ParentResolver = Resolver<Node | null>;
-	export type ChildrenResolver = Resolver<(Node | null)[] | null>;
-	export type LanguagesResolver = Resolver<(languages_2 | null)[] | null>;
-	export type TechnicalResolver = Resolver<(technical_2 | null)[] | null>;
-	export type SoftResolver = Resolver<(soft_2 | null)[] | null>;
-	export type InternalResolver = Resolver<internal_25 | null>;
-}
-export namespace languages_2Resolvers {
-	export interface Resolvers {
-		name?: NameResolver;
-		intensity?: IntensityResolver;
-	}
-
-	export type NameResolver = Resolver<string | null>;
-	export type IntensityResolver = Resolver<number | null>;
-}
-export namespace technical_2Resolvers {
-	export interface Resolvers {
-		name?: NameResolver;
-		intensity?: IntensityResolver;
-	}
-
-	export type NameResolver = Resolver<string | null>;
-	export type IntensityResolver = Resolver<number | null>;
-}
-export namespace soft_2Resolvers {
-	export interface Resolvers {
-		name?: NameResolver;
-		intensity?: IntensityResolver;
-	}
-
-	export type NameResolver = Resolver<string | null>;
-	export type IntensityResolver = Resolver<number | null>;
-}
-export namespace internal_25Resolvers {
-	export interface Resolvers {
-		contentDigest?: ContentDigestResolver;
-		type?: TypeResolver;
-		owner?: OwnerResolver;
-	}
-
-	export type ContentDigestResolver = Resolver<string | null>;
-	export type TypeResolver = Resolver<string | null>;
-	export type OwnerResolver = Resolver<string | null>;
-}
-export namespace internal_17Resolvers {
-	export interface Resolvers {
-		contentDigest?: ContentDigestResolver;
-		type?: TypeResolver;
-		mediaType?: MediaTypeResolver;
-		description?: DescriptionResolver;
-		owner?: OwnerResolver;
-	}
-
-	export type ContentDigestResolver = Resolver<string | null>;
-	export type TypeResolver = Resolver<string | null>;
-	export type MediaTypeResolver = Resolver<string | null>;
-	export type DescriptionResolver = Resolver<string | null>;
-	export type OwnerResolver = Resolver<string | null>;
-} /** A connection to a list of items. */
-export namespace fileGroupConnectionConnectionResolvers {
-	export interface Resolvers {
-		pageInfo?: PageInfoResolver /** Information to aid in pagination. */;
-		edges?: EdgesResolver /** A list of edges. */;
-		field?: FieldResolver;
-		fieldValue?: FieldValueResolver;
-		totalCount?: TotalCountResolver;
-	}
-
-	export type PageInfoResolver = Resolver<PageInfo>;
-	export type EdgesResolver = Resolver<
-		(fileGroupConnectionEdge | null)[] | null
+	export type IdResolver<R = string, Parent = any, Context = any> = Resolver<
+		R,
+		Parent,
+		Context
 	>;
-	export type FieldResolver = Resolver<string | null>;
-	export type FieldValueResolver = Resolver<string | null>;
-	export type TotalCountResolver = Resolver<number | null>;
-} /** An edge in a connection. */
-export namespace fileGroupConnectionEdgeResolvers {
-	export interface Resolvers {
-		node?: NodeResolver /** The item at the end of the edge */;
-		next?: NextResolver /** The next edge in the connection */;
-		previous?: PreviousResolver /** The previous edge in the connection */;
+	export type ParentResolver<
+		R = Node | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type ChildrenResolver<
+		R = (Node | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type LanguagesResolver<
+		R = (Languages_2 | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type TechnicalResolver<
+		R = (Technical_2 | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type SoftResolver<
+		R = (Soft_2 | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type InternalResolver<
+		R = Internal_23 | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+}
+
+export namespace Languages_2Resolvers {
+	export interface Resolvers<Context = any> {
+		name?: NameResolver<string | null, any, Context>;
+		intensity?: IntensityResolver<number | null, any, Context>;
 	}
 
-	export type NodeResolver = Resolver<File | null>;
-	export type NextResolver = Resolver<File | null>;
-	export type PreviousResolver = Resolver<File | null>;
-} /** A connection to a list of items. */
+	export type NameResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type IntensityResolver<
+		R = number | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+}
+
+export namespace Technical_2Resolvers {
+	export interface Resolvers<Context = any> {
+		name?: NameResolver<string | null, any, Context>;
+		intensity?: IntensityResolver<number | null, any, Context>;
+	}
+
+	export type NameResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type IntensityResolver<
+		R = number | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+}
+
+export namespace Soft_2Resolvers {
+	export interface Resolvers<Context = any> {
+		name?: NameResolver<string | null, any, Context>;
+		intensity?: IntensityResolver<number | null, any, Context>;
+	}
+
+	export type NameResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type IntensityResolver<
+		R = number | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+}
+
+export namespace Internal_23Resolvers {
+	export interface Resolvers<Context = any> {
+		contentDigest?: ContentDigestResolver<string | null, any, Context>;
+		type?: TypeResolver<string | null, any, Context>;
+		owner?: OwnerResolver<string | null, any, Context>;
+	}
+
+	export type ContentDigestResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type TypeResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type OwnerResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+}
+/** Node of type PersonalJson */
+export namespace PersonalJsonResolvers {
+	export interface Resolvers<Context = any> {
+		id?: IdResolver<string, any, Context> /** The id of this node. */;
+		parent?: ParentResolver<
+			Node | null,
+			any,
+			Context
+		> /** The parent of this node. */;
+		children?: ChildrenResolver<
+			(Node | null)[] | null,
+			any,
+			Context
+		> /** The children of this node. */;
+		name?: NameResolver<string | null, any, Context>;
+		email?: EmailResolver<string | null, any, Context>;
+		jobTitle?: JobTitleResolver<string | null, any, Context>;
+		social?: SocialResolver<(Social_2 | null)[] | null, any, Context>;
+		internal?: InternalResolver<Internal_24 | null, any, Context>;
+	}
+
+	export type IdResolver<R = string, Parent = any, Context = any> = Resolver<
+		R,
+		Parent,
+		Context
+	>;
+	export type ParentResolver<
+		R = Node | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type ChildrenResolver<
+		R = (Node | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type NameResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type EmailResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type JobTitleResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type SocialResolver<
+		R = (Social_2 | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type InternalResolver<
+		R = Internal_24 | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+}
+
+export namespace Social_2Resolvers {
+	export interface Resolvers<Context = any> {
+		serviceName?: ServiceNameResolver<string | null, any, Context>;
+		icon?: IconResolver<string | null, any, Context>;
+		url?: UrlResolver<string | null, any, Context>;
+	}
+
+	export type ServiceNameResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type IconResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type UrlResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+}
+
+export namespace Internal_24Resolvers {
+	export interface Resolvers<Context = any> {
+		contentDigest?: ContentDigestResolver<string | null, any, Context>;
+		type?: TypeResolver<string | null, any, Context>;
+		owner?: OwnerResolver<string | null, any, Context>;
+	}
+
+	export type ContentDigestResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type TypeResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type OwnerResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+}
+/** Node of type CompetencesJson */
+export namespace CompetencesJsonResolvers {
+	export interface Resolvers<Context = any> {
+		id?: IdResolver<string, any, Context> /** The id of this node. */;
+		parent?: ParentResolver<
+			Node | null,
+			any,
+			Context
+		> /** The parent of this node. */;
+		children?: ChildrenResolver<
+			(Node | null)[] | null,
+			any,
+			Context
+		> /** The children of this node. */;
+		name?: NameResolver<string | null, any, Context>;
+		description?: DescriptionResolver<string | null, any, Context>;
+		internal?: InternalResolver<Internal_25 | null, any, Context>;
+	}
+
+	export type IdResolver<R = string, Parent = any, Context = any> = Resolver<
+		R,
+		Parent,
+		Context
+	>;
+	export type ParentResolver<
+		R = Node | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type ChildrenResolver<
+		R = (Node | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type NameResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type DescriptionResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type InternalResolver<
+		R = Internal_25 | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+}
+
+export namespace Internal_25Resolvers {
+	export interface Resolvers<Context = any> {
+		contentDigest?: ContentDigestResolver<string | null, any, Context>;
+		type?: TypeResolver<string | null, any, Context>;
+		owner?: OwnerResolver<string | null, any, Context>;
+	}
+
+	export type ContentDigestResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type TypeResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type OwnerResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+}
+
+export namespace Internal_17Resolvers {
+	export interface Resolvers<Context = any> {
+		contentDigest?: ContentDigestResolver<string | null, any, Context>;
+		type?: TypeResolver<string | null, any, Context>;
+		mediaType?: MediaTypeResolver<string | null, any, Context>;
+		description?: DescriptionResolver<string | null, any, Context>;
+		owner?: OwnerResolver<string | null, any, Context>;
+	}
+
+	export type ContentDigestResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type TypeResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type MediaTypeResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type DescriptionResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type OwnerResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+}
+/** A connection to a list of items. */
+export namespace FileGroupConnectionConnectionResolvers {
+	export interface Resolvers<Context = any> {
+		pageInfo?: PageInfoResolver<
+			PageInfo,
+			any,
+			Context
+		> /** Information to aid in pagination. */;
+		edges?: EdgesResolver<
+			(FileGroupConnectionEdge | null)[] | null,
+			any,
+			Context
+		> /** A list of edges. */;
+		field?: FieldResolver<string | null, any, Context>;
+		fieldValue?: FieldValueResolver<string | null, any, Context>;
+		totalCount?: TotalCountResolver<number | null, any, Context>;
+	}
+
+	export type PageInfoResolver<
+		R = PageInfo,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type EdgesResolver<
+		R = (FileGroupConnectionEdge | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type FieldResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type FieldValueResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type TotalCountResolver<
+		R = number | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+}
+/** An edge in a connection. */
+export namespace FileGroupConnectionEdgeResolvers {
+	export interface Resolvers<Context = any> {
+		node?: NodeResolver<
+			File | null,
+			any,
+			Context
+		> /** The item at the end of the edge */;
+		next?: NextResolver<
+			File | null,
+			any,
+			Context
+		> /** The next edge in the connection */;
+		previous?: PreviousResolver<
+			File | null,
+			any,
+			Context
+		> /** The previous edge in the connection */;
+	}
+
+	export type NodeResolver<
+		R = File | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type NextResolver<
+		R = File | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type PreviousResolver<
+		R = File | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+}
+/** A connection to a list of items. */
 export namespace MarkdownRemarkConnectionResolvers {
-	export interface Resolvers {
-		pageInfo?: PageInfoResolver /** Information to aid in pagination. */;
-		edges?: EdgesResolver /** A list of edges. */;
-		totalCount?: TotalCountResolver;
-		distinct?: DistinctResolver;
-		group?: GroupResolver;
+	export interface Resolvers<Context = any> {
+		pageInfo?: PageInfoResolver<
+			PageInfo,
+			any,
+			Context
+		> /** Information to aid in pagination. */;
+		edges?: EdgesResolver<
+			(MarkdownRemarkEdge | null)[] | null,
+			any,
+			Context
+		> /** A list of edges. */;
+		totalCount?: TotalCountResolver<number | null, any, Context>;
+		distinct?: DistinctResolver<(string | null)[] | null, any, Context>;
+		group?: GroupResolver<
+			(MarkdownRemarkGroupConnectionConnection | null)[] | null,
+			any,
+			Context
+		>;
 	}
 
-	export type PageInfoResolver = Resolver<PageInfo>;
-	export type EdgesResolver = Resolver<(MarkdownRemarkEdge | null)[] | null>;
-	export type TotalCountResolver = Resolver<number | null>;
-	export type DistinctResolver = Resolver<
-		(string | null)[] | null,
-		DistinctArgs
-	>;
+	export type PageInfoResolver<
+		R = PageInfo,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type EdgesResolver<
+		R = (MarkdownRemarkEdge | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type TotalCountResolver<
+		R = number | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type DistinctResolver<
+		R = (string | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context, DistinctArgs>;
 	export interface DistinctArgs {
-		field?: markdownRemarkDistinctEnum | null;
+		field?: MarkdownRemarkDistinctEnum | null;
 	}
 
-	export type GroupResolver = Resolver<
-		(markdownRemarkGroupConnectionConnection | null)[] | null,
-		GroupArgs
-	>;
+	export type GroupResolver<
+		R = (MarkdownRemarkGroupConnectionConnection | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context, GroupArgs>;
 	export interface GroupArgs {
 		skip?: number | null;
 		limit?: number | null;
-		field?: markdownRemarkGroupEnum | null;
+		field?: MarkdownRemarkGroupEnum | null;
 	}
-} /** An edge in a connection. */
+}
+/** An edge in a connection. */
 export namespace MarkdownRemarkEdgeResolvers {
-	export interface Resolvers {
-		node?: NodeResolver /** The item at the end of the edge */;
-		next?: NextResolver /** The next edge in the connection */;
-		previous?: PreviousResolver /** The previous edge in the connection */;
+	export interface Resolvers<Context = any> {
+		node?: NodeResolver<
+			MarkdownRemark | null,
+			any,
+			Context
+		> /** The item at the end of the edge */;
+		next?: NextResolver<
+			MarkdownRemark | null,
+			any,
+			Context
+		> /** The next edge in the connection */;
+		previous?: PreviousResolver<
+			MarkdownRemark | null,
+			any,
+			Context
+		> /** The previous edge in the connection */;
 	}
 
-	export type NodeResolver = Resolver<MarkdownRemark | null>;
-	export type NextResolver = Resolver<MarkdownRemark | null>;
-	export type PreviousResolver = Resolver<MarkdownRemark | null>;
-} /** A connection to a list of items. */
-export namespace markdownRemarkGroupConnectionConnectionResolvers {
-	export interface Resolvers {
-		pageInfo?: PageInfoResolver /** Information to aid in pagination. */;
-		edges?: EdgesResolver /** A list of edges. */;
-		field?: FieldResolver;
-		fieldValue?: FieldValueResolver;
-		totalCount?: TotalCountResolver;
+	export type NodeResolver<
+		R = MarkdownRemark | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type NextResolver<
+		R = MarkdownRemark | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type PreviousResolver<
+		R = MarkdownRemark | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+}
+/** A connection to a list of items. */
+export namespace MarkdownRemarkGroupConnectionConnectionResolvers {
+	export interface Resolvers<Context = any> {
+		pageInfo?: PageInfoResolver<
+			PageInfo,
+			any,
+			Context
+		> /** Information to aid in pagination. */;
+		edges?: EdgesResolver<
+			(MarkdownRemarkGroupConnectionEdge | null)[] | null,
+			any,
+			Context
+		> /** A list of edges. */;
+		field?: FieldResolver<string | null, any, Context>;
+		fieldValue?: FieldValueResolver<string | null, any, Context>;
+		totalCount?: TotalCountResolver<number | null, any, Context>;
 	}
 
-	export type PageInfoResolver = Resolver<PageInfo>;
-	export type EdgesResolver = Resolver<
-		(markdownRemarkGroupConnectionEdge | null)[] | null
-	>;
-	export type FieldResolver = Resolver<string | null>;
-	export type FieldValueResolver = Resolver<string | null>;
-	export type TotalCountResolver = Resolver<number | null>;
-} /** An edge in a connection. */
-export namespace markdownRemarkGroupConnectionEdgeResolvers {
-	export interface Resolvers {
-		node?: NodeResolver /** The item at the end of the edge */;
-		next?: NextResolver /** The next edge in the connection */;
-		previous?: PreviousResolver /** The previous edge in the connection */;
+	export type PageInfoResolver<
+		R = PageInfo,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type EdgesResolver<
+		R = (MarkdownRemarkGroupConnectionEdge | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type FieldResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type FieldValueResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type TotalCountResolver<
+		R = number | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+}
+/** An edge in a connection. */
+export namespace MarkdownRemarkGroupConnectionEdgeResolvers {
+	export interface Resolvers<Context = any> {
+		node?: NodeResolver<
+			MarkdownRemark | null,
+			any,
+			Context
+		> /** The item at the end of the edge */;
+		next?: NextResolver<
+			MarkdownRemark | null,
+			any,
+			Context
+		> /** The next edge in the connection */;
+		previous?: PreviousResolver<
+			MarkdownRemark | null,
+			any,
+			Context
+		> /** The previous edge in the connection */;
 	}
 
-	export type NodeResolver = Resolver<MarkdownRemark | null>;
-	export type NextResolver = Resolver<MarkdownRemark | null>;
-	export type PreviousResolver = Resolver<MarkdownRemark | null>;
-} /** A connection to a list of items. */
+	export type NodeResolver<
+		R = MarkdownRemark | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type NextResolver<
+		R = MarkdownRemark | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type PreviousResolver<
+		R = MarkdownRemark | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+}
+/** A connection to a list of items. */
 export namespace TodoJsonConnectionResolvers {
-	export interface Resolvers {
-		pageInfo?: PageInfoResolver /** Information to aid in pagination. */;
-		edges?: EdgesResolver /** A list of edges. */;
-		totalCount?: TotalCountResolver;
-		distinct?: DistinctResolver;
-		group?: GroupResolver;
+	export interface Resolvers<Context = any> {
+		pageInfo?: PageInfoResolver<
+			PageInfo,
+			any,
+			Context
+		> /** Information to aid in pagination. */;
+		edges?: EdgesResolver<
+			(TodoJsonEdge | null)[] | null,
+			any,
+			Context
+		> /** A list of edges. */;
+		totalCount?: TotalCountResolver<number | null, any, Context>;
+		distinct?: DistinctResolver<(string | null)[] | null, any, Context>;
+		group?: GroupResolver<
+			(TodoJsonGroupConnectionConnection | null)[] | null,
+			any,
+			Context
+		>;
 	}
 
-	export type PageInfoResolver = Resolver<PageInfo>;
-	export type EdgesResolver = Resolver<(TodoJsonEdge | null)[] | null>;
-	export type TotalCountResolver = Resolver<number | null>;
-	export type DistinctResolver = Resolver<
-		(string | null)[] | null,
-		DistinctArgs
-	>;
+	export type PageInfoResolver<
+		R = PageInfo,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type EdgesResolver<
+		R = (TodoJsonEdge | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type TotalCountResolver<
+		R = number | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type DistinctResolver<
+		R = (string | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context, DistinctArgs>;
 	export interface DistinctArgs {
-		field?: todoJsonDistinctEnum | null;
+		field?: TodoJsonDistinctEnum | null;
 	}
 
-	export type GroupResolver = Resolver<
-		(todoJsonGroupConnectionConnection | null)[] | null,
-		GroupArgs
-	>;
+	export type GroupResolver<
+		R = (TodoJsonGroupConnectionConnection | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context, GroupArgs>;
 	export interface GroupArgs {
 		skip?: number | null;
 		limit?: number | null;
-		field?: todoJsonGroupEnum | null;
+		field?: TodoJsonGroupEnum | null;
 	}
-} /** An edge in a connection. */
+}
+/** An edge in a connection. */
 export namespace TodoJsonEdgeResolvers {
-	export interface Resolvers {
-		node?: NodeResolver /** The item at the end of the edge */;
-		next?: NextResolver /** The next edge in the connection */;
-		previous?: PreviousResolver /** The previous edge in the connection */;
+	export interface Resolvers<Context = any> {
+		node?: NodeResolver<
+			TodoJson | null,
+			any,
+			Context
+		> /** The item at the end of the edge */;
+		next?: NextResolver<
+			TodoJson | null,
+			any,
+			Context
+		> /** The next edge in the connection */;
+		previous?: PreviousResolver<
+			TodoJson | null,
+			any,
+			Context
+		> /** The previous edge in the connection */;
 	}
 
-	export type NodeResolver = Resolver<TodoJson | null>;
-	export type NextResolver = Resolver<TodoJson | null>;
-	export type PreviousResolver = Resolver<TodoJson | null>;
-} /** A connection to a list of items. */
-export namespace todoJsonGroupConnectionConnectionResolvers {
-	export interface Resolvers {
-		pageInfo?: PageInfoResolver /** Information to aid in pagination. */;
-		edges?: EdgesResolver /** A list of edges. */;
-		field?: FieldResolver;
-		fieldValue?: FieldValueResolver;
-		totalCount?: TotalCountResolver;
+	export type NodeResolver<
+		R = TodoJson | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type NextResolver<
+		R = TodoJson | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type PreviousResolver<
+		R = TodoJson | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+}
+/** A connection to a list of items. */
+export namespace TodoJsonGroupConnectionConnectionResolvers {
+	export interface Resolvers<Context = any> {
+		pageInfo?: PageInfoResolver<
+			PageInfo,
+			any,
+			Context
+		> /** Information to aid in pagination. */;
+		edges?: EdgesResolver<
+			(TodoJsonGroupConnectionEdge | null)[] | null,
+			any,
+			Context
+		> /** A list of edges. */;
+		field?: FieldResolver<string | null, any, Context>;
+		fieldValue?: FieldValueResolver<string | null, any, Context>;
+		totalCount?: TotalCountResolver<number | null, any, Context>;
 	}
 
-	export type PageInfoResolver = Resolver<PageInfo>;
-	export type EdgesResolver = Resolver<
-		(todoJsonGroupConnectionEdge | null)[] | null
-	>;
-	export type FieldResolver = Resolver<string | null>;
-	export type FieldValueResolver = Resolver<string | null>;
-	export type TotalCountResolver = Resolver<number | null>;
-} /** An edge in a connection. */
-export namespace todoJsonGroupConnectionEdgeResolvers {
-	export interface Resolvers {
-		node?: NodeResolver /** The item at the end of the edge */;
-		next?: NextResolver /** The next edge in the connection */;
-		previous?: PreviousResolver /** The previous edge in the connection */;
+	export type PageInfoResolver<
+		R = PageInfo,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type EdgesResolver<
+		R = (TodoJsonGroupConnectionEdge | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type FieldResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type FieldValueResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type TotalCountResolver<
+		R = number | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+}
+/** An edge in a connection. */
+export namespace TodoJsonGroupConnectionEdgeResolvers {
+	export interface Resolvers<Context = any> {
+		node?: NodeResolver<
+			TodoJson | null,
+			any,
+			Context
+		> /** The item at the end of the edge */;
+		next?: NextResolver<
+			TodoJson | null,
+			any,
+			Context
+		> /** The next edge in the connection */;
+		previous?: PreviousResolver<
+			TodoJson | null,
+			any,
+			Context
+		> /** The previous edge in the connection */;
 	}
 
-	export type NodeResolver = Resolver<TodoJson | null>;
-	export type NextResolver = Resolver<TodoJson | null>;
-	export type PreviousResolver = Resolver<TodoJson | null>;
-} /** A connection to a list of items. */
-export namespace OrganizationJsonConnectionResolvers {
-	export interface Resolvers {
-		pageInfo?: PageInfoResolver /** Information to aid in pagination. */;
-		edges?: EdgesResolver /** A list of edges. */;
-		totalCount?: TotalCountResolver;
-		distinct?: DistinctResolver;
-		group?: GroupResolver;
-	}
-
-	export type PageInfoResolver = Resolver<PageInfo>;
-	export type EdgesResolver = Resolver<
-		(OrganizationJsonEdge | null)[] | null
-	>;
-	export type TotalCountResolver = Resolver<number | null>;
-	export type DistinctResolver = Resolver<
-		(string | null)[] | null,
-		DistinctArgs
-	>;
-	export interface DistinctArgs {
-		field?: organizationJsonDistinctEnum | null;
-	}
-
-	export type GroupResolver = Resolver<
-		(organizationJsonGroupConnectionConnection | null)[] | null,
-		GroupArgs
-	>;
-	export interface GroupArgs {
-		skip?: number | null;
-		limit?: number | null;
-		field?: organizationJsonGroupEnum | null;
-	}
-} /** An edge in a connection. */
-export namespace OrganizationJsonEdgeResolvers {
-	export interface Resolvers {
-		node?: NodeResolver /** The item at the end of the edge */;
-		next?: NextResolver /** The next edge in the connection */;
-		previous?: PreviousResolver /** The previous edge in the connection */;
-	}
-
-	export type NodeResolver = Resolver<OrganizationJson | null>;
-	export type NextResolver = Resolver<OrganizationJson | null>;
-	export type PreviousResolver = Resolver<OrganizationJson | null>;
-} /** A connection to a list of items. */
-export namespace organizationJsonGroupConnectionConnectionResolvers {
-	export interface Resolvers {
-		pageInfo?: PageInfoResolver /** Information to aid in pagination. */;
-		edges?: EdgesResolver /** A list of edges. */;
-		field?: FieldResolver;
-		fieldValue?: FieldValueResolver;
-		totalCount?: TotalCountResolver;
-	}
-
-	export type PageInfoResolver = Resolver<PageInfo>;
-	export type EdgesResolver = Resolver<
-		(organizationJsonGroupConnectionEdge | null)[] | null
-	>;
-	export type FieldResolver = Resolver<string | null>;
-	export type FieldValueResolver = Resolver<string | null>;
-	export type TotalCountResolver = Resolver<number | null>;
-} /** An edge in a connection. */
-export namespace organizationJsonGroupConnectionEdgeResolvers {
-	export interface Resolvers {
-		node?: NodeResolver /** The item at the end of the edge */;
-		next?: NextResolver /** The next edge in the connection */;
-		previous?: PreviousResolver /** The previous edge in the connection */;
-	}
-
-	export type NodeResolver = Resolver<OrganizationJson | null>;
-	export type NextResolver = Resolver<OrganizationJson | null>;
-	export type PreviousResolver = Resolver<OrganizationJson | null>;
-} /** A connection to a list of items. */
-export namespace ExperiencesJsonConnectionResolvers {
-	export interface Resolvers {
-		pageInfo?: PageInfoResolver /** Information to aid in pagination. */;
-		edges?: EdgesResolver /** A list of edges. */;
-		totalCount?: TotalCountResolver;
-		distinct?: DistinctResolver;
-		group?: GroupResolver;
-	}
-
-	export type PageInfoResolver = Resolver<PageInfo>;
-	export type EdgesResolver = Resolver<(ExperiencesJsonEdge | null)[] | null>;
-	export type TotalCountResolver = Resolver<number | null>;
-	export type DistinctResolver = Resolver<
-		(string | null)[] | null,
-		DistinctArgs
-	>;
-	export interface DistinctArgs {
-		field?: experiencesJsonDistinctEnum | null;
-	}
-
-	export type GroupResolver = Resolver<
-		(experiencesJsonGroupConnectionConnection | null)[] | null,
-		GroupArgs
-	>;
-	export interface GroupArgs {
-		skip?: number | null;
-		limit?: number | null;
-		field?: experiencesJsonGroupEnum | null;
-	}
-} /** An edge in a connection. */
-export namespace ExperiencesJsonEdgeResolvers {
-	export interface Resolvers {
-		node?: NodeResolver /** The item at the end of the edge */;
-		next?: NextResolver /** The next edge in the connection */;
-		previous?: PreviousResolver /** The previous edge in the connection */;
-	}
-
-	export type NodeResolver = Resolver<ExperiencesJson | null>;
-	export type NextResolver = Resolver<ExperiencesJson | null>;
-	export type PreviousResolver = Resolver<ExperiencesJson | null>;
-} /** A connection to a list of items. */
-export namespace experiencesJsonGroupConnectionConnectionResolvers {
-	export interface Resolvers {
-		pageInfo?: PageInfoResolver /** Information to aid in pagination. */;
-		edges?: EdgesResolver /** A list of edges. */;
-		field?: FieldResolver;
-		fieldValue?: FieldValueResolver;
-		totalCount?: TotalCountResolver;
-	}
-
-	export type PageInfoResolver = Resolver<PageInfo>;
-	export type EdgesResolver = Resolver<
-		(experiencesJsonGroupConnectionEdge | null)[] | null
-	>;
-	export type FieldResolver = Resolver<string | null>;
-	export type FieldValueResolver = Resolver<string | null>;
-	export type TotalCountResolver = Resolver<number | null>;
-} /** An edge in a connection. */
-export namespace experiencesJsonGroupConnectionEdgeResolvers {
-	export interface Resolvers {
-		node?: NodeResolver /** The item at the end of the edge */;
-		next?: NextResolver /** The next edge in the connection */;
-		previous?: PreviousResolver /** The previous edge in the connection */;
-	}
-
-	export type NodeResolver = Resolver<ExperiencesJson | null>;
-	export type NextResolver = Resolver<ExperiencesJson | null>;
-	export type PreviousResolver = Resolver<ExperiencesJson | null>;
-} /** A connection to a list of items. */
-export namespace CompetencesJsonConnectionResolvers {
-	export interface Resolvers {
-		pageInfo?: PageInfoResolver /** Information to aid in pagination. */;
-		edges?: EdgesResolver /** A list of edges. */;
-		totalCount?: TotalCountResolver;
-		distinct?: DistinctResolver;
-		group?: GroupResolver;
-	}
-
-	export type PageInfoResolver = Resolver<PageInfo>;
-	export type EdgesResolver = Resolver<(CompetencesJsonEdge | null)[] | null>;
-	export type TotalCountResolver = Resolver<number | null>;
-	export type DistinctResolver = Resolver<
-		(string | null)[] | null,
-		DistinctArgs
-	>;
-	export interface DistinctArgs {
-		field?: competencesJsonDistinctEnum | null;
-	}
-
-	export type GroupResolver = Resolver<
-		(competencesJsonGroupConnectionConnection | null)[] | null,
-		GroupArgs
-	>;
-	export interface GroupArgs {
-		skip?: number | null;
-		limit?: number | null;
-		field?: competencesJsonGroupEnum | null;
-	}
-} /** An edge in a connection. */
-export namespace CompetencesJsonEdgeResolvers {
-	export interface Resolvers {
-		node?: NodeResolver /** The item at the end of the edge */;
-		next?: NextResolver /** The next edge in the connection */;
-		previous?: PreviousResolver /** The previous edge in the connection */;
-	}
-
-	export type NodeResolver = Resolver<CompetencesJson | null>;
-	export type NextResolver = Resolver<CompetencesJson | null>;
-	export type PreviousResolver = Resolver<CompetencesJson | null>;
-} /** A connection to a list of items. */
-export namespace competencesJsonGroupConnectionConnectionResolvers {
-	export interface Resolvers {
-		pageInfo?: PageInfoResolver /** Information to aid in pagination. */;
-		edges?: EdgesResolver /** A list of edges. */;
-		field?: FieldResolver;
-		fieldValue?: FieldValueResolver;
-		totalCount?: TotalCountResolver;
-	}
-
-	export type PageInfoResolver = Resolver<PageInfo>;
-	export type EdgesResolver = Resolver<
-		(competencesJsonGroupConnectionEdge | null)[] | null
-	>;
-	export type FieldResolver = Resolver<string | null>;
-	export type FieldValueResolver = Resolver<string | null>;
-	export type TotalCountResolver = Resolver<number | null>;
-} /** An edge in a connection. */
-export namespace competencesJsonGroupConnectionEdgeResolvers {
-	export interface Resolvers {
-		node?: NodeResolver /** The item at the end of the edge */;
-		next?: NextResolver /** The next edge in the connection */;
-		previous?: PreviousResolver /** The previous edge in the connection */;
-	}
-
-	export type NodeResolver = Resolver<CompetencesJson | null>;
-	export type NextResolver = Resolver<CompetencesJson | null>;
-	export type PreviousResolver = Resolver<CompetencesJson | null>;
-} /** A connection to a list of items. */
+	export type NodeResolver<
+		R = TodoJson | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type NextResolver<
+		R = TodoJson | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type PreviousResolver<
+		R = TodoJson | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+}
+/** A connection to a list of items. */
 export namespace InterestsJsonConnectionResolvers {
-	export interface Resolvers {
-		pageInfo?: PageInfoResolver /** Information to aid in pagination. */;
-		edges?: EdgesResolver /** A list of edges. */;
-		totalCount?: TotalCountResolver;
-		distinct?: DistinctResolver;
-		group?: GroupResolver;
+	export interface Resolvers<Context = any> {
+		pageInfo?: PageInfoResolver<
+			PageInfo,
+			any,
+			Context
+		> /** Information to aid in pagination. */;
+		edges?: EdgesResolver<
+			(InterestsJsonEdge | null)[] | null,
+			any,
+			Context
+		> /** A list of edges. */;
+		totalCount?: TotalCountResolver<number | null, any, Context>;
+		distinct?: DistinctResolver<(string | null)[] | null, any, Context>;
+		group?: GroupResolver<
+			(InterestsJsonGroupConnectionConnection | null)[] | null,
+			any,
+			Context
+		>;
 	}
 
-	export type PageInfoResolver = Resolver<PageInfo>;
-	export type EdgesResolver = Resolver<(InterestsJsonEdge | null)[] | null>;
-	export type TotalCountResolver = Resolver<number | null>;
-	export type DistinctResolver = Resolver<
-		(string | null)[] | null,
-		DistinctArgs
-	>;
+	export type PageInfoResolver<
+		R = PageInfo,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type EdgesResolver<
+		R = (InterestsJsonEdge | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type TotalCountResolver<
+		R = number | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type DistinctResolver<
+		R = (string | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context, DistinctArgs>;
 	export interface DistinctArgs {
-		field?: interestsJsonDistinctEnum | null;
+		field?: InterestsJsonDistinctEnum | null;
 	}
 
-	export type GroupResolver = Resolver<
-		(interestsJsonGroupConnectionConnection | null)[] | null,
-		GroupArgs
-	>;
+	export type GroupResolver<
+		R = (InterestsJsonGroupConnectionConnection | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context, GroupArgs>;
 	export interface GroupArgs {
 		skip?: number | null;
 		limit?: number | null;
-		field?: interestsJsonGroupEnum | null;
+		field?: InterestsJsonGroupEnum | null;
 	}
-} /** An edge in a connection. */
+}
+/** An edge in a connection. */
 export namespace InterestsJsonEdgeResolvers {
-	export interface Resolvers {
-		node?: NodeResolver /** The item at the end of the edge */;
-		next?: NextResolver /** The next edge in the connection */;
-		previous?: PreviousResolver /** The previous edge in the connection */;
+	export interface Resolvers<Context = any> {
+		node?: NodeResolver<
+			InterestsJson | null,
+			any,
+			Context
+		> /** The item at the end of the edge */;
+		next?: NextResolver<
+			InterestsJson | null,
+			any,
+			Context
+		> /** The next edge in the connection */;
+		previous?: PreviousResolver<
+			InterestsJson | null,
+			any,
+			Context
+		> /** The previous edge in the connection */;
 	}
 
-	export type NodeResolver = Resolver<InterestsJson | null>;
-	export type NextResolver = Resolver<InterestsJson | null>;
-	export type PreviousResolver = Resolver<InterestsJson | null>;
-} /** A connection to a list of items. */
-export namespace interestsJsonGroupConnectionConnectionResolvers {
-	export interface Resolvers {
-		pageInfo?: PageInfoResolver /** Information to aid in pagination. */;
-		edges?: EdgesResolver /** A list of edges. */;
-		field?: FieldResolver;
-		fieldValue?: FieldValueResolver;
-		totalCount?: TotalCountResolver;
+	export type NodeResolver<
+		R = InterestsJson | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type NextResolver<
+		R = InterestsJson | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type PreviousResolver<
+		R = InterestsJson | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+}
+/** A connection to a list of items. */
+export namespace InterestsJsonGroupConnectionConnectionResolvers {
+	export interface Resolvers<Context = any> {
+		pageInfo?: PageInfoResolver<
+			PageInfo,
+			any,
+			Context
+		> /** Information to aid in pagination. */;
+		edges?: EdgesResolver<
+			(InterestsJsonGroupConnectionEdge | null)[] | null,
+			any,
+			Context
+		> /** A list of edges. */;
+		field?: FieldResolver<string | null, any, Context>;
+		fieldValue?: FieldValueResolver<string | null, any, Context>;
+		totalCount?: TotalCountResolver<number | null, any, Context>;
 	}
 
-	export type PageInfoResolver = Resolver<PageInfo>;
-	export type EdgesResolver = Resolver<
-		(interestsJsonGroupConnectionEdge | null)[] | null
-	>;
-	export type FieldResolver = Resolver<string | null>;
-	export type FieldValueResolver = Resolver<string | null>;
-	export type TotalCountResolver = Resolver<number | null>;
-} /** An edge in a connection. */
-export namespace interestsJsonGroupConnectionEdgeResolvers {
-	export interface Resolvers {
-		node?: NodeResolver /** The item at the end of the edge */;
-		next?: NextResolver /** The next edge in the connection */;
-		previous?: PreviousResolver /** The previous edge in the connection */;
+	export type PageInfoResolver<
+		R = PageInfo,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type EdgesResolver<
+		R = (InterestsJsonGroupConnectionEdge | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type FieldResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type FieldValueResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type TotalCountResolver<
+		R = number | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+}
+/** An edge in a connection. */
+export namespace InterestsJsonGroupConnectionEdgeResolvers {
+	export interface Resolvers<Context = any> {
+		node?: NodeResolver<
+			InterestsJson | null,
+			any,
+			Context
+		> /** The item at the end of the edge */;
+		next?: NextResolver<
+			InterestsJson | null,
+			any,
+			Context
+		> /** The next edge in the connection */;
+		previous?: PreviousResolver<
+			InterestsJson | null,
+			any,
+			Context
+		> /** The previous edge in the connection */;
 	}
 
-	export type NodeResolver = Resolver<InterestsJson | null>;
-	export type NextResolver = Resolver<InterestsJson | null>;
-	export type PreviousResolver = Resolver<InterestsJson | null>;
-} /** A connection to a list of items. */
-export namespace PersonalJsonConnectionResolvers {
-	export interface Resolvers {
-		pageInfo?: PageInfoResolver /** Information to aid in pagination. */;
-		edges?: EdgesResolver /** A list of edges. */;
-		totalCount?: TotalCountResolver;
-		distinct?: DistinctResolver;
-		group?: GroupResolver;
+	export type NodeResolver<
+		R = InterestsJson | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type NextResolver<
+		R = InterestsJson | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type PreviousResolver<
+		R = InterestsJson | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+}
+/** A connection to a list of items. */
+export namespace OrganizationJsonConnectionResolvers {
+	export interface Resolvers<Context = any> {
+		pageInfo?: PageInfoResolver<
+			PageInfo,
+			any,
+			Context
+		> /** Information to aid in pagination. */;
+		edges?: EdgesResolver<
+			(OrganizationJsonEdge | null)[] | null,
+			any,
+			Context
+		> /** A list of edges. */;
+		totalCount?: TotalCountResolver<number | null, any, Context>;
+		distinct?: DistinctResolver<(string | null)[] | null, any, Context>;
+		group?: GroupResolver<
+			(OrganizationJsonGroupConnectionConnection | null)[] | null,
+			any,
+			Context
+		>;
 	}
 
-	export type PageInfoResolver = Resolver<PageInfo>;
-	export type EdgesResolver = Resolver<(PersonalJsonEdge | null)[] | null>;
-	export type TotalCountResolver = Resolver<number | null>;
-	export type DistinctResolver = Resolver<
-		(string | null)[] | null,
-		DistinctArgs
-	>;
+	export type PageInfoResolver<
+		R = PageInfo,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type EdgesResolver<
+		R = (OrganizationJsonEdge | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type TotalCountResolver<
+		R = number | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type DistinctResolver<
+		R = (string | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context, DistinctArgs>;
 	export interface DistinctArgs {
-		field?: personalJsonDistinctEnum | null;
+		field?: OrganizationJsonDistinctEnum | null;
 	}
 
-	export type GroupResolver = Resolver<
-		(personalJsonGroupConnectionConnection | null)[] | null,
-		GroupArgs
-	>;
+	export type GroupResolver<
+		R = (OrganizationJsonGroupConnectionConnection | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context, GroupArgs>;
 	export interface GroupArgs {
 		skip?: number | null;
 		limit?: number | null;
-		field?: personalJsonGroupEnum | null;
+		field?: OrganizationJsonGroupEnum | null;
 	}
-} /** An edge in a connection. */
-export namespace PersonalJsonEdgeResolvers {
-	export interface Resolvers {
-		node?: NodeResolver /** The item at the end of the edge */;
-		next?: NextResolver /** The next edge in the connection */;
-		previous?: PreviousResolver /** The previous edge in the connection */;
-	}
-
-	export type NodeResolver = Resolver<PersonalJson | null>;
-	export type NextResolver = Resolver<PersonalJson | null>;
-	export type PreviousResolver = Resolver<PersonalJson | null>;
-} /** A connection to a list of items. */
-export namespace personalJsonGroupConnectionConnectionResolvers {
-	export interface Resolvers {
-		pageInfo?: PageInfoResolver /** Information to aid in pagination. */;
-		edges?: EdgesResolver /** A list of edges. */;
-		field?: FieldResolver;
-		fieldValue?: FieldValueResolver;
-		totalCount?: TotalCountResolver;
-	}
-
-	export type PageInfoResolver = Resolver<PageInfo>;
-	export type EdgesResolver = Resolver<
-		(personalJsonGroupConnectionEdge | null)[] | null
-	>;
-	export type FieldResolver = Resolver<string | null>;
-	export type FieldValueResolver = Resolver<string | null>;
-	export type TotalCountResolver = Resolver<number | null>;
-} /** An edge in a connection. */
-export namespace personalJsonGroupConnectionEdgeResolvers {
-	export interface Resolvers {
-		node?: NodeResolver /** The item at the end of the edge */;
-		next?: NextResolver /** The next edge in the connection */;
-		previous?: PreviousResolver /** The previous edge in the connection */;
+}
+/** An edge in a connection. */
+export namespace OrganizationJsonEdgeResolvers {
+	export interface Resolvers<Context = any> {
+		node?: NodeResolver<
+			OrganizationJson | null,
+			any,
+			Context
+		> /** The item at the end of the edge */;
+		next?: NextResolver<
+			OrganizationJson | null,
+			any,
+			Context
+		> /** The next edge in the connection */;
+		previous?: PreviousResolver<
+			OrganizationJson | null,
+			any,
+			Context
+		> /** The previous edge in the connection */;
 	}
 
-	export type NodeResolver = Resolver<PersonalJson | null>;
-	export type NextResolver = Resolver<PersonalJson | null>;
-	export type PreviousResolver = Resolver<PersonalJson | null>;
-} /** A connection to a list of items. */
+	export type NodeResolver<
+		R = OrganizationJson | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type NextResolver<
+		R = OrganizationJson | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type PreviousResolver<
+		R = OrganizationJson | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+}
+/** A connection to a list of items. */
+export namespace OrganizationJsonGroupConnectionConnectionResolvers {
+	export interface Resolvers<Context = any> {
+		pageInfo?: PageInfoResolver<
+			PageInfo,
+			any,
+			Context
+		> /** Information to aid in pagination. */;
+		edges?: EdgesResolver<
+			(OrganizationJsonGroupConnectionEdge | null)[] | null,
+			any,
+			Context
+		> /** A list of edges. */;
+		field?: FieldResolver<string | null, any, Context>;
+		fieldValue?: FieldValueResolver<string | null, any, Context>;
+		totalCount?: TotalCountResolver<number | null, any, Context>;
+	}
+
+	export type PageInfoResolver<
+		R = PageInfo,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type EdgesResolver<
+		R = (OrganizationJsonGroupConnectionEdge | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type FieldResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type FieldValueResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type TotalCountResolver<
+		R = number | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+}
+/** An edge in a connection. */
+export namespace OrganizationJsonGroupConnectionEdgeResolvers {
+	export interface Resolvers<Context = any> {
+		node?: NodeResolver<
+			OrganizationJson | null,
+			any,
+			Context
+		> /** The item at the end of the edge */;
+		next?: NextResolver<
+			OrganizationJson | null,
+			any,
+			Context
+		> /** The next edge in the connection */;
+		previous?: PreviousResolver<
+			OrganizationJson | null,
+			any,
+			Context
+		> /** The previous edge in the connection */;
+	}
+
+	export type NodeResolver<
+		R = OrganizationJson | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type NextResolver<
+		R = OrganizationJson | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type PreviousResolver<
+		R = OrganizationJson | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+}
+/** A connection to a list of items. */
 export namespace SkillsJsonConnectionResolvers {
-	export interface Resolvers {
-		pageInfo?: PageInfoResolver /** Information to aid in pagination. */;
-		edges?: EdgesResolver /** A list of edges. */;
-		totalCount?: TotalCountResolver;
-		distinct?: DistinctResolver;
-		group?: GroupResolver;
+	export interface Resolvers<Context = any> {
+		pageInfo?: PageInfoResolver<
+			PageInfo,
+			any,
+			Context
+		> /** Information to aid in pagination. */;
+		edges?: EdgesResolver<
+			(SkillsJsonEdge | null)[] | null,
+			any,
+			Context
+		> /** A list of edges. */;
+		totalCount?: TotalCountResolver<number | null, any, Context>;
+		distinct?: DistinctResolver<(string | null)[] | null, any, Context>;
+		group?: GroupResolver<
+			(SkillsJsonGroupConnectionConnection | null)[] | null,
+			any,
+			Context
+		>;
 	}
 
-	export type PageInfoResolver = Resolver<PageInfo>;
-	export type EdgesResolver = Resolver<(SkillsJsonEdge | null)[] | null>;
-	export type TotalCountResolver = Resolver<number | null>;
-	export type DistinctResolver = Resolver<
-		(string | null)[] | null,
-		DistinctArgs
-	>;
+	export type PageInfoResolver<
+		R = PageInfo,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type EdgesResolver<
+		R = (SkillsJsonEdge | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type TotalCountResolver<
+		R = number | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type DistinctResolver<
+		R = (string | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context, DistinctArgs>;
 	export interface DistinctArgs {
-		field?: skillsJsonDistinctEnum | null;
+		field?: SkillsJsonDistinctEnum | null;
 	}
 
-	export type GroupResolver = Resolver<
-		(skillsJsonGroupConnectionConnection | null)[] | null,
-		GroupArgs
-	>;
+	export type GroupResolver<
+		R = (SkillsJsonGroupConnectionConnection | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context, GroupArgs>;
 	export interface GroupArgs {
 		skip?: number | null;
 		limit?: number | null;
-		field?: skillsJsonGroupEnum | null;
+		field?: SkillsJsonGroupEnum | null;
 	}
-} /** An edge in a connection. */
+}
+/** An edge in a connection. */
 export namespace SkillsJsonEdgeResolvers {
-	export interface Resolvers {
-		node?: NodeResolver /** The item at the end of the edge */;
-		next?: NextResolver /** The next edge in the connection */;
-		previous?: PreviousResolver /** The previous edge in the connection */;
+	export interface Resolvers<Context = any> {
+		node?: NodeResolver<
+			SkillsJson | null,
+			any,
+			Context
+		> /** The item at the end of the edge */;
+		next?: NextResolver<
+			SkillsJson | null,
+			any,
+			Context
+		> /** The next edge in the connection */;
+		previous?: PreviousResolver<
+			SkillsJson | null,
+			any,
+			Context
+		> /** The previous edge in the connection */;
 	}
 
-	export type NodeResolver = Resolver<SkillsJson | null>;
-	export type NextResolver = Resolver<SkillsJson | null>;
-	export type PreviousResolver = Resolver<SkillsJson | null>;
-} /** A connection to a list of items. */
-export namespace skillsJsonGroupConnectionConnectionResolvers {
-	export interface Resolvers {
-		pageInfo?: PageInfoResolver /** Information to aid in pagination. */;
-		edges?: EdgesResolver /** A list of edges. */;
-		field?: FieldResolver;
-		fieldValue?: FieldValueResolver;
-		totalCount?: TotalCountResolver;
+	export type NodeResolver<
+		R = SkillsJson | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type NextResolver<
+		R = SkillsJson | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type PreviousResolver<
+		R = SkillsJson | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+}
+/** A connection to a list of items. */
+export namespace SkillsJsonGroupConnectionConnectionResolvers {
+	export interface Resolvers<Context = any> {
+		pageInfo?: PageInfoResolver<
+			PageInfo,
+			any,
+			Context
+		> /** Information to aid in pagination. */;
+		edges?: EdgesResolver<
+			(SkillsJsonGroupConnectionEdge | null)[] | null,
+			any,
+			Context
+		> /** A list of edges. */;
+		field?: FieldResolver<string | null, any, Context>;
+		fieldValue?: FieldValueResolver<string | null, any, Context>;
+		totalCount?: TotalCountResolver<number | null, any, Context>;
 	}
 
-	export type PageInfoResolver = Resolver<PageInfo>;
-	export type EdgesResolver = Resolver<
-		(skillsJsonGroupConnectionEdge | null)[] | null
-	>;
-	export type FieldResolver = Resolver<string | null>;
-	export type FieldValueResolver = Resolver<string | null>;
-	export type TotalCountResolver = Resolver<number | null>;
-} /** An edge in a connection. */
-export namespace skillsJsonGroupConnectionEdgeResolvers {
-	export interface Resolvers {
-		node?: NodeResolver /** The item at the end of the edge */;
-		next?: NextResolver /** The next edge in the connection */;
-		previous?: PreviousResolver /** The previous edge in the connection */;
+	export type PageInfoResolver<
+		R = PageInfo,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type EdgesResolver<
+		R = (SkillsJsonGroupConnectionEdge | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type FieldResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type FieldValueResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type TotalCountResolver<
+		R = number | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+}
+/** An edge in a connection. */
+export namespace SkillsJsonGroupConnectionEdgeResolvers {
+	export interface Resolvers<Context = any> {
+		node?: NodeResolver<
+			SkillsJson | null,
+			any,
+			Context
+		> /** The item at the end of the edge */;
+		next?: NextResolver<
+			SkillsJson | null,
+			any,
+			Context
+		> /** The next edge in the connection */;
+		previous?: PreviousResolver<
+			SkillsJson | null,
+			any,
+			Context
+		> /** The previous edge in the connection */;
 	}
 
-	export type NodeResolver = Resolver<SkillsJson | null>;
-	export type NextResolver = Resolver<SkillsJson | null>;
-	export type PreviousResolver = Resolver<SkillsJson | null>;
-} /** Node of type Site */
+	export type NodeResolver<
+		R = SkillsJson | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type NextResolver<
+		R = SkillsJson | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type PreviousResolver<
+		R = SkillsJson | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+}
+/** A connection to a list of items. */
+export namespace CompetencesJsonConnectionResolvers {
+	export interface Resolvers<Context = any> {
+		pageInfo?: PageInfoResolver<
+			PageInfo,
+			any,
+			Context
+		> /** Information to aid in pagination. */;
+		edges?: EdgesResolver<
+			(CompetencesJsonEdge | null)[] | null,
+			any,
+			Context
+		> /** A list of edges. */;
+		totalCount?: TotalCountResolver<number | null, any, Context>;
+		distinct?: DistinctResolver<(string | null)[] | null, any, Context>;
+		group?: GroupResolver<
+			(CompetencesJsonGroupConnectionConnection | null)[] | null,
+			any,
+			Context
+		>;
+	}
+
+	export type PageInfoResolver<
+		R = PageInfo,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type EdgesResolver<
+		R = (CompetencesJsonEdge | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type TotalCountResolver<
+		R = number | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type DistinctResolver<
+		R = (string | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context, DistinctArgs>;
+	export interface DistinctArgs {
+		field?: CompetencesJsonDistinctEnum | null;
+	}
+
+	export type GroupResolver<
+		R = (CompetencesJsonGroupConnectionConnection | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context, GroupArgs>;
+	export interface GroupArgs {
+		skip?: number | null;
+		limit?: number | null;
+		field?: CompetencesJsonGroupEnum | null;
+	}
+}
+/** An edge in a connection. */
+export namespace CompetencesJsonEdgeResolvers {
+	export interface Resolvers<Context = any> {
+		node?: NodeResolver<
+			CompetencesJson | null,
+			any,
+			Context
+		> /** The item at the end of the edge */;
+		next?: NextResolver<
+			CompetencesJson | null,
+			any,
+			Context
+		> /** The next edge in the connection */;
+		previous?: PreviousResolver<
+			CompetencesJson | null,
+			any,
+			Context
+		> /** The previous edge in the connection */;
+	}
+
+	export type NodeResolver<
+		R = CompetencesJson | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type NextResolver<
+		R = CompetencesJson | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type PreviousResolver<
+		R = CompetencesJson | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+}
+/** A connection to a list of items. */
+export namespace CompetencesJsonGroupConnectionConnectionResolvers {
+	export interface Resolvers<Context = any> {
+		pageInfo?: PageInfoResolver<
+			PageInfo,
+			any,
+			Context
+		> /** Information to aid in pagination. */;
+		edges?: EdgesResolver<
+			(CompetencesJsonGroupConnectionEdge | null)[] | null,
+			any,
+			Context
+		> /** A list of edges. */;
+		field?: FieldResolver<string | null, any, Context>;
+		fieldValue?: FieldValueResolver<string | null, any, Context>;
+		totalCount?: TotalCountResolver<number | null, any, Context>;
+	}
+
+	export type PageInfoResolver<
+		R = PageInfo,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type EdgesResolver<
+		R = (CompetencesJsonGroupConnectionEdge | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type FieldResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type FieldValueResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type TotalCountResolver<
+		R = number | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+}
+/** An edge in a connection. */
+export namespace CompetencesJsonGroupConnectionEdgeResolvers {
+	export interface Resolvers<Context = any> {
+		node?: NodeResolver<
+			CompetencesJson | null,
+			any,
+			Context
+		> /** The item at the end of the edge */;
+		next?: NextResolver<
+			CompetencesJson | null,
+			any,
+			Context
+		> /** The next edge in the connection */;
+		previous?: PreviousResolver<
+			CompetencesJson | null,
+			any,
+			Context
+		> /** The previous edge in the connection */;
+	}
+
+	export type NodeResolver<
+		R = CompetencesJson | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type NextResolver<
+		R = CompetencesJson | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type PreviousResolver<
+		R = CompetencesJson | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+}
+/** A connection to a list of items. */
+export namespace PersonalJsonConnectionResolvers {
+	export interface Resolvers<Context = any> {
+		pageInfo?: PageInfoResolver<
+			PageInfo,
+			any,
+			Context
+		> /** Information to aid in pagination. */;
+		edges?: EdgesResolver<
+			(PersonalJsonEdge | null)[] | null,
+			any,
+			Context
+		> /** A list of edges. */;
+		totalCount?: TotalCountResolver<number | null, any, Context>;
+		distinct?: DistinctResolver<(string | null)[] | null, any, Context>;
+		group?: GroupResolver<
+			(PersonalJsonGroupConnectionConnection | null)[] | null,
+			any,
+			Context
+		>;
+	}
+
+	export type PageInfoResolver<
+		R = PageInfo,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type EdgesResolver<
+		R = (PersonalJsonEdge | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type TotalCountResolver<
+		R = number | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type DistinctResolver<
+		R = (string | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context, DistinctArgs>;
+	export interface DistinctArgs {
+		field?: PersonalJsonDistinctEnum | null;
+	}
+
+	export type GroupResolver<
+		R = (PersonalJsonGroupConnectionConnection | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context, GroupArgs>;
+	export interface GroupArgs {
+		skip?: number | null;
+		limit?: number | null;
+		field?: PersonalJsonGroupEnum | null;
+	}
+}
+/** An edge in a connection. */
+export namespace PersonalJsonEdgeResolvers {
+	export interface Resolvers<Context = any> {
+		node?: NodeResolver<
+			PersonalJson | null,
+			any,
+			Context
+		> /** The item at the end of the edge */;
+		next?: NextResolver<
+			PersonalJson | null,
+			any,
+			Context
+		> /** The next edge in the connection */;
+		previous?: PreviousResolver<
+			PersonalJson | null,
+			any,
+			Context
+		> /** The previous edge in the connection */;
+	}
+
+	export type NodeResolver<
+		R = PersonalJson | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type NextResolver<
+		R = PersonalJson | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type PreviousResolver<
+		R = PersonalJson | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+}
+/** A connection to a list of items. */
+export namespace PersonalJsonGroupConnectionConnectionResolvers {
+	export interface Resolvers<Context = any> {
+		pageInfo?: PageInfoResolver<
+			PageInfo,
+			any,
+			Context
+		> /** Information to aid in pagination. */;
+		edges?: EdgesResolver<
+			(PersonalJsonGroupConnectionEdge | null)[] | null,
+			any,
+			Context
+		> /** A list of edges. */;
+		field?: FieldResolver<string | null, any, Context>;
+		fieldValue?: FieldValueResolver<string | null, any, Context>;
+		totalCount?: TotalCountResolver<number | null, any, Context>;
+	}
+
+	export type PageInfoResolver<
+		R = PageInfo,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type EdgesResolver<
+		R = (PersonalJsonGroupConnectionEdge | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type FieldResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type FieldValueResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type TotalCountResolver<
+		R = number | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+}
+/** An edge in a connection. */
+export namespace PersonalJsonGroupConnectionEdgeResolvers {
+	export interface Resolvers<Context = any> {
+		node?: NodeResolver<
+			PersonalJson | null,
+			any,
+			Context
+		> /** The item at the end of the edge */;
+		next?: NextResolver<
+			PersonalJson | null,
+			any,
+			Context
+		> /** The next edge in the connection */;
+		previous?: PreviousResolver<
+			PersonalJson | null,
+			any,
+			Context
+		> /** The previous edge in the connection */;
+	}
+
+	export type NodeResolver<
+		R = PersonalJson | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type NextResolver<
+		R = PersonalJson | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type PreviousResolver<
+		R = PersonalJson | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+}
+/** A connection to a list of items. */
+export namespace ExperiencesJsonConnectionResolvers {
+	export interface Resolvers<Context = any> {
+		pageInfo?: PageInfoResolver<
+			PageInfo,
+			any,
+			Context
+		> /** Information to aid in pagination. */;
+		edges?: EdgesResolver<
+			(ExperiencesJsonEdge | null)[] | null,
+			any,
+			Context
+		> /** A list of edges. */;
+		totalCount?: TotalCountResolver<number | null, any, Context>;
+		distinct?: DistinctResolver<(string | null)[] | null, any, Context>;
+		group?: GroupResolver<
+			(ExperiencesJsonGroupConnectionConnection | null)[] | null,
+			any,
+			Context
+		>;
+	}
+
+	export type PageInfoResolver<
+		R = PageInfo,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type EdgesResolver<
+		R = (ExperiencesJsonEdge | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type TotalCountResolver<
+		R = number | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type DistinctResolver<
+		R = (string | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context, DistinctArgs>;
+	export interface DistinctArgs {
+		field?: ExperiencesJsonDistinctEnum | null;
+	}
+
+	export type GroupResolver<
+		R = (ExperiencesJsonGroupConnectionConnection | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context, GroupArgs>;
+	export interface GroupArgs {
+		skip?: number | null;
+		limit?: number | null;
+		field?: ExperiencesJsonGroupEnum | null;
+	}
+}
+/** An edge in a connection. */
+export namespace ExperiencesJsonEdgeResolvers {
+	export interface Resolvers<Context = any> {
+		node?: NodeResolver<
+			ExperiencesJson | null,
+			any,
+			Context
+		> /** The item at the end of the edge */;
+		next?: NextResolver<
+			ExperiencesJson | null,
+			any,
+			Context
+		> /** The next edge in the connection */;
+		previous?: PreviousResolver<
+			ExperiencesJson | null,
+			any,
+			Context
+		> /** The previous edge in the connection */;
+	}
+
+	export type NodeResolver<
+		R = ExperiencesJson | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type NextResolver<
+		R = ExperiencesJson | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type PreviousResolver<
+		R = ExperiencesJson | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+}
+/** A connection to a list of items. */
+export namespace ExperiencesJsonGroupConnectionConnectionResolvers {
+	export interface Resolvers<Context = any> {
+		pageInfo?: PageInfoResolver<
+			PageInfo,
+			any,
+			Context
+		> /** Information to aid in pagination. */;
+		edges?: EdgesResolver<
+			(ExperiencesJsonGroupConnectionEdge | null)[] | null,
+			any,
+			Context
+		> /** A list of edges. */;
+		field?: FieldResolver<string | null, any, Context>;
+		fieldValue?: FieldValueResolver<string | null, any, Context>;
+		totalCount?: TotalCountResolver<number | null, any, Context>;
+	}
+
+	export type PageInfoResolver<
+		R = PageInfo,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type EdgesResolver<
+		R = (ExperiencesJsonGroupConnectionEdge | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type FieldResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type FieldValueResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type TotalCountResolver<
+		R = number | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+}
+/** An edge in a connection. */
+export namespace ExperiencesJsonGroupConnectionEdgeResolvers {
+	export interface Resolvers<Context = any> {
+		node?: NodeResolver<
+			ExperiencesJson | null,
+			any,
+			Context
+		> /** The item at the end of the edge */;
+		next?: NextResolver<
+			ExperiencesJson | null,
+			any,
+			Context
+		> /** The next edge in the connection */;
+		previous?: PreviousResolver<
+			ExperiencesJson | null,
+			any,
+			Context
+		> /** The previous edge in the connection */;
+	}
+
+	export type NodeResolver<
+		R = ExperiencesJson | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type NextResolver<
+		R = ExperiencesJson | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type PreviousResolver<
+		R = ExperiencesJson | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+}
+/** Node of type Site */
 export namespace SiteResolvers {
-	export interface Resolvers {
-		id?: IdResolver /** The id of this node. */;
-		parent?: ParentResolver /** The parent of this node. */;
-		children?: ChildrenResolver /** The children of this node. */;
-		siteMetadata?: SiteMetadataResolver;
-		port?: PortResolver;
-		host?: HostResolver;
-		pathPrefix?: PathPrefixResolver;
-		polyfill?: PolyfillResolver;
-		buildTime?: BuildTimeResolver;
-		internal?: InternalResolver;
+	export interface Resolvers<Context = any> {
+		id?: IdResolver<string, any, Context> /** The id of this node. */;
+		parent?: ParentResolver<
+			Node | null,
+			any,
+			Context
+		> /** The parent of this node. */;
+		children?: ChildrenResolver<
+			(Node | null)[] | null,
+			any,
+			Context
+		> /** The children of this node. */;
+		siteMetadata?: SiteMetadataResolver<
+			SiteMetadata_2 | null,
+			any,
+			Context
+		>;
+		port?: PortResolver<Date | null, any, Context>;
+		host?: HostResolver<string | null, any, Context>;
+		pathPrefix?: PathPrefixResolver<string | null, any, Context>;
+		polyfill?: PolyfillResolver<boolean | null, any, Context>;
+		buildTime?: BuildTimeResolver<Date | null, any, Context>;
+		internal?: InternalResolver<Internal_26 | null, any, Context>;
 	}
 
-	export type IdResolver = Resolver<string>;
-	export type ParentResolver = Resolver<Node | null>;
-	export type ChildrenResolver = Resolver<(Node | null)[] | null>;
-	export type SiteMetadataResolver = Resolver<siteMetadata_2 | null>;
-	export type PortResolver = Resolver<Date | null, PortArgs>;
+	export type IdResolver<R = string, Parent = any, Context = any> = Resolver<
+		R,
+		Parent,
+		Context
+	>;
+	export type ParentResolver<
+		R = Node | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type ChildrenResolver<
+		R = (Node | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type SiteMetadataResolver<
+		R = SiteMetadata_2 | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type PortResolver<
+		R = Date | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context, PortArgs>;
 	export interface PortArgs {
 		formatString?:
 			| string
@@ -13174,10 +18034,26 @@ export namespace SiteResolvers {
 			| null /** Configures the locale Moment.js will use to format the date. */;
 	}
 
-	export type HostResolver = Resolver<string | null>;
-	export type PathPrefixResolver = Resolver<string | null>;
-	export type PolyfillResolver = Resolver<boolean | null>;
-	export type BuildTimeResolver = Resolver<Date | null, BuildTimeArgs>;
+	export type HostResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type PathPrefixResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type PolyfillResolver<
+		R = boolean | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type BuildTimeResolver<
+		R = Date | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context, BuildTimeArgs>;
 	export interface BuildTimeArgs {
 		formatString?:
 			| string
@@ -13193,29 +18069,63 @@ export namespace SiteResolvers {
 			| null /** Configures the locale Moment.js will use to format the date. */;
 	}
 
-	export type InternalResolver = Resolver<internal_26 | null>;
+	export type InternalResolver<
+		R = Internal_26 | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
 }
-export namespace siteMetadata_2Resolvers {
-	export interface Resolvers {
-		title?: TitleResolver;
-		siteUrl?: SiteUrlResolver;
-		sourceUrl?: SourceUrlResolver;
-		description?: DescriptionResolver;
+
+export namespace SiteMetadata_2Resolvers {
+	export interface Resolvers<Context = any> {
+		title?: TitleResolver<string | null, any, Context>;
+		siteUrl?: SiteUrlResolver<string | null, any, Context>;
+		sourceUrl?: SourceUrlResolver<string | null, any, Context>;
+		description?: DescriptionResolver<string | null, any, Context>;
 	}
 
-	export type TitleResolver = Resolver<string | null>;
-	export type SiteUrlResolver = Resolver<string | null>;
-	export type SourceUrlResolver = Resolver<string | null>;
-	export type DescriptionResolver = Resolver<string | null>;
+	export type TitleResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type SiteUrlResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type SourceUrlResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type DescriptionResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
 }
-export namespace internal_26Resolvers {
-	export interface Resolvers {
-		contentDigest?: ContentDigestResolver;
-		type?: TypeResolver;
-		owner?: OwnerResolver;
+
+export namespace Internal_26Resolvers {
+	export interface Resolvers<Context = any> {
+		contentDigest?: ContentDigestResolver<string | null, any, Context>;
+		type?: TypeResolver<string | null, any, Context>;
+		owner?: OwnerResolver<string | null, any, Context>;
 	}
 
-	export type ContentDigestResolver = Resolver<string | null>;
-	export type TypeResolver = Resolver<string | null>;
-	export type OwnerResolver = Resolver<string | null>;
+	export type ContentDigestResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type TypeResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type OwnerResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
 }

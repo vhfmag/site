@@ -1,5 +1,9 @@
 import * as React from "react";
-import { responsiveBreakpoint } from "../utils/consts";
+import {
+	responsiveBreakpoint,
+	backgroundColor,
+	themeColor,
+} from "../utils/consts";
 import styled from "styled-components";
 import {
 	SkillsJson,
@@ -10,6 +14,7 @@ import {
 import { Helmet } from "react-helmet";
 import DefaultLayout from "../components/layout";
 import { graphql } from "gatsby";
+import { isNotNullish } from "../utils/types";
 
 interface IResumePageProps {
 	data: {
@@ -44,7 +49,12 @@ export const pageQuery = graphql`
 				link
 				image
 				period
-				tasks
+				skills
+				projects {
+					name
+					url
+					description
+				}
 				role
 			}
 		}
@@ -121,11 +131,46 @@ const StyledList = styled.div`
 
 const StyledExperienceInfo = styled.div``;
 
+const StyledExperienceProjects = styled.dl`
+	all: unset;
+
+	dt {
+		all: unset;
+	}
+
+	dd {
+		all: unset;
+	}
+
+	dt,
+	dd {
+		display: block;
+	}
+`;
+
+const StyledExperienceSkills = styled.ul`
+	all: unset;
+	display: flex;
+	flex-wrap: wrap;
+	align-items: flex-start;
+	margin: -4pt;
+
+	li {
+		all: unset;
+		margin: 4pt;
+		font-size: 0.8em;
+		padding: 0.25em 0.5em;
+		border-radius: 4pt;
+		color: ${backgroundColor};
+		background-color: ${themeColor};
+	}
+`;
+
 const StyledExperience = styled.div`
 	display: grid;
-	grid-gap: 10px 20px;
+	grid-gap: 20px;
 	grid-template-rows: repeat(3, auto);
-	grid-template-columns: 150px auto;
+	grid-template-columns: 180px auto;
 
 	img {
 		grid-row: 1/3;
@@ -136,7 +181,16 @@ const StyledExperience = styled.div`
 	}
 
 	h4 {
-		margin: 0;
+		all: unset;
+		color: ${themeColor};
+		font-weight: bold;
+		font-size: 1.2em;
+	}
+
+	h5 {
+		all: unset;
+		color: ${themeColor};
+		font-weight: bold;
 	}
 
 	h4,
@@ -144,8 +198,8 @@ const StyledExperience = styled.div`
 		grid-column: 2;
 	}
 
-	ul {
-		grid-column: 1/3;
+	& + & {
+		margin-top: 64pt;
 	}
 `;
 
@@ -209,7 +263,8 @@ export default class ResumePage extends React.Component<IResumePageProps> {
 						link,
 						period,
 						role,
-						tasks,
+						skills: expSkills,
+						projects,
 					} = experience!;
 
 					const [start, end] = period!;
@@ -229,12 +284,44 @@ export default class ResumePage extends React.Component<IResumePageProps> {
 									de {start} até {end || "o presente"}
 								</div>
 							</StyledExperienceInfo>
-							{tasks && (
-								<ul>
-									{tasks.map(task => (
-										<li key={task!}>{task}</li>
-									))}
-								</ul>
+							{projects && (
+								<>
+									<h5>Projetos</h5>
+									<StyledExperienceProjects>
+										{projects
+											.filter(isNotNullish)
+											.map(
+												({
+													name,
+													url,
+													description,
+												}) => (
+													<React.Fragment key={name!}>
+														<dt>
+															<a href={url!}>
+																{name}
+															</a>
+														</dt>
+														{description && (
+															<dd>
+																{description}
+															</dd>
+														)}
+													</React.Fragment>
+												),
+											)}
+									</StyledExperienceProjects>
+								</>
+							)}
+							{expSkills && (
+								<>
+									<h5>Tecnologias e habilidades</h5>
+									<StyledExperienceSkills>
+										{expSkills.map(skill => (
+											<li key={skill!}>{skill}</li>
+										))}
+									</StyledExperienceSkills>
+								</>
 							)}
 						</StyledExperience>
 					);
