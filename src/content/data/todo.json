@@ -4,10 +4,12 @@
 		"tags": ["try-stuff"]
 	},
 	{
+		"done": true,
 		"title": "ter uma instância de <a href='https://wallabag.org/en'>Wallabag</a> e sair do Pocket",
 		"tags": ["foss", "self-hosting"]
 	},
 	{
+		"done": true,
 		"title": "ter uma instância de <a href='https://yunohost.org/#/'>Yunohost</a> com <a href='https://nextcloud.com/'>NextCloud</a> e sair de alguns dos produtos da Google",
 		"tags": ["foss", "self-hosting"]
 	},
@@ -16,6 +18,7 @@
 		"tags": ["foss", "machine-learning", "face-recognition"]
 	},
 	{
+		"done": true,
 		"title": "implementar SRI com <a href='https://www.npmjs.com/package/webpack-subresource-integrity'>esse plugin</a> nesse site"
 	},
 	{
@@ -40,9 +43,6 @@
 		"title": "ter educação financeira"
 	},
 	{
-		"title": "ter tempo / não me sentir tão sobrecarregado"
-	},
-	{
 		"title": "escrever contos solarpunk-like"
 	},
 	{
@@ -63,43 +63,30 @@
 		"title": "contribuir mais com open source"
 	},
 	{
-		"title": "analisar meus dados do <a href='https://getpocket.com'>pocket</a>"
-	},
-	{
 		"title": "become googleless"
-	},
-	{
-		"title": "traduzir <a href='https://staltz.com/a-plan-to-rescue-the-web-from-the-internet.html'>A plan to rescue the Web from the Internet</a> de [André Staltz]"
 	},
 	{
 		"title": "traduzir <a href='http://www.dubberly.com/articles/cybernetics-and-counterculture.html'>How cybernetics connects computing, counterculture, and design</a>"
 	},
 	{
-		"title": "certificar inglês (CAE)"
+		"title": "certificar inglês (CAE)",
+		"tags": ["languages"]
 	},
 	{
-		"title": "certificar francês (DALF)"
+		"title": "certificar francês (DALF)",
+		"tags": ["languages"]
 	},
 	{
-		"title": "aprender alemão"
+		"title": "aprender alemão",
+		"tags": ["languages"]
+	},
+	{
+		"title": "aprender libras",
+		"tags": ["languages"]
 	},
 	{
 		"title": "usar o <a href='https://choo.io/'>choo</a>",
 		"tags": ["try-stuff"]
-	},
-	{
-		"title": "fazer app com <a href='https://http://elm-lang.org/'>elm</a>",
-		"tags": ["try-stuff"]
-	},
-	{
-		"title": "aprender ciência da computação"
-	},
-	{
-		"title": "se formar"
-	},
-	{
-		"title": "trabalhar no <a href='https://github.com/vhfmag/typescript-workshop/'>workshop de typescript</a> com o <a href='https://github.com/workshopper/workshopper-adventure'>workshopper-adventure</a>",
-		"tags": ["open-source"]
 	},
 	{
 		"title": "usar ML para transcrever fala humana em <a href='https://www.internationalphoneticalphabet.org/'>IPA</a>"
@@ -118,10 +105,6 @@
 	{
 		"title": "fazer algo com <a href='https://ipfs.io/'>IPFS</a>",
 		"tags": ["try-stuff"]
-	},
-	{
-		"title": "implementar plugin de Tandem (colaboração P2P com CRDT em editores de texto) do VSCode (<a href='https://github.com/typeintandem/tandem/issues/128'>issue</a>)",
-		"tags": ["open-source"]
 	},
 	{
 		"title": "usar <a href='http://danger.systems/js/'>DangerJS</a> em algum projeto",
