@@ -5,17 +5,13 @@ import { backgroundColor } from "../utils/consts";
 import FlipMove from "react-flip-move";
 import DefaultLayout from "../components/layout";
 import { graphql } from "gatsby";
-
-interface ITodo {
-	title: string;
-	tags: string[] | null;
-}
+import { TodoJson } from "../graphql-types";
 
 interface ITodoPageProps {
 	data: {
 		allTodoJson: {
 			edges: Array<{
-				node: ITodo;
+				node: TodoJson;
 			}>;
 		};
 	};
@@ -25,10 +21,17 @@ const StyledTodoList = styled.div`
 	display: flex;
 	flex-wrap: wrap;
 	position: relative;
+	align-items: flex-start;
+
+	margin: -4pt;
+
+	&:not(:last-child) {
+		margin-bottom: 16pt;
+	}
 `;
 
 const TodoWrapper = styled.div`
-	margin: 2pt;
+	margin: 4pt;
 	padding: 8pt;
 	max-width: 500px;
 	background-color: rgba(255, 255, 255, 0.04);
@@ -42,7 +45,12 @@ const TodoTitle = styled.div`
 
 const TodoTags = styled.div`
 	display: flex;
-	flex-wrap: true;
+	flex-wrap: wrap;
+	margin: -4pt;
+
+	& > * {
+		margin: 4pt;
+	}
 `;
 
 const TodoTag = styled.div`
@@ -66,7 +74,7 @@ const TodoTag = styled.div`
 	}
 `;
 
-interface ITodoItemProps extends ITodo {
+interface ITodoItemProps extends TodoJson {
 	isHighlighted?: boolean;
 	currentTag: string | undefined;
 	toggleCurrentTag(tag: string): void;
@@ -79,19 +87,19 @@ class Todo extends React.PureComponent<ITodoItemProps> {
 		return (
 			<TodoWrapper>
 				<TodoTitle>
-					<p dangerouslySetInnerHTML={{ __html: title }} />
+					<p dangerouslySetInnerHTML={{ __html: title! }} />
 				</TodoTitle>
 				{tags &&
 					tags.length > 0 && (
 						<TodoTags>
 							{tags.map(tag => (
 								<TodoTag
-									key={tag}
+									key={tag!}
 									className={
 										(currentTag === tag && "active") ||
 										undefined
 									}
-									onClick={() => toggleCurrentTag(tag)}
+									onClick={() => toggleCurrentTag(tag!)}
 								>
 									{tag}
 								</TodoTag>
@@ -123,7 +131,7 @@ export default class TodoPage extends React.Component<
 		return this.props.data.allTodoJson.edges.map(({ node }) => node);
 	}
 
-	private isTodoHighlighted = ({ tags }: ITodo): boolean => {
+	private isTodoHighlighted = ({ tags }: TodoJson): boolean => {
 		const { currentTag } = this.state;
 
 		if (currentTag && tags) {
@@ -133,7 +141,7 @@ export default class TodoPage extends React.Component<
 		}
 	};
 
-	private todoComparer = (t1: ITodo, t2: ITodo): number => {
+	private todoComparer = (t1: TodoJson, t2: TodoJson): number => {
 		const [h1, h2] = [t1, t2].map(this.isTodoHighlighted);
 
 		if (h1 === h2) {
@@ -148,16 +156,33 @@ export default class TodoPage extends React.Component<
 	public render() {
 		const { todos } = this;
 
+		const todosDone = todos.filter(todo => todo.done);
+		const todosUndone = todos.filter(todo => !todo.done);
+
 		return (
 			<DefaultLayout>
 				<Helmet title="todo" />
 				<h2>quem sabe um dia</h2>
 				<StyledTodoList>
 					<FlipMove typeName={null}>
-						{todos.sort(this.todoComparer).map(todo => (
+						{todosUndone.sort(this.todoComparer).map(todo => (
 							<Todo
 								{...todo}
-								key={todo.title}
+								key={todo.title!}
+								currentTag={this.state.currentTag}
+								toggleCurrentTag={this.toggleCurrentTag}
+							/>
+						))}
+					</FlipMove>
+				</StyledTodoList>
+				<hr />
+				<h2>feitos!</h2>
+				<StyledTodoList>
+					<FlipMove typeName={null}>
+						{todosDone.sort(this.todoComparer).map(todo => (
+							<Todo
+								{...todo}
+								key={todo.title!}
 								currentTag={this.state.currentTag}
 								toggleCurrentTag={this.toggleCurrentTag}
 							/>
@@ -173,6 +198,7 @@ export const todoFragment = graphql`
 	fragment TodoItem on TodoJson {
 		title
 		tags
+		done
 	}
 	query TodoPage {
 		allTodoJson {
