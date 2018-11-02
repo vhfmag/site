@@ -5,25 +5,23 @@ const { graphql } = require("./src/utils/taggedUtils");
 const { compareEntryEdges } = require("./src/utils/utils");
 
 const serializeFeed = ({ query: { site, allMarkdownRemark } }) => {
-	return allMarkdownRemark.edges
-		.sort((a, b) => compareEntryEdges)
-		.map(edge => {
-			const url = `${site.siteMetadata.siteUrl}/${
-				edge.node.parent.relativeDirectory
-			}/${edge.node.parent.name}`;
+	return allMarkdownRemark.edges.sort(compareEntryEdges).map(edge => {
+		const url = `${site.siteMetadata.siteUrl}/${
+			edge.node.parent.relativeDirectory
+		}/${edge.node.parent.name}`;
 
-			return Object.assign({}, edge.node.frontmatter, {
-				description: edge.node.excerpt,
-				url,
-				category: edge.node.parent.relativeDirectory,
-				guid: url,
-				custom_elements: [
-					{
-						"content:encoded": edge.node.html,
-					},
-				],
-			});
+		return Object.assign({}, edge.node.frontmatter, {
+			description: edge.node.excerpt,
+			url,
+			category: edge.node.parent.relativeDirectory,
+			guid: url,
+			custom_elements: [
+				{
+					"content:encoded": edge.node.html,
+				},
+			],
 		});
+	});
 };
 
 const netlifyCacheControlHeader =

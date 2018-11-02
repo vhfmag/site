@@ -28,7 +28,9 @@ function compareEntryEdges(e1, e2) {
 	if (t1 !== t2) {
 		return t2 - t1;
 	} else {
-		return e1.node.parent.name.localeCompare(e2.node.parent.name);
+		return e1.node.frontmatter.title.localeCompare(
+			e2.node.frontmatter.title,
+		);
 	}
 }
 
