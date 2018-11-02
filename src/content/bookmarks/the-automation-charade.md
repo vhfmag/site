@@ -10,7 +10,7 @@ Mais um texto maravilhoso da maravilhosa revista [Logic](https://logicmag.io/). 
 
 > Hence, I propose making our idea of automation itself obsolescent. A new term, “fauxtomation,” seems far more fitting.
 
-Aqui, Astra Taylor propõe uma nova palavra: *fauxtomation* – uma amálgama de *faux*, falso, e *automation*, automação. Com ela, tenta mostrar como promessas de automação e progresso tecnológico não passam de uma forma de fazer os consumidores - que pagam - fazerem o trabalho que antes funcionários - que recebem - fariam:
+Aqui, Astra Taylor propõe uma nova palavra: *fauxtomation* – uma amálgama de *faux*, falso, e *automation*, automação. Com ela, tenta mostrar como certas promessas de automação e progresso tecnológico não passam de uma forma de fazer os consumidores - que pagam - fazerem o trabalho que antes funcionários - que recebem - fariam:
 
 > “Earlier this month, McDonald’s announced the nationwide roll-out of touchscreen self-service kiosks,” Rensi wrote. “In a video the company released to showcase the new customer experience, it’s striking to see employees who once would have managed a cash register now reduced to monitoring a customer’s choices at an iPad-style kiosk.”
 > 
