@@ -76,7 +76,7 @@ export const EntryHeader: React.SFC<
 	folderName,
 	authors,
 	replyTo,
-	replyToText = "Link do bookmark",
+	replyToText = "Link da recomendação",
 	publishDate,
 	isFullPage,
 	timeToRead,
