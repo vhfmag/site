@@ -60,16 +60,14 @@
 		"typography": "^0.16.17",
 		"typography-breakpoint-constants": "^0.15.10"
 	},
-	"keywords": [
-		"gatsby, typescript"
-	],
+	"keywords": ["gatsby, typescript"],
 	"license": "MIT",
 	"main": "n/a",
 	"scripts": {
 		"build": "gatsby build",
 		"start": "gatsby serve",
 		"develop": "gatsby develop",
-		"generate-types": "gql-gen --schema http://localhost:8000/___graphql --template typescript --out ./src/graphql-types.d.ts",
+		"generate-types": "gql-gen --schema http://localhost:8000/___graphql --template graphql-codegen-typescript-template --out ./src/graphql-types.d.ts",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"devDependencies": {
