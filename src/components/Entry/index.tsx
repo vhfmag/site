@@ -25,10 +25,6 @@ const StyledEntry = styled.article`
 		}
 	}
 
-	hr {
-		background-color: ${themeColor};
-	}
-
 	h1,
 	h2,
 	h3,

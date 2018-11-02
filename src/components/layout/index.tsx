@@ -3,8 +3,8 @@ import { Helmet } from "react-helmet";
 import styled, { createGlobalStyle } from "styled-components";
 import { StaticQuery, graphql } from "gatsby";
 
-import { responsiveBreakpoint } from "../../utils/consts";
-import { social_2 } from "../../graphql-types";
+import { responsiveBreakpoint, themeColor } from "../../utils/consts";
+import { Social_2 } from "../../graphql-types";
 import { Sidebar } from "../Sidebar";
 
 import "./icons";
@@ -76,6 +76,10 @@ const StyledRoot = styled.div`
 		flex-direction: column;
 	}
 
+	hr {
+		background-color: ${themeColor};
+	}
+
 	.emojione {
 		height: 1.25em;
 		margin: 0;
@@ -106,7 +110,7 @@ interface ILayoutData {
 		email: string;
 		name: string;
 		jobTitle: string;
-		social: Array<DeepNonNullable<social_2>>;
+		social: Array<DeepNonNullable<Social_2>>;
 	};
 }
 
