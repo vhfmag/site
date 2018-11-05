@@ -67,7 +67,7 @@ const StyledMain = styled.main`
 
 const StyledRoot = styled.div`
 	--rootPadding: 16pt;
-	--sidebarWidth: 250px;
+	--sidebarWidth: 270px;
 
 	display: flex;
 	align-items: stretch;

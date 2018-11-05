@@ -76,7 +76,7 @@ module.exports = {
 		siteUrl: "https://victormagalhaes.codes",
 		sourceUrl: "https://gitlab.com/vhfmag/vhfmag.gitlab.io/",
 		description:
-			"desenvolvedor em <a href='https://cubos.io/'>cubos.io</a> e entusiasta da web, p2p e privacidade",
+			"desenvolvedor, entusiasta da web, decentralização e privacidade, leitor eclético",
 	},
 	plugins: [
 		"gatsby-plugin-typescript",
