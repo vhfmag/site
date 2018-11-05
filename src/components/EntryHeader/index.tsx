@@ -58,7 +58,7 @@ const StyledTags = styled.ul`
 	a {
 		all: unset;
 		margin: 4pt;
-		padding: 4pt;
+		padding: 2pt 4pt;
 		cursor: pointer;
 		border-radius: 4pt;
 		background-color: ${themeColor};
