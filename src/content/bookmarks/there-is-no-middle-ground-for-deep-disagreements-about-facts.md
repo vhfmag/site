@@ -3,6 +3,7 @@ title: 'There is no middle ground for deep disagreements about facts '
 link: >-
   https://aeon.co/ideas/there-is-no-middle-ground-for-deep-disagreements-about-facts
 date: '2018-11-02'
+tags: ['Erisologia', 'Conhecimento']
 authors:
   - name: Sam Dresser
     url: 'https://aeon.co/users/samdresser'

@@ -3,6 +3,7 @@ title: 'Gardens Need Walls: On Boundaries, Ritual, and Beauty'
 link: >-
   https://www.ribbonfarm.com/2015/03/04/gardens-need-walls-on-boundaries-ritual-and-beauty/
 date: '2018-05-12T00:00:00-03:00'
+tags: ['Sociologia', 'Evolução', 'Sistemas', 'Sociedade']
 authors:
   - name: Sarah Perry
     url: 'https://www.ribbonfarm.com/author/sarahperry/'
@@ -14,4 +15,4 @@ In this essay, the author speaks about human groups, community, cooperation, cre
 
 Traditionally, humans have been gathering in tree-like nested groups of groups of humans, where people had voice in their inner groups and those loosely coupled units could iterate on cultural innovations, imitating what works for them and discarding what don't - but how to have a voice on a always global conversation? In which meaningful ways can we communicate globally if not by _relatable memes_?
 
-As with everything on [Ribbonfarm](https://www.ribbonfarm.com/), that's a great read.
+As usual for [Ribbonfarm](https://www.ribbonfarm.com/) and Sarah Perry, a great read.

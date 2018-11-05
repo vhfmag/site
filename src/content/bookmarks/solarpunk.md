@@ -3,6 +3,7 @@ title: On the political dimensions of solarpunk
 link: >-
   https://medium.com/solarpunks/on-the-political-dimensions-of-solarpunk-c5a7b4bf8df4
 date: '2018-05-12T00:00:00-03:00'
+tags: ['Solarpunk', 'Política', 'Cultura']
 authors:
   - name: Andrew Dana Hudson
     url: 'https://medium.com/@andrewdhudson?source=post_header_lockup'

@@ -2,6 +2,7 @@
 title: Steps Towards a Web without The Internet
 link: 'http://ajroach42.com/steps-towards-a-web-without-the-internet/'
 date: '2018-05-12'
+tags: ['Decentralização', 'Web', 'Surveillance capitalism']
 authors:
   - name: Andrew Roach
     url: 'http://ajroach42.com/'

@@ -2,6 +2,7 @@
 title: Leituras da semana 31 de 2018
 draft: false
 date: '2018-08-05'
+tags: ['Leituras da semana']
 toc: true
 ---
 

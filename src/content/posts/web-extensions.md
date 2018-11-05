@@ -1,6 +1,7 @@
 ---
 title: "Como fazer uma extensão para browser"
 description: "Usando a WebExtensions API para fazer extensões que funcionam em múltiplos browsers"
+tags: ['Técnico']
 date: 2018-02-20
 draft: true
 ---

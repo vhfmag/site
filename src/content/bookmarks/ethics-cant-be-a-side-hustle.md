@@ -2,6 +2,7 @@
 title: Ethics can’t be a side hustle
 link: 'https://deardesignstudent.com/ethics-cant-be-a-side-hustle-b9e78c090aee'
 date: '2018-05-12'
+tags: ['Ética']
 authors:
   - name: Mike Monteiro
     url: 'https://deardesignstudent.com/@monteiro'

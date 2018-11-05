@@ -2,6 +2,7 @@
 title: The Automation Charade
 link: 'https://logicmag.io/05-the-automation-charade/'
 date: '2018-11-02'
+tags: ['História', 'Feminismo', 'Automação', 'Trabalho']
 authors:
   - name: Astra Taylor
     url: 'https://twitter.com/astradisastra'

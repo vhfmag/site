@@ -2,6 +2,7 @@
 title: Software disenchantment (em português!)
 link: 'http://tonsky.me/blog/disenchantment/pt/'
 date: '2018-11-02'
+tags: ['Técnico', 'Engenharia de software']
 authors:
   - name: Nikita Tonsky
     url: 'http://tonsky.me'

@@ -2,6 +2,7 @@
 title: 'Which is more fundamental: processes or things? '
 link: 'https://aeon.co/ideas/which-is-more-fundamental-processes-or-things'
 date: '2018-11-02'
+tags: ['Filosofia', 'Metafísica']
 authors:
   - name: Sam Dresser
     url: 'https://aeon.co/users/samdresser'

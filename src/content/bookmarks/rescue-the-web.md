@@ -2,6 +2,7 @@
 title: A plan to rescue the Web from the Internet
 link: 'https://staltz.com/a-plan-to-rescue-the-web-from-the-internet.html'
 date: '2018-05-12T00:00:00-03:00'
+tags: ['Decentralização', 'Web']
 authors:
   - name: André Staltz
     url: 'https://staltz.com/'

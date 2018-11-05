@@ -2,6 +2,7 @@
 title: "Tecnologia e minorias"
 description: "As perversões nas interações entre sociedade e suas tecnologias"
 date: 2017-09-05
+tags: ['Sociedade', 'Tecnologia']
 type: "post"
 draft: false
 ---

@@ -2,6 +2,7 @@
 title: What Screens Want
 link: 'https://frankchimero.com/writing/what-screens-want/'
 date: '2018-05-12T00:00:00-03:00'
+tags: ['Web como mídia', 'Mídia']
 authors:
   - name: Frank Chimero
     url: 'https://frankchimero.com'

@@ -2,6 +2,7 @@
 title: Survival of the Mediocre Mediocre
 link: 'https://www.ribbonfarm.com/2018/04/24/survival-of-the-mediocre-mediocre/'
 date: '2018-05-12T00:00:00-03:00'
+tags: ['Sistemas', 'Evolução']
 authors:
   - name: Venkatesh Rao
     url: 'https://www.ribbonfarm.com/author/admin/'

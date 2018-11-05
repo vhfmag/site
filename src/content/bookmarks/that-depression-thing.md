@@ -2,6 +2,7 @@
 title: the depression thing
 link: 'https://zachholman.com/posts/the-depression-thing'
 date: '2018-05-12T00:00:00-03:00'
+tags: ['Depressão', 'Web como mídia', 'Psicologia', 'Autobiográfico']
 authors:
   - name: Zach Holman
     url: 'https://zachholman.com/'

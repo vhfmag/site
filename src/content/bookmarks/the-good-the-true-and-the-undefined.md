@@ -2,6 +2,7 @@
 title: 'The Good, the True and the Undefined'
 link: 'https://everythingstudies.com/2017/05/29/the-good-the-true-and-the-undefined/'
 date: '2018-11-02'
+tags: ['Filosofia ocidental', 'Cartesianismo']
 authors:
   - name: John Nerst
     url: 'https://twitter.com/everytstudies'

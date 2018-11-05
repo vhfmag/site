@@ -3,6 +3,7 @@ title: 'Post-work: the radical idea of a world without jobs'
 link: >-
   https://www.theguardian.com/news/2018/jan/19/post-work-the-radical-idea-of-a-world-without-jobs
 date: '2018-05-12T00:00:00-03:00'
+tags: ['Trabalho', 'Sociedade']
 authors:
   - name: Andy Beckett
     url: 'https://www.theguardian.com/profile/andybeckett'

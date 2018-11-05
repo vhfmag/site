@@ -2,6 +2,7 @@
 title: Reality has a surprising amount of detail
 link: 'http://johnsalvatier.org/blog/2017/reality-has-a-surprising-amount-of-detail'
 date: '2018-05-12T00:00:00-03:00'
+tags: ['Sistemas']
 authors:
   - name: John Salvatier
     url: 'http://johnsalvatier.org/blog/'

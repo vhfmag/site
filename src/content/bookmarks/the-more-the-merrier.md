@@ -2,6 +2,7 @@
 title: The More the Merrier
 link: 'https://everythingstudies.com/2018/09/20/the-more-the-merrier/'
 date: '2018-11-02'
+tags: ['Conhecimento', 'Abstrações']
 authors:
   - name: John Nerst
     url: 'https://twitter.com/everytstudies'

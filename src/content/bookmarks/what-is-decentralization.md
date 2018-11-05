@@ -2,6 +2,7 @@
 title: What is Decentralization?
 link: 'https://fieldnotes.resistant.tech/what-is-decentralization/'
 date: '2018-11-02'
+tags: ['Decentralização', 'Sistemas']
 authors:
   - name: Sarah Jamie Lewis
     url: 'https://fieldnotes.resistant.tech/'

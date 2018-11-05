@@ -3,6 +3,7 @@ title: 'Neoliberalism has conned us into fighting climate change as individuals 
 link: >-
   https://www.theguardian.com/environment/true-north/2017/jul/17/neoliberalism-has-conned-us-into-fighting-climate-change-as-individuals
 date: '2018-11-02'
+tags: ['Ecologia', 'Sociedade', 'Sistemas']
 authors:
   - name: Martin Lukacs
     url: 'https://twitter.com/Martin_Lukacs'

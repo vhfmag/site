@@ -2,6 +2,7 @@
 title: Software Is Politics
 link: 'https://deardesignstudent.com/?source=logo-6f1894598ca---11cf651abef3'
 date: '2018-05-12T00:00:00-03:00'
+tags: ['Engenharia de software', 'Sistemas', 'Política']
 authors:
   - name: Richard Pope
     url: 'https://www.fastcodesign.com/user/richard-pope'

@@ -2,6 +2,7 @@
 title: Territory and the Maps
 link: 'https://putanumonit.com/2018/09/23/territory-and-the-maps/'
 date: '2018-11-02'
+tags: ['Filosofia']
 authors:
   - name: Jacob
     url: 'https://putanumonit.com/'

@@ -2,6 +2,7 @@
 title: Leituras da semana 32 de 2018
 draft: false
 date: '2018-08-12'
+tags: ['Leituras da semana']
 toc: true
 ---
 
