@@ -2,7 +2,7 @@
 title: "Sobre a neutralidade de rede"
 description: "O que é, como a internet muda sem ela, porque defendem e porque atacam"
 date: 2017-12-19
-tags: ['Tecnologia', 'Sociedade']
+tags: ["Tecnologia", "Sociedade"]
 draft: false
 ---
 
@@ -17,6 +17,7 @@ Para se entender melhor a situação e poder ter opiniões embasadas sobre o ass
 A definição de neutralidade de rede é ampla e passa pelo atendimento de alguns princípios, e a obrigatoriedade de todos eles pode não ser consenso, a depender de quem a define. Alguns dos principais são: neutralidade da internet, internet aberta, _dumb pipe_, princípio de ponta-a-ponta e limitação de modelagem de tráfego. Em comum, a visão da internet como utilidade pública, equiparando as provedoras de internet às distribuidoras de água e energia; essencial ao exercício da cidadania, conforme o [Marco Civil da Internet][marco-civil], artigo 7º; e até mesmo direito humano básico, conforme a ONU[^internet-human-right].
 
 ### Neutralidade da internet
+
 Princípio segundo o qual toda e qualquer informação que trafega na internet deve ser tratada igualmente, sem qualquer discriminação e na mesma velocidade - na velocidade contratada pelo usuário. Esse é um dos princípios mais básicos. Como rege o [Marco Civil][marco-civil]:
 
 > Art. 9o O responsável pela transmissão, comutação ou roteamento tem o dever de tratar de forma isonômica quaisquer pacotes de dados, sem distinção por conteúdo, origem e destino, serviço, terminal ou aplicação.
@@ -31,8 +32,8 @@ Assim como redes de distribuição de água são feitas de canos que não são c
 
 Para citar exemplos mais concretos de violações desses princípios, pense na Vivo, Oi, Claro ou Tim vendendendo serviços como:
 
-* Coleta de dados de tráfego (ex: Google Analytics e Piwik)
-* Otimização de tráfego (ex: CDNs)
+-   Coleta de dados de tráfego (ex: Google Analytics e Piwik)
+-   Otimização de tráfego (ex: CDNs)
 
 ### Limitação de modelagem de tráfego
 
@@ -69,20 +70,58 @@ Esperamos que este artigo possa te ajudar a entender melhor o que é e porque de
 [marco-civil]: http://www.planalto.gov.br/CCIVIL_03/_Ato2011-2014/2014/Lei/L12965.htm
 [fcc-open-internet-order]: https://en.wikipedia.org/wiki/FCC_Open_Internet_Order_2010
 
-[^case-against-neutrality]: https://www.thebalance.com/the-case-against-net-neutrality-2531680
-[^ajit-pai-order]: https://www.fcc.gov/document/chairman-pai-proposes-restore-internet-freedom
-[^net-neutrality-enforcement]: https://www.ofcom.org.uk/__data/assets/pdf_file/0024/71682/traffic-management-detection.pdf
-[^net-neutrality-dead]: https://www.technologyreview.com/the-download/609784/the-fcc-has-now-done-its-part-to-kill-net-neutrality/
-[^net-neutrality-dead-2]: https://www.nytimes.com/2017/12/14/technology/net-neutrality-repeal-vote.html
+[^case-against-neutrality]:
+
+    https://www.thebalance.com/the-case-against-net-neutrality-2531680
+
+[^ajit-pai-order]:
+
+    https://www.fcc.gov/document/chairman-pai-proposes-restore-internet-freedom
+
+[^net-neutrality-enforcement]:
+
+    https://www.ofcom.org.uk/__data/assets/pdf_file/0024/71682/traffic-management-detection.pdf
+
+[^net-neutrality-dead]:
+
+    https://www.technologyreview.com/the-download/609784/the-fcc-has-now-done-its-part-to-kill-net-neutrality/
+
+[^net-neutrality-dead-2]:
+
+    https://www.nytimes.com/2017/12/14/technology/net-neutrality-repeal-vote.html
+
 [^definicao-neutralidade]: https://en.wikipedia.org/wiki/Net_neutrality
-[^net-neutrality-innovation]: https://www.technologyreview.com/s/609594/the-demise-of-net-neutrality-will-harm-innovation-in-america/
-[^neutrality-delusion]: https://www.technologyreview.com/s/607984/the-neutrality-delusion/
-[^portugal-non-neutral-web]: https://boingboing.net/2017/10/28/warning-taken-as-suggestion.html
+[^net-neutrality-innovation]:
+
+    https://www.technologyreview.com/s/609594/the-demise-of-net-neutrality-will-harm-innovation-in-america/
+
+[^neutrality-delusion]:
+
+    https://www.technologyreview.com/s/607984/the-neutrality-delusion/
+
+[^portugal-non-neutral-web]:
+
+    https://boingboing.net/2017/10/28/warning-taken-as-suggestion.html
+
 [^neutralidade-da-rede]: https://pt.wikipedia.org/wiki/Neutralidade_da_rede
-[^isp-blocks-competition]: https://www.dailydot.com/layer8/net-neutrality-violations-history/
-[^internet-human-right]: https://gizmodo.com/internet-access-is-now-a-basic-human-right-1783081865
-[^fb-bubble-1]: https://www.vanityfair.com/news/2017/11/the-end-of-the-social-era-twitter-facebook-snapchat
-[^fb-bubble-2]: https://www.theatlantic.com/technology/archive/2017/10/what-facebook-did/542502/
-[^fake-comments-scandal]: https://hackernoon.com/more-than-a-million-pro-repeal-net-neutrality-comments-were-likely-faked-e9f0e3ed36a6
+[^isp-blocks-competition]:
+
+    https://www.dailydot.com/layer8/net-neutrality-violations-history/
+
+[^internet-human-right]:
+
+    https://gizmodo.com/internet-access-is-now-a-basic-human-right-1783081865
+
+[^fb-bubble-1]:
+
+    https://www.vanityfair.com/news/2017/11/the-end-of-the-social-era-twitter-facebook-snapchat
+
+[^fb-bubble-2]:
+
+    https://www.theatlantic.com/technology/archive/2017/10/what-facebook-did/542502/
+
+[^fake-comments-scandal]:
+
+    https://hackernoon.com/more-than-a-million-pro-repeal-net-neutrality-comments-were-likely-faked-e9f0e3ed36a6
 
 > Publicado originalmente [no blog da cubos](http://cubos.io/blog/neutralidade-de-rede/)

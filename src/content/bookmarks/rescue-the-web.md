@@ -1,11 +1,11 @@
 ---
 title: A plan to rescue the Web from the Internet
-link: 'https://staltz.com/a-plan-to-rescue-the-web-from-the-internet.html'
-date: '2018-05-12T00:00:00-03:00'
-tags: ['Decentralização', 'Web']
+link: "https://staltz.com/a-plan-to-rescue-the-web-from-the-internet.html"
+date: "2018-05-12T00:00:00-03:00"
+tags: ["Decentralização", "Web"]
 authors:
-  - name: André Staltz
-    url: 'https://staltz.com/'
+    - name: André Staltz
+      url: "https://staltz.com/"
 ---
 
 A bold, opinionated article that shows how different the Web as we know today is from how its creators envisioned it, how something born as a commons was turned into the corporative, for-profit, surveillance-based mesh of tracker-fueled walled gardens that ultimately gave rise to our broken and unhealthy attention economy. Then, the author lists the technical and architectural flaws that originated and support today's web's power structure and how they do so.

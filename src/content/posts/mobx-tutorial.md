@@ -1,7 +1,7 @@
 ---
 title: "Uma introdução a MobX"
 description: "Apresentando os principais conceitos da biblioteca de gerenciamento de estado para aplicativos web"
-tags: ['Técnico', 'MobX']
+tags: ["Técnico", "MobX"]
 date: 2018-04-25
 ---
 
@@ -18,11 +18,11 @@ Observáveis são porções de estado (variáveis, listas, objetos, campos de um
 ```tsx
 import { observable, autorun } from "mobx";
 
-const lista = observable([ 1, 2, 3 ]);
+const lista = observable([1, 2, 3]);
 
 autorun(() => {
-    const soma = lista.reduce((acc, el) => acc + el, 0);
-    console.log(soma);
+	const soma = lista.reduce((acc, el) => acc + el, 0);
+	console.log(soma);
 });
 // printa 6
 
@@ -34,26 +34,28 @@ Eis o que a biblioteca faz, por debaixo dos panos: roda a função passada para 
 
 ```tsx
 class TaskStore {
-    @observable
-    public tasks: Task[];
+	@observable
+	public tasks: Task[];
 
-    constructor() {
-        try {
-            this.tasks = JSON.parse(localStorage.getItem("tasks")) || [];
-        } catch {
-            this.tasks = [];
-        }
+	constructor() {
+		try {
+			this.tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+		} catch {
+			this.tasks = [];
+		}
 
-        autorun(() => localStorage.setItem("tasks", JSON.stringify(this.tasks)));
-    }
+		autorun(() =>
+			localStorage.setItem("tasks", JSON.stringify(this.tasks)),
+		);
+	}
 }
 ```
 
 O exemplo acima ilustra um dos usos mais frequentes de `autorun` na prática: persistir estado. Além disso, usa-se `observable` como um decorador, o que só é possível dentro de classes.
 
-> *Observáveis*: valores a que reações podem se inscrever para ser notificadas de mudanças
+> _Observáveis_: valores a que reações podem se inscrever para ser notificadas de mudanças
 
-> *Reações*: ações a serem executadas sempre que determinados observáveis mudarem
+> _Reações_: ações a serem executadas sempre que determinados observáveis mudarem
 
 ### Valores derivados
 
@@ -63,17 +65,19 @@ Até agora, nós discutimos observáveis e reações. No entanto, reagir a mudan
 import { observable } from "mobx";
 
 interface ExamResult {
-    student: string;
-    grade: number;
+	student: string;
+	grade: number;
 }
 
 class ExamStore {
-    @observable
-    public results: ExamResult[] = [];
+	@observable
+	public results: ExamResult[] = [];
 
-    public averageGrade() {
-        return this.results.reduce((acc, el) => acc + el, 0) / this.results.length;
-    }
+	public averageGrade() {
+		return (
+			this.results.reduce((acc, el) => acc + el, 0) / this.results.length
+		);
+	}
 }
 
 const store = new ExamStore();
@@ -82,7 +86,9 @@ store.results.push({ student: "Clara", grade: 8 });
 store.results.push({ student: "Dygufa", grade: 9 });
 
 console.log(store.averageGrade());
-document.querySelector("avg").innerText = `Média da turma: ${store.averageGrade()}`;
+document.querySelector(
+	"avg",
+).innerText = `Média da turma: ${store.averageGrade()}`;
 ```
 
 Nesse exemplo, `averageGrade` é chamado duas vezes, recalculando a média desnecessariamente. Isso poderia ser otimizado, já que enquanto `results` não mudar, a média permanecerá a mesma (para quem é familiar com Redux, nesse contexto se usariam seletores). E é justamente para isso que serve o `computed`, mais uma função da biblioteca. O exemplo acima ficaria assim, quando reescrito para utilizar `computed`:
@@ -91,18 +97,20 @@ Nesse exemplo, `averageGrade` é chamado duas vezes, recalculando a média desne
 import { observable, computed } from "mobx";
 
 interface ExamResult {
-    student: string;
-    grade: number;
+	student: string;
+	grade: number;
 }
 
 class ExamStore {
-    @observable
-    public results: ExamResult[] = [];
+	@observable
+	public results: ExamResult[] = [];
 
-    @computed
-    public get averageGrade() {
-        return this.results.reduce((acc, el) => acc + el, 0) / this.results.length;
-    }
+	@computed
+	public get averageGrade() {
+		return (
+			this.results.reduce((acc, el) => acc + el, 0) / this.results.length
+		);
+	}
 }
 
 const store = new ExamStore();
@@ -111,7 +119,9 @@ store.results.push({ student: "Clara", grade: 8 });
 store.results.push({ student: "Dygufa", grade: 9 });
 
 console.log(store.averageGrade);
-document.querySelector("avg").innerText = `Média da turma: ${store.averageGrade}`;
+document.querySelector("avg").innerText = `Média da turma: ${
+	store.averageGrade
+}`;
 ```
 
 As mudanças foram:
@@ -122,9 +132,9 @@ As mudanças foram:
 
 Com essas 3 mudanças, o MobX otimiza o cálculo da média, fazendo-o apenas quando necessário. Além disso, `averageGrade` também é um observável, o que permite que reações se inscrevam a ele e reajam a mudanças.
 
-> *Valores derivados*: observáveis derivados a partir de outros observáveis que são automaticamente re-calculados sempre que os observáveis de que depende mudam
+> _Valores derivados_: observáveis derivados a partir de outros observáveis que são automaticamente re-calculados sempre que os observáveis de que depende mudam
 
-> *Dica*: sempre que possível, use `computed` para derivar informações a partir do estado: isso evita que computações custosas se repitam desnecessariamente
+> _Dica_: sempre que possível, use `computed` para derivar informações a partir do estado: isso evita que computações custosas se repitam desnecessariamente
 
 ### Observadores
 
@@ -136,11 +146,11 @@ Observação: O exemplo acima é editável, dá pra abrir ele no [CodeSandbox](h
 
 Nessa aplicação, usamos todos os conceitos que já vimos: observáveis, valores derivados e reações. Usamos também uma biblioteca nova, a `mobx-react`: nela são expostas funções que facilitam a integração de `mobx`, que pode ser usado com qualquer biblioteca de UI, com React. Uma dessas funções é a `observer`, cuja função é criar uma _reação_ que assiste às mudanças em _observáveis_ utilizados dentro de render e, a cada mudança, re-renderizam o componente. Conforme visto no exemplo, é possível usar `observer` tanto como decorador de classe (como em `App`, no exemplo) quanto como higher-order function (com componentes funcionais, como em `Task`).
 
-> *`observer`*: função que torna a re-renderização de um componente uma reação às mudanças de estado
+> _`observer`_: função que torna a re-renderização de um componente uma reação às mudanças de estado
 
 ### Ações
 
-Conforme citado anteriormente, o MobX é extremamente flexível - e a subsequente falta de padrões e boas práticas pode ter consequências negativas. O fato de que o estado é mutável leva com frequência desenvolvedores a mudá-lo diretamente nos componentes que o utilizam, espalhando a lógica de negócio por inúmeros arquivos, gerando dívida técnica e dificultando a manutenção. Outro *anti-pattern* comum é assumir que se está recebendo um `observable` como propriedade e modificá-lo diretamente, possivelmente introduzindo bugs sutis e difíceis de identificar caso a propriedade não seja observável.
+Conforme citado anteriormente, o MobX é extremamente flexível - e a subsequente falta de padrões e boas práticas pode ter consequências negativas. O fato de que o estado é mutável leva com frequência desenvolvedores a mudá-lo diretamente nos componentes que o utilizam, espalhando a lógica de negócio por inúmeros arquivos, gerando dívida técnica e dificultando a manutenção. Outro _anti-pattern_ comum é assumir que se está recebendo um `observable` como propriedade e modificá-lo diretamente, possivelmente introduzindo bugs sutis e difíceis de identificar caso a propriedade não seja observável.
 
 Pensando nisso, o `mobx` introduz o conceito de `action`: funções que modificam o estado. Seu uso traz alguns benefícios:
 
@@ -154,7 +164,7 @@ A seguir, o exemplo anterior, reescrito para usar actions:
 
 Como se pode ver, `action` pode ser usado como decorador e como higher-order function, assim como `observer`. Outra novidade é o `configure({ enforceActions: true })`: essa configuração faz o MobX disparar um erro sempre que um estado for mudado de fora de uma `action`.
 
-> *Dica*: experimente tirar um `@action` e utilizar a UI para ver o erro sendo disparado
+> _Dica_: experimente tirar um `@action` e utilizar a UI para ver o erro sendo disparado
 
 Uma ressalva: `action` não funciona bem com funções assíncronas, devido à forma como elas são transpiladas para ES5:
 
@@ -178,11 +188,11 @@ class AsyncStore {
 
 A solução oficial para esse problema é uma nova função chamada `flow`, sobre a qual se pode ler na [documentação](https://mobx.js.org/best/actions.html). Infelizmente, ela não funciona bem com Typescript e, por isso, não é usada na Cubos.
 
-> *Ação*: Toda função que modifica estado é uma ação. Preferencialmente, todas elas devem ser marcadas como ações usando a função `action`
+> _Ação_: Toda função que modifica estado é uma ação. Preferencialmente, todas elas devem ser marcadas como ações usando a função `action`
 
-> *Modo estrito*: Modo em que mudanças de estado fora de uma action disparam erro (`configure({ enforceActions: true })`)
+> _Modo estrito_: Modo em que mudanças de estado fora de uma action disparam erro (`configure({ enforceActions: true })`)
 
-> *Gotcha*: Ações assíncronas exigem adaptações para não disparar erros no modo estrito após o uso de `await`. Recomenda-se evitar o uso ou substituir `action` por `flow`
+> _Gotcha_: Ações assíncronas exigem adaptações para não disparar erros no modo estrito após o uso de `await`. Recomenda-se evitar o uso ou substituir `action` por `flow`
 
 ### Estado global
 
@@ -194,7 +204,7 @@ O Provider é um componente que recebe um objeto cujas chaves são os nomes das 
 
 Já o `inject` é uma função que recebe uma quantidade qualquer de nomes de store e é responsável por se comunicar com o contexto e disponibilizar as stores como propriedades para o componente em que ela é aplicada.
 
-> *Dica*: o `inject` sempre deve vir antes do `observer`
+> _Dica_: o `inject` sempre deve vir antes do `observer`
 
 Essa arquitetura favorece boas práticas, separando lógica de negócio de lógica de UI, e é uma excelente opção para projetos maiores, em que um estado é utilizado em pontos muito diferentes da aplicação.
 
@@ -245,22 +255,22 @@ store.statusByClient.set("victor", "Done");
 
 Principais prós:
 
-- Boilerplate mínimo ou ausente
-- Re-renderização é automaticamente otimizada de forma granular, só sendo causada por mudanças de observáveis recentemente utilizados no `render` de cada componente
-- Tendo sido feita em Typescript, ela trabalha muito bem com tipos (algo muito difícil de fazer e custoso de manter com Redux)
+-   Boilerplate mínimo ou ausente
+-   Re-renderização é automaticamente otimizada de forma granular, só sendo causada por mudanças de observáveis recentemente utilizados no `render` de cada componente
+-   Tendo sido feita em Typescript, ela trabalha muito bem com tipos (algo muito difícil de fazer e custoso de manter com Redux)
 
 Principais contras:
 
-- Boa parte da funcionalidade da biblioteca é abstraída e invisível para o desenvolvedor (vulgo mágica), o que pode tornar debugar difícil
-- Flexível demais: boas práticas precisam ser ativamente estimuladas pela equipe de desenvolvimento (enquanto em Redux as boas práticas são forçadas pela arquitetura)
+-   Boa parte da funcionalidade da biblioteca é abstraída e invisível para o desenvolvedor (vulgo mágica), o que pode tornar debugar difícil
+-   Flexível demais: boas práticas precisam ser ativamente estimuladas pela equipe de desenvolvimento (enquanto em Redux as boas práticas são forçadas pela arquitetura)
 
 #### Porque não usamos Redux
 
 Os principais problemas que encontramos com Redux foram:
 
-- Muito, muito boilerplate
-- Tipar o payload recebido por reducers das actions era extremamente custoso e difícil de manter (específico para quem usa Typescript, Flow ou similares)
-- Seletores são uma adição, ao invés de estar no cerne do paradigma
+-   Muito, muito boilerplate
+-   Tipar o payload recebido por reducers das actions era extremamente custoso e difícil de manter (específico para quem usa Typescript, Flow ou similares)
+-   Seletores são uma adição, ao invés de estar no cerne do paradigma
 
 ### Conclusão
 

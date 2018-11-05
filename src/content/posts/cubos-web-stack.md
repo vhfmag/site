@@ -1,8 +1,8 @@
 ---
 title: A stack front-end da Cubos
 description: Que linguagens e bibliotecas a Cubos usa em seus web apps?
-tags: ['Técnico']
-date:  2017-10-13
+tags: ["Técnico"]
+date: 2017-10-13
 ---
 
 Começar em JavaScript em 2017 não é fácil. As infinitas possibilidades podem sobrecarregar e parar a gente antes da primeira linha de código.
@@ -11,7 +11,7 @@ Enquanto para começar a desenvolver um aplicativo nativo para iOS há decisões
 
 Por isso, a Cubos decidiu falar um pouco mais sobre a nossa stack front-end, passando principalmente pelas três categorias acima citadas: _flavor_, biblioteca de UI e ferramentas de build.
 
-## Typescript 
+## Typescript
 
 ### JavaScript com tipos
 

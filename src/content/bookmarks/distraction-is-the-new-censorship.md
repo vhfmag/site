@@ -1,11 +1,11 @@
 ---
 title: Distraction is the New Censorship
-link: 'https://longreads.com/2018/01/31/distraction-is-the-new-censorship/'
-date: '2018-05-12'
-tags: ['Attention economy', 'fake news', 'mídias sociais']
+link: "https://longreads.com/2018/01/31/distraction-is-the-new-censorship/"
+date: "2018-05-12"
+tags: ["Attention economy", "fake news", "mídias sociais"]
 authors:
-  - name: Catherice Cusick
-    url: 'https://longreads.com/author/cusickcatherine/'
+    - name: Catherice Cusick
+      url: "https://longreads.com/author/cusickcatherine/"
 ---
 
 <figure src="/images/bookmarks/estatua-bandeirantes-noise-awareness.jpg" title="Monument to the Bandeiras, International Noise Awareness Day in Brazil." attr="(Dario Oliveira/Anadolu Agency/Getty Images)"></figure>

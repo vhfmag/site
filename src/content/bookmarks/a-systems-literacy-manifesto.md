@@ -1,11 +1,11 @@
 ---
 title: A Systems Literacy Manifesto
-link: 'http://www.dubberly.com/articles/a-systems-literacy-manifesto.html'
-date: '2018-05-12'
-tags: ['Sistemas']
+link: "http://www.dubberly.com/articles/a-systems-literacy-manifesto.html"
+date: "2018-05-12"
+tags: ["Sistemas"]
 authors:
-  - name: Hugh Dubberly
-    url: 'http://www.dubberly.com/author/hugh'
+    - name: Hugh Dubberly
+      url: "http://www.dubberly.com/author/hugh"
 ---
 
 > In 1968, West Churchman wrote, “…there is a good deal of turmoil about the manner in which our society is run. …the citizen has begun to suspect that the people who make major decisions that affect our lives don’t know what they are doing.”[1] Churchman was writing at a time of growing concern about war, civil rights, and the environment. Almost fifty years later, these concerns remain, and we have more reason than ever “to suspect that the people who make major decisions that affect our lives don’t know what they are doing.” Examples abound.

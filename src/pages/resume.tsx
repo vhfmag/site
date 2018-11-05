@@ -281,7 +281,13 @@ export default class ResumePage extends React.Component<IResumePageProps> {
 							<StyledExperienceInfo>
 								<div>{role}</div>
 								<div>
-									{end ? <>de {start} até {end}</> : <>desde {start}</>}
+									{end ? (
+										<>
+											de {start} até {end}
+										</>
+									) : (
+										<>desde {start}</>
+									)}
 								</div>
 							</StyledExperienceInfo>
 							{projects && (

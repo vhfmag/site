@@ -2,7 +2,7 @@
 title: "Tecnologia e minorias"
 description: "As perversões nas interações entre sociedade e suas tecnologias"
 date: 2017-09-05
-tags: ['Sociedade', 'Tecnologia']
+tags: ["Sociedade", "Tecnologia"]
 type: "post"
 draft: false
 ---
@@ -37,8 +37,22 @@ Podemos, portanto, dizer que sim, representatividade e diversidade no ambiente d
 
 > Publicado originalmente [no blog da cubos](https://cubos.io/blog/o-preconceito-em-nossas-tecnologias/)
 
-[^1]: [ Oscar 2016: atores negros estão ausentes pelo 2º ano seguido](http://g1.globo.com/pop-arte/oscar/2016/noticia/2016/01/oscar-nao-indica-nenhum-ator-negro-ao-pelo-segundo-ano-consecutivo.html)
-[^2]:  [A beauty contest was judged by AI and the robots didn’t like dark skin](https://www.theguardian.com/technology/2016/sep/08/artificial-intelligence-beauty-contest-doesnt-like-black-people)
-[^3]:  [Microsoft made a chatbot that tweets like a teen](http://www.theverge.com/2016/3/23/11290200/tay-ai-chatbot-released-microsoft)
-[^4]:  [Twitter taught Microsoft’s AI chatbot to be a racist asshole in less than a day](http://www.theverge.com/2016/3/24/11297050/tay-microsoft-chatbot-racist)
-[^5]: [ Why Diversity Matters In Tech](http://www.forbes.com/sites/mnewlands/2016/08/29/why-diversity-matters-in-tech/#2a51d01f3a12)
+[^1]:
+
+    [ Oscar 2016: atores negros estão ausentes pelo 2º ano seguido](http://g1.globo.com/pop-arte/oscar/2016/noticia/2016/01/oscar-nao-indica-nenhum-ator-negro-ao-pelo-segundo-ano-consecutivo.html)
+
+[^2]:
+
+    [A beauty contest was judged by AI and the robots didn’t like dark skin](https://www.theguardian.com/technology/2016/sep/08/artificial-intelligence-beauty-contest-doesnt-like-black-people)
+
+[^3]:
+
+    [Microsoft made a chatbot that tweets like a teen](http://www.theverge.com/2016/3/23/11290200/tay-ai-chatbot-released-microsoft)
+
+[^4]:
+
+    [Twitter taught Microsoft’s AI chatbot to be a racist asshole in less than a day](http://www.theverge.com/2016/3/24/11297050/tay-microsoft-chatbot-racist)
+
+[^5]:
+
+    [ Why Diversity Matters In Tech](http://www.forbes.com/sites/mnewlands/2016/08/29/why-diversity-matters-in-tech/#2a51d01f3a12)

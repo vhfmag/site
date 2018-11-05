@@ -1,7 +1,7 @@
 ---
 title: "Uma breve história do código aberto e do software livre"
 description: "De bem comum a marketing"
-tags: ['Software livre', 'Código aberto']
+tags: ["Software livre", "Código aberto"]
 date: 2018-05-31
 ---
 
@@ -67,10 +67,10 @@ No final da década de 60, a produção de software passou a competir com os dis
 
 Um software pode ser classificado como livre quando atende as seguintes liberdades para os usuários, segundo a FSF:
 
-- A liberdade de executar o programa, para qualquer propósito;
-- A liberdade de estudar o programa, e adaptá-lo para as suas necessidades.
-- A liberdade de redistribuir cópias do programa de modo que você possa ajudar ao seu próximo;
-- A liberdade de modificar o programa e distribuir estas modificações, de modo que toda a comunidade se beneficie.
+-   A liberdade de executar o programa, para qualquer propósito;
+-   A liberdade de estudar o programa, e adaptá-lo para as suas necessidades.
+-   A liberdade de redistribuir cópias do programa de modo que você possa ajudar ao seu próximo;
+-   A liberdade de modificar o programa e distribuir estas modificações, de modo que toda a comunidade se beneficie.
 
 Vale ressaltar que nenhuma dessas condições cita explicitamente que o código deva ser aberto - logo, nem todo software livre precisa ter código aberto. A união dos dois movimentos é referida como [FOSS (Free and open source software)](https://en.wikipedia.org/wiki/Free_and_open-source_software).
 
@@ -90,10 +90,10 @@ A controversa relação de empresas de tecnologia com os movimentos do código a
 
 Essa mudança de paradigma aconteceu por motivos diversos, dentre os quais:
 
-- Ter projetos em código aberto tornou-se bom para a imagem das empresas, assim como ser ecológica e socialmente responsável
-- Código aberto aumenta a qualidade do software: atendendo maiores quantidade e variedade de casos de uso implica em código mais resiliente, testado e bem documentado
-- Desenvolvedores de fora da empresa originária podem corrigir erros ou implementar novas funcionalidades na sua biblioteca **de graça**, em troca de capital social, já que profissionais com contribuições em código aberto são mais valorizados
-- A necessidade de colaborar com desenvolvedores ao redor do mundo fez a comunidade _open source_ desenvolver técnicas de excelência, a ponto destas serem documentadas e aplicadas por empresas nas suas bases de código proprietário (exemplo: [InnerSourceCommons](https://paypal.github.io/InnerSourceCommons/))
+-   Ter projetos em código aberto tornou-se bom para a imagem das empresas, assim como ser ecológica e socialmente responsável
+-   Código aberto aumenta a qualidade do software: atendendo maiores quantidade e variedade de casos de uso implica em código mais resiliente, testado e bem documentado
+-   Desenvolvedores de fora da empresa originária podem corrigir erros ou implementar novas funcionalidades na sua biblioteca **de graça**, em troca de capital social, já que profissionais com contribuições em código aberto são mais valorizados
+-   A necessidade de colaborar com desenvolvedores ao redor do mundo fez a comunidade _open source_ desenvolver técnicas de excelência, a ponto destas serem documentadas e aplicadas por empresas nas suas bases de código proprietário (exemplo: [InnerSourceCommons](https://paypal.github.io/InnerSourceCommons/))
 
 ## Abertura e liberdade, além do código
 
@@ -108,8 +108,22 @@ Se o código aberto e o software livre podem ser tão benéficos (inclusive para
 Ela pode e ela é, seja em plataformas eletrônicas ([Arduino](https://arduino.cc) e [Raspberry PI](https://www.raspberrypi.org/)), em [carros _open-source_](https://en.wikipedia.org/wiki/Open-source_car), em [plantas-baixas abertas para uma civilização](https://www.opensourceecology.org/) (_documentação aberta e pública de como construir a insfraestrutura básica de uma vila_) ou [em](https://openbionics.org/) [muitas](https://wikihouse.cc/) [outras](https://www.opendesk.cc/) [coisas](http://www.poc21.cc/). Mas isso é assunto pro próximo post :wink:.
 
 [^linux-top-computers]: https://itsfoss.com/linux-supercomputers-2017/
-[^software-before-80s]: https://en.wikipedia.org/wiki/History_of_free_and_open-source_software#Free_software_before_the_1980s
-[^software-after-copyright]: https://en.wikipedia.org/wiki/History_of_free_and_open-source_software#Initial_decline_of_free_software
-[^enabling-linux-on-windows]: https://blog.ubuntu.com/2016/04/14/howto-ubuntu-on-windows-2
-[^linux-is-a-cancer]: https://www.theregister.co.uk/2001/06/02/ballmer_linux_is_a_cancer/
-[^microsoft-github-leader]: http://www.businessinsider.com/microsoft-github-open-source-2016-9
+[^software-before-80s]:
+
+    https://en.wikipedia.org/wiki/History_of_free_and_open-source_software#Free_software_before_the_1980s
+
+[^software-after-copyright]:
+
+    https://en.wikipedia.org/wiki/History_of_free_and_open-source_software#Initial_decline_of_free_software
+
+[^enabling-linux-on-windows]:
+
+    https://blog.ubuntu.com/2016/04/14/howto-ubuntu-on-windows-2
+
+[^linux-is-a-cancer]:
+
+    https://www.theregister.co.uk/2001/06/02/ballmer_linux_is_a_cancer/
+
+[^microsoft-github-leader]:
+
+    http://www.businessinsider.com/microsoft-github-open-source-2016-9

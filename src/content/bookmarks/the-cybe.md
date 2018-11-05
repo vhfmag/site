@@ -1,11 +1,11 @@
 ---
 title: The Cybe
-link: 'https://staltz.com/the-cybe.html'
-date: '2018-10-29'
-tags: ['Sistemas', 'Cibernética', 'Abstrações']
+link: "https://staltz.com/the-cybe.html"
+date: "2018-10-29"
+tags: ["Sistemas", "Cibernética", "Abstrações"]
 authors:
-  - name: André Staltz
-    url: 'https://staltz.com/'
+    - name: André Staltz
+      url: "https://staltz.com/"
 ---
 
-Nesse texto, André propõe uma nova abstração no estudo da cibernética, adicionando um substantivo, *Cybe*, que se aplica àquilo que apresenta comportamento cibernético, a sistemas complexos que apresentam *loops de feedback* e comportamentos não-lineares cujo estudo a partir das partes constituintes não apresenta bons resultados, por ignorar os efeitos de rede, às consequências de como as partes evoluem e se relacionam.
+Nesse texto, André propõe uma nova abstração no estudo da cibernética, adicionando um substantivo, _Cybe_, que se aplica àquilo que apresenta comportamento cibernético, a sistemas complexos que apresentam _loops de feedback_ e comportamentos não-lineares cujo estudo a partir das partes constituintes não apresenta bons resultados, por ignorar os efeitos de rede, às consequências de como as partes evoluem e se relacionam.

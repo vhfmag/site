@@ -1,7 +1,7 @@
 ---
 title: "Como fazer uma extensão para browser"
 description: "Usando a WebExtensions API para fazer extensões que funcionam em múltiplos browsers"
-tags: ['Técnico']
+tags: ["Técnico"]
 date: 2018-02-20
 draft: true
 ---
@@ -22,12 +22,12 @@ Vamos botar a mão na massa e aprender na prática como ela funciona?
 
 Para testar o padrão, vamos criar uma extensão que permita inspecionar os metadados de uma página. Para isso, usaremos duas bibliotecas:
 
-- A biblioteca [microformat-shiv](npm.im/microformat-shiv), que é capaz de:
-    - Identificar relações entre documentos que contenham `<link rel="relação" href="link-para-documento">`
-    - Metadados em formato [microformats2](http://microformats.org/)
-- A biblioteca [web-auto-extractor](npm.im/web-auto-extractor), que detecta:
-    - Metadados em tags `<meta>` para padrões como o Open Graph e o Twitter Cards
-    - Metadados RDF (_Rich Data Format_), como o JSON-LD[^json-ld], o RDFa[^rdfa] e o Microdata[^microdata]
+-   A biblioteca [microformat-shiv](npm.im/microformat-shiv), que é capaz de:
+    -   Identificar relações entre documentos que contenham `<link rel="relação" href="link-para-documento">`
+    -   Metadados em formato [microformats2](http://microformats.org/)
+-   A biblioteca [web-auto-extractor](npm.im/web-auto-extractor), que detecta:
+    -   Metadados em tags `<meta>` para padrões como o Open Graph e o Twitter Cards
+    -   Metadados RDF (_Rich Data Format_), como o JSON-LD[^json-ld], o RDFa[^rdfa] e o Microdata[^microdata]
 
 Donos de sites publicam esses metadados por diferentes razões: melhorias de SEO, extração de dados ricos de documentos HTML e a defesa da [IndieWeb](http://indieweb.org/) são alguns dos principais. Esses padrões costumam ser complexos, cheios de vocabulários e especificações. Uma das principais entidades que emitem especificações de RDF é o [schema.org](schema.org), que já definiu quase 600 tipos diferentes de entidades[^schema-org-types] (pessoas, organizações, endereços, eventos, artigos, produtos, etc).
 
@@ -51,10 +51,10 @@ yo web-extension
 
 Você vai precisar responder algumas perguntas simples, como o nome, o _slug_ e a descrição da extensão. Depois, perguntas mais específicas:
 
-- `Would you like to use UI Action?` dá três opções: browser (cria um ícone na barra de tarefas do navegador), page (cria um ícone na caixa de endereço) ou none (não cria ícone algum). Escolheremos browser pra ter acesso à feature de _badge_ no ícone.
-- `Would you like to override a chrome page?` pergunta se queremos sobrescrever alguma página padrão do browser, como a nova aba. Não é o nosso caso.
-- `Would you like more UI Features?` pergunta que features adicionais nós queremos. Para ter acesso à página e ler os metadados, precisaremos de um _content script_ que, como será explicado abaixo, um arquivo javascript que é executado no ambiente da página, podendo fazer leituras e mudanças na DOM.
-- `Would you like to use permissions?` A única permissão de que vamos precisar é a ActiveTab, direito de acesso ao conteúdo da aba atual.
+-   `Would you like to use UI Action?` dá três opções: browser (cria um ícone na barra de tarefas do navegador), page (cria um ícone na caixa de endereço) ou none (não cria ícone algum). Escolheremos browser pra ter acesso à feature de _badge_ no ícone.
+-   `Would you like to override a chrome page?` pergunta se queremos sobrescrever alguma página padrão do browser, como a nova aba. Não é o nosso caso.
+-   `Would you like more UI Features?` pergunta que features adicionais nós queremos. Para ter acesso à página e ler os metadados, precisaremos de um _content script_ que, como será explicado abaixo, um arquivo javascript que é executado no ambiente da página, podendo fazer leituras e mudanças na DOM.
+-   `Would you like to use permissions?` A única permissão de que vamos precisar é a ActiveTab, direito de acesso ao conteúdo da aba atual.
 
 <figure src="/images/posts/webextensions/browseraction.png" title="Barra do Firefox mostrando browser actions à direita e page actions, como o ícone do Pocket, mais ao centro"></figure>
 
