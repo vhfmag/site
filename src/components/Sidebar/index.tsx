@@ -16,13 +16,19 @@ const HeadLink = styled(Link)`
 `;
 
 const StyledNav = styled.nav`
+	padding-top: 1.6785em;
+	padding-bottom: 1.6785em;
+
 	ul {
 		list-style: none;
 		margin: -2pt -4pt;
-		padding-bottom: 1.6785em;
 		display: flex;
 		flex-wrap: wrap;
 		flex-direction: column;
+
+		& ul {
+			padding-left: 1em;
+		}
 
 		@media print, (max-width: ${responsiveBreakpoint}) {
 			flex-direction: row;
@@ -94,12 +100,28 @@ interface ISidebarProps {
 	sourceUrl: string;
 	description: string;
 	social: ISocialInfo[];
-	nav: ISidebarNav[];
+	nav: ISidebarNavLink[];
 }
 
-export interface ISidebarNav {
+export interface ISidebarNavLink {
 	name: string;
 	url: string;
+	subNav?: ISidebarNavLink[];
+}
+
+function NavLinks({ navs }: { navs: ISidebarNavLink[] }) {
+	return (
+		<ul>
+			{navs.map(({ name, url, subNav }) => (
+				<li key={name}>
+					<Link activeClassName={activeLinkClassName} to={url}>
+						{name}
+					</Link>
+					{subNav && <NavLinks navs={subNav} />}
+				</li>
+			))}
+		</ul>
+	);
 }
 
 export const Sidebar: React.SFC<ISidebarProps> = ({
@@ -131,15 +153,7 @@ export const Sidebar: React.SFC<ISidebarProps> = ({
 			className="lead p-note"
 		/>
 		<StyledNav>
-			<ul>
-				{nav.map(({ name, url }) => (
-					<li key={name}>
-						<Link activeClassName={activeLinkClassName} to={url}>
-							{name}
-						</Link>
-					</li>
-				))}
-			</ul>
+			<NavLinks navs={nav} />
 		</StyledNav>
 		<SocialLinks>
 			<li>

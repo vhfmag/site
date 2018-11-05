@@ -221,18 +221,20 @@ export default class DefaultLayout extends React.Component {
 						{
 							name: "feed",
 							url: "/",
-						},
-						{
-							name: "posts",
-							url: "/posts",
-						},
-						{
-							name: "livros",
-							url: "/books",
-						},
-						{
-							name: "recomendações",
-							url: "/bookmarks",
+							subNav: [
+								{
+									name: "posts",
+									url: "/posts",
+								},
+								{
+									name: "livros",
+									url: "/books",
+								},
+								{
+									name: "recomendações",
+									url: "/bookmarks",
+								},
+							],
 						},
 						{
 							name: "todo",
