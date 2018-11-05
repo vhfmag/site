@@ -47,12 +47,12 @@ export interface Query {
 	allFile?: FileConnection | null /** Connection to all File nodes */;
 	allMarkdownRemark?: MarkdownRemarkConnection | null /** Connection to all MarkdownRemark nodes */;
 	allTodoJson?: TodoJsonConnection | null /** Connection to all TodoJson nodes */;
-	allOrganizationJson?: OrganizationJsonConnection | null /** Connection to all OrganizationJson nodes */;
 	allPersonalJson?: PersonalJsonConnection | null /** Connection to all PersonalJson nodes */;
 	allCompetencesJson?: CompetencesJsonConnection | null /** Connection to all CompetencesJson nodes */;
 	allExperiencesJson?: ExperiencesJsonConnection | null /** Connection to all ExperiencesJson nodes */;
-	allInterestsJson?: InterestsJsonConnection | null /** Connection to all InterestsJson nodes */;
 	allSkillsJson?: SkillsJsonConnection | null /** Connection to all SkillsJson nodes */;
+	allInterestsJson?: InterestsJsonConnection | null /** Connection to all InterestsJson nodes */;
+	allOrganizationJson?: OrganizationJsonConnection | null /** Connection to all OrganizationJson nodes */;
 	sitePage?: SitePage | null;
 	sitePlugin?: SitePlugin | null;
 	site?: Site | null;
@@ -60,12 +60,12 @@ export interface Query {
 	file?: File | null;
 	markdownRemark?: MarkdownRemark | null;
 	todoJson?: TodoJson | null;
-	organizationJson?: OrganizationJson | null;
 	personalJson?: PersonalJson | null;
 	competencesJson?: CompetencesJson | null;
 	experiencesJson?: ExperiencesJson | null;
-	interestsJson?: InterestsJson | null;
 	skillsJson?: SkillsJson | null;
+	interestsJson?: InterestsJson | null;
+	organizationJson?: OrganizationJson | null;
 }
 /** A connection to a list of items. */
 export interface SitePageConnection {
@@ -548,14 +548,14 @@ export interface File extends Node {
 	childrenTodoJson?:
 		| (TodoJson | null)[]
 		| null /** The children of this node of type todoJson */;
-	childOrganizationJson?: OrganizationJson | null /** The child of this node of type organizationJson */;
 	childPersonalJson?: PersonalJson | null /** The child of this node of type personalJson */;
 	childrenCompetencesJson?:
 		| (CompetencesJson | null)[]
 		| null /** The children of this node of type competencesJson */;
 	childExperiencesJson?: ExperiencesJson | null /** The child of this node of type experiencesJson */;
-	childInterestsJson?: InterestsJson | null /** The child of this node of type interestsJson */;
 	childSkillsJson?: SkillsJson | null /** The child of this node of type skillsJson */;
+	childInterestsJson?: InterestsJson | null /** The child of this node of type interestsJson */;
+	childOrganizationJson?: OrganizationJson | null /** The child of this node of type organizationJson */;
 	internal?: Internal_17 | null;
 	sourceInstanceName?: string | null;
 	absolutePath?: string | null;
@@ -623,11 +623,12 @@ export interface Frontmatter_3 {
 	title?: string | null;
 	link?: string | null;
 	date?: Date | null;
+	tags?: (string | null)[] | null;
 	authors?: (Authors_3 | null)[] | null;
 	_PARENT?: string | null;
-	description?: string | null;
 	draft?: boolean | null;
 	toc?: boolean | null;
+	description?: string | null;
 	type?: string | null;
 }
 
@@ -662,33 +663,6 @@ export interface Internal_19 {
 	type?: string | null;
 	owner?: string | null;
 }
-/** Node of type OrganizationJson */
-export interface OrganizationJson extends Node {
-	id: string /** The id of this node. */;
-	parent?: Node | null /** The parent of this node. */;
-	children?: (Node | null)[] | null /** The children of this node. */;
-	name?: string | null;
-	url?: string | null;
-	logo?: string | null;
-	telephone?: string | null;
-	internal?: Internal_20 | null;
-	fields?: Fields_3 | null;
-}
-
-export interface Internal_20 {
-	contentDigest?: string | null;
-	type?: string | null;
-	owner?: string | null;
-	fieldOwners?: FieldOwners_3 | null;
-}
-
-export interface FieldOwners_3 {
-	logo_image?: string | null;
-}
-
-export interface Fields_3 {
-	logo_image?: string | null;
-}
 /** Node of type PersonalJson */
 export interface PersonalJson extends Node {
 	id: string /** The id of this node. */;
@@ -698,7 +672,7 @@ export interface PersonalJson extends Node {
 	email?: string | null;
 	jobTitle?: string | null;
 	social?: (Social_2 | null)[] | null;
-	internal?: Internal_21 | null;
+	internal?: Internal_20 | null;
 }
 
 export interface Social_2 {
@@ -707,7 +681,7 @@ export interface Social_2 {
 	url?: string | null;
 }
 
-export interface Internal_21 {
+export interface Internal_20 {
 	contentDigest?: string | null;
 	type?: string | null;
 	owner?: string | null;
@@ -719,10 +693,10 @@ export interface CompetencesJson extends Node {
 	children?: (Node | null)[] | null /** The children of this node. */;
 	name?: string | null;
 	description?: string | null;
-	internal?: Internal_22 | null;
+	internal?: Internal_21 | null;
 }
 
-export interface Internal_22 {
+export interface Internal_21 {
 	contentDigest?: string | null;
 	type?: string | null;
 	owner?: string | null;
@@ -733,8 +707,8 @@ export interface ExperiencesJson extends Node {
 	parent?: Node | null /** The parent of this node. */;
 	children?: (Node | null)[] | null /** The children of this node. */;
 	work?: (Work_2 | null)[] | null;
-	internal?: Internal_23 | null;
-	fields?: Fields_4 | null;
+	internal?: Internal_22 | null;
+	fields?: Fields_3 | null;
 }
 
 export interface Work_2 {
@@ -753,19 +727,50 @@ export interface Projects_2 {
 	description?: string | null;
 }
 
+export interface Internal_22 {
+	contentDigest?: string | null;
+	type?: string | null;
+	owner?: string | null;
+	fieldOwners?: FieldOwners_3 | null;
+}
+
+export interface FieldOwners_3 {
+	image_image?: string | null;
+}
+
+export interface Fields_3 {
+	image_image?: (string | null)[] | null;
+}
+/** Node of type SkillsJson */
+export interface SkillsJson extends Node {
+	id: string /** The id of this node. */;
+	parent?: Node | null /** The parent of this node. */;
+	children?: (Node | null)[] | null /** The children of this node. */;
+	languages?: (Languages_2 | null)[] | null;
+	technical?: (Technical_2 | null)[] | null;
+	soft?: (Soft_2 | null)[] | null;
+	internal?: Internal_23 | null;
+}
+
+export interface Languages_2 {
+	name?: string | null;
+	intensity?: number | null;
+}
+
+export interface Technical_2 {
+	name?: string | null;
+	intensity?: number | null;
+}
+
+export interface Soft_2 {
+	name?: string | null;
+	intensity?: number | null;
+}
+
 export interface Internal_23 {
 	contentDigest?: string | null;
 	type?: string | null;
 	owner?: string | null;
-	fieldOwners?: FieldOwners_4 | null;
-}
-
-export interface FieldOwners_4 {
-	image_image?: string | null;
-}
-
-export interface Fields_4 {
-	image_image?: (string | null)[] | null;
 }
 /** Node of type InterestsJson */
 export interface InterestsJson extends Node {
@@ -786,36 +791,32 @@ export interface Internal_24 {
 	type?: string | null;
 	owner?: string | null;
 }
-/** Node of type SkillsJson */
-export interface SkillsJson extends Node {
+/** Node of type OrganizationJson */
+export interface OrganizationJson extends Node {
 	id: string /** The id of this node. */;
 	parent?: Node | null /** The parent of this node. */;
 	children?: (Node | null)[] | null /** The children of this node. */;
-	languages?: (Languages_2 | null)[] | null;
-	technical?: (Technical_2 | null)[] | null;
-	soft?: (Soft_2 | null)[] | null;
+	name?: string | null;
+	url?: string | null;
+	logo?: string | null;
+	telephone?: string | null;
 	internal?: Internal_25 | null;
-}
-
-export interface Languages_2 {
-	name?: string | null;
-	intensity?: number | null;
-}
-
-export interface Technical_2 {
-	name?: string | null;
-	intensity?: number | null;
-}
-
-export interface Soft_2 {
-	name?: string | null;
-	intensity?: number | null;
+	fields?: Fields_4 | null;
 }
 
 export interface Internal_25 {
 	contentDigest?: string | null;
 	type?: string | null;
 	owner?: string | null;
+	fieldOwners?: FieldOwners_4 | null;
+}
+
+export interface FieldOwners_4 {
+	logo_image?: string | null;
+}
+
+export interface Fields_4 {
+	logo_image?: string | null;
 }
 
 export interface Internal_17 {
@@ -898,36 +899,6 @@ export interface TodoJsonGroupConnectionEdge {
 	node?: TodoJson | null /** The item at the end of the edge */;
 	next?: TodoJson | null /** The next edge in the connection */;
 	previous?: TodoJson | null /** The previous edge in the connection */;
-}
-/** A connection to a list of items. */
-export interface OrganizationJsonConnection {
-	pageInfo: PageInfo /** Information to aid in pagination. */;
-	edges?: (OrganizationJsonEdge | null)[] | null /** A list of edges. */;
-	totalCount?: number | null;
-	distinct?: (string | null)[] | null;
-	group?: (OrganizationJsonGroupConnectionConnection | null)[] | null;
-}
-/** An edge in a connection. */
-export interface OrganizationJsonEdge {
-	node?: OrganizationJson | null /** The item at the end of the edge */;
-	next?: OrganizationJson | null /** The next edge in the connection */;
-	previous?: OrganizationJson | null /** The previous edge in the connection */;
-}
-/** A connection to a list of items. */
-export interface OrganizationJsonGroupConnectionConnection {
-	pageInfo: PageInfo /** Information to aid in pagination. */;
-	edges?:
-		| (OrganizationJsonGroupConnectionEdge | null)[]
-		| null /** A list of edges. */;
-	field?: string | null;
-	fieldValue?: string | null;
-	totalCount?: number | null;
-}
-/** An edge in a connection. */
-export interface OrganizationJsonGroupConnectionEdge {
-	node?: OrganizationJson | null /** The item at the end of the edge */;
-	next?: OrganizationJson | null /** The next edge in the connection */;
-	previous?: OrganizationJson | null /** The previous edge in the connection */;
 }
 /** A connection to a list of items. */
 export interface PersonalJsonConnection {
@@ -1020,6 +991,36 @@ export interface ExperiencesJsonGroupConnectionEdge {
 	previous?: ExperiencesJson | null /** The previous edge in the connection */;
 }
 /** A connection to a list of items. */
+export interface SkillsJsonConnection {
+	pageInfo: PageInfo /** Information to aid in pagination. */;
+	edges?: (SkillsJsonEdge | null)[] | null /** A list of edges. */;
+	totalCount?: number | null;
+	distinct?: (string | null)[] | null;
+	group?: (SkillsJsonGroupConnectionConnection | null)[] | null;
+}
+/** An edge in a connection. */
+export interface SkillsJsonEdge {
+	node?: SkillsJson | null /** The item at the end of the edge */;
+	next?: SkillsJson | null /** The next edge in the connection */;
+	previous?: SkillsJson | null /** The previous edge in the connection */;
+}
+/** A connection to a list of items. */
+export interface SkillsJsonGroupConnectionConnection {
+	pageInfo: PageInfo /** Information to aid in pagination. */;
+	edges?:
+		| (SkillsJsonGroupConnectionEdge | null)[]
+		| null /** A list of edges. */;
+	field?: string | null;
+	fieldValue?: string | null;
+	totalCount?: number | null;
+}
+/** An edge in a connection. */
+export interface SkillsJsonGroupConnectionEdge {
+	node?: SkillsJson | null /** The item at the end of the edge */;
+	next?: SkillsJson | null /** The next edge in the connection */;
+	previous?: SkillsJson | null /** The previous edge in the connection */;
+}
+/** A connection to a list of items. */
 export interface InterestsJsonConnection {
 	pageInfo: PageInfo /** Information to aid in pagination. */;
 	edges?: (InterestsJsonEdge | null)[] | null /** A list of edges. */;
@@ -1050,34 +1051,34 @@ export interface InterestsJsonGroupConnectionEdge {
 	previous?: InterestsJson | null /** The previous edge in the connection */;
 }
 /** A connection to a list of items. */
-export interface SkillsJsonConnection {
+export interface OrganizationJsonConnection {
 	pageInfo: PageInfo /** Information to aid in pagination. */;
-	edges?: (SkillsJsonEdge | null)[] | null /** A list of edges. */;
+	edges?: (OrganizationJsonEdge | null)[] | null /** A list of edges. */;
 	totalCount?: number | null;
 	distinct?: (string | null)[] | null;
-	group?: (SkillsJsonGroupConnectionConnection | null)[] | null;
+	group?: (OrganizationJsonGroupConnectionConnection | null)[] | null;
 }
 /** An edge in a connection. */
-export interface SkillsJsonEdge {
-	node?: SkillsJson | null /** The item at the end of the edge */;
-	next?: SkillsJson | null /** The next edge in the connection */;
-	previous?: SkillsJson | null /** The previous edge in the connection */;
+export interface OrganizationJsonEdge {
+	node?: OrganizationJson | null /** The item at the end of the edge */;
+	next?: OrganizationJson | null /** The next edge in the connection */;
+	previous?: OrganizationJson | null /** The previous edge in the connection */;
 }
 /** A connection to a list of items. */
-export interface SkillsJsonGroupConnectionConnection {
+export interface OrganizationJsonGroupConnectionConnection {
 	pageInfo: PageInfo /** Information to aid in pagination. */;
 	edges?:
-		| (SkillsJsonGroupConnectionEdge | null)[]
+		| (OrganizationJsonGroupConnectionEdge | null)[]
 		| null /** A list of edges. */;
 	field?: string | null;
 	fieldValue?: string | null;
 	totalCount?: number | null;
 }
 /** An edge in a connection. */
-export interface SkillsJsonGroupConnectionEdge {
-	node?: SkillsJson | null /** The item at the end of the edge */;
-	next?: SkillsJson | null /** The next edge in the connection */;
-	previous?: SkillsJson | null /** The previous edge in the connection */;
+export interface OrganizationJsonGroupConnectionEdge {
+	node?: OrganizationJson | null /** The item at the end of the edge */;
+	next?: OrganizationJson | null /** The next edge in the connection */;
+	previous?: OrganizationJson | null /** The previous edge in the connection */;
 }
 /** Node of type Site */
 export interface Site extends Node {
@@ -4743,11 +4744,12 @@ export interface MarkdownRemarkConnectionFrontmatterInputObject_2 {
 	title?: MarkdownRemarkConnectionFrontmatterTitleQueryString_2 | null;
 	link?: MarkdownRemarkConnectionFrontmatterLinkQueryString_2 | null;
 	date?: MarkdownRemarkConnectionFrontmatterDateQueryString_2 | null;
+	tags?: MarkdownRemarkConnectionFrontmatterTagsQueryList_2 | null;
 	authors?: MarkdownRemarkConnectionFrontmatterAuthorsQueryList_2 | null;
 	_PARENT?: MarkdownRemarkConnectionFrontmatterParentQueryString_2 | null;
-	description?: MarkdownRemarkConnectionFrontmatterDescriptionQueryString_2 | null;
 	draft?: MarkdownRemarkConnectionFrontmatterDraftQueryBoolean_2 | null;
 	toc?: MarkdownRemarkConnectionFrontmatterTocQueryBoolean_2 | null;
+	description?: MarkdownRemarkConnectionFrontmatterDescriptionQueryString_2 | null;
 	type?: MarkdownRemarkConnectionFrontmatterTypeQueryString_2 | null;
 }
 
@@ -4770,6 +4772,15 @@ export interface MarkdownRemarkConnectionFrontmatterLinkQueryString_2 {
 }
 
 export interface MarkdownRemarkConnectionFrontmatterDateQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface MarkdownRemarkConnectionFrontmatterTagsQueryList_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
@@ -4814,15 +4825,6 @@ export interface MarkdownRemarkConnectionFrontmatterParentQueryString_2 {
 	nin?: (string | null)[] | null;
 }
 
-export interface MarkdownRemarkConnectionFrontmatterDescriptionQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
 export interface MarkdownRemarkConnectionFrontmatterDraftQueryBoolean_2 {
 	eq?: boolean | null;
 	ne?: boolean | null;
@@ -4835,6 +4837,15 @@ export interface MarkdownRemarkConnectionFrontmatterTocQueryBoolean_2 {
 	ne?: boolean | null;
 	in?: (boolean | null)[] | null;
 	nin?: (boolean | null)[] | null;
+}
+
+export interface MarkdownRemarkConnectionFrontmatterDescriptionQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
 export interface MarkdownRemarkConnectionFrontmatterTypeQueryString_2 {
@@ -5048,126 +5059,6 @@ export interface TodoJsonConnectionDoneQueryBoolean_2 {
 	ne?: boolean | null;
 	in?: (boolean | null)[] | null;
 	nin?: (boolean | null)[] | null;
-}
-
-export interface OrganizationJsonConnectionSort {
-	fields: (OrganizationJsonConnectionSortByFieldsEnum | null)[];
-	order?: OrganizationJsonConnectionSortOrderValues | null;
-}
-/** Filter connection on its fields */
-export interface FilterOrganizationJson {
-	name?: OrganizationJsonConnectionNameQueryString_2 | null;
-	url?: OrganizationJsonConnectionUrlQueryString_2 | null;
-	logo?: OrganizationJsonConnectionLogoQueryString_2 | null;
-	telephone?: OrganizationJsonConnectionTelephoneQueryString_2 | null;
-	id?: OrganizationJsonConnectionIdQueryString_2 | null;
-	internal?: OrganizationJsonConnectionInternalInputObject_2 | null;
-	fields?: OrganizationJsonConnectionFieldsInputObject_2 | null;
-}
-
-export interface OrganizationJsonConnectionNameQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface OrganizationJsonConnectionUrlQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface OrganizationJsonConnectionLogoQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface OrganizationJsonConnectionTelephoneQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface OrganizationJsonConnectionIdQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface OrganizationJsonConnectionInternalInputObject_2 {
-	contentDigest?: OrganizationJsonConnectionInternalContentDigestQueryString_2 | null;
-	type?: OrganizationJsonConnectionInternalTypeQueryString_2 | null;
-	owner?: OrganizationJsonConnectionInternalOwnerQueryString_2 | null;
-	fieldOwners?: OrganizationJsonConnectionInternalFieldOwnersInputObject_2 | null;
-}
-
-export interface OrganizationJsonConnectionInternalContentDigestQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface OrganizationJsonConnectionInternalTypeQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface OrganizationJsonConnectionInternalOwnerQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface OrganizationJsonConnectionInternalFieldOwnersInputObject_2 {
-	logo_image?: OrganizationJsonConnectionInternalFieldOwnersLogoImageQueryString_2 | null;
-}
-
-export interface OrganizationJsonConnectionInternalFieldOwnersLogoImageQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface OrganizationJsonConnectionFieldsInputObject_2 {
-	logo_image?: OrganizationJsonConnectionFieldsLogoImageQueryString_2 | null;
-}
-
-export interface OrganizationJsonConnectionFieldsLogoImageQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
 }
 
 export interface PersonalJsonConnectionSort {
@@ -5548,88 +5439,6 @@ export interface ExperiencesJsonConnectionFieldsImageImageQueryList_2 {
 	nin?: (string | null)[] | null;
 }
 
-export interface InterestsJsonConnectionSort {
-	fields: (InterestsJsonConnectionSortByFieldsEnum | null)[];
-	order?: InterestsJsonConnectionSortOrderValues | null;
-}
-/** Filter connection on its fields */
-export interface FilterInterestsJson {
-	subjects?: InterestsJsonConnectionSubjectsQueryList_2 | null;
-	id?: InterestsJsonConnectionIdQueryString_2 | null;
-	internal?: InterestsJsonConnectionInternalInputObject_2 | null;
-}
-
-export interface InterestsJsonConnectionSubjectsQueryList_2 {
-	elemMatch?: InterestsJsonConnectionSubjectsInputObject_2 | null;
-}
-
-export interface InterestsJsonConnectionSubjectsInputObject_2 {
-	name?: InterestsJsonConnectionSubjectsNameQueryString_2 | null;
-	intensity?: InterestsJsonConnectionSubjectsIntensityQueryInteger_2 | null;
-}
-
-export interface InterestsJsonConnectionSubjectsNameQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface InterestsJsonConnectionSubjectsIntensityQueryInteger_2 {
-	eq?: number | null;
-	ne?: number | null;
-	gt?: number | null;
-	gte?: number | null;
-	lt?: number | null;
-	lte?: number | null;
-	in?: (number | null)[] | null;
-	nin?: (number | null)[] | null;
-}
-
-export interface InterestsJsonConnectionIdQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface InterestsJsonConnectionInternalInputObject_2 {
-	contentDigest?: InterestsJsonConnectionInternalContentDigestQueryString_2 | null;
-	type?: InterestsJsonConnectionInternalTypeQueryString_2 | null;
-	owner?: InterestsJsonConnectionInternalOwnerQueryString_2 | null;
-}
-
-export interface InterestsJsonConnectionInternalContentDigestQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface InterestsJsonConnectionInternalTypeQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface InterestsJsonConnectionInternalOwnerQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
 export interface SkillsJsonConnectionSort {
 	fields: (SkillsJsonConnectionSortByFieldsEnum | null)[];
 	order?: SkillsJsonConnectionSortOrderValues | null;
@@ -5764,6 +5573,208 @@ export interface SkillsJsonConnectionInternalTypeQueryString_2 {
 }
 
 export interface SkillsJsonConnectionInternalOwnerQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface InterestsJsonConnectionSort {
+	fields: (InterestsJsonConnectionSortByFieldsEnum | null)[];
+	order?: InterestsJsonConnectionSortOrderValues | null;
+}
+/** Filter connection on its fields */
+export interface FilterInterestsJson {
+	subjects?: InterestsJsonConnectionSubjectsQueryList_2 | null;
+	id?: InterestsJsonConnectionIdQueryString_2 | null;
+	internal?: InterestsJsonConnectionInternalInputObject_2 | null;
+}
+
+export interface InterestsJsonConnectionSubjectsQueryList_2 {
+	elemMatch?: InterestsJsonConnectionSubjectsInputObject_2 | null;
+}
+
+export interface InterestsJsonConnectionSubjectsInputObject_2 {
+	name?: InterestsJsonConnectionSubjectsNameQueryString_2 | null;
+	intensity?: InterestsJsonConnectionSubjectsIntensityQueryInteger_2 | null;
+}
+
+export interface InterestsJsonConnectionSubjectsNameQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface InterestsJsonConnectionSubjectsIntensityQueryInteger_2 {
+	eq?: number | null;
+	ne?: number | null;
+	gt?: number | null;
+	gte?: number | null;
+	lt?: number | null;
+	lte?: number | null;
+	in?: (number | null)[] | null;
+	nin?: (number | null)[] | null;
+}
+
+export interface InterestsJsonConnectionIdQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface InterestsJsonConnectionInternalInputObject_2 {
+	contentDigest?: InterestsJsonConnectionInternalContentDigestQueryString_2 | null;
+	type?: InterestsJsonConnectionInternalTypeQueryString_2 | null;
+	owner?: InterestsJsonConnectionInternalOwnerQueryString_2 | null;
+}
+
+export interface InterestsJsonConnectionInternalContentDigestQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface InterestsJsonConnectionInternalTypeQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface InterestsJsonConnectionInternalOwnerQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface OrganizationJsonConnectionSort {
+	fields: (OrganizationJsonConnectionSortByFieldsEnum | null)[];
+	order?: OrganizationJsonConnectionSortOrderValues | null;
+}
+/** Filter connection on its fields */
+export interface FilterOrganizationJson {
+	name?: OrganizationJsonConnectionNameQueryString_2 | null;
+	url?: OrganizationJsonConnectionUrlQueryString_2 | null;
+	logo?: OrganizationJsonConnectionLogoQueryString_2 | null;
+	telephone?: OrganizationJsonConnectionTelephoneQueryString_2 | null;
+	id?: OrganizationJsonConnectionIdQueryString_2 | null;
+	internal?: OrganizationJsonConnectionInternalInputObject_2 | null;
+	fields?: OrganizationJsonConnectionFieldsInputObject_2 | null;
+}
+
+export interface OrganizationJsonConnectionNameQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface OrganizationJsonConnectionUrlQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface OrganizationJsonConnectionLogoQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface OrganizationJsonConnectionTelephoneQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface OrganizationJsonConnectionIdQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface OrganizationJsonConnectionInternalInputObject_2 {
+	contentDigest?: OrganizationJsonConnectionInternalContentDigestQueryString_2 | null;
+	type?: OrganizationJsonConnectionInternalTypeQueryString_2 | null;
+	owner?: OrganizationJsonConnectionInternalOwnerQueryString_2 | null;
+	fieldOwners?: OrganizationJsonConnectionInternalFieldOwnersInputObject_2 | null;
+}
+
+export interface OrganizationJsonConnectionInternalContentDigestQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface OrganizationJsonConnectionInternalTypeQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface OrganizationJsonConnectionInternalOwnerQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface OrganizationJsonConnectionInternalFieldOwnersInputObject_2 {
+	logo_image?: OrganizationJsonConnectionInternalFieldOwnersLogoImageQueryString_2 | null;
+}
+
+export interface OrganizationJsonConnectionInternalFieldOwnersLogoImageQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface OrganizationJsonConnectionFieldsInputObject_2 {
+	logo_image?: OrganizationJsonConnectionFieldsLogoImageQueryString_2 | null;
+}
+
+export interface OrganizationJsonConnectionFieldsLogoImageQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
@@ -9393,11 +9404,12 @@ export interface MarkdownRemarkFrontmatterInputObject_2 {
 	title?: MarkdownRemarkFrontmatterTitleQueryString_2 | null;
 	link?: MarkdownRemarkFrontmatterLinkQueryString_2 | null;
 	date?: MarkdownRemarkFrontmatterDateQueryString_2 | null;
+	tags?: MarkdownRemarkFrontmatterTagsQueryList_2 | null;
 	authors?: MarkdownRemarkFrontmatterAuthorsQueryList_2 | null;
 	_PARENT?: MarkdownRemarkFrontmatterParentQueryString_2 | null;
-	description?: MarkdownRemarkFrontmatterDescriptionQueryString_2 | null;
 	draft?: MarkdownRemarkFrontmatterDraftQueryBoolean_2 | null;
 	toc?: MarkdownRemarkFrontmatterTocQueryBoolean_2 | null;
+	description?: MarkdownRemarkFrontmatterDescriptionQueryString_2 | null;
 	type?: MarkdownRemarkFrontmatterTypeQueryString_2 | null;
 }
 
@@ -9420,6 +9432,15 @@ export interface MarkdownRemarkFrontmatterLinkQueryString_2 {
 }
 
 export interface MarkdownRemarkFrontmatterDateQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface MarkdownRemarkFrontmatterTagsQueryList_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
@@ -9464,15 +9485,6 @@ export interface MarkdownRemarkFrontmatterParentQueryString_2 {
 	nin?: (string | null)[] | null;
 }
 
-export interface MarkdownRemarkFrontmatterDescriptionQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
 export interface MarkdownRemarkFrontmatterDraftQueryBoolean_2 {
 	eq?: boolean | null;
 	ne?: boolean | null;
@@ -9485,6 +9497,15 @@ export interface MarkdownRemarkFrontmatterTocQueryBoolean_2 {
 	ne?: boolean | null;
 	in?: (boolean | null)[] | null;
 	nin?: (boolean | null)[] | null;
+}
+
+export interface MarkdownRemarkFrontmatterDescriptionQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
 export interface MarkdownRemarkFrontmatterTypeQueryString_2 {
@@ -9685,111 +9706,6 @@ export interface TodoJsonDoneQueryBoolean_2 {
 	ne?: boolean | null;
 	in?: (boolean | null)[] | null;
 	nin?: (boolean | null)[] | null;
-}
-
-export interface OrganizationJsonNameQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface OrganizationJsonUrlQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface OrganizationJsonLogoQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface OrganizationJsonTelephoneQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface OrganizationJsonIdQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface OrganizationJsonInternalInputObject_2 {
-	contentDigest?: OrganizationJsonInternalContentDigestQueryString_2 | null;
-	type?: OrganizationJsonInternalTypeQueryString_2 | null;
-	owner?: OrganizationJsonInternalOwnerQueryString_2 | null;
-	fieldOwners?: OrganizationJsonInternalFieldOwnersInputObject_2 | null;
-}
-
-export interface OrganizationJsonInternalContentDigestQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface OrganizationJsonInternalTypeQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface OrganizationJsonInternalOwnerQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface OrganizationJsonInternalFieldOwnersInputObject_2 {
-	logo_image?: OrganizationJsonInternalFieldOwnersLogoImageQueryString_2 | null;
-}
-
-export interface OrganizationJsonInternalFieldOwnersLogoImageQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface OrganizationJsonFieldsInputObject_2 {
-	logo_image?: OrganizationJsonFieldsLogoImageQueryString_2 | null;
-}
-
-export interface OrganizationJsonFieldsLogoImageQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
 }
 
 export interface PersonalJsonNameQueryString_2 {
@@ -10132,77 +10048,6 @@ export interface ExperiencesJsonFieldsImageImageQueryList_2 {
 	nin?: (string | null)[] | null;
 }
 
-export interface InterestsJsonSubjectsQueryList_2 {
-	elemMatch?: InterestsJsonSubjectsInputObject_2 | null;
-}
-
-export interface InterestsJsonSubjectsInputObject_2 {
-	name?: InterestsJsonSubjectsNameQueryString_2 | null;
-	intensity?: InterestsJsonSubjectsIntensityQueryInteger_2 | null;
-}
-
-export interface InterestsJsonSubjectsNameQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface InterestsJsonSubjectsIntensityQueryInteger_2 {
-	eq?: number | null;
-	ne?: number | null;
-	gt?: number | null;
-	gte?: number | null;
-	lt?: number | null;
-	lte?: number | null;
-	in?: (number | null)[] | null;
-	nin?: (number | null)[] | null;
-}
-
-export interface InterestsJsonIdQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface InterestsJsonInternalInputObject_2 {
-	contentDigest?: InterestsJsonInternalContentDigestQueryString_2 | null;
-	type?: InterestsJsonInternalTypeQueryString_2 | null;
-	owner?: InterestsJsonInternalOwnerQueryString_2 | null;
-}
-
-export interface InterestsJsonInternalContentDigestQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface InterestsJsonInternalTypeQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface InterestsJsonInternalOwnerQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
 export interface SkillsJsonLanguagesQueryList_2 {
 	elemMatch?: SkillsJsonLanguagesInputObject_2 | null;
 }
@@ -10331,6 +10176,182 @@ export interface SkillsJsonInternalOwnerQueryString_2 {
 	in?: (string | null)[] | null;
 	nin?: (string | null)[] | null;
 }
+
+export interface InterestsJsonSubjectsQueryList_2 {
+	elemMatch?: InterestsJsonSubjectsInputObject_2 | null;
+}
+
+export interface InterestsJsonSubjectsInputObject_2 {
+	name?: InterestsJsonSubjectsNameQueryString_2 | null;
+	intensity?: InterestsJsonSubjectsIntensityQueryInteger_2 | null;
+}
+
+export interface InterestsJsonSubjectsNameQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface InterestsJsonSubjectsIntensityQueryInteger_2 {
+	eq?: number | null;
+	ne?: number | null;
+	gt?: number | null;
+	gte?: number | null;
+	lt?: number | null;
+	lte?: number | null;
+	in?: (number | null)[] | null;
+	nin?: (number | null)[] | null;
+}
+
+export interface InterestsJsonIdQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface InterestsJsonInternalInputObject_2 {
+	contentDigest?: InterestsJsonInternalContentDigestQueryString_2 | null;
+	type?: InterestsJsonInternalTypeQueryString_2 | null;
+	owner?: InterestsJsonInternalOwnerQueryString_2 | null;
+}
+
+export interface InterestsJsonInternalContentDigestQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface InterestsJsonInternalTypeQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface InterestsJsonInternalOwnerQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface OrganizationJsonNameQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface OrganizationJsonUrlQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface OrganizationJsonLogoQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface OrganizationJsonTelephoneQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface OrganizationJsonIdQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface OrganizationJsonInternalInputObject_2 {
+	contentDigest?: OrganizationJsonInternalContentDigestQueryString_2 | null;
+	type?: OrganizationJsonInternalTypeQueryString_2 | null;
+	owner?: OrganizationJsonInternalOwnerQueryString_2 | null;
+	fieldOwners?: OrganizationJsonInternalFieldOwnersInputObject_2 | null;
+}
+
+export interface OrganizationJsonInternalContentDigestQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface OrganizationJsonInternalTypeQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface OrganizationJsonInternalOwnerQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface OrganizationJsonInternalFieldOwnersInputObject_2 {
+	logo_image?: OrganizationJsonInternalFieldOwnersLogoImageQueryString_2 | null;
+}
+
+export interface OrganizationJsonInternalFieldOwnersLogoImageQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface OrganizationJsonFieldsInputObject_2 {
+	logo_image?: OrganizationJsonFieldsLogoImageQueryString_2 | null;
+}
+
+export interface OrganizationJsonFieldsLogoImageQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
 export interface AllSitePageQueryArgs {
 	skip?: number | null;
 	limit?: number | null;
@@ -10367,12 +10388,6 @@ export interface AllTodoJsonQueryArgs {
 	sort?: TodoJsonConnectionSort | null;
 	filter?: FilterTodoJson | null;
 }
-export interface AllOrganizationJsonQueryArgs {
-	skip?: number | null;
-	limit?: number | null;
-	sort?: OrganizationJsonConnectionSort | null;
-	filter?: FilterOrganizationJson | null;
-}
 export interface AllPersonalJsonQueryArgs {
 	skip?: number | null;
 	limit?: number | null;
@@ -10391,17 +10406,23 @@ export interface AllExperiencesJsonQueryArgs {
 	sort?: ExperiencesJsonConnectionSort | null;
 	filter?: FilterExperiencesJson | null;
 }
+export interface AllSkillsJsonQueryArgs {
+	skip?: number | null;
+	limit?: number | null;
+	sort?: SkillsJsonConnectionSort | null;
+	filter?: FilterSkillsJson | null;
+}
 export interface AllInterestsJsonQueryArgs {
 	skip?: number | null;
 	limit?: number | null;
 	sort?: InterestsJsonConnectionSort | null;
 	filter?: FilterInterestsJson | null;
 }
-export interface AllSkillsJsonQueryArgs {
+export interface AllOrganizationJsonQueryArgs {
 	skip?: number | null;
 	limit?: number | null;
-	sort?: SkillsJsonConnectionSort | null;
-	filter?: FilterSkillsJson | null;
+	sort?: OrganizationJsonConnectionSort | null;
+	filter?: FilterOrganizationJson | null;
 }
 export interface SitePageQueryArgs {
 	jsonName?: SitePageJsonNameQueryString | null;
@@ -10534,15 +10555,6 @@ export interface TodoJsonQueryArgs {
 	internal?: TodoJsonInternalInputObject_2 | null;
 	done?: TodoJsonDoneQueryBoolean_2 | null;
 }
-export interface OrganizationJsonQueryArgs {
-	name?: OrganizationJsonNameQueryString_2 | null;
-	url?: OrganizationJsonUrlQueryString_2 | null;
-	logo?: OrganizationJsonLogoQueryString_2 | null;
-	telephone?: OrganizationJsonTelephoneQueryString_2 | null;
-	id?: OrganizationJsonIdQueryString_2 | null;
-	internal?: OrganizationJsonInternalInputObject_2 | null;
-	fields?: OrganizationJsonFieldsInputObject_2 | null;
-}
 export interface PersonalJsonQueryArgs {
 	name?: PersonalJsonNameQueryString_2 | null;
 	email?: PersonalJsonEmailQueryString_2 | null;
@@ -10563,17 +10575,26 @@ export interface ExperiencesJsonQueryArgs {
 	internal?: ExperiencesJsonInternalInputObject_2 | null;
 	fields?: ExperiencesJsonFieldsInputObject_2 | null;
 }
-export interface InterestsJsonQueryArgs {
-	subjects?: InterestsJsonSubjectsQueryList_2 | null;
-	id?: InterestsJsonIdQueryString_2 | null;
-	internal?: InterestsJsonInternalInputObject_2 | null;
-}
 export interface SkillsJsonQueryArgs {
 	languages?: SkillsJsonLanguagesQueryList_2 | null;
 	technical?: SkillsJsonTechnicalQueryList_2 | null;
 	soft?: SkillsJsonSoftQueryList_2 | null;
 	id?: SkillsJsonIdQueryString_2 | null;
 	internal?: SkillsJsonInternalInputObject_2 | null;
+}
+export interface InterestsJsonQueryArgs {
+	subjects?: InterestsJsonSubjectsQueryList_2 | null;
+	id?: InterestsJsonIdQueryString_2 | null;
+	internal?: InterestsJsonInternalInputObject_2 | null;
+}
+export interface OrganizationJsonQueryArgs {
+	name?: OrganizationJsonNameQueryString_2 | null;
+	url?: OrganizationJsonUrlQueryString_2 | null;
+	logo?: OrganizationJsonLogoQueryString_2 | null;
+	telephone?: OrganizationJsonTelephoneQueryString_2 | null;
+	id?: OrganizationJsonIdQueryString_2 | null;
+	internal?: OrganizationJsonInternalInputObject_2 | null;
+	fields?: OrganizationJsonFieldsInputObject_2 | null;
 }
 export interface DistinctSitePageConnectionArgs {
 	field?: SitePageDistinctEnum | null;
@@ -10899,14 +10920,6 @@ export interface GroupTodoJsonConnectionArgs {
 	limit?: number | null;
 	field?: TodoJsonGroupEnum | null;
 }
-export interface DistinctOrganizationJsonConnectionArgs {
-	field?: OrganizationJsonDistinctEnum | null;
-}
-export interface GroupOrganizationJsonConnectionArgs {
-	skip?: number | null;
-	limit?: number | null;
-	field?: OrganizationJsonGroupEnum | null;
-}
 export interface DistinctPersonalJsonConnectionArgs {
 	field?: PersonalJsonDistinctEnum | null;
 }
@@ -10931,6 +10944,14 @@ export interface GroupExperiencesJsonConnectionArgs {
 	limit?: number | null;
 	field?: ExperiencesJsonGroupEnum | null;
 }
+export interface DistinctSkillsJsonConnectionArgs {
+	field?: SkillsJsonDistinctEnum | null;
+}
+export interface GroupSkillsJsonConnectionArgs {
+	skip?: number | null;
+	limit?: number | null;
+	field?: SkillsJsonGroupEnum | null;
+}
 export interface DistinctInterestsJsonConnectionArgs {
 	field?: InterestsJsonDistinctEnum | null;
 }
@@ -10939,13 +10960,13 @@ export interface GroupInterestsJsonConnectionArgs {
 	limit?: number | null;
 	field?: InterestsJsonGroupEnum | null;
 }
-export interface DistinctSkillsJsonConnectionArgs {
-	field?: SkillsJsonDistinctEnum | null;
+export interface DistinctOrganizationJsonConnectionArgs {
+	field?: OrganizationJsonDistinctEnum | null;
 }
-export interface GroupSkillsJsonConnectionArgs {
+export interface GroupOrganizationJsonConnectionArgs {
 	skip?: number | null;
 	limit?: number | null;
-	field?: SkillsJsonGroupEnum | null;
+	field?: OrganizationJsonGroupEnum | null;
 }
 export interface PortSiteArgs {
 	formatString?:
@@ -11520,11 +11541,12 @@ export enum MarkdownRemarkConnectionSortByFieldsEnum {
 	frontmatter___title = "frontmatter___title",
 	frontmatter___link = "frontmatter___link",
 	frontmatter___date = "frontmatter___date",
+	frontmatter___tags = "frontmatter___tags",
 	frontmatter___authors = "frontmatter___authors",
 	frontmatter____PARENT = "frontmatter____PARENT",
-	frontmatter___description = "frontmatter___description",
 	frontmatter___draft = "frontmatter___draft",
 	frontmatter___toc = "frontmatter___toc",
+	frontmatter___description = "frontmatter___description",
 	frontmatter___type = "frontmatter___type",
 	excerpt = "excerpt",
 	rawMarkdownBody = "rawMarkdownBody",
@@ -11553,11 +11575,12 @@ export enum MarkdownRemarkDistinctEnum {
 	frontmatter___title = "frontmatter___title",
 	frontmatter___link = "frontmatter___link",
 	frontmatter___date = "frontmatter___date",
+	frontmatter___tags = "frontmatter___tags",
 	frontmatter___authors = "frontmatter___authors",
 	frontmatter____PARENT = "frontmatter____PARENT",
-	frontmatter___description = "frontmatter___description",
 	frontmatter___draft = "frontmatter___draft",
 	frontmatter___toc = "frontmatter___toc",
+	frontmatter___description = "frontmatter___description",
 	frontmatter___type = "frontmatter___type",
 	excerpt = "excerpt",
 	rawMarkdownBody = "rawMarkdownBody",
@@ -11574,11 +11597,12 @@ export enum MarkdownRemarkGroupEnum {
 	frontmatter___title = "frontmatter___title",
 	frontmatter___link = "frontmatter___link",
 	frontmatter___date = "frontmatter___date",
+	frontmatter___tags = "frontmatter___tags",
 	frontmatter___authors = "frontmatter___authors",
 	frontmatter____PARENT = "frontmatter____PARENT",
-	frontmatter___description = "frontmatter___description",
 	frontmatter___draft = "frontmatter___draft",
 	frontmatter___toc = "frontmatter___toc",
+	frontmatter___description = "frontmatter___description",
 	frontmatter___type = "frontmatter___type",
 	excerpt = "excerpt",
 	rawMarkdownBody = "rawMarkdownBody",
@@ -11621,53 +11645,6 @@ export enum TodoJsonGroupEnum {
 	internal___type = "internal___type",
 	internal___owner = "internal___owner",
 	done = "done",
-}
-
-export enum OrganizationJsonConnectionSortByFieldsEnum {
-	name = "name",
-	url = "url",
-	logo = "logo",
-	telephone = "telephone",
-	id = "id",
-	parent = "parent",
-	internal___contentDigest = "internal___contentDigest",
-	internal___type = "internal___type",
-	internal___owner = "internal___owner",
-	internal___fieldOwners___logo_image = "internal___fieldOwners___logo_image",
-	fields___logo_image = "fields___logo_image",
-}
-
-export enum OrganizationJsonConnectionSortOrderValues {
-	ASC = "ASC",
-	DESC = "DESC",
-}
-
-export enum OrganizationJsonDistinctEnum {
-	name = "name",
-	url = "url",
-	logo = "logo",
-	telephone = "telephone",
-	id = "id",
-	parent = "parent",
-	internal___contentDigest = "internal___contentDigest",
-	internal___type = "internal___type",
-	internal___owner = "internal___owner",
-	internal___fieldOwners___logo_image = "internal___fieldOwners___logo_image",
-	fields___logo_image = "fields___logo_image",
-}
-
-export enum OrganizationJsonGroupEnum {
-	name = "name",
-	url = "url",
-	logo = "logo",
-	telephone = "telephone",
-	id = "id",
-	parent = "parent",
-	internal___contentDigest = "internal___contentDigest",
-	internal___type = "internal___type",
-	internal___owner = "internal___owner",
-	internal___fieldOwners___logo_image = "internal___fieldOwners___logo_image",
-	fields___logo_image = "fields___logo_image",
 }
 
 export enum PersonalJsonConnectionSortByFieldsEnum {
@@ -11784,38 +11761,6 @@ export enum ExperiencesJsonGroupEnum {
 	fields___image_image = "fields___image_image",
 }
 
-export enum InterestsJsonConnectionSortByFieldsEnum {
-	subjects = "subjects",
-	id = "id",
-	parent = "parent",
-	internal___contentDigest = "internal___contentDigest",
-	internal___type = "internal___type",
-	internal___owner = "internal___owner",
-}
-
-export enum InterestsJsonConnectionSortOrderValues {
-	ASC = "ASC",
-	DESC = "DESC",
-}
-
-export enum InterestsJsonDistinctEnum {
-	subjects = "subjects",
-	id = "id",
-	parent = "parent",
-	internal___contentDigest = "internal___contentDigest",
-	internal___type = "internal___type",
-	internal___owner = "internal___owner",
-}
-
-export enum InterestsJsonGroupEnum {
-	subjects = "subjects",
-	id = "id",
-	parent = "parent",
-	internal___contentDigest = "internal___contentDigest",
-	internal___type = "internal___type",
-	internal___owner = "internal___owner",
-}
-
 export enum SkillsJsonConnectionSortByFieldsEnum {
 	languages = "languages",
 	technical = "technical",
@@ -11854,6 +11799,85 @@ export enum SkillsJsonGroupEnum {
 	internal___owner = "internal___owner",
 }
 
+export enum InterestsJsonConnectionSortByFieldsEnum {
+	subjects = "subjects",
+	id = "id",
+	parent = "parent",
+	internal___contentDigest = "internal___contentDigest",
+	internal___type = "internal___type",
+	internal___owner = "internal___owner",
+}
+
+export enum InterestsJsonConnectionSortOrderValues {
+	ASC = "ASC",
+	DESC = "DESC",
+}
+
+export enum InterestsJsonDistinctEnum {
+	subjects = "subjects",
+	id = "id",
+	parent = "parent",
+	internal___contentDigest = "internal___contentDigest",
+	internal___type = "internal___type",
+	internal___owner = "internal___owner",
+}
+
+export enum InterestsJsonGroupEnum {
+	subjects = "subjects",
+	id = "id",
+	parent = "parent",
+	internal___contentDigest = "internal___contentDigest",
+	internal___type = "internal___type",
+	internal___owner = "internal___owner",
+}
+
+export enum OrganizationJsonConnectionSortByFieldsEnum {
+	name = "name",
+	url = "url",
+	logo = "logo",
+	telephone = "telephone",
+	id = "id",
+	parent = "parent",
+	internal___contentDigest = "internal___contentDigest",
+	internal___type = "internal___type",
+	internal___owner = "internal___owner",
+	internal___fieldOwners___logo_image = "internal___fieldOwners___logo_image",
+	fields___logo_image = "fields___logo_image",
+}
+
+export enum OrganizationJsonConnectionSortOrderValues {
+	ASC = "ASC",
+	DESC = "DESC",
+}
+
+export enum OrganizationJsonDistinctEnum {
+	name = "name",
+	url = "url",
+	logo = "logo",
+	telephone = "telephone",
+	id = "id",
+	parent = "parent",
+	internal___contentDigest = "internal___contentDigest",
+	internal___type = "internal___type",
+	internal___owner = "internal___owner",
+	internal___fieldOwners___logo_image = "internal___fieldOwners___logo_image",
+	fields___logo_image = "fields___logo_image",
+}
+
+export enum OrganizationJsonGroupEnum {
+	name = "name",
+	url = "url",
+	logo = "logo",
+	telephone = "telephone",
+	id = "id",
+	parent = "parent",
+	internal___contentDigest = "internal___contentDigest",
+	internal___type = "internal___type",
+	internal___owner = "internal___owner",
+	internal___fieldOwners___logo_image = "internal___fieldOwners___logo_image",
+	fields___logo_image = "fields___logo_image",
+}
+
 export namespace QueryResolvers {
 	export interface Resolvers<Context = any> {
 		allSitePage?: AllSitePageResolver<
@@ -11886,11 +11910,6 @@ export namespace QueryResolvers {
 			any,
 			Context
 		> /** Connection to all TodoJson nodes */;
-		allOrganizationJson?: AllOrganizationJsonResolver<
-			OrganizationJsonConnection | null,
-			any,
-			Context
-		> /** Connection to all OrganizationJson nodes */;
 		allPersonalJson?: AllPersonalJsonResolver<
 			PersonalJsonConnection | null,
 			any,
@@ -11906,16 +11925,21 @@ export namespace QueryResolvers {
 			any,
 			Context
 		> /** Connection to all ExperiencesJson nodes */;
-		allInterestsJson?: AllInterestsJsonResolver<
-			InterestsJsonConnection | null,
-			any,
-			Context
-		> /** Connection to all InterestsJson nodes */;
 		allSkillsJson?: AllSkillsJsonResolver<
 			SkillsJsonConnection | null,
 			any,
 			Context
 		> /** Connection to all SkillsJson nodes */;
+		allInterestsJson?: AllInterestsJsonResolver<
+			InterestsJsonConnection | null,
+			any,
+			Context
+		> /** Connection to all InterestsJson nodes */;
+		allOrganizationJson?: AllOrganizationJsonResolver<
+			OrganizationJsonConnection | null,
+			any,
+			Context
+		> /** Connection to all OrganizationJson nodes */;
 		sitePage?: SitePageResolver<SitePage | null, any, Context>;
 		sitePlugin?: SitePluginResolver<SitePlugin | null, any, Context>;
 		site?: SiteResolver<Site | null, any, Context>;
@@ -11927,11 +11951,6 @@ export namespace QueryResolvers {
 			Context
 		>;
 		todoJson?: TodoJsonResolver<TodoJson | null, any, Context>;
-		organizationJson?: OrganizationJsonResolver<
-			OrganizationJson | null,
-			any,
-			Context
-		>;
 		personalJson?: PersonalJsonResolver<PersonalJson | null, any, Context>;
 		competencesJson?: CompetencesJsonResolver<
 			CompetencesJson | null,
@@ -11943,12 +11962,17 @@ export namespace QueryResolvers {
 			any,
 			Context
 		>;
+		skillsJson?: SkillsJsonResolver<SkillsJson | null, any, Context>;
 		interestsJson?: InterestsJsonResolver<
 			InterestsJson | null,
 			any,
 			Context
 		>;
-		skillsJson?: SkillsJsonResolver<SkillsJson | null, any, Context>;
+		organizationJson?: OrganizationJsonResolver<
+			OrganizationJson | null,
+			any,
+			Context
+		>;
 	}
 
 	export type AllSitePageResolver<
@@ -12023,18 +12047,6 @@ export namespace QueryResolvers {
 		filter?: FilterTodoJson | null;
 	}
 
-	export type AllOrganizationJsonResolver<
-		R = OrganizationJsonConnection | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context, AllOrganizationJsonArgs>;
-	export interface AllOrganizationJsonArgs {
-		skip?: number | null;
-		limit?: number | null;
-		sort?: OrganizationJsonConnectionSort | null;
-		filter?: FilterOrganizationJson | null;
-	}
-
 	export type AllPersonalJsonResolver<
 		R = PersonalJsonConnection | null,
 		Parent = any,
@@ -12071,6 +12083,18 @@ export namespace QueryResolvers {
 		filter?: FilterExperiencesJson | null;
 	}
 
+	export type AllSkillsJsonResolver<
+		R = SkillsJsonConnection | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context, AllSkillsJsonArgs>;
+	export interface AllSkillsJsonArgs {
+		skip?: number | null;
+		limit?: number | null;
+		sort?: SkillsJsonConnectionSort | null;
+		filter?: FilterSkillsJson | null;
+	}
+
 	export type AllInterestsJsonResolver<
 		R = InterestsJsonConnection | null,
 		Parent = any,
@@ -12083,16 +12107,16 @@ export namespace QueryResolvers {
 		filter?: FilterInterestsJson | null;
 	}
 
-	export type AllSkillsJsonResolver<
-		R = SkillsJsonConnection | null,
+	export type AllOrganizationJsonResolver<
+		R = OrganizationJsonConnection | null,
 		Parent = any,
 		Context = any
-	> = Resolver<R, Parent, Context, AllSkillsJsonArgs>;
-	export interface AllSkillsJsonArgs {
+	> = Resolver<R, Parent, Context, AllOrganizationJsonArgs>;
+	export interface AllOrganizationJsonArgs {
 		skip?: number | null;
 		limit?: number | null;
-		sort?: SkillsJsonConnectionSort | null;
-		filter?: FilterSkillsJson | null;
+		sort?: OrganizationJsonConnectionSort | null;
+		filter?: FilterOrganizationJson | null;
 	}
 
 	export type SitePageResolver<
@@ -12268,21 +12292,6 @@ export namespace QueryResolvers {
 		done?: TodoJsonDoneQueryBoolean_2 | null;
 	}
 
-	export type OrganizationJsonResolver<
-		R = OrganizationJson | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context, OrganizationJsonArgs>;
-	export interface OrganizationJsonArgs {
-		name?: OrganizationJsonNameQueryString_2 | null;
-		url?: OrganizationJsonUrlQueryString_2 | null;
-		logo?: OrganizationJsonLogoQueryString_2 | null;
-		telephone?: OrganizationJsonTelephoneQueryString_2 | null;
-		id?: OrganizationJsonIdQueryString_2 | null;
-		internal?: OrganizationJsonInternalInputObject_2 | null;
-		fields?: OrganizationJsonFieldsInputObject_2 | null;
-	}
-
 	export type PersonalJsonResolver<
 		R = PersonalJson | null,
 		Parent = any,
@@ -12321,17 +12330,6 @@ export namespace QueryResolvers {
 		fields?: ExperiencesJsonFieldsInputObject_2 | null;
 	}
 
-	export type InterestsJsonResolver<
-		R = InterestsJson | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context, InterestsJsonArgs>;
-	export interface InterestsJsonArgs {
-		subjects?: InterestsJsonSubjectsQueryList_2 | null;
-		id?: InterestsJsonIdQueryString_2 | null;
-		internal?: InterestsJsonInternalInputObject_2 | null;
-	}
-
 	export type SkillsJsonResolver<
 		R = SkillsJson | null,
 		Parent = any,
@@ -12343,6 +12341,32 @@ export namespace QueryResolvers {
 		soft?: SkillsJsonSoftQueryList_2 | null;
 		id?: SkillsJsonIdQueryString_2 | null;
 		internal?: SkillsJsonInternalInputObject_2 | null;
+	}
+
+	export type InterestsJsonResolver<
+		R = InterestsJson | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context, InterestsJsonArgs>;
+	export interface InterestsJsonArgs {
+		subjects?: InterestsJsonSubjectsQueryList_2 | null;
+		id?: InterestsJsonIdQueryString_2 | null;
+		internal?: InterestsJsonInternalInputObject_2 | null;
+	}
+
+	export type OrganizationJsonResolver<
+		R = OrganizationJson | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context, OrganizationJsonArgs>;
+	export interface OrganizationJsonArgs {
+		name?: OrganizationJsonNameQueryString_2 | null;
+		url?: OrganizationJsonUrlQueryString_2 | null;
+		logo?: OrganizationJsonLogoQueryString_2 | null;
+		telephone?: OrganizationJsonTelephoneQueryString_2 | null;
+		id?: OrganizationJsonIdQueryString_2 | null;
+		internal?: OrganizationJsonInternalInputObject_2 | null;
+		fields?: OrganizationJsonFieldsInputObject_2 | null;
 	}
 }
 /** A connection to a list of items. */
@@ -14986,11 +15010,6 @@ export namespace FileResolvers {
 			any,
 			Context
 		> /** The children of this node of type todoJson */;
-		childOrganizationJson?: ChildOrganizationJsonResolver<
-			OrganizationJson | null,
-			any,
-			Context
-		> /** The child of this node of type organizationJson */;
 		childPersonalJson?: ChildPersonalJsonResolver<
 			PersonalJson | null,
 			any,
@@ -15006,16 +15025,21 @@ export namespace FileResolvers {
 			any,
 			Context
 		> /** The child of this node of type experiencesJson */;
-		childInterestsJson?: ChildInterestsJsonResolver<
-			InterestsJson | null,
-			any,
-			Context
-		> /** The child of this node of type interestsJson */;
 		childSkillsJson?: ChildSkillsJsonResolver<
 			SkillsJson | null,
 			any,
 			Context
 		> /** The child of this node of type skillsJson */;
+		childInterestsJson?: ChildInterestsJsonResolver<
+			InterestsJson | null,
+			any,
+			Context
+		> /** The child of this node of type interestsJson */;
+		childOrganizationJson?: ChildOrganizationJsonResolver<
+			OrganizationJson | null,
+			any,
+			Context
+		> /** The child of this node of type organizationJson */;
 		internal?: InternalResolver<Internal_17 | null, any, Context>;
 		sourceInstanceName?: SourceInstanceNameResolver<
 			string | null,
@@ -15090,11 +15114,6 @@ export namespace FileResolvers {
 		Parent = any,
 		Context = any
 	> = Resolver<R, Parent, Context>;
-	export type ChildOrganizationJsonResolver<
-		R = OrganizationJson | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
 	export type ChildPersonalJsonResolver<
 		R = PersonalJson | null,
 		Parent = any,
@@ -15110,13 +15129,18 @@ export namespace FileResolvers {
 		Parent = any,
 		Context = any
 	> = Resolver<R, Parent, Context>;
+	export type ChildSkillsJsonResolver<
+		R = SkillsJson | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
 	export type ChildInterestsJsonResolver<
 		R = InterestsJson | null,
 		Parent = any,
 		Context = any
 	> = Resolver<R, Parent, Context>;
-	export type ChildSkillsJsonResolver<
-		R = SkillsJson | null,
+	export type ChildOrganizationJsonResolver<
+		R = OrganizationJson | null,
 		Parent = any,
 		Context = any
 	> = Resolver<R, Parent, Context>;
@@ -15571,11 +15595,12 @@ export namespace Frontmatter_3Resolvers {
 		title?: TitleResolver<string | null, any, Context>;
 		link?: LinkResolver<string | null, any, Context>;
 		date?: DateResolver<Date | null, any, Context>;
+		tags?: TagsResolver<(string | null)[] | null, any, Context>;
 		authors?: AuthorsResolver<(Authors_3 | null)[] | null, any, Context>;
 		_PARENT?: ParentResolver<string | null, any, Context>;
-		description?: DescriptionResolver<string | null, any, Context>;
 		draft?: DraftResolver<boolean | null, any, Context>;
 		toc?: TocResolver<boolean | null, any, Context>;
+		description?: DescriptionResolver<string | null, any, Context>;
 		type?: TypeResolver<string | null, any, Context>;
 	}
 
@@ -15609,17 +15634,17 @@ export namespace Frontmatter_3Resolvers {
 			| null /** Configures the locale Moment.js will use to format the date. */;
 	}
 
+	export type TagsResolver<
+		R = (string | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
 	export type AuthorsResolver<
 		R = (Authors_3 | null)[] | null,
 		Parent = any,
 		Context = any
 	> = Resolver<R, Parent, Context>;
 	export type ParentResolver<
-		R = string | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type DescriptionResolver<
 		R = string | null,
 		Parent = any,
 		Context = any
@@ -15631,6 +15656,11 @@ export namespace Frontmatter_3Resolvers {
 	> = Resolver<R, Parent, Context>;
 	export type TocResolver<
 		R = boolean | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type DescriptionResolver<
+		R = string | null,
 		Parent = any,
 		Context = any
 	> = Resolver<R, Parent, Context>;
@@ -15780,128 +15810,6 @@ export namespace Internal_19Resolvers {
 		Context = any
 	> = Resolver<R, Parent, Context>;
 }
-/** Node of type OrganizationJson */
-export namespace OrganizationJsonResolvers {
-	export interface Resolvers<Context = any> {
-		id?: IdResolver<string, any, Context> /** The id of this node. */;
-		parent?: ParentResolver<
-			Node | null,
-			any,
-			Context
-		> /** The parent of this node. */;
-		children?: ChildrenResolver<
-			(Node | null)[] | null,
-			any,
-			Context
-		> /** The children of this node. */;
-		name?: NameResolver<string | null, any, Context>;
-		url?: UrlResolver<string | null, any, Context>;
-		logo?: LogoResolver<string | null, any, Context>;
-		telephone?: TelephoneResolver<string | null, any, Context>;
-		internal?: InternalResolver<Internal_20 | null, any, Context>;
-		fields?: FieldsResolver<Fields_3 | null, any, Context>;
-	}
-
-	export type IdResolver<R = string, Parent = any, Context = any> = Resolver<
-		R,
-		Parent,
-		Context
-	>;
-	export type ParentResolver<
-		R = Node | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type ChildrenResolver<
-		R = (Node | null)[] | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type NameResolver<
-		R = string | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type UrlResolver<
-		R = string | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type LogoResolver<
-		R = string | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type TelephoneResolver<
-		R = string | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type InternalResolver<
-		R = Internal_20 | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type FieldsResolver<
-		R = Fields_3 | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-}
-
-export namespace Internal_20Resolvers {
-	export interface Resolvers<Context = any> {
-		contentDigest?: ContentDigestResolver<string | null, any, Context>;
-		type?: TypeResolver<string | null, any, Context>;
-		owner?: OwnerResolver<string | null, any, Context>;
-		fieldOwners?: FieldOwnersResolver<FieldOwners_3 | null, any, Context>;
-	}
-
-	export type ContentDigestResolver<
-		R = string | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type TypeResolver<
-		R = string | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type OwnerResolver<
-		R = string | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type FieldOwnersResolver<
-		R = FieldOwners_3 | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-}
-
-export namespace FieldOwners_3Resolvers {
-	export interface Resolvers<Context = any> {
-		logo_image?: LogoImageResolver<string | null, any, Context>;
-	}
-
-	export type LogoImageResolver<
-		R = string | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-}
-
-export namespace Fields_3Resolvers {
-	export interface Resolvers<Context = any> {
-		logo_image?: LogoImageResolver<string | null, any, Context>;
-	}
-
-	export type LogoImageResolver<
-		R = string | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-}
 /** Node of type PersonalJson */
 export namespace PersonalJsonResolvers {
 	export interface Resolvers<Context = any> {
@@ -15920,7 +15828,7 @@ export namespace PersonalJsonResolvers {
 		email?: EmailResolver<string | null, any, Context>;
 		jobTitle?: JobTitleResolver<string | null, any, Context>;
 		social?: SocialResolver<(Social_2 | null)[] | null, any, Context>;
-		internal?: InternalResolver<Internal_21 | null, any, Context>;
+		internal?: InternalResolver<Internal_20 | null, any, Context>;
 	}
 
 	export type IdResolver<R = string, Parent = any, Context = any> = Resolver<
@@ -15959,7 +15867,7 @@ export namespace PersonalJsonResolvers {
 		Context = any
 	> = Resolver<R, Parent, Context>;
 	export type InternalResolver<
-		R = Internal_21 | null,
+		R = Internal_20 | null,
 		Parent = any,
 		Context = any
 	> = Resolver<R, Parent, Context>;
@@ -15989,7 +15897,7 @@ export namespace Social_2Resolvers {
 	> = Resolver<R, Parent, Context>;
 }
 
-export namespace Internal_21Resolvers {
+export namespace Internal_20Resolvers {
 	export interface Resolvers<Context = any> {
 		contentDigest?: ContentDigestResolver<string | null, any, Context>;
 		type?: TypeResolver<string | null, any, Context>;
@@ -16028,7 +15936,7 @@ export namespace CompetencesJsonResolvers {
 		> /** The children of this node. */;
 		name?: NameResolver<string | null, any, Context>;
 		description?: DescriptionResolver<string | null, any, Context>;
-		internal?: InternalResolver<Internal_22 | null, any, Context>;
+		internal?: InternalResolver<Internal_21 | null, any, Context>;
 	}
 
 	export type IdResolver<R = string, Parent = any, Context = any> = Resolver<
@@ -16057,13 +15965,13 @@ export namespace CompetencesJsonResolvers {
 		Context = any
 	> = Resolver<R, Parent, Context>;
 	export type InternalResolver<
-		R = Internal_22 | null,
+		R = Internal_21 | null,
 		Parent = any,
 		Context = any
 	> = Resolver<R, Parent, Context>;
 }
 
-export namespace Internal_22Resolvers {
+export namespace Internal_21Resolvers {
 	export interface Resolvers<Context = any> {
 		contentDigest?: ContentDigestResolver<string | null, any, Context>;
 		type?: TypeResolver<string | null, any, Context>;
@@ -16101,8 +16009,8 @@ export namespace ExperiencesJsonResolvers {
 			Context
 		> /** The children of this node. */;
 		work?: WorkResolver<(Work_2 | null)[] | null, any, Context>;
-		internal?: InternalResolver<Internal_23 | null, any, Context>;
-		fields?: FieldsResolver<Fields_4 | null, any, Context>;
+		internal?: InternalResolver<Internal_22 | null, any, Context>;
+		fields?: FieldsResolver<Fields_3 | null, any, Context>;
 	}
 
 	export type IdResolver<R = string, Parent = any, Context = any> = Resolver<
@@ -16126,12 +16034,12 @@ export namespace ExperiencesJsonResolvers {
 		Context = any
 	> = Resolver<R, Parent, Context>;
 	export type InternalResolver<
-		R = Internal_23 | null,
+		R = Internal_22 | null,
 		Parent = any,
 		Context = any
 	> = Resolver<R, Parent, Context>;
 	export type FieldsResolver<
-		R = Fields_4 | null,
+		R = Fields_3 | null,
 		Parent = any,
 		Context = any
 	> = Resolver<R, Parent, Context>;
@@ -16209,12 +16117,12 @@ export namespace Projects_2Resolvers {
 	> = Resolver<R, Parent, Context>;
 }
 
-export namespace Internal_23Resolvers {
+export namespace Internal_22Resolvers {
 	export interface Resolvers<Context = any> {
 		contentDigest?: ContentDigestResolver<string | null, any, Context>;
 		type?: TypeResolver<string | null, any, Context>;
 		owner?: OwnerResolver<string | null, any, Context>;
-		fieldOwners?: FieldOwnersResolver<FieldOwners_4 | null, any, Context>;
+		fieldOwners?: FieldOwnersResolver<FieldOwners_3 | null, any, Context>;
 	}
 
 	export type ContentDigestResolver<
@@ -16233,13 +16141,13 @@ export namespace Internal_23Resolvers {
 		Context = any
 	> = Resolver<R, Parent, Context>;
 	export type FieldOwnersResolver<
-		R = FieldOwners_4 | null,
+		R = FieldOwners_3 | null,
 		Parent = any,
 		Context = any
 	> = Resolver<R, Parent, Context>;
 }
 
-export namespace FieldOwners_4Resolvers {
+export namespace FieldOwners_3Resolvers {
 	export interface Resolvers<Context = any> {
 		image_image?: ImageImageResolver<string | null, any, Context>;
 	}
@@ -16251,7 +16159,7 @@ export namespace FieldOwners_4Resolvers {
 	> = Resolver<R, Parent, Context>;
 }
 
-export namespace Fields_4Resolvers {
+export namespace Fields_3Resolvers {
 	export interface Resolvers<Context = any> {
 		image_image?: ImageImageResolver<
 			(string | null)[] | null,
@@ -16262,6 +16170,148 @@ export namespace Fields_4Resolvers {
 
 	export type ImageImageResolver<
 		R = (string | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+}
+/** Node of type SkillsJson */
+export namespace SkillsJsonResolvers {
+	export interface Resolvers<Context = any> {
+		id?: IdResolver<string, any, Context> /** The id of this node. */;
+		parent?: ParentResolver<
+			Node | null,
+			any,
+			Context
+		> /** The parent of this node. */;
+		children?: ChildrenResolver<
+			(Node | null)[] | null,
+			any,
+			Context
+		> /** The children of this node. */;
+		languages?: LanguagesResolver<
+			(Languages_2 | null)[] | null,
+			any,
+			Context
+		>;
+		technical?: TechnicalResolver<
+			(Technical_2 | null)[] | null,
+			any,
+			Context
+		>;
+		soft?: SoftResolver<(Soft_2 | null)[] | null, any, Context>;
+		internal?: InternalResolver<Internal_23 | null, any, Context>;
+	}
+
+	export type IdResolver<R = string, Parent = any, Context = any> = Resolver<
+		R,
+		Parent,
+		Context
+	>;
+	export type ParentResolver<
+		R = Node | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type ChildrenResolver<
+		R = (Node | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type LanguagesResolver<
+		R = (Languages_2 | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type TechnicalResolver<
+		R = (Technical_2 | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type SoftResolver<
+		R = (Soft_2 | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type InternalResolver<
+		R = Internal_23 | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+}
+
+export namespace Languages_2Resolvers {
+	export interface Resolvers<Context = any> {
+		name?: NameResolver<string | null, any, Context>;
+		intensity?: IntensityResolver<number | null, any, Context>;
+	}
+
+	export type NameResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type IntensityResolver<
+		R = number | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+}
+
+export namespace Technical_2Resolvers {
+	export interface Resolvers<Context = any> {
+		name?: NameResolver<string | null, any, Context>;
+		intensity?: IntensityResolver<number | null, any, Context>;
+	}
+
+	export type NameResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type IntensityResolver<
+		R = number | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+}
+
+export namespace Soft_2Resolvers {
+	export interface Resolvers<Context = any> {
+		name?: NameResolver<string | null, any, Context>;
+		intensity?: IntensityResolver<number | null, any, Context>;
+	}
+
+	export type NameResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type IntensityResolver<
+		R = number | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+}
+
+export namespace Internal_23Resolvers {
+	export interface Resolvers<Context = any> {
+		contentDigest?: ContentDigestResolver<string | null, any, Context>;
+		type?: TypeResolver<string | null, any, Context>;
+		owner?: OwnerResolver<string | null, any, Context>;
+	}
+
+	export type ContentDigestResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type TypeResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type OwnerResolver<
+		R = string | null,
 		Parent = any,
 		Context = any
 	> = Resolver<R, Parent, Context>;
@@ -16352,8 +16402,8 @@ export namespace Internal_24Resolvers {
 		Context = any
 	> = Resolver<R, Parent, Context>;
 }
-/** Node of type SkillsJson */
-export namespace SkillsJsonResolvers {
+/** Node of type OrganizationJson */
+export namespace OrganizationJsonResolvers {
 	export interface Resolvers<Context = any> {
 		id?: IdResolver<string, any, Context> /** The id of this node. */;
 		parent?: ParentResolver<
@@ -16366,18 +16416,12 @@ export namespace SkillsJsonResolvers {
 			any,
 			Context
 		> /** The children of this node. */;
-		languages?: LanguagesResolver<
-			(Languages_2 | null)[] | null,
-			any,
-			Context
-		>;
-		technical?: TechnicalResolver<
-			(Technical_2 | null)[] | null,
-			any,
-			Context
-		>;
-		soft?: SoftResolver<(Soft_2 | null)[] | null, any, Context>;
+		name?: NameResolver<string | null, any, Context>;
+		url?: UrlResolver<string | null, any, Context>;
+		logo?: LogoResolver<string | null, any, Context>;
+		telephone?: TelephoneResolver<string | null, any, Context>;
 		internal?: InternalResolver<Internal_25 | null, any, Context>;
+		fields?: FieldsResolver<Fields_4 | null, any, Context>;
 	}
 
 	export type IdResolver<R = string, Parent = any, Context = any> = Resolver<
@@ -16395,18 +16439,23 @@ export namespace SkillsJsonResolvers {
 		Parent = any,
 		Context = any
 	> = Resolver<R, Parent, Context>;
-	export type LanguagesResolver<
-		R = (Languages_2 | null)[] | null,
+	export type NameResolver<
+		R = string | null,
 		Parent = any,
 		Context = any
 	> = Resolver<R, Parent, Context>;
-	export type TechnicalResolver<
-		R = (Technical_2 | null)[] | null,
+	export type UrlResolver<
+		R = string | null,
 		Parent = any,
 		Context = any
 	> = Resolver<R, Parent, Context>;
-	export type SoftResolver<
-		R = (Soft_2 | null)[] | null,
+	export type LogoResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type TelephoneResolver<
+		R = string | null,
 		Parent = any,
 		Context = any
 	> = Resolver<R, Parent, Context>;
@@ -16415,57 +16464,8 @@ export namespace SkillsJsonResolvers {
 		Parent = any,
 		Context = any
 	> = Resolver<R, Parent, Context>;
-}
-
-export namespace Languages_2Resolvers {
-	export interface Resolvers<Context = any> {
-		name?: NameResolver<string | null, any, Context>;
-		intensity?: IntensityResolver<number | null, any, Context>;
-	}
-
-	export type NameResolver<
-		R = string | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type IntensityResolver<
-		R = number | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-}
-
-export namespace Technical_2Resolvers {
-	export interface Resolvers<Context = any> {
-		name?: NameResolver<string | null, any, Context>;
-		intensity?: IntensityResolver<number | null, any, Context>;
-	}
-
-	export type NameResolver<
-		R = string | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type IntensityResolver<
-		R = number | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-}
-
-export namespace Soft_2Resolvers {
-	export interface Resolvers<Context = any> {
-		name?: NameResolver<string | null, any, Context>;
-		intensity?: IntensityResolver<number | null, any, Context>;
-	}
-
-	export type NameResolver<
-		R = string | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type IntensityResolver<
-		R = number | null,
+	export type FieldsResolver<
+		R = Fields_4 | null,
 		Parent = any,
 		Context = any
 	> = Resolver<R, Parent, Context>;
@@ -16476,6 +16476,7 @@ export namespace Internal_25Resolvers {
 		contentDigest?: ContentDigestResolver<string | null, any, Context>;
 		type?: TypeResolver<string | null, any, Context>;
 		owner?: OwnerResolver<string | null, any, Context>;
+		fieldOwners?: FieldOwnersResolver<FieldOwners_4 | null, any, Context>;
 	}
 
 	export type ContentDigestResolver<
@@ -16489,6 +16490,35 @@ export namespace Internal_25Resolvers {
 		Context = any
 	> = Resolver<R, Parent, Context>;
 	export type OwnerResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type FieldOwnersResolver<
+		R = FieldOwners_4 | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+}
+
+export namespace FieldOwners_4Resolvers {
+	export interface Resolvers<Context = any> {
+		logo_image?: LogoImageResolver<string | null, any, Context>;
+	}
+
+	export type LogoImageResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+}
+
+export namespace Fields_4Resolvers {
+	export interface Resolvers<Context = any> {
+		logo_image?: LogoImageResolver<string | null, any, Context>;
+	}
+
+	export type LogoImageResolver<
 		R = string | null,
 		Parent = any,
 		Context = any
@@ -16952,179 +16982,6 @@ export namespace TodoJsonGroupConnectionEdgeResolvers {
 	> = Resolver<R, Parent, Context>;
 	export type PreviousResolver<
 		R = TodoJson | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-}
-/** A connection to a list of items. */
-export namespace OrganizationJsonConnectionResolvers {
-	export interface Resolvers<Context = any> {
-		pageInfo?: PageInfoResolver<
-			PageInfo,
-			any,
-			Context
-		> /** Information to aid in pagination. */;
-		edges?: EdgesResolver<
-			(OrganizationJsonEdge | null)[] | null,
-			any,
-			Context
-		> /** A list of edges. */;
-		totalCount?: TotalCountResolver<number | null, any, Context>;
-		distinct?: DistinctResolver<(string | null)[] | null, any, Context>;
-		group?: GroupResolver<
-			(OrganizationJsonGroupConnectionConnection | null)[] | null,
-			any,
-			Context
-		>;
-	}
-
-	export type PageInfoResolver<
-		R = PageInfo,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type EdgesResolver<
-		R = (OrganizationJsonEdge | null)[] | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type TotalCountResolver<
-		R = number | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type DistinctResolver<
-		R = (string | null)[] | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context, DistinctArgs>;
-	export interface DistinctArgs {
-		field?: OrganizationJsonDistinctEnum | null;
-	}
-
-	export type GroupResolver<
-		R = (OrganizationJsonGroupConnectionConnection | null)[] | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context, GroupArgs>;
-	export interface GroupArgs {
-		skip?: number | null;
-		limit?: number | null;
-		field?: OrganizationJsonGroupEnum | null;
-	}
-}
-/** An edge in a connection. */
-export namespace OrganizationJsonEdgeResolvers {
-	export interface Resolvers<Context = any> {
-		node?: NodeResolver<
-			OrganizationJson | null,
-			any,
-			Context
-		> /** The item at the end of the edge */;
-		next?: NextResolver<
-			OrganizationJson | null,
-			any,
-			Context
-		> /** The next edge in the connection */;
-		previous?: PreviousResolver<
-			OrganizationJson | null,
-			any,
-			Context
-		> /** The previous edge in the connection */;
-	}
-
-	export type NodeResolver<
-		R = OrganizationJson | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type NextResolver<
-		R = OrganizationJson | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type PreviousResolver<
-		R = OrganizationJson | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-}
-/** A connection to a list of items. */
-export namespace OrganizationJsonGroupConnectionConnectionResolvers {
-	export interface Resolvers<Context = any> {
-		pageInfo?: PageInfoResolver<
-			PageInfo,
-			any,
-			Context
-		> /** Information to aid in pagination. */;
-		edges?: EdgesResolver<
-			(OrganizationJsonGroupConnectionEdge | null)[] | null,
-			any,
-			Context
-		> /** A list of edges. */;
-		field?: FieldResolver<string | null, any, Context>;
-		fieldValue?: FieldValueResolver<string | null, any, Context>;
-		totalCount?: TotalCountResolver<number | null, any, Context>;
-	}
-
-	export type PageInfoResolver<
-		R = PageInfo,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type EdgesResolver<
-		R = (OrganizationJsonGroupConnectionEdge | null)[] | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type FieldResolver<
-		R = string | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type FieldValueResolver<
-		R = string | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type TotalCountResolver<
-		R = number | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-}
-/** An edge in a connection. */
-export namespace OrganizationJsonGroupConnectionEdgeResolvers {
-	export interface Resolvers<Context = any> {
-		node?: NodeResolver<
-			OrganizationJson | null,
-			any,
-			Context
-		> /** The item at the end of the edge */;
-		next?: NextResolver<
-			OrganizationJson | null,
-			any,
-			Context
-		> /** The next edge in the connection */;
-		previous?: PreviousResolver<
-			OrganizationJson | null,
-			any,
-			Context
-		> /** The previous edge in the connection */;
-	}
-
-	export type NodeResolver<
-		R = OrganizationJson | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type NextResolver<
-		R = OrganizationJson | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type PreviousResolver<
-		R = OrganizationJson | null,
 		Parent = any,
 		Context = any
 	> = Resolver<R, Parent, Context>;
@@ -17649,6 +17506,179 @@ export namespace ExperiencesJsonGroupConnectionEdgeResolvers {
 	> = Resolver<R, Parent, Context>;
 }
 /** A connection to a list of items. */
+export namespace SkillsJsonConnectionResolvers {
+	export interface Resolvers<Context = any> {
+		pageInfo?: PageInfoResolver<
+			PageInfo,
+			any,
+			Context
+		> /** Information to aid in pagination. */;
+		edges?: EdgesResolver<
+			(SkillsJsonEdge | null)[] | null,
+			any,
+			Context
+		> /** A list of edges. */;
+		totalCount?: TotalCountResolver<number | null, any, Context>;
+		distinct?: DistinctResolver<(string | null)[] | null, any, Context>;
+		group?: GroupResolver<
+			(SkillsJsonGroupConnectionConnection | null)[] | null,
+			any,
+			Context
+		>;
+	}
+
+	export type PageInfoResolver<
+		R = PageInfo,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type EdgesResolver<
+		R = (SkillsJsonEdge | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type TotalCountResolver<
+		R = number | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type DistinctResolver<
+		R = (string | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context, DistinctArgs>;
+	export interface DistinctArgs {
+		field?: SkillsJsonDistinctEnum | null;
+	}
+
+	export type GroupResolver<
+		R = (SkillsJsonGroupConnectionConnection | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context, GroupArgs>;
+	export interface GroupArgs {
+		skip?: number | null;
+		limit?: number | null;
+		field?: SkillsJsonGroupEnum | null;
+	}
+}
+/** An edge in a connection. */
+export namespace SkillsJsonEdgeResolvers {
+	export interface Resolvers<Context = any> {
+		node?: NodeResolver<
+			SkillsJson | null,
+			any,
+			Context
+		> /** The item at the end of the edge */;
+		next?: NextResolver<
+			SkillsJson | null,
+			any,
+			Context
+		> /** The next edge in the connection */;
+		previous?: PreviousResolver<
+			SkillsJson | null,
+			any,
+			Context
+		> /** The previous edge in the connection */;
+	}
+
+	export type NodeResolver<
+		R = SkillsJson | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type NextResolver<
+		R = SkillsJson | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type PreviousResolver<
+		R = SkillsJson | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+}
+/** A connection to a list of items. */
+export namespace SkillsJsonGroupConnectionConnectionResolvers {
+	export interface Resolvers<Context = any> {
+		pageInfo?: PageInfoResolver<
+			PageInfo,
+			any,
+			Context
+		> /** Information to aid in pagination. */;
+		edges?: EdgesResolver<
+			(SkillsJsonGroupConnectionEdge | null)[] | null,
+			any,
+			Context
+		> /** A list of edges. */;
+		field?: FieldResolver<string | null, any, Context>;
+		fieldValue?: FieldValueResolver<string | null, any, Context>;
+		totalCount?: TotalCountResolver<number | null, any, Context>;
+	}
+
+	export type PageInfoResolver<
+		R = PageInfo,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type EdgesResolver<
+		R = (SkillsJsonGroupConnectionEdge | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type FieldResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type FieldValueResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type TotalCountResolver<
+		R = number | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+}
+/** An edge in a connection. */
+export namespace SkillsJsonGroupConnectionEdgeResolvers {
+	export interface Resolvers<Context = any> {
+		node?: NodeResolver<
+			SkillsJson | null,
+			any,
+			Context
+		> /** The item at the end of the edge */;
+		next?: NextResolver<
+			SkillsJson | null,
+			any,
+			Context
+		> /** The next edge in the connection */;
+		previous?: PreviousResolver<
+			SkillsJson | null,
+			any,
+			Context
+		> /** The previous edge in the connection */;
+	}
+
+	export type NodeResolver<
+		R = SkillsJson | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type NextResolver<
+		R = SkillsJson | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type PreviousResolver<
+		R = SkillsJson | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+}
+/** A connection to a list of items. */
 export namespace InterestsJsonConnectionResolvers {
 	export interface Resolvers<Context = any> {
 		pageInfo?: PageInfoResolver<
@@ -17822,7 +17852,7 @@ export namespace InterestsJsonGroupConnectionEdgeResolvers {
 	> = Resolver<R, Parent, Context>;
 }
 /** A connection to a list of items. */
-export namespace SkillsJsonConnectionResolvers {
+export namespace OrganizationJsonConnectionResolvers {
 	export interface Resolvers<Context = any> {
 		pageInfo?: PageInfoResolver<
 			PageInfo,
@@ -17830,14 +17860,14 @@ export namespace SkillsJsonConnectionResolvers {
 			Context
 		> /** Information to aid in pagination. */;
 		edges?: EdgesResolver<
-			(SkillsJsonEdge | null)[] | null,
+			(OrganizationJsonEdge | null)[] | null,
 			any,
 			Context
 		> /** A list of edges. */;
 		totalCount?: TotalCountResolver<number | null, any, Context>;
 		distinct?: DistinctResolver<(string | null)[] | null, any, Context>;
 		group?: GroupResolver<
-			(SkillsJsonGroupConnectionConnection | null)[] | null,
+			(OrganizationJsonGroupConnectionConnection | null)[] | null,
 			any,
 			Context
 		>;
@@ -17849,7 +17879,7 @@ export namespace SkillsJsonConnectionResolvers {
 		Context = any
 	> = Resolver<R, Parent, Context>;
 	export type EdgesResolver<
-		R = (SkillsJsonEdge | null)[] | null,
+		R = (OrganizationJsonEdge | null)[] | null,
 		Parent = any,
 		Context = any
 	> = Resolver<R, Parent, Context>;
@@ -17864,58 +17894,58 @@ export namespace SkillsJsonConnectionResolvers {
 		Context = any
 	> = Resolver<R, Parent, Context, DistinctArgs>;
 	export interface DistinctArgs {
-		field?: SkillsJsonDistinctEnum | null;
+		field?: OrganizationJsonDistinctEnum | null;
 	}
 
 	export type GroupResolver<
-		R = (SkillsJsonGroupConnectionConnection | null)[] | null,
+		R = (OrganizationJsonGroupConnectionConnection | null)[] | null,
 		Parent = any,
 		Context = any
 	> = Resolver<R, Parent, Context, GroupArgs>;
 	export interface GroupArgs {
 		skip?: number | null;
 		limit?: number | null;
-		field?: SkillsJsonGroupEnum | null;
+		field?: OrganizationJsonGroupEnum | null;
 	}
 }
 /** An edge in a connection. */
-export namespace SkillsJsonEdgeResolvers {
+export namespace OrganizationJsonEdgeResolvers {
 	export interface Resolvers<Context = any> {
 		node?: NodeResolver<
-			SkillsJson | null,
+			OrganizationJson | null,
 			any,
 			Context
 		> /** The item at the end of the edge */;
 		next?: NextResolver<
-			SkillsJson | null,
+			OrganizationJson | null,
 			any,
 			Context
 		> /** The next edge in the connection */;
 		previous?: PreviousResolver<
-			SkillsJson | null,
+			OrganizationJson | null,
 			any,
 			Context
 		> /** The previous edge in the connection */;
 	}
 
 	export type NodeResolver<
-		R = SkillsJson | null,
+		R = OrganizationJson | null,
 		Parent = any,
 		Context = any
 	> = Resolver<R, Parent, Context>;
 	export type NextResolver<
-		R = SkillsJson | null,
+		R = OrganizationJson | null,
 		Parent = any,
 		Context = any
 	> = Resolver<R, Parent, Context>;
 	export type PreviousResolver<
-		R = SkillsJson | null,
+		R = OrganizationJson | null,
 		Parent = any,
 		Context = any
 	> = Resolver<R, Parent, Context>;
 }
 /** A connection to a list of items. */
-export namespace SkillsJsonGroupConnectionConnectionResolvers {
+export namespace OrganizationJsonGroupConnectionConnectionResolvers {
 	export interface Resolvers<Context = any> {
 		pageInfo?: PageInfoResolver<
 			PageInfo,
@@ -17923,7 +17953,7 @@ export namespace SkillsJsonGroupConnectionConnectionResolvers {
 			Context
 		> /** Information to aid in pagination. */;
 		edges?: EdgesResolver<
-			(SkillsJsonGroupConnectionEdge | null)[] | null,
+			(OrganizationJsonGroupConnectionEdge | null)[] | null,
 			any,
 			Context
 		> /** A list of edges. */;
@@ -17938,7 +17968,7 @@ export namespace SkillsJsonGroupConnectionConnectionResolvers {
 		Context = any
 	> = Resolver<R, Parent, Context>;
 	export type EdgesResolver<
-		R = (SkillsJsonGroupConnectionEdge | null)[] | null,
+		R = (OrganizationJsonGroupConnectionEdge | null)[] | null,
 		Parent = any,
 		Context = any
 	> = Resolver<R, Parent, Context>;
@@ -17959,37 +17989,37 @@ export namespace SkillsJsonGroupConnectionConnectionResolvers {
 	> = Resolver<R, Parent, Context>;
 }
 /** An edge in a connection. */
-export namespace SkillsJsonGroupConnectionEdgeResolvers {
+export namespace OrganizationJsonGroupConnectionEdgeResolvers {
 	export interface Resolvers<Context = any> {
 		node?: NodeResolver<
-			SkillsJson | null,
+			OrganizationJson | null,
 			any,
 			Context
 		> /** The item at the end of the edge */;
 		next?: NextResolver<
-			SkillsJson | null,
+			OrganizationJson | null,
 			any,
 			Context
 		> /** The next edge in the connection */;
 		previous?: PreviousResolver<
-			SkillsJson | null,
+			OrganizationJson | null,
 			any,
 			Context
 		> /** The previous edge in the connection */;
 	}
 
 	export type NodeResolver<
-		R = SkillsJson | null,
+		R = OrganizationJson | null,
 		Parent = any,
 		Context = any
 	> = Resolver<R, Parent, Context>;
 	export type NextResolver<
-		R = SkillsJson | null,
+		R = OrganizationJson | null,
 		Parent = any,
 		Context = any
 	> = Resolver<R, Parent, Context>;
 	export type PreviousResolver<
-		R = SkillsJson | null,
+		R = OrganizationJson | null,
 		Parent = any,
 		Context = any
 	> = Resolver<R, Parent, Context>;

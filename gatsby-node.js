@@ -1,8 +1,7 @@
 const path = require("path");
-// const createPaginatedPages = require("gatsby-paginate");
 
 const { graphql } = require("./src/utils/taggedUtils");
-const { compareEntryEdges } = require("./src/utils/utils");
+const { compareEntryEdges, slugify } = require("./src/utils/utils");
 
 const postTemplate = path.resolve(`src/templates/singlePost.tsx`);
 const entryTemplate = path.resolve(`src/templates/singleEntry.tsx`);
@@ -47,6 +46,7 @@ function buildPageQuery(pageKind = ".*") {
 							title
 							description
 							date
+							tags
 							authors {
 								name
 								url
@@ -75,14 +75,53 @@ function createEntryPages({
 				throw result.errors[0];
 			}
 
-			const postEdges = result.data.allMarkdownRemark.edges;
-			const sortedEdges = [...postEdges].sort(compareEntryEdges);
+			/** @type {import("./src/graphql-types").MarkdownRemarkEdge[]} */
+			const rawEdges = result.data.allMarkdownRemark.edges;
+
+			const postEdges = rawEdges
+				.map(edge => {
+					edge.node.frontmatter.tags =
+						edge.node.frontmatter.tags &&
+						edge.node.frontmatter.tags.map(tag => tag.trim());
+					return edge;
+				})
+				.sort(compareEntryEdges);
+
+			const tags = new Set(
+				postEdges
+					.map(edge => edge.node.frontmatter.tags)
+					.filter(maybeArr => maybeArr)
+					.reduce((arr, el) => arr.concat(el), []),
+			);
+
+			for (const tag of tags) {
+				const tagEdges = postEdges.filter(
+					edge =>
+						edge.node.frontmatter.tags &&
+						edge.node.frontmatter.tags.includes(tag),
+				);
+
+				const path = `/${pathPrefix}/tags/${slugify(tag)}`.replace(
+					/\/{2,}/g,
+					"/",
+				);
+
+				createPage({
+					path,
+					component: entryListTemplate,
+					context: {
+						group: tagEdges,
+						pathPrefix,
+						additionalContext: { listTitle: tag },
+					},
+				});
+			}
 
 			createPage({
 				path: `/${pathPrefix}`,
 				component: entryListTemplate,
 				context: {
-					group: sortedEdges,
+					group: postEdges,
 					pathPrefix,
 					additionalContext: { listTitle },
 				},
