@@ -71,7 +71,7 @@ const StyledMetadata = styled.div`
 	opacity: 0.85;
 	line-height: 1.4;
 
-	* + *::before {
+	> * + *::before {
 		content: " | ";
 	}
 `;
