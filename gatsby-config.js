@@ -189,7 +189,11 @@ module.exports = {
 					"/*.gif": [netlifyCacheControlHeader],
 					"/*.svg": [netlifyCacheControlHeader],
 				},
-				allPageHeaders: ["Strict-Transport-Security: max-age=31536000"],
+				allPageHeaders: [
+					"Strict-Transport-Security: max-age=31536000",
+					"Referrer-Policy: no-referrer, same-origin",
+					"Content-Security-Policy: default-src 'none'; connect-src 'self'; frame-src https://codesandbox.io https://www.youtube.com",
+				],
 			},
 		},
 		"gatsby-plugin-netlify-cache",
