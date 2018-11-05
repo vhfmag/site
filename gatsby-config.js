@@ -57,7 +57,6 @@ const makeFeedQuery = (pageKind = ".*") => graphql`
 				}
 				frontmatter {
 					title
-					title
 					description
 					date
 					authors {
