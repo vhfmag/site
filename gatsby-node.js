@@ -264,7 +264,7 @@ exports.createPages = ({ actions, graphql: graphqlQuerier }) => {
 					pageKind: "bookmarks",
 					graphqlQuerier,
 					createPage,
-					listTitle: "Recomendaçõess",
+					listTitle: "Recomendações",
 					pathPrefix: "bookmarks",
 				}),
 			]),
