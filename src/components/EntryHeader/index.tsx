@@ -1,12 +1,18 @@
 import * as React from "react";
 import styled from "styled-components";
 import { Link } from "gatsby";
-import { formatDate } from "../../utils/utils";
-import { folderToCategory } from "../../utils/consts";
+import { formatDate, slugify } from "../../utils/utils";
+import {
+	folderToCategory,
+	themeColor,
+	backgroundColor,
+} from "../../utils/consts";
+import { Authors_2 } from "../../graphql-types";
 
 export interface IEntryHeaderProps {
 	title: string;
-	authors: IAuthor[];
+	authors: Authors_2[];
+	tags?: string[];
 
 	subtitle?: NonNullableNode;
 	publishDate?: Date;
@@ -37,6 +43,26 @@ const StyledHeader = styled.header`
 		&:first-child {
 			margin-top: 0;
 		}
+	}
+`;
+
+const StyledTags = styled.ul`
+	all: unset;
+	font-size: 0.75em;
+	opacity: 0.85;
+	line-height: 1.4;
+	display: inline-flex;
+	flex-wrap: wrap;
+	margin: -4pt;
+
+	a {
+		all: unset;
+		margin: 4pt;
+		padding: 4pt;
+		cursor: pointer;
+		border-radius: 4pt;
+		background-color: ${themeColor};
+		color: ${backgroundColor};
 	}
 `;
 
@@ -81,6 +107,7 @@ export const EntryHeader: React.SFC<
 	isFullPage,
 	timeToRead,
 	wordCount,
+	tags,
 }) => {
 	const Title = isFullPage ? "h1" : "h2";
 	const Subtitle = isFullPage ? "h2" : "h3";
@@ -129,10 +156,10 @@ export const EntryHeader: React.SFC<
 						{formatDate(publishDate)}
 					</time>
 				)}
-			</StyledMetadata>
-			<StyledMetadata>
-				{wordCount} palavras, <abbr title="aproximadamente">~</abbr>
-				{timeToRead} minutos de leitura
+				<span>
+					{wordCount} palavras, <abbr title="aproximadamente">~</abbr>
+					{timeToRead} minutos de leitura
+				</span>
 			</StyledMetadata>
 			{replyTo && (
 				<StyledMetadata>
@@ -140,6 +167,19 @@ export const EntryHeader: React.SFC<
 						{replyToText}
 					</a>
 				</StyledMetadata>
+			)}
+			{tags && (
+				<StyledTags>
+					{tags.map(tag => (
+						<a
+							role="listitem"
+							href={`/${folderName}/tags/${slugify(tag.trim())}`}
+							key={tag}
+						>
+							{tag}
+						</a>
+					))}
+				</StyledTags>
 			)}
 		</StyledHeader>
 	);

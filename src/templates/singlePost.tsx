@@ -25,7 +25,7 @@ export default class SinglePostTemplate extends React.Component<
 					htmlAst,
 					headings,
 					excerpt,
-					frontmatter: { toc, date, title, description },
+					frontmatter: { toc, date, title, description, tags },
 					timeToRead,
 					parent: { birthTime, name: fileName, relativeDirectory },
 					count: { words } = { words: -1 },
@@ -68,6 +68,7 @@ export default class SinglePostTemplate extends React.Component<
 					authors={[{ name, url: siteUrl }]}
 					htmlAst={htmlAst}
 					headings={headings}
+					tags={tags}
 					wordCount={words}
 					timeToRead={timeToRead}
 				/>

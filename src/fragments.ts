@@ -18,6 +18,7 @@ export interface IMarkdownEntryFragment {
 		title: string;
 		description?: string;
 		date?: string;
+		tags?: string[];
 		authors?: Array<{
 			name: string;
 			url?: string;
@@ -73,6 +74,7 @@ export const fragments = graphql`
 			title
 			description
 			date
+			tags
 			authors {
 				name
 				url

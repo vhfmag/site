@@ -15,12 +15,19 @@ function formatDate(date) {
 	return dateFormatter.format(date instanceof Date ? date : new Date(date));
 }
 
+/**
+ * @param {import("../graphql-types").MarkdownRemarkEdge} edge
+ */
 function getEdgeTimestamp(edge) {
 	return new Date(
 		edge.node.frontmatter.date || edge.node.parent.birthTime,
 	).valueOf();
 }
 
+/**
+ * @param {import("../graphql-types").MarkdownRemarkEdge} e1
+ * @param {import("../graphql-types").MarkdownRemarkEdge} e2
+ */
 function compareEntryEdges(e1, e2) {
 	const t1 = getEdgeTimestamp(e1);
 	const t2 = getEdgeTimestamp(e2);

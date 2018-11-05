@@ -25,7 +25,7 @@ export default class SingleEntryTemplate extends React.Component<
 					htmlAst,
 					excerpt,
 					headings,
-					frontmatter: { title, toc, authors, link, date },
+					frontmatter: { title, toc, authors, link, date, tags },
 					parent: { birthTime, name: fileName, relativeDirectory },
 					timeToRead,
 					count: { words },
@@ -73,6 +73,7 @@ export default class SingleEntryTemplate extends React.Component<
 					replyTo={link}
 					htmlAst={htmlAst}
 					headings={headings}
+					tags={tags}
 					wordCount={words}
 					timeToRead={timeToRead}
 				/>

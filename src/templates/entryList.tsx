@@ -49,7 +49,13 @@ export default class EntryList extends React.Component<IBookmarkListProps> {
 							node: {
 								fileAbsolutePath,
 								excerpt,
-								frontmatter: { title, authors, link, date },
+								frontmatter: {
+									title,
+									authors,
+									link,
+									date,
+									tags,
+								},
 								timeToRead,
 								parent: {
 									birthTime,
@@ -73,6 +79,7 @@ export default class EntryList extends React.Component<IBookmarkListProps> {
 									publishDate={new Date(date || birthTime)}
 									title={title}
 									fileName={fileName}
+									tags={tags}
 									folderName={relativeDirectory}
 									content={excerpt}
 									wordCount={words}
