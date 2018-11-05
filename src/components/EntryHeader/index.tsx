@@ -172,6 +172,7 @@ export const EntryHeader: React.SFC<
 				<StyledTags>
 					{tags.map(tag => (
 						<a
+							rel="tag"
 							role="listitem"
 							href={`/${folderName}/tags/${slugify(tag.trim())}`}
 							key={tag}
