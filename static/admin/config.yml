@@ -1,58 +1,76 @@
 backend:
-  name: gitlab
-  repo: vhfmag/vhfmag.gitlab.io
+    name: gitlab
+    repo: vhfmag/vhfmag.gitlab.io
 
 media_folder: "static/img" # Folder where user uploaded files should go
 public_folder: "img"
 
 collections:
-  - name: "post"
-    label: "Post"
-    folder: "src/content/posts"
-    create: true
-    fields:
-      - { label: "Title", name: "title", widget: "string" }
-      - { label: "Draft", name: "draft", widget: "boolean", required: false }
-      - { label: "Description", name: "description", widget: "text" }
-      - { label: "Publish Date", name: "date", widget: "date" }
-      - { label: "Body", name: "body", widget: "markdown" }
-  - name: "bookmark"
-    label: "Bookmark"
-    folder: "src/content/bookmarks"
-    create: true
-    fields:
-      - { label: "Title", name: "title", widget: "string" }
-      - { label: "Link", name: "link", widget: "string", required: false }
-      - { label: "Draft", name: "draft", widget: "boolean", required: false }
-      - { label: "Publish Date", name: "date", widget: "date" }
-      - label: "Authors"
-        name: "authors"
-        widget: "list"
-        fields:
-          - label: "Name"
-            name: "name"
-            widget: "string"
-          - label: "URL"
-            name: "url"
-            widget: "string"
-      - { label: "Body", name: "body", widget: "markdown", required: false }
-  - name: "book"
-    label: "Book"
-    folder: "src/content/books"
-    create: true
-    fields:
-      - { label: "Title", name: "title", widget: "string" }
-      - { label: "Link", name: "link", widget: "string", required: false }
-      - { label: "Draft", name: "draft", widget: "boolean", required: false }
-      - { label: "Publish Date", name: "date", widget: "date" }
-      - label: "Authors"
-        name: "authors"
-        widget: "list"
-        fields:
-          - label: "Name"
-            name: "name"
-            widget: "string"
-          - label: "URL"
-            name: "url"
-            widget: "string"
-      - { label: "Body", name: "body", widget: "markdown", required: false }
+    - name: "post"
+      label: "Post"
+      folder: "src/content/posts"
+      create: true
+      fields:
+          - { label: "Title", name: "title", widget: "string" }
+          - {
+                label: "Draft",
+                name: "draft",
+                widget: "boolean",
+                required: false,
+            }
+          - { label: "Description", name: "description", widget: "text" }
+          - { label: "Publish Date", name: "date", widget: "date" }
+          - { label: "Body", name: "body", widget: "markdown" }
+          - { label: "Tags", name: "tags", widget: "list", required: false }
+    - name: "bookmark"
+      label: "Bookmark"
+      folder: "src/content/bookmarks"
+      create: true
+      fields:
+          - { label: "Title", name: "title", widget: "string" }
+          - { label: "Link", name: "link", widget: "string", required: false }
+          - {
+                label: "Draft",
+                name: "draft",
+                widget: "boolean",
+                required: false,
+            }
+          - { label: "Publish Date", name: "date", widget: "date" }
+          - { label: "Tags", name: "tags", widget: "list", required: false }
+          - label: "Authors"
+            name: "authors"
+            widget: "list"
+            fields:
+                - label: "Name"
+                  name: "name"
+                  widget: "string"
+                - label: "URL"
+                  name: "url"
+                  widget: "string"
+          - { label: "Body", name: "body", widget: "markdown", required: false }
+    - name: "book"
+      label: "Book"
+      folder: "src/content/books"
+      create: true
+      fields:
+          - { label: "Title", name: "title", widget: "string" }
+          - { label: "Link", name: "link", widget: "string", required: false }
+          - {
+                label: "Draft",
+                name: "draft",
+                widget: "boolean",
+                required: false,
+            }
+          - { label: "Publish Date", name: "date", widget: "date" }
+          - { label: "Tags", name: "tags", widget: "list", required: false }
+          - label: "Authors"
+            name: "authors"
+            widget: "list"
+            fields:
+                - label: "Name"
+                  name: "name"
+                  widget: "string"
+                - label: "URL"
+                  name: "url"
+                  widget: "string"
+          - { label: "Body", name: "body", widget: "markdown", required: false }
