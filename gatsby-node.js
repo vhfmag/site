@@ -1,11 +1,14 @@
 const path = require("path");
 
+const { zipObject, mapValues } = require("lodash");
 const { graphql } = require("./src/utils/taggedUtils");
 const { compareEntryEdges, slugify } = require("./src/utils/utils");
 
 const postTemplate = path.resolve(`src/templates/singlePost.tsx`);
 const entryTemplate = path.resolve(`src/templates/singleEntry.tsx`);
 const entryListTemplate = path.resolve(`src/templates/entryList.tsx`);
+
+const tagListTemplate = path.resolve(`src/templates/tagList.tsx`);
 
 const folderToPageTemplate = {
 	posts: postTemplate,
@@ -87,24 +90,46 @@ function createEntryPages({
 				})
 				.sort(compareEntryEdges);
 
-			const tags = new Set(
-				postEdges
-					.map(edge => edge.node.frontmatter.tags)
-					.filter(maybeArr => maybeArr)
-					.reduce((arr, el) => arr.concat(el), []),
+			const tags = Array.from(
+				new Set(
+					postEdges
+						.map(edge => edge.node.frontmatter.tags)
+						.filter(maybeArr => maybeArr)
+						.reduce((arr, el) => arr.concat(el), []),
+				),
 			);
 
-			for (const tag of tags) {
-				const tagEdges = postEdges.filter(
-					edge =>
-						edge.node.frontmatter.tags &&
-						edge.node.frontmatter.tags.includes(tag),
-				);
+			const tagPagesMap = zipObject(
+				tags,
+				tags.map(tag =>
+					postEdges.filter(
+						edge =>
+							edge.node.frontmatter.tags &&
+							edge.node.frontmatter.tags.includes(tag),
+					),
+				),
+			);
 
-				const path = `/${pathPrefix}/tags/${slugify(tag)}`.replace(
-					/\/{2,}/g,
-					"/",
-				);
+			const basePath = `/${pathPrefix}/tags`;
+			const getTagPath = tag =>
+				`${basePath}/${slugify(tag)}`.replace(/\/{2,}/g, "/");
+
+			createPage({
+				path: basePath,
+				component: tagListTemplate,
+				context: {
+					listTitle,
+					tags: Object.keys(tagPagesMap).map(tag => ({
+						tag,
+						count: tagPagesMap[tag].length,
+						url: getTagPath(tag),
+					})),
+				},
+			});
+
+			for (const tag in tagPagesMap) {
+				const tagEdges = tagPagesMap[tag];
+				const path = getTagPath(tag);
 
 				createPage({
 					path,
