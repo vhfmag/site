@@ -15,6 +15,7 @@ import {
 	faTwitter,
 	faInstagram,
 	faKeybase,
+	faMedium,
 } from "@fortawesome/free-brands-svg-icons";
 
 library.add(faRss);
@@ -29,5 +30,6 @@ library.add(faGetPocket);
 library.add(faGithub);
 library.add(faLinkedin);
 library.add(faTwitter);
+library.add(faMedium);
 library.add(faInstagram);
 library.add(faKeybase);

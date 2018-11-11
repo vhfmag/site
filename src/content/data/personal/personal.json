@@ -34,6 +34,11 @@
 			"url": "https://twitter.com/vhfmag"
 		},
 		{
+			"serviceName": "Medium",
+			"icon": "fab medium",
+			"url": "https://medium.com/@vhfmag"
+		},
+		{
 			"serviceName": "Instagram",
 			"icon": "fab instagram",
 			"url": "https://instagram.com/vhfmag"
