@@ -234,6 +234,10 @@ export default class DefaultLayout extends React.Component {
 									name: "recomendações",
 									url: "/bookmarks",
 								},
+								{
+									name: "tags",
+									url: "/tags",
+								},
 							],
 						},
 						{
