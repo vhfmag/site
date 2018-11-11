@@ -209,6 +209,16 @@ export default class DefaultLayout extends React.Component {
 					`}</noscript>
 					{generateLinkedDataTag(personLinkedData)}
 					{generateLinkedDataTag(blogLinkedData)}
+
+					<link
+						rel="webmention"
+						href="https://webmention.io/victormagalhaes.codes/webmention"
+					/>
+
+					<link
+						rel="pingback"
+						href="https://webmention.io/victormagalhaes.codes/xmlrpc"
+					/>
 				</Helmet>
 
 				<Sidebar
