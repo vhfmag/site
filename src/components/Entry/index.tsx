@@ -84,7 +84,6 @@ function headingsToTree(
 export class Entry extends React.Component<IEntryProps> {
 	public render() {
 		const { content, htmlAst, headings, ...headerProps } = this.props;
-		console.log({ headings });
 
 		return (
 			<StyledEntry className="h-entry">
