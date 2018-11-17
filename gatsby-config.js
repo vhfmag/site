@@ -202,7 +202,6 @@ module.exports = {
 				siteId: "1",
 				matomoUrl: "https://yuno.victormagalhaes.codes/matomo",
 				siteUrl: "https://victormagalhaes.codes",
-				dev: true,
 			},
 		},
 		"gatsby-plugin-netlify-cache",
