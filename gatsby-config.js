@@ -192,7 +192,7 @@ module.exports = {
 				allPageHeaders: [
 					"Strict-Transport-Security: max-age=31536000",
 					"Referrer-Policy: no-referrer, same-origin",
-					"Content-Security-Policy: default-src 'none'; connect-src 'self'; frame-src https://codesandbox.io https://www.youtube.com",
+					"Content-Security-Policy:  default-src 'none'; connect-src 'self'; font-src data:; frame-src https://codesandbox.io https://www.youtube.com; img-src 'self' data:; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; worker-src 'self'",
 				],
 			},
 		},
