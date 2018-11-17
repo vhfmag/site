@@ -192,8 +192,17 @@ module.exports = {
 				allPageHeaders: [
 					"Strict-Transport-Security: max-age=31536000",
 					"Referrer-Policy: no-referrer, same-origin",
-					"Content-Security-Policy:  default-src 'none'; connect-src 'self'; font-src data:; frame-src https://codesandbox.io https://www.youtube.com; img-src 'self' data:; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; worker-src 'self'",
+					"Content-Security-Policy:  default-src 'none'; connect-src 'self'; font-src data:; frame-src https://codesandbox.io https://www.youtube.com; img-src 'self' data:; script-src 'self' 'unsafe-inline' https://yuno.victormagalhaes.codes; style-src 'self' 'unsafe-inline'; worker-src 'self'",
 				],
+			},
+		},
+		{
+			resolve: "gatsby-plugin-matomo",
+			options: {
+				siteId: "1",
+				matomoUrl: "https://yuno.victormagalhaes.codes/matomo",
+				siteUrl: "https://victormagalhaes.codes",
+				dev: true,
 			},
 		},
 		"gatsby-plugin-netlify-cache",
