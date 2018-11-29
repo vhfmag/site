@@ -5,6 +5,7 @@ date: '2018-11-05'
 tags:
   - Filosofia
   - Beleza
+  - Teoria dos jogos
 authors:
   - name: Kevin Simler
     url: 'https://meltingasphalt.com/about'
