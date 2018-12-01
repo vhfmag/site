@@ -6,16 +6,6 @@ const typography = new Typography({
 	title: "Grand View",
 	baseFontSize: "16px",
 	baseLineHeight: 1.6875,
-	googleFonts: [
-		{
-			name: "Montserrat",
-			styles: ["700"],
-		},
-		{
-			name: "Zilla Slab",
-			styles: ["400", "400i", "700"],
-		},
-	],
 	headerFontFamily: ["Montserrat", "sans-serif"],
 	bodyFontFamily: ["Zilla Slab", "sans-serif"],
 	headerColor: themeColor,

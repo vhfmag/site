@@ -62,6 +62,8 @@
 		"rehype-react": "^3.0.2",
 		"styled-components": "^4.0.2",
 		"tslint-plugin-prettier": "^2.0.1",
+		"typeface-montserrat": "^0.0.54",
+		"typeface-zilla-slab": "^0.0.54",
 		"typelevel-ts": "^0.3.1",
 		"typescript": "^3.0.1",
 		"typography": "^0.16.17",

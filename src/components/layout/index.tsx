@@ -8,6 +8,8 @@ import { responsiveBreakpoint, themeColor } from "../../utils/consts";
 import { Social_2 } from "../../graphql-types";
 import { Sidebar } from "../Sidebar";
 
+import "typeface-montserrat";
+import "typeface-zilla-slab";
 import "./icons";
 import "prismjs/themes/prism-okaidia.css";
 import { generateLinkedDataTag } from "../LinkedData";
