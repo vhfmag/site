@@ -3,6 +3,7 @@ import { EntrySummary } from "../components/EntrySummary";
 import Helmet from "react-helmet";
 import { graphql } from "gatsby";
 import DefaultLayout from "../components/layout";
+import { Paginator } from "../components/Paginator";
 import { GeneralMetadataFragment, IMarkdownEntryFragment } from "../fragments";
 import styled from "styled-components";
 import { isFolder } from "../utils/types";
@@ -43,6 +44,7 @@ export default class EntryList extends React.Component<IBookmarkListProps> {
 			<DefaultLayout>
 				<Helmet title={listTitle} bodyAttributes={bodyAttributes} />
 				<h1>{listTitle}</h1>
+				<Paginator {...this.props.pathContext} />
 				<ListWrapper>
 					{posts.map(
 						({
@@ -89,6 +91,7 @@ export default class EntryList extends React.Component<IBookmarkListProps> {
 						},
 					)}
 				</ListWrapper>
+				<Paginator {...this.props.pathContext} />
 			</DefaultLayout>
 		);
 	}

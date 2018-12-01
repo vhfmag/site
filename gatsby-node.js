@@ -4,6 +4,7 @@ const { zipObject, mapValues } = require("lodash");
 const { graphql } = require("./src/utils/taggedUtils");
 const { compareEntryEdges, slugify } = require("./src/utils/utils");
 const componentWithMDXScope = require("gatsby-mdx/component-with-mdx-scope");
+const createPaginatedPages = require("gatsby-paginate");
 
 const postTemplate = path.resolve(`src/templates/singlePost.jsx`);
 const entryTemplate = path.resolve(`src/templates/singleEntry.jsx`);
@@ -145,13 +146,14 @@ function createEntryPages({
 				});
 			}
 
-			createPage({
-				path: `/${pathPrefix}`,
-				component: entryListTemplate,
+			createPaginatedPages({
+				createPage,
+				pageTemplate: entryListTemplate,
+				edges: postEdges,
+				pathPrefix,
+				pageLength: 20,
 				context: {
-					group: postEdges,
-					pathPrefix,
-					additionalContext: { listTitle },
+					listTitle,
 				},
 			});
 
