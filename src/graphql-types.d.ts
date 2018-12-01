@@ -45,27 +45,27 @@ export interface Query {
 	allSitePlugin?: SitePluginConnection | null /** Connection to all SitePlugin nodes */;
 	allDirectory?: DirectoryConnection | null /** Connection to all Directory nodes */;
 	allFile?: FileConnection | null /** Connection to all File nodes */;
-	allMarkdownRemark?: MarkdownRemarkConnection | null /** Connection to all MarkdownRemark nodes */;
 	allTodoJson?: TodoJsonConnection | null /** Connection to all TodoJson nodes */;
-	allPersonalJson?: PersonalJsonConnection | null /** Connection to all PersonalJson nodes */;
-	allCompetencesJson?: CompetencesJsonConnection | null /** Connection to all CompetencesJson nodes */;
-	allExperiencesJson?: ExperiencesJsonConnection | null /** Connection to all ExperiencesJson nodes */;
+	allMdx?: MdxConnection | null /** Connection to all Mdx nodes */;
 	allSkillsJson?: SkillsJsonConnection | null /** Connection to all SkillsJson nodes */;
+	allCompetencesJson?: CompetencesJsonConnection | null /** Connection to all CompetencesJson nodes */;
 	allInterestsJson?: InterestsJsonConnection | null /** Connection to all InterestsJson nodes */;
 	allOrganizationJson?: OrganizationJsonConnection | null /** Connection to all OrganizationJson nodes */;
+	allPersonalJson?: PersonalJsonConnection | null /** Connection to all PersonalJson nodes */;
+	allExperiencesJson?: ExperiencesJsonConnection | null /** Connection to all ExperiencesJson nodes */;
 	sitePage?: SitePage | null;
 	sitePlugin?: SitePlugin | null;
 	site?: Site | null;
 	directory?: Directory | null;
 	file?: File | null;
-	markdownRemark?: MarkdownRemark | null;
 	todoJson?: TodoJson | null;
-	personalJson?: PersonalJson | null;
-	competencesJson?: CompetencesJson | null;
-	experiencesJson?: ExperiencesJson | null;
+	mdx?: Mdx | null;
 	skillsJson?: SkillsJson | null;
+	competencesJson?: CompetencesJson | null;
 	interestsJson?: InterestsJson | null;
 	organizationJson?: OrganizationJson | null;
+	personalJson?: PersonalJson | null;
+	experiencesJson?: ExperiencesJson | null;
 }
 /** A connection to a list of items. */
 export interface SitePageConnection {
@@ -103,10 +103,18 @@ export interface SitePage extends Node {
 }
 
 export interface Context {
+	listTitle?: string | null;
+	tags?: (Tags | null)[] | null;
 	group?: (Group | null)[] | null;
 	pathPrefix?: string | null;
 	additionalContext?: AdditionalContext | null;
 	markdownPath?: string | null;
+}
+
+export interface Tags {
+	tag?: string | null;
+	count?: number | null;
+	url?: string | null;
 }
 
 export interface Group {
@@ -114,143 +122,21 @@ export interface Group {
 }
 
 export interface Node {
-	htmlAst?: HtmlAst | null;
 	excerpt?: string | null;
 	timeToRead?: number | null;
 	count?: Count | null;
+	code?: Code | null;
 	fileAbsolutePath?: string | null;
 	parent?: Parent | null;
 	frontmatter?: Frontmatter_2 | null;
 }
 
-export interface HtmlAst {
-	type?: string | null;
-	children?: (Children | null)[] | null;
-	data?: Data | null;
-	tagName?: string | null;
-}
-
-export interface Children {
-	type?: string | null;
-	tagName?: string | null;
-	properties?: Properties | null;
-	children?: (Children_2 | null)[] | null;
-	value?: string | null;
-}
-
-export interface Properties {
-	id?: string | null;
-	src?: string | null;
-	title?: string | null;
-	attr?: string | null;
-	size?: string | null;
-	className?: (string | null)[] | null;
-	dataLanguage?: string | null;
-	style?: string | null;
-	sandbox?: (string | null)[] | null;
-	width?: number | null;
-	height?: number | null;
-	frameBorder?: string | null;
-	allow?: string | null;
-	allowFullScreen?: boolean | null;
-}
-
-export interface Children_2 {
-	type?: string | null;
-	value?: string | null;
-	tagName?: string | null;
-	properties?: Properties_2 | null;
-	children?: (Children_3 | null)[] | null;
-}
-
-export interface Properties_2 {
-	href?: string | null;
-	role?: string | null;
-	ariaLabelledBy?: (string | null)[] | null;
-	ariaHidden?: boolean | null;
-	className?: (string | null)[] | null;
-	title?: string | null;
-	id?: string | null;
-	quote?: string | null;
-	author?: string | null;
-	from?: string | null;
-	position?: string | null;
-	src?: string | null;
-	alt?: string | null;
-}
-
-export interface Children_3 {
-	type?: string | null;
-	value?: string | null;
-	tagName?: string | null;
-	properties?: Properties_3 | null;
-	children?: (Children_4 | null)[] | null;
-}
-
-export interface Properties_3 {
-	ariaHidden?: string | null;
-	height?: string | null;
-	version?: string | null;
-	viewBox?: string | null;
-	width?: string | null;
-	href?: string | null;
-	className?: (string | null)[] | null;
-	id?: string | null;
-}
-
-export interface Children_4 {
-	type?: string | null;
-	value?: string | null;
-	tagName?: string | null;
-	properties?: Properties_4 | null;
-	children?: (Children_5 | null)[] | null;
-}
-
-export interface Properties_4 {
-	fillRule?: string | null;
-	d?: string | null;
-	href?: string | null;
-	className?: (string | null)[] | null;
-}
-
-export interface Children_5 {
-	type?: string | null;
-	value?: string | null;
-	tagName?: string | null;
-	properties?: Properties_5 | null;
-	children?: (Children_6 | null)[] | null;
-}
-
-export interface Properties_5 {
-	href?: string | null;
-	className?: (string | null)[] | null;
-	id?: string | null;
-}
-
-export interface Children_6 {
-	type?: string | null;
-	value?: string | null;
-	tagName?: string | null;
-	properties?: Properties_6 | null;
-	children?: (Children_7 | null)[] | null;
-}
-
-export interface Properties_6 {
-	className?: (string | null)[] | null;
-	href?: string | null;
-}
-
-export interface Children_7 {
-	type?: string | null;
-	value?: string | null;
-}
-
-export interface Data {
-	quirksMode?: boolean | null;
-}
-
 export interface Count {
 	words?: number | null;
+}
+
+export interface Code {
+	scope?: string | null;
 }
 
 export interface Parent {
@@ -263,6 +149,7 @@ export interface Frontmatter_2 {
 	title?: string | null;
 	description?: string | null;
 	date?: Date | null;
+	tags?: (string | null)[] | null;
 	authors?: (Authors_2 | null)[] | null;
 	link?: string | null;
 }
@@ -301,12 +188,6 @@ export interface PluginOptions_3 {
 	name?: string | null;
 	path?: string | null;
 	maxWidth?: number | null;
-	wrapperStyle?: string | null;
-	backgroundColor?: string | null;
-	linkImagesToOriginal?: boolean | null;
-	showCaptions?: boolean | null;
-	pathPrefix?: string | null;
-	withWebp?: boolean | null;
 	inlineCodeMarker?: string | null;
 	pathToConfigModule?: string | null;
 	omitGoogleFont?: boolean | null;
@@ -314,6 +195,9 @@ export interface PluginOptions_3 {
 	feeds?: (Feeds_2 | null)[] | null;
 	headers?: Headers_2 | null;
 	allPageHeaders?: (string | null)[] | null;
+	siteId?: string | null;
+	matomoUrl?: string | null;
+	siteUrl?: string | null;
 	short_name?: string | null;
 	start_url?: string | null;
 	background_color?: string | null;
@@ -336,12 +220,6 @@ export interface Plugins_2 {
 
 export interface PluginOptions_4 {
 	maxWidth?: number | null;
-	wrapperStyle?: string | null;
-	backgroundColor?: string | null;
-	linkImagesToOriginal?: boolean | null;
-	showCaptions?: boolean | null;
-	pathPrefix?: string | null;
-	withWebp?: boolean | null;
 	inlineCodeMarker?: string | null;
 }
 
@@ -544,18 +422,18 @@ export interface File extends Node {
 	id: string /** The id of this node. */;
 	parent?: Node | null /** The parent of this node. */;
 	children?: (Node | null)[] | null /** The children of this node. */;
-	childMarkdownRemark?: MarkdownRemark | null /** The child of this node of type markdownRemark */;
+	childMdx?: Mdx | null /** The child of this node of type mdx */;
 	childrenTodoJson?:
 		| (TodoJson | null)[]
 		| null /** The children of this node of type todoJson */;
-	childPersonalJson?: PersonalJson | null /** The child of this node of type personalJson */;
+	childSkillsJson?: SkillsJson | null /** The child of this node of type skillsJson */;
 	childrenCompetencesJson?:
 		| (CompetencesJson | null)[]
 		| null /** The children of this node of type competencesJson */;
-	childExperiencesJson?: ExperiencesJson | null /** The child of this node of type experiencesJson */;
-	childSkillsJson?: SkillsJson | null /** The child of this node of type skillsJson */;
 	childInterestsJson?: InterestsJson | null /** The child of this node of type interestsJson */;
 	childOrganizationJson?: OrganizationJson | null /** The child of this node of type organizationJson */;
+	childPersonalJson?: PersonalJson | null /** The child of this node of type personalJson */;
+	childExperiencesJson?: ExperiencesJson | null /** The child of this node of type experiencesJson */;
 	internal?: Internal_17 | null;
 	sourceInstanceName?: string | null;
 	absolutePath?: string | null;
@@ -594,22 +472,21 @@ export interface File extends Node {
 		| string
 		| null /** Copy file to static directory and return public url to it */;
 }
-/** Node of type MarkdownRemark */
-export interface MarkdownRemark extends Node {
+/** Node of type Mdx */
+export interface Mdx extends Node {
 	id: string /** The id of this node. */;
 	parent?: Node | null /** The parent of this node. */;
 	children?: (Node | null)[] | null /** The children of this node. */;
 	internal?: Internal_18 | null;
 	frontmatter?: Frontmatter_3 | null;
-	rawMarkdownBody?: string | null;
+	rawBody?: string | null;
 	fileAbsolutePath?: string | null;
-	html?: string | null;
-	htmlAst?: Json | null;
+	code?: MdxCodeMdx | null;
 	excerpt?: string | null;
-	headings?: (MarkdownHeading | null)[] | null;
+	headings?: (MdxHeadingMdx | null)[] | null;
+	tableOfContents?: Json | null;
 	timeToRead?: number | null;
-	tableOfContents?: string | null;
-	wordCount?: WordCount | null;
+	wordCount?: WordCountsMdx | null;
 }
 
 export interface Internal_18 {
@@ -626,9 +503,9 @@ export interface Frontmatter_3 {
 	tags?: (string | null)[] | null;
 	authors?: (Authors_3 | null)[] | null;
 	_PARENT?: string | null;
+	description?: string | null;
 	draft?: boolean | null;
 	toc?: boolean | null;
-	description?: string | null;
 	type?: string | null;
 }
 
@@ -637,12 +514,17 @@ export interface Authors_3 {
 	url?: string | null;
 }
 
-export interface MarkdownHeading {
+export interface MdxCodeMdx {
+	body?: string | null;
+	scope?: string | null;
+}
+
+export interface MdxHeadingMdx {
 	value?: string | null;
 	depth?: number | null;
 }
 
-export interface WordCount {
+export interface WordCountsMdx {
 	paragraphs?: number | null;
 	sentences?: number | null;
 	words?: number | null;
@@ -663,22 +545,30 @@ export interface Internal_19 {
 	type?: string | null;
 	owner?: string | null;
 }
-/** Node of type PersonalJson */
-export interface PersonalJson extends Node {
+/** Node of type SkillsJson */
+export interface SkillsJson extends Node {
 	id: string /** The id of this node. */;
 	parent?: Node | null /** The parent of this node. */;
 	children?: (Node | null)[] | null /** The children of this node. */;
-	name?: string | null;
-	email?: string | null;
-	jobTitle?: string | null;
-	social?: (Social_2 | null)[] | null;
+	languages?: (Languages_2 | null)[] | null;
+	technical?: (Technical_2 | null)[] | null;
+	soft?: (Soft_2 | null)[] | null;
 	internal?: Internal_20 | null;
 }
 
-export interface Social_2 {
-	serviceName?: string | null;
-	icon?: string | null;
-	url?: string | null;
+export interface Languages_2 {
+	name?: string | null;
+	intensity?: number | null;
+}
+
+export interface Technical_2 {
+	name?: string | null;
+	intensity?: number | null;
+}
+
+export interface Soft_2 {
+	name?: string | null;
+	intensity?: number | null;
 }
 
 export interface Internal_20 {
@@ -701,14 +591,83 @@ export interface Internal_21 {
 	type?: string | null;
 	owner?: string | null;
 }
+/** Node of type InterestsJson */
+export interface InterestsJson extends Node {
+	id: string /** The id of this node. */;
+	parent?: Node | null /** The parent of this node. */;
+	children?: (Node | null)[] | null /** The children of this node. */;
+	subjects?: (Subjects_2 | null)[] | null;
+	internal?: Internal_22 | null;
+}
+
+export interface Subjects_2 {
+	name?: string | null;
+	intensity?: number | null;
+}
+
+export interface Internal_22 {
+	contentDigest?: string | null;
+	type?: string | null;
+	owner?: string | null;
+}
+/** Node of type OrganizationJson */
+export interface OrganizationJson extends Node {
+	id: string /** The id of this node. */;
+	parent?: Node | null /** The parent of this node. */;
+	children?: (Node | null)[] | null /** The children of this node. */;
+	name?: string | null;
+	url?: string | null;
+	logo?: string | null;
+	telephone?: string | null;
+	internal?: Internal_23 | null;
+	fields?: Fields_3 | null;
+}
+
+export interface Internal_23 {
+	contentDigest?: string | null;
+	type?: string | null;
+	owner?: string | null;
+	fieldOwners?: FieldOwners_3 | null;
+}
+
+export interface FieldOwners_3 {
+	logo_image?: string | null;
+}
+
+export interface Fields_3 {
+	logo_image?: string | null;
+}
+/** Node of type PersonalJson */
+export interface PersonalJson extends Node {
+	id: string /** The id of this node. */;
+	parent?: Node | null /** The parent of this node. */;
+	children?: (Node | null)[] | null /** The children of this node. */;
+	name?: string | null;
+	email?: string | null;
+	jobTitle?: string | null;
+	social?: (Social_2 | null)[] | null;
+	internal?: Internal_24 | null;
+}
+
+export interface Social_2 {
+	serviceName?: string | null;
+	icon?: string | null;
+	url?: string | null;
+}
+
+export interface Internal_24 {
+	contentDigest?: string | null;
+	type?: string | null;
+	owner?: string | null;
+}
 /** Node of type ExperiencesJson */
 export interface ExperiencesJson extends Node {
 	id: string /** The id of this node. */;
 	parent?: Node | null /** The parent of this node. */;
 	children?: (Node | null)[] | null /** The children of this node. */;
 	work?: (Work_2 | null)[] | null;
-	internal?: Internal_22 | null;
-	fields?: Fields_3 | null;
+	internal?: Internal_25 | null;
+	fields?: Fields_4 | null;
 }
 
 export interface Work_2 {
@@ -727,83 +686,6 @@ export interface Projects_2 {
 	description?: string | null;
 }
 
-export interface Internal_22 {
-	contentDigest?: string | null;
-	type?: string | null;
-	owner?: string | null;
-	fieldOwners?: FieldOwners_3 | null;
-}
-
-export interface FieldOwners_3 {
-	image_image?: string | null;
-}
-
-export interface Fields_3 {
-	image_image?: (string | null)[] | null;
-}
-/** Node of type SkillsJson */
-export interface SkillsJson extends Node {
-	id: string /** The id of this node. */;
-	parent?: Node | null /** The parent of this node. */;
-	children?: (Node | null)[] | null /** The children of this node. */;
-	languages?: (Languages_2 | null)[] | null;
-	technical?: (Technical_2 | null)[] | null;
-	soft?: (Soft_2 | null)[] | null;
-	internal?: Internal_23 | null;
-}
-
-export interface Languages_2 {
-	name?: string | null;
-	intensity?: number | null;
-}
-
-export interface Technical_2 {
-	name?: string | null;
-	intensity?: number | null;
-}
-
-export interface Soft_2 {
-	name?: string | null;
-	intensity?: number | null;
-}
-
-export interface Internal_23 {
-	contentDigest?: string | null;
-	type?: string | null;
-	owner?: string | null;
-}
-/** Node of type InterestsJson */
-export interface InterestsJson extends Node {
-	id: string /** The id of this node. */;
-	parent?: Node | null /** The parent of this node. */;
-	children?: (Node | null)[] | null /** The children of this node. */;
-	subjects?: (Subjects_2 | null)[] | null;
-	internal?: Internal_24 | null;
-}
-
-export interface Subjects_2 {
-	name?: string | null;
-	intensity?: number | null;
-}
-
-export interface Internal_24 {
-	contentDigest?: string | null;
-	type?: string | null;
-	owner?: string | null;
-}
-/** Node of type OrganizationJson */
-export interface OrganizationJson extends Node {
-	id: string /** The id of this node. */;
-	parent?: Node | null /** The parent of this node. */;
-	children?: (Node | null)[] | null /** The children of this node. */;
-	name?: string | null;
-	url?: string | null;
-	logo?: string | null;
-	telephone?: string | null;
-	internal?: Internal_25 | null;
-	fields?: Fields_4 | null;
-}
-
 export interface Internal_25 {
 	contentDigest?: string | null;
 	type?: string | null;
@@ -812,11 +694,11 @@ export interface Internal_25 {
 }
 
 export interface FieldOwners_4 {
-	logo_image?: string | null;
+	image_image?: string | null;
 }
 
 export interface Fields_4 {
-	logo_image?: string | null;
+	image_image?: (string | null)[] | null;
 }
 
 export interface Internal_17 {
@@ -839,36 +721,6 @@ export interface FileGroupConnectionEdge {
 	node?: File | null /** The item at the end of the edge */;
 	next?: File | null /** The next edge in the connection */;
 	previous?: File | null /** The previous edge in the connection */;
-}
-/** A connection to a list of items. */
-export interface MarkdownRemarkConnection {
-	pageInfo: PageInfo /** Information to aid in pagination. */;
-	edges?: (MarkdownRemarkEdge | null)[] | null /** A list of edges. */;
-	totalCount?: number | null;
-	distinct?: (string | null)[] | null;
-	group?: (MarkdownRemarkGroupConnectionConnection | null)[] | null;
-}
-/** An edge in a connection. */
-export interface MarkdownRemarkEdge {
-	node?: MarkdownRemark | null /** The item at the end of the edge */;
-	next?: MarkdownRemark | null /** The next edge in the connection */;
-	previous?: MarkdownRemark | null /** The previous edge in the connection */;
-}
-/** A connection to a list of items. */
-export interface MarkdownRemarkGroupConnectionConnection {
-	pageInfo: PageInfo /** Information to aid in pagination. */;
-	edges?:
-		| (MarkdownRemarkGroupConnectionEdge | null)[]
-		| null /** A list of edges. */;
-	field?: string | null;
-	fieldValue?: string | null;
-	totalCount?: number | null;
-}
-/** An edge in a connection. */
-export interface MarkdownRemarkGroupConnectionEdge {
-	node?: MarkdownRemark | null /** The item at the end of the edge */;
-	next?: MarkdownRemark | null /** The next edge in the connection */;
-	previous?: MarkdownRemark | null /** The previous edge in the connection */;
 }
 /** A connection to a list of items. */
 export interface TodoJsonConnection {
@@ -901,94 +753,32 @@ export interface TodoJsonGroupConnectionEdge {
 	previous?: TodoJson | null /** The previous edge in the connection */;
 }
 /** A connection to a list of items. */
-export interface PersonalJsonConnection {
+export interface MdxConnection {
 	pageInfo: PageInfo /** Information to aid in pagination. */;
-	edges?: (PersonalJsonEdge | null)[] | null /** A list of edges. */;
+	edges?: (MdxEdge | null)[] | null /** A list of edges. */;
 	totalCount?: number | null;
 	distinct?: (string | null)[] | null;
-	group?: (PersonalJsonGroupConnectionConnection | null)[] | null;
+	group?: (MdxGroupConnectionConnection | null)[] | null;
 }
 /** An edge in a connection. */
-export interface PersonalJsonEdge {
-	node?: PersonalJson | null /** The item at the end of the edge */;
-	next?: PersonalJson | null /** The next edge in the connection */;
-	previous?: PersonalJson | null /** The previous edge in the connection */;
+export interface MdxEdge {
+	node?: Mdx | null /** The item at the end of the edge */;
+	next?: Mdx | null /** The next edge in the connection */;
+	previous?: Mdx | null /** The previous edge in the connection */;
 }
 /** A connection to a list of items. */
-export interface PersonalJsonGroupConnectionConnection {
+export interface MdxGroupConnectionConnection {
 	pageInfo: PageInfo /** Information to aid in pagination. */;
-	edges?:
-		| (PersonalJsonGroupConnectionEdge | null)[]
-		| null /** A list of edges. */;
+	edges?: (MdxGroupConnectionEdge | null)[] | null /** A list of edges. */;
 	field?: string | null;
 	fieldValue?: string | null;
 	totalCount?: number | null;
 }
 /** An edge in a connection. */
-export interface PersonalJsonGroupConnectionEdge {
-	node?: PersonalJson | null /** The item at the end of the edge */;
-	next?: PersonalJson | null /** The next edge in the connection */;
-	previous?: PersonalJson | null /** The previous edge in the connection */;
-}
-/** A connection to a list of items. */
-export interface CompetencesJsonConnection {
-	pageInfo: PageInfo /** Information to aid in pagination. */;
-	edges?: (CompetencesJsonEdge | null)[] | null /** A list of edges. */;
-	totalCount?: number | null;
-	distinct?: (string | null)[] | null;
-	group?: (CompetencesJsonGroupConnectionConnection | null)[] | null;
-}
-/** An edge in a connection. */
-export interface CompetencesJsonEdge {
-	node?: CompetencesJson | null /** The item at the end of the edge */;
-	next?: CompetencesJson | null /** The next edge in the connection */;
-	previous?: CompetencesJson | null /** The previous edge in the connection */;
-}
-/** A connection to a list of items. */
-export interface CompetencesJsonGroupConnectionConnection {
-	pageInfo: PageInfo /** Information to aid in pagination. */;
-	edges?:
-		| (CompetencesJsonGroupConnectionEdge | null)[]
-		| null /** A list of edges. */;
-	field?: string | null;
-	fieldValue?: string | null;
-	totalCount?: number | null;
-}
-/** An edge in a connection. */
-export interface CompetencesJsonGroupConnectionEdge {
-	node?: CompetencesJson | null /** The item at the end of the edge */;
-	next?: CompetencesJson | null /** The next edge in the connection */;
-	previous?: CompetencesJson | null /** The previous edge in the connection */;
-}
-/** A connection to a list of items. */
-export interface ExperiencesJsonConnection {
-	pageInfo: PageInfo /** Information to aid in pagination. */;
-	edges?: (ExperiencesJsonEdge | null)[] | null /** A list of edges. */;
-	totalCount?: number | null;
-	distinct?: (string | null)[] | null;
-	group?: (ExperiencesJsonGroupConnectionConnection | null)[] | null;
-}
-/** An edge in a connection. */
-export interface ExperiencesJsonEdge {
-	node?: ExperiencesJson | null /** The item at the end of the edge */;
-	next?: ExperiencesJson | null /** The next edge in the connection */;
-	previous?: ExperiencesJson | null /** The previous edge in the connection */;
-}
-/** A connection to a list of items. */
-export interface ExperiencesJsonGroupConnectionConnection {
-	pageInfo: PageInfo /** Information to aid in pagination. */;
-	edges?:
-		| (ExperiencesJsonGroupConnectionEdge | null)[]
-		| null /** A list of edges. */;
-	field?: string | null;
-	fieldValue?: string | null;
-	totalCount?: number | null;
-}
-/** An edge in a connection. */
-export interface ExperiencesJsonGroupConnectionEdge {
-	node?: ExperiencesJson | null /** The item at the end of the edge */;
-	next?: ExperiencesJson | null /** The next edge in the connection */;
-	previous?: ExperiencesJson | null /** The previous edge in the connection */;
+export interface MdxGroupConnectionEdge {
+	node?: Mdx | null /** The item at the end of the edge */;
+	next?: Mdx | null /** The next edge in the connection */;
+	previous?: Mdx | null /** The previous edge in the connection */;
 }
 /** A connection to a list of items. */
 export interface SkillsJsonConnection {
@@ -1019,6 +809,36 @@ export interface SkillsJsonGroupConnectionEdge {
 	node?: SkillsJson | null /** The item at the end of the edge */;
 	next?: SkillsJson | null /** The next edge in the connection */;
 	previous?: SkillsJson | null /** The previous edge in the connection */;
+}
+/** A connection to a list of items. */
+export interface CompetencesJsonConnection {
+	pageInfo: PageInfo /** Information to aid in pagination. */;
+	edges?: (CompetencesJsonEdge | null)[] | null /** A list of edges. */;
+	totalCount?: number | null;
+	distinct?: (string | null)[] | null;
+	group?: (CompetencesJsonGroupConnectionConnection | null)[] | null;
+}
+/** An edge in a connection. */
+export interface CompetencesJsonEdge {
+	node?: CompetencesJson | null /** The item at the end of the edge */;
+	next?: CompetencesJson | null /** The next edge in the connection */;
+	previous?: CompetencesJson | null /** The previous edge in the connection */;
+}
+/** A connection to a list of items. */
+export interface CompetencesJsonGroupConnectionConnection {
+	pageInfo: PageInfo /** Information to aid in pagination. */;
+	edges?:
+		| (CompetencesJsonGroupConnectionEdge | null)[]
+		| null /** A list of edges. */;
+	field?: string | null;
+	fieldValue?: string | null;
+	totalCount?: number | null;
+}
+/** An edge in a connection. */
+export interface CompetencesJsonGroupConnectionEdge {
+	node?: CompetencesJson | null /** The item at the end of the edge */;
+	next?: CompetencesJson | null /** The next edge in the connection */;
+	previous?: CompetencesJson | null /** The previous edge in the connection */;
 }
 /** A connection to a list of items. */
 export interface InterestsJsonConnection {
@@ -1079,6 +899,66 @@ export interface OrganizationJsonGroupConnectionEdge {
 	node?: OrganizationJson | null /** The item at the end of the edge */;
 	next?: OrganizationJson | null /** The next edge in the connection */;
 	previous?: OrganizationJson | null /** The previous edge in the connection */;
+}
+/** A connection to a list of items. */
+export interface PersonalJsonConnection {
+	pageInfo: PageInfo /** Information to aid in pagination. */;
+	edges?: (PersonalJsonEdge | null)[] | null /** A list of edges. */;
+	totalCount?: number | null;
+	distinct?: (string | null)[] | null;
+	group?: (PersonalJsonGroupConnectionConnection | null)[] | null;
+}
+/** An edge in a connection. */
+export interface PersonalJsonEdge {
+	node?: PersonalJson | null /** The item at the end of the edge */;
+	next?: PersonalJson | null /** The next edge in the connection */;
+	previous?: PersonalJson | null /** The previous edge in the connection */;
+}
+/** A connection to a list of items. */
+export interface PersonalJsonGroupConnectionConnection {
+	pageInfo: PageInfo /** Information to aid in pagination. */;
+	edges?:
+		| (PersonalJsonGroupConnectionEdge | null)[]
+		| null /** A list of edges. */;
+	field?: string | null;
+	fieldValue?: string | null;
+	totalCount?: number | null;
+}
+/** An edge in a connection. */
+export interface PersonalJsonGroupConnectionEdge {
+	node?: PersonalJson | null /** The item at the end of the edge */;
+	next?: PersonalJson | null /** The next edge in the connection */;
+	previous?: PersonalJson | null /** The previous edge in the connection */;
+}
+/** A connection to a list of items. */
+export interface ExperiencesJsonConnection {
+	pageInfo: PageInfo /** Information to aid in pagination. */;
+	edges?: (ExperiencesJsonEdge | null)[] | null /** A list of edges. */;
+	totalCount?: number | null;
+	distinct?: (string | null)[] | null;
+	group?: (ExperiencesJsonGroupConnectionConnection | null)[] | null;
+}
+/** An edge in a connection. */
+export interface ExperiencesJsonEdge {
+	node?: ExperiencesJson | null /** The item at the end of the edge */;
+	next?: ExperiencesJson | null /** The next edge in the connection */;
+	previous?: ExperiencesJson | null /** The previous edge in the connection */;
+}
+/** A connection to a list of items. */
+export interface ExperiencesJsonGroupConnectionConnection {
+	pageInfo: PageInfo /** Information to aid in pagination. */;
+	edges?:
+		| (ExperiencesJsonGroupConnectionEdge | null)[]
+		| null /** A list of edges. */;
+	field?: string | null;
+	fieldValue?: string | null;
+	totalCount?: number | null;
+}
+/** An edge in a connection. */
+export interface ExperiencesJsonGroupConnectionEdge {
+	node?: ExperiencesJson | null /** The item at the end of the edge */;
+	next?: ExperiencesJson | null /** The next edge in the connection */;
+	previous?: ExperiencesJson | null /** The previous edge in the connection */;
 }
 /** Node of type Site */
 export interface Site extends Node {
@@ -1172,10 +1052,60 @@ export interface SitePageConnectionComponentChunkNameQueryString {
 }
 
 export interface SitePageConnectionContextInputObject {
+	listTitle?: SitePageConnectionContextListTitleQueryString | null;
+	tags?: SitePageConnectionContextTagsQueryList | null;
 	group?: SitePageConnectionContextGroupQueryList | null;
 	pathPrefix?: SitePageConnectionContextPathPrefixQueryString | null;
 	additionalContext?: SitePageConnectionContextAdditionalContextInputObject | null;
 	markdownPath?: SitePageConnectionContextMarkdownPathQueryString | null;
+}
+
+export interface SitePageConnectionContextListTitleQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageConnectionContextTagsQueryList {
+	elemMatch?: SitePageConnectionContextTagsInputObject | null;
+}
+
+export interface SitePageConnectionContextTagsInputObject {
+	tag?: SitePageConnectionContextTagsTagQueryString | null;
+	count?: SitePageConnectionContextTagsCountQueryInteger | null;
+	url?: SitePageConnectionContextTagsUrlQueryString | null;
+}
+
+export interface SitePageConnectionContextTagsTagQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageConnectionContextTagsCountQueryInteger {
+	eq?: number | null;
+	ne?: number | null;
+	gt?: number | null;
+	gte?: number | null;
+	lt?: number | null;
+	lte?: number | null;
+	in?: (number | null)[] | null;
+	nin?: (number | null)[] | null;
+}
+
+export interface SitePageConnectionContextTagsUrlQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
 export interface SitePageConnectionContextGroupQueryList {
@@ -1187,768 +1117,13 @@ export interface SitePageConnectionContextGroupInputObject {
 }
 
 export interface SitePageConnectionContextGroupNodeInputObject {
-	htmlAst?: SitePageConnectionContextGroupNodeHtmlAstInputObject | null;
 	excerpt?: SitePageConnectionContextGroupNodeExcerptQueryString | null;
 	timeToRead?: SitePageConnectionContextGroupNodeTimeToReadQueryInteger | null;
 	count?: SitePageConnectionContextGroupNodeCountInputObject | null;
+	code?: SitePageConnectionContextGroupNodeCodeInputObject | null;
 	fileAbsolutePath?: SitePageConnectionContextGroupNodeFileAbsolutePathQueryString | null;
 	parent?: SitePageConnectionContextGroupNodeParentInputObject | null;
 	frontmatter?: SitePageConnectionContextGroupNodeFrontmatterInputObject | null;
-}
-
-export interface SitePageConnectionContextGroupNodeHtmlAstInputObject {
-	type?: SitePageConnectionContextGroupNodeHtmlAstTypeQueryString | null;
-	children?: SitePageConnectionContextGroupNodeHtmlAstChildrenQueryList | null;
-	data?: SitePageConnectionContextGroupNodeHtmlAstDataInputObject | null;
-	tagName?: SitePageConnectionContextGroupNodeHtmlAstTagNameQueryString | null;
-}
-
-export interface SitePageConnectionContextGroupNodeHtmlAstTypeQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageConnectionContextGroupNodeHtmlAstChildrenQueryList {
-	elemMatch?: SitePageConnectionContextGroupNodeHtmlAstChildrenInputObject | null;
-}
-
-export interface SitePageConnectionContextGroupNodeHtmlAstChildrenInputObject {
-	type?: SitePageConnectionContextGroupNodeHtmlAstChildrenTypeQueryString | null;
-	tagName?: SitePageConnectionContextGroupNodeHtmlAstChildrenTagNameQueryString | null;
-	properties?: SitePageConnectionContextGroupNodeHtmlAstChildrenPropertiesInputObject | null;
-	children?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenQueryList | null;
-	value?: SitePageConnectionContextGroupNodeHtmlAstChildrenValueQueryString | null;
-}
-
-export interface SitePageConnectionContextGroupNodeHtmlAstChildrenTypeQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageConnectionContextGroupNodeHtmlAstChildrenTagNameQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageConnectionContextGroupNodeHtmlAstChildrenPropertiesInputObject {
-	id?: SitePageConnectionContextGroupNodeHtmlAstChildrenPropertiesIdQueryString | null;
-	src?: SitePageConnectionContextGroupNodeHtmlAstChildrenPropertiesSrcQueryString | null;
-	title?: SitePageConnectionContextGroupNodeHtmlAstChildrenPropertiesTitleQueryString | null;
-	attr?: SitePageConnectionContextGroupNodeHtmlAstChildrenPropertiesAttrQueryString | null;
-	size?: SitePageConnectionContextGroupNodeHtmlAstChildrenPropertiesSizeQueryString | null;
-	className?: SitePageConnectionContextGroupNodeHtmlAstChildrenPropertiesClassNameQueryList | null;
-	dataLanguage?: SitePageConnectionContextGroupNodeHtmlAstChildrenPropertiesDataLanguageQueryString | null;
-	style?: SitePageConnectionContextGroupNodeHtmlAstChildrenPropertiesStyleQueryString | null;
-	sandbox?: SitePageConnectionContextGroupNodeHtmlAstChildrenPropertiesSandboxQueryList | null;
-	width?: SitePageConnectionContextGroupNodeHtmlAstChildrenPropertiesWidthQueryInteger | null;
-	height?: SitePageConnectionContextGroupNodeHtmlAstChildrenPropertiesHeightQueryInteger | null;
-	frameBorder?: SitePageConnectionContextGroupNodeHtmlAstChildrenPropertiesFrameBorderQueryString | null;
-	allow?: SitePageConnectionContextGroupNodeHtmlAstChildrenPropertiesAllowQueryString | null;
-	allowFullScreen?: SitePageConnectionContextGroupNodeHtmlAstChildrenPropertiesAllowFullScreenQueryBoolean | null;
-}
-
-export interface SitePageConnectionContextGroupNodeHtmlAstChildrenPropertiesIdQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageConnectionContextGroupNodeHtmlAstChildrenPropertiesSrcQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageConnectionContextGroupNodeHtmlAstChildrenPropertiesTitleQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageConnectionContextGroupNodeHtmlAstChildrenPropertiesAttrQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageConnectionContextGroupNodeHtmlAstChildrenPropertiesSizeQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageConnectionContextGroupNodeHtmlAstChildrenPropertiesClassNameQueryList {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageConnectionContextGroupNodeHtmlAstChildrenPropertiesDataLanguageQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageConnectionContextGroupNodeHtmlAstChildrenPropertiesStyleQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageConnectionContextGroupNodeHtmlAstChildrenPropertiesSandboxQueryList {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageConnectionContextGroupNodeHtmlAstChildrenPropertiesWidthQueryInteger {
-	eq?: number | null;
-	ne?: number | null;
-	gt?: number | null;
-	gte?: number | null;
-	lt?: number | null;
-	lte?: number | null;
-	in?: (number | null)[] | null;
-	nin?: (number | null)[] | null;
-}
-
-export interface SitePageConnectionContextGroupNodeHtmlAstChildrenPropertiesHeightQueryInteger {
-	eq?: number | null;
-	ne?: number | null;
-	gt?: number | null;
-	gte?: number | null;
-	lt?: number | null;
-	lte?: number | null;
-	in?: (number | null)[] | null;
-	nin?: (number | null)[] | null;
-}
-
-export interface SitePageConnectionContextGroupNodeHtmlAstChildrenPropertiesFrameBorderQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageConnectionContextGroupNodeHtmlAstChildrenPropertiesAllowQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageConnectionContextGroupNodeHtmlAstChildrenPropertiesAllowFullScreenQueryBoolean {
-	eq?: boolean | null;
-	ne?: boolean | null;
-	in?: (boolean | null)[] | null;
-	nin?: (boolean | null)[] | null;
-}
-
-export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenQueryList {
-	elemMatch?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenInputObject | null;
-}
-
-export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenInputObject {
-	type?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenTypeQueryString | null;
-	value?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenValueQueryString | null;
-	tagName?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenTagNameQueryString | null;
-	properties?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenPropertiesInputObject | null;
-	children?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenQueryList | null;
-}
-
-export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenTypeQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenValueQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenTagNameQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenPropertiesInputObject {
-	href?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenPropertiesHrefQueryString | null;
-	role?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenPropertiesRoleQueryString | null;
-	ariaLabelledBy?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenPropertiesAriaLabelledByQueryList | null;
-	ariaHidden?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenPropertiesAriaHiddenQueryBoolean | null;
-	className?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenPropertiesClassNameQueryList | null;
-	title?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenPropertiesTitleQueryString | null;
-	id?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenPropertiesIdQueryString | null;
-	quote?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenPropertiesQuoteQueryString | null;
-	author?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenPropertiesAuthorQueryString | null;
-	from?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenPropertiesFromQueryString | null;
-	position?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenPropertiesPositionQueryString | null;
-	src?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenPropertiesSrcQueryString | null;
-	alt?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenPropertiesAltQueryString | null;
-}
-
-export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenPropertiesHrefQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenPropertiesRoleQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenPropertiesAriaLabelledByQueryList {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenPropertiesAriaHiddenQueryBoolean {
-	eq?: boolean | null;
-	ne?: boolean | null;
-	in?: (boolean | null)[] | null;
-	nin?: (boolean | null)[] | null;
-}
-
-export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenPropertiesClassNameQueryList {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenPropertiesTitleQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenPropertiesIdQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenPropertiesQuoteQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenPropertiesAuthorQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenPropertiesFromQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenPropertiesPositionQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenPropertiesSrcQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenPropertiesAltQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenQueryList {
-	elemMatch?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenInputObject | null;
-}
-
-export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenInputObject {
-	type?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenTypeQueryString | null;
-	value?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenValueQueryString | null;
-	tagName?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenTagNameQueryString | null;
-	properties?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenPropertiesInputObject | null;
-	children?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenQueryList | null;
-}
-
-export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenTypeQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenValueQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenTagNameQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenPropertiesInputObject {
-	ariaHidden?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenPropertiesAriaHiddenQueryString | null;
-	height?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenPropertiesHeightQueryString | null;
-	version?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenPropertiesVersionQueryString | null;
-	viewBox?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenPropertiesViewBoxQueryString | null;
-	width?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenPropertiesWidthQueryString | null;
-	href?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenPropertiesHrefQueryString | null;
-	className?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenPropertiesClassNameQueryList | null;
-	id?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenPropertiesIdQueryString | null;
-}
-
-export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenPropertiesAriaHiddenQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenPropertiesHeightQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenPropertiesVersionQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenPropertiesViewBoxQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenPropertiesWidthQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenPropertiesHrefQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenPropertiesClassNameQueryList {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenPropertiesIdQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenQueryList {
-	elemMatch?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenInputObject | null;
-}
-
-export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenInputObject {
-	type?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenTypeQueryString | null;
-	value?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenValueQueryString | null;
-	tagName?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenTagNameQueryString | null;
-	properties?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenPropertiesInputObject | null;
-	children?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenQueryList | null;
-}
-
-export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenTypeQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenValueQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenTagNameQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenPropertiesInputObject {
-	fillRule?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenPropertiesFillRuleQueryString | null;
-	d?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenPropertiesDQueryString | null;
-	href?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenPropertiesHrefQueryString | null;
-	className?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenPropertiesClassNameQueryList | null;
-}
-
-export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenPropertiesFillRuleQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenPropertiesDQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenPropertiesHrefQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenPropertiesClassNameQueryList {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenQueryList {
-	elemMatch?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenInputObject | null;
-}
-
-export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenInputObject {
-	type?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenTypeQueryString | null;
-	value?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenValueQueryString | null;
-	tagName?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenTagNameQueryString | null;
-	properties?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenPropertiesInputObject | null;
-	children?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenQueryList | null;
-}
-
-export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenTypeQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenValueQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenTagNameQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenPropertiesInputObject {
-	href?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenPropertiesHrefQueryString | null;
-	className?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenPropertiesClassNameQueryList | null;
-	id?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenPropertiesIdQueryString | null;
-}
-
-export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenPropertiesHrefQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenPropertiesClassNameQueryList {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenPropertiesIdQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenQueryList {
-	elemMatch?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenInputObject | null;
-}
-
-export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenInputObject {
-	type?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenTypeQueryString | null;
-	value?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenValueQueryString | null;
-	tagName?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenTagNameQueryString | null;
-	properties?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenPropertiesInputObject | null;
-	children?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenChildrenQueryList | null;
-}
-
-export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenTypeQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenValueQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenTagNameQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenPropertiesInputObject {
-	className?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenPropertiesClassNameQueryList | null;
-	href?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenPropertiesHrefQueryString | null;
-}
-
-export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenPropertiesClassNameQueryList {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenPropertiesHrefQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenChildrenQueryList {
-	elemMatch?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenChildrenInputObject | null;
-}
-
-export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenChildrenInputObject {
-	type?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenChildrenTypeQueryString | null;
-	value?: SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenChildrenValueQueryString | null;
-}
-
-export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenChildrenTypeQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageConnectionContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenChildrenValueQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageConnectionContextGroupNodeHtmlAstChildrenValueQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageConnectionContextGroupNodeHtmlAstDataInputObject {
-	quirksMode?: SitePageConnectionContextGroupNodeHtmlAstDataQuirksModeQueryBoolean | null;
-}
-
-export interface SitePageConnectionContextGroupNodeHtmlAstDataQuirksModeQueryBoolean {
-	eq?: boolean | null;
-	ne?: boolean | null;
-	in?: (boolean | null)[] | null;
-	nin?: (boolean | null)[] | null;
-}
-
-export interface SitePageConnectionContextGroupNodeHtmlAstTagNameQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
 }
 
 export interface SitePageConnectionContextGroupNodeExcerptQueryString {
@@ -1984,6 +1159,19 @@ export interface SitePageConnectionContextGroupNodeCountWordsQueryInteger {
 	lte?: number | null;
 	in?: (number | null)[] | null;
 	nin?: (number | null)[] | null;
+}
+
+export interface SitePageConnectionContextGroupNodeCodeInputObject {
+	scope?: SitePageConnectionContextGroupNodeCodeScopeQueryString | null;
+}
+
+export interface SitePageConnectionContextGroupNodeCodeScopeQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
 export interface SitePageConnectionContextGroupNodeFileAbsolutePathQueryString {
@@ -2032,6 +1220,7 @@ export interface SitePageConnectionContextGroupNodeFrontmatterInputObject {
 	title?: SitePageConnectionContextGroupNodeFrontmatterTitleQueryString | null;
 	description?: SitePageConnectionContextGroupNodeFrontmatterDescriptionQueryString | null;
 	date?: SitePageConnectionContextGroupNodeFrontmatterDateQueryString | null;
+	tags?: SitePageConnectionContextGroupNodeFrontmatterTagsQueryList | null;
 	authors?: SitePageConnectionContextGroupNodeFrontmatterAuthorsQueryList | null;
 	link?: SitePageConnectionContextGroupNodeFrontmatterLinkQueryString | null;
 }
@@ -2055,6 +1244,15 @@ export interface SitePageConnectionContextGroupNodeFrontmatterDescriptionQuerySt
 }
 
 export interface SitePageConnectionContextGroupNodeFrontmatterDateQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageConnectionContextGroupNodeFrontmatterTagsQueryList {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
@@ -2190,12 +1388,6 @@ export interface SitePageConnectionPluginCreatorPluginOptionsInputObject {
 	name?: SitePageConnectionPluginCreatorPluginOptionsNameQueryString | null;
 	path?: SitePageConnectionPluginCreatorPluginOptionsPathQueryString | null;
 	maxWidth?: SitePageConnectionPluginCreatorPluginOptionsMaxWidthQueryInteger | null;
-	wrapperStyle?: SitePageConnectionPluginCreatorPluginOptionsWrapperStyleQueryString | null;
-	backgroundColor?: SitePageConnectionPluginCreatorPluginOptionsBackgroundColorQueryString | null;
-	linkImagesToOriginal?: SitePageConnectionPluginCreatorPluginOptionsLinkImagesToOriginalQueryBoolean | null;
-	showCaptions?: SitePageConnectionPluginCreatorPluginOptionsShowCaptionsQueryBoolean | null;
-	pathPrefix?: SitePageConnectionPluginCreatorPluginOptionsPathPrefixQueryString | null;
-	withWebp?: SitePageConnectionPluginCreatorPluginOptionsWithWebpQueryBoolean | null;
 	inlineCodeMarker?: SitePageConnectionPluginCreatorPluginOptionsInlineCodeMarkerQueryString | null;
 	pathToConfigModule?: SitePageConnectionPluginCreatorPluginOptionsPathToConfigModuleQueryString | null;
 	omitGoogleFont?: SitePageConnectionPluginCreatorPluginOptionsOmitGoogleFontQueryBoolean | null;
@@ -2203,9 +1395,12 @@ export interface SitePageConnectionPluginCreatorPluginOptionsInputObject {
 	feeds?: SitePageConnectionPluginCreatorPluginOptionsFeedsQueryList | null;
 	headers?: SitePageConnectionPluginCreatorPluginOptionsHeadersInputObject | null;
 	allPageHeaders?: SitePageConnectionPluginCreatorPluginOptionsAllPageHeadersQueryList | null;
+	siteId?: SitePageConnectionPluginCreatorPluginOptionsSiteIdQueryString | null;
+	matomoUrl?: SitePageConnectionPluginCreatorPluginOptionsMatomoUrlQueryString | null;
+	siteUrl?: SitePageConnectionPluginCreatorPluginOptionsSiteUrlQueryString | null;
 	short_name?: SitePageConnectionPluginCreatorPluginOptionsShortNameQueryString | null;
 	start_url?: SitePageConnectionPluginCreatorPluginOptionsStartUrlQueryString | null;
-	background_color?: SitePageConnectionPluginCreatorPluginOptionsBackgroundColorQueryString_2 | null;
+	background_color?: SitePageConnectionPluginCreatorPluginOptionsBackgroundColorQueryString | null;
 	theme_color?: SitePageConnectionPluginCreatorPluginOptionsThemeColorQueryString | null;
 	display?: SitePageConnectionPluginCreatorPluginOptionsDisplayQueryString | null;
 	icon?: SitePageConnectionPluginCreatorPluginOptionsIconQueryString | null;
@@ -2265,12 +1460,6 @@ export interface SitePageConnectionPluginCreatorPluginOptionsPluginsVersionQuery
 
 export interface SitePageConnectionPluginCreatorPluginOptionsPluginsPluginOptionsInputObject {
 	maxWidth?: SitePageConnectionPluginCreatorPluginOptionsPluginsPluginOptionsMaxWidthQueryInteger | null;
-	wrapperStyle?: SitePageConnectionPluginCreatorPluginOptionsPluginsPluginOptionsWrapperStyleQueryString | null;
-	backgroundColor?: SitePageConnectionPluginCreatorPluginOptionsPluginsPluginOptionsBackgroundColorQueryString | null;
-	linkImagesToOriginal?: SitePageConnectionPluginCreatorPluginOptionsPluginsPluginOptionsLinkImagesToOriginalQueryBoolean | null;
-	showCaptions?: SitePageConnectionPluginCreatorPluginOptionsPluginsPluginOptionsShowCaptionsQueryBoolean | null;
-	pathPrefix?: SitePageConnectionPluginCreatorPluginOptionsPluginsPluginOptionsPathPrefixQueryString | null;
-	withWebp?: SitePageConnectionPluginCreatorPluginOptionsPluginsPluginOptionsWithWebpQueryBoolean | null;
 	inlineCodeMarker?: SitePageConnectionPluginCreatorPluginOptionsPluginsPluginOptionsInlineCodeMarkerQueryString | null;
 }
 
@@ -2283,54 +1472,6 @@ export interface SitePageConnectionPluginCreatorPluginOptionsPluginsPluginOption
 	lte?: number | null;
 	in?: (number | null)[] | null;
 	nin?: (number | null)[] | null;
-}
-
-export interface SitePageConnectionPluginCreatorPluginOptionsPluginsPluginOptionsWrapperStyleQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageConnectionPluginCreatorPluginOptionsPluginsPluginOptionsBackgroundColorQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageConnectionPluginCreatorPluginOptionsPluginsPluginOptionsLinkImagesToOriginalQueryBoolean {
-	eq?: boolean | null;
-	ne?: boolean | null;
-	in?: (boolean | null)[] | null;
-	nin?: (boolean | null)[] | null;
-}
-
-export interface SitePageConnectionPluginCreatorPluginOptionsPluginsPluginOptionsShowCaptionsQueryBoolean {
-	eq?: boolean | null;
-	ne?: boolean | null;
-	in?: (boolean | null)[] | null;
-	nin?: (boolean | null)[] | null;
-}
-
-export interface SitePageConnectionPluginCreatorPluginOptionsPluginsPluginOptionsPathPrefixQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageConnectionPluginCreatorPluginOptionsPluginsPluginOptionsWithWebpQueryBoolean {
-	eq?: boolean | null;
-	ne?: boolean | null;
-	in?: (boolean | null)[] | null;
-	nin?: (boolean | null)[] | null;
 }
 
 export interface SitePageConnectionPluginCreatorPluginOptionsPluginsPluginOptionsInlineCodeMarkerQueryString {
@@ -2428,54 +1569,6 @@ export interface SitePageConnectionPluginCreatorPluginOptionsMaxWidthQueryIntege
 	lte?: number | null;
 	in?: (number | null)[] | null;
 	nin?: (number | null)[] | null;
-}
-
-export interface SitePageConnectionPluginCreatorPluginOptionsWrapperStyleQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageConnectionPluginCreatorPluginOptionsBackgroundColorQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageConnectionPluginCreatorPluginOptionsLinkImagesToOriginalQueryBoolean {
-	eq?: boolean | null;
-	ne?: boolean | null;
-	in?: (boolean | null)[] | null;
-	nin?: (boolean | null)[] | null;
-}
-
-export interface SitePageConnectionPluginCreatorPluginOptionsShowCaptionsQueryBoolean {
-	eq?: boolean | null;
-	ne?: boolean | null;
-	in?: (boolean | null)[] | null;
-	nin?: (boolean | null)[] | null;
-}
-
-export interface SitePageConnectionPluginCreatorPluginOptionsPathPrefixQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageConnectionPluginCreatorPluginOptionsWithWebpQueryBoolean {
-	eq?: boolean | null;
-	ne?: boolean | null;
-	in?: (boolean | null)[] | null;
-	nin?: (boolean | null)[] | null;
 }
 
 export interface SitePageConnectionPluginCreatorPluginOptionsInlineCodeMarkerQueryString {
@@ -2641,6 +1734,33 @@ export interface SitePageConnectionPluginCreatorPluginOptionsAllPageHeadersQuery
 	nin?: (string | null)[] | null;
 }
 
+export interface SitePageConnectionPluginCreatorPluginOptionsSiteIdQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageConnectionPluginCreatorPluginOptionsMatomoUrlQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageConnectionPluginCreatorPluginOptionsSiteUrlQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
 export interface SitePageConnectionPluginCreatorPluginOptionsShortNameQueryString {
 	eq?: string | null;
 	ne?: string | null;
@@ -2659,7 +1779,7 @@ export interface SitePageConnectionPluginCreatorPluginOptionsStartUrlQueryString
 	nin?: (string | null)[] | null;
 }
 
-export interface SitePageConnectionPluginCreatorPluginOptionsBackgroundColorQueryString_2 {
+export interface SitePageConnectionPluginCreatorPluginOptionsBackgroundColorQueryString {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
@@ -3071,12 +2191,6 @@ export interface SitePluginConnectionPluginOptionsInputObject_2 {
 	name?: SitePluginConnectionPluginOptionsNameQueryString_2 | null;
 	path?: SitePluginConnectionPluginOptionsPathQueryString_2 | null;
 	maxWidth?: SitePluginConnectionPluginOptionsMaxWidthQueryInteger_2 | null;
-	wrapperStyle?: SitePluginConnectionPluginOptionsWrapperStyleQueryString | null;
-	backgroundColor?: SitePluginConnectionPluginOptionsBackgroundColorQueryString_2 | null;
-	linkImagesToOriginal?: SitePluginConnectionPluginOptionsLinkImagesToOriginalQueryBoolean | null;
-	showCaptions?: SitePluginConnectionPluginOptionsShowCaptionsQueryBoolean | null;
-	pathPrefix?: SitePluginConnectionPluginOptionsPathPrefixQueryString | null;
-	withWebp?: SitePluginConnectionPluginOptionsWithWebpQueryBoolean | null;
 	inlineCodeMarker?: SitePluginConnectionPluginOptionsInlineCodeMarkerQueryString_2 | null;
 	pathToConfigModule?: SitePluginConnectionPluginOptionsPathToConfigModuleQueryString_2 | null;
 	omitGoogleFont?: SitePluginConnectionPluginOptionsOmitGoogleFontQueryBoolean_2 | null;
@@ -3084,9 +2198,12 @@ export interface SitePluginConnectionPluginOptionsInputObject_2 {
 	feeds?: SitePluginConnectionPluginOptionsFeedsQueryList_2 | null;
 	headers?: SitePluginConnectionPluginOptionsHeadersInputObject_2 | null;
 	allPageHeaders?: SitePluginConnectionPluginOptionsAllPageHeadersQueryList_2 | null;
+	siteId?: SitePluginConnectionPluginOptionsSiteIdQueryString_2 | null;
+	matomoUrl?: SitePluginConnectionPluginOptionsMatomoUrlQueryString_2 | null;
+	siteUrl?: SitePluginConnectionPluginOptionsSiteUrlQueryString_2 | null;
 	short_name?: SitePluginConnectionPluginOptionsShortNameQueryString_2 | null;
 	start_url?: SitePluginConnectionPluginOptionsStartUrlQueryString_2 | null;
-	background_color?: SitePluginConnectionPluginOptionsBackgroundColorQueryString_3 | null;
+	background_color?: SitePluginConnectionPluginOptionsBackgroundColorQueryString_2 | null;
 	theme_color?: SitePluginConnectionPluginOptionsThemeColorQueryString_2 | null;
 	display?: SitePluginConnectionPluginOptionsDisplayQueryString_2 | null;
 	icon?: SitePluginConnectionPluginOptionsIconQueryString_2 | null;
@@ -3146,12 +2263,6 @@ export interface SitePluginConnectionPluginOptionsPluginsVersionQueryString_2 {
 
 export interface SitePluginConnectionPluginOptionsPluginsPluginOptionsInputObject_2 {
 	maxWidth?: SitePluginConnectionPluginOptionsPluginsPluginOptionsMaxWidthQueryInteger_2 | null;
-	wrapperStyle?: SitePluginConnectionPluginOptionsPluginsPluginOptionsWrapperStyleQueryString | null;
-	backgroundColor?: SitePluginConnectionPluginOptionsPluginsPluginOptionsBackgroundColorQueryString | null;
-	linkImagesToOriginal?: SitePluginConnectionPluginOptionsPluginsPluginOptionsLinkImagesToOriginalQueryBoolean | null;
-	showCaptions?: SitePluginConnectionPluginOptionsPluginsPluginOptionsShowCaptionsQueryBoolean | null;
-	pathPrefix?: SitePluginConnectionPluginOptionsPluginsPluginOptionsPathPrefixQueryString | null;
-	withWebp?: SitePluginConnectionPluginOptionsPluginsPluginOptionsWithWebpQueryBoolean | null;
 	inlineCodeMarker?: SitePluginConnectionPluginOptionsPluginsPluginOptionsInlineCodeMarkerQueryString_2 | null;
 }
 
@@ -3164,54 +2275,6 @@ export interface SitePluginConnectionPluginOptionsPluginsPluginOptionsMaxWidthQu
 	lte?: number | null;
 	in?: (number | null)[] | null;
 	nin?: (number | null)[] | null;
-}
-
-export interface SitePluginConnectionPluginOptionsPluginsPluginOptionsWrapperStyleQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePluginConnectionPluginOptionsPluginsPluginOptionsBackgroundColorQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePluginConnectionPluginOptionsPluginsPluginOptionsLinkImagesToOriginalQueryBoolean {
-	eq?: boolean | null;
-	ne?: boolean | null;
-	in?: (boolean | null)[] | null;
-	nin?: (boolean | null)[] | null;
-}
-
-export interface SitePluginConnectionPluginOptionsPluginsPluginOptionsShowCaptionsQueryBoolean {
-	eq?: boolean | null;
-	ne?: boolean | null;
-	in?: (boolean | null)[] | null;
-	nin?: (boolean | null)[] | null;
-}
-
-export interface SitePluginConnectionPluginOptionsPluginsPluginOptionsPathPrefixQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePluginConnectionPluginOptionsPluginsPluginOptionsWithWebpQueryBoolean {
-	eq?: boolean | null;
-	ne?: boolean | null;
-	in?: (boolean | null)[] | null;
-	nin?: (boolean | null)[] | null;
 }
 
 export interface SitePluginConnectionPluginOptionsPluginsPluginOptionsInlineCodeMarkerQueryString_2 {
@@ -3309,54 +2372,6 @@ export interface SitePluginConnectionPluginOptionsMaxWidthQueryInteger_2 {
 	lte?: number | null;
 	in?: (number | null)[] | null;
 	nin?: (number | null)[] | null;
-}
-
-export interface SitePluginConnectionPluginOptionsWrapperStyleQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePluginConnectionPluginOptionsBackgroundColorQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePluginConnectionPluginOptionsLinkImagesToOriginalQueryBoolean {
-	eq?: boolean | null;
-	ne?: boolean | null;
-	in?: (boolean | null)[] | null;
-	nin?: (boolean | null)[] | null;
-}
-
-export interface SitePluginConnectionPluginOptionsShowCaptionsQueryBoolean {
-	eq?: boolean | null;
-	ne?: boolean | null;
-	in?: (boolean | null)[] | null;
-	nin?: (boolean | null)[] | null;
-}
-
-export interface SitePluginConnectionPluginOptionsPathPrefixQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePluginConnectionPluginOptionsWithWebpQueryBoolean {
-	eq?: boolean | null;
-	ne?: boolean | null;
-	in?: (boolean | null)[] | null;
-	nin?: (boolean | null)[] | null;
 }
 
 export interface SitePluginConnectionPluginOptionsInlineCodeMarkerQueryString_2 {
@@ -3522,6 +2537,33 @@ export interface SitePluginConnectionPluginOptionsAllPageHeadersQueryList_2 {
 	nin?: (string | null)[] | null;
 }
 
+export interface SitePluginConnectionPluginOptionsSiteIdQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePluginConnectionPluginOptionsMatomoUrlQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePluginConnectionPluginOptionsSiteUrlQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
 export interface SitePluginConnectionPluginOptionsShortNameQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
@@ -3540,7 +2582,7 @@ export interface SitePluginConnectionPluginOptionsStartUrlQueryString_2 {
 	nin?: (string | null)[] | null;
 }
 
-export interface SitePluginConnectionPluginOptionsBackgroundColorQueryString_3 {
+export interface SitePluginConnectionPluginOptionsBackgroundColorQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
@@ -4669,318 +3711,6 @@ export interface PublicUrlQueryString_4 {
 	nin?: (string | null)[] | null;
 }
 
-export interface MarkdownRemarkConnectionSort {
-	fields: (MarkdownRemarkConnectionSortByFieldsEnum | null)[];
-	order?: MarkdownRemarkConnectionSortOrderValues | null;
-}
-/** Filter connection on its fields */
-export interface FilterMarkdownRemark {
-	id?: MarkdownRemarkConnectionIdQueryString_2 | null;
-	internal?: MarkdownRemarkConnectionInternalInputObject_2 | null;
-	frontmatter?: MarkdownRemarkConnectionFrontmatterInputObject_2 | null;
-	excerpt?: ExcerptQueryString_4 | null;
-	rawMarkdownBody?: MarkdownRemarkConnectionRawMarkdownBodyQueryString_2 | null;
-	fileAbsolutePath?: MarkdownRemarkConnectionFileAbsolutePathQueryString_2 | null;
-	html?: HtmlQueryString_4 | null;
-	headings?: HeadingsQueryList_4 | null;
-	timeToRead?: TimeToReadQueryInt_4 | null;
-	tableOfContents?: TableOfContentsQueryString_4 | null;
-	wordCount?: WordCountTypeName_4 | null;
-}
-
-export interface MarkdownRemarkConnectionIdQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface MarkdownRemarkConnectionInternalInputObject_2 {
-	content?: MarkdownRemarkConnectionInternalContentQueryString_2 | null;
-	type?: MarkdownRemarkConnectionInternalTypeQueryString_2 | null;
-	contentDigest?: MarkdownRemarkConnectionInternalContentDigestQueryString_2 | null;
-	owner?: MarkdownRemarkConnectionInternalOwnerQueryString_2 | null;
-}
-
-export interface MarkdownRemarkConnectionInternalContentQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface MarkdownRemarkConnectionInternalTypeQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface MarkdownRemarkConnectionInternalContentDigestQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface MarkdownRemarkConnectionInternalOwnerQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface MarkdownRemarkConnectionFrontmatterInputObject_2 {
-	title?: MarkdownRemarkConnectionFrontmatterTitleQueryString_2 | null;
-	link?: MarkdownRemarkConnectionFrontmatterLinkQueryString_2 | null;
-	date?: MarkdownRemarkConnectionFrontmatterDateQueryString_2 | null;
-	tags?: MarkdownRemarkConnectionFrontmatterTagsQueryList_2 | null;
-	authors?: MarkdownRemarkConnectionFrontmatterAuthorsQueryList_2 | null;
-	_PARENT?: MarkdownRemarkConnectionFrontmatterParentQueryString_2 | null;
-	draft?: MarkdownRemarkConnectionFrontmatterDraftQueryBoolean_2 | null;
-	toc?: MarkdownRemarkConnectionFrontmatterTocQueryBoolean_2 | null;
-	description?: MarkdownRemarkConnectionFrontmatterDescriptionQueryString_2 | null;
-	type?: MarkdownRemarkConnectionFrontmatterTypeQueryString_2 | null;
-}
-
-export interface MarkdownRemarkConnectionFrontmatterTitleQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface MarkdownRemarkConnectionFrontmatterLinkQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface MarkdownRemarkConnectionFrontmatterDateQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface MarkdownRemarkConnectionFrontmatterTagsQueryList_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface MarkdownRemarkConnectionFrontmatterAuthorsQueryList_2 {
-	elemMatch?: MarkdownRemarkConnectionFrontmatterAuthorsInputObject_2 | null;
-}
-
-export interface MarkdownRemarkConnectionFrontmatterAuthorsInputObject_2 {
-	name?: MarkdownRemarkConnectionFrontmatterAuthorsNameQueryString_2 | null;
-	url?: MarkdownRemarkConnectionFrontmatterAuthorsUrlQueryString_2 | null;
-}
-
-export interface MarkdownRemarkConnectionFrontmatterAuthorsNameQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface MarkdownRemarkConnectionFrontmatterAuthorsUrlQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface MarkdownRemarkConnectionFrontmatterParentQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface MarkdownRemarkConnectionFrontmatterDraftQueryBoolean_2 {
-	eq?: boolean | null;
-	ne?: boolean | null;
-	in?: (boolean | null)[] | null;
-	nin?: (boolean | null)[] | null;
-}
-
-export interface MarkdownRemarkConnectionFrontmatterTocQueryBoolean_2 {
-	eq?: boolean | null;
-	ne?: boolean | null;
-	in?: (boolean | null)[] | null;
-	nin?: (boolean | null)[] | null;
-}
-
-export interface MarkdownRemarkConnectionFrontmatterDescriptionQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface MarkdownRemarkConnectionFrontmatterTypeQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface ExcerptQueryString_4 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface MarkdownRemarkConnectionRawMarkdownBodyQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface MarkdownRemarkConnectionFileAbsolutePathQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface HtmlQueryString_4 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface HeadingsQueryList_4 {
-	elemMatch?: HeadingsListElemTypeName_4 | null;
-}
-
-export interface HeadingsListElemTypeName_4 {
-	value?: HeadingsListElemValueQueryString_4 | null;
-	depth?: HeadingsListElemDepthQueryInt_4 | null;
-}
-
-export interface HeadingsListElemValueQueryString_4 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface HeadingsListElemDepthQueryInt_4 {
-	eq?: number | null;
-	ne?: number | null;
-	gt?: number | null;
-	gte?: number | null;
-	lt?: number | null;
-	lte?: number | null;
-	in?: (number | null)[] | null;
-	nin?: (number | null)[] | null;
-}
-
-export interface TimeToReadQueryInt_4 {
-	eq?: number | null;
-	ne?: number | null;
-	gt?: number | null;
-	gte?: number | null;
-	lt?: number | null;
-	lte?: number | null;
-	in?: (number | null)[] | null;
-	nin?: (number | null)[] | null;
-}
-
-export interface TableOfContentsQueryString_4 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface WordCountTypeName_4 {
-	paragraphs?: WordCountParagraphsQueryInt_4 | null;
-	sentences?: WordCountSentencesQueryInt_4 | null;
-	words?: WordCountWordsQueryInt_4 | null;
-}
-
-export interface WordCountParagraphsQueryInt_4 {
-	eq?: number | null;
-	ne?: number | null;
-	gt?: number | null;
-	gte?: number | null;
-	lt?: number | null;
-	lte?: number | null;
-	in?: (number | null)[] | null;
-	nin?: (number | null)[] | null;
-}
-
-export interface WordCountSentencesQueryInt_4 {
-	eq?: number | null;
-	ne?: number | null;
-	gt?: number | null;
-	gte?: number | null;
-	lt?: number | null;
-	lte?: number | null;
-	in?: (number | null)[] | null;
-	nin?: (number | null)[] | null;
-}
-
-export interface WordCountWordsQueryInt_4 {
-	eq?: number | null;
-	ne?: number | null;
-	gt?: number | null;
-	gte?: number | null;
-	lt?: number | null;
-	lte?: number | null;
-	in?: (number | null)[] | null;
-	nin?: (number | null)[] | null;
-}
-
 export interface TodoJsonConnectionSort {
 	fields: (TodoJsonConnectionSortByFieldsEnum | null)[];
 	order?: TodoJsonConnectionSortOrderValues | null;
@@ -5061,21 +3791,25 @@ export interface TodoJsonConnectionDoneQueryBoolean_2 {
 	nin?: (boolean | null)[] | null;
 }
 
-export interface PersonalJsonConnectionSort {
-	fields: (PersonalJsonConnectionSortByFieldsEnum | null)[];
-	order?: PersonalJsonConnectionSortOrderValues | null;
+export interface MdxConnectionSort {
+	fields: (MdxConnectionSortByFieldsEnum | null)[];
+	order?: MdxConnectionSortOrderValues | null;
 }
 /** Filter connection on its fields */
-export interface FilterPersonalJson {
-	name?: PersonalJsonConnectionNameQueryString_2 | null;
-	email?: PersonalJsonConnectionEmailQueryString_2 | null;
-	jobTitle?: PersonalJsonConnectionJobTitleQueryString_2 | null;
-	social?: PersonalJsonConnectionSocialQueryList_2 | null;
-	id?: PersonalJsonConnectionIdQueryString_2 | null;
-	internal?: PersonalJsonConnectionInternalInputObject_2 | null;
+export interface FilterMdx {
+	id?: MdxConnectionIdQueryString_2 | null;
+	internal?: MdxConnectionInternalInputObject_2 | null;
+	frontmatter?: MdxConnectionFrontmatterInputObject_2 | null;
+	rawBody?: MdxConnectionRawBodyQueryString_2 | null;
+	fileAbsolutePath?: MdxConnectionFileAbsolutePathQueryString_2 | null;
+	code?: CodeTypeName_4 | null;
+	excerpt?: ExcerptQueryString_4 | null;
+	headings?: HeadingsQueryList_4 | null;
+	timeToRead?: TimeToReadQueryInt_4 | null;
+	wordCount?: WordCountTypeName_4 | null;
 }
 
-export interface PersonalJsonConnectionNameQueryString_2 {
+export interface MdxConnectionIdQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
@@ -5084,7 +3818,14 @@ export interface PersonalJsonConnectionNameQueryString_2 {
 	nin?: (string | null)[] | null;
 }
 
-export interface PersonalJsonConnectionEmailQueryString_2 {
+export interface MdxConnectionInternalInputObject_2 {
+	content?: MdxConnectionInternalContentQueryString_2 | null;
+	type?: MdxConnectionInternalTypeQueryString_2 | null;
+	contentDigest?: MdxConnectionInternalContentDigestQueryString_2 | null;
+	owner?: MdxConnectionInternalOwnerQueryString_2 | null;
+}
+
+export interface MdxConnectionInternalContentQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
@@ -5093,7 +3834,7 @@ export interface PersonalJsonConnectionEmailQueryString_2 {
 	nin?: (string | null)[] | null;
 }
 
-export interface PersonalJsonConnectionJobTitleQueryString_2 {
+export interface MdxConnectionInternalTypeQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
@@ -5102,17 +3843,7 @@ export interface PersonalJsonConnectionJobTitleQueryString_2 {
 	nin?: (string | null)[] | null;
 }
 
-export interface PersonalJsonConnectionSocialQueryList_2 {
-	elemMatch?: PersonalJsonConnectionSocialInputObject_2 | null;
-}
-
-export interface PersonalJsonConnectionSocialInputObject_2 {
-	serviceName?: PersonalJsonConnectionSocialServiceNameQueryString_2 | null;
-	icon?: PersonalJsonConnectionSocialIconQueryString_2 | null;
-	url?: PersonalJsonConnectionSocialUrlQueryString_2 | null;
-}
-
-export interface PersonalJsonConnectionSocialServiceNameQueryString_2 {
+export interface MdxConnectionInternalContentDigestQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
@@ -5121,7 +3852,7 @@ export interface PersonalJsonConnectionSocialServiceNameQueryString_2 {
 	nin?: (string | null)[] | null;
 }
 
-export interface PersonalJsonConnectionSocialIconQueryString_2 {
+export interface MdxConnectionInternalOwnerQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
@@ -5130,7 +3861,20 @@ export interface PersonalJsonConnectionSocialIconQueryString_2 {
 	nin?: (string | null)[] | null;
 }
 
-export interface PersonalJsonConnectionSocialUrlQueryString_2 {
+export interface MdxConnectionFrontmatterInputObject_2 {
+	title?: MdxConnectionFrontmatterTitleQueryString_2 | null;
+	link?: MdxConnectionFrontmatterLinkQueryString_2 | null;
+	date?: MdxConnectionFrontmatterDateQueryString_2 | null;
+	tags?: MdxConnectionFrontmatterTagsQueryList_2 | null;
+	authors?: MdxConnectionFrontmatterAuthorsQueryList_2 | null;
+	_PARENT?: MdxConnectionFrontmatterParentQueryString_2 | null;
+	description?: MdxConnectionFrontmatterDescriptionQueryString_2 | null;
+	draft?: MdxConnectionFrontmatterDraftQueryBoolean_2 | null;
+	toc?: MdxConnectionFrontmatterTocQueryBoolean_2 | null;
+	type?: MdxConnectionFrontmatterTypeQueryString_2 | null;
+}
+
+export interface MdxConnectionFrontmatterTitleQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
@@ -5139,7 +3883,7 @@ export interface PersonalJsonConnectionSocialUrlQueryString_2 {
 	nin?: (string | null)[] | null;
 }
 
-export interface PersonalJsonConnectionIdQueryString_2 {
+export interface MdxConnectionFrontmatterLinkQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
@@ -5148,13 +3892,7 @@ export interface PersonalJsonConnectionIdQueryString_2 {
 	nin?: (string | null)[] | null;
 }
 
-export interface PersonalJsonConnectionInternalInputObject_2 {
-	contentDigest?: PersonalJsonConnectionInternalContentDigestQueryString_2 | null;
-	type?: PersonalJsonConnectionInternalTypeQueryString_2 | null;
-	owner?: PersonalJsonConnectionInternalOwnerQueryString_2 | null;
-}
-
-export interface PersonalJsonConnectionInternalContentDigestQueryString_2 {
+export interface MdxConnectionFrontmatterDateQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
@@ -5163,7 +3901,7 @@ export interface PersonalJsonConnectionInternalContentDigestQueryString_2 {
 	nin?: (string | null)[] | null;
 }
 
-export interface PersonalJsonConnectionInternalTypeQueryString_2 {
+export interface MdxConnectionFrontmatterTagsQueryList_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
@@ -5172,7 +3910,16 @@ export interface PersonalJsonConnectionInternalTypeQueryString_2 {
 	nin?: (string | null)[] | null;
 }
 
-export interface PersonalJsonConnectionInternalOwnerQueryString_2 {
+export interface MdxConnectionFrontmatterAuthorsQueryList_2 {
+	elemMatch?: MdxConnectionFrontmatterAuthorsInputObject_2 | null;
+}
+
+export interface MdxConnectionFrontmatterAuthorsInputObject_2 {
+	name?: MdxConnectionFrontmatterAuthorsNameQueryString_2 | null;
+	url?: MdxConnectionFrontmatterAuthorsUrlQueryString_2 | null;
+}
+
+export interface MdxConnectionFrontmatterAuthorsNameQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
@@ -5181,19 +3928,7 @@ export interface PersonalJsonConnectionInternalOwnerQueryString_2 {
 	nin?: (string | null)[] | null;
 }
 
-export interface CompetencesJsonConnectionSort {
-	fields: (CompetencesJsonConnectionSortByFieldsEnum | null)[];
-	order?: CompetencesJsonConnectionSortOrderValues | null;
-}
-/** Filter connection on its fields */
-export interface FilterCompetencesJson {
-	name?: CompetencesJsonConnectionNameQueryString_2 | null;
-	description?: CompetencesJsonConnectionDescriptionQueryString_2 | null;
-	id?: CompetencesJsonConnectionIdQueryString_2 | null;
-	internal?: CompetencesJsonConnectionInternalInputObject_2 | null;
-}
-
-export interface CompetencesJsonConnectionNameQueryString_2 {
+export interface MdxConnectionFrontmatterAuthorsUrlQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
@@ -5202,7 +3937,7 @@ export interface CompetencesJsonConnectionNameQueryString_2 {
 	nin?: (string | null)[] | null;
 }
 
-export interface CompetencesJsonConnectionDescriptionQueryString_2 {
+export interface MdxConnectionFrontmatterParentQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
@@ -5211,7 +3946,7 @@ export interface CompetencesJsonConnectionDescriptionQueryString_2 {
 	nin?: (string | null)[] | null;
 }
 
-export interface CompetencesJsonConnectionIdQueryString_2 {
+export interface MdxConnectionFrontmatterDescriptionQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
@@ -5220,13 +3955,21 @@ export interface CompetencesJsonConnectionIdQueryString_2 {
 	nin?: (string | null)[] | null;
 }
 
-export interface CompetencesJsonConnectionInternalInputObject_2 {
-	contentDigest?: CompetencesJsonConnectionInternalContentDigestQueryString_2 | null;
-	type?: CompetencesJsonConnectionInternalTypeQueryString_2 | null;
-	owner?: CompetencesJsonConnectionInternalOwnerQueryString_2 | null;
+export interface MdxConnectionFrontmatterDraftQueryBoolean_2 {
+	eq?: boolean | null;
+	ne?: boolean | null;
+	in?: (boolean | null)[] | null;
+	nin?: (boolean | null)[] | null;
 }
 
-export interface CompetencesJsonConnectionInternalContentDigestQueryString_2 {
+export interface MdxConnectionFrontmatterTocQueryBoolean_2 {
+	eq?: boolean | null;
+	ne?: boolean | null;
+	in?: (boolean | null)[] | null;
+	nin?: (boolean | null)[] | null;
+}
+
+export interface MdxConnectionFrontmatterTypeQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
@@ -5235,7 +3978,7 @@ export interface CompetencesJsonConnectionInternalContentDigestQueryString_2 {
 	nin?: (string | null)[] | null;
 }
 
-export interface CompetencesJsonConnectionInternalTypeQueryString_2 {
+export interface MdxConnectionRawBodyQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
@@ -5244,7 +3987,7 @@ export interface CompetencesJsonConnectionInternalTypeQueryString_2 {
 	nin?: (string | null)[] | null;
 }
 
-export interface CompetencesJsonConnectionInternalOwnerQueryString_2 {
+export interface MdxConnectionFileAbsolutePathQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
@@ -5253,33 +3996,12 @@ export interface CompetencesJsonConnectionInternalOwnerQueryString_2 {
 	nin?: (string | null)[] | null;
 }
 
-export interface ExperiencesJsonConnectionSort {
-	fields: (ExperiencesJsonConnectionSortByFieldsEnum | null)[];
-	order?: ExperiencesJsonConnectionSortOrderValues | null;
-}
-/** Filter connection on its fields */
-export interface FilterExperiencesJson {
-	work?: ExperiencesJsonConnectionWorkQueryList_2 | null;
-	id?: ExperiencesJsonConnectionIdQueryString_2 | null;
-	internal?: ExperiencesJsonConnectionInternalInputObject_2 | null;
-	fields?: ExperiencesJsonConnectionFieldsInputObject_2 | null;
+export interface CodeTypeName_4 {
+	body?: CodeBodyQueryString_4 | null;
+	scope?: CodeScopeQueryString_4 | null;
 }
 
-export interface ExperiencesJsonConnectionWorkQueryList_2 {
-	elemMatch?: ExperiencesJsonConnectionWorkInputObject_2 | null;
-}
-
-export interface ExperiencesJsonConnectionWorkInputObject_2 {
-	company?: ExperiencesJsonConnectionWorkCompanyQueryString_2 | null;
-	link?: ExperiencesJsonConnectionWorkLinkQueryString_2 | null;
-	image?: ExperiencesJsonConnectionWorkImageQueryString_2 | null;
-	period?: ExperiencesJsonConnectionWorkPeriodQueryList_2 | null;
-	role?: ExperiencesJsonConnectionWorkRoleQueryString_2 | null;
-	skills?: ExperiencesJsonConnectionWorkSkillsQueryList_2 | null;
-	projects?: ExperiencesJsonConnectionWorkProjectsQueryList_2 | null;
-}
-
-export interface ExperiencesJsonConnectionWorkCompanyQueryString_2 {
+export interface CodeBodyQueryString_4 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
@@ -5288,7 +4010,7 @@ export interface ExperiencesJsonConnectionWorkCompanyQueryString_2 {
 	nin?: (string | null)[] | null;
 }
 
-export interface ExperiencesJsonConnectionWorkLinkQueryString_2 {
+export interface CodeScopeQueryString_4 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
@@ -5297,7 +4019,7 @@ export interface ExperiencesJsonConnectionWorkLinkQueryString_2 {
 	nin?: (string | null)[] | null;
 }
 
-export interface ExperiencesJsonConnectionWorkImageQueryString_2 {
+export interface ExcerptQueryString_4 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
@@ -5306,7 +4028,16 @@ export interface ExperiencesJsonConnectionWorkImageQueryString_2 {
 	nin?: (string | null)[] | null;
 }
 
-export interface ExperiencesJsonConnectionWorkPeriodQueryList_2 {
+export interface HeadingsQueryList_4 {
+	elemMatch?: HeadingsListElemTypeName_4 | null;
+}
+
+export interface HeadingsListElemTypeName_4 {
+	value?: HeadingsListElemValueQueryString_4 | null;
+	depth?: HeadingsListElemDepthQueryInt_4 | null;
+}
+
+export interface HeadingsListElemValueQueryString_4 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
@@ -5315,128 +4046,65 @@ export interface ExperiencesJsonConnectionWorkPeriodQueryList_2 {
 	nin?: (string | null)[] | null;
 }
 
-export interface ExperiencesJsonConnectionWorkRoleQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
+export interface HeadingsListElemDepthQueryInt_4 {
+	eq?: number | null;
+	ne?: number | null;
+	gt?: number | null;
+	gte?: number | null;
+	lt?: number | null;
+	lte?: number | null;
+	in?: (number | null)[] | null;
+	nin?: (number | null)[] | null;
 }
 
-export interface ExperiencesJsonConnectionWorkSkillsQueryList_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
+export interface TimeToReadQueryInt_4 {
+	eq?: number | null;
+	ne?: number | null;
+	gt?: number | null;
+	gte?: number | null;
+	lt?: number | null;
+	lte?: number | null;
+	in?: (number | null)[] | null;
+	nin?: (number | null)[] | null;
 }
 
-export interface ExperiencesJsonConnectionWorkProjectsQueryList_2 {
-	elemMatch?: ExperiencesJsonConnectionWorkProjectsInputObject_2 | null;
+export interface WordCountTypeName_4 {
+	paragraphs?: WordCountParagraphsQueryInt_4 | null;
+	sentences?: WordCountSentencesQueryInt_4 | null;
+	words?: WordCountWordsQueryInt_4 | null;
 }
 
-export interface ExperiencesJsonConnectionWorkProjectsInputObject_2 {
-	name?: ExperiencesJsonConnectionWorkProjectsNameQueryString_2 | null;
-	url?: ExperiencesJsonConnectionWorkProjectsUrlQueryString_2 | null;
-	description?: ExperiencesJsonConnectionWorkProjectsDescriptionQueryString_2 | null;
+export interface WordCountParagraphsQueryInt_4 {
+	eq?: number | null;
+	ne?: number | null;
+	gt?: number | null;
+	gte?: number | null;
+	lt?: number | null;
+	lte?: number | null;
+	in?: (number | null)[] | null;
+	nin?: (number | null)[] | null;
 }
 
-export interface ExperiencesJsonConnectionWorkProjectsNameQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
+export interface WordCountSentencesQueryInt_4 {
+	eq?: number | null;
+	ne?: number | null;
+	gt?: number | null;
+	gte?: number | null;
+	lt?: number | null;
+	lte?: number | null;
+	in?: (number | null)[] | null;
+	nin?: (number | null)[] | null;
 }
 
-export interface ExperiencesJsonConnectionWorkProjectsUrlQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface ExperiencesJsonConnectionWorkProjectsDescriptionQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface ExperiencesJsonConnectionIdQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface ExperiencesJsonConnectionInternalInputObject_2 {
-	contentDigest?: ExperiencesJsonConnectionInternalContentDigestQueryString_2 | null;
-	type?: ExperiencesJsonConnectionInternalTypeQueryString_2 | null;
-	owner?: ExperiencesJsonConnectionInternalOwnerQueryString_2 | null;
-	fieldOwners?: ExperiencesJsonConnectionInternalFieldOwnersInputObject_2 | null;
-}
-
-export interface ExperiencesJsonConnectionInternalContentDigestQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface ExperiencesJsonConnectionInternalTypeQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface ExperiencesJsonConnectionInternalOwnerQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface ExperiencesJsonConnectionInternalFieldOwnersInputObject_2 {
-	image_image?: ExperiencesJsonConnectionInternalFieldOwnersImageImageQueryString_2 | null;
-}
-
-export interface ExperiencesJsonConnectionInternalFieldOwnersImageImageQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface ExperiencesJsonConnectionFieldsInputObject_2 {
-	image_image?: ExperiencesJsonConnectionFieldsImageImageQueryList_2 | null;
-}
-
-export interface ExperiencesJsonConnectionFieldsImageImageQueryList_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
+export interface WordCountWordsQueryInt_4 {
+	eq?: number | null;
+	ne?: number | null;
+	gt?: number | null;
+	gte?: number | null;
+	lt?: number | null;
+	lte?: number | null;
+	in?: (number | null)[] | null;
+	nin?: (number | null)[] | null;
 }
 
 export interface SkillsJsonConnectionSort {
@@ -5573,6 +4241,78 @@ export interface SkillsJsonConnectionInternalTypeQueryString_2 {
 }
 
 export interface SkillsJsonConnectionInternalOwnerQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface CompetencesJsonConnectionSort {
+	fields: (CompetencesJsonConnectionSortByFieldsEnum | null)[];
+	order?: CompetencesJsonConnectionSortOrderValues | null;
+}
+/** Filter connection on its fields */
+export interface FilterCompetencesJson {
+	name?: CompetencesJsonConnectionNameQueryString_2 | null;
+	description?: CompetencesJsonConnectionDescriptionQueryString_2 | null;
+	id?: CompetencesJsonConnectionIdQueryString_2 | null;
+	internal?: CompetencesJsonConnectionInternalInputObject_2 | null;
+}
+
+export interface CompetencesJsonConnectionNameQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface CompetencesJsonConnectionDescriptionQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface CompetencesJsonConnectionIdQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface CompetencesJsonConnectionInternalInputObject_2 {
+	contentDigest?: CompetencesJsonConnectionInternalContentDigestQueryString_2 | null;
+	type?: CompetencesJsonConnectionInternalTypeQueryString_2 | null;
+	owner?: CompetencesJsonConnectionInternalOwnerQueryString_2 | null;
+}
+
+export interface CompetencesJsonConnectionInternalContentDigestQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface CompetencesJsonConnectionInternalTypeQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface CompetencesJsonConnectionInternalOwnerQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
@@ -5783,6 +4523,312 @@ export interface OrganizationJsonConnectionFieldsLogoImageQueryString_2 {
 	nin?: (string | null)[] | null;
 }
 
+export interface PersonalJsonConnectionSort {
+	fields: (PersonalJsonConnectionSortByFieldsEnum | null)[];
+	order?: PersonalJsonConnectionSortOrderValues | null;
+}
+/** Filter connection on its fields */
+export interface FilterPersonalJson {
+	name?: PersonalJsonConnectionNameQueryString_2 | null;
+	email?: PersonalJsonConnectionEmailQueryString_2 | null;
+	jobTitle?: PersonalJsonConnectionJobTitleQueryString_2 | null;
+	social?: PersonalJsonConnectionSocialQueryList_2 | null;
+	id?: PersonalJsonConnectionIdQueryString_2 | null;
+	internal?: PersonalJsonConnectionInternalInputObject_2 | null;
+}
+
+export interface PersonalJsonConnectionNameQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface PersonalJsonConnectionEmailQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface PersonalJsonConnectionJobTitleQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface PersonalJsonConnectionSocialQueryList_2 {
+	elemMatch?: PersonalJsonConnectionSocialInputObject_2 | null;
+}
+
+export interface PersonalJsonConnectionSocialInputObject_2 {
+	serviceName?: PersonalJsonConnectionSocialServiceNameQueryString_2 | null;
+	icon?: PersonalJsonConnectionSocialIconQueryString_2 | null;
+	url?: PersonalJsonConnectionSocialUrlQueryString_2 | null;
+}
+
+export interface PersonalJsonConnectionSocialServiceNameQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface PersonalJsonConnectionSocialIconQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface PersonalJsonConnectionSocialUrlQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface PersonalJsonConnectionIdQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface PersonalJsonConnectionInternalInputObject_2 {
+	contentDigest?: PersonalJsonConnectionInternalContentDigestQueryString_2 | null;
+	type?: PersonalJsonConnectionInternalTypeQueryString_2 | null;
+	owner?: PersonalJsonConnectionInternalOwnerQueryString_2 | null;
+}
+
+export interface PersonalJsonConnectionInternalContentDigestQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface PersonalJsonConnectionInternalTypeQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface PersonalJsonConnectionInternalOwnerQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface ExperiencesJsonConnectionSort {
+	fields: (ExperiencesJsonConnectionSortByFieldsEnum | null)[];
+	order?: ExperiencesJsonConnectionSortOrderValues | null;
+}
+/** Filter connection on its fields */
+export interface FilterExperiencesJson {
+	work?: ExperiencesJsonConnectionWorkQueryList_2 | null;
+	id?: ExperiencesJsonConnectionIdQueryString_2 | null;
+	internal?: ExperiencesJsonConnectionInternalInputObject_2 | null;
+	fields?: ExperiencesJsonConnectionFieldsInputObject_2 | null;
+}
+
+export interface ExperiencesJsonConnectionWorkQueryList_2 {
+	elemMatch?: ExperiencesJsonConnectionWorkInputObject_2 | null;
+}
+
+export interface ExperiencesJsonConnectionWorkInputObject_2 {
+	company?: ExperiencesJsonConnectionWorkCompanyQueryString_2 | null;
+	link?: ExperiencesJsonConnectionWorkLinkQueryString_2 | null;
+	image?: ExperiencesJsonConnectionWorkImageQueryString_2 | null;
+	period?: ExperiencesJsonConnectionWorkPeriodQueryList_2 | null;
+	role?: ExperiencesJsonConnectionWorkRoleQueryString_2 | null;
+	skills?: ExperiencesJsonConnectionWorkSkillsQueryList_2 | null;
+	projects?: ExperiencesJsonConnectionWorkProjectsQueryList_2 | null;
+}
+
+export interface ExperiencesJsonConnectionWorkCompanyQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface ExperiencesJsonConnectionWorkLinkQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface ExperiencesJsonConnectionWorkImageQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface ExperiencesJsonConnectionWorkPeriodQueryList_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface ExperiencesJsonConnectionWorkRoleQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface ExperiencesJsonConnectionWorkSkillsQueryList_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface ExperiencesJsonConnectionWorkProjectsQueryList_2 {
+	elemMatch?: ExperiencesJsonConnectionWorkProjectsInputObject_2 | null;
+}
+
+export interface ExperiencesJsonConnectionWorkProjectsInputObject_2 {
+	name?: ExperiencesJsonConnectionWorkProjectsNameQueryString_2 | null;
+	url?: ExperiencesJsonConnectionWorkProjectsUrlQueryString_2 | null;
+	description?: ExperiencesJsonConnectionWorkProjectsDescriptionQueryString_2 | null;
+}
+
+export interface ExperiencesJsonConnectionWorkProjectsNameQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface ExperiencesJsonConnectionWorkProjectsUrlQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface ExperiencesJsonConnectionWorkProjectsDescriptionQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface ExperiencesJsonConnectionIdQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface ExperiencesJsonConnectionInternalInputObject_2 {
+	contentDigest?: ExperiencesJsonConnectionInternalContentDigestQueryString_2 | null;
+	type?: ExperiencesJsonConnectionInternalTypeQueryString_2 | null;
+	owner?: ExperiencesJsonConnectionInternalOwnerQueryString_2 | null;
+	fieldOwners?: ExperiencesJsonConnectionInternalFieldOwnersInputObject_2 | null;
+}
+
+export interface ExperiencesJsonConnectionInternalContentDigestQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface ExperiencesJsonConnectionInternalTypeQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface ExperiencesJsonConnectionInternalOwnerQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface ExperiencesJsonConnectionInternalFieldOwnersInputObject_2 {
+	image_image?: ExperiencesJsonConnectionInternalFieldOwnersImageImageQueryString_2 | null;
+}
+
+export interface ExperiencesJsonConnectionInternalFieldOwnersImageImageQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface ExperiencesJsonConnectionFieldsInputObject_2 {
+	image_image?: ExperiencesJsonConnectionFieldsImageImageQueryList_2 | null;
+}
+
+export interface ExperiencesJsonConnectionFieldsImageImageQueryList_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
 export interface SitePageJsonNameQueryString {
 	eq?: string | null;
 	ne?: string | null;
@@ -5829,10 +4875,60 @@ export interface SitePageComponentChunkNameQueryString {
 }
 
 export interface SitePageContextInputObject {
+	listTitle?: SitePageContextListTitleQueryString | null;
+	tags?: SitePageContextTagsQueryList | null;
 	group?: SitePageContextGroupQueryList | null;
 	pathPrefix?: SitePageContextPathPrefixQueryString | null;
 	additionalContext?: SitePageContextAdditionalContextInputObject | null;
 	markdownPath?: SitePageContextMarkdownPathQueryString | null;
+}
+
+export interface SitePageContextListTitleQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageContextTagsQueryList {
+	elemMatch?: SitePageContextTagsInputObject | null;
+}
+
+export interface SitePageContextTagsInputObject {
+	tag?: SitePageContextTagsTagQueryString | null;
+	count?: SitePageContextTagsCountQueryInteger | null;
+	url?: SitePageContextTagsUrlQueryString | null;
+}
+
+export interface SitePageContextTagsTagQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageContextTagsCountQueryInteger {
+	eq?: number | null;
+	ne?: number | null;
+	gt?: number | null;
+	gte?: number | null;
+	lt?: number | null;
+	lte?: number | null;
+	in?: (number | null)[] | null;
+	nin?: (number | null)[] | null;
+}
+
+export interface SitePageContextTagsUrlQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
 export interface SitePageContextGroupQueryList {
@@ -5844,768 +4940,13 @@ export interface SitePageContextGroupInputObject {
 }
 
 export interface SitePageContextGroupNodeInputObject {
-	htmlAst?: SitePageContextGroupNodeHtmlAstInputObject | null;
 	excerpt?: SitePageContextGroupNodeExcerptQueryString | null;
 	timeToRead?: SitePageContextGroupNodeTimeToReadQueryInteger | null;
 	count?: SitePageContextGroupNodeCountInputObject | null;
+	code?: SitePageContextGroupNodeCodeInputObject | null;
 	fileAbsolutePath?: SitePageContextGroupNodeFileAbsolutePathQueryString | null;
 	parent?: SitePageContextGroupNodeParentInputObject | null;
 	frontmatter?: SitePageContextGroupNodeFrontmatterInputObject | null;
-}
-
-export interface SitePageContextGroupNodeHtmlAstInputObject {
-	type?: SitePageContextGroupNodeHtmlAstTypeQueryString | null;
-	children?: SitePageContextGroupNodeHtmlAstChildrenQueryList | null;
-	data?: SitePageContextGroupNodeHtmlAstDataInputObject | null;
-	tagName?: SitePageContextGroupNodeHtmlAstTagNameQueryString | null;
-}
-
-export interface SitePageContextGroupNodeHtmlAstTypeQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageContextGroupNodeHtmlAstChildrenQueryList {
-	elemMatch?: SitePageContextGroupNodeHtmlAstChildrenInputObject | null;
-}
-
-export interface SitePageContextGroupNodeHtmlAstChildrenInputObject {
-	type?: SitePageContextGroupNodeHtmlAstChildrenTypeQueryString | null;
-	tagName?: SitePageContextGroupNodeHtmlAstChildrenTagNameQueryString | null;
-	properties?: SitePageContextGroupNodeHtmlAstChildrenPropertiesInputObject | null;
-	children?: SitePageContextGroupNodeHtmlAstChildrenChildrenQueryList | null;
-	value?: SitePageContextGroupNodeHtmlAstChildrenValueQueryString | null;
-}
-
-export interface SitePageContextGroupNodeHtmlAstChildrenTypeQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageContextGroupNodeHtmlAstChildrenTagNameQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageContextGroupNodeHtmlAstChildrenPropertiesInputObject {
-	id?: SitePageContextGroupNodeHtmlAstChildrenPropertiesIdQueryString | null;
-	src?: SitePageContextGroupNodeHtmlAstChildrenPropertiesSrcQueryString | null;
-	title?: SitePageContextGroupNodeHtmlAstChildrenPropertiesTitleQueryString | null;
-	attr?: SitePageContextGroupNodeHtmlAstChildrenPropertiesAttrQueryString | null;
-	size?: SitePageContextGroupNodeHtmlAstChildrenPropertiesSizeQueryString | null;
-	className?: SitePageContextGroupNodeHtmlAstChildrenPropertiesClassNameQueryList | null;
-	dataLanguage?: SitePageContextGroupNodeHtmlAstChildrenPropertiesDataLanguageQueryString | null;
-	style?: SitePageContextGroupNodeHtmlAstChildrenPropertiesStyleQueryString | null;
-	sandbox?: SitePageContextGroupNodeHtmlAstChildrenPropertiesSandboxQueryList | null;
-	width?: SitePageContextGroupNodeHtmlAstChildrenPropertiesWidthQueryInteger | null;
-	height?: SitePageContextGroupNodeHtmlAstChildrenPropertiesHeightQueryInteger | null;
-	frameBorder?: SitePageContextGroupNodeHtmlAstChildrenPropertiesFrameBorderQueryString | null;
-	allow?: SitePageContextGroupNodeHtmlAstChildrenPropertiesAllowQueryString | null;
-	allowFullScreen?: SitePageContextGroupNodeHtmlAstChildrenPropertiesAllowFullScreenQueryBoolean | null;
-}
-
-export interface SitePageContextGroupNodeHtmlAstChildrenPropertiesIdQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageContextGroupNodeHtmlAstChildrenPropertiesSrcQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageContextGroupNodeHtmlAstChildrenPropertiesTitleQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageContextGroupNodeHtmlAstChildrenPropertiesAttrQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageContextGroupNodeHtmlAstChildrenPropertiesSizeQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageContextGroupNodeHtmlAstChildrenPropertiesClassNameQueryList {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageContextGroupNodeHtmlAstChildrenPropertiesDataLanguageQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageContextGroupNodeHtmlAstChildrenPropertiesStyleQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageContextGroupNodeHtmlAstChildrenPropertiesSandboxQueryList {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageContextGroupNodeHtmlAstChildrenPropertiesWidthQueryInteger {
-	eq?: number | null;
-	ne?: number | null;
-	gt?: number | null;
-	gte?: number | null;
-	lt?: number | null;
-	lte?: number | null;
-	in?: (number | null)[] | null;
-	nin?: (number | null)[] | null;
-}
-
-export interface SitePageContextGroupNodeHtmlAstChildrenPropertiesHeightQueryInteger {
-	eq?: number | null;
-	ne?: number | null;
-	gt?: number | null;
-	gte?: number | null;
-	lt?: number | null;
-	lte?: number | null;
-	in?: (number | null)[] | null;
-	nin?: (number | null)[] | null;
-}
-
-export interface SitePageContextGroupNodeHtmlAstChildrenPropertiesFrameBorderQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageContextGroupNodeHtmlAstChildrenPropertiesAllowQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageContextGroupNodeHtmlAstChildrenPropertiesAllowFullScreenQueryBoolean {
-	eq?: boolean | null;
-	ne?: boolean | null;
-	in?: (boolean | null)[] | null;
-	nin?: (boolean | null)[] | null;
-}
-
-export interface SitePageContextGroupNodeHtmlAstChildrenChildrenQueryList {
-	elemMatch?: SitePageContextGroupNodeHtmlAstChildrenChildrenInputObject | null;
-}
-
-export interface SitePageContextGroupNodeHtmlAstChildrenChildrenInputObject {
-	type?: SitePageContextGroupNodeHtmlAstChildrenChildrenTypeQueryString | null;
-	value?: SitePageContextGroupNodeHtmlAstChildrenChildrenValueQueryString | null;
-	tagName?: SitePageContextGroupNodeHtmlAstChildrenChildrenTagNameQueryString | null;
-	properties?: SitePageContextGroupNodeHtmlAstChildrenChildrenPropertiesInputObject | null;
-	children?: SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenQueryList | null;
-}
-
-export interface SitePageContextGroupNodeHtmlAstChildrenChildrenTypeQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageContextGroupNodeHtmlAstChildrenChildrenValueQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageContextGroupNodeHtmlAstChildrenChildrenTagNameQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageContextGroupNodeHtmlAstChildrenChildrenPropertiesInputObject {
-	href?: SitePageContextGroupNodeHtmlAstChildrenChildrenPropertiesHrefQueryString | null;
-	role?: SitePageContextGroupNodeHtmlAstChildrenChildrenPropertiesRoleQueryString | null;
-	ariaLabelledBy?: SitePageContextGroupNodeHtmlAstChildrenChildrenPropertiesAriaLabelledByQueryList | null;
-	ariaHidden?: SitePageContextGroupNodeHtmlAstChildrenChildrenPropertiesAriaHiddenQueryBoolean | null;
-	className?: SitePageContextGroupNodeHtmlAstChildrenChildrenPropertiesClassNameQueryList | null;
-	title?: SitePageContextGroupNodeHtmlAstChildrenChildrenPropertiesTitleQueryString | null;
-	id?: SitePageContextGroupNodeHtmlAstChildrenChildrenPropertiesIdQueryString | null;
-	quote?: SitePageContextGroupNodeHtmlAstChildrenChildrenPropertiesQuoteQueryString | null;
-	author?: SitePageContextGroupNodeHtmlAstChildrenChildrenPropertiesAuthorQueryString | null;
-	from?: SitePageContextGroupNodeHtmlAstChildrenChildrenPropertiesFromQueryString | null;
-	position?: SitePageContextGroupNodeHtmlAstChildrenChildrenPropertiesPositionQueryString | null;
-	src?: SitePageContextGroupNodeHtmlAstChildrenChildrenPropertiesSrcQueryString | null;
-	alt?: SitePageContextGroupNodeHtmlAstChildrenChildrenPropertiesAltQueryString | null;
-}
-
-export interface SitePageContextGroupNodeHtmlAstChildrenChildrenPropertiesHrefQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageContextGroupNodeHtmlAstChildrenChildrenPropertiesRoleQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageContextGroupNodeHtmlAstChildrenChildrenPropertiesAriaLabelledByQueryList {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageContextGroupNodeHtmlAstChildrenChildrenPropertiesAriaHiddenQueryBoolean {
-	eq?: boolean | null;
-	ne?: boolean | null;
-	in?: (boolean | null)[] | null;
-	nin?: (boolean | null)[] | null;
-}
-
-export interface SitePageContextGroupNodeHtmlAstChildrenChildrenPropertiesClassNameQueryList {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageContextGroupNodeHtmlAstChildrenChildrenPropertiesTitleQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageContextGroupNodeHtmlAstChildrenChildrenPropertiesIdQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageContextGroupNodeHtmlAstChildrenChildrenPropertiesQuoteQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageContextGroupNodeHtmlAstChildrenChildrenPropertiesAuthorQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageContextGroupNodeHtmlAstChildrenChildrenPropertiesFromQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageContextGroupNodeHtmlAstChildrenChildrenPropertiesPositionQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageContextGroupNodeHtmlAstChildrenChildrenPropertiesSrcQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageContextGroupNodeHtmlAstChildrenChildrenPropertiesAltQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenQueryList {
-	elemMatch?: SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenInputObject | null;
-}
-
-export interface SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenInputObject {
-	type?: SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenTypeQueryString | null;
-	value?: SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenValueQueryString | null;
-	tagName?: SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenTagNameQueryString | null;
-	properties?: SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenPropertiesInputObject | null;
-	children?: SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenQueryList | null;
-}
-
-export interface SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenTypeQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenValueQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenTagNameQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenPropertiesInputObject {
-	ariaHidden?: SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenPropertiesAriaHiddenQueryString | null;
-	height?: SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenPropertiesHeightQueryString | null;
-	version?: SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenPropertiesVersionQueryString | null;
-	viewBox?: SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenPropertiesViewBoxQueryString | null;
-	width?: SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenPropertiesWidthQueryString | null;
-	href?: SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenPropertiesHrefQueryString | null;
-	className?: SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenPropertiesClassNameQueryList | null;
-	id?: SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenPropertiesIdQueryString | null;
-}
-
-export interface SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenPropertiesAriaHiddenQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenPropertiesHeightQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenPropertiesVersionQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenPropertiesViewBoxQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenPropertiesWidthQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenPropertiesHrefQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenPropertiesClassNameQueryList {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenPropertiesIdQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenQueryList {
-	elemMatch?: SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenInputObject | null;
-}
-
-export interface SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenInputObject {
-	type?: SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenTypeQueryString | null;
-	value?: SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenValueQueryString | null;
-	tagName?: SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenTagNameQueryString | null;
-	properties?: SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenPropertiesInputObject | null;
-	children?: SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenQueryList | null;
-}
-
-export interface SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenTypeQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenValueQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenTagNameQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenPropertiesInputObject {
-	fillRule?: SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenPropertiesFillRuleQueryString | null;
-	d?: SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenPropertiesDQueryString | null;
-	href?: SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenPropertiesHrefQueryString | null;
-	className?: SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenPropertiesClassNameQueryList | null;
-}
-
-export interface SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenPropertiesFillRuleQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenPropertiesDQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenPropertiesHrefQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenPropertiesClassNameQueryList {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenQueryList {
-	elemMatch?: SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenInputObject | null;
-}
-
-export interface SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenInputObject {
-	type?: SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenTypeQueryString | null;
-	value?: SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenValueQueryString | null;
-	tagName?: SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenTagNameQueryString | null;
-	properties?: SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenPropertiesInputObject | null;
-	children?: SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenQueryList | null;
-}
-
-export interface SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenTypeQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenValueQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenTagNameQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenPropertiesInputObject {
-	href?: SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenPropertiesHrefQueryString | null;
-	className?: SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenPropertiesClassNameQueryList | null;
-	id?: SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenPropertiesIdQueryString | null;
-}
-
-export interface SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenPropertiesHrefQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenPropertiesClassNameQueryList {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenPropertiesIdQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenQueryList {
-	elemMatch?: SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenInputObject | null;
-}
-
-export interface SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenInputObject {
-	type?: SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenTypeQueryString | null;
-	value?: SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenValueQueryString | null;
-	tagName?: SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenTagNameQueryString | null;
-	properties?: SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenPropertiesInputObject | null;
-	children?: SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenChildrenQueryList | null;
-}
-
-export interface SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenTypeQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenValueQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenTagNameQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenPropertiesInputObject {
-	className?: SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenPropertiesClassNameQueryList | null;
-	href?: SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenPropertiesHrefQueryString | null;
-}
-
-export interface SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenPropertiesClassNameQueryList {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenPropertiesHrefQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenChildrenQueryList {
-	elemMatch?: SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenChildrenInputObject | null;
-}
-
-export interface SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenChildrenInputObject {
-	type?: SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenChildrenTypeQueryString | null;
-	value?: SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenChildrenValueQueryString | null;
-}
-
-export interface SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenChildrenTypeQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageContextGroupNodeHtmlAstChildrenChildrenChildrenChildrenChildrenChildrenChildrenValueQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageContextGroupNodeHtmlAstChildrenValueQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePageContextGroupNodeHtmlAstDataInputObject {
-	quirksMode?: SitePageContextGroupNodeHtmlAstDataQuirksModeQueryBoolean | null;
-}
-
-export interface SitePageContextGroupNodeHtmlAstDataQuirksModeQueryBoolean {
-	eq?: boolean | null;
-	ne?: boolean | null;
-	in?: (boolean | null)[] | null;
-	nin?: (boolean | null)[] | null;
-}
-
-export interface SitePageContextGroupNodeHtmlAstTagNameQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
 }
 
 export interface SitePageContextGroupNodeExcerptQueryString {
@@ -6641,6 +4982,19 @@ export interface SitePageContextGroupNodeCountWordsQueryInteger {
 	lte?: number | null;
 	in?: (number | null)[] | null;
 	nin?: (number | null)[] | null;
+}
+
+export interface SitePageContextGroupNodeCodeInputObject {
+	scope?: SitePageContextGroupNodeCodeScopeQueryString | null;
+}
+
+export interface SitePageContextGroupNodeCodeScopeQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
 }
 
 export interface SitePageContextGroupNodeFileAbsolutePathQueryString {
@@ -6689,6 +5043,7 @@ export interface SitePageContextGroupNodeFrontmatterInputObject {
 	title?: SitePageContextGroupNodeFrontmatterTitleQueryString | null;
 	description?: SitePageContextGroupNodeFrontmatterDescriptionQueryString | null;
 	date?: SitePageContextGroupNodeFrontmatterDateQueryString | null;
+	tags?: SitePageContextGroupNodeFrontmatterTagsQueryList | null;
 	authors?: SitePageContextGroupNodeFrontmatterAuthorsQueryList | null;
 	link?: SitePageContextGroupNodeFrontmatterLinkQueryString | null;
 }
@@ -6712,6 +5067,15 @@ export interface SitePageContextGroupNodeFrontmatterDescriptionQueryString {
 }
 
 export interface SitePageContextGroupNodeFrontmatterDateQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePageContextGroupNodeFrontmatterTagsQueryList {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
@@ -6847,12 +5211,6 @@ export interface SitePagePluginCreatorPluginOptionsInputObject {
 	name?: SitePagePluginCreatorPluginOptionsNameQueryString | null;
 	path?: SitePagePluginCreatorPluginOptionsPathQueryString | null;
 	maxWidth?: SitePagePluginCreatorPluginOptionsMaxWidthQueryInteger | null;
-	wrapperStyle?: SitePagePluginCreatorPluginOptionsWrapperStyleQueryString | null;
-	backgroundColor?: SitePagePluginCreatorPluginOptionsBackgroundColorQueryString | null;
-	linkImagesToOriginal?: SitePagePluginCreatorPluginOptionsLinkImagesToOriginalQueryBoolean | null;
-	showCaptions?: SitePagePluginCreatorPluginOptionsShowCaptionsQueryBoolean | null;
-	pathPrefix?: SitePagePluginCreatorPluginOptionsPathPrefixQueryString | null;
-	withWebp?: SitePagePluginCreatorPluginOptionsWithWebpQueryBoolean | null;
 	inlineCodeMarker?: SitePagePluginCreatorPluginOptionsInlineCodeMarkerQueryString | null;
 	pathToConfigModule?: SitePagePluginCreatorPluginOptionsPathToConfigModuleQueryString | null;
 	omitGoogleFont?: SitePagePluginCreatorPluginOptionsOmitGoogleFontQueryBoolean | null;
@@ -6860,9 +5218,12 @@ export interface SitePagePluginCreatorPluginOptionsInputObject {
 	feeds?: SitePagePluginCreatorPluginOptionsFeedsQueryList | null;
 	headers?: SitePagePluginCreatorPluginOptionsHeadersInputObject | null;
 	allPageHeaders?: SitePagePluginCreatorPluginOptionsAllPageHeadersQueryList | null;
+	siteId?: SitePagePluginCreatorPluginOptionsSiteIdQueryString | null;
+	matomoUrl?: SitePagePluginCreatorPluginOptionsMatomoUrlQueryString | null;
+	siteUrl?: SitePagePluginCreatorPluginOptionsSiteUrlQueryString | null;
 	short_name?: SitePagePluginCreatorPluginOptionsShortNameQueryString | null;
 	start_url?: SitePagePluginCreatorPluginOptionsStartUrlQueryString | null;
-	background_color?: SitePagePluginCreatorPluginOptionsBackgroundColorQueryString_2 | null;
+	background_color?: SitePagePluginCreatorPluginOptionsBackgroundColorQueryString | null;
 	theme_color?: SitePagePluginCreatorPluginOptionsThemeColorQueryString | null;
 	display?: SitePagePluginCreatorPluginOptionsDisplayQueryString | null;
 	icon?: SitePagePluginCreatorPluginOptionsIconQueryString | null;
@@ -6922,12 +5283,6 @@ export interface SitePagePluginCreatorPluginOptionsPluginsVersionQueryString {
 
 export interface SitePagePluginCreatorPluginOptionsPluginsPluginOptionsInputObject {
 	maxWidth?: SitePagePluginCreatorPluginOptionsPluginsPluginOptionsMaxWidthQueryInteger | null;
-	wrapperStyle?: SitePagePluginCreatorPluginOptionsPluginsPluginOptionsWrapperStyleQueryString | null;
-	backgroundColor?: SitePagePluginCreatorPluginOptionsPluginsPluginOptionsBackgroundColorQueryString | null;
-	linkImagesToOriginal?: SitePagePluginCreatorPluginOptionsPluginsPluginOptionsLinkImagesToOriginalQueryBoolean | null;
-	showCaptions?: SitePagePluginCreatorPluginOptionsPluginsPluginOptionsShowCaptionsQueryBoolean | null;
-	pathPrefix?: SitePagePluginCreatorPluginOptionsPluginsPluginOptionsPathPrefixQueryString | null;
-	withWebp?: SitePagePluginCreatorPluginOptionsPluginsPluginOptionsWithWebpQueryBoolean | null;
 	inlineCodeMarker?: SitePagePluginCreatorPluginOptionsPluginsPluginOptionsInlineCodeMarkerQueryString | null;
 }
 
@@ -6940,54 +5295,6 @@ export interface SitePagePluginCreatorPluginOptionsPluginsPluginOptionsMaxWidthQ
 	lte?: number | null;
 	in?: (number | null)[] | null;
 	nin?: (number | null)[] | null;
-}
-
-export interface SitePagePluginCreatorPluginOptionsPluginsPluginOptionsWrapperStyleQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePagePluginCreatorPluginOptionsPluginsPluginOptionsBackgroundColorQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePagePluginCreatorPluginOptionsPluginsPluginOptionsLinkImagesToOriginalQueryBoolean {
-	eq?: boolean | null;
-	ne?: boolean | null;
-	in?: (boolean | null)[] | null;
-	nin?: (boolean | null)[] | null;
-}
-
-export interface SitePagePluginCreatorPluginOptionsPluginsPluginOptionsShowCaptionsQueryBoolean {
-	eq?: boolean | null;
-	ne?: boolean | null;
-	in?: (boolean | null)[] | null;
-	nin?: (boolean | null)[] | null;
-}
-
-export interface SitePagePluginCreatorPluginOptionsPluginsPluginOptionsPathPrefixQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePagePluginCreatorPluginOptionsPluginsPluginOptionsWithWebpQueryBoolean {
-	eq?: boolean | null;
-	ne?: boolean | null;
-	in?: (boolean | null)[] | null;
-	nin?: (boolean | null)[] | null;
 }
 
 export interface SitePagePluginCreatorPluginOptionsPluginsPluginOptionsInlineCodeMarkerQueryString {
@@ -7085,54 +5392,6 @@ export interface SitePagePluginCreatorPluginOptionsMaxWidthQueryInteger {
 	lte?: number | null;
 	in?: (number | null)[] | null;
 	nin?: (number | null)[] | null;
-}
-
-export interface SitePagePluginCreatorPluginOptionsWrapperStyleQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePagePluginCreatorPluginOptionsBackgroundColorQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePagePluginCreatorPluginOptionsLinkImagesToOriginalQueryBoolean {
-	eq?: boolean | null;
-	ne?: boolean | null;
-	in?: (boolean | null)[] | null;
-	nin?: (boolean | null)[] | null;
-}
-
-export interface SitePagePluginCreatorPluginOptionsShowCaptionsQueryBoolean {
-	eq?: boolean | null;
-	ne?: boolean | null;
-	in?: (boolean | null)[] | null;
-	nin?: (boolean | null)[] | null;
-}
-
-export interface SitePagePluginCreatorPluginOptionsPathPrefixQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePagePluginCreatorPluginOptionsWithWebpQueryBoolean {
-	eq?: boolean | null;
-	ne?: boolean | null;
-	in?: (boolean | null)[] | null;
-	nin?: (boolean | null)[] | null;
 }
 
 export interface SitePagePluginCreatorPluginOptionsInlineCodeMarkerQueryString {
@@ -7298,6 +5557,33 @@ export interface SitePagePluginCreatorPluginOptionsAllPageHeadersQueryList {
 	nin?: (string | null)[] | null;
 }
 
+export interface SitePagePluginCreatorPluginOptionsSiteIdQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePagePluginCreatorPluginOptionsMatomoUrlQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePagePluginCreatorPluginOptionsSiteUrlQueryString {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
 export interface SitePagePluginCreatorPluginOptionsShortNameQueryString {
 	eq?: string | null;
 	ne?: string | null;
@@ -7316,7 +5602,7 @@ export interface SitePagePluginCreatorPluginOptionsStartUrlQueryString {
 	nin?: (string | null)[] | null;
 }
 
-export interface SitePagePluginCreatorPluginOptionsBackgroundColorQueryString_2 {
+export interface SitePagePluginCreatorPluginOptionsBackgroundColorQueryString {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
@@ -7709,12 +5995,6 @@ export interface SitePluginPluginOptionsInputObject_2 {
 	name?: SitePluginPluginOptionsNameQueryString_2 | null;
 	path?: SitePluginPluginOptionsPathQueryString_2 | null;
 	maxWidth?: SitePluginPluginOptionsMaxWidthQueryInteger_2 | null;
-	wrapperStyle?: SitePluginPluginOptionsWrapperStyleQueryString | null;
-	backgroundColor?: SitePluginPluginOptionsBackgroundColorQueryString_2 | null;
-	linkImagesToOriginal?: SitePluginPluginOptionsLinkImagesToOriginalQueryBoolean | null;
-	showCaptions?: SitePluginPluginOptionsShowCaptionsQueryBoolean | null;
-	pathPrefix?: SitePluginPluginOptionsPathPrefixQueryString | null;
-	withWebp?: SitePluginPluginOptionsWithWebpQueryBoolean | null;
 	inlineCodeMarker?: SitePluginPluginOptionsInlineCodeMarkerQueryString_2 | null;
 	pathToConfigModule?: SitePluginPluginOptionsPathToConfigModuleQueryString_2 | null;
 	omitGoogleFont?: SitePluginPluginOptionsOmitGoogleFontQueryBoolean_2 | null;
@@ -7722,9 +6002,12 @@ export interface SitePluginPluginOptionsInputObject_2 {
 	feeds?: SitePluginPluginOptionsFeedsQueryList_2 | null;
 	headers?: SitePluginPluginOptionsHeadersInputObject_2 | null;
 	allPageHeaders?: SitePluginPluginOptionsAllPageHeadersQueryList_2 | null;
+	siteId?: SitePluginPluginOptionsSiteIdQueryString_2 | null;
+	matomoUrl?: SitePluginPluginOptionsMatomoUrlQueryString_2 | null;
+	siteUrl?: SitePluginPluginOptionsSiteUrlQueryString_2 | null;
 	short_name?: SitePluginPluginOptionsShortNameQueryString_2 | null;
 	start_url?: SitePluginPluginOptionsStartUrlQueryString_2 | null;
-	background_color?: SitePluginPluginOptionsBackgroundColorQueryString_3 | null;
+	background_color?: SitePluginPluginOptionsBackgroundColorQueryString_2 | null;
 	theme_color?: SitePluginPluginOptionsThemeColorQueryString_2 | null;
 	display?: SitePluginPluginOptionsDisplayQueryString_2 | null;
 	icon?: SitePluginPluginOptionsIconQueryString_2 | null;
@@ -7784,12 +6067,6 @@ export interface SitePluginPluginOptionsPluginsVersionQueryString_2 {
 
 export interface SitePluginPluginOptionsPluginsPluginOptionsInputObject_2 {
 	maxWidth?: SitePluginPluginOptionsPluginsPluginOptionsMaxWidthQueryInteger_2 | null;
-	wrapperStyle?: SitePluginPluginOptionsPluginsPluginOptionsWrapperStyleQueryString | null;
-	backgroundColor?: SitePluginPluginOptionsPluginsPluginOptionsBackgroundColorQueryString | null;
-	linkImagesToOriginal?: SitePluginPluginOptionsPluginsPluginOptionsLinkImagesToOriginalQueryBoolean | null;
-	showCaptions?: SitePluginPluginOptionsPluginsPluginOptionsShowCaptionsQueryBoolean | null;
-	pathPrefix?: SitePluginPluginOptionsPluginsPluginOptionsPathPrefixQueryString | null;
-	withWebp?: SitePluginPluginOptionsPluginsPluginOptionsWithWebpQueryBoolean | null;
 	inlineCodeMarker?: SitePluginPluginOptionsPluginsPluginOptionsInlineCodeMarkerQueryString_2 | null;
 }
 
@@ -7802,54 +6079,6 @@ export interface SitePluginPluginOptionsPluginsPluginOptionsMaxWidthQueryInteger
 	lte?: number | null;
 	in?: (number | null)[] | null;
 	nin?: (number | null)[] | null;
-}
-
-export interface SitePluginPluginOptionsPluginsPluginOptionsWrapperStyleQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePluginPluginOptionsPluginsPluginOptionsBackgroundColorQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePluginPluginOptionsPluginsPluginOptionsLinkImagesToOriginalQueryBoolean {
-	eq?: boolean | null;
-	ne?: boolean | null;
-	in?: (boolean | null)[] | null;
-	nin?: (boolean | null)[] | null;
-}
-
-export interface SitePluginPluginOptionsPluginsPluginOptionsShowCaptionsQueryBoolean {
-	eq?: boolean | null;
-	ne?: boolean | null;
-	in?: (boolean | null)[] | null;
-	nin?: (boolean | null)[] | null;
-}
-
-export interface SitePluginPluginOptionsPluginsPluginOptionsPathPrefixQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePluginPluginOptionsPluginsPluginOptionsWithWebpQueryBoolean {
-	eq?: boolean | null;
-	ne?: boolean | null;
-	in?: (boolean | null)[] | null;
-	nin?: (boolean | null)[] | null;
 }
 
 export interface SitePluginPluginOptionsPluginsPluginOptionsInlineCodeMarkerQueryString_2 {
@@ -7947,54 +6176,6 @@ export interface SitePluginPluginOptionsMaxWidthQueryInteger_2 {
 	lte?: number | null;
 	in?: (number | null)[] | null;
 	nin?: (number | null)[] | null;
-}
-
-export interface SitePluginPluginOptionsWrapperStyleQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePluginPluginOptionsBackgroundColorQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePluginPluginOptionsLinkImagesToOriginalQueryBoolean {
-	eq?: boolean | null;
-	ne?: boolean | null;
-	in?: (boolean | null)[] | null;
-	nin?: (boolean | null)[] | null;
-}
-
-export interface SitePluginPluginOptionsShowCaptionsQueryBoolean {
-	eq?: boolean | null;
-	ne?: boolean | null;
-	in?: (boolean | null)[] | null;
-	nin?: (boolean | null)[] | null;
-}
-
-export interface SitePluginPluginOptionsPathPrefixQueryString {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface SitePluginPluginOptionsWithWebpQueryBoolean {
-	eq?: boolean | null;
-	ne?: boolean | null;
-	in?: (boolean | null)[] | null;
-	nin?: (boolean | null)[] | null;
 }
 
 export interface SitePluginPluginOptionsInlineCodeMarkerQueryString_2 {
@@ -8160,6 +6341,33 @@ export interface SitePluginPluginOptionsAllPageHeadersQueryList_2 {
 	nin?: (string | null)[] | null;
 }
 
+export interface SitePluginPluginOptionsSiteIdQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePluginPluginOptionsMatomoUrlQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface SitePluginPluginOptionsSiteUrlQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
 export interface SitePluginPluginOptionsShortNameQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
@@ -8178,7 +6386,7 @@ export interface SitePluginPluginOptionsStartUrlQueryString_2 {
 	nin?: (string | null)[] | null;
 }
 
-export interface SitePluginPluginOptionsBackgroundColorQueryString_3 {
+export interface SitePluginPluginOptionsBackgroundColorQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
@@ -9348,299 +7556,6 @@ export interface PublicUrlQueryString_3 {
 	nin?: (string | null)[] | null;
 }
 
-export interface MarkdownRemarkIdQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface MarkdownRemarkInternalInputObject_2 {
-	content?: MarkdownRemarkInternalContentQueryString_2 | null;
-	type?: MarkdownRemarkInternalTypeQueryString_2 | null;
-	contentDigest?: MarkdownRemarkInternalContentDigestQueryString_2 | null;
-	owner?: MarkdownRemarkInternalOwnerQueryString_2 | null;
-}
-
-export interface MarkdownRemarkInternalContentQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface MarkdownRemarkInternalTypeQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface MarkdownRemarkInternalContentDigestQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface MarkdownRemarkInternalOwnerQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface MarkdownRemarkFrontmatterInputObject_2 {
-	title?: MarkdownRemarkFrontmatterTitleQueryString_2 | null;
-	link?: MarkdownRemarkFrontmatterLinkQueryString_2 | null;
-	date?: MarkdownRemarkFrontmatterDateQueryString_2 | null;
-	tags?: MarkdownRemarkFrontmatterTagsQueryList_2 | null;
-	authors?: MarkdownRemarkFrontmatterAuthorsQueryList_2 | null;
-	_PARENT?: MarkdownRemarkFrontmatterParentQueryString_2 | null;
-	draft?: MarkdownRemarkFrontmatterDraftQueryBoolean_2 | null;
-	toc?: MarkdownRemarkFrontmatterTocQueryBoolean_2 | null;
-	description?: MarkdownRemarkFrontmatterDescriptionQueryString_2 | null;
-	type?: MarkdownRemarkFrontmatterTypeQueryString_2 | null;
-}
-
-export interface MarkdownRemarkFrontmatterTitleQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface MarkdownRemarkFrontmatterLinkQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface MarkdownRemarkFrontmatterDateQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface MarkdownRemarkFrontmatterTagsQueryList_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface MarkdownRemarkFrontmatterAuthorsQueryList_2 {
-	elemMatch?: MarkdownRemarkFrontmatterAuthorsInputObject_2 | null;
-}
-
-export interface MarkdownRemarkFrontmatterAuthorsInputObject_2 {
-	name?: MarkdownRemarkFrontmatterAuthorsNameQueryString_2 | null;
-	url?: MarkdownRemarkFrontmatterAuthorsUrlQueryString_2 | null;
-}
-
-export interface MarkdownRemarkFrontmatterAuthorsNameQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface MarkdownRemarkFrontmatterAuthorsUrlQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface MarkdownRemarkFrontmatterParentQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface MarkdownRemarkFrontmatterDraftQueryBoolean_2 {
-	eq?: boolean | null;
-	ne?: boolean | null;
-	in?: (boolean | null)[] | null;
-	nin?: (boolean | null)[] | null;
-}
-
-export interface MarkdownRemarkFrontmatterTocQueryBoolean_2 {
-	eq?: boolean | null;
-	ne?: boolean | null;
-	in?: (boolean | null)[] | null;
-	nin?: (boolean | null)[] | null;
-}
-
-export interface MarkdownRemarkFrontmatterDescriptionQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface MarkdownRemarkFrontmatterTypeQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface ExcerptQueryString_3 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface MarkdownRemarkRawMarkdownBodyQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface MarkdownRemarkFileAbsolutePathQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface HtmlQueryString_3 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface HeadingsQueryList_3 {
-	elemMatch?: HeadingsListElemTypeName_3 | null;
-}
-
-export interface HeadingsListElemTypeName_3 {
-	value?: HeadingsListElemValueQueryString_3 | null;
-	depth?: HeadingsListElemDepthQueryInt_3 | null;
-}
-
-export interface HeadingsListElemValueQueryString_3 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface HeadingsListElemDepthQueryInt_3 {
-	eq?: number | null;
-	ne?: number | null;
-	gt?: number | null;
-	gte?: number | null;
-	lt?: number | null;
-	lte?: number | null;
-	in?: (number | null)[] | null;
-	nin?: (number | null)[] | null;
-}
-
-export interface TimeToReadQueryInt_3 {
-	eq?: number | null;
-	ne?: number | null;
-	gt?: number | null;
-	gte?: number | null;
-	lt?: number | null;
-	lte?: number | null;
-	in?: (number | null)[] | null;
-	nin?: (number | null)[] | null;
-}
-
-export interface TableOfContentsQueryString_3 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface WordCountTypeName_3 {
-	paragraphs?: WordCountParagraphsQueryInt_3 | null;
-	sentences?: WordCountSentencesQueryInt_3 | null;
-	words?: WordCountWordsQueryInt_3 | null;
-}
-
-export interface WordCountParagraphsQueryInt_3 {
-	eq?: number | null;
-	ne?: number | null;
-	gt?: number | null;
-	gte?: number | null;
-	lt?: number | null;
-	lte?: number | null;
-	in?: (number | null)[] | null;
-	nin?: (number | null)[] | null;
-}
-
-export interface WordCountSentencesQueryInt_3 {
-	eq?: number | null;
-	ne?: number | null;
-	gt?: number | null;
-	gte?: number | null;
-	lt?: number | null;
-	lte?: number | null;
-	in?: (number | null)[] | null;
-	nin?: (number | null)[] | null;
-}
-
-export interface WordCountWordsQueryInt_3 {
-	eq?: number | null;
-	ne?: number | null;
-	gt?: number | null;
-	gte?: number | null;
-	lt?: number | null;
-	lte?: number | null;
-	in?: (number | null)[] | null;
-	nin?: (number | null)[] | null;
-}
-
 export interface TodoJsonTitleQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
@@ -9708,7 +7623,7 @@ export interface TodoJsonDoneQueryBoolean_2 {
 	nin?: (boolean | null)[] | null;
 }
 
-export interface PersonalJsonNameQueryString_2 {
+export interface MdxIdQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
@@ -9717,7 +7632,14 @@ export interface PersonalJsonNameQueryString_2 {
 	nin?: (string | null)[] | null;
 }
 
-export interface PersonalJsonEmailQueryString_2 {
+export interface MdxInternalInputObject_2 {
+	content?: MdxInternalContentQueryString_2 | null;
+	type?: MdxInternalTypeQueryString_2 | null;
+	contentDigest?: MdxInternalContentDigestQueryString_2 | null;
+	owner?: MdxInternalOwnerQueryString_2 | null;
+}
+
+export interface MdxInternalContentQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
@@ -9726,7 +7648,7 @@ export interface PersonalJsonEmailQueryString_2 {
 	nin?: (string | null)[] | null;
 }
 
-export interface PersonalJsonJobTitleQueryString_2 {
+export interface MdxInternalTypeQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
@@ -9735,17 +7657,7 @@ export interface PersonalJsonJobTitleQueryString_2 {
 	nin?: (string | null)[] | null;
 }
 
-export interface PersonalJsonSocialQueryList_2 {
-	elemMatch?: PersonalJsonSocialInputObject_2 | null;
-}
-
-export interface PersonalJsonSocialInputObject_2 {
-	serviceName?: PersonalJsonSocialServiceNameQueryString_2 | null;
-	icon?: PersonalJsonSocialIconQueryString_2 | null;
-	url?: PersonalJsonSocialUrlQueryString_2 | null;
-}
-
-export interface PersonalJsonSocialServiceNameQueryString_2 {
+export interface MdxInternalContentDigestQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
@@ -9754,7 +7666,7 @@ export interface PersonalJsonSocialServiceNameQueryString_2 {
 	nin?: (string | null)[] | null;
 }
 
-export interface PersonalJsonSocialIconQueryString_2 {
+export interface MdxInternalOwnerQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
@@ -9763,7 +7675,20 @@ export interface PersonalJsonSocialIconQueryString_2 {
 	nin?: (string | null)[] | null;
 }
 
-export interface PersonalJsonSocialUrlQueryString_2 {
+export interface MdxFrontmatterInputObject_2 {
+	title?: MdxFrontmatterTitleQueryString_2 | null;
+	link?: MdxFrontmatterLinkQueryString_2 | null;
+	date?: MdxFrontmatterDateQueryString_2 | null;
+	tags?: MdxFrontmatterTagsQueryList_2 | null;
+	authors?: MdxFrontmatterAuthorsQueryList_2 | null;
+	_PARENT?: MdxFrontmatterParentQueryString_2 | null;
+	description?: MdxFrontmatterDescriptionQueryString_2 | null;
+	draft?: MdxFrontmatterDraftQueryBoolean_2 | null;
+	toc?: MdxFrontmatterTocQueryBoolean_2 | null;
+	type?: MdxFrontmatterTypeQueryString_2 | null;
+}
+
+export interface MdxFrontmatterTitleQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
@@ -9772,7 +7697,7 @@ export interface PersonalJsonSocialUrlQueryString_2 {
 	nin?: (string | null)[] | null;
 }
 
-export interface PersonalJsonIdQueryString_2 {
+export interface MdxFrontmatterLinkQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
@@ -9781,13 +7706,7 @@ export interface PersonalJsonIdQueryString_2 {
 	nin?: (string | null)[] | null;
 }
 
-export interface PersonalJsonInternalInputObject_2 {
-	contentDigest?: PersonalJsonInternalContentDigestQueryString_2 | null;
-	type?: PersonalJsonInternalTypeQueryString_2 | null;
-	owner?: PersonalJsonInternalOwnerQueryString_2 | null;
-}
-
-export interface PersonalJsonInternalContentDigestQueryString_2 {
+export interface MdxFrontmatterDateQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
@@ -9796,7 +7715,7 @@ export interface PersonalJsonInternalContentDigestQueryString_2 {
 	nin?: (string | null)[] | null;
 }
 
-export interface PersonalJsonInternalTypeQueryString_2 {
+export interface MdxFrontmatterTagsQueryList_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
@@ -9805,7 +7724,16 @@ export interface PersonalJsonInternalTypeQueryString_2 {
 	nin?: (string | null)[] | null;
 }
 
-export interface PersonalJsonInternalOwnerQueryString_2 {
+export interface MdxFrontmatterAuthorsQueryList_2 {
+	elemMatch?: MdxFrontmatterAuthorsInputObject_2 | null;
+}
+
+export interface MdxFrontmatterAuthorsInputObject_2 {
+	name?: MdxFrontmatterAuthorsNameQueryString_2 | null;
+	url?: MdxFrontmatterAuthorsUrlQueryString_2 | null;
+}
+
+export interface MdxFrontmatterAuthorsNameQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
@@ -9814,7 +7742,7 @@ export interface PersonalJsonInternalOwnerQueryString_2 {
 	nin?: (string | null)[] | null;
 }
 
-export interface CompetencesJsonNameQueryString_2 {
+export interface MdxFrontmatterAuthorsUrlQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
@@ -9823,7 +7751,7 @@ export interface CompetencesJsonNameQueryString_2 {
 	nin?: (string | null)[] | null;
 }
 
-export interface CompetencesJsonDescriptionQueryString_2 {
+export interface MdxFrontmatterParentQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
@@ -9832,7 +7760,7 @@ export interface CompetencesJsonDescriptionQueryString_2 {
 	nin?: (string | null)[] | null;
 }
 
-export interface CompetencesJsonIdQueryString_2 {
+export interface MdxFrontmatterDescriptionQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
@@ -9841,13 +7769,21 @@ export interface CompetencesJsonIdQueryString_2 {
 	nin?: (string | null)[] | null;
 }
 
-export interface CompetencesJsonInternalInputObject_2 {
-	contentDigest?: CompetencesJsonInternalContentDigestQueryString_2 | null;
-	type?: CompetencesJsonInternalTypeQueryString_2 | null;
-	owner?: CompetencesJsonInternalOwnerQueryString_2 | null;
+export interface MdxFrontmatterDraftQueryBoolean_2 {
+	eq?: boolean | null;
+	ne?: boolean | null;
+	in?: (boolean | null)[] | null;
+	nin?: (boolean | null)[] | null;
 }
 
-export interface CompetencesJsonInternalContentDigestQueryString_2 {
+export interface MdxFrontmatterTocQueryBoolean_2 {
+	eq?: boolean | null;
+	ne?: boolean | null;
+	in?: (boolean | null)[] | null;
+	nin?: (boolean | null)[] | null;
+}
+
+export interface MdxFrontmatterTypeQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
@@ -9856,7 +7792,7 @@ export interface CompetencesJsonInternalContentDigestQueryString_2 {
 	nin?: (string | null)[] | null;
 }
 
-export interface CompetencesJsonInternalTypeQueryString_2 {
+export interface MdxRawBodyQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
@@ -9865,7 +7801,7 @@ export interface CompetencesJsonInternalTypeQueryString_2 {
 	nin?: (string | null)[] | null;
 }
 
-export interface CompetencesJsonInternalOwnerQueryString_2 {
+export interface MdxFileAbsolutePathQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
@@ -9874,21 +7810,12 @@ export interface CompetencesJsonInternalOwnerQueryString_2 {
 	nin?: (string | null)[] | null;
 }
 
-export interface ExperiencesJsonWorkQueryList_2 {
-	elemMatch?: ExperiencesJsonWorkInputObject_2 | null;
+export interface CodeTypeName_3 {
+	body?: CodeBodyQueryString_3 | null;
+	scope?: CodeScopeQueryString_3 | null;
 }
 
-export interface ExperiencesJsonWorkInputObject_2 {
-	company?: ExperiencesJsonWorkCompanyQueryString_2 | null;
-	link?: ExperiencesJsonWorkLinkQueryString_2 | null;
-	image?: ExperiencesJsonWorkImageQueryString_2 | null;
-	period?: ExperiencesJsonWorkPeriodQueryList_2 | null;
-	role?: ExperiencesJsonWorkRoleQueryString_2 | null;
-	skills?: ExperiencesJsonWorkSkillsQueryList_2 | null;
-	projects?: ExperiencesJsonWorkProjectsQueryList_2 | null;
-}
-
-export interface ExperiencesJsonWorkCompanyQueryString_2 {
+export interface CodeBodyQueryString_3 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
@@ -9897,7 +7824,7 @@ export interface ExperiencesJsonWorkCompanyQueryString_2 {
 	nin?: (string | null)[] | null;
 }
 
-export interface ExperiencesJsonWorkLinkQueryString_2 {
+export interface CodeScopeQueryString_3 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
@@ -9906,7 +7833,7 @@ export interface ExperiencesJsonWorkLinkQueryString_2 {
 	nin?: (string | null)[] | null;
 }
 
-export interface ExperiencesJsonWorkImageQueryString_2 {
+export interface ExcerptQueryString_3 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
@@ -9915,7 +7842,16 @@ export interface ExperiencesJsonWorkImageQueryString_2 {
 	nin?: (string | null)[] | null;
 }
 
-export interface ExperiencesJsonWorkPeriodQueryList_2 {
+export interface HeadingsQueryList_3 {
+	elemMatch?: HeadingsListElemTypeName_3 | null;
+}
+
+export interface HeadingsListElemTypeName_3 {
+	value?: HeadingsListElemValueQueryString_3 | null;
+	depth?: HeadingsListElemDepthQueryInt_3 | null;
+}
+
+export interface HeadingsListElemValueQueryString_3 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
@@ -9924,128 +7860,65 @@ export interface ExperiencesJsonWorkPeriodQueryList_2 {
 	nin?: (string | null)[] | null;
 }
 
-export interface ExperiencesJsonWorkRoleQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
+export interface HeadingsListElemDepthQueryInt_3 {
+	eq?: number | null;
+	ne?: number | null;
+	gt?: number | null;
+	gte?: number | null;
+	lt?: number | null;
+	lte?: number | null;
+	in?: (number | null)[] | null;
+	nin?: (number | null)[] | null;
 }
 
-export interface ExperiencesJsonWorkSkillsQueryList_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
+export interface TimeToReadQueryInt_3 {
+	eq?: number | null;
+	ne?: number | null;
+	gt?: number | null;
+	gte?: number | null;
+	lt?: number | null;
+	lte?: number | null;
+	in?: (number | null)[] | null;
+	nin?: (number | null)[] | null;
 }
 
-export interface ExperiencesJsonWorkProjectsQueryList_2 {
-	elemMatch?: ExperiencesJsonWorkProjectsInputObject_2 | null;
+export interface WordCountTypeName_3 {
+	paragraphs?: WordCountParagraphsQueryInt_3 | null;
+	sentences?: WordCountSentencesQueryInt_3 | null;
+	words?: WordCountWordsQueryInt_3 | null;
 }
 
-export interface ExperiencesJsonWorkProjectsInputObject_2 {
-	name?: ExperiencesJsonWorkProjectsNameQueryString_2 | null;
-	url?: ExperiencesJsonWorkProjectsUrlQueryString_2 | null;
-	description?: ExperiencesJsonWorkProjectsDescriptionQueryString_2 | null;
+export interface WordCountParagraphsQueryInt_3 {
+	eq?: number | null;
+	ne?: number | null;
+	gt?: number | null;
+	gte?: number | null;
+	lt?: number | null;
+	lte?: number | null;
+	in?: (number | null)[] | null;
+	nin?: (number | null)[] | null;
 }
 
-export interface ExperiencesJsonWorkProjectsNameQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
+export interface WordCountSentencesQueryInt_3 {
+	eq?: number | null;
+	ne?: number | null;
+	gt?: number | null;
+	gte?: number | null;
+	lt?: number | null;
+	lte?: number | null;
+	in?: (number | null)[] | null;
+	nin?: (number | null)[] | null;
 }
 
-export interface ExperiencesJsonWorkProjectsUrlQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface ExperiencesJsonWorkProjectsDescriptionQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface ExperiencesJsonIdQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface ExperiencesJsonInternalInputObject_2 {
-	contentDigest?: ExperiencesJsonInternalContentDigestQueryString_2 | null;
-	type?: ExperiencesJsonInternalTypeQueryString_2 | null;
-	owner?: ExperiencesJsonInternalOwnerQueryString_2 | null;
-	fieldOwners?: ExperiencesJsonInternalFieldOwnersInputObject_2 | null;
-}
-
-export interface ExperiencesJsonInternalContentDigestQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface ExperiencesJsonInternalTypeQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface ExperiencesJsonInternalOwnerQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface ExperiencesJsonInternalFieldOwnersInputObject_2 {
-	image_image?: ExperiencesJsonInternalFieldOwnersImageImageQueryString_2 | null;
-}
-
-export interface ExperiencesJsonInternalFieldOwnersImageImageQueryString_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
-}
-
-export interface ExperiencesJsonFieldsInputObject_2 {
-	image_image?: ExperiencesJsonFieldsImageImageQueryList_2 | null;
-}
-
-export interface ExperiencesJsonFieldsImageImageQueryList_2 {
-	eq?: string | null;
-	ne?: string | null;
-	regex?: string | null;
-	glob?: string | null;
-	in?: (string | null)[] | null;
-	nin?: (string | null)[] | null;
+export interface WordCountWordsQueryInt_3 {
+	eq?: number | null;
+	ne?: number | null;
+	gt?: number | null;
+	gte?: number | null;
+	lt?: number | null;
+	lte?: number | null;
+	in?: (number | null)[] | null;
+	nin?: (number | null)[] | null;
 }
 
 export interface SkillsJsonLanguagesQueryList_2 {
@@ -10169,6 +8042,66 @@ export interface SkillsJsonInternalTypeQueryString_2 {
 }
 
 export interface SkillsJsonInternalOwnerQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface CompetencesJsonNameQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface CompetencesJsonDescriptionQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface CompetencesJsonIdQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface CompetencesJsonInternalInputObject_2 {
+	contentDigest?: CompetencesJsonInternalContentDigestQueryString_2 | null;
+	type?: CompetencesJsonInternalTypeQueryString_2 | null;
+	owner?: CompetencesJsonInternalOwnerQueryString_2 | null;
+}
+
+export interface CompetencesJsonInternalContentDigestQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface CompetencesJsonInternalTypeQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface CompetencesJsonInternalOwnerQueryString_2 {
 	eq?: string | null;
 	ne?: string | null;
 	regex?: string | null;
@@ -10352,6 +8285,286 @@ export interface OrganizationJsonFieldsLogoImageQueryString_2 {
 	in?: (string | null)[] | null;
 	nin?: (string | null)[] | null;
 }
+
+export interface PersonalJsonNameQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface PersonalJsonEmailQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface PersonalJsonJobTitleQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface PersonalJsonSocialQueryList_2 {
+	elemMatch?: PersonalJsonSocialInputObject_2 | null;
+}
+
+export interface PersonalJsonSocialInputObject_2 {
+	serviceName?: PersonalJsonSocialServiceNameQueryString_2 | null;
+	icon?: PersonalJsonSocialIconQueryString_2 | null;
+	url?: PersonalJsonSocialUrlQueryString_2 | null;
+}
+
+export interface PersonalJsonSocialServiceNameQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface PersonalJsonSocialIconQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface PersonalJsonSocialUrlQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface PersonalJsonIdQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface PersonalJsonInternalInputObject_2 {
+	contentDigest?: PersonalJsonInternalContentDigestQueryString_2 | null;
+	type?: PersonalJsonInternalTypeQueryString_2 | null;
+	owner?: PersonalJsonInternalOwnerQueryString_2 | null;
+}
+
+export interface PersonalJsonInternalContentDigestQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface PersonalJsonInternalTypeQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface PersonalJsonInternalOwnerQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface ExperiencesJsonWorkQueryList_2 {
+	elemMatch?: ExperiencesJsonWorkInputObject_2 | null;
+}
+
+export interface ExperiencesJsonWorkInputObject_2 {
+	company?: ExperiencesJsonWorkCompanyQueryString_2 | null;
+	link?: ExperiencesJsonWorkLinkQueryString_2 | null;
+	image?: ExperiencesJsonWorkImageQueryString_2 | null;
+	period?: ExperiencesJsonWorkPeriodQueryList_2 | null;
+	role?: ExperiencesJsonWorkRoleQueryString_2 | null;
+	skills?: ExperiencesJsonWorkSkillsQueryList_2 | null;
+	projects?: ExperiencesJsonWorkProjectsQueryList_2 | null;
+}
+
+export interface ExperiencesJsonWorkCompanyQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface ExperiencesJsonWorkLinkQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface ExperiencesJsonWorkImageQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface ExperiencesJsonWorkPeriodQueryList_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface ExperiencesJsonWorkRoleQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface ExperiencesJsonWorkSkillsQueryList_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface ExperiencesJsonWorkProjectsQueryList_2 {
+	elemMatch?: ExperiencesJsonWorkProjectsInputObject_2 | null;
+}
+
+export interface ExperiencesJsonWorkProjectsInputObject_2 {
+	name?: ExperiencesJsonWorkProjectsNameQueryString_2 | null;
+	url?: ExperiencesJsonWorkProjectsUrlQueryString_2 | null;
+	description?: ExperiencesJsonWorkProjectsDescriptionQueryString_2 | null;
+}
+
+export interface ExperiencesJsonWorkProjectsNameQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface ExperiencesJsonWorkProjectsUrlQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface ExperiencesJsonWorkProjectsDescriptionQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface ExperiencesJsonIdQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface ExperiencesJsonInternalInputObject_2 {
+	contentDigest?: ExperiencesJsonInternalContentDigestQueryString_2 | null;
+	type?: ExperiencesJsonInternalTypeQueryString_2 | null;
+	owner?: ExperiencesJsonInternalOwnerQueryString_2 | null;
+	fieldOwners?: ExperiencesJsonInternalFieldOwnersInputObject_2 | null;
+}
+
+export interface ExperiencesJsonInternalContentDigestQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface ExperiencesJsonInternalTypeQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface ExperiencesJsonInternalOwnerQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface ExperiencesJsonInternalFieldOwnersInputObject_2 {
+	image_image?: ExperiencesJsonInternalFieldOwnersImageImageQueryString_2 | null;
+}
+
+export interface ExperiencesJsonInternalFieldOwnersImageImageQueryString_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
+
+export interface ExperiencesJsonFieldsInputObject_2 {
+	image_image?: ExperiencesJsonFieldsImageImageQueryList_2 | null;
+}
+
+export interface ExperiencesJsonFieldsImageImageQueryList_2 {
+	eq?: string | null;
+	ne?: string | null;
+	regex?: string | null;
+	glob?: string | null;
+	in?: (string | null)[] | null;
+	nin?: (string | null)[] | null;
+}
 export interface AllSitePageQueryArgs {
 	skip?: number | null;
 	limit?: number | null;
@@ -10376,41 +8589,29 @@ export interface AllFileQueryArgs {
 	sort?: FileConnectionSort | null;
 	filter?: FilterFile | null;
 }
-export interface AllMarkdownRemarkQueryArgs {
-	skip?: number | null;
-	limit?: number | null;
-	sort?: MarkdownRemarkConnectionSort | null;
-	filter?: FilterMarkdownRemark | null;
-}
 export interface AllTodoJsonQueryArgs {
 	skip?: number | null;
 	limit?: number | null;
 	sort?: TodoJsonConnectionSort | null;
 	filter?: FilterTodoJson | null;
 }
-export interface AllPersonalJsonQueryArgs {
+export interface AllMdxQueryArgs {
 	skip?: number | null;
 	limit?: number | null;
-	sort?: PersonalJsonConnectionSort | null;
-	filter?: FilterPersonalJson | null;
-}
-export interface AllCompetencesJsonQueryArgs {
-	skip?: number | null;
-	limit?: number | null;
-	sort?: CompetencesJsonConnectionSort | null;
-	filter?: FilterCompetencesJson | null;
-}
-export interface AllExperiencesJsonQueryArgs {
-	skip?: number | null;
-	limit?: number | null;
-	sort?: ExperiencesJsonConnectionSort | null;
-	filter?: FilterExperiencesJson | null;
+	sort?: MdxConnectionSort | null;
+	filter?: FilterMdx | null;
 }
 export interface AllSkillsJsonQueryArgs {
 	skip?: number | null;
 	limit?: number | null;
 	sort?: SkillsJsonConnectionSort | null;
 	filter?: FilterSkillsJson | null;
+}
+export interface AllCompetencesJsonQueryArgs {
+	skip?: number | null;
+	limit?: number | null;
+	sort?: CompetencesJsonConnectionSort | null;
+	filter?: FilterCompetencesJson | null;
 }
 export interface AllInterestsJsonQueryArgs {
 	skip?: number | null;
@@ -10423,6 +8624,18 @@ export interface AllOrganizationJsonQueryArgs {
 	limit?: number | null;
 	sort?: OrganizationJsonConnectionSort | null;
 	filter?: FilterOrganizationJson | null;
+}
+export interface AllPersonalJsonQueryArgs {
+	skip?: number | null;
+	limit?: number | null;
+	sort?: PersonalJsonConnectionSort | null;
+	filter?: FilterPersonalJson | null;
+}
+export interface AllExperiencesJsonQueryArgs {
+	skip?: number | null;
+	limit?: number | null;
+	sort?: ExperiencesJsonConnectionSort | null;
+	filter?: FilterExperiencesJson | null;
 }
 export interface SitePageQueryArgs {
 	jsonName?: SitePageJsonNameQueryString | null;
@@ -10535,19 +8748,6 @@ export interface FileQueryArgs {
 	birthtime?: FileBirthtimeQueryString_2 | null;
 	publicURL?: PublicUrlQueryString_3 | null;
 }
-export interface MarkdownRemarkQueryArgs {
-	id?: MarkdownRemarkIdQueryString_2 | null;
-	internal?: MarkdownRemarkInternalInputObject_2 | null;
-	frontmatter?: MarkdownRemarkFrontmatterInputObject_2 | null;
-	excerpt?: ExcerptQueryString_3 | null;
-	rawMarkdownBody?: MarkdownRemarkRawMarkdownBodyQueryString_2 | null;
-	fileAbsolutePath?: MarkdownRemarkFileAbsolutePathQueryString_2 | null;
-	html?: HtmlQueryString_3 | null;
-	headings?: HeadingsQueryList_3 | null;
-	timeToRead?: TimeToReadQueryInt_3 | null;
-	tableOfContents?: TableOfContentsQueryString_3 | null;
-	wordCount?: WordCountTypeName_3 | null;
-}
 export interface TodoJsonQueryArgs {
 	title?: TodoJsonTitleQueryString_2 | null;
 	tags?: TodoJsonTagsQueryList_2 | null;
@@ -10555,25 +8755,17 @@ export interface TodoJsonQueryArgs {
 	internal?: TodoJsonInternalInputObject_2 | null;
 	done?: TodoJsonDoneQueryBoolean_2 | null;
 }
-export interface PersonalJsonQueryArgs {
-	name?: PersonalJsonNameQueryString_2 | null;
-	email?: PersonalJsonEmailQueryString_2 | null;
-	jobTitle?: PersonalJsonJobTitleQueryString_2 | null;
-	social?: PersonalJsonSocialQueryList_2 | null;
-	id?: PersonalJsonIdQueryString_2 | null;
-	internal?: PersonalJsonInternalInputObject_2 | null;
-}
-export interface CompetencesJsonQueryArgs {
-	name?: CompetencesJsonNameQueryString_2 | null;
-	description?: CompetencesJsonDescriptionQueryString_2 | null;
-	id?: CompetencesJsonIdQueryString_2 | null;
-	internal?: CompetencesJsonInternalInputObject_2 | null;
-}
-export interface ExperiencesJsonQueryArgs {
-	work?: ExperiencesJsonWorkQueryList_2 | null;
-	id?: ExperiencesJsonIdQueryString_2 | null;
-	internal?: ExperiencesJsonInternalInputObject_2 | null;
-	fields?: ExperiencesJsonFieldsInputObject_2 | null;
+export interface MdxQueryArgs {
+	id?: MdxIdQueryString_2 | null;
+	internal?: MdxInternalInputObject_2 | null;
+	frontmatter?: MdxFrontmatterInputObject_2 | null;
+	rawBody?: MdxRawBodyQueryString_2 | null;
+	fileAbsolutePath?: MdxFileAbsolutePathQueryString_2 | null;
+	code?: CodeTypeName_3 | null;
+	excerpt?: ExcerptQueryString_3 | null;
+	headings?: HeadingsQueryList_3 | null;
+	timeToRead?: TimeToReadQueryInt_3 | null;
+	wordCount?: WordCountTypeName_3 | null;
 }
 export interface SkillsJsonQueryArgs {
 	languages?: SkillsJsonLanguagesQueryList_2 | null;
@@ -10581,6 +8773,12 @@ export interface SkillsJsonQueryArgs {
 	soft?: SkillsJsonSoftQueryList_2 | null;
 	id?: SkillsJsonIdQueryString_2 | null;
 	internal?: SkillsJsonInternalInputObject_2 | null;
+}
+export interface CompetencesJsonQueryArgs {
+	name?: CompetencesJsonNameQueryString_2 | null;
+	description?: CompetencesJsonDescriptionQueryString_2 | null;
+	id?: CompetencesJsonIdQueryString_2 | null;
+	internal?: CompetencesJsonInternalInputObject_2 | null;
 }
 export interface InterestsJsonQueryArgs {
 	subjects?: InterestsJsonSubjectsQueryList_2 | null;
@@ -10595,6 +8793,20 @@ export interface OrganizationJsonQueryArgs {
 	id?: OrganizationJsonIdQueryString_2 | null;
 	internal?: OrganizationJsonInternalInputObject_2 | null;
 	fields?: OrganizationJsonFieldsInputObject_2 | null;
+}
+export interface PersonalJsonQueryArgs {
+	name?: PersonalJsonNameQueryString_2 | null;
+	email?: PersonalJsonEmailQueryString_2 | null;
+	jobTitle?: PersonalJsonJobTitleQueryString_2 | null;
+	social?: PersonalJsonSocialQueryList_2 | null;
+	id?: PersonalJsonIdQueryString_2 | null;
+	internal?: PersonalJsonInternalInputObject_2 | null;
+}
+export interface ExperiencesJsonQueryArgs {
+	work?: ExperiencesJsonWorkQueryList_2 | null;
+	id?: ExperiencesJsonIdQueryString_2 | null;
+	internal?: ExperiencesJsonInternalInputObject_2 | null;
+	fields?: ExperiencesJsonFieldsInputObject_2 | null;
 }
 export interface DistinctSitePageConnectionArgs {
 	field?: SitePageDistinctEnum | null;
@@ -10880,15 +9092,14 @@ export interface BirthtimeFileArgs {
 		| string
 		| null /** Configures the locale Moment.js will use to format the date. */;
 }
-export interface ExcerptMarkdownRemarkArgs {
+export interface ExcerptMdxArgs {
 	pruneLength?: number | null;
-	truncate?: boolean | null;
 }
-export interface HeadingsMarkdownRemarkArgs {
-	depth?: HeadingLevels | null;
+export interface HeadingsMdxArgs {
+	depth?: HeadingsMdx | null;
 }
-export interface TableOfContentsMarkdownRemarkArgs {
-	pathToSlugField?: string | null;
+export interface TableOfContentsMdxArgs {
+	maxDepth?: number | null;
 }
 export interface DateFrontmatter_3Args {
 	formatString?:
@@ -10904,14 +9115,6 @@ export interface DateFrontmatter_3Args {
 		| string
 		| null /** Configures the locale Moment.js will use to format the date. */;
 }
-export interface DistinctMarkdownRemarkConnectionArgs {
-	field?: MarkdownRemarkDistinctEnum | null;
-}
-export interface GroupMarkdownRemarkConnectionArgs {
-	skip?: number | null;
-	limit?: number | null;
-	field?: MarkdownRemarkGroupEnum | null;
-}
 export interface DistinctTodoJsonConnectionArgs {
 	field?: TodoJsonDistinctEnum | null;
 }
@@ -10920,29 +9123,13 @@ export interface GroupTodoJsonConnectionArgs {
 	limit?: number | null;
 	field?: TodoJsonGroupEnum | null;
 }
-export interface DistinctPersonalJsonConnectionArgs {
-	field?: PersonalJsonDistinctEnum | null;
+export interface DistinctMdxConnectionArgs {
+	field?: MdxDistinctEnum | null;
 }
-export interface GroupPersonalJsonConnectionArgs {
+export interface GroupMdxConnectionArgs {
 	skip?: number | null;
 	limit?: number | null;
-	field?: PersonalJsonGroupEnum | null;
-}
-export interface DistinctCompetencesJsonConnectionArgs {
-	field?: CompetencesJsonDistinctEnum | null;
-}
-export interface GroupCompetencesJsonConnectionArgs {
-	skip?: number | null;
-	limit?: number | null;
-	field?: CompetencesJsonGroupEnum | null;
-}
-export interface DistinctExperiencesJsonConnectionArgs {
-	field?: ExperiencesJsonDistinctEnum | null;
-}
-export interface GroupExperiencesJsonConnectionArgs {
-	skip?: number | null;
-	limit?: number | null;
-	field?: ExperiencesJsonGroupEnum | null;
+	field?: MdxGroupEnum | null;
 }
 export interface DistinctSkillsJsonConnectionArgs {
 	field?: SkillsJsonDistinctEnum | null;
@@ -10951,6 +9138,14 @@ export interface GroupSkillsJsonConnectionArgs {
 	skip?: number | null;
 	limit?: number | null;
 	field?: SkillsJsonGroupEnum | null;
+}
+export interface DistinctCompetencesJsonConnectionArgs {
+	field?: CompetencesJsonDistinctEnum | null;
+}
+export interface GroupCompetencesJsonConnectionArgs {
+	skip?: number | null;
+	limit?: number | null;
+	field?: CompetencesJsonGroupEnum | null;
 }
 export interface DistinctInterestsJsonConnectionArgs {
 	field?: InterestsJsonDistinctEnum | null;
@@ -10967,6 +9162,22 @@ export interface GroupOrganizationJsonConnectionArgs {
 	skip?: number | null;
 	limit?: number | null;
 	field?: OrganizationJsonGroupEnum | null;
+}
+export interface DistinctPersonalJsonConnectionArgs {
+	field?: PersonalJsonDistinctEnum | null;
+}
+export interface GroupPersonalJsonConnectionArgs {
+	skip?: number | null;
+	limit?: number | null;
+	field?: PersonalJsonGroupEnum | null;
+}
+export interface DistinctExperiencesJsonConnectionArgs {
+	field?: ExperiencesJsonDistinctEnum | null;
+}
+export interface GroupExperiencesJsonConnectionArgs {
+	skip?: number | null;
+	limit?: number | null;
+	field?: ExperiencesJsonGroupEnum | null;
 }
 export interface PortSiteArgs {
 	formatString?:
@@ -11003,6 +9214,8 @@ export enum SitePageConnectionSortByFieldsEnum {
 	path = "path",
 	component = "component",
 	componentChunkName = "componentChunkName",
+	context___listTitle = "context___listTitle",
+	context___tags = "context___tags",
 	context___group = "context___group",
 	context___pathPrefix = "context___pathPrefix",
 	context___additionalContext___listTitle = "context___additionalContext___listTitle",
@@ -11029,6 +9242,8 @@ export enum SitePageDistinctEnum {
 	path = "path",
 	component = "component",
 	componentChunkName = "componentChunkName",
+	context___listTitle = "context___listTitle",
+	context___tags = "context___tags",
 	context___group = "context___group",
 	context___pathPrefix = "context___pathPrefix",
 	context___additionalContext___listTitle = "context___additionalContext___listTitle",
@@ -11050,6 +9265,8 @@ export enum SitePageGroupEnum {
 	path = "path",
 	component = "component",
 	componentChunkName = "componentChunkName",
+	context___listTitle = "context___listTitle",
+	context___tags = "context___tags",
 	context___group = "context___group",
 	context___pathPrefix = "context___pathPrefix",
 	context___additionalContext___listTitle = "context___additionalContext___listTitle",
@@ -11078,12 +9295,6 @@ export enum SitePluginConnectionSortByFieldsEnum {
 	pluginOptions___name = "pluginOptions___name",
 	pluginOptions___path = "pluginOptions___path",
 	pluginOptions___maxWidth = "pluginOptions___maxWidth",
-	pluginOptions___wrapperStyle = "pluginOptions___wrapperStyle",
-	pluginOptions___backgroundColor = "pluginOptions___backgroundColor",
-	pluginOptions___linkImagesToOriginal = "pluginOptions___linkImagesToOriginal",
-	pluginOptions___showCaptions = "pluginOptions___showCaptions",
-	pluginOptions___pathPrefix = "pluginOptions___pathPrefix",
-	pluginOptions___withWebp = "pluginOptions___withWebp",
 	pluginOptions___inlineCodeMarker = "pluginOptions___inlineCodeMarker",
 	pluginOptions___pathToConfigModule = "pluginOptions___pathToConfigModule",
 	pluginOptions___omitGoogleFont = "pluginOptions___omitGoogleFont",
@@ -11099,6 +9310,9 @@ export enum SitePluginConnectionSortByFieldsEnum {
 	pluginOptions___headers______gif = "pluginOptions___headers______gif",
 	pluginOptions___headers______svg = "pluginOptions___headers______svg",
 	pluginOptions___allPageHeaders = "pluginOptions___allPageHeaders",
+	pluginOptions___siteId = "pluginOptions___siteId",
+	pluginOptions___matomoUrl = "pluginOptions___matomoUrl",
+	pluginOptions___siteUrl = "pluginOptions___siteUrl",
 	pluginOptions___short_name = "pluginOptions___short_name",
 	pluginOptions___start_url = "pluginOptions___start_url",
 	pluginOptions___background_color = "pluginOptions___background_color",
@@ -11144,12 +9358,6 @@ export enum SitePluginDistinctEnum {
 	pluginOptions___name = "pluginOptions___name",
 	pluginOptions___path = "pluginOptions___path",
 	pluginOptions___maxWidth = "pluginOptions___maxWidth",
-	pluginOptions___wrapperStyle = "pluginOptions___wrapperStyle",
-	pluginOptions___backgroundColor = "pluginOptions___backgroundColor",
-	pluginOptions___linkImagesToOriginal = "pluginOptions___linkImagesToOriginal",
-	pluginOptions___showCaptions = "pluginOptions___showCaptions",
-	pluginOptions___pathPrefix = "pluginOptions___pathPrefix",
-	pluginOptions___withWebp = "pluginOptions___withWebp",
 	pluginOptions___inlineCodeMarker = "pluginOptions___inlineCodeMarker",
 	pluginOptions___pathToConfigModule = "pluginOptions___pathToConfigModule",
 	pluginOptions___omitGoogleFont = "pluginOptions___omitGoogleFont",
@@ -11165,6 +9373,9 @@ export enum SitePluginDistinctEnum {
 	pluginOptions___headers______gif = "pluginOptions___headers______gif",
 	pluginOptions___headers______svg = "pluginOptions___headers______svg",
 	pluginOptions___allPageHeaders = "pluginOptions___allPageHeaders",
+	pluginOptions___siteId = "pluginOptions___siteId",
+	pluginOptions___matomoUrl = "pluginOptions___matomoUrl",
+	pluginOptions___siteUrl = "pluginOptions___siteUrl",
 	pluginOptions___short_name = "pluginOptions___short_name",
 	pluginOptions___start_url = "pluginOptions___start_url",
 	pluginOptions___background_color = "pluginOptions___background_color",
@@ -11205,12 +9416,6 @@ export enum SitePluginGroupEnum {
 	pluginOptions___name = "pluginOptions___name",
 	pluginOptions___path = "pluginOptions___path",
 	pluginOptions___maxWidth = "pluginOptions___maxWidth",
-	pluginOptions___wrapperStyle = "pluginOptions___wrapperStyle",
-	pluginOptions___backgroundColor = "pluginOptions___backgroundColor",
-	pluginOptions___linkImagesToOriginal = "pluginOptions___linkImagesToOriginal",
-	pluginOptions___showCaptions = "pluginOptions___showCaptions",
-	pluginOptions___pathPrefix = "pluginOptions___pathPrefix",
-	pluginOptions___withWebp = "pluginOptions___withWebp",
 	pluginOptions___inlineCodeMarker = "pluginOptions___inlineCodeMarker",
 	pluginOptions___pathToConfigModule = "pluginOptions___pathToConfigModule",
 	pluginOptions___omitGoogleFont = "pluginOptions___omitGoogleFont",
@@ -11226,6 +9431,9 @@ export enum SitePluginGroupEnum {
 	pluginOptions___headers______gif = "pluginOptions___headers______gif",
 	pluginOptions___headers______svg = "pluginOptions___headers______svg",
 	pluginOptions___allPageHeaders = "pluginOptions___allPageHeaders",
+	pluginOptions___siteId = "pluginOptions___siteId",
+	pluginOptions___matomoUrl = "pluginOptions___matomoUrl",
+	pluginOptions___siteUrl = "pluginOptions___siteUrl",
 	pluginOptions___short_name = "pluginOptions___short_name",
 	pluginOptions___start_url = "pluginOptions___start_url",
 	pluginOptions___background_color = "pluginOptions___background_color",
@@ -11434,7 +9642,7 @@ export enum FileConnectionSortOrderValues {
 	DESC = "DESC",
 }
 
-export enum HeadingLevels {
+export enum HeadingsMdx {
 	h1 = "h1",
 	h2 = "h2",
 	h3 = "h3",
@@ -11531,84 +9739,6 @@ export enum FileGroupEnum {
 	birthtime = "birthtime",
 }
 
-export enum MarkdownRemarkConnectionSortByFieldsEnum {
-	id = "id",
-	parent = "parent",
-	internal___content = "internal___content",
-	internal___type = "internal___type",
-	internal___contentDigest = "internal___contentDigest",
-	internal___owner = "internal___owner",
-	frontmatter___title = "frontmatter___title",
-	frontmatter___link = "frontmatter___link",
-	frontmatter___date = "frontmatter___date",
-	frontmatter___tags = "frontmatter___tags",
-	frontmatter___authors = "frontmatter___authors",
-	frontmatter____PARENT = "frontmatter____PARENT",
-	frontmatter___draft = "frontmatter___draft",
-	frontmatter___toc = "frontmatter___toc",
-	frontmatter___description = "frontmatter___description",
-	frontmatter___type = "frontmatter___type",
-	excerpt = "excerpt",
-	rawMarkdownBody = "rawMarkdownBody",
-	fileAbsolutePath = "fileAbsolutePath",
-	html = "html",
-	headings = "headings",
-	timeToRead = "timeToRead",
-	tableOfContents = "tableOfContents",
-	wordCount___paragraphs = "wordCount___paragraphs",
-	wordCount___sentences = "wordCount___sentences",
-	wordCount___words = "wordCount___words",
-}
-
-export enum MarkdownRemarkConnectionSortOrderValues {
-	ASC = "ASC",
-	DESC = "DESC",
-}
-
-export enum MarkdownRemarkDistinctEnum {
-	id = "id",
-	parent = "parent",
-	internal___content = "internal___content",
-	internal___type = "internal___type",
-	internal___contentDigest = "internal___contentDigest",
-	internal___owner = "internal___owner",
-	frontmatter___title = "frontmatter___title",
-	frontmatter___link = "frontmatter___link",
-	frontmatter___date = "frontmatter___date",
-	frontmatter___tags = "frontmatter___tags",
-	frontmatter___authors = "frontmatter___authors",
-	frontmatter____PARENT = "frontmatter____PARENT",
-	frontmatter___draft = "frontmatter___draft",
-	frontmatter___toc = "frontmatter___toc",
-	frontmatter___description = "frontmatter___description",
-	frontmatter___type = "frontmatter___type",
-	excerpt = "excerpt",
-	rawMarkdownBody = "rawMarkdownBody",
-	fileAbsolutePath = "fileAbsolutePath",
-}
-
-export enum MarkdownRemarkGroupEnum {
-	id = "id",
-	parent = "parent",
-	internal___content = "internal___content",
-	internal___type = "internal___type",
-	internal___contentDigest = "internal___contentDigest",
-	internal___owner = "internal___owner",
-	frontmatter___title = "frontmatter___title",
-	frontmatter___link = "frontmatter___link",
-	frontmatter___date = "frontmatter___date",
-	frontmatter___tags = "frontmatter___tags",
-	frontmatter___authors = "frontmatter___authors",
-	frontmatter____PARENT = "frontmatter____PARENT",
-	frontmatter___draft = "frontmatter___draft",
-	frontmatter___toc = "frontmatter___toc",
-	frontmatter___description = "frontmatter___description",
-	frontmatter___type = "frontmatter___type",
-	excerpt = "excerpt",
-	rawMarkdownBody = "rawMarkdownBody",
-	fileAbsolutePath = "fileAbsolutePath",
-}
-
 export enum TodoJsonConnectionSortByFieldsEnum {
 	title = "title",
 	tags = "tags",
@@ -11647,28 +9777,86 @@ export enum TodoJsonGroupEnum {
 	done = "done",
 }
 
-export enum PersonalJsonConnectionSortByFieldsEnum {
-	name = "name",
-	email = "email",
-	jobTitle = "jobTitle",
-	social = "social",
+export enum MdxConnectionSortByFieldsEnum {
 	id = "id",
 	parent = "parent",
-	internal___contentDigest = "internal___contentDigest",
+	internal___content = "internal___content",
 	internal___type = "internal___type",
+	internal___contentDigest = "internal___contentDigest",
 	internal___owner = "internal___owner",
+	frontmatter___title = "frontmatter___title",
+	frontmatter___link = "frontmatter___link",
+	frontmatter___date = "frontmatter___date",
+	frontmatter___tags = "frontmatter___tags",
+	frontmatter___authors = "frontmatter___authors",
+	frontmatter____PARENT = "frontmatter____PARENT",
+	frontmatter___description = "frontmatter___description",
+	frontmatter___draft = "frontmatter___draft",
+	frontmatter___toc = "frontmatter___toc",
+	frontmatter___type = "frontmatter___type",
+	rawBody = "rawBody",
+	fileAbsolutePath = "fileAbsolutePath",
+	code___body = "code___body",
+	code___scope = "code___scope",
+	excerpt = "excerpt",
+	headings = "headings",
+	timeToRead = "timeToRead",
+	wordCount___paragraphs = "wordCount___paragraphs",
+	wordCount___sentences = "wordCount___sentences",
+	wordCount___words = "wordCount___words",
 }
 
-export enum PersonalJsonConnectionSortOrderValues {
+export enum MdxConnectionSortOrderValues {
 	ASC = "ASC",
 	DESC = "DESC",
 }
 
-export enum PersonalJsonDistinctEnum {
-	name = "name",
-	email = "email",
-	jobTitle = "jobTitle",
-	social = "social",
+export enum MdxDistinctEnum {
+	id = "id",
+	parent = "parent",
+	internal___content = "internal___content",
+	internal___type = "internal___type",
+	internal___contentDigest = "internal___contentDigest",
+	internal___owner = "internal___owner",
+	frontmatter___title = "frontmatter___title",
+	frontmatter___link = "frontmatter___link",
+	frontmatter___date = "frontmatter___date",
+	frontmatter___tags = "frontmatter___tags",
+	frontmatter___authors = "frontmatter___authors",
+	frontmatter____PARENT = "frontmatter____PARENT",
+	frontmatter___description = "frontmatter___description",
+	frontmatter___draft = "frontmatter___draft",
+	frontmatter___toc = "frontmatter___toc",
+	frontmatter___type = "frontmatter___type",
+	rawBody = "rawBody",
+	fileAbsolutePath = "fileAbsolutePath",
+}
+
+export enum MdxGroupEnum {
+	id = "id",
+	parent = "parent",
+	internal___content = "internal___content",
+	internal___type = "internal___type",
+	internal___contentDigest = "internal___contentDigest",
+	internal___owner = "internal___owner",
+	frontmatter___title = "frontmatter___title",
+	frontmatter___link = "frontmatter___link",
+	frontmatter___date = "frontmatter___date",
+	frontmatter___tags = "frontmatter___tags",
+	frontmatter___authors = "frontmatter___authors",
+	frontmatter____PARENT = "frontmatter____PARENT",
+	frontmatter___description = "frontmatter___description",
+	frontmatter___draft = "frontmatter___draft",
+	frontmatter___toc = "frontmatter___toc",
+	frontmatter___type = "frontmatter___type",
+	rawBody = "rawBody",
+	fileAbsolutePath = "fileAbsolutePath",
+}
+
+export enum SkillsJsonConnectionSortByFieldsEnum {
+	languages = "languages",
+	technical = "technical",
+	soft = "soft",
 	id = "id",
 	parent = "parent",
 	internal___contentDigest = "internal___contentDigest",
@@ -11676,11 +9864,26 @@ export enum PersonalJsonDistinctEnum {
 	internal___owner = "internal___owner",
 }
 
-export enum PersonalJsonGroupEnum {
-	name = "name",
-	email = "email",
-	jobTitle = "jobTitle",
-	social = "social",
+export enum SkillsJsonConnectionSortOrderValues {
+	ASC = "ASC",
+	DESC = "DESC",
+}
+
+export enum SkillsJsonDistinctEnum {
+	languages = "languages",
+	technical = "technical",
+	soft = "soft",
+	id = "id",
+	parent = "parent",
+	internal___contentDigest = "internal___contentDigest",
+	internal___type = "internal___type",
+	internal___owner = "internal___owner",
+}
+
+export enum SkillsJsonGroupEnum {
+	languages = "languages",
+	technical = "technical",
+	soft = "soft",
 	id = "id",
 	parent = "parent",
 	internal___contentDigest = "internal___contentDigest",
@@ -11716,82 +9919,6 @@ export enum CompetencesJsonDistinctEnum {
 export enum CompetencesJsonGroupEnum {
 	name = "name",
 	description = "description",
-	id = "id",
-	parent = "parent",
-	internal___contentDigest = "internal___contentDigest",
-	internal___type = "internal___type",
-	internal___owner = "internal___owner",
-}
-
-export enum ExperiencesJsonConnectionSortByFieldsEnum {
-	work = "work",
-	id = "id",
-	parent = "parent",
-	internal___contentDigest = "internal___contentDigest",
-	internal___type = "internal___type",
-	internal___owner = "internal___owner",
-	internal___fieldOwners___image_image = "internal___fieldOwners___image_image",
-	fields___image_image = "fields___image_image",
-}
-
-export enum ExperiencesJsonConnectionSortOrderValues {
-	ASC = "ASC",
-	DESC = "DESC",
-}
-
-export enum ExperiencesJsonDistinctEnum {
-	work = "work",
-	id = "id",
-	parent = "parent",
-	internal___contentDigest = "internal___contentDigest",
-	internal___type = "internal___type",
-	internal___owner = "internal___owner",
-	internal___fieldOwners___image_image = "internal___fieldOwners___image_image",
-	fields___image_image = "fields___image_image",
-}
-
-export enum ExperiencesJsonGroupEnum {
-	work = "work",
-	id = "id",
-	parent = "parent",
-	internal___contentDigest = "internal___contentDigest",
-	internal___type = "internal___type",
-	internal___owner = "internal___owner",
-	internal___fieldOwners___image_image = "internal___fieldOwners___image_image",
-	fields___image_image = "fields___image_image",
-}
-
-export enum SkillsJsonConnectionSortByFieldsEnum {
-	languages = "languages",
-	technical = "technical",
-	soft = "soft",
-	id = "id",
-	parent = "parent",
-	internal___contentDigest = "internal___contentDigest",
-	internal___type = "internal___type",
-	internal___owner = "internal___owner",
-}
-
-export enum SkillsJsonConnectionSortOrderValues {
-	ASC = "ASC",
-	DESC = "DESC",
-}
-
-export enum SkillsJsonDistinctEnum {
-	languages = "languages",
-	technical = "technical",
-	soft = "soft",
-	id = "id",
-	parent = "parent",
-	internal___contentDigest = "internal___contentDigest",
-	internal___type = "internal___type",
-	internal___owner = "internal___owner",
-}
-
-export enum SkillsJsonGroupEnum {
-	languages = "languages",
-	technical = "technical",
-	soft = "soft",
 	id = "id",
 	parent = "parent",
 	internal___contentDigest = "internal___contentDigest",
@@ -11878,6 +10005,85 @@ export enum OrganizationJsonGroupEnum {
 	fields___logo_image = "fields___logo_image",
 }
 
+export enum PersonalJsonConnectionSortByFieldsEnum {
+	name = "name",
+	email = "email",
+	jobTitle = "jobTitle",
+	social = "social",
+	id = "id",
+	parent = "parent",
+	internal___contentDigest = "internal___contentDigest",
+	internal___type = "internal___type",
+	internal___owner = "internal___owner",
+}
+
+export enum PersonalJsonConnectionSortOrderValues {
+	ASC = "ASC",
+	DESC = "DESC",
+}
+
+export enum PersonalJsonDistinctEnum {
+	name = "name",
+	email = "email",
+	jobTitle = "jobTitle",
+	social = "social",
+	id = "id",
+	parent = "parent",
+	internal___contentDigest = "internal___contentDigest",
+	internal___type = "internal___type",
+	internal___owner = "internal___owner",
+}
+
+export enum PersonalJsonGroupEnum {
+	name = "name",
+	email = "email",
+	jobTitle = "jobTitle",
+	social = "social",
+	id = "id",
+	parent = "parent",
+	internal___contentDigest = "internal___contentDigest",
+	internal___type = "internal___type",
+	internal___owner = "internal___owner",
+}
+
+export enum ExperiencesJsonConnectionSortByFieldsEnum {
+	work = "work",
+	id = "id",
+	parent = "parent",
+	internal___contentDigest = "internal___contentDigest",
+	internal___type = "internal___type",
+	internal___owner = "internal___owner",
+	internal___fieldOwners___image_image = "internal___fieldOwners___image_image",
+	fields___image_image = "fields___image_image",
+}
+
+export enum ExperiencesJsonConnectionSortOrderValues {
+	ASC = "ASC",
+	DESC = "DESC",
+}
+
+export enum ExperiencesJsonDistinctEnum {
+	work = "work",
+	id = "id",
+	parent = "parent",
+	internal___contentDigest = "internal___contentDigest",
+	internal___type = "internal___type",
+	internal___owner = "internal___owner",
+	internal___fieldOwners___image_image = "internal___fieldOwners___image_image",
+	fields___image_image = "fields___image_image",
+}
+
+export enum ExperiencesJsonGroupEnum {
+	work = "work",
+	id = "id",
+	parent = "parent",
+	internal___contentDigest = "internal___contentDigest",
+	internal___type = "internal___type",
+	internal___owner = "internal___owner",
+	internal___fieldOwners___image_image = "internal___fieldOwners___image_image",
+	fields___image_image = "fields___image_image",
+}
+
 export namespace QueryResolvers {
 	export interface Resolvers<Context = any> {
 		allSitePage?: AllSitePageResolver<
@@ -11900,36 +10106,26 @@ export namespace QueryResolvers {
 			any,
 			Context
 		> /** Connection to all File nodes */;
-		allMarkdownRemark?: AllMarkdownRemarkResolver<
-			MarkdownRemarkConnection | null,
-			any,
-			Context
-		> /** Connection to all MarkdownRemark nodes */;
 		allTodoJson?: AllTodoJsonResolver<
 			TodoJsonConnection | null,
 			any,
 			Context
 		> /** Connection to all TodoJson nodes */;
-		allPersonalJson?: AllPersonalJsonResolver<
-			PersonalJsonConnection | null,
+		allMdx?: AllMdxResolver<
+			MdxConnection | null,
 			any,
 			Context
-		> /** Connection to all PersonalJson nodes */;
-		allCompetencesJson?: AllCompetencesJsonResolver<
-			CompetencesJsonConnection | null,
-			any,
-			Context
-		> /** Connection to all CompetencesJson nodes */;
-		allExperiencesJson?: AllExperiencesJsonResolver<
-			ExperiencesJsonConnection | null,
-			any,
-			Context
-		> /** Connection to all ExperiencesJson nodes */;
+		> /** Connection to all Mdx nodes */;
 		allSkillsJson?: AllSkillsJsonResolver<
 			SkillsJsonConnection | null,
 			any,
 			Context
 		> /** Connection to all SkillsJson nodes */;
+		allCompetencesJson?: AllCompetencesJsonResolver<
+			CompetencesJsonConnection | null,
+			any,
+			Context
+		> /** Connection to all CompetencesJson nodes */;
 		allInterestsJson?: AllInterestsJsonResolver<
 			InterestsJsonConnection | null,
 			any,
@@ -11940,29 +10136,29 @@ export namespace QueryResolvers {
 			any,
 			Context
 		> /** Connection to all OrganizationJson nodes */;
+		allPersonalJson?: AllPersonalJsonResolver<
+			PersonalJsonConnection | null,
+			any,
+			Context
+		> /** Connection to all PersonalJson nodes */;
+		allExperiencesJson?: AllExperiencesJsonResolver<
+			ExperiencesJsonConnection | null,
+			any,
+			Context
+		> /** Connection to all ExperiencesJson nodes */;
 		sitePage?: SitePageResolver<SitePage | null, any, Context>;
 		sitePlugin?: SitePluginResolver<SitePlugin | null, any, Context>;
 		site?: SiteResolver<Site | null, any, Context>;
 		directory?: DirectoryResolver<Directory | null, any, Context>;
 		file?: FileResolver<File | null, any, Context>;
-		markdownRemark?: MarkdownRemarkResolver<
-			MarkdownRemark | null,
-			any,
-			Context
-		>;
 		todoJson?: TodoJsonResolver<TodoJson | null, any, Context>;
-		personalJson?: PersonalJsonResolver<PersonalJson | null, any, Context>;
+		mdx?: MdxResolver<Mdx | null, any, Context>;
+		skillsJson?: SkillsJsonResolver<SkillsJson | null, any, Context>;
 		competencesJson?: CompetencesJsonResolver<
 			CompetencesJson | null,
 			any,
 			Context
 		>;
-		experiencesJson?: ExperiencesJsonResolver<
-			ExperiencesJson | null,
-			any,
-			Context
-		>;
-		skillsJson?: SkillsJsonResolver<SkillsJson | null, any, Context>;
 		interestsJson?: InterestsJsonResolver<
 			InterestsJson | null,
 			any,
@@ -11970,6 +10166,12 @@ export namespace QueryResolvers {
 		>;
 		organizationJson?: OrganizationJsonResolver<
 			OrganizationJson | null,
+			any,
+			Context
+		>;
+		personalJson?: PersonalJsonResolver<PersonalJson | null, any, Context>;
+		experiencesJson?: ExperiencesJsonResolver<
+			ExperiencesJson | null,
 			any,
 			Context
 		>;
@@ -12023,18 +10225,6 @@ export namespace QueryResolvers {
 		filter?: FilterFile | null;
 	}
 
-	export type AllMarkdownRemarkResolver<
-		R = MarkdownRemarkConnection | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context, AllMarkdownRemarkArgs>;
-	export interface AllMarkdownRemarkArgs {
-		skip?: number | null;
-		limit?: number | null;
-		sort?: MarkdownRemarkConnectionSort | null;
-		filter?: FilterMarkdownRemark | null;
-	}
-
 	export type AllTodoJsonResolver<
 		R = TodoJsonConnection | null,
 		Parent = any,
@@ -12047,40 +10237,16 @@ export namespace QueryResolvers {
 		filter?: FilterTodoJson | null;
 	}
 
-	export type AllPersonalJsonResolver<
-		R = PersonalJsonConnection | null,
+	export type AllMdxResolver<
+		R = MdxConnection | null,
 		Parent = any,
 		Context = any
-	> = Resolver<R, Parent, Context, AllPersonalJsonArgs>;
-	export interface AllPersonalJsonArgs {
+	> = Resolver<R, Parent, Context, AllMdxArgs>;
+	export interface AllMdxArgs {
 		skip?: number | null;
 		limit?: number | null;
-		sort?: PersonalJsonConnectionSort | null;
-		filter?: FilterPersonalJson | null;
-	}
-
-	export type AllCompetencesJsonResolver<
-		R = CompetencesJsonConnection | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context, AllCompetencesJsonArgs>;
-	export interface AllCompetencesJsonArgs {
-		skip?: number | null;
-		limit?: number | null;
-		sort?: CompetencesJsonConnectionSort | null;
-		filter?: FilterCompetencesJson | null;
-	}
-
-	export type AllExperiencesJsonResolver<
-		R = ExperiencesJsonConnection | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context, AllExperiencesJsonArgs>;
-	export interface AllExperiencesJsonArgs {
-		skip?: number | null;
-		limit?: number | null;
-		sort?: ExperiencesJsonConnectionSort | null;
-		filter?: FilterExperiencesJson | null;
+		sort?: MdxConnectionSort | null;
+		filter?: FilterMdx | null;
 	}
 
 	export type AllSkillsJsonResolver<
@@ -12093,6 +10259,18 @@ export namespace QueryResolvers {
 		limit?: number | null;
 		sort?: SkillsJsonConnectionSort | null;
 		filter?: FilterSkillsJson | null;
+	}
+
+	export type AllCompetencesJsonResolver<
+		R = CompetencesJsonConnection | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context, AllCompetencesJsonArgs>;
+	export interface AllCompetencesJsonArgs {
+		skip?: number | null;
+		limit?: number | null;
+		sort?: CompetencesJsonConnectionSort | null;
+		filter?: FilterCompetencesJson | null;
 	}
 
 	export type AllInterestsJsonResolver<
@@ -12117,6 +10295,30 @@ export namespace QueryResolvers {
 		limit?: number | null;
 		sort?: OrganizationJsonConnectionSort | null;
 		filter?: FilterOrganizationJson | null;
+	}
+
+	export type AllPersonalJsonResolver<
+		R = PersonalJsonConnection | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context, AllPersonalJsonArgs>;
+	export interface AllPersonalJsonArgs {
+		skip?: number | null;
+		limit?: number | null;
+		sort?: PersonalJsonConnectionSort | null;
+		filter?: FilterPersonalJson | null;
+	}
+
+	export type AllExperiencesJsonResolver<
+		R = ExperiencesJsonConnection | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context, AllExperiencesJsonArgs>;
+	export interface AllExperiencesJsonArgs {
+		skip?: number | null;
+		limit?: number | null;
+		sort?: ExperiencesJsonConnectionSort | null;
+		filter?: FilterExperiencesJson | null;
 	}
 
 	export type SitePageResolver<
@@ -12260,25 +10462,6 @@ export namespace QueryResolvers {
 		publicURL?: PublicUrlQueryString_3 | null;
 	}
 
-	export type MarkdownRemarkResolver<
-		R = MarkdownRemark | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context, MarkdownRemarkArgs>;
-	export interface MarkdownRemarkArgs {
-		id?: MarkdownRemarkIdQueryString_2 | null;
-		internal?: MarkdownRemarkInternalInputObject_2 | null;
-		frontmatter?: MarkdownRemarkFrontmatterInputObject_2 | null;
-		excerpt?: ExcerptQueryString_3 | null;
-		rawMarkdownBody?: MarkdownRemarkRawMarkdownBodyQueryString_2 | null;
-		fileAbsolutePath?: MarkdownRemarkFileAbsolutePathQueryString_2 | null;
-		html?: HtmlQueryString_3 | null;
-		headings?: HeadingsQueryList_3 | null;
-		timeToRead?: TimeToReadQueryInt_3 | null;
-		tableOfContents?: TableOfContentsQueryString_3 | null;
-		wordCount?: WordCountTypeName_3 | null;
-	}
-
 	export type TodoJsonResolver<
 		R = TodoJson | null,
 		Parent = any,
@@ -12292,42 +10475,22 @@ export namespace QueryResolvers {
 		done?: TodoJsonDoneQueryBoolean_2 | null;
 	}
 
-	export type PersonalJsonResolver<
-		R = PersonalJson | null,
+	export type MdxResolver<
+		R = Mdx | null,
 		Parent = any,
 		Context = any
-	> = Resolver<R, Parent, Context, PersonalJsonArgs>;
-	export interface PersonalJsonArgs {
-		name?: PersonalJsonNameQueryString_2 | null;
-		email?: PersonalJsonEmailQueryString_2 | null;
-		jobTitle?: PersonalJsonJobTitleQueryString_2 | null;
-		social?: PersonalJsonSocialQueryList_2 | null;
-		id?: PersonalJsonIdQueryString_2 | null;
-		internal?: PersonalJsonInternalInputObject_2 | null;
-	}
-
-	export type CompetencesJsonResolver<
-		R = CompetencesJson | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context, CompetencesJsonArgs>;
-	export interface CompetencesJsonArgs {
-		name?: CompetencesJsonNameQueryString_2 | null;
-		description?: CompetencesJsonDescriptionQueryString_2 | null;
-		id?: CompetencesJsonIdQueryString_2 | null;
-		internal?: CompetencesJsonInternalInputObject_2 | null;
-	}
-
-	export type ExperiencesJsonResolver<
-		R = ExperiencesJson | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context, ExperiencesJsonArgs>;
-	export interface ExperiencesJsonArgs {
-		work?: ExperiencesJsonWorkQueryList_2 | null;
-		id?: ExperiencesJsonIdQueryString_2 | null;
-		internal?: ExperiencesJsonInternalInputObject_2 | null;
-		fields?: ExperiencesJsonFieldsInputObject_2 | null;
+	> = Resolver<R, Parent, Context, MdxArgs>;
+	export interface MdxArgs {
+		id?: MdxIdQueryString_2 | null;
+		internal?: MdxInternalInputObject_2 | null;
+		frontmatter?: MdxFrontmatterInputObject_2 | null;
+		rawBody?: MdxRawBodyQueryString_2 | null;
+		fileAbsolutePath?: MdxFileAbsolutePathQueryString_2 | null;
+		code?: CodeTypeName_3 | null;
+		excerpt?: ExcerptQueryString_3 | null;
+		headings?: HeadingsQueryList_3 | null;
+		timeToRead?: TimeToReadQueryInt_3 | null;
+		wordCount?: WordCountTypeName_3 | null;
 	}
 
 	export type SkillsJsonResolver<
@@ -12341,6 +10504,18 @@ export namespace QueryResolvers {
 		soft?: SkillsJsonSoftQueryList_2 | null;
 		id?: SkillsJsonIdQueryString_2 | null;
 		internal?: SkillsJsonInternalInputObject_2 | null;
+	}
+
+	export type CompetencesJsonResolver<
+		R = CompetencesJson | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context, CompetencesJsonArgs>;
+	export interface CompetencesJsonArgs {
+		name?: CompetencesJsonNameQueryString_2 | null;
+		description?: CompetencesJsonDescriptionQueryString_2 | null;
+		id?: CompetencesJsonIdQueryString_2 | null;
+		internal?: CompetencesJsonInternalInputObject_2 | null;
 	}
 
 	export type InterestsJsonResolver<
@@ -12367,6 +10542,32 @@ export namespace QueryResolvers {
 		id?: OrganizationJsonIdQueryString_2 | null;
 		internal?: OrganizationJsonInternalInputObject_2 | null;
 		fields?: OrganizationJsonFieldsInputObject_2 | null;
+	}
+
+	export type PersonalJsonResolver<
+		R = PersonalJson | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context, PersonalJsonArgs>;
+	export interface PersonalJsonArgs {
+		name?: PersonalJsonNameQueryString_2 | null;
+		email?: PersonalJsonEmailQueryString_2 | null;
+		jobTitle?: PersonalJsonJobTitleQueryString_2 | null;
+		social?: PersonalJsonSocialQueryList_2 | null;
+		id?: PersonalJsonIdQueryString_2 | null;
+		internal?: PersonalJsonInternalInputObject_2 | null;
+	}
+
+	export type ExperiencesJsonResolver<
+		R = ExperiencesJson | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context, ExperiencesJsonArgs>;
+	export interface ExperiencesJsonArgs {
+		work?: ExperiencesJsonWorkQueryList_2 | null;
+		id?: ExperiencesJsonIdQueryString_2 | null;
+		internal?: ExperiencesJsonInternalInputObject_2 | null;
+		fields?: ExperiencesJsonFieldsInputObject_2 | null;
 	}
 }
 /** A connection to a list of items. */
@@ -12581,6 +10782,8 @@ export namespace SitePageResolvers {
 
 export namespace ContextResolvers {
 	export interface Resolvers<Context = any> {
+		listTitle?: ListTitleResolver<string | null, any, Context>;
+		tags?: TagsResolver<(Tags | null)[] | null, any, Context>;
 		group?: GroupResolver<(Group | null)[] | null, any, Context>;
 		pathPrefix?: PathPrefixResolver<string | null, any, Context>;
 		additionalContext?: AdditionalContextResolver<
@@ -12591,6 +10794,16 @@ export namespace ContextResolvers {
 		markdownPath?: MarkdownPathResolver<string | null, any, Context>;
 	}
 
+	export type ListTitleResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type TagsResolver<
+		R = (Tags | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
 	export type GroupResolver<
 		R = (Group | null)[] | null,
 		Parent = any,
@@ -12613,6 +10826,30 @@ export namespace ContextResolvers {
 	> = Resolver<R, Parent, Context>;
 }
 
+export namespace TagsResolvers {
+	export interface Resolvers<Context = any> {
+		tag?: TagResolver<string | null, any, Context>;
+		count?: CountResolver<number | null, any, Context>;
+		url?: UrlResolver<string | null, any, Context>;
+	}
+
+	export type TagResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type CountResolver<
+		R = number | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type UrlResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+}
+
 export namespace GroupResolvers {
 	export interface Resolvers<Context = any> {
 		node?: NodeResolver<Node | null, any, Context>;
@@ -12627,10 +10864,10 @@ export namespace GroupResolvers {
 
 export namespace NodeResolvers {
 	export interface Resolvers<Context = any> {
-		htmlAst?: HtmlAstResolver<HtmlAst | null, any, Context>;
 		excerpt?: ExcerptResolver<string | null, any, Context>;
 		timeToRead?: TimeToReadResolver<number | null, any, Context>;
 		count?: CountResolver<Count | null, any, Context>;
+		code?: CodeResolver<Code | null, any, Context>;
 		fileAbsolutePath?: FileAbsolutePathResolver<
 			string | null,
 			any,
@@ -12640,11 +10877,6 @@ export namespace NodeResolvers {
 		frontmatter?: FrontmatterResolver<Frontmatter_2 | null, any, Context>;
 	}
 
-	export type HtmlAstResolver<
-		R = HtmlAst | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
 	export type ExcerptResolver<
 		R = string | null,
 		Parent = any,
@@ -12657,6 +10889,11 @@ export namespace NodeResolvers {
 	> = Resolver<R, Parent, Context>;
 	export type CountResolver<
 		R = Count | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type CodeResolver<
+		R = Code | null,
 		Parent = any,
 		Context = any
 	> = Resolver<R, Parent, Context>;
@@ -12677,586 +10914,6 @@ export namespace NodeResolvers {
 	> = Resolver<R, Parent, Context>;
 }
 
-export namespace HtmlAstResolvers {
-	export interface Resolvers<Context = any> {
-		type?: TypeResolver<string | null, any, Context>;
-		children?: ChildrenResolver<(Children | null)[] | null, any, Context>;
-		data?: DataResolver<Data | null, any, Context>;
-		tagName?: TagNameResolver<string | null, any, Context>;
-	}
-
-	export type TypeResolver<
-		R = string | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type ChildrenResolver<
-		R = (Children | null)[] | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type DataResolver<
-		R = Data | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type TagNameResolver<
-		R = string | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-}
-
-export namespace ChildrenResolvers {
-	export interface Resolvers<Context = any> {
-		type?: TypeResolver<string | null, any, Context>;
-		tagName?: TagNameResolver<string | null, any, Context>;
-		properties?: PropertiesResolver<Properties | null, any, Context>;
-		children?: ChildrenResolver<(Children_2 | null)[] | null, any, Context>;
-		value?: ValueResolver<string | null, any, Context>;
-	}
-
-	export type TypeResolver<
-		R = string | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type TagNameResolver<
-		R = string | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type PropertiesResolver<
-		R = Properties | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type ChildrenResolver<
-		R = (Children_2 | null)[] | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type ValueResolver<
-		R = string | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-}
-
-export namespace PropertiesResolvers {
-	export interface Resolvers<Context = any> {
-		id?: IdResolver<string | null, any, Context>;
-		src?: SrcResolver<string | null, any, Context>;
-		title?: TitleResolver<string | null, any, Context>;
-		attr?: AttrResolver<string | null, any, Context>;
-		size?: SizeResolver<string | null, any, Context>;
-		className?: ClassNameResolver<(string | null)[] | null, any, Context>;
-		dataLanguage?: DataLanguageResolver<string | null, any, Context>;
-		style?: StyleResolver<string | null, any, Context>;
-		sandbox?: SandboxResolver<(string | null)[] | null, any, Context>;
-		width?: WidthResolver<number | null, any, Context>;
-		height?: HeightResolver<number | null, any, Context>;
-		frameBorder?: FrameBorderResolver<string | null, any, Context>;
-		allow?: AllowResolver<string | null, any, Context>;
-		allowFullScreen?: AllowFullScreenResolver<boolean | null, any, Context>;
-	}
-
-	export type IdResolver<
-		R = string | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type SrcResolver<
-		R = string | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type TitleResolver<
-		R = string | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type AttrResolver<
-		R = string | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type SizeResolver<
-		R = string | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type ClassNameResolver<
-		R = (string | null)[] | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type DataLanguageResolver<
-		R = string | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type StyleResolver<
-		R = string | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type SandboxResolver<
-		R = (string | null)[] | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type WidthResolver<
-		R = number | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type HeightResolver<
-		R = number | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type FrameBorderResolver<
-		R = string | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type AllowResolver<
-		R = string | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type AllowFullScreenResolver<
-		R = boolean | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-}
-
-export namespace Children_2Resolvers {
-	export interface Resolvers<Context = any> {
-		type?: TypeResolver<string | null, any, Context>;
-		value?: ValueResolver<string | null, any, Context>;
-		tagName?: TagNameResolver<string | null, any, Context>;
-		properties?: PropertiesResolver<Properties_2 | null, any, Context>;
-		children?: ChildrenResolver<(Children_3 | null)[] | null, any, Context>;
-	}
-
-	export type TypeResolver<
-		R = string | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type ValueResolver<
-		R = string | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type TagNameResolver<
-		R = string | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type PropertiesResolver<
-		R = Properties_2 | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type ChildrenResolver<
-		R = (Children_3 | null)[] | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-}
-
-export namespace Properties_2Resolvers {
-	export interface Resolvers<Context = any> {
-		href?: HrefResolver<string | null, any, Context>;
-		role?: RoleResolver<string | null, any, Context>;
-		ariaLabelledBy?: AriaLabelledByResolver<
-			(string | null)[] | null,
-			any,
-			Context
-		>;
-		ariaHidden?: AriaHiddenResolver<boolean | null, any, Context>;
-		className?: ClassNameResolver<(string | null)[] | null, any, Context>;
-		title?: TitleResolver<string | null, any, Context>;
-		id?: IdResolver<string | null, any, Context>;
-		quote?: QuoteResolver<string | null, any, Context>;
-		author?: AuthorResolver<string | null, any, Context>;
-		from?: FromResolver<string | null, any, Context>;
-		position?: PositionResolver<string | null, any, Context>;
-		src?: SrcResolver<string | null, any, Context>;
-		alt?: AltResolver<string | null, any, Context>;
-	}
-
-	export type HrefResolver<
-		R = string | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type RoleResolver<
-		R = string | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type AriaLabelledByResolver<
-		R = (string | null)[] | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type AriaHiddenResolver<
-		R = boolean | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type ClassNameResolver<
-		R = (string | null)[] | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type TitleResolver<
-		R = string | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type IdResolver<
-		R = string | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type QuoteResolver<
-		R = string | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type AuthorResolver<
-		R = string | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type FromResolver<
-		R = string | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type PositionResolver<
-		R = string | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type SrcResolver<
-		R = string | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type AltResolver<
-		R = string | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-}
-
-export namespace Children_3Resolvers {
-	export interface Resolvers<Context = any> {
-		type?: TypeResolver<string | null, any, Context>;
-		value?: ValueResolver<string | null, any, Context>;
-		tagName?: TagNameResolver<string | null, any, Context>;
-		properties?: PropertiesResolver<Properties_3 | null, any, Context>;
-		children?: ChildrenResolver<(Children_4 | null)[] | null, any, Context>;
-	}
-
-	export type TypeResolver<
-		R = string | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type ValueResolver<
-		R = string | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type TagNameResolver<
-		R = string | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type PropertiesResolver<
-		R = Properties_3 | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type ChildrenResolver<
-		R = (Children_4 | null)[] | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-}
-
-export namespace Properties_3Resolvers {
-	export interface Resolvers<Context = any> {
-		ariaHidden?: AriaHiddenResolver<string | null, any, Context>;
-		height?: HeightResolver<string | null, any, Context>;
-		version?: VersionResolver<string | null, any, Context>;
-		viewBox?: ViewBoxResolver<string | null, any, Context>;
-		width?: WidthResolver<string | null, any, Context>;
-		href?: HrefResolver<string | null, any, Context>;
-		className?: ClassNameResolver<(string | null)[] | null, any, Context>;
-		id?: IdResolver<string | null, any, Context>;
-	}
-
-	export type AriaHiddenResolver<
-		R = string | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type HeightResolver<
-		R = string | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type VersionResolver<
-		R = string | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type ViewBoxResolver<
-		R = string | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type WidthResolver<
-		R = string | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type HrefResolver<
-		R = string | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type ClassNameResolver<
-		R = (string | null)[] | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type IdResolver<
-		R = string | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-}
-
-export namespace Children_4Resolvers {
-	export interface Resolvers<Context = any> {
-		type?: TypeResolver<string | null, any, Context>;
-		value?: ValueResolver<string | null, any, Context>;
-		tagName?: TagNameResolver<string | null, any, Context>;
-		properties?: PropertiesResolver<Properties_4 | null, any, Context>;
-		children?: ChildrenResolver<(Children_5 | null)[] | null, any, Context>;
-	}
-
-	export type TypeResolver<
-		R = string | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type ValueResolver<
-		R = string | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type TagNameResolver<
-		R = string | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type PropertiesResolver<
-		R = Properties_4 | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type ChildrenResolver<
-		R = (Children_5 | null)[] | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-}
-
-export namespace Properties_4Resolvers {
-	export interface Resolvers<Context = any> {
-		fillRule?: FillRuleResolver<string | null, any, Context>;
-		d?: DResolver<string | null, any, Context>;
-		href?: HrefResolver<string | null, any, Context>;
-		className?: ClassNameResolver<(string | null)[] | null, any, Context>;
-	}
-
-	export type FillRuleResolver<
-		R = string | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type DResolver<
-		R = string | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type HrefResolver<
-		R = string | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type ClassNameResolver<
-		R = (string | null)[] | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-}
-
-export namespace Children_5Resolvers {
-	export interface Resolvers<Context = any> {
-		type?: TypeResolver<string | null, any, Context>;
-		value?: ValueResolver<string | null, any, Context>;
-		tagName?: TagNameResolver<string | null, any, Context>;
-		properties?: PropertiesResolver<Properties_5 | null, any, Context>;
-		children?: ChildrenResolver<(Children_6 | null)[] | null, any, Context>;
-	}
-
-	export type TypeResolver<
-		R = string | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type ValueResolver<
-		R = string | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type TagNameResolver<
-		R = string | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type PropertiesResolver<
-		R = Properties_5 | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type ChildrenResolver<
-		R = (Children_6 | null)[] | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-}
-
-export namespace Properties_5Resolvers {
-	export interface Resolvers<Context = any> {
-		href?: HrefResolver<string | null, any, Context>;
-		className?: ClassNameResolver<(string | null)[] | null, any, Context>;
-		id?: IdResolver<string | null, any, Context>;
-	}
-
-	export type HrefResolver<
-		R = string | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type ClassNameResolver<
-		R = (string | null)[] | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type IdResolver<
-		R = string | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-}
-
-export namespace Children_6Resolvers {
-	export interface Resolvers<Context = any> {
-		type?: TypeResolver<string | null, any, Context>;
-		value?: ValueResolver<string | null, any, Context>;
-		tagName?: TagNameResolver<string | null, any, Context>;
-		properties?: PropertiesResolver<Properties_6 | null, any, Context>;
-		children?: ChildrenResolver<(Children_7 | null)[] | null, any, Context>;
-	}
-
-	export type TypeResolver<
-		R = string | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type ValueResolver<
-		R = string | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type TagNameResolver<
-		R = string | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type PropertiesResolver<
-		R = Properties_6 | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type ChildrenResolver<
-		R = (Children_7 | null)[] | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-}
-
-export namespace Properties_6Resolvers {
-	export interface Resolvers<Context = any> {
-		className?: ClassNameResolver<(string | null)[] | null, any, Context>;
-		href?: HrefResolver<string | null, any, Context>;
-	}
-
-	export type ClassNameResolver<
-		R = (string | null)[] | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type HrefResolver<
-		R = string | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-}
-
-export namespace Children_7Resolvers {
-	export interface Resolvers<Context = any> {
-		type?: TypeResolver<string | null, any, Context>;
-		value?: ValueResolver<string | null, any, Context>;
-	}
-
-	export type TypeResolver<
-		R = string | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type ValueResolver<
-		R = string | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-}
-
-export namespace DataResolvers {
-	export interface Resolvers<Context = any> {
-		quirksMode?: QuirksModeResolver<boolean | null, any, Context>;
-	}
-
-	export type QuirksModeResolver<
-		R = boolean | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-}
-
 export namespace CountResolvers {
 	export interface Resolvers<Context = any> {
 		words?: WordsResolver<number | null, any, Context>;
@@ -13264,6 +10921,18 @@ export namespace CountResolvers {
 
 	export type WordsResolver<
 		R = number | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+}
+
+export namespace CodeResolvers {
+	export interface Resolvers<Context = any> {
+		scope?: ScopeResolver<string | null, any, Context>;
+	}
+
+	export type ScopeResolver<
+		R = string | null,
 		Parent = any,
 		Context = any
 	> = Resolver<R, Parent, Context>;
@@ -13317,6 +10986,7 @@ export namespace Frontmatter_2Resolvers {
 		title?: TitleResolver<string | null, any, Context>;
 		description?: DescriptionResolver<string | null, any, Context>;
 		date?: DateResolver<Date | null, any, Context>;
+		tags?: TagsResolver<(string | null)[] | null, any, Context>;
 		authors?: AuthorsResolver<(Authors_2 | null)[] | null, any, Context>;
 		link?: LinkResolver<string | null, any, Context>;
 	}
@@ -13351,6 +11021,11 @@ export namespace Frontmatter_2Resolvers {
 			| null /** Configures the locale Moment.js will use to format the date. */;
 	}
 
+	export type TagsResolver<
+		R = (string | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
 	export type AuthorsResolver<
 		R = (Authors_2 | null)[] | null,
 		Parent = any,
@@ -13503,16 +11178,6 @@ export namespace PluginOptions_3Resolvers {
 		name?: NameResolver<string | null, any, Context>;
 		path?: PathResolver<string | null, any, Context>;
 		maxWidth?: MaxWidthResolver<number | null, any, Context>;
-		wrapperStyle?: WrapperStyleResolver<string | null, any, Context>;
-		backgroundColor?: BackgroundColorResolver<string | null, any, Context>;
-		linkImagesToOriginal?: LinkImagesToOriginalResolver<
-			boolean | null,
-			any,
-			Context
-		>;
-		showCaptions?: ShowCaptionsResolver<boolean | null, any, Context>;
-		pathPrefix?: PathPrefixResolver<string | null, any, Context>;
-		withWebp?: WithWebpResolver<boolean | null, any, Context>;
 		inlineCodeMarker?: InlineCodeMarkerResolver<
 			string | null,
 			any,
@@ -13532,6 +11197,9 @@ export namespace PluginOptions_3Resolvers {
 			any,
 			Context
 		>;
+		siteId?: SiteIdResolver<string | null, any, Context>;
+		matomoUrl?: MatomoUrlResolver<string | null, any, Context>;
+		siteUrl?: SiteUrlResolver<string | null, any, Context>;
 		short_name?: ShortNameResolver<string | null, any, Context>;
 		start_url?: StartUrlResolver<string | null, any, Context>;
 		background_color?: BackgroundColorResolver<string | null, any, Context>;
@@ -13581,36 +11249,6 @@ export namespace PluginOptions_3Resolvers {
 		Parent = any,
 		Context = any
 	> = Resolver<R, Parent, Context>;
-	export type WrapperStyleResolver<
-		R = string | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type BackgroundColorResolver<
-		R = string | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type LinkImagesToOriginalResolver<
-		R = boolean | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type ShowCaptionsResolver<
-		R = boolean | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type PathPrefixResolver<
-		R = string | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type WithWebpResolver<
-		R = boolean | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
 	export type InlineCodeMarkerResolver<
 		R = string | null,
 		Parent = any,
@@ -13643,6 +11281,21 @@ export namespace PluginOptions_3Resolvers {
 	> = Resolver<R, Parent, Context>;
 	export type AllPageHeadersResolver<
 		R = (string | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type SiteIdResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type MatomoUrlResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type SiteUrlResolver<
+		R = string | null,
 		Parent = any,
 		Context = any
 	> = Resolver<R, Parent, Context>;
@@ -13748,16 +11401,6 @@ export namespace Plugins_2Resolvers {
 export namespace PluginOptions_4Resolvers {
 	export interface Resolvers<Context = any> {
 		maxWidth?: MaxWidthResolver<number | null, any, Context>;
-		wrapperStyle?: WrapperStyleResolver<string | null, any, Context>;
-		backgroundColor?: BackgroundColorResolver<string | null, any, Context>;
-		linkImagesToOriginal?: LinkImagesToOriginalResolver<
-			boolean | null,
-			any,
-			Context
-		>;
-		showCaptions?: ShowCaptionsResolver<boolean | null, any, Context>;
-		pathPrefix?: PathPrefixResolver<string | null, any, Context>;
-		withWebp?: WithWebpResolver<boolean | null, any, Context>;
 		inlineCodeMarker?: InlineCodeMarkerResolver<
 			string | null,
 			any,
@@ -13767,36 +11410,6 @@ export namespace PluginOptions_4Resolvers {
 
 	export type MaxWidthResolver<
 		R = number | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type WrapperStyleResolver<
-		R = string | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type BackgroundColorResolver<
-		R = string | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type LinkImagesToOriginalResolver<
-		R = boolean | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type ShowCaptionsResolver<
-		R = boolean | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type PathPrefixResolver<
-		R = string | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type WithWebpResolver<
-		R = boolean | null,
 		Parent = any,
 		Context = any
 	> = Resolver<R, Parent, Context>;
@@ -15000,36 +12613,26 @@ export namespace FileResolvers {
 			any,
 			Context
 		> /** The children of this node. */;
-		childMarkdownRemark?: ChildMarkdownRemarkResolver<
-			MarkdownRemark | null,
+		childMdx?: ChildMdxResolver<
+			Mdx | null,
 			any,
 			Context
-		> /** The child of this node of type markdownRemark */;
+		> /** The child of this node of type mdx */;
 		childrenTodoJson?: ChildrenTodoJsonResolver<
 			(TodoJson | null)[] | null,
 			any,
 			Context
 		> /** The children of this node of type todoJson */;
-		childPersonalJson?: ChildPersonalJsonResolver<
-			PersonalJson | null,
-			any,
-			Context
-		> /** The child of this node of type personalJson */;
-		childrenCompetencesJson?: ChildrenCompetencesJsonResolver<
-			(CompetencesJson | null)[] | null,
-			any,
-			Context
-		> /** The children of this node of type competencesJson */;
-		childExperiencesJson?: ChildExperiencesJsonResolver<
-			ExperiencesJson | null,
-			any,
-			Context
-		> /** The child of this node of type experiencesJson */;
 		childSkillsJson?: ChildSkillsJsonResolver<
 			SkillsJson | null,
 			any,
 			Context
 		> /** The child of this node of type skillsJson */;
+		childrenCompetencesJson?: ChildrenCompetencesJsonResolver<
+			(CompetencesJson | null)[] | null,
+			any,
+			Context
+		> /** The children of this node of type competencesJson */;
 		childInterestsJson?: ChildInterestsJsonResolver<
 			InterestsJson | null,
 			any,
@@ -15040,6 +12643,16 @@ export namespace FileResolvers {
 			any,
 			Context
 		> /** The child of this node of type organizationJson */;
+		childPersonalJson?: ChildPersonalJsonResolver<
+			PersonalJson | null,
+			any,
+			Context
+		> /** The child of this node of type personalJson */;
+		childExperiencesJson?: ChildExperiencesJsonResolver<
+			ExperiencesJson | null,
+			any,
+			Context
+		> /** The child of this node of type experiencesJson */;
 		internal?: InternalResolver<Internal_17 | null, any, Context>;
 		sourceInstanceName?: SourceInstanceNameResolver<
 			string | null,
@@ -15104,8 +12717,8 @@ export namespace FileResolvers {
 		Parent = any,
 		Context = any
 	> = Resolver<R, Parent, Context>;
-	export type ChildMarkdownRemarkResolver<
-		R = MarkdownRemark | null,
+	export type ChildMdxResolver<
+		R = Mdx | null,
 		Parent = any,
 		Context = any
 	> = Resolver<R, Parent, Context>;
@@ -15114,23 +12727,13 @@ export namespace FileResolvers {
 		Parent = any,
 		Context = any
 	> = Resolver<R, Parent, Context>;
-	export type ChildPersonalJsonResolver<
-		R = PersonalJson | null,
+	export type ChildSkillsJsonResolver<
+		R = SkillsJson | null,
 		Parent = any,
 		Context = any
 	> = Resolver<R, Parent, Context>;
 	export type ChildrenCompetencesJsonResolver<
 		R = (CompetencesJson | null)[] | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type ChildExperiencesJsonResolver<
-		R = ExperiencesJson | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type ChildSkillsJsonResolver<
-		R = SkillsJson | null,
 		Parent = any,
 		Context = any
 	> = Resolver<R, Parent, Context>;
@@ -15141,6 +12744,16 @@ export namespace FileResolvers {
 	> = Resolver<R, Parent, Context>;
 	export type ChildOrganizationJsonResolver<
 		R = OrganizationJson | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type ChildPersonalJsonResolver<
+		R = PersonalJson | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type ChildExperiencesJsonResolver<
+		R = ExperiencesJson | null,
 		Parent = any,
 		Context = any
 	> = Resolver<R, Parent, Context>;
@@ -15440,8 +13053,8 @@ export namespace FileResolvers {
 		Context = any
 	> = Resolver<R, Parent, Context>;
 }
-/** Node of type MarkdownRemark */
-export namespace MarkdownRemarkResolvers {
+/** Node of type Mdx */
+export namespace MdxResolvers {
 	export interface Resolvers<Context = any> {
 		id?: IdResolver<string, any, Context> /** The id of this node. */;
 		parent?: ParentResolver<
@@ -15456,23 +13069,22 @@ export namespace MarkdownRemarkResolvers {
 		> /** The children of this node. */;
 		internal?: InternalResolver<Internal_18 | null, any, Context>;
 		frontmatter?: FrontmatterResolver<Frontmatter_3 | null, any, Context>;
-		rawMarkdownBody?: RawMarkdownBodyResolver<string | null, any, Context>;
+		rawBody?: RawBodyResolver<string | null, any, Context>;
 		fileAbsolutePath?: FileAbsolutePathResolver<
 			string | null,
 			any,
 			Context
 		>;
-		html?: HtmlResolver<string | null, any, Context>;
-		htmlAst?: HtmlAstResolver<Json | null, any, Context>;
+		code?: CodeResolver<MdxCodeMdx | null, any, Context>;
 		excerpt?: ExcerptResolver<string | null, any, Context>;
 		headings?: HeadingsResolver<
-			(MarkdownHeading | null)[] | null,
+			(MdxHeadingMdx | null)[] | null,
 			any,
 			Context
 		>;
+		tableOfContents?: TableOfContentsResolver<Json | null, any, Context>;
 		timeToRead?: TimeToReadResolver<number | null, any, Context>;
-		tableOfContents?: TableOfContentsResolver<string | null, any, Context>;
-		wordCount?: WordCountResolver<WordCount | null, any, Context>;
+		wordCount?: WordCountResolver<WordCountsMdx | null, any, Context>;
 	}
 
 	export type IdResolver<R = string, Parent = any, Context = any> = Resolver<
@@ -15500,7 +13112,7 @@ export namespace MarkdownRemarkResolvers {
 		Parent = any,
 		Context = any
 	> = Resolver<R, Parent, Context>;
-	export type RawMarkdownBodyResolver<
+	export type RawBodyResolver<
 		R = string | null,
 		Parent = any,
 		Context = any
@@ -15510,13 +13122,8 @@ export namespace MarkdownRemarkResolvers {
 		Parent = any,
 		Context = any
 	> = Resolver<R, Parent, Context>;
-	export type HtmlResolver<
-		R = string | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type HtmlAstResolver<
-		R = Json | null,
+	export type CodeResolver<
+		R = MdxCodeMdx | null,
 		Parent = any,
 		Context = any
 	> = Resolver<R, Parent, Context>;
@@ -15527,16 +13134,24 @@ export namespace MarkdownRemarkResolvers {
 	> = Resolver<R, Parent, Context, ExcerptArgs>;
 	export interface ExcerptArgs {
 		pruneLength?: number | null;
-		truncate?: boolean | null;
 	}
 
 	export type HeadingsResolver<
-		R = (MarkdownHeading | null)[] | null,
+		R = (MdxHeadingMdx | null)[] | null,
 		Parent = any,
 		Context = any
 	> = Resolver<R, Parent, Context, HeadingsArgs>;
 	export interface HeadingsArgs {
-		depth?: HeadingLevels | null;
+		depth?: HeadingsMdx | null;
+	}
+
+	export type TableOfContentsResolver<
+		R = Json | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context, TableOfContentsArgs>;
+	export interface TableOfContentsArgs {
+		maxDepth?: number | null;
 	}
 
 	export type TimeToReadResolver<
@@ -15544,17 +13159,8 @@ export namespace MarkdownRemarkResolvers {
 		Parent = any,
 		Context = any
 	> = Resolver<R, Parent, Context>;
-	export type TableOfContentsResolver<
-		R = string | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context, TableOfContentsArgs>;
-	export interface TableOfContentsArgs {
-		pathToSlugField?: string | null;
-	}
-
 	export type WordCountResolver<
-		R = WordCount | null,
+		R = WordCountsMdx | null,
 		Parent = any,
 		Context = any
 	> = Resolver<R, Parent, Context>;
@@ -15598,9 +13204,9 @@ export namespace Frontmatter_3Resolvers {
 		tags?: TagsResolver<(string | null)[] | null, any, Context>;
 		authors?: AuthorsResolver<(Authors_3 | null)[] | null, any, Context>;
 		_PARENT?: ParentResolver<string | null, any, Context>;
+		description?: DescriptionResolver<string | null, any, Context>;
 		draft?: DraftResolver<boolean | null, any, Context>;
 		toc?: TocResolver<boolean | null, any, Context>;
-		description?: DescriptionResolver<string | null, any, Context>;
 		type?: TypeResolver<string | null, any, Context>;
 	}
 
@@ -15649,6 +13255,11 @@ export namespace Frontmatter_3Resolvers {
 		Parent = any,
 		Context = any
 	> = Resolver<R, Parent, Context>;
+	export type DescriptionResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
 	export type DraftResolver<
 		R = boolean | null,
 		Parent = any,
@@ -15656,11 +13267,6 @@ export namespace Frontmatter_3Resolvers {
 	> = Resolver<R, Parent, Context>;
 	export type TocResolver<
 		R = boolean | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type DescriptionResolver<
-		R = string | null,
 		Parent = any,
 		Context = any
 	> = Resolver<R, Parent, Context>;
@@ -15689,7 +13295,25 @@ export namespace Authors_3Resolvers {
 	> = Resolver<R, Parent, Context>;
 }
 
-export namespace MarkdownHeadingResolvers {
+export namespace MdxCodeMdxResolvers {
+	export interface Resolvers<Context = any> {
+		body?: BodyResolver<string | null, any, Context>;
+		scope?: ScopeResolver<string | null, any, Context>;
+	}
+
+	export type BodyResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type ScopeResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+}
+
+export namespace MdxHeadingMdxResolvers {
 	export interface Resolvers<Context = any> {
 		value?: ValueResolver<string | null, any, Context>;
 		depth?: DepthResolver<number | null, any, Context>;
@@ -15707,7 +13331,7 @@ export namespace MarkdownHeadingResolvers {
 	> = Resolver<R, Parent, Context>;
 }
 
-export namespace WordCountResolvers {
+export namespace WordCountsMdxResolvers {
 	export interface Resolvers<Context = any> {
 		paragraphs?: ParagraphsResolver<number | null, any, Context>;
 		sentences?: SentencesResolver<number | null, any, Context>;
@@ -15810,8 +13434,8 @@ export namespace Internal_19Resolvers {
 		Context = any
 	> = Resolver<R, Parent, Context>;
 }
-/** Node of type PersonalJson */
-export namespace PersonalJsonResolvers {
+/** Node of type SkillsJson */
+export namespace SkillsJsonResolvers {
 	export interface Resolvers<Context = any> {
 		id?: IdResolver<string, any, Context> /** The id of this node. */;
 		parent?: ParentResolver<
@@ -15824,10 +13448,17 @@ export namespace PersonalJsonResolvers {
 			any,
 			Context
 		> /** The children of this node. */;
-		name?: NameResolver<string | null, any, Context>;
-		email?: EmailResolver<string | null, any, Context>;
-		jobTitle?: JobTitleResolver<string | null, any, Context>;
-		social?: SocialResolver<(Social_2 | null)[] | null, any, Context>;
+		languages?: LanguagesResolver<
+			(Languages_2 | null)[] | null,
+			any,
+			Context
+		>;
+		technical?: TechnicalResolver<
+			(Technical_2 | null)[] | null,
+			any,
+			Context
+		>;
+		soft?: SoftResolver<(Soft_2 | null)[] | null, any, Context>;
 		internal?: InternalResolver<Internal_20 | null, any, Context>;
 	}
 
@@ -15846,23 +13477,18 @@ export namespace PersonalJsonResolvers {
 		Parent = any,
 		Context = any
 	> = Resolver<R, Parent, Context>;
-	export type NameResolver<
-		R = string | null,
+	export type LanguagesResolver<
+		R = (Languages_2 | null)[] | null,
 		Parent = any,
 		Context = any
 	> = Resolver<R, Parent, Context>;
-	export type EmailResolver<
-		R = string | null,
+	export type TechnicalResolver<
+		R = (Technical_2 | null)[] | null,
 		Parent = any,
 		Context = any
 	> = Resolver<R, Parent, Context>;
-	export type JobTitleResolver<
-		R = string | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type SocialResolver<
-		R = (Social_2 | null)[] | null,
+	export type SoftResolver<
+		R = (Soft_2 | null)[] | null,
 		Parent = any,
 		Context = any
 	> = Resolver<R, Parent, Context>;
@@ -15873,25 +13499,55 @@ export namespace PersonalJsonResolvers {
 	> = Resolver<R, Parent, Context>;
 }
 
-export namespace Social_2Resolvers {
+export namespace Languages_2Resolvers {
 	export interface Resolvers<Context = any> {
-		serviceName?: ServiceNameResolver<string | null, any, Context>;
-		icon?: IconResolver<string | null, any, Context>;
-		url?: UrlResolver<string | null, any, Context>;
+		name?: NameResolver<string | null, any, Context>;
+		intensity?: IntensityResolver<number | null, any, Context>;
 	}
 
-	export type ServiceNameResolver<
+	export type NameResolver<
 		R = string | null,
 		Parent = any,
 		Context = any
 	> = Resolver<R, Parent, Context>;
-	export type IconResolver<
+	export type IntensityResolver<
+		R = number | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+}
+
+export namespace Technical_2Resolvers {
+	export interface Resolvers<Context = any> {
+		name?: NameResolver<string | null, any, Context>;
+		intensity?: IntensityResolver<number | null, any, Context>;
+	}
+
+	export type NameResolver<
 		R = string | null,
 		Parent = any,
 		Context = any
 	> = Resolver<R, Parent, Context>;
-	export type UrlResolver<
+	export type IntensityResolver<
+		R = number | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+}
+
+export namespace Soft_2Resolvers {
+	export interface Resolvers<Context = any> {
+		name?: NameResolver<string | null, any, Context>;
+		intensity?: IntensityResolver<number | null, any, Context>;
+	}
+
+	export type NameResolver<
 		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type IntensityResolver<
+		R = number | null,
 		Parent = any,
 		Context = any
 	> = Resolver<R, Parent, Context>;
@@ -15994,6 +13650,324 @@ export namespace Internal_21Resolvers {
 		Context = any
 	> = Resolver<R, Parent, Context>;
 }
+/** Node of type InterestsJson */
+export namespace InterestsJsonResolvers {
+	export interface Resolvers<Context = any> {
+		id?: IdResolver<string, any, Context> /** The id of this node. */;
+		parent?: ParentResolver<
+			Node | null,
+			any,
+			Context
+		> /** The parent of this node. */;
+		children?: ChildrenResolver<
+			(Node | null)[] | null,
+			any,
+			Context
+		> /** The children of this node. */;
+		subjects?: SubjectsResolver<(Subjects_2 | null)[] | null, any, Context>;
+		internal?: InternalResolver<Internal_22 | null, any, Context>;
+	}
+
+	export type IdResolver<R = string, Parent = any, Context = any> = Resolver<
+		R,
+		Parent,
+		Context
+	>;
+	export type ParentResolver<
+		R = Node | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type ChildrenResolver<
+		R = (Node | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type SubjectsResolver<
+		R = (Subjects_2 | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type InternalResolver<
+		R = Internal_22 | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+}
+
+export namespace Subjects_2Resolvers {
+	export interface Resolvers<Context = any> {
+		name?: NameResolver<string | null, any, Context>;
+		intensity?: IntensityResolver<number | null, any, Context>;
+	}
+
+	export type NameResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type IntensityResolver<
+		R = number | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+}
+
+export namespace Internal_22Resolvers {
+	export interface Resolvers<Context = any> {
+		contentDigest?: ContentDigestResolver<string | null, any, Context>;
+		type?: TypeResolver<string | null, any, Context>;
+		owner?: OwnerResolver<string | null, any, Context>;
+	}
+
+	export type ContentDigestResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type TypeResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type OwnerResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+}
+/** Node of type OrganizationJson */
+export namespace OrganizationJsonResolvers {
+	export interface Resolvers<Context = any> {
+		id?: IdResolver<string, any, Context> /** The id of this node. */;
+		parent?: ParentResolver<
+			Node | null,
+			any,
+			Context
+		> /** The parent of this node. */;
+		children?: ChildrenResolver<
+			(Node | null)[] | null,
+			any,
+			Context
+		> /** The children of this node. */;
+		name?: NameResolver<string | null, any, Context>;
+		url?: UrlResolver<string | null, any, Context>;
+		logo?: LogoResolver<string | null, any, Context>;
+		telephone?: TelephoneResolver<string | null, any, Context>;
+		internal?: InternalResolver<Internal_23 | null, any, Context>;
+		fields?: FieldsResolver<Fields_3 | null, any, Context>;
+	}
+
+	export type IdResolver<R = string, Parent = any, Context = any> = Resolver<
+		R,
+		Parent,
+		Context
+	>;
+	export type ParentResolver<
+		R = Node | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type ChildrenResolver<
+		R = (Node | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type NameResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type UrlResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type LogoResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type TelephoneResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type InternalResolver<
+		R = Internal_23 | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type FieldsResolver<
+		R = Fields_3 | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+}
+
+export namespace Internal_23Resolvers {
+	export interface Resolvers<Context = any> {
+		contentDigest?: ContentDigestResolver<string | null, any, Context>;
+		type?: TypeResolver<string | null, any, Context>;
+		owner?: OwnerResolver<string | null, any, Context>;
+		fieldOwners?: FieldOwnersResolver<FieldOwners_3 | null, any, Context>;
+	}
+
+	export type ContentDigestResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type TypeResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type OwnerResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type FieldOwnersResolver<
+		R = FieldOwners_3 | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+}
+
+export namespace FieldOwners_3Resolvers {
+	export interface Resolvers<Context = any> {
+		logo_image?: LogoImageResolver<string | null, any, Context>;
+	}
+
+	export type LogoImageResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+}
+
+export namespace Fields_3Resolvers {
+	export interface Resolvers<Context = any> {
+		logo_image?: LogoImageResolver<string | null, any, Context>;
+	}
+
+	export type LogoImageResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+}
+/** Node of type PersonalJson */
+export namespace PersonalJsonResolvers {
+	export interface Resolvers<Context = any> {
+		id?: IdResolver<string, any, Context> /** The id of this node. */;
+		parent?: ParentResolver<
+			Node | null,
+			any,
+			Context
+		> /** The parent of this node. */;
+		children?: ChildrenResolver<
+			(Node | null)[] | null,
+			any,
+			Context
+		> /** The children of this node. */;
+		name?: NameResolver<string | null, any, Context>;
+		email?: EmailResolver<string | null, any, Context>;
+		jobTitle?: JobTitleResolver<string | null, any, Context>;
+		social?: SocialResolver<(Social_2 | null)[] | null, any, Context>;
+		internal?: InternalResolver<Internal_24 | null, any, Context>;
+	}
+
+	export type IdResolver<R = string, Parent = any, Context = any> = Resolver<
+		R,
+		Parent,
+		Context
+	>;
+	export type ParentResolver<
+		R = Node | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type ChildrenResolver<
+		R = (Node | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type NameResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type EmailResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type JobTitleResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type SocialResolver<
+		R = (Social_2 | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type InternalResolver<
+		R = Internal_24 | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+}
+
+export namespace Social_2Resolvers {
+	export interface Resolvers<Context = any> {
+		serviceName?: ServiceNameResolver<string | null, any, Context>;
+		icon?: IconResolver<string | null, any, Context>;
+		url?: UrlResolver<string | null, any, Context>;
+	}
+
+	export type ServiceNameResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type IconResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type UrlResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+}
+
+export namespace Internal_24Resolvers {
+	export interface Resolvers<Context = any> {
+		contentDigest?: ContentDigestResolver<string | null, any, Context>;
+		type?: TypeResolver<string | null, any, Context>;
+		owner?: OwnerResolver<string | null, any, Context>;
+	}
+
+	export type ContentDigestResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type TypeResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type OwnerResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+}
 /** Node of type ExperiencesJson */
 export namespace ExperiencesJsonResolvers {
 	export interface Resolvers<Context = any> {
@@ -16009,8 +13983,8 @@ export namespace ExperiencesJsonResolvers {
 			Context
 		> /** The children of this node. */;
 		work?: WorkResolver<(Work_2 | null)[] | null, any, Context>;
-		internal?: InternalResolver<Internal_22 | null, any, Context>;
-		fields?: FieldsResolver<Fields_3 | null, any, Context>;
+		internal?: InternalResolver<Internal_25 | null, any, Context>;
+		fields?: FieldsResolver<Fields_4 | null, any, Context>;
 	}
 
 	export type IdResolver<R = string, Parent = any, Context = any> = Resolver<
@@ -16034,12 +14008,12 @@ export namespace ExperiencesJsonResolvers {
 		Context = any
 	> = Resolver<R, Parent, Context>;
 	export type InternalResolver<
-		R = Internal_22 | null,
+		R = Internal_25 | null,
 		Parent = any,
 		Context = any
 	> = Resolver<R, Parent, Context>;
 	export type FieldsResolver<
-		R = Fields_3 | null,
+		R = Fields_4 | null,
 		Parent = any,
 		Context = any
 	> = Resolver<R, Parent, Context>;
@@ -16117,360 +14091,6 @@ export namespace Projects_2Resolvers {
 	> = Resolver<R, Parent, Context>;
 }
 
-export namespace Internal_22Resolvers {
-	export interface Resolvers<Context = any> {
-		contentDigest?: ContentDigestResolver<string | null, any, Context>;
-		type?: TypeResolver<string | null, any, Context>;
-		owner?: OwnerResolver<string | null, any, Context>;
-		fieldOwners?: FieldOwnersResolver<FieldOwners_3 | null, any, Context>;
-	}
-
-	export type ContentDigestResolver<
-		R = string | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type TypeResolver<
-		R = string | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type OwnerResolver<
-		R = string | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type FieldOwnersResolver<
-		R = FieldOwners_3 | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-}
-
-export namespace FieldOwners_3Resolvers {
-	export interface Resolvers<Context = any> {
-		image_image?: ImageImageResolver<string | null, any, Context>;
-	}
-
-	export type ImageImageResolver<
-		R = string | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-}
-
-export namespace Fields_3Resolvers {
-	export interface Resolvers<Context = any> {
-		image_image?: ImageImageResolver<
-			(string | null)[] | null,
-			any,
-			Context
-		>;
-	}
-
-	export type ImageImageResolver<
-		R = (string | null)[] | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-}
-/** Node of type SkillsJson */
-export namespace SkillsJsonResolvers {
-	export interface Resolvers<Context = any> {
-		id?: IdResolver<string, any, Context> /** The id of this node. */;
-		parent?: ParentResolver<
-			Node | null,
-			any,
-			Context
-		> /** The parent of this node. */;
-		children?: ChildrenResolver<
-			(Node | null)[] | null,
-			any,
-			Context
-		> /** The children of this node. */;
-		languages?: LanguagesResolver<
-			(Languages_2 | null)[] | null,
-			any,
-			Context
-		>;
-		technical?: TechnicalResolver<
-			(Technical_2 | null)[] | null,
-			any,
-			Context
-		>;
-		soft?: SoftResolver<(Soft_2 | null)[] | null, any, Context>;
-		internal?: InternalResolver<Internal_23 | null, any, Context>;
-	}
-
-	export type IdResolver<R = string, Parent = any, Context = any> = Resolver<
-		R,
-		Parent,
-		Context
-	>;
-	export type ParentResolver<
-		R = Node | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type ChildrenResolver<
-		R = (Node | null)[] | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type LanguagesResolver<
-		R = (Languages_2 | null)[] | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type TechnicalResolver<
-		R = (Technical_2 | null)[] | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type SoftResolver<
-		R = (Soft_2 | null)[] | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type InternalResolver<
-		R = Internal_23 | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-}
-
-export namespace Languages_2Resolvers {
-	export interface Resolvers<Context = any> {
-		name?: NameResolver<string | null, any, Context>;
-		intensity?: IntensityResolver<number | null, any, Context>;
-	}
-
-	export type NameResolver<
-		R = string | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type IntensityResolver<
-		R = number | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-}
-
-export namespace Technical_2Resolvers {
-	export interface Resolvers<Context = any> {
-		name?: NameResolver<string | null, any, Context>;
-		intensity?: IntensityResolver<number | null, any, Context>;
-	}
-
-	export type NameResolver<
-		R = string | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type IntensityResolver<
-		R = number | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-}
-
-export namespace Soft_2Resolvers {
-	export interface Resolvers<Context = any> {
-		name?: NameResolver<string | null, any, Context>;
-		intensity?: IntensityResolver<number | null, any, Context>;
-	}
-
-	export type NameResolver<
-		R = string | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type IntensityResolver<
-		R = number | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-}
-
-export namespace Internal_23Resolvers {
-	export interface Resolvers<Context = any> {
-		contentDigest?: ContentDigestResolver<string | null, any, Context>;
-		type?: TypeResolver<string | null, any, Context>;
-		owner?: OwnerResolver<string | null, any, Context>;
-	}
-
-	export type ContentDigestResolver<
-		R = string | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type TypeResolver<
-		R = string | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type OwnerResolver<
-		R = string | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-}
-/** Node of type InterestsJson */
-export namespace InterestsJsonResolvers {
-	export interface Resolvers<Context = any> {
-		id?: IdResolver<string, any, Context> /** The id of this node. */;
-		parent?: ParentResolver<
-			Node | null,
-			any,
-			Context
-		> /** The parent of this node. */;
-		children?: ChildrenResolver<
-			(Node | null)[] | null,
-			any,
-			Context
-		> /** The children of this node. */;
-		subjects?: SubjectsResolver<(Subjects_2 | null)[] | null, any, Context>;
-		internal?: InternalResolver<Internal_24 | null, any, Context>;
-	}
-
-	export type IdResolver<R = string, Parent = any, Context = any> = Resolver<
-		R,
-		Parent,
-		Context
-	>;
-	export type ParentResolver<
-		R = Node | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type ChildrenResolver<
-		R = (Node | null)[] | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type SubjectsResolver<
-		R = (Subjects_2 | null)[] | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type InternalResolver<
-		R = Internal_24 | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-}
-
-export namespace Subjects_2Resolvers {
-	export interface Resolvers<Context = any> {
-		name?: NameResolver<string | null, any, Context>;
-		intensity?: IntensityResolver<number | null, any, Context>;
-	}
-
-	export type NameResolver<
-		R = string | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type IntensityResolver<
-		R = number | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-}
-
-export namespace Internal_24Resolvers {
-	export interface Resolvers<Context = any> {
-		contentDigest?: ContentDigestResolver<string | null, any, Context>;
-		type?: TypeResolver<string | null, any, Context>;
-		owner?: OwnerResolver<string | null, any, Context>;
-	}
-
-	export type ContentDigestResolver<
-		R = string | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type TypeResolver<
-		R = string | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type OwnerResolver<
-		R = string | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-}
-/** Node of type OrganizationJson */
-export namespace OrganizationJsonResolvers {
-	export interface Resolvers<Context = any> {
-		id?: IdResolver<string, any, Context> /** The id of this node. */;
-		parent?: ParentResolver<
-			Node | null,
-			any,
-			Context
-		> /** The parent of this node. */;
-		children?: ChildrenResolver<
-			(Node | null)[] | null,
-			any,
-			Context
-		> /** The children of this node. */;
-		name?: NameResolver<string | null, any, Context>;
-		url?: UrlResolver<string | null, any, Context>;
-		logo?: LogoResolver<string | null, any, Context>;
-		telephone?: TelephoneResolver<string | null, any, Context>;
-		internal?: InternalResolver<Internal_25 | null, any, Context>;
-		fields?: FieldsResolver<Fields_4 | null, any, Context>;
-	}
-
-	export type IdResolver<R = string, Parent = any, Context = any> = Resolver<
-		R,
-		Parent,
-		Context
-	>;
-	export type ParentResolver<
-		R = Node | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type ChildrenResolver<
-		R = (Node | null)[] | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type NameResolver<
-		R = string | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type UrlResolver<
-		R = string | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type LogoResolver<
-		R = string | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type TelephoneResolver<
-		R = string | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type InternalResolver<
-		R = Internal_25 | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type FieldsResolver<
-		R = Fields_4 | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-}
-
 export namespace Internal_25Resolvers {
 	export interface Resolvers<Context = any> {
 		contentDigest?: ContentDigestResolver<string | null, any, Context>;
@@ -16503,10 +14123,10 @@ export namespace Internal_25Resolvers {
 
 export namespace FieldOwners_4Resolvers {
 	export interface Resolvers<Context = any> {
-		logo_image?: LogoImageResolver<string | null, any, Context>;
+		image_image?: ImageImageResolver<string | null, any, Context>;
 	}
 
-	export type LogoImageResolver<
+	export type ImageImageResolver<
 		R = string | null,
 		Parent = any,
 		Context = any
@@ -16515,11 +14135,15 @@ export namespace FieldOwners_4Resolvers {
 
 export namespace Fields_4Resolvers {
 	export interface Resolvers<Context = any> {
-		logo_image?: LogoImageResolver<string | null, any, Context>;
+		image_image?: ImageImageResolver<
+			(string | null)[] | null,
+			any,
+			Context
+		>;
 	}
 
-	export type LogoImageResolver<
-		R = string | null,
+	export type ImageImageResolver<
+		R = (string | null)[] | null,
 		Parent = any,
 		Context = any
 	> = Resolver<R, Parent, Context>;
@@ -16636,179 +14260,6 @@ export namespace FileGroupConnectionEdgeResolvers {
 	> = Resolver<R, Parent, Context>;
 	export type PreviousResolver<
 		R = File | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-}
-/** A connection to a list of items. */
-export namespace MarkdownRemarkConnectionResolvers {
-	export interface Resolvers<Context = any> {
-		pageInfo?: PageInfoResolver<
-			PageInfo,
-			any,
-			Context
-		> /** Information to aid in pagination. */;
-		edges?: EdgesResolver<
-			(MarkdownRemarkEdge | null)[] | null,
-			any,
-			Context
-		> /** A list of edges. */;
-		totalCount?: TotalCountResolver<number | null, any, Context>;
-		distinct?: DistinctResolver<(string | null)[] | null, any, Context>;
-		group?: GroupResolver<
-			(MarkdownRemarkGroupConnectionConnection | null)[] | null,
-			any,
-			Context
-		>;
-	}
-
-	export type PageInfoResolver<
-		R = PageInfo,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type EdgesResolver<
-		R = (MarkdownRemarkEdge | null)[] | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type TotalCountResolver<
-		R = number | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type DistinctResolver<
-		R = (string | null)[] | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context, DistinctArgs>;
-	export interface DistinctArgs {
-		field?: MarkdownRemarkDistinctEnum | null;
-	}
-
-	export type GroupResolver<
-		R = (MarkdownRemarkGroupConnectionConnection | null)[] | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context, GroupArgs>;
-	export interface GroupArgs {
-		skip?: number | null;
-		limit?: number | null;
-		field?: MarkdownRemarkGroupEnum | null;
-	}
-}
-/** An edge in a connection. */
-export namespace MarkdownRemarkEdgeResolvers {
-	export interface Resolvers<Context = any> {
-		node?: NodeResolver<
-			MarkdownRemark | null,
-			any,
-			Context
-		> /** The item at the end of the edge */;
-		next?: NextResolver<
-			MarkdownRemark | null,
-			any,
-			Context
-		> /** The next edge in the connection */;
-		previous?: PreviousResolver<
-			MarkdownRemark | null,
-			any,
-			Context
-		> /** The previous edge in the connection */;
-	}
-
-	export type NodeResolver<
-		R = MarkdownRemark | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type NextResolver<
-		R = MarkdownRemark | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type PreviousResolver<
-		R = MarkdownRemark | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-}
-/** A connection to a list of items. */
-export namespace MarkdownRemarkGroupConnectionConnectionResolvers {
-	export interface Resolvers<Context = any> {
-		pageInfo?: PageInfoResolver<
-			PageInfo,
-			any,
-			Context
-		> /** Information to aid in pagination. */;
-		edges?: EdgesResolver<
-			(MarkdownRemarkGroupConnectionEdge | null)[] | null,
-			any,
-			Context
-		> /** A list of edges. */;
-		field?: FieldResolver<string | null, any, Context>;
-		fieldValue?: FieldValueResolver<string | null, any, Context>;
-		totalCount?: TotalCountResolver<number | null, any, Context>;
-	}
-
-	export type PageInfoResolver<
-		R = PageInfo,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type EdgesResolver<
-		R = (MarkdownRemarkGroupConnectionEdge | null)[] | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type FieldResolver<
-		R = string | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type FieldValueResolver<
-		R = string | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type TotalCountResolver<
-		R = number | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-}
-/** An edge in a connection. */
-export namespace MarkdownRemarkGroupConnectionEdgeResolvers {
-	export interface Resolvers<Context = any> {
-		node?: NodeResolver<
-			MarkdownRemark | null,
-			any,
-			Context
-		> /** The item at the end of the edge */;
-		next?: NextResolver<
-			MarkdownRemark | null,
-			any,
-			Context
-		> /** The next edge in the connection */;
-		previous?: PreviousResolver<
-			MarkdownRemark | null,
-			any,
-			Context
-		> /** The previous edge in the connection */;
-	}
-
-	export type NodeResolver<
-		R = MarkdownRemark | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type NextResolver<
-		R = MarkdownRemark | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type PreviousResolver<
-		R = MarkdownRemark | null,
 		Parent = any,
 		Context = any
 	> = Resolver<R, Parent, Context>;
@@ -16987,7 +14438,7 @@ export namespace TodoJsonGroupConnectionEdgeResolvers {
 	> = Resolver<R, Parent, Context>;
 }
 /** A connection to a list of items. */
-export namespace PersonalJsonConnectionResolvers {
+export namespace MdxConnectionResolvers {
 	export interface Resolvers<Context = any> {
 		pageInfo?: PageInfoResolver<
 			PageInfo,
@@ -16995,14 +14446,14 @@ export namespace PersonalJsonConnectionResolvers {
 			Context
 		> /** Information to aid in pagination. */;
 		edges?: EdgesResolver<
-			(PersonalJsonEdge | null)[] | null,
+			(MdxEdge | null)[] | null,
 			any,
 			Context
 		> /** A list of edges. */;
 		totalCount?: TotalCountResolver<number | null, any, Context>;
 		distinct?: DistinctResolver<(string | null)[] | null, any, Context>;
 		group?: GroupResolver<
-			(PersonalJsonGroupConnectionConnection | null)[] | null,
+			(MdxGroupConnectionConnection | null)[] | null,
 			any,
 			Context
 		>;
@@ -17014,7 +14465,7 @@ export namespace PersonalJsonConnectionResolvers {
 		Context = any
 	> = Resolver<R, Parent, Context>;
 	export type EdgesResolver<
-		R = (PersonalJsonEdge | null)[] | null,
+		R = (MdxEdge | null)[] | null,
 		Parent = any,
 		Context = any
 	> = Resolver<R, Parent, Context>;
@@ -17029,58 +14480,58 @@ export namespace PersonalJsonConnectionResolvers {
 		Context = any
 	> = Resolver<R, Parent, Context, DistinctArgs>;
 	export interface DistinctArgs {
-		field?: PersonalJsonDistinctEnum | null;
+		field?: MdxDistinctEnum | null;
 	}
 
 	export type GroupResolver<
-		R = (PersonalJsonGroupConnectionConnection | null)[] | null,
+		R = (MdxGroupConnectionConnection | null)[] | null,
 		Parent = any,
 		Context = any
 	> = Resolver<R, Parent, Context, GroupArgs>;
 	export interface GroupArgs {
 		skip?: number | null;
 		limit?: number | null;
-		field?: PersonalJsonGroupEnum | null;
+		field?: MdxGroupEnum | null;
 	}
 }
 /** An edge in a connection. */
-export namespace PersonalJsonEdgeResolvers {
+export namespace MdxEdgeResolvers {
 	export interface Resolvers<Context = any> {
 		node?: NodeResolver<
-			PersonalJson | null,
+			Mdx | null,
 			any,
 			Context
 		> /** The item at the end of the edge */;
 		next?: NextResolver<
-			PersonalJson | null,
+			Mdx | null,
 			any,
 			Context
 		> /** The next edge in the connection */;
 		previous?: PreviousResolver<
-			PersonalJson | null,
+			Mdx | null,
 			any,
 			Context
 		> /** The previous edge in the connection */;
 	}
 
 	export type NodeResolver<
-		R = PersonalJson | null,
+		R = Mdx | null,
 		Parent = any,
 		Context = any
 	> = Resolver<R, Parent, Context>;
 	export type NextResolver<
-		R = PersonalJson | null,
+		R = Mdx | null,
 		Parent = any,
 		Context = any
 	> = Resolver<R, Parent, Context>;
 	export type PreviousResolver<
-		R = PersonalJson | null,
+		R = Mdx | null,
 		Parent = any,
 		Context = any
 	> = Resolver<R, Parent, Context>;
 }
 /** A connection to a list of items. */
-export namespace PersonalJsonGroupConnectionConnectionResolvers {
+export namespace MdxGroupConnectionConnectionResolvers {
 	export interface Resolvers<Context = any> {
 		pageInfo?: PageInfoResolver<
 			PageInfo,
@@ -17088,7 +14539,7 @@ export namespace PersonalJsonGroupConnectionConnectionResolvers {
 			Context
 		> /** Information to aid in pagination. */;
 		edges?: EdgesResolver<
-			(PersonalJsonGroupConnectionEdge | null)[] | null,
+			(MdxGroupConnectionEdge | null)[] | null,
 			any,
 			Context
 		> /** A list of edges. */;
@@ -17103,7 +14554,7 @@ export namespace PersonalJsonGroupConnectionConnectionResolvers {
 		Context = any
 	> = Resolver<R, Parent, Context>;
 	export type EdgesResolver<
-		R = (PersonalJsonGroupConnectionEdge | null)[] | null,
+		R = (MdxGroupConnectionEdge | null)[] | null,
 		Parent = any,
 		Context = any
 	> = Resolver<R, Parent, Context>;
@@ -17124,383 +14575,37 @@ export namespace PersonalJsonGroupConnectionConnectionResolvers {
 	> = Resolver<R, Parent, Context>;
 }
 /** An edge in a connection. */
-export namespace PersonalJsonGroupConnectionEdgeResolvers {
+export namespace MdxGroupConnectionEdgeResolvers {
 	export interface Resolvers<Context = any> {
 		node?: NodeResolver<
-			PersonalJson | null,
+			Mdx | null,
 			any,
 			Context
 		> /** The item at the end of the edge */;
 		next?: NextResolver<
-			PersonalJson | null,
+			Mdx | null,
 			any,
 			Context
 		> /** The next edge in the connection */;
 		previous?: PreviousResolver<
-			PersonalJson | null,
+			Mdx | null,
 			any,
 			Context
 		> /** The previous edge in the connection */;
 	}
 
 	export type NodeResolver<
-		R = PersonalJson | null,
+		R = Mdx | null,
 		Parent = any,
 		Context = any
 	> = Resolver<R, Parent, Context>;
 	export type NextResolver<
-		R = PersonalJson | null,
+		R = Mdx | null,
 		Parent = any,
 		Context = any
 	> = Resolver<R, Parent, Context>;
 	export type PreviousResolver<
-		R = PersonalJson | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-}
-/** A connection to a list of items. */
-export namespace CompetencesJsonConnectionResolvers {
-	export interface Resolvers<Context = any> {
-		pageInfo?: PageInfoResolver<
-			PageInfo,
-			any,
-			Context
-		> /** Information to aid in pagination. */;
-		edges?: EdgesResolver<
-			(CompetencesJsonEdge | null)[] | null,
-			any,
-			Context
-		> /** A list of edges. */;
-		totalCount?: TotalCountResolver<number | null, any, Context>;
-		distinct?: DistinctResolver<(string | null)[] | null, any, Context>;
-		group?: GroupResolver<
-			(CompetencesJsonGroupConnectionConnection | null)[] | null,
-			any,
-			Context
-		>;
-	}
-
-	export type PageInfoResolver<
-		R = PageInfo,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type EdgesResolver<
-		R = (CompetencesJsonEdge | null)[] | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type TotalCountResolver<
-		R = number | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type DistinctResolver<
-		R = (string | null)[] | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context, DistinctArgs>;
-	export interface DistinctArgs {
-		field?: CompetencesJsonDistinctEnum | null;
-	}
-
-	export type GroupResolver<
-		R = (CompetencesJsonGroupConnectionConnection | null)[] | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context, GroupArgs>;
-	export interface GroupArgs {
-		skip?: number | null;
-		limit?: number | null;
-		field?: CompetencesJsonGroupEnum | null;
-	}
-}
-/** An edge in a connection. */
-export namespace CompetencesJsonEdgeResolvers {
-	export interface Resolvers<Context = any> {
-		node?: NodeResolver<
-			CompetencesJson | null,
-			any,
-			Context
-		> /** The item at the end of the edge */;
-		next?: NextResolver<
-			CompetencesJson | null,
-			any,
-			Context
-		> /** The next edge in the connection */;
-		previous?: PreviousResolver<
-			CompetencesJson | null,
-			any,
-			Context
-		> /** The previous edge in the connection */;
-	}
-
-	export type NodeResolver<
-		R = CompetencesJson | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type NextResolver<
-		R = CompetencesJson | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type PreviousResolver<
-		R = CompetencesJson | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-}
-/** A connection to a list of items. */
-export namespace CompetencesJsonGroupConnectionConnectionResolvers {
-	export interface Resolvers<Context = any> {
-		pageInfo?: PageInfoResolver<
-			PageInfo,
-			any,
-			Context
-		> /** Information to aid in pagination. */;
-		edges?: EdgesResolver<
-			(CompetencesJsonGroupConnectionEdge | null)[] | null,
-			any,
-			Context
-		> /** A list of edges. */;
-		field?: FieldResolver<string | null, any, Context>;
-		fieldValue?: FieldValueResolver<string | null, any, Context>;
-		totalCount?: TotalCountResolver<number | null, any, Context>;
-	}
-
-	export type PageInfoResolver<
-		R = PageInfo,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type EdgesResolver<
-		R = (CompetencesJsonGroupConnectionEdge | null)[] | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type FieldResolver<
-		R = string | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type FieldValueResolver<
-		R = string | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type TotalCountResolver<
-		R = number | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-}
-/** An edge in a connection. */
-export namespace CompetencesJsonGroupConnectionEdgeResolvers {
-	export interface Resolvers<Context = any> {
-		node?: NodeResolver<
-			CompetencesJson | null,
-			any,
-			Context
-		> /** The item at the end of the edge */;
-		next?: NextResolver<
-			CompetencesJson | null,
-			any,
-			Context
-		> /** The next edge in the connection */;
-		previous?: PreviousResolver<
-			CompetencesJson | null,
-			any,
-			Context
-		> /** The previous edge in the connection */;
-	}
-
-	export type NodeResolver<
-		R = CompetencesJson | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type NextResolver<
-		R = CompetencesJson | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type PreviousResolver<
-		R = CompetencesJson | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-}
-/** A connection to a list of items. */
-export namespace ExperiencesJsonConnectionResolvers {
-	export interface Resolvers<Context = any> {
-		pageInfo?: PageInfoResolver<
-			PageInfo,
-			any,
-			Context
-		> /** Information to aid in pagination. */;
-		edges?: EdgesResolver<
-			(ExperiencesJsonEdge | null)[] | null,
-			any,
-			Context
-		> /** A list of edges. */;
-		totalCount?: TotalCountResolver<number | null, any, Context>;
-		distinct?: DistinctResolver<(string | null)[] | null, any, Context>;
-		group?: GroupResolver<
-			(ExperiencesJsonGroupConnectionConnection | null)[] | null,
-			any,
-			Context
-		>;
-	}
-
-	export type PageInfoResolver<
-		R = PageInfo,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type EdgesResolver<
-		R = (ExperiencesJsonEdge | null)[] | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type TotalCountResolver<
-		R = number | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type DistinctResolver<
-		R = (string | null)[] | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context, DistinctArgs>;
-	export interface DistinctArgs {
-		field?: ExperiencesJsonDistinctEnum | null;
-	}
-
-	export type GroupResolver<
-		R = (ExperiencesJsonGroupConnectionConnection | null)[] | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context, GroupArgs>;
-	export interface GroupArgs {
-		skip?: number | null;
-		limit?: number | null;
-		field?: ExperiencesJsonGroupEnum | null;
-	}
-}
-/** An edge in a connection. */
-export namespace ExperiencesJsonEdgeResolvers {
-	export interface Resolvers<Context = any> {
-		node?: NodeResolver<
-			ExperiencesJson | null,
-			any,
-			Context
-		> /** The item at the end of the edge */;
-		next?: NextResolver<
-			ExperiencesJson | null,
-			any,
-			Context
-		> /** The next edge in the connection */;
-		previous?: PreviousResolver<
-			ExperiencesJson | null,
-			any,
-			Context
-		> /** The previous edge in the connection */;
-	}
-
-	export type NodeResolver<
-		R = ExperiencesJson | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type NextResolver<
-		R = ExperiencesJson | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type PreviousResolver<
-		R = ExperiencesJson | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-}
-/** A connection to a list of items. */
-export namespace ExperiencesJsonGroupConnectionConnectionResolvers {
-	export interface Resolvers<Context = any> {
-		pageInfo?: PageInfoResolver<
-			PageInfo,
-			any,
-			Context
-		> /** Information to aid in pagination. */;
-		edges?: EdgesResolver<
-			(ExperiencesJsonGroupConnectionEdge | null)[] | null,
-			any,
-			Context
-		> /** A list of edges. */;
-		field?: FieldResolver<string | null, any, Context>;
-		fieldValue?: FieldValueResolver<string | null, any, Context>;
-		totalCount?: TotalCountResolver<number | null, any, Context>;
-	}
-
-	export type PageInfoResolver<
-		R = PageInfo,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type EdgesResolver<
-		R = (ExperiencesJsonGroupConnectionEdge | null)[] | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type FieldResolver<
-		R = string | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type FieldValueResolver<
-		R = string | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type TotalCountResolver<
-		R = number | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-}
-/** An edge in a connection. */
-export namespace ExperiencesJsonGroupConnectionEdgeResolvers {
-	export interface Resolvers<Context = any> {
-		node?: NodeResolver<
-			ExperiencesJson | null,
-			any,
-			Context
-		> /** The item at the end of the edge */;
-		next?: NextResolver<
-			ExperiencesJson | null,
-			any,
-			Context
-		> /** The next edge in the connection */;
-		previous?: PreviousResolver<
-			ExperiencesJson | null,
-			any,
-			Context
-		> /** The previous edge in the connection */;
-	}
-
-	export type NodeResolver<
-		R = ExperiencesJson | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type NextResolver<
-		R = ExperiencesJson | null,
-		Parent = any,
-		Context = any
-	> = Resolver<R, Parent, Context>;
-	export type PreviousResolver<
-		R = ExperiencesJson | null,
+		R = Mdx | null,
 		Parent = any,
 		Context = any
 	> = Resolver<R, Parent, Context>;
@@ -17674,6 +14779,179 @@ export namespace SkillsJsonGroupConnectionEdgeResolvers {
 	> = Resolver<R, Parent, Context>;
 	export type PreviousResolver<
 		R = SkillsJson | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+}
+/** A connection to a list of items. */
+export namespace CompetencesJsonConnectionResolvers {
+	export interface Resolvers<Context = any> {
+		pageInfo?: PageInfoResolver<
+			PageInfo,
+			any,
+			Context
+		> /** Information to aid in pagination. */;
+		edges?: EdgesResolver<
+			(CompetencesJsonEdge | null)[] | null,
+			any,
+			Context
+		> /** A list of edges. */;
+		totalCount?: TotalCountResolver<number | null, any, Context>;
+		distinct?: DistinctResolver<(string | null)[] | null, any, Context>;
+		group?: GroupResolver<
+			(CompetencesJsonGroupConnectionConnection | null)[] | null,
+			any,
+			Context
+		>;
+	}
+
+	export type PageInfoResolver<
+		R = PageInfo,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type EdgesResolver<
+		R = (CompetencesJsonEdge | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type TotalCountResolver<
+		R = number | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type DistinctResolver<
+		R = (string | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context, DistinctArgs>;
+	export interface DistinctArgs {
+		field?: CompetencesJsonDistinctEnum | null;
+	}
+
+	export type GroupResolver<
+		R = (CompetencesJsonGroupConnectionConnection | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context, GroupArgs>;
+	export interface GroupArgs {
+		skip?: number | null;
+		limit?: number | null;
+		field?: CompetencesJsonGroupEnum | null;
+	}
+}
+/** An edge in a connection. */
+export namespace CompetencesJsonEdgeResolvers {
+	export interface Resolvers<Context = any> {
+		node?: NodeResolver<
+			CompetencesJson | null,
+			any,
+			Context
+		> /** The item at the end of the edge */;
+		next?: NextResolver<
+			CompetencesJson | null,
+			any,
+			Context
+		> /** The next edge in the connection */;
+		previous?: PreviousResolver<
+			CompetencesJson | null,
+			any,
+			Context
+		> /** The previous edge in the connection */;
+	}
+
+	export type NodeResolver<
+		R = CompetencesJson | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type NextResolver<
+		R = CompetencesJson | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type PreviousResolver<
+		R = CompetencesJson | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+}
+/** A connection to a list of items. */
+export namespace CompetencesJsonGroupConnectionConnectionResolvers {
+	export interface Resolvers<Context = any> {
+		pageInfo?: PageInfoResolver<
+			PageInfo,
+			any,
+			Context
+		> /** Information to aid in pagination. */;
+		edges?: EdgesResolver<
+			(CompetencesJsonGroupConnectionEdge | null)[] | null,
+			any,
+			Context
+		> /** A list of edges. */;
+		field?: FieldResolver<string | null, any, Context>;
+		fieldValue?: FieldValueResolver<string | null, any, Context>;
+		totalCount?: TotalCountResolver<number | null, any, Context>;
+	}
+
+	export type PageInfoResolver<
+		R = PageInfo,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type EdgesResolver<
+		R = (CompetencesJsonGroupConnectionEdge | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type FieldResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type FieldValueResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type TotalCountResolver<
+		R = number | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+}
+/** An edge in a connection. */
+export namespace CompetencesJsonGroupConnectionEdgeResolvers {
+	export interface Resolvers<Context = any> {
+		node?: NodeResolver<
+			CompetencesJson | null,
+			any,
+			Context
+		> /** The item at the end of the edge */;
+		next?: NextResolver<
+			CompetencesJson | null,
+			any,
+			Context
+		> /** The next edge in the connection */;
+		previous?: PreviousResolver<
+			CompetencesJson | null,
+			any,
+			Context
+		> /** The previous edge in the connection */;
+	}
+
+	export type NodeResolver<
+		R = CompetencesJson | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type NextResolver<
+		R = CompetencesJson | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type PreviousResolver<
+		R = CompetencesJson | null,
 		Parent = any,
 		Context = any
 	> = Resolver<R, Parent, Context>;
@@ -18020,6 +15298,352 @@ export namespace OrganizationJsonGroupConnectionEdgeResolvers {
 	> = Resolver<R, Parent, Context>;
 	export type PreviousResolver<
 		R = OrganizationJson | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+}
+/** A connection to a list of items. */
+export namespace PersonalJsonConnectionResolvers {
+	export interface Resolvers<Context = any> {
+		pageInfo?: PageInfoResolver<
+			PageInfo,
+			any,
+			Context
+		> /** Information to aid in pagination. */;
+		edges?: EdgesResolver<
+			(PersonalJsonEdge | null)[] | null,
+			any,
+			Context
+		> /** A list of edges. */;
+		totalCount?: TotalCountResolver<number | null, any, Context>;
+		distinct?: DistinctResolver<(string | null)[] | null, any, Context>;
+		group?: GroupResolver<
+			(PersonalJsonGroupConnectionConnection | null)[] | null,
+			any,
+			Context
+		>;
+	}
+
+	export type PageInfoResolver<
+		R = PageInfo,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type EdgesResolver<
+		R = (PersonalJsonEdge | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type TotalCountResolver<
+		R = number | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type DistinctResolver<
+		R = (string | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context, DistinctArgs>;
+	export interface DistinctArgs {
+		field?: PersonalJsonDistinctEnum | null;
+	}
+
+	export type GroupResolver<
+		R = (PersonalJsonGroupConnectionConnection | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context, GroupArgs>;
+	export interface GroupArgs {
+		skip?: number | null;
+		limit?: number | null;
+		field?: PersonalJsonGroupEnum | null;
+	}
+}
+/** An edge in a connection. */
+export namespace PersonalJsonEdgeResolvers {
+	export interface Resolvers<Context = any> {
+		node?: NodeResolver<
+			PersonalJson | null,
+			any,
+			Context
+		> /** The item at the end of the edge */;
+		next?: NextResolver<
+			PersonalJson | null,
+			any,
+			Context
+		> /** The next edge in the connection */;
+		previous?: PreviousResolver<
+			PersonalJson | null,
+			any,
+			Context
+		> /** The previous edge in the connection */;
+	}
+
+	export type NodeResolver<
+		R = PersonalJson | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type NextResolver<
+		R = PersonalJson | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type PreviousResolver<
+		R = PersonalJson | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+}
+/** A connection to a list of items. */
+export namespace PersonalJsonGroupConnectionConnectionResolvers {
+	export interface Resolvers<Context = any> {
+		pageInfo?: PageInfoResolver<
+			PageInfo,
+			any,
+			Context
+		> /** Information to aid in pagination. */;
+		edges?: EdgesResolver<
+			(PersonalJsonGroupConnectionEdge | null)[] | null,
+			any,
+			Context
+		> /** A list of edges. */;
+		field?: FieldResolver<string | null, any, Context>;
+		fieldValue?: FieldValueResolver<string | null, any, Context>;
+		totalCount?: TotalCountResolver<number | null, any, Context>;
+	}
+
+	export type PageInfoResolver<
+		R = PageInfo,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type EdgesResolver<
+		R = (PersonalJsonGroupConnectionEdge | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type FieldResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type FieldValueResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type TotalCountResolver<
+		R = number | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+}
+/** An edge in a connection. */
+export namespace PersonalJsonGroupConnectionEdgeResolvers {
+	export interface Resolvers<Context = any> {
+		node?: NodeResolver<
+			PersonalJson | null,
+			any,
+			Context
+		> /** The item at the end of the edge */;
+		next?: NextResolver<
+			PersonalJson | null,
+			any,
+			Context
+		> /** The next edge in the connection */;
+		previous?: PreviousResolver<
+			PersonalJson | null,
+			any,
+			Context
+		> /** The previous edge in the connection */;
+	}
+
+	export type NodeResolver<
+		R = PersonalJson | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type NextResolver<
+		R = PersonalJson | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type PreviousResolver<
+		R = PersonalJson | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+}
+/** A connection to a list of items. */
+export namespace ExperiencesJsonConnectionResolvers {
+	export interface Resolvers<Context = any> {
+		pageInfo?: PageInfoResolver<
+			PageInfo,
+			any,
+			Context
+		> /** Information to aid in pagination. */;
+		edges?: EdgesResolver<
+			(ExperiencesJsonEdge | null)[] | null,
+			any,
+			Context
+		> /** A list of edges. */;
+		totalCount?: TotalCountResolver<number | null, any, Context>;
+		distinct?: DistinctResolver<(string | null)[] | null, any, Context>;
+		group?: GroupResolver<
+			(ExperiencesJsonGroupConnectionConnection | null)[] | null,
+			any,
+			Context
+		>;
+	}
+
+	export type PageInfoResolver<
+		R = PageInfo,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type EdgesResolver<
+		R = (ExperiencesJsonEdge | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type TotalCountResolver<
+		R = number | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type DistinctResolver<
+		R = (string | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context, DistinctArgs>;
+	export interface DistinctArgs {
+		field?: ExperiencesJsonDistinctEnum | null;
+	}
+
+	export type GroupResolver<
+		R = (ExperiencesJsonGroupConnectionConnection | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context, GroupArgs>;
+	export interface GroupArgs {
+		skip?: number | null;
+		limit?: number | null;
+		field?: ExperiencesJsonGroupEnum | null;
+	}
+}
+/** An edge in a connection. */
+export namespace ExperiencesJsonEdgeResolvers {
+	export interface Resolvers<Context = any> {
+		node?: NodeResolver<
+			ExperiencesJson | null,
+			any,
+			Context
+		> /** The item at the end of the edge */;
+		next?: NextResolver<
+			ExperiencesJson | null,
+			any,
+			Context
+		> /** The next edge in the connection */;
+		previous?: PreviousResolver<
+			ExperiencesJson | null,
+			any,
+			Context
+		> /** The previous edge in the connection */;
+	}
+
+	export type NodeResolver<
+		R = ExperiencesJson | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type NextResolver<
+		R = ExperiencesJson | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type PreviousResolver<
+		R = ExperiencesJson | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+}
+/** A connection to a list of items. */
+export namespace ExperiencesJsonGroupConnectionConnectionResolvers {
+	export interface Resolvers<Context = any> {
+		pageInfo?: PageInfoResolver<
+			PageInfo,
+			any,
+			Context
+		> /** Information to aid in pagination. */;
+		edges?: EdgesResolver<
+			(ExperiencesJsonGroupConnectionEdge | null)[] | null,
+			any,
+			Context
+		> /** A list of edges. */;
+		field?: FieldResolver<string | null, any, Context>;
+		fieldValue?: FieldValueResolver<string | null, any, Context>;
+		totalCount?: TotalCountResolver<number | null, any, Context>;
+	}
+
+	export type PageInfoResolver<
+		R = PageInfo,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type EdgesResolver<
+		R = (ExperiencesJsonGroupConnectionEdge | null)[] | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type FieldResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type FieldValueResolver<
+		R = string | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type TotalCountResolver<
+		R = number | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+}
+/** An edge in a connection. */
+export namespace ExperiencesJsonGroupConnectionEdgeResolvers {
+	export interface Resolvers<Context = any> {
+		node?: NodeResolver<
+			ExperiencesJson | null,
+			any,
+			Context
+		> /** The item at the end of the edge */;
+		next?: NextResolver<
+			ExperiencesJson | null,
+			any,
+			Context
+		> /** The next edge in the connection */;
+		previous?: PreviousResolver<
+			ExperiencesJson | null,
+			any,
+			Context
+		> /** The previous edge in the connection */;
+	}
+
+	export type NodeResolver<
+		R = ExperiencesJson | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type NextResolver<
+		R = ExperiencesJson | null,
+		Parent = any,
+		Context = any
+	> = Resolver<R, Parent, Context>;
+	export type PreviousResolver<
+		R = ExperiencesJson | null,
 		Parent = any,
 		Context = any
 	> = Resolver<R, Parent, Context>;

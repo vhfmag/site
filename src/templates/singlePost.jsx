@@ -1,30 +1,33 @@
 import * as React from "react";
 import { Entry } from "../components/Entry";
 import { Helmet } from "react-helmet";
+import MDXRenderer from "gatsby-mdx/mdx-renderer";
 import { generateLinkedDataTag } from "../components/LinkedData";
 import { graphql } from "gatsby";
 import DefaultLayout from "../components/layout";
-import { GeneralMetadataFragment, IMarkdownEntryFragment } from "../fragments";
 import { isFolder } from "../utils/types";
 
-interface IPostTemplateProps {
-	data: GeneralMetadataFragment & { markdownRemark: IMarkdownEntryFragment };
-}
+/**
+ * @typedef {Object} IPostTemplateProps
+ * @property {import("../fragments").GeneralMetadataFragment & { mdx: import("../fragments").IMarkdownEntryFragment }} data
+ */
 
-export default class SinglePostTemplate extends React.Component<
-	IPostTemplateProps
-> {
-	public render() {
+/**
+ * @extends {React.Component<IPostTemplateProps>}
+ */
+export default class SinglePostTemplate extends React.Component {
+	render() {
 		const {
 			data: {
 				site: {
 					siteMetadata: { siteUrl },
 				},
 				personalJson: { name },
-				markdownRemark: {
+				mdx: {
 					htmlAst,
 					headings,
 					excerpt,
+					code: { body },
 					frontmatter: { toc, date, title, description, tags },
 					timeToRead,
 					parent: { birthTime, name: fileName, relativeDirectory },
@@ -71,16 +74,18 @@ export default class SinglePostTemplate extends React.Component<
 					tags={tags}
 					wordCount={words}
 					timeToRead={timeToRead}
-				/>
+				>
+					<MDXRenderer>{body}</MDXRenderer>
+				</Entry>
 			</DefaultLayout>
 		);
 	}
 }
 
 export const pageQuery = graphql`
-	query SinglePostQuery($markdownPath: String!) {
+	query($markdownPath: String!) {
 		...GeneralMetadata
-		markdownRemark(fileAbsolutePath: { eq: $markdownPath }) {
+		mdx(fileAbsolutePath: { eq: $markdownPath }) {
 			...MarkdownEntry
 		}
 	}

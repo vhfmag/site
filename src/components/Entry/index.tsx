@@ -3,7 +3,6 @@ import * as React from "react";
 import styled from "styled-components";
 import Helmet from "react-helmet";
 import { themeColor } from "../../utils/consts";
-import { renderAst } from "../../utils/customComponents";
 import { IEntryHeaderProps, EntryHeader } from "../EntryHeader";
 import { TableOfContents, ITreeNode } from "../TableOfContents";
 
@@ -83,20 +82,23 @@ function headingsToTree(
 
 export class Entry extends React.Component<IEntryProps> {
 	public render() {
-		const { content, htmlAst, headings, ...headerProps } = this.props;
+		const {
+			content,
+			headings,
+			children,
+			...headerProps
+		} = this.props;
 
 		return (
 			<StyledEntry className="h-entry">
 				<Helmet title={headerProps.title} />
 				<EntryHeader {...headerProps} isFullPage={true} />
 				<section className="e-content">
-					{headings &&
-						headings.length > 0 && (
-							<TableOfContents
-								headings={headingsToTree(headings)}
-							/>
-						)}
-					{content ? <p>{content}</p> : renderAst(htmlAst)}
+					{headings && headings.length > 0 && (
+						<TableOfContents headings={headingsToTree(headings)} />
+					)}
+					{content && <p>{content}</p>}
+					{children}
 				</section>
 			</StyledEntry>
 		);

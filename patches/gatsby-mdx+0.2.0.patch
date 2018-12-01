@@ -1,0 +1,13 @@
+patch-package
+--- a/node_modules/gatsby-mdx/mdx-renderer.js
++++ b/node_modules/gatsby-mdx/mdx-renderer.js
+@@ -14,7 +14,8 @@ export default withMDXScope(
+     const values = keys.map(key => fullScope[key]);
+     const fn = new Function("_fn", ...keys, `${children}`);
+ 
+-    const end = fn({}, ...values)({ components, ...props });
++    const constructor = fn({}, ...values);
++    const end = new constructor({ components, ...props });
+     return end;
+   })
+ );

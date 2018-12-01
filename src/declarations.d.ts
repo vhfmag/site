@@ -19,3 +19,5 @@ type ObjectOmit<Obj, Props extends keyof Obj> = Pick<
 	Obj,
 	Exclude<keyof Obj, Props>
 >;
+
+declare module "@mdx-js/tag";

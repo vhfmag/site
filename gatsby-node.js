@@ -3,9 +3,10 @@ const path = require("path");
 const { zipObject, mapValues } = require("lodash");
 const { graphql } = require("./src/utils/taggedUtils");
 const { compareEntryEdges, slugify } = require("./src/utils/utils");
+const componentWithMDXScope = require("gatsby-mdx/component-with-mdx-scope");
 
-const postTemplate = path.resolve(`src/templates/singlePost.tsx`);
-const entryTemplate = path.resolve(`src/templates/singleEntry.tsx`);
+const postTemplate = path.resolve(`src/templates/singlePost.jsx`);
+const entryTemplate = path.resolve(`src/templates/singleEntry.jsx`);
 const entryListTemplate = path.resolve(`src/templates/entryList.tsx`);
 
 const tagListTemplate = path.resolve(`src/templates/tagList.tsx`);
@@ -19,7 +20,7 @@ const folderToPageTemplate = {
 function buildPageQuery(pageKind = ".*") {
 	return graphql`
 		{
-			allMarkdownRemark(
+			allMdx(
 				filter: {
 					${
 						process.env.NODE_ENV === "production"
@@ -31,11 +32,13 @@ function buildPageQuery(pageKind = ".*") {
 			) {
 				edges {
 					node {
-						htmlAst
 						excerpt
 						timeToRead
 						count: wordCount {
 							words
+						}
+						code {
+							scope
 						}
 						fileAbsolutePath
 						parent {
@@ -79,7 +82,7 @@ function createEntryPages({
 			}
 
 			/** @type {import("./src/graphql-types").MarkdownRemarkEdge[]} */
-			const rawEdges = result.data.allMarkdownRemark.edges;
+			const rawEdges = result.data.allMdx.edges;
 
 			const postEdges = rawEdges
 				.map(edge => {
@@ -158,11 +161,15 @@ function createEntryPages({
 						node: {
 							fileAbsolutePath: markdownPath,
 							parent: { name: slug, relativeDirectory: folder },
+							code: { scope },
 						},
 					}) => {
 						createPage({
 							path: `/${folder}/${slug}`,
-							component: folderToPageTemplate[folder],
+							component: componentWithMDXScope(
+								folderToPageTemplate[folder],
+								scope,
+							),
 							context: {
 								markdownPath,
 							},

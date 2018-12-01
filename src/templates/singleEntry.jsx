@@ -1,34 +1,40 @@
 import * as React from "react";
 import { Entry } from "../components/Entry";
 import { Helmet } from "react-helmet";
+import MDXRenderer from "gatsby-mdx/mdx-renderer";
 import { generateLinkedDataTag } from "../components/LinkedData";
 import { graphql } from "gatsby";
 import DefaultLayout from "../components/layout";
-import { GeneralMetadataFragment, IMarkdownEntryFragment } from "../fragments";
 import { isFolder } from "../utils/types";
 
-interface IEntryTemplateProps {
-	data: GeneralMetadataFragment & { markdownRemark: IMarkdownEntryFragment };
-}
+/**
+ * @typedef {Object} IEntryTemplateProps
+ * @property {import("../fragments").GeneralMetadataFragment & { mdx: import("../fragments").IMarkdownEntryFragment }} data
+ */
 
-export default class SingleEntryTemplate extends React.Component<
-	IEntryTemplateProps
-> {
-	public render() {
+/**
+ * @extends {React.Component<IEntryTemplateProps>}
+ */
+export default class SingleEntryTemplate extends React.Component {
+	componentDidCatch(...args) {
+		console.trace(...args);
+	}
+
+	render() {
 		const {
 			data: {
 				site: {
 					siteMetadata: { siteUrl },
 				},
 				personalJson: { name },
-				markdownRemark: {
-					htmlAst,
+				mdx: {
 					excerpt,
 					headings,
 					frontmatter: { title, toc, authors, link, date, tags },
 					parent: { birthTime, name: fileName, relativeDirectory },
 					timeToRead,
 					count: { words },
+					code: { body },
 				},
 			},
 		} = this.props;
@@ -66,26 +72,27 @@ export default class SingleEntryTemplate extends React.Component<
 				<Entry
 					toc={toc}
 					title={title}
-					authors={authors!}
+					authors={authors}
 					fileName={fileName}
 					folderName={relativeDirectory}
 					publishDate={new Date(date || birthTime)}
 					replyTo={link}
-					htmlAst={htmlAst}
 					headings={headings}
 					tags={tags}
 					wordCount={words}
 					timeToRead={timeToRead}
-				/>
+				>
+					<MDXRenderer>{body}</MDXRenderer>
+				</Entry>
 			</DefaultLayout>
 		);
 	}
 }
 
 export const pageQuery = graphql`
-	query SingleEntryQuery($markdownPath: String!) {
+	query($markdownPath: String!) {
 		...GeneralMetadata
-		markdownRemark(fileAbsolutePath: { eq: $markdownPath }) {
+		mdx(fileAbsolutePath: { eq: $markdownPath }) {
 			...MarkdownEntry
 		}
 	}

@@ -4,8 +4,8 @@ const { graphql } = require("./src/utils/taggedUtils");
 
 const { compareEntryEdges } = require("./src/utils/utils");
 
-const serializeFeed = ({ query: { site, allMarkdownRemark } }) => {
-	return allMarkdownRemark.edges.sort(compareEntryEdges).map(edge => {
+const serializeFeed = ({ query: { site, allMdx } }) => {
+	return allMdx.edges.sort(compareEntryEdges).map(edge => {
 		const url = `${site.siteMetadata.siteUrl}/${
 			edge.node.parent.relativeDirectory
 		}/${edge.node.parent.name}`;
@@ -37,7 +37,7 @@ const makeFeedQuery = (pageKind = ".*") => graphql`
 			site_url: siteUrl
 		}
 	}
-	allMarkdownRemark(
+	allMdx(
 		limit: 1000
 		filter: {
 			frontmatter: { draft: { ne: true } }
@@ -47,7 +47,6 @@ const makeFeedQuery = (pageKind = ".*") => graphql`
 		edges {
 			node {
 				excerpt
-				html
 				fileAbsolutePath
 				parent {
 					... on File {
@@ -98,7 +97,7 @@ module.exports = {
 			},
 		},
 		{
-			resolve: "gatsby-transformer-remark",
+			resolve: "gatsby-mdx",
 			options: {
 				plugins: [
 					"gatsby-remark-component",

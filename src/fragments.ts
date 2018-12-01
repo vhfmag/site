@@ -51,11 +51,14 @@ export const fragments = graphql`
 		}
 	}
 
-	fragment MarkdownEntry on MarkdownRemark {
-		htmlAst
+	fragment MarkdownEntry on Mdx {
 		headings {
 			depth
 			value
+		}
+		code {
+			scope
+			body
 		}
 		excerpt
 		timeToRead
