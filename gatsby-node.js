@@ -151,7 +151,7 @@ function createEntryPages({
 				pageTemplate: entryListTemplate,
 				edges: postEdges,
 				pathPrefix,
-				pageLength: 20,
+				pageLength: 10,
 				context: {
 					listTitle,
 				},
