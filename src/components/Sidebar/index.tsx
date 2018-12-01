@@ -32,7 +32,15 @@ const StyledNav = styled.nav`
 
 		@media print, (max-width: ${responsiveBreakpoint}) {
 			flex-direction: row;
-			justify-content: flex-start;
+
+			li,
+			ul {
+				display: contents;
+			}
+
+			a {
+				margin: 2pt 4pt;
+			}
 		}
 
 		li {
