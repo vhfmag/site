@@ -37,6 +37,7 @@ export const SocialLink: React.SFC<ISocialLinkProps> = ({
 						: iconNameParts) as any
 				}
 				title={serviceName}
+				alt={serviceName}
 			/>
 		</StyledSocialLink>
 	);
