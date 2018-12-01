@@ -55,7 +55,7 @@ const StyledTags = styled.ul`
 	flex-wrap: wrap;
 	margin: -4pt;
 
-	a {
+	li {
 		all: unset;
 		margin: 4pt;
 		padding: 2pt 4pt;
@@ -63,6 +63,10 @@ const StyledTags = styled.ul`
 		border-radius: 4pt;
 		background-color: ${themeColor};
 		color: ${backgroundColor};
+
+		a {
+			all: unset;
+		}
 	}
 `;
 
@@ -129,21 +133,20 @@ export const EntryHeader: React.SFC<
 					<span>
 						Por{" "}
 						{authors
-							.map(
-								({ name, url: authorUrl }) =>
-									authorUrl ? (
-										<a
-											rel="author"
-											className="p-author h-card"
-											href={authorUrl}
-										>
-											{name}
-										</a>
-									) : (
-										<span className="p-author h-card">
-											{name}
-										</span>
-									),
+							.map(({ name, url: authorUrl }) =>
+								authorUrl ? (
+									<a
+										rel="author"
+										className="p-author h-card"
+										href={authorUrl}
+									>
+										{name}
+									</a>
+								) : (
+									<span className="p-author h-card">
+										{name}
+									</span>
+								),
 							)
 							.reduce(reduceElementsToEnumeration)}
 					</span>
@@ -171,14 +174,16 @@ export const EntryHeader: React.SFC<
 			{tags && (
 				<StyledTags>
 					{tags.map(tag => (
-						<a
-							rel="tag"
-							role="listitem"
-							href={`/${folderName}/tags/${slugify(tag.trim())}`}
-							key={tag}
-						>
-							{tag}
-						</a>
+						<li key={tag}>
+							<a
+								rel="tag"
+								href={`/${folderName}/tags/${slugify(
+									tag.trim(),
+								)}`}
+							>
+								{tag}
+							</a>
+						</li>
 					))}
 				</StyledTags>
 			)}
