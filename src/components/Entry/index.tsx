@@ -1,4 +1,3 @@
-import { last } from "lodash";
 import * as React from "react";
 import styled from "styled-components";
 import Helmet from "react-helmet";
@@ -55,7 +54,7 @@ function headingsToTree(
 
 			let depth = 1;
 			let lastNodeList = nodes;
-			let lastNode = last(nodes);
+			let lastNode = nodes[nodes.length - 1];
 
 			while (
 				depth < headingDepth &&
@@ -65,7 +64,7 @@ function headingsToTree(
 			) {
 				depth++;
 				lastNodeList = lastNode.children;
-				lastNode = last(lastNodeList);
+				lastNode = lastNodeList[lastNodeList.length - 1];
 			}
 
 			if (lastNode && headingDepth > depth) {
@@ -82,12 +81,7 @@ function headingsToTree(
 
 export class Entry extends React.Component<IEntryProps> {
 	public render() {
-		const {
-			content,
-			headings,
-			children,
-			...headerProps
-		} = this.props;
+		const { content, headings, children, ...headerProps } = this.props;
 
 		return (
 			<StyledEntry className="h-entry">
