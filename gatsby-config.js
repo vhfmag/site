@@ -124,6 +124,12 @@ module.exports = {
 		},
 		"gatsby-transformer-json",
 		"gatsby-plugin-sharp",
+		{
+			resolve: "gatsby-plugin-nprogress",
+			options: {
+				color: themeColor,
+			},
+		},
 		"gatsby-plugin-brotli",
 		"gatsby-plugin-zopfli",
 		"gatsby-plugin-sri",
