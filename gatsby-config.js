@@ -106,10 +106,15 @@ module.exports = {
 		{
 			resolve: "gatsby-mdx",
 			options: {
-				plugins: [
-					"gatsby-remark-component",
-					"gatsby-remark-autolink-headers",
-					"gatsby-remark-emoji-unicode",
+				gatsbyRemarkPlugins: [
+					{ resolve: "gatsby-remark-autolink-headers" },
+					{ resolve: "gatsby-remark-emoji-unicode" },
+					{
+						resolve: "gatsby-remark-external-links",
+						options: {
+							target: null,
+						},
+					},
 					{
 						resolve: `gatsby-remark-images`,
 						options: {
