@@ -38,11 +38,6 @@ const GlobalStyle = createGlobalStyle`
 		opacity: 0.75;
 	}
 
-	figcaption {
-		text-align: center;
-		color: ${themeColor};
-	}
-
 	${dom.css()}
 `;
 
@@ -53,12 +48,8 @@ const StyledMain = styled.main`
 	max-width: var(--width);
 	font-size: calc(1rem + 0.25vw);
 
-	p,
-	figure {
-		max-width: 70ch;
-	}
-
 	p {
+		max-width: 70ch;
 		text-align: justify;
 		hyphens: auto;
 	}
