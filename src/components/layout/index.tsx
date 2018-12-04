@@ -136,7 +136,7 @@ const RawLayout: React.SFC<ILayoutData> = ({
 		name: siteMetadata.title,
 		author: {
 			"@type": "Person",
-			name,
+			name: personalJson.name,
 		},
 	};
 
