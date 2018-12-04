@@ -140,6 +140,7 @@ module.exports = {
 			resolve: "gatsby-plugin-nprogress",
 			options: {
 				color: themeColor,
+				showSpinner: false,
 			},
 		},
 		"gatsby-plugin-brotli",

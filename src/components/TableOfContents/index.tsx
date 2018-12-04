@@ -1,6 +1,7 @@
 import * as React from "react";
 import styled from "styled-components";
 import { slugify } from "../../utils/utils";
+import { backgroundColor } from "../../utils/consts";
 
 const StyledTOC = styled.aside`
 	@media (min-width: 1000px) {
@@ -8,6 +9,13 @@ const StyledTOC = styled.aside`
 		float: right;
 		max-width: 300px;
 	}
+
+	@media (min-width: 1500px) {
+		position: sticky;
+		top: 1em;
+	}
+
+	background-color: ${backgroundColor};
 
 	ol {
 		counter-reset: item;
