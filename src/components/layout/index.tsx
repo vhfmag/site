@@ -122,7 +122,7 @@ const RawLayout: React.SFC<ILayoutData> = ({
 	const personLinkedData = {
 		"@context": "http://schema.org",
 		"@type": "Person",
-		name,
+		name: personalJson.name,
 		jobTitle: personalJson.jobTitle,
 		email: personalJson.email,
 		url: "https://victormagalhaes.codes",
