@@ -5,7 +5,7 @@ import { StaticQuery, graphql } from "gatsby";
 import { MDXProvider } from "@mdx-js/tag";
 
 import { responsiveBreakpoint, themeColor } from "../../utils/consts";
-import { Social_2 } from "../../graphql-types";
+import { SiteMetadata_2, PersonalJson } from "../../graphql-types";
 import { Sidebar } from "../Sidebar";
 
 import "typeface-montserrat";
@@ -15,6 +15,7 @@ import "prismjs/themes/prism-okaidia.css";
 import { generateLinkedDataTag } from "../LinkedData";
 
 import { dom } from "@fortawesome/fontawesome-svg-core";
+import { isNotNullish } from "../../utils/types";
 
 const GlobalStyle = createGlobalStyle`
 	* {
@@ -48,7 +49,8 @@ const StyledMain = styled.main`
 	max-width: var(--width);
 	font-size: calc(1rem + 0.25vw);
 
-	p {
+	p,
+	hr {
 		max-width: 70ch;
 		text-align: justify;
 		hyphens: auto;
@@ -102,29 +104,17 @@ const StyledRoot = styled.div`
 
 interface ILayoutData {
 	site: {
-		siteMetadata: {
-			title: string;
-			siteUrl: string;
-			sourceUrl: string;
-			description: string;
-		};
+		siteMetadata: SiteMetadata_2;
 	};
-	personalJson: {
-		email: string;
-		name: string;
-		jobTitle: string;
-		social: Array<DeepNonNullable<Social_2>>;
-	};
+	personalJson: PersonalJson;
 }
 
 const RawLayout: React.SFC<ILayoutData> = ({
-	site: {
-		siteMetadata: { title, description, siteUrl, sourceUrl },
-	},
-	personalJson: { name, jobTitle, email, social },
+	site: { siteMetadata },
+	personalJson,
 	children,
 }) => {
-	const plainTextDescription = description.replace(
+	const plainTextDescription = siteMetadata.description!.replace(
 		/\[([^\]]+)\]\([^\)]+\)/g,
 		"$1",
 	);
@@ -133,17 +123,17 @@ const RawLayout: React.SFC<ILayoutData> = ({
 		"@context": "http://schema.org",
 		"@type": "Person",
 		name,
-		jobTitle,
-		email,
+		jobTitle: personalJson.jobTitle,
+		email: personalJson.email,
 		url: "https://victormagalhaes.codes",
-		sameAs: social.map(({ url }) => url),
+		sameAs: personalJson.social!.filter(isNotNullish).map(({ url }) => url),
 	};
 
 	const blogLinkedData = {
 		"@context": "http://schema.org",
 		"@type": "Blog",
-		url: siteUrl,
-		name: title,
+		url: siteMetadata.siteUrl,
+		name: siteMetadata.title,
 		author: {
 			"@type": "Person",
 			name,
@@ -158,8 +148,8 @@ const RawLayout: React.SFC<ILayoutData> = ({
 					htmlAttributes={{
 						lang: "pt-br",
 					}}
-					defaultTitle={title}
-					titleTemplate={`${title} | %s`}
+					defaultTitle={siteMetadata.title!}
+					titleTemplate={`${siteMetadata.title} | %s`}
 					meta={[
 						{
 							name: "description",
@@ -211,11 +201,8 @@ const RawLayout: React.SFC<ILayoutData> = ({
 				</Helmet>
 
 				<Sidebar
-					title={title}
-					email={email}
-					social={social}
-					sourceUrl={sourceUrl}
-					description={description}
+					metadata={siteMetadata}
+					personalData={personalJson}
 					nav={[
 						{
 							name: "feed",

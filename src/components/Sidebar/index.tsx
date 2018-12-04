@@ -6,6 +6,8 @@ import { SocialLink } from "./SocialLink";
 import { responsiveBreakpoint } from "../../utils/consts";
 
 import { ScreenOnly } from "../../styles";
+import { SiteMetadata_2, PersonalJson } from "../../graphql-types";
+import { isNotNullish } from "../../utils/types";
 
 const activeLinkClassName = "active";
 
@@ -96,18 +98,9 @@ const SocialLinks = styled(ScreenOnly.withComponent("ul"))`
 	}
 `;
 
-interface ISocialInfo {
-	url: string;
-	serviceName: string;
-	icon: string;
-}
-
 interface ISidebarProps {
-	title: string;
-	email: string;
-	sourceUrl: string;
-	description: string;
-	social: ISocialInfo[];
+	metadata: SiteMetadata_2;
+	personalData: PersonalJson;
 	nav: ISidebarNavLink[];
 }
 
@@ -133,15 +126,12 @@ function NavLinks({ navs }: { navs: ISidebarNavLink[] }) {
 }
 
 export const Sidebar: React.SFC<ISidebarProps> = ({
-	title,
-	sourceUrl,
-	description,
-	email,
-	social,
+	metadata: { title, description, sourceUrl },
+	personalData: { email, social },
 	nav,
 }) => (
 	<StyledSidebar className="h-card">
-		<SidebarSection>
+		<SidebarSection itemProp="name">
 			<HeadLink className="p-name u-uid u-url" to="/">
 				{title}
 			</HeadLink>
@@ -153,11 +143,11 @@ export const Sidebar: React.SFC<ISidebarProps> = ({
 				</a>
 			</div>
 			<ScreenOnly>
-				<a href={sourceUrl}>ver código fonte</a>
+				<a href={sourceUrl!}>ver código fonte</a>
 			</ScreenOnly>
 		</SidebarSection>
 		<div
-			dangerouslySetInnerHTML={{ __html: description }}
+			dangerouslySetInnerHTML={{ __html: description! }}
 			className="lead p-note"
 		/>
 		<StyledNav>
@@ -172,8 +162,8 @@ export const Sidebar: React.SFC<ISidebarProps> = ({
 					url="/rss.xml"
 				/>
 			</li>
-			{social.map(socialProps => (
-				<li key={socialProps.serviceName}>
+			{social!.filter(isNotNullish).map(socialProps => (
+				<li key={socialProps.serviceName!}>
 					<SocialLink {...socialProps} />
 				</li>
 			))}
