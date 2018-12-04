@@ -10,6 +10,7 @@ import {
 	ExperiencesJson,
 	CompetencesJson,
 	InterestsJson,
+	Work_2,
 } from "../graphql-types";
 import { Helmet } from "react-helmet";
 import DefaultLayout from "../components/layout";
@@ -203,136 +204,117 @@ const StyledExperience = styled.div`
 	}
 `;
 
-export default class ResumePage extends React.Component<IResumePageProps> {
-	public render() {
-		const {
-			allCompetencesJson: { edges: competences },
-			experiencesJson: experiences,
-			interestsJson: interests,
-			skillsJson: skills,
-		} = this.props.data;
+const WorkExperience: React.SFC<Work_2> = ({
+	company,
+	image,
+	link,
+	period,
+	role,
+	skills: expSkills,
+	projects,
+}) => {
+	const [start, end] = period!;
 
-		return (
-			<DefaultLayout>
-				<Helmet title="Currículo" />
-				<h1>Currículo</h1>
-				<h2>Competências</h2>
-				<h3>Como posso ser útil</h3>
-				<StyledCompetences>
-					<dl>
-						{competences.map(({ node: { name, description } }) => (
-							<React.Fragment key={name!}>
-								<dt>{name}</dt>
-								<dd>{description}</dd>
-							</React.Fragment>
+	return (
+		<StyledExperience key={company!}>
+			<h4>{link ? <a href={link}>{company}</a> : company}</h4>
+			<img src={require(`../assets${image}`)} alt={company!} />
+			<StyledExperienceInfo>
+				<div>{role}</div>
+				<div>
+					{end ? (
+						<>
+							de {start} até {end}
+						</>
+					) : (
+						<>desde {start}</>
+					)}
+				</div>
+			</StyledExperienceInfo>
+			{projects && (
+				<>
+					<h5>Projetos</h5>
+					<StyledExperienceProjects>
+						{projects
+							.filter(isNotNullish)
+							.map(({ name, url, description }) => (
+								<React.Fragment key={name!}>
+									<dt>
+										<a href={url!}>{name}</a>
+									</dt>
+									{description && <dd>{description}</dd>}
+								</React.Fragment>
+							))}
+					</StyledExperienceProjects>
+				</>
+			)}
+			{expSkills && (
+				<>
+					<h5>Tecnologias e habilidades</h5>
+					<StyledExperienceSkills>
+						{expSkills.map(skill => (
+							<li key={skill!}>{skill}</li>
 						))}
-					</dl>
-				</StyledCompetences>
-				<h3>Habilidades e interesses</h3>
-				<StyledListWrapper>
-					<StyledList data-columns={2}>
-						<h4>Habilidades técnicas</h4>
-						<ul>
-							{skills.technical!.map(skill => (
-								<li key={skill!.name!}>{skill!.name}</li>
-							))}
-						</ul>
-					</StyledList>
-					<StyledList data-columns={1}>
-						<h4>Soft skills</h4>
-						<ul>
-							{skills.soft!.map(skill => (
-								<li key={skill!.name!}>{skill!.name}</li>
-							))}
-						</ul>
-					</StyledList>
-					<StyledList data-columns={3}>
-						<h4>Demais interesses</h4>
-						<ul>
-							{interests.subjects!.map(skill => (
-								<li key={skill!.name!}>{skill!.name}</li>
-							))}
-						</ul>
-					</StyledList>
-				</StyledListWrapper>
-				<h2>Experiências</h2>
-				{experiences.work!.map(experience => {
-					const {
-						company,
-						image,
-						link,
-						period,
-						role,
-						skills: expSkills,
-						projects,
-					} = experience!;
+					</StyledExperienceSkills>
+				</>
+			)}
+		</StyledExperience>
+	);
+};
 
-					const [start, end] = period!;
+const ResumePage: React.SFC<IResumePageProps> = ({
+	data: {
+		allCompetencesJson: { edges: competences },
+		experiencesJson: experiences,
+		interestsJson: interests,
+		skillsJson: skills,
+	},
+}) => (
+	<DefaultLayout>
+		<Helmet title="Currículo" />
+		<h1>Currículo</h1>
+		<h2>Competências</h2>
+		<h3>Como posso ser útil</h3>
+		<StyledCompetences>
+			<dl>
+				{competences.map(({ node: { name, description } }) => (
+					<React.Fragment key={name!}>
+						<dt>{name}</dt>
+						<dd>{description}</dd>
+					</React.Fragment>
+				))}
+			</dl>
+		</StyledCompetences>
+		<h3>Habilidades e interesses</h3>
+		<StyledListWrapper>
+			<StyledList data-columns={2}>
+				<h4>Habilidades técnicas</h4>
+				<ul>
+					{skills.technical!.map(skill => (
+						<li key={skill!.name!}>{skill!.name}</li>
+					))}
+				</ul>
+			</StyledList>
+			<StyledList data-columns={1}>
+				<h4>Soft skills</h4>
+				<ul>
+					{skills.soft!.map(skill => (
+						<li key={skill!.name!}>{skill!.name}</li>
+					))}
+				</ul>
+			</StyledList>
+			<StyledList data-columns={3}>
+				<h4>Demais interesses</h4>
+				<ul>
+					{interests.subjects!.map(skill => (
+						<li key={skill!.name!}>{skill!.name}</li>
+					))}
+				</ul>
+			</StyledList>
+		</StyledListWrapper>
+		<h2>Experiências</h2>
+		{experiences.work!.filter(isNotNullish).map(WorkExperience)}
+	</DefaultLayout>
+);
 
-					return (
-						<StyledExperience key={company!}>
-							<h4>
-								{link ? <a href={link}>{company}</a> : company}
-							</h4>
-							<img
-								src={require(`../assets${image}`)}
-								alt={company!}
-							/>
-							<StyledExperienceInfo>
-								<div>{role}</div>
-								<div>
-									{end ? (
-										<>
-											de {start} até {end}
-										</>
-									) : (
-										<>desde {start}</>
-									)}
-								</div>
-							</StyledExperienceInfo>
-							{projects && (
-								<>
-									<h5>Projetos</h5>
-									<StyledExperienceProjects>
-										{projects
-											.filter(isNotNullish)
-											.map(
-												({
-													name,
-													url,
-													description,
-												}) => (
-													<React.Fragment key={name!}>
-														<dt>
-															<a href={url!}>
-																{name}
-															</a>
-														</dt>
-														{description && (
-															<dd>
-																{description}
-															</dd>
-														)}
-													</React.Fragment>
-												),
-											)}
-									</StyledExperienceProjects>
-								</>
-							)}
-							{expSkills && (
-								<>
-									<h5>Tecnologias e habilidades</h5>
-									<StyledExperienceSkills>
-										{expSkills.map(skill => (
-											<li key={skill!}>{skill}</li>
-										))}
-									</StyledExperienceSkills>
-								</>
-							)}
-						</StyledExperience>
-					);
-				})}
-			</DefaultLayout>
-		);
-	}
-}
+export default ResumePage;

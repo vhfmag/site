@@ -79,22 +79,21 @@ function headingsToTree(
 	);
 }
 
-export class Entry extends React.Component<IEntryProps> {
-	public render() {
-		const { content, headings, children, ...headerProps } = this.props;
-
-		return (
-			<StyledEntry className="h-entry">
-				<Helmet title={headerProps.title} />
-				<EntryHeader {...headerProps} isFullPage={true} />
-				<section className="e-content">
-					{headings && headings.length > 0 && (
-						<TableOfContents headings={headingsToTree(headings)} />
-					)}
-					{content && <p>{content}</p>}
-					{children}
-				</section>
-			</StyledEntry>
-		);
-	}
-}
+export const Entry: React.SFC<IEntryProps> = ({
+	content,
+	headings,
+	children,
+	...headerProps
+}) => (
+	<StyledEntry className="h-entry">
+		<Helmet title={headerProps.title} />
+		<EntryHeader {...headerProps} isFullPage={true} />
+		<section className="e-content">
+			{headings && headings.length > 0 && (
+				<TableOfContents headings={headingsToTree(headings)} />
+			)}
+			{content && <p>{content}</p>}
+			{children}
+		</section>
+	</StyledEntry>
+);

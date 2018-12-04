@@ -117,8 +117,148 @@ interface ILayoutData {
 	};
 }
 
-export default class DefaultLayout extends React.Component {
-	public componentDidMount() {
+const RawLayout: React.SFC<ILayoutData> = ({
+	site: {
+		siteMetadata: { title, description, siteUrl, sourceUrl },
+	},
+	personalJson: { name, jobTitle, email, social },
+	children,
+}) => {
+	const plainTextDescription = description.replace(
+		/\[([^\]]+)\]\([^\)]+\)/g,
+		"$1",
+	);
+
+	const personLinkedData = {
+		"@context": "http://schema.org",
+		"@type": "Person",
+		name,
+		jobTitle,
+		email,
+		url: "https://victormagalhaes.codes",
+		sameAs: social.map(({ url }) => url),
+	};
+
+	const blogLinkedData = {
+		"@context": "http://schema.org",
+		"@type": "Blog",
+		url: siteUrl,
+		name: title,
+		author: {
+			"@type": "Person",
+			name,
+		},
+	};
+
+	return (
+		<MDXProvider>
+			<StyledRoot>
+				<GlobalStyle />
+				<Helmet
+					htmlAttributes={{
+						lang: "pt-br",
+					}}
+					defaultTitle={title}
+					titleTemplate={`${title} | %s`}
+					meta={[
+						{
+							name: "description",
+							content: plainTextDescription,
+						},
+						{
+							name: "keywords",
+							content: [
+								"javascript",
+								"typescript",
+								"development",
+								"web development",
+								"web",
+								"privacy",
+								"decentralized web",
+								"decentralization",
+								"p2p",
+								"personal",
+								"blog",
+								"brazilian",
+							].join(", "),
+						},
+						{
+							name: "google-site-verification",
+							content:
+								"RHQh7j4JKTIEmRsQrcOD1Pk7OoLoW8VK9YG4LscV7d0",
+						},
+					]}
+				>
+					<noscript className="deferred-styles">{`
+						<link
+							href="//fonts.googleapis.com/css?family=Montserrat:700|Zilla+Slab:400,400i,700"
+							rel="stylesheet"
+							type="text/css"
+						/>
+					`}</noscript>
+					{generateLinkedDataTag(personLinkedData)}
+					{generateLinkedDataTag(blogLinkedData)}
+
+					<link
+						rel="webmention"
+						href="https://webmention.io/victormagalhaes.codes/webmention"
+					/>
+
+					<link
+						rel="pingback"
+						href="https://webmention.io/victormagalhaes.codes/xmlrpc"
+					/>
+				</Helmet>
+
+				<Sidebar
+					title={title}
+					email={email}
+					social={social}
+					sourceUrl={sourceUrl}
+					description={description}
+					nav={[
+						{
+							name: "feed",
+							url: "/",
+							subNav: [
+								{
+									name: "posts",
+									url: "/posts",
+								},
+								{
+									name: "livros",
+									url: "/books",
+								},
+								{
+									name: "recomendações",
+									url: "/bookmarks",
+								},
+								{
+									name: "tags",
+									url: "/tags",
+								},
+							],
+						},
+						{
+							name: "todo",
+							url: "/todo",
+						},
+						{
+							name: "currículo",
+							url: "/resume",
+						},
+					]}
+				/>
+
+				<StyledMain>{children}</StyledMain>
+				<link rel="canonical" href="https://victormagalhaes.codes" />
+			</StyledRoot>
+		</MDXProvider>
+	);
+};
+
+const DefaultLayout: React.SFC = ({ children }) => {
+	React.useEffect(() => {
 		const addStylesNode = document.getElementById("deferred-styles");
 		if (!addStylesNode) {
 			return;
@@ -128,180 +268,35 @@ export default class DefaultLayout extends React.Component {
 		replacement.innerHTML = addStylesNode.textContent!;
 		document.body.appendChild(replacement);
 		addStylesNode.parentElement!.removeChild(addStylesNode);
-	}
+	}, []);
 
-	private renderPage = (data: ILayoutData) => {
-		const {
-			title,
-			description,
-			siteUrl,
-			sourceUrl,
-		} = data.site.siteMetadata;
-		const { name, jobTitle, email, social } = data.personalJson;
-
-		const plainTextDescription = description.replace(
-			/\[([^\]]+)\]\([^\)]+\)/g,
-			"$1",
-		);
-
-		const personLinkedData = {
-			"@context": "http://schema.org",
-			"@type": "Person",
-			name,
-			jobTitle,
-			email,
-			url: "https://victormagalhaes.codes",
-			sameAs: social.map(({ url }) => url),
-		};
-
-		const blogLinkedData = {
-			"@context": "http://schema.org",
-			"@type": "Blog",
-			url: siteUrl,
-			name: title,
-			author: {
-				"@type": "Person",
-				name,
-			},
-		};
-
-		return (
-			<MDXProvider>
-				<StyledRoot>
-					<GlobalStyle />
-					<Helmet
-						htmlAttributes={{
-							lang: "pt-br",
-						}}
-						defaultTitle={title}
-						titleTemplate={`${title} | %s`}
-						meta={[
-							{
-								name: "description",
-								content: plainTextDescription,
-							},
-							{
-								name: "keywords",
-								content: [
-									"javascript",
-									"typescript",
-									"development",
-									"web development",
-									"web",
-									"privacy",
-									"decentralized web",
-									"decentralization",
-									"p2p",
-									"personal",
-									"blog",
-									"brazilian",
-								].join(", "),
-							},
-							{
-								name: "google-site-verification",
-								content:
-									"RHQh7j4JKTIEmRsQrcOD1Pk7OoLoW8VK9YG4LscV7d0",
-							},
-						]}
-					>
-						<noscript className="deferred-styles">{`
-						<link
-							href="//fonts.googleapis.com/css?family=Montserrat:700|Zilla+Slab:400,400i,700"
-							rel="stylesheet"
-							type="text/css"
-						/>
-					`}</noscript>
-						{generateLinkedDataTag(personLinkedData)}
-						{generateLinkedDataTag(blogLinkedData)}
-
-						<link
-							rel="webmention"
-							href="https://webmention.io/victormagalhaes.codes/webmention"
-						/>
-
-						<link
-							rel="pingback"
-							href="https://webmention.io/victormagalhaes.codes/xmlrpc"
-						/>
-					</Helmet>
-
-					<Sidebar
-						title={title}
-						email={email}
-						social={social}
-						sourceUrl={sourceUrl}
-						description={description}
-						nav={[
-							{
-								name: "feed",
-								url: "/",
-								subNav: [
-									{
-										name: "posts",
-										url: "/posts",
-									},
-									{
-										name: "livros",
-										url: "/books",
-									},
-									{
-										name: "recomendações",
-										url: "/bookmarks",
-									},
-									{
-										name: "tags",
-										url: "/tags",
-									},
-								],
-							},
-							{
-								name: "todo",
-								url: "/todo",
-							},
-							{
-								name: "currículo",
-								url: "/resume",
-							},
-						]}
-					/>
-
-					<StyledMain>{this.props.children}</StyledMain>
-					<link
-						rel="canonical"
-						href="https://victormagalhaes.codes"
-					/>
-				</StyledRoot>
-			</MDXProvider>
-		);
-	};
-
-	public render() {
-		return (
-			<StaticQuery
-				query={graphql`
-					query MetadataQuery {
-						site {
-							siteMetadata {
-								title
-								siteUrl
-								sourceUrl
-								description
-							}
-						}
-						personalJson {
-							name
-							email
-							jobTitle
-							social {
-								serviceName
-								icon
-								url
-							}
+	return (
+		<StaticQuery
+			query={graphql`
+				query MetadataQuery {
+					site {
+						siteMetadata {
+							title
+							siteUrl
+							sourceUrl
+							description
 						}
 					}
-				`}
-				render={this.renderPage}
-			/>
-		);
-	}
-}
+					personalJson {
+						name
+						email
+						jobTitle
+						social {
+							serviceName
+							icon
+							url
+						}
+					}
+				}
+			`}
+			render={props => <RawLayout {...props}>{children}</RawLayout>}
+		/>
+	);
+};
+
+export default DefaultLayout;

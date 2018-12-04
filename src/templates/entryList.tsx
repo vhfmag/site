@@ -23,79 +23,73 @@ interface IBookmarkListProps {
 
 const bodyAttributes = { class: "h-feed" };
 
-export default class EntryList extends React.Component<IBookmarkListProps> {
-	public render() {
-		const {
-			group: posts,
-			additionalContext: { listTitle },
-		} = this.props.pathContext;
+const EntryList: React.SFC<IBookmarkListProps> = ({
+	pathContext,
+	data: {
+		personalJson: { name },
+	},
+}) => {
+	const {
+		group: posts,
+		additionalContext: { listTitle },
+	} = pathContext;
+	const meAuthor = { name };
 
-		const {
-			personalJson: { name },
-		} = this.props.data;
-
-		const meAuthor = { name };
-
-		if (!listTitle) {
-			throw new Error("Context is missing listTitle");
-		}
-
-		return (
-			<DefaultLayout>
-				<Helmet title={listTitle} bodyAttributes={bodyAttributes} />
-				<h1>{listTitle}</h1>
-				<Paginator {...this.props.pathContext} />
-				<ListWrapper>
-					{posts.map(
-						({
-							node: {
-								fileAbsolutePath,
-								excerpt,
-								frontmatter: {
-									title,
-									authors,
-									link,
-									date,
-									tags,
-								},
-								timeToRead,
-								parent: {
-									birthTime,
-									name: fileName,
-									relativeDirectory,
-								},
-								count: { words },
-							},
-						}) => {
-							if (!isFolder(relativeDirectory)) {
-								throw new Error(
-									`There is an unhandled directory. Update 'folderToCategory' to include '${relativeDirectory}'`,
-								);
-							}
-
-							return (
-								<EntrySummary
-									key={fileAbsolutePath}
-									replyTo={link}
-									authors={authors || [meAuthor]}
-									publishDate={new Date(date || birthTime)}
-									title={title}
-									fileName={fileName}
-									tags={tags}
-									folderName={relativeDirectory}
-									content={excerpt}
-									wordCount={words}
-									timeToRead={timeToRead}
-								/>
-							);
-						},
-					)}
-				</ListWrapper>
-				<Paginator {...this.props.pathContext} />
-			</DefaultLayout>
-		);
+	if (!listTitle) {
+		throw new Error("Context is missing listTitle");
 	}
-}
+
+	return (
+		<DefaultLayout>
+			<Helmet title={listTitle} bodyAttributes={bodyAttributes} />
+			<h1>{listTitle}</h1>
+			<Paginator {...pathContext} />
+			<ListWrapper>
+				{posts.map(
+					({
+						node: {
+							fileAbsolutePath,
+							excerpt,
+							frontmatter: { title, authors, link, date, tags },
+							timeToRead,
+							parent: {
+								birthTime,
+								name: fileName,
+								relativeDirectory,
+							},
+							count: { words },
+						},
+					}) => {
+						if (!isFolder(relativeDirectory)) {
+							throw new Error(
+								`There is an unhandled directory. Update 'folderToCategory' to include '${relativeDirectory}'`,
+							);
+						}
+
+						return (
+							<EntrySummary
+								key={fileAbsolutePath}
+								replyTo={link}
+								authors={authors || [meAuthor]}
+								publishDate={new Date(date || birthTime)}
+								title={title}
+								fileName={fileName}
+								tags={tags}
+								folderName={relativeDirectory}
+								content={excerpt}
+								wordCount={words}
+								timeToRead={timeToRead}
+							/>
+						);
+					},
+				)}
+			</ListWrapper>
+			<Paginator {...pathContext} />
+		</DefaultLayout>
+	);
+};
+
+export default EntryList;
 
 export const pageQuery = graphql`
 	query EntryListQuery {

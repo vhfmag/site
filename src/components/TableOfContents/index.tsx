@@ -36,43 +36,41 @@ export interface ITableOfContentsProps {
 	title?: string;
 	headings?: Array<ITreeNode<string>>;
 }
-
-export class TableOfContents extends React.Component<ITableOfContentsProps> {
-	private static ContentsTree({
-		headings,
-	}: {
-		headings?: Array<ITreeNode<string>>;
-	}) {
-		if (!headings || headings.length === 0) {
-			return null;
-		}
-
-		return (
-			<ol>
-				{headings.map(h => (
-					<li key={h.value}>
-						<p>
-							<a href={`#${slugify(h.value)}`}>{h.value}</a>
-						</p>
-						<TableOfContents.ContentsTree headings={h.children} />
-					</li>
-				))}
-			</ol>
-		);
+const ContentsTree = ({
+	headings,
+}: {
+	headings?: Array<ITreeNode<string>>;
+}) => {
+	if (!headings || headings.length === 0) {
+		return null;
 	}
 
-	public render() {
-		const { title = "Conteúdo", headings } = this.props;
+	return (
+		<ol>
+			{headings.map(h => (
+				<li key={h.value}>
+					<p>
+						<a href={`#${slugify(h.value)}`}>{h.value}</a>
+					</p>
+					<ContentsTree headings={h.children} />
+				</li>
+			))}
+		</ol>
+	);
+};
 
-		if (!headings || headings.length === 0) {
-			return null;
-		}
-
-		return (
-			<StyledTOC>
-				<h2>{title}</h2>
-				<TableOfContents.ContentsTree headings={headings} />
-			</StyledTOC>
-		);
+export const TableOfContents: React.SFC<ITableOfContentsProps> = ({
+	title = "Conteúdo",
+	headings,
+}) => {
+	if (!headings || headings.length === 0) {
+		return null;
 	}
-}
+
+	return (
+		<StyledTOC>
+			<h2>{title}</h2>
+			<ContentsTree headings={headings} />
+		</StyledTOC>
+	);
+};

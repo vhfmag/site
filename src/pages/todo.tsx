@@ -80,119 +80,111 @@ interface ITodoItemProps extends TodoJson {
 	toggleCurrentTag(tag: string): void;
 }
 
-class Todo extends React.PureComponent<ITodoItemProps> {
-	public render() {
-		const { tags, title, currentTag, toggleCurrentTag } = this.props;
-
-		return (
-			<TodoWrapper>
-				<TodoTitle>
-					<p dangerouslySetInnerHTML={{ __html: title! }} />
-				</TodoTitle>
-				{tags &&
-					tags.length > 0 && (
-						<TodoTags>
-							{tags.map(tag => (
-								<TodoTag
-									key={tag!}
-									className={
-										(currentTag === tag && "active") ||
-										undefined
-									}
-									onClick={() => toggleCurrentTag(tag!)}
-								>
-									{tag}
-								</TodoTag>
-							))}
-						</TodoTags>
-					)}
-			</TodoWrapper>
-		);
-	}
-}
+const Todo: React.SFC<ITodoItemProps> = ({
+	tags,
+	title,
+	currentTag,
+	toggleCurrentTag,
+}) => (
+	<TodoWrapper>
+		<TodoTitle>
+			<p dangerouslySetInnerHTML={{ __html: title! }} />
+		</TodoTitle>
+		{tags && tags.length > 0 && (
+			<TodoTags>
+				{tags.map(tag => (
+					<TodoTag
+						key={tag!}
+						className={
+							(currentTag === tag && "active") || undefined
+						}
+						onClick={() => toggleCurrentTag(tag!)}
+					>
+						{tag}
+					</TodoTag>
+				))}
+			</TodoTags>
+		)}
+	</TodoWrapper>
+);
 
 interface ITodoPageState {
 	currentTag?: string;
 }
 
-export default class TodoPage extends React.Component<
-	ITodoPageProps,
-	ITodoPageState
-> {
-	public state: ITodoPageState = {};
-
-	private toggleCurrentTag = (newTag: string) => {
-		this.setState(({ currentTag: oldTag }) => ({
-			currentTag: newTag === oldTag ? undefined : newTag,
-		}));
-	};
-
-	private get todos() {
-		return this.props.data.allTodoJson.edges.map(({ node }) => node);
+const isTodoHighlighted = (currentTag: string | undefined) => ({
+	tags,
+}: TodoJson): boolean => {
+	if (currentTag && tags) {
+		return tags.includes(currentTag);
+	} else {
+		return false;
 	}
+};
 
-	private isTodoHighlighted = ({ tags }: TodoJson): boolean => {
-		const { currentTag } = this.state;
+const todoComparer = (currentTag: string | undefined) => (
+	t1: TodoJson,
+	t2: TodoJson,
+): number => {
+	const [h1, h2] = [t1, t2].map(isTodoHighlighted(currentTag));
 
-		if (currentTag && tags) {
-			return tags.includes(currentTag);
-		} else {
-			return false;
-		}
-	};
-
-	private todoComparer = (t1: TodoJson, t2: TodoJson): number => {
-		const [h1, h2] = [t1, t2].map(this.isTodoHighlighted);
-
-		if (h1 === h2) {
-			return 0;
-		} else if (h1) {
-			return -1;
-		} else {
-			return 1;
-		}
-	};
-
-	public render() {
-		const { todos } = this;
-
-		const todosDone = todos.filter(todo => todo.done);
-		const todosUndone = todos.filter(todo => !todo.done);
-
-		return (
-			<DefaultLayout>
-				<Helmet title="todo" />
-				<h2>quem sabe um dia</h2>
-				<StyledTodoList>
-					<FlipMove typeName={null}>
-						{todosUndone.sort(this.todoComparer).map(todo => (
-							<Todo
-								{...todo}
-								key={todo.title!}
-								currentTag={this.state.currentTag}
-								toggleCurrentTag={this.toggleCurrentTag}
-							/>
-						))}
-					</FlipMove>
-				</StyledTodoList>
-				<hr />
-				<h2>feitos!</h2>
-				<StyledTodoList>
-					<FlipMove typeName={null}>
-						{todosDone.sort(this.todoComparer).map(todo => (
-							<Todo
-								{...todo}
-								key={todo.title!}
-								currentTag={this.state.currentTag}
-								toggleCurrentTag={this.toggleCurrentTag}
-							/>
-						))}
-					</FlipMove>
-				</StyledTodoList>
-			</DefaultLayout>
-		);
+	if (h1 === h2) {
+		return 0;
+	} else if (h1) {
+		return -1;
+	} else {
+		return 1;
 	}
-}
+};
+
+const TodoPage: React.SFC<ITodoPageProps> = ({ data: { allTodoJson } }) => {
+	const [currentTag, setCurrentTag] = React.useState<string | undefined>(
+		undefined,
+	);
+
+	const todos = allTodoJson.edges.map(({ node }) => node);
+	const toggleCurrentTag = (newTag: string) =>
+		setCurrentTag(newTag === currentTag ? undefined : newTag);
+
+	const todosDone = todos.filter(todo => todo.done);
+	const todosUndone = todos.filter(todo => !todo.done);
+	const comparer = todoComparer(currentTag);
+
+	return (
+		<DefaultLayout>
+			<Helmet title="todo" />
+			<h2>quem sabe um dia</h2>
+			<StyledTodoList>
+				<FlipMove typeName={null}>
+					{todosUndone.sort(comparer).map(todo => (
+						<Todo
+							{...todo}
+							key={todo.title!}
+							currentTag={currentTag}
+							toggleCurrentTag={toggleCurrentTag}
+						/>
+					))}
+				</FlipMove>
+			</StyledTodoList>
+			<hr />
+			<h2>feitos!</h2>
+			<StyledTodoList>
+				<FlipMove typeName={null}>
+					{todosDone.sort(comparer).map(todo => (
+						<Todo
+							{...todo}
+							key={todo.title!}
+							currentTag={currentTag}
+							toggleCurrentTag={toggleCurrentTag}
+						/>
+					))}
+				</FlipMove>
+			</StyledTodoList>
+		</DefaultLayout>
+	);
+};
+
+export default TodoPage;
 
 export const todoFragment = graphql`
 	fragment TodoItem on TodoJson {

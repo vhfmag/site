@@ -9,85 +9,79 @@ import { isFolder } from "../utils/types";
 
 /**
  * @typedef {Object} IEntryTemplateProps
- * @property {import("../fragments").GeneralMetadataFragment & { mdx: import("../fragments").IMarkdownEntryFragment }} data
+ * @property {import("../fragments").GeneralMetadataFragment & { mdx: import("../fragments").IMarkdownEntryFragment, code: { body: any } }} data
  */
 
 /**
- * @extends {React.Component<IEntryTemplateProps>}
+ * @param {IEntryTemplateProps} props
  */
-export default class SingleEntryTemplate extends React.Component {
-	componentDidCatch(...args) {
-		console.trace(...args);
-	}
-
-	render() {
-		const {
-			data: {
-				site: {
-					siteMetadata: { siteUrl },
-				},
-				personalJson: { name },
-				mdx: {
-					excerpt,
-					headings,
-					frontmatter: { title, toc, authors, link, date, tags },
-					parent: { birthTime, name: fileName, relativeDirectory },
-					timeToRead,
-					count: { words },
-					code: { body },
-				},
-			},
-		} = this.props;
-
-		if (!isFolder(relativeDirectory)) {
-			throw new Error(
-				`There is an unhandled directory. Update 'folderToCategory' to include '${relativeDirectory}'`,
-			);
-		}
-
-		const linkedData = {
-			"@context": "http://schema.org",
-			"@type": "Review",
-			mainEntityOfPage: {
-				"@type": "Blog",
-				"@id": siteUrl,
-			},
-			itemReviewed: {
-				"@id": link,
-				url: link,
-				name: title,
-			},
-			reviewBody: excerpt,
-			author: {
-				"@type": "Person",
-				"@id": siteUrl,
-				url: siteUrl,
-				name,
-			},
-		};
-
-		return (
-			<DefaultLayout>
-				<Helmet>{generateLinkedDataTag(linkedData)}</Helmet>
-				<Entry
-					toc={toc}
-					title={title}
-					authors={authors}
-					fileName={fileName}
-					folderName={relativeDirectory}
-					publishDate={new Date(date || birthTime)}
-					replyTo={link}
-					headings={headings}
-					tags={tags}
-					wordCount={words}
-					timeToRead={timeToRead}
-				>
-					<MDXRenderer>{body}</MDXRenderer>
-				</Entry>
-			</DefaultLayout>
+const SingleEntryTemplate = ({
+	data: {
+		site: {
+			siteMetadata: { siteUrl },
+		},
+		personalJson: { name },
+		mdx: {
+			excerpt,
+			headings,
+			frontmatter: { title, toc, authors, link, date, tags },
+			parent: { birthTime, name: fileName, relativeDirectory },
+			timeToRead,
+			count: { words },
+			code: { body },
+		},
+	},
+}) => {
+	if (!isFolder(relativeDirectory)) {
+		throw new Error(
+			`There is an unhandled directory. Update 'folderToCategory' to include '${relativeDirectory}'`,
 		);
 	}
-}
+
+	const linkedData = {
+		"@context": "http://schema.org",
+		"@type": "Review",
+		mainEntityOfPage: {
+			"@type": "Blog",
+			"@id": siteUrl,
+		},
+		itemReviewed: {
+			"@id": link,
+			url: link,
+			name: title,
+		},
+		reviewBody: excerpt,
+		author: {
+			"@type": "Person",
+			"@id": siteUrl,
+			url: siteUrl,
+			name,
+		},
+	};
+
+	return (
+		<DefaultLayout>
+			<Helmet>{generateLinkedDataTag(linkedData)}</Helmet>
+			<Entry
+				toc={toc}
+				title={title}
+				authors={authors}
+				fileName={fileName}
+				folderName={relativeDirectory}
+				publishDate={new Date(date || birthTime)}
+				replyTo={link}
+				headings={headings}
+				tags={tags}
+				wordCount={words}
+				timeToRead={timeToRead}
+			>
+				<MDXRenderer>{body}</MDXRenderer>
+			</Entry>
+		</DefaultLayout>
+	);
+};
+
+export default SingleEntryTemplate;
 
 export const pageQuery = graphql`
 	query($markdownPath: String!) {
