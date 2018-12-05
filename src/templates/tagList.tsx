@@ -2,8 +2,8 @@ import * as React from "react";
 import Helmet from "react-helmet";
 import { GeneralMetadataFragment } from "../fragments";
 import DefaultLayout from "../components/layout";
-import styled from "styled-components";
-import { themeColor, backgroundColor } from "../utils/consts";
+import styled from "../styles/styled";
+import { fromTheme } from "../styles/theme";
 
 type Comparator<T> = (a: T, b: T) => number;
 function pipeComparators<T>(
@@ -45,8 +45,8 @@ const StyledTagUl = styled.ul`
 		margin: 4pt;
 		padding: 2pt 4pt;
 		border-radius: 4pt;
-		color: ${backgroundColor};
-		background-color: ${themeColor};
+		color: ${fromTheme("backgroundColor")};
+		background-color: ${fromTheme("themeColor")};
 	}
 `;
 

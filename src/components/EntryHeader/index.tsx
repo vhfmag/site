@@ -1,13 +1,10 @@
 import * as React from "react";
-import styled from "styled-components";
+import styled from "../../styles/styled";
 import { Link } from "gatsby";
 import { formatDate, slugify } from "../../utils/utils";
-import {
-	folderToCategory,
-	themeColor,
-	backgroundColor,
-} from "../../utils/consts";
+import { folderToCategory } from "../../utils/consts";
 import { Authors_2 } from "../../graphql-types";
+import { fromTheme } from "../../styles/theme";
 
 export interface IEntryHeaderProps {
 	title: string;
@@ -61,8 +58,8 @@ const StyledTags = styled.ul`
 		padding: 2pt 4pt;
 		cursor: pointer;
 		border-radius: 4pt;
-		background-color: ${themeColor};
-		color: ${backgroundColor};
+		background-color: ${fromTheme("themeColor")};
+		color: ${fromTheme("backgroundColor")};
 
 		a {
 			all: unset;

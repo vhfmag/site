@@ -1,5 +1,5 @@
 import * as React from "react";
-import styled from "styled-components";
+import styled from "../../styles/styled";
 import { Link } from "gatsby";
 
 import { SocialLink } from "./SocialLink";
@@ -8,6 +8,7 @@ import { responsiveBreakpoint } from "../../utils/consts";
 import { ScreenOnly } from "../../styles";
 import { SiteMetadata_2, PersonalJson } from "../../graphql-types";
 import { isNotNullish } from "../../utils/types";
+import { fromTheme } from "../../styles/theme";
 
 const activeLinkClassName = "active";
 
@@ -60,8 +61,8 @@ const SidebarSection = styled.div``;
 const StyledDescription = styled.p``;
 
 const StyledSidebar = styled.header`
-	flex: 0 0 var(--sidebarWidth);
-	padding: var(--rootPadding);
+	flex: 0 0 ${fromTheme("sidebarWidth")};
+	padding: ${fromTheme("rootPadding")};
 
 	p,
 	${StyledDescription}, ${SidebarSection} {

@@ -1,11 +1,11 @@
 import * as React from "react";
-import styled from "styled-components";
+import styled from "../styles/styled";
 import { Helmet } from "react-helmet";
-import { backgroundColor } from "../utils/consts";
 import FlipMove from "react-flip-move";
 import DefaultLayout from "../components/layout";
 import { graphql } from "gatsby";
 import { TodoJson } from "../graphql-types";
+import { fromTheme } from "../styles/theme";
 
 interface ITodoPageProps {
 	data: {
@@ -58,7 +58,7 @@ const TodoTag = styled.div`
 	font-size: 0.8em;
 	border-radius: 4pt;
 	font-variant: small-caps;
-	color: ${backgroundColor};
+	color: ${fromTheme("backgroundColor")};
 	background-color: white;
 	cursor: pointer;
 	transition: opacity 0.5s ease;
@@ -107,10 +107,6 @@ const Todo: React.SFC<ITodoItemProps> = ({
 		)}
 	</TodoWrapper>
 );
-
-interface ITodoPageState {
-	currentTag?: string;
-}
 
 const isTodoHighlighted = (currentTag: string | undefined) => ({
 	tags,

@@ -1,5 +1,5 @@
 import * as React from "react";
-import styled from "styled-components";
+import styled from "../../styles/styled";
 import { Link } from "gatsby";
 
 export type IPaginatorProps = ObjectOmit<GatsbyPaginatorProps<any>, "group"> & {

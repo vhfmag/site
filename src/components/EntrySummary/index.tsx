@@ -1,21 +1,18 @@
 import * as React from "react";
-import styled from "styled-components";
-import {
-	themeColor,
-	backgroundColor,
-	folderToCategory,
-} from "../../utils/consts";
+import styled, { withTheme, ThemeContext } from "../../styles/styled";
+import { folderToCategory } from "../../utils/consts";
 import { IEntryHeaderProps, EntryHeader } from "../EntryHeader";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { Folder } from "../../utils/types";
+import { fromTheme, ITheme } from "../../styles/theme";
 
 type IEntrySummaryProps = HTMLOrString & IEntryHeaderProps;
 
 const StyledEntryCategoryName = styled.div`
 	margin-top: 4pt;
 	font-size: 0.8em;
-	color: ${themeColor};
+	color: ${fromTheme("themeColor")};
 `;
 
 const StyledEntryCategory = styled.div`
@@ -59,6 +56,8 @@ export const EntrySummary: React.SFC<IEntrySummaryProps> = ({
 	content,
 	...headerProps
 }) => {
+	const theme = React.useContext(ThemeContext);
+
 	return (
 		<StyledEntrySummary className="h-entry">
 			<StyledEntryCategory>
@@ -67,10 +66,10 @@ export const EntrySummary: React.SFC<IEntrySummaryProps> = ({
 						icon="circle"
 						size="lg"
 						role="presentation"
-						color={themeColor}
+						color={theme.themeColor}
 					/>
 					<FontAwesomeIcon
-						color={backgroundColor}
+						color={theme.backgroundColor}
 						transform="shrink-4"
 						role="presentation"
 						icon={iconPerFolder[headerProps.folderName]}

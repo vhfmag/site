@@ -1,7 +1,10 @@
-import styled from "styled-components";
+import styled from "../../../styles/styled";
 import { Float } from "../Float";
+import { withProps } from "../../../utils/types";
 
-export const Highlight = styled<{ size?: "small" | "medium" | "large" }>(Float)`
+export const Highlight = styled(
+	withProps<{ size?: "small" | "medium" }, typeof Float>(Float),
+)`
 	font-size: ${({ size }) =>
 		size === "small" ? "1.25em" : size === "medium" ? "1.5em" : "2em"};
 	line-height: 1;

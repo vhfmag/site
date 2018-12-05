@@ -1,16 +1,16 @@
 import * as React from "react";
-import styled from "styled-components";
-import { textColor, themeColor } from "../../utils/consts";
+import styled from "../../styles/styled";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Social_2 } from "../../graphql-types";
+import { fromTheme } from "../../styles/theme";
 
 const StyledSocialLink = styled.a`
 	font-size: 1.5em;
-	color: ${textColor} !important;
+	color: ${fromTheme("textColor")} !important;
 
 	&:active,
 	&:hover {
-		color: ${themeColor} !important;
+		color: ${fromTheme("themeColor")} !important;
 	}
 `;
 

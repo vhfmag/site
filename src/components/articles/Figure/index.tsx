@@ -1,5 +1,5 @@
 import * as React from "react";
-import styled from "styled-components";
+import styled from "../../../styles/styled";
 
 const StyledFigure = styled.figure`
 	padding: 16pt;

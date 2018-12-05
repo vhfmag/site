@@ -1,5 +1,5 @@
 import * as React from "react";
-import styled from "styled-components";
+import styled from "../../styles/styled";
 import { slugify } from "../../utils/utils";
 import { backgroundColor } from "../../utils/consts";
 

@@ -1,10 +1,9 @@
 import * as React from "react";
 import { Helmet } from "react-helmet";
-import styled, { createGlobalStyle } from "styled-components";
+import styled, { createGlobalStyle, ThemeProvider } from "../../styles/styled";
 import { StaticQuery, graphql } from "gatsby";
 import { MDXProvider } from "@mdx-js/tag";
 
-import { responsiveBreakpoint, themeColor } from "../../utils/consts";
 import { SiteMetadata_2, PersonalJson } from "../../graphql-types";
 import { Sidebar } from "../Sidebar";
 
@@ -16,6 +15,7 @@ import { generateLinkedDataTag } from "../LinkedData";
 
 import { dom } from "@fortawesome/fontawesome-svg-core";
 import { isNotNullish } from "../../utils/types";
+import { darkTheme, fromTheme } from "../../styles/theme";
 
 const GlobalStyle = createGlobalStyle`
 	* {
@@ -44,7 +44,8 @@ const GlobalStyle = createGlobalStyle`
 
 const StyledMain = styled.main`
 	--width: auto;
-	padding: var(--rootPadding);
+
+	padding: ${fromTheme("rootPadding")};
 	flex: 0 1 var(--width);
 	max-width: var(--width);
 	font-size: calc(1rem + 0.25vw);
@@ -65,24 +66,24 @@ const StyledMain = styled.main`
 		margin-top: 0;
 	}
 
-	@media (min-width: ${responsiveBreakpoint}) {
-		--width: calc(100vw - var(--sidebarWidth) - 2 * var(--rootPadding));
+	@media (min-width: ${fromTheme("responsiveBreakpoint")}) {
+		--width: calc(
+			100vw - ${fromTheme("sidebarWidth")} - 2 *
+				${fromTheme("rootPadding")}
+		);
 	}
 `;
 
 const StyledRoot = styled.div`
-	--rootPadding: 16pt;
-	--sidebarWidth: 270px;
-
 	display: flex;
 	align-items: stretch;
 
-	@media print, (max-width: ${responsiveBreakpoint}) {
+	@media print, (max-width: ${fromTheme("responsiveBreakpoint")}) {
 		flex-direction: column;
 	}
 
 	hr {
-		background-color: ${themeColor};
+		background-color: ${fromTheme("themeColor")};
 	}
 
 	.emojione {
@@ -142,104 +143,109 @@ const RawLayout: React.SFC<ILayoutData> = ({
 
 	return (
 		<MDXProvider>
-			<StyledRoot>
-				<GlobalStyle />
-				<Helmet
-					htmlAttributes={{
-						lang: "pt-br",
-					}}
-					defaultTitle={siteMetadata.title!}
-					titleTemplate={`${siteMetadata.title} | %s`}
-					meta={[
-						{
-							name: "description",
-							content: plainTextDescription,
-						},
-						{
-							name: "keywords",
-							content: [
-								"javascript",
-								"typescript",
-								"development",
-								"web development",
-								"web",
-								"privacy",
-								"decentralized web",
-								"decentralization",
-								"p2p",
-								"personal",
-								"blog",
-								"brazilian",
-							].join(", "),
-						},
-						{
-							name: "google-site-verification",
-							content:
-								"RHQh7j4JKTIEmRsQrcOD1Pk7OoLoW8VK9YG4LscV7d0",
-						},
-					]}
-				>
-					<noscript className="deferred-styles">{`
+			<ThemeProvider theme={darkTheme}>
+				<StyledRoot>
+					<GlobalStyle />
+					<Helmet
+						htmlAttributes={{
+							lang: "pt-br",
+						}}
+						defaultTitle={siteMetadata.title!}
+						titleTemplate={`${siteMetadata.title} | %s`}
+						meta={[
+							{
+								name: "description",
+								content: plainTextDescription,
+							},
+							{
+								name: "keywords",
+								content: [
+									"javascript",
+									"typescript",
+									"development",
+									"web development",
+									"web",
+									"privacy",
+									"decentralized web",
+									"decentralization",
+									"p2p",
+									"personal",
+									"blog",
+									"brazilian",
+								].join(", "),
+							},
+							{
+								name: "google-site-verification",
+								content:
+									"RHQh7j4JKTIEmRsQrcOD1Pk7OoLoW8VK9YG4LscV7d0",
+							},
+						]}
+					>
+						<noscript className="deferred-styles">{`
 						<link
 							href="//fonts.googleapis.com/css?family=Montserrat:700|Zilla+Slab:400,400i,700"
 							rel="stylesheet"
 							type="text/css"
 						/>
 					`}</noscript>
-					{generateLinkedDataTag(personLinkedData)}
-					{generateLinkedDataTag(blogLinkedData)}
+						{generateLinkedDataTag(personLinkedData)}
+						{generateLinkedDataTag(blogLinkedData)}
 
-					<link
-						rel="webmention"
-						href="https://webmention.io/victormagalhaes.codes/webmention"
+						<link
+							rel="webmention"
+							href="https://webmention.io/victormagalhaes.codes/webmention"
+						/>
+
+						<link
+							rel="pingback"
+							href="https://webmention.io/victormagalhaes.codes/xmlrpc"
+						/>
+					</Helmet>
+
+					<Sidebar
+						metadata={siteMetadata}
+						personalData={personalJson}
+						nav={[
+							{
+								name: "feed",
+								url: "/",
+								subNav: [
+									{
+										name: "posts",
+										url: "/posts",
+									},
+									{
+										name: "livros",
+										url: "/books",
+									},
+									{
+										name: "recomendações",
+										url: "/bookmarks",
+									},
+									{
+										name: "tags",
+										url: "/tags",
+									},
+								],
+							},
+							{
+								name: "todo",
+								url: "/todo",
+							},
+							{
+								name: "currículo",
+								url: "/resume",
+							},
+						]}
 					/>
 
+					<StyledMain>{children}</StyledMain>
 					<link
-						rel="pingback"
-						href="https://webmention.io/victormagalhaes.codes/xmlrpc"
+						rel="canonical"
+						href="https://victormagalhaes.codes"
 					/>
-				</Helmet>
-
-				<Sidebar
-					metadata={siteMetadata}
-					personalData={personalJson}
-					nav={[
-						{
-							name: "feed",
-							url: "/",
-							subNav: [
-								{
-									name: "posts",
-									url: "/posts",
-								},
-								{
-									name: "livros",
-									url: "/books",
-								},
-								{
-									name: "recomendações",
-									url: "/bookmarks",
-								},
-								{
-									name: "tags",
-									url: "/tags",
-								},
-							],
-						},
-						{
-							name: "todo",
-							url: "/todo",
-						},
-						{
-							name: "currículo",
-							url: "/resume",
-						},
-					]}
-				/>
-
-				<StyledMain>{children}</StyledMain>
-				<link rel="canonical" href="https://victormagalhaes.codes" />
-			</StyledRoot>
+				</StyledRoot>
+			</ThemeProvider>
 		</MDXProvider>
 	);
 };

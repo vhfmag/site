@@ -1,9 +1,9 @@
 import * as React from "react";
-import styled from "styled-components";
+import styled from "../../styles/styled";
 import Helmet from "react-helmet";
-import { themeColor } from "../../utils/consts";
 import { IEntryHeaderProps, EntryHeader } from "../EntryHeader";
 import { TableOfContents, ITreeNode } from "../TableOfContents";
+import { fromTheme } from "../../styles/theme";
 
 type IEntryProps = HTMLOrString &
 	IEntryHeaderProps & {
@@ -30,7 +30,7 @@ const StyledEntry = styled.article`
 	h5,
 	h6 {
 		.anchor path {
-			fill: ${themeColor};
+			fill: ${fromTheme("themeColor")};
 		}
 	}
 `;

@@ -1,5 +1,5 @@
 import * as React from "react";
-import styled from "styled-components";
+import styled from "../../../styles/styled";
 
 export const StyledHighlight = styled.blockquote`
 	@media (min-width: 600px) {
@@ -27,6 +27,7 @@ export function Float({
 	position = "right",
 	ref: _,
 	children,
+	as,
 	...blockquoteProps
 }: IFloatProps): React.ReactElement<{}> {
 	return (

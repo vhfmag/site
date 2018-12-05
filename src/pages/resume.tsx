@@ -1,10 +1,5 @@
 import * as React from "react";
-import {
-	responsiveBreakpoint,
-	backgroundColor,
-	themeColor,
-} from "../utils/consts";
-import styled from "styled-components";
+import styled from "../styles/styled";
 import {
 	SkillsJson,
 	ExperiencesJson,
@@ -16,6 +11,7 @@ import { Helmet } from "react-helmet";
 import DefaultLayout from "../components/layout";
 import { graphql } from "gatsby";
 import { isNotNullish } from "../utils/types";
+import { fromTheme } from "../styles/theme";
 
 interface IResumePageProps {
 	data: {
@@ -81,12 +77,12 @@ const StyledCompetences = styled.section`
 		display: grid;
 		grid-gap: 8pt;
 
-		@media screen and (min-width: ${responsiveBreakpoint}) {
+		@media screen and (min-width: ${fromTheme("responsiveBreakpoint")}) {
 			grid-auto-flow: column;
 			grid-template-rows: auto auto;
 		}
 
-		@media print, (max-width: ${responsiveBreakpoint}) {
+		@media print, (max-width: ${fromTheme("responsiveBreakpoint")}) {
 			grid-auto-flow: row;
 			grid-template-columns: auto auto;
 		}
@@ -162,8 +158,8 @@ const StyledExperienceSkills = styled.ul`
 		font-size: 0.8em;
 		padding: 0.25em 0.5em;
 		border-radius: 4pt;
-		color: ${backgroundColor};
-		background-color: ${themeColor};
+		color: ${fromTheme("backgroundColor")};
+		background-color: ${fromTheme("themeColor")};
 	}
 `;
 
@@ -183,14 +179,14 @@ const StyledExperience = styled.div`
 
 	h4 {
 		all: unset;
-		color: ${themeColor};
+		color: ${fromTheme("themeColor")};
 		font-weight: bold;
 		font-size: 1.2em;
 	}
 
 	h5 {
 		all: unset;
-		color: ${themeColor};
+		color: ${fromTheme("themeColor")};
 		font-weight: bold;
 	}
 

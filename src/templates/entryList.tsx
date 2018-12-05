@@ -5,7 +5,7 @@ import { graphql } from "gatsby";
 import DefaultLayout from "../components/layout";
 import { Paginator } from "../components/Paginator";
 import { GeneralMetadataFragment, IMarkdownEntryFragment } from "../fragments";
-import styled from "styled-components";
+import styled from "../styles/styled";
 import { isFolder } from "../utils/types";
 
 const ListWrapper = styled.div`
