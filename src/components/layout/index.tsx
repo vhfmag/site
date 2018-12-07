@@ -181,21 +181,12 @@ const RawLayout: React.SFC<ILayoutData> = ({
 							},
 						]}
 					>
-						<noscript className="deferred-styles">{`
-						<link
-							href="//fonts.googleapis.com/css?family=Montserrat:700|Zilla+Slab:400,400i,700"
-							rel="stylesheet"
-							type="text/css"
-						/>
-					`}</noscript>
 						{generateLinkedDataTag(personLinkedData)}
 						{generateLinkedDataTag(blogLinkedData)}
-
 						<link
 							rel="webmention"
 							href="https://webmention.io/victormagalhaes.codes/webmention"
 						/>
-
 						<link
 							rel="pingback"
 							href="https://webmention.io/victormagalhaes.codes/xmlrpc"
@@ -251,18 +242,6 @@ const RawLayout: React.SFC<ILayoutData> = ({
 };
 
 const DefaultLayout: React.SFC = ({ children }) => {
-	React.useEffect(() => {
-		const addStylesNode = document.getElementById("deferred-styles");
-		if (!addStylesNode) {
-			return;
-		}
-
-		const replacement = document.createElement("div");
-		replacement.innerHTML = addStylesNode.textContent!;
-		document.body.appendChild(replacement);
-		addStylesNode.parentElement!.removeChild(addStylesNode);
-	}, []);
-
 	return (
 		<StaticQuery
 			query={graphql`
