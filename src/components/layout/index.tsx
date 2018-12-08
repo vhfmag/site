@@ -199,6 +199,10 @@ const RawLayout: React.SFC<ILayoutData> = ({
 							rel="pingback"
 							href="https://webmention.io/victormagalhaes.codes/xmlrpc"
 						/>
+						<link
+							rel="canonical"
+							href="https://victormagalhaes.codes"
+						/>
 					</Helmet>
 
 					<SkipNavLink>Pular para conteúdo</SkipNavLink>
@@ -242,10 +246,6 @@ const RawLayout: React.SFC<ILayoutData> = ({
 					<SkipNavContent />
 
 					<StyledMain>{children}</StyledMain>
-					<link
-						rel="canonical"
-						href="https://victormagalhaes.codes"
-					/>
 				</StyledRoot>
 			</ThemeProvider>
 		</MDXProvider>
