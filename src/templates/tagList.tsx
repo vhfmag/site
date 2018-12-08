@@ -38,11 +38,11 @@ interface ITagListProps {
 const StyledTagUl = styled.ul`
 	display: flex;
 	flex-wrap: wrap;
-	margin: -4pt;
+	margin: -8pt;
 
 	> li,
 	> [role="listitem"] {
-		margin: 4pt;
+		margin: 8pt;
 		padding: 2pt 4pt;
 		border-radius: 4pt;
 		color: ${fromTheme("backgroundColor")};

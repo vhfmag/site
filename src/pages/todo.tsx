@@ -46,10 +46,10 @@ const TodoTitle = styled.div`
 const TodoTags = styled.div`
 	display: flex;
 	flex-wrap: wrap;
-	margin: -4pt;
+	margin: -8pt;
 
 	& > * {
-		margin: 4pt;
+		margin: 8pt;
 	}
 `;
 
