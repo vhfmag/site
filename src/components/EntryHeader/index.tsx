@@ -62,7 +62,7 @@ const StyledTags = styled.ul`
 		color: ${fromTheme("backgroundColor")};
 
 		a {
-			all: unset;
+			color: inherit;
 		}
 	}
 `;
@@ -169,7 +169,7 @@ export const EntryHeader: React.SFC<
 				</StyledMetadata>
 			)}
 			{tags && (
-				<StyledTags>
+				<StyledTags aria-label="Tags">
 					{tags.map(tag => (
 						<li key={tag}>
 							<a

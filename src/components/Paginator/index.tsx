@@ -1,6 +1,7 @@
 import * as React from "react";
 import styled from "../../styles/styled";
 import { Link } from "gatsby";
+import VisuallyHidden from "@reach/visually-hidden";
 
 export type IPaginatorProps = ObjectOmit<GatsbyPaginatorProps<any>, "group"> & {
 	className?: string;
@@ -37,7 +38,7 @@ export const Paginator: React.SFC<IPaginatorProps> = ({
 	className,
 	additionalContext: { listTitle },
 }) => (
-	<StyledNav className={className}>
+	<StyledNav aria-label="Paginação" className={className}>
 		{" "}
 		<Link
 			className={(first && "disabled") || ""}
@@ -47,7 +48,8 @@ export const Paginator: React.SFC<IPaginatorProps> = ({
 			title={`Primeira página anterior de ${listTitle}`}
 		>
 			{" "}
-			&lt;&lt;{" "}
+			<span aria-hidden>&lt;&lt;</span>{" "}
+			<VisuallyHidden>Primeira página</VisuallyHidden>
 		</Link>{" "}
 		<Link
 			className={(first && "disabled") || ""}
@@ -57,7 +59,8 @@ export const Paginator: React.SFC<IPaginatorProps> = ({
 			title={`Página anterior de ${listTitle}`}
 		>
 			{" "}
-			&lt;{" "}
+			<span aria-hidden>&lt;</span>{" "}
+			<VisuallyHidden>Página anterior</VisuallyHidden>
 		</Link>{" "}
 		{Array.from(new Array(pageCount))
 			.map((_, i) => i + 1)
@@ -85,7 +88,8 @@ export const Paginator: React.SFC<IPaginatorProps> = ({
 			title={`Página seguinte de ${listTitle}`}
 		>
 			{" "}
-			&gt;{" "}
+			<span aria-hidden>&gt;</span>{" "}
+			<VisuallyHidden>Próxima página</VisuallyHidden>
 		</Link>{" "}
 		<Link
 			className={(last && "disabled") || ""}
@@ -95,7 +99,8 @@ export const Paginator: React.SFC<IPaginatorProps> = ({
 			title={`Última página de ${listTitle}`}
 		>
 			{" "}
-			&gt;&gt;{" "}
+			<span aria-hidden>&gt;&gt;</span>{" "}
+			<VisuallyHidden>Última página</VisuallyHidden>
 		</Link>{" "}
 	</StyledNav>
 );

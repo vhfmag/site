@@ -16,6 +16,8 @@ import { generateLinkedDataTag } from "../LinkedData";
 import { dom } from "@fortawesome/fontawesome-svg-core";
 import { isNotNullish } from "../../utils/types";
 import { darkTheme, fromTheme } from "../../styles/theme";
+import { SkipNavContent, SkipNavLink } from "@reach/skip-nav";
+import "@reach/skip-nav/styles.css";
 
 const GlobalStyle = createGlobalStyle`
 	* {
@@ -37,6 +39,12 @@ const GlobalStyle = createGlobalStyle`
 	a:active,
 	a:focus {
 		opacity: 0.75;
+	}
+
+	[data-reach-skip-link]:focus {
+		background-color: ${fromTheme("themeColor")} !important;
+		color: ${fromTheme("backgroundColor")} !important;
+		opacity: 1;
 	}
 
 	${dom.css()}
@@ -193,6 +201,7 @@ const RawLayout: React.SFC<ILayoutData> = ({
 						/>
 					</Helmet>
 
+					<SkipNavLink>Pular para conteúdo</SkipNavLink>
 					<Sidebar
 						metadata={siteMetadata}
 						personalData={personalJson}
@@ -229,6 +238,8 @@ const RawLayout: React.SFC<ILayoutData> = ({
 							},
 						]}
 					/>
+
+					<SkipNavContent />
 
 					<StyledMain>{children}</StyledMain>
 					<link
