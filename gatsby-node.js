@@ -114,7 +114,7 @@ function createEntryPages({
 				),
 			);
 
-			const basePath = `/${pathPrefix}/tags`;
+			const basePath = `/${pathPrefix}/tags/`;
 			const getTagPath = tag =>
 				`${basePath}/${slugify(tag)}`.replace(/\/{2,}/g, "/");
 

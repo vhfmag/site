@@ -216,29 +216,29 @@ const RawLayout: React.SFC<ILayoutData> = ({
 								subNav: [
 									{
 										name: "posts",
-										url: "/posts",
+										url: "/posts/",
 									},
 									{
 										name: "livros",
-										url: "/books",
+										url: "/books/",
 									},
 									{
 										name: "recomendações",
-										url: "/bookmarks",
+										url: "/bookmarks/",
 									},
 									{
 										name: "tags",
-										url: "/tags",
+										url: "/tags/",
 									},
 								],
 							},
 							{
 								name: "todo",
-								url: "/todo",
+								url: "/todo/",
 							},
 							{
 								name: "currículo",
-								url: "/resume",
+								url: "/resume/",
 							},
 						]}
 					/>
