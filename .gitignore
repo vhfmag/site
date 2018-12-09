@@ -10,4 +10,5 @@ yarn-error.log
 .netlify
 # Reports
 siteaudit/
+hint-report/
 report.html
