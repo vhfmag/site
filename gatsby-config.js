@@ -207,6 +207,7 @@ module.exports = {
 					"/*.jpeg": [netlifyCacheControlHeader],
 					"/*.gif": [netlifyCacheControlHeader],
 					"/*.svg": [netlifyCacheControlHeader],
+					"/*.woff2": [netlifyCacheControlHeader],
 				},
 				allPageHeaders: [
 					"Strict-Transport-Security: max-age=31536000",
