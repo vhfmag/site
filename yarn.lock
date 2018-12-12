@@ -6293,6 +6293,13 @@ gatsby-plugin-webpack-bundle-analyzer@^1.0.3:
   dependencies:
     webpack-bundle-analyzer "^2.13.1"
 
+gatsby-plugin-webpack-size@^0.0.3:
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-webpack-size/-/gatsby-plugin-webpack-size-0.0.3.tgz#5d4dd4740668efa551fb7055a788253ab196ebf0"
+  integrity sha512-+SeXLobugpnDd9ZMKTQqypvUi67XjzJJm4NfNhOsEiRVbOep4TJNWGYzh4smb29/26cT/ZKfg+tdeTYpuB6AXA==
+  dependencies:
+    size-plugin "^1.0.1"
+
 gatsby-plugin-zopfli@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/gatsby-plugin-zopfli/-/gatsby-plugin-zopfli-1.0.2.tgz#3a0736d19d3de4164e93cbf56448c501e7480726"
@@ -7151,6 +7158,14 @@ gzip-size@^4.1.0:
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/gzip-size/-/gzip-size-4.1.0.tgz#8ae096257eabe7d69c45be2b67c448124ffb517c"
   integrity sha1-iuCWJX6r59acRb4rZ8RIEk/7UXw=
+  dependencies:
+    duplexer "^0.1.1"
+    pify "^3.0.0"
+
+gzip-size@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/gzip-size/-/gzip-size-5.0.0.tgz#a55ecd99222f4c48fd8c01c625ce3b349d0a0e80"
+  integrity sha512-5iI7omclyqrnWw4XbXAmGhPsABkSIDQonv2K0h61lybgofWa6iZyvrI3r2zsJH4P8Nb64fFVzlvfhs0g7BBxAA==
   dependencies:
     duplexer "^0.1.1"
     pify "^3.0.0"
@@ -12629,6 +12644,19 @@ sitemap@^1.12.0:
   dependencies:
     underscore "^1.7.0"
     url-join "^1.1.0"
+
+size-plugin@^1.0.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/size-plugin/-/size-plugin-1.1.1.tgz#2d9e44752e552e15c6c558cb10966858b4a0e5b3"
+  integrity sha512-32k0gfNVkP8bHYtA1zmgsko6kKRuB97l480rmnUxQe9jHabYSx29psB2eFXb9dlqQww0T1E/cqV2D1fXaFnjfQ==
+  dependencies:
+    chalk "^2.4.1"
+    escape-string-regexp "^1.0.5"
+    glob "^7.1.2"
+    gzip-size "^5.0.0"
+    minimatch "^3.0.4"
+    pretty-bytes "^5.1.0"
+    util.promisify "^1.0.0"
 
 slash@^1.0.0:
   version "1.0.0"
