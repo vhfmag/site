@@ -84,7 +84,7 @@
 		"start": "gatsby serve",
 		"prepare": "patch-package",
 		"develop": "gatsby develop",
-		"generate-types": "gql-gen --schema http://localhost:8000/___graphql --template graphql-codegen-typescript-template --out ./src/graphql-types.d.ts",
+		"generate-types": "gql-gen",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"devDependencies": {
