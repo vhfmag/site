@@ -19,9 +19,6 @@ const HeadLink = styled(Link)`
 `;
 
 const StyledNav = styled.nav`
-	padding-top: 1.6785em;
-	padding-bottom: 1.6785em;
-
 	ul {
 		list-style: none;
 		margin: -2pt -4pt;
@@ -65,8 +62,12 @@ const StyledSidebar = styled.header`
 	padding: ${fromTheme("rootPadding")};
 
 	p,
-	${StyledDescription}, ${SidebarSection} {
-		margin: 0 0 1.6785em;
+	${StyledDescription}, ${SidebarSection}, ${StyledNav} {
+		margin: 1.2em 0;
+
+		:first-child {
+			margin-top: 0;
+		}
 	}
 
 	> h1 {
