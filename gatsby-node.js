@@ -67,6 +67,12 @@ function buildPageQuery(pageKind = ".*") {
 	`;
 }
 
+/**
+ *
+ * @typedef MdxEdge
+ * @type {import("./src/graphql-types").MdxEdge & { node?: { parent?: import("./src/graphql-types").File }}}
+ */
+
 function createEntryPages({
 	pageKind = undefined,
 	createPage,
@@ -82,7 +88,7 @@ function createEntryPages({
 				throw result.errors[0];
 			}
 
-			/** @type {import("./src/graphql-types").MarkdownRemarkEdge[]} */
+			/** @type {MdxEdge[]} */
 			const rawEdges = result.data.allMdx.edges;
 
 			const postEdges = rawEdges
