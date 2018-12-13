@@ -9,7 +9,7 @@ import { isFolder } from "../utils/types";
 
 /**
  * @typedef {Object} IEntryTemplateProps
- * @property {import("../fragments").GeneralMetadataFragment & { mdx: import("../fragments").IMarkdownEntryFragment, code: { body: any } }} data
+ * @property {import("../fragments").IGeneralMetadataFragment & { mdx: import("../fragments").IMarkdownEntryFragment, code: { body: any } }} data
  */
 
 /**

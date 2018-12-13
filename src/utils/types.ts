@@ -13,12 +13,12 @@ export function isNotNullish<T>(
 }
 
 export type WithProps<
-	U,
-	C extends React.ComponentType<P>
-> = C extends React.Component<infer P>
-	? React.Component<P & U>
-	: C extends React.SFC<infer P>
-	? React.SFC<P & U>
+	ProvidedProps,
+	Component extends React.ComponentType<any>
+> = Component extends React.Component<infer ClassProps>
+	? React.Component<ClassProps & ProvidedProps>
+	: Component extends React.SFC<infer SFCProps>
+	? React.SFC<SFCProps & ProvidedProps>
 	: never;
 
 export function withProps<U, C extends React.ComponentType<any>>(

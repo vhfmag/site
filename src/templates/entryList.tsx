@@ -4,7 +4,7 @@ import Helmet from "react-helmet";
 import { graphql } from "gatsby";
 import DefaultLayout from "../components/layout";
 import { Paginator } from "../components/Paginator";
-import { GeneralMetadataFragment, IMarkdownEntryFragment } from "../fragments";
+import { IGeneralMetadataFragment, IMarkdownEntryFragment } from "../fragments";
 import styled from "../styles/styled";
 import { isFolder } from "../utils/types";
 
@@ -17,7 +17,7 @@ interface IEntryNode {
 }
 
 interface IBookmarkListProps {
-	data: GeneralMetadataFragment;
+	data: IGeneralMetadataFragment;
 	pathContext: GatsbyPaginatorProps<IEntryNode>;
 }
 
@@ -49,7 +49,6 @@ const EntryList: React.SFC<IBookmarkListProps> = ({
 					({
 						node: {
 							fileAbsolutePath,
-							excerpt,
 							frontmatter: { title, authors, link, date, tags },
 							timeToRead,
 							parent: {
@@ -76,7 +75,6 @@ const EntryList: React.SFC<IBookmarkListProps> = ({
 								fileName={fileName}
 								tags={tags}
 								folderName={relativeDirectory}
-								content={excerpt}
 								wordCount={words}
 								timeToRead={timeToRead}
 							/>

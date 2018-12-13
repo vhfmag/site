@@ -16,17 +16,28 @@ function formatDate(date) {
 }
 
 /**
- * @param {import("../graphql-types").MarkdownRemarkEdge} edge
+ *
+ * @typedef MdxEdge
+ * @type {import("../graphql-types").MdxEdge & { node?: { parent?: import("../graphql-types").File }}}
+ */
+
+/**
+ * @param {MdxEdge} edge
  */
 function getEdgeTimestamp(edge) {
+	if (!edge.node) {
+		throw new Error("Invalid edge");
+	}
+
 	return new Date(
-		edge.node.frontmatter.date || edge.node.parent.birthTime,
+		(edge.node.frontmatter && edge.node.frontmatter.date) ||
+			(edge.node.parent && edge.node.parent.birthTime),
 	).valueOf();
 }
 
 /**
- * @param {import("../graphql-types").MarkdownRemarkEdge} e1
- * @param {import("../graphql-types").MarkdownRemarkEdge} e2
+ * @param {MdxEdge} e1
+ * @param {MdxEdge} e2
  */
 function compareEntryEdges(e1, e2) {
 	const t1 = getEdgeTimestamp(e1);
@@ -35,9 +46,12 @@ function compareEntryEdges(e1, e2) {
 	if (t1 !== t2) {
 		return t2 - t1;
 	} else {
-		return e1.node.frontmatter.title.localeCompare(
-			e2.node.frontmatter.title,
-		);
+		const title1 =
+			(e1.node && e1.node.frontmatter && e1.node.frontmatter.title) || "";
+		const title2 =
+			(e2.node && e2.node.frontmatter && e2.node.frontmatter.title) || "";
+
+		return title1.localeCompare(title2);
 	}
 }
 

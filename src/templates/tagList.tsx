@@ -1,6 +1,6 @@
 import * as React from "react";
 import Helmet from "react-helmet";
-import { GeneralMetadataFragment } from "../fragments";
+import { IGeneralMetadataFragment } from "../fragments";
 import DefaultLayout from "../components/layout";
 import styled from "../styles/styled";
 import { fromTheme } from "../styles/theme";
@@ -31,7 +31,7 @@ interface IEntryNode {
 }
 
 interface ITagListProps {
-	data: GeneralMetadataFragment;
+	data: IGeneralMetadataFragment;
 	pathContext: IEntryNode;
 }
 

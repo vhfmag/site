@@ -1,10 +1,10 @@
 import { graphql } from "gatsby";
 
 export interface IMarkdownEntryFragment {
-	htmlAst: any;
 	headings?: Array<{ depth: number; value: string }>;
 	excerpt: string;
 	timeToRead: number;
+	code: { body: any };
 	count: {
 		words: number;
 	};
@@ -28,7 +28,7 @@ export interface IMarkdownEntryFragment {
 	};
 }
 
-export interface GeneralMetadataFragment {
+export interface IGeneralMetadataFragment {
 	site: {
 		siteMetadata: {
 			siteUrl: string;

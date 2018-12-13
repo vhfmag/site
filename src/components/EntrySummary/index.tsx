@@ -1,13 +1,13 @@
 import * as React from "react";
-import styled, { withTheme, ThemeContext } from "../../styles/styled";
+import styled, { ThemeContext } from "../../styles/styled";
 import { folderToCategory } from "../../utils/consts";
 import { IEntryHeaderProps, EntryHeader } from "../EntryHeader";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { Folder } from "../../utils/types";
-import { fromTheme, ITheme } from "../../styles/theme";
+import { fromTheme } from "../../styles/theme";
 
-type IEntrySummaryProps = HTMLOrString & IEntryHeaderProps;
+type IEntrySummaryProps = IEntryHeaderProps;
 
 const StyledEntryCategoryName = styled.div`
 	margin-top: 4pt;
@@ -52,8 +52,6 @@ const iconPerFolder: Record<Folder, IconProp> = {
 };
 
 export const EntrySummary: React.SFC<IEntrySummaryProps> = ({
-	htmlAst,
-	content,
 	...headerProps
 }) => {
 	const theme = React.useContext(ThemeContext);

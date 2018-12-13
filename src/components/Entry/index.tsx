@@ -5,11 +5,11 @@ import { IEntryHeaderProps, EntryHeader } from "../EntryHeader";
 import { TableOfContents, ITreeNode } from "../TableOfContents";
 import { fromTheme } from "../../styles/theme";
 
-type IEntryProps = HTMLOrString &
-	IEntryHeaderProps & {
-		headings: Array<Required<IHeading>> | undefined;
-		toc: boolean | undefined;
-	};
+type IEntryProps = IEntryHeaderProps & {
+	headings: Array<Required<IHeading>> | undefined;
+	toc: boolean | undefined;
+	content?: React.ReactNode;
+};
 
 const StyledEntry = styled.article`
 	.footnotes {

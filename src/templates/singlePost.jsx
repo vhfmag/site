@@ -9,7 +9,7 @@ import { isFolder } from "../utils/types";
 
 /**
  * @typedef {Object} IPostTemplateProps
- * @property {import("../fragments").GeneralMetadataFragment & { mdx: import("../fragments").IMarkdownEntryFragment, code: { body: any } }} data
+ * @property {import("../fragments").IGeneralMetadataFragment & { mdx: import("../fragments").IMarkdownEntryFragment, code: { body: any } }} data
  */
 
 /**
@@ -22,7 +22,6 @@ const SinglePostTemplate = ({
 		},
 		personalJson: { name },
 		mdx: {
-			htmlAst,
 			headings,
 			excerpt,
 			code: { body },
@@ -66,7 +65,6 @@ const SinglePostTemplate = ({
 				subtitle={description}
 				publishDate={new Date(date || birthTime)}
 				authors={[{ name, url: siteUrl }]}
-				htmlAst={htmlAst}
 				headings={headings}
 				tags={tags}
 				wordCount={words}

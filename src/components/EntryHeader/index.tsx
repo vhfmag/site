@@ -8,7 +8,7 @@ import { fromTheme } from "../../styles/theme";
 
 export interface IEntryHeaderProps {
 	title: string;
-	authors: Authors_2[];
+	authors?: Authors_2[];
 	tags?: string[];
 
 	subtitle?: NonNullableNode;

@@ -1,8 +1,5 @@
 declare type DeepNonNullable<T> = { [K in keyof T]-?: NonNullable<T[K]> };
 declare type NonNullableNode = NonNullable<React.ReactNode>;
-declare type HTMLOrString =
-	| { content: NonNullableNode; htmlAst?: undefined }
-	| { htmlAst: Object; content?: undefined };
 
 declare interface GatsbyPaginatorProps<T> {
 	first: boolean;
