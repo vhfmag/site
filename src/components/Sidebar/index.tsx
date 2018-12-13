@@ -137,6 +137,10 @@ export const Sidebar: React.SFC<ISidebarProps> = ({
 				{title}
 			</HeadLink>
 		</SidebarSection>
+		<SidebarSection
+			dangerouslySetInnerHTML={{ __html: description! }}
+			className="lead p-note"
+		/>
 		<SidebarSection>
 			<div>
 				<a className="u-email" href={`mailto:${email}`}>
@@ -147,10 +151,6 @@ export const Sidebar: React.SFC<ISidebarProps> = ({
 				<a href={sourceUrl!}>ver código fonte</a>
 			</ScreenOnly>
 		</SidebarSection>
-		<div
-			dangerouslySetInnerHTML={{ __html: description! }}
-			className="lead p-note"
-		/>
 		<StyledNav>
 			<NavLinks navs={nav} />
 		</StyledNav>
