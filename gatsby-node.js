@@ -23,11 +23,6 @@ function buildPageQuery(pageKind = ".*") {
 		{
 			allMdx(
 				filter: {
-					${
-						process.env.NODE_ENV === "production"
-							? `frontmatter: { draft: { ne: true } },`
-							: ""
-					}
 					fileAbsolutePath: {regex: "/${pageKind}/.*\.md/"}
 				}
 			) {
@@ -54,6 +49,7 @@ function buildPageQuery(pageKind = ".*") {
 							description
 							date
 							tags
+							draft
 							authors {
 								name
 								url
@@ -91,7 +87,7 @@ function createEntryPages({
 			/** @type {MdxEdge[]} */
 			const rawEdges = result.data.allMdx.edges;
 
-			const postEdges = rawEdges
+			const allEdges = rawEdges
 				.map(edge => {
 					edge.node.frontmatter.tags =
 						edge.node.frontmatter.tags &&
@@ -99,6 +95,15 @@ function createEntryPages({
 					return edge;
 				})
 				.sort(compareEntryEdges);
+
+			const nonDraftEdges = allEdges.filter(
+				edge => !edge.node.frontmatter.draft,
+			);
+
+			const postEdges =
+				process.env.NODE_ENV === "production"
+					? nonDraftEdges
+					: allEdges;
 
 			const tags = Array.from(
 				new Set(
@@ -164,7 +169,7 @@ function createEntryPages({
 			});
 
 			if (!disableSinglePage) {
-				postEdges.forEach(
+				allEdges.forEach(
 					({
 						node: {
 							fileAbsolutePath: markdownPath,
@@ -176,7 +181,7 @@ function createEntryPages({
 							path: `/${folder}/${slug}`,
 							component: componentWithMDXScope(
 								folderToPageTemplate[folder],
-								scope,
+								[scope],
 							),
 							context: {
 								markdownPath,
