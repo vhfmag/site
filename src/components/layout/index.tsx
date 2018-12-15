@@ -211,13 +211,9 @@ const RawLayout: React.SFC<ILayoutData> = ({
 						personalData={personalJson}
 						nav={[
 							{
-								name: "feed",
+								name: "blog",
 								url: "/",
 								subNav: [
-									{
-										name: "posts",
-										url: "/posts/",
-									},
 									{
 										name: "livros",
 										url: "/books/",
@@ -229,6 +225,10 @@ const RawLayout: React.SFC<ILayoutData> = ({
 									{
 										name: "tags",
 										url: "/tags/",
+									},
+									{
+										name: "todos",
+										url: "/all/",
 									},
 								],
 							},

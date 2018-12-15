@@ -288,17 +288,17 @@ exports.createPages = ({ actions, graphql: graphqlQuerier }) => {
 		resolve(
 			Promise.all([
 				createEntryPages({
-					graphqlQuerier,
-					createPage,
-					listTitle: "Feed",
-					disableSinglePage: true,
-				}),
-				createEntryPages({
 					pageKind: "posts",
 					graphqlQuerier,
 					createPage,
-					listTitle: "Posts",
-					pathPrefix: "posts",
+					listTitle: "Blog",
+					disableSinglePage: true,
+				}),
+				createEntryPages({
+					graphqlQuerier,
+					createPage,
+					listTitle: "Todos",
+					pathPrefix: "all",
 				}),
 				createEntryPages({
 					pageKind: "books",
@@ -311,7 +311,7 @@ exports.createPages = ({ actions, graphql: graphqlQuerier }) => {
 					pageKind: "bookmarks",
 					graphqlQuerier,
 					createPage,
-					listTitle: "Recomendações",
+					listTitle: "Links",
 					pathPrefix: "bookmarks",
 				}),
 			]),
