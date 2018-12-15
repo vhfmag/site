@@ -106,6 +106,11 @@ module.exports = {
 		{
 			resolve: "gatsby-mdx",
 			options: {
+				defaultLayouts: {
+					default: require.resolve(
+						"./src/components/layout/index.tsx",
+					),
+				},
 				gatsbyRemarkPlugins: [
 					{ resolve: "gatsby-remark-autolink-headers" },
 					{ resolve: "gatsby-remark-emoji-unicode" },
