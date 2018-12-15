@@ -220,8 +220,8 @@ const RawLayout: React.SFC<ILayoutData> = ({ site: { siteMetadata }, personalJso
 										url: "/tags/",
 									},
 									{
-										name: "todos",
-										url: "/all/",
+										name: "arquivo",
+										url: "/archive/",
 									},
 								],
 							},

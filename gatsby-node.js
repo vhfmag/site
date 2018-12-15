@@ -297,8 +297,8 @@ exports.createPages = ({ actions, graphql: graphqlQuerier }) => {
 				createEntryPages({
 					graphqlQuerier,
 					createPage,
-					listTitle: "Todos",
-					pathPrefix: "all",
+					listTitle: "Arquivo",
+					pathPrefix: "archive",
 				}),
 				createEntryPages({
 					pageKind: "books",
