@@ -1,7 +1,7 @@
 import * as React from "react";
 import { EntrySummary } from "../components/EntrySummary";
 import Helmet from "react-helmet";
-import { graphql } from "gatsby";
+import { graphql, Link } from "gatsby";
 import DefaultLayout from "../components/layout";
 import { Paginator } from "../components/Paginator";
 import { IGeneralMetadataFragment, IMarkdownEntryFragment } from "../fragments";
@@ -20,6 +20,22 @@ interface IBookmarkListProps {
 	data: IGeneralMetadataFragment;
 	pathContext: GatsbyPaginatorProps<IEntryNode>;
 }
+
+const BlogNav = styled.nav`
+	--nav-gap: 4pt;
+
+	ul {
+		all: unset;
+		display: flex;
+		flex-wrap: wrap;
+		margin: calc(-1 * var(--nav-gap));
+
+		li {
+			all: unset;
+			margin: var(--nav-gap);
+		}
+	}
+`;
 
 const bodyAttributes = { class: "h-feed" };
 
@@ -43,6 +59,22 @@ const EntryList: React.SFC<IBookmarkListProps> = ({
 		<DefaultLayout>
 			<Helmet title={listTitle} bodyAttributes={bodyAttributes} />
 			<h1>{listTitle}</h1>
+			<details>
+				<summary>Outras seções do blog</summary>
+				<BlogNav>
+					<ul>
+						<li>
+							<Link to="/">Posts</Link>
+						</li>
+						<li>
+							<Link to="/bookmarks">Bookmarks</Link>
+						</li>
+						<li>
+							<Link to="/archive">Arquivo</Link>
+						</li>
+					</ul>
+				</BlogNav>
+			</details>
 			<Paginator {...pathContext} />
 			<ListWrapper>
 				{posts.map(

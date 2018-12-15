@@ -47,6 +47,34 @@ const GlobalStyle = createGlobalStyle`
 		}
 	}
 
+	details {
+		--status-indicator-size: 0.5em;
+
+		summary {
+			color: ${fromTheme("themeColor")};
+			display: flex;
+			align-items: center;
+
+			&::before {
+				content: "";
+				width: 0;
+				height: 0;
+				margin: 0 0.5em;
+				display: inline-block;
+				transition: all .25s ease;
+				border-top: var(--status-indicator-size) solid transparent;
+				border-bottom: var(--status-indicator-size) solid transparent;
+				border-left: var(--status-indicator-size) solid currentColor;
+			}
+		}
+
+		&[open] {
+			summary::before {
+				transform: rotate(90deg);
+			}
+		}
+	}
+
 	[data-reach-skip-link]:focus {
 		background-color: ${fromTheme("themeColor")} !important;
 		color: ${fromTheme("backgroundColor")} !important;
@@ -156,7 +184,7 @@ const RawLayout: React.SFC<ILayoutData> = ({ site: { siteMetadata }, personalJso
 							lang: "pt-br",
 						}}
 						defaultTitle={siteMetadata.title!}
-						titleTemplate={`${siteMetadata.title} | %s`}
+						titleTemplate={`%s — ${siteMetadata.title}`}
 						meta={[
 							{
 								name: "description",
@@ -206,24 +234,6 @@ const RawLayout: React.SFC<ILayoutData> = ({ site: { siteMetadata }, personalJso
 							{
 								name: "blog",
 								url: "/",
-								subNav: [
-									{
-										name: "livros",
-										url: "/books/",
-									},
-									{
-										name: "recomendações",
-										url: "/bookmarks/",
-									},
-									{
-										name: "tags",
-										url: "/tags/",
-									},
-									{
-										name: "arquivo",
-										url: "/archive/",
-									},
-								],
 							},
 							{
 								name: "todo",
