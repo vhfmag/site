@@ -65,7 +65,8 @@ const StyledMain = styled.main`
 	font-size: calc(1rem + 0.25vw);
 
 	p,
-	hr {
+	hr,
+	dl {
 		max-width: 70ch;
 		text-align: justify;
 		hyphens: auto;

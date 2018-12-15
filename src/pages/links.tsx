@@ -9,16 +9,18 @@ const LinksPage: React.FunctionComponent<{ data: any }> = ({ data }) => {
 			{data.allLinksJson.edges.map(({ node }) => (
 				<React.Fragment key={node.name}>
 					<h2>{node.name}</h2>
-					{node.links.map(link => (
-						<React.Fragment key={link.url}>
-							<dt>
-								<a href={link.url}>{link.name}</a>
-							</dt>
-							{link.description && (
-								<dd dangerouslySetInnerHTML={{ __html: link.description }} />
-							)}
-						</React.Fragment>
-					))}
+					<dl>
+						{node.links.map(link => (
+							<React.Fragment key={link.url}>
+								<dt>
+									<a href={link.url}>{link.name}</a>
+								</dt>
+								{link.description && (
+									<dd dangerouslySetInnerHTML={{ __html: link.description }} />
+								)}
+							</React.Fragment>
+						))}
+					</dl>
 				</React.Fragment>
 			))}
 		</DefaultLayout>
