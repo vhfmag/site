@@ -43,9 +43,7 @@ const iconPerFolder: Record<Folder, IconProp> = {
 	bookmarks: "bookmark",
 };
 
-export const EntrySummary: React.SFC<IEntrySummaryProps> = ({
-	...headerProps
-}) => {
+export const EntrySummary: React.SFC<IEntrySummaryProps> = ({ ...headerProps }) => {
 	const theme = React.useContext(ThemeContext);
 
 	return (

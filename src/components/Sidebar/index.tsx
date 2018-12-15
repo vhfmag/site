@@ -157,12 +157,7 @@ export const Sidebar: React.SFC<ISidebarProps> = ({
 		</StyledNav>
 		<SocialLinks>
 			<li>
-				<SocialLink
-					icon="rss"
-					serviceName="RSS"
-					rel="alternate"
-					url="/rss.xml"
-				/>
+				<SocialLink icon="rss" serviceName="RSS" rel="alternate" url="/rss.xml" />
 			</li>
 			{social!.filter(isNotNullish).map(socialProps => (
 				<li key={socialProps.serviceName!}>

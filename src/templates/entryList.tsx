@@ -51,11 +51,7 @@ const EntryList: React.SFC<IBookmarkListProps> = ({
 							fileAbsolutePath,
 							frontmatter: { title, authors, link, date, tags },
 							timeToRead,
-							parent: {
-								birthTime,
-								name: fileName,
-								relativeDirectory,
-							},
+							parent: { birthTime, name: fileName, relativeDirectory },
 							count: { words },
 						},
 					}) => {

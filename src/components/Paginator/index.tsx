@@ -21,13 +21,8 @@ const StyledNav = styled.nav`
 	}
 `;
 
-const buildPath = ({
-	pathPrefix,
-	index,
-}: {
-	pathPrefix: string;
-	index: number;
-}) => (pathPrefix ? `/${pathPrefix}` : "") + (index === 1 ? "/" : `/${index}`);
+const buildPath = ({ pathPrefix, index }: { pathPrefix: string; index: number }) =>
+	(pathPrefix ? `/${pathPrefix}` : "") + (index === 1 ? "/" : `/${index}`);
 
 export const Paginator: React.SFC<IPaginatorProps> = ({
 	pageCount,
@@ -48,8 +43,7 @@ export const Paginator: React.SFC<IPaginatorProps> = ({
 			title={`Primeira página anterior de ${listTitle}`}
 		>
 			{" "}
-			<span aria-hidden>&lt;&lt;</span>{" "}
-			<VisuallyHidden>Primeira página</VisuallyHidden>
+			<span aria-hidden>&lt;&lt;</span> <VisuallyHidden>Primeira página</VisuallyHidden>
 		</Link>{" "}
 		<Link
 			className={(first && "disabled") || ""}
@@ -59,8 +53,7 @@ export const Paginator: React.SFC<IPaginatorProps> = ({
 			title={`Página anterior de ${listTitle}`}
 		>
 			{" "}
-			<span aria-hidden>&lt;</span>{" "}
-			<VisuallyHidden>Página anterior</VisuallyHidden>
+			<span aria-hidden>&lt;</span> <VisuallyHidden>Página anterior</VisuallyHidden>
 		</Link>{" "}
 		{Array.from(new Array(pageCount))
 			.map((_, i) => i + 1)
@@ -70,9 +63,8 @@ export const Paginator: React.SFC<IPaginatorProps> = ({
 					key={i}
 					title={`Página ${i} de ${listTitle}`}
 					rel={
-						`${i === 1 ? "first" : ""} ${
-							i === pageCount ? "last" : ""
-						}`.trim() || undefined
+						`${i === 1 ? "first" : ""} ${i === pageCount ? "last" : ""}`.trim() ||
+						undefined
 					}
 					to={buildPath({ pathPrefix, index: i })}
 				>
@@ -88,8 +80,7 @@ export const Paginator: React.SFC<IPaginatorProps> = ({
 			title={`Página seguinte de ${listTitle}`}
 		>
 			{" "}
-			<span aria-hidden>&gt;</span>{" "}
-			<VisuallyHidden>Próxima página</VisuallyHidden>
+			<span aria-hidden>&gt;</span> <VisuallyHidden>Próxima página</VisuallyHidden>
 		</Link>{" "}
 		<Link
 			className={(last && "disabled") || ""}
@@ -99,8 +90,7 @@ export const Paginator: React.SFC<IPaginatorProps> = ({
 			title={`Última página de ${listTitle}`}
 		>
 			{" "}
-			<span aria-hidden>&gt;&gt;</span>{" "}
-			<VisuallyHidden>Última página</VisuallyHidden>
+			<span aria-hidden>&gt;&gt;</span> <VisuallyHidden>Última página</VisuallyHidden>
 		</Link>{" "}
 	</StyledNav>
 );

@@ -6,9 +6,7 @@
  * @returns {string} Interpolated string
  */
 function highlighter(template, ...subs) {
-	return template
-		.map((piece, i) => piece + (subs[i] || ""))
-		.reduce((acc, el) => acc + el, "");
+	return template.map((piece, i) => piece + (subs[i] || "")).reduce((acc, el) => acc + el, "");
 }
 
 module.exports = {

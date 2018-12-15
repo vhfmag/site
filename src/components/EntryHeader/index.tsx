@@ -27,9 +27,7 @@ const gappedClassName = "has-gap";
 
 const StyledHeader = styled.header`
 	margin-bottom: ${props =>
-		props.className && props.className.includes(gappedClassName)
-			? "32pt"
-			: "0"};
+		props.className && props.className.includes(gappedClassName) ? "32pt" : "0"};
 
 	> h1,
 	> h2,
@@ -94,9 +92,7 @@ function reduceElementsToEnumeration(
 	);
 }
 
-export const EntryHeader: React.SFC<
-	IEntryHeaderProps & { isFullPage: boolean }
-> = ({
+export const EntryHeader: React.SFC<IEntryHeaderProps & { isFullPage: boolean }> = ({
 	title,
 	subtitle,
 	fileName,
@@ -132,27 +128,18 @@ export const EntryHeader: React.SFC<
 						{authors
 							.map(({ name, url: authorUrl }) =>
 								authorUrl ? (
-									<a
-										rel="author"
-										className="p-author h-card"
-										href={authorUrl}
-									>
+									<a rel="author" className="p-author h-card" href={authorUrl}>
 										{name}
 									</a>
 								) : (
-									<span className="p-author h-card">
-										{name}
-									</span>
+									<span className="p-author h-card">{name}</span>
 								),
 							)
 							.reduce(reduceElementsToEnumeration)}
 					</span>
 				)}
 				{publishDate && (
-					<time
-						className="dt-published"
-						dateTime={publishDate.toISOString()}
-					>
+					<time className="dt-published" dateTime={publishDate.toISOString()}>
 						{formatDate(publishDate)}
 					</time>
 				)}
@@ -172,12 +159,7 @@ export const EntryHeader: React.SFC<
 				<StyledTags aria-label="Tags">
 					{tags.map(tag => (
 						<li key={tag}>
-							<a
-								rel="tag"
-								href={`/${folderName}/tags/${slugify(
-									tag.trim(),
-								)}`}
-							>
+							<a rel="tag" href={`/${folderName}/tags/${slugify(tag.trim())}`}>
 								{tag}
 							</a>
 						</li>

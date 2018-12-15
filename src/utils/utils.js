@@ -46,10 +46,8 @@ function compareEntryEdges(e1, e2) {
 	if (t1 !== t2) {
 		return t2 - t1;
 	} else {
-		const title1 =
-			(e1.node && e1.node.frontmatter && e1.node.frontmatter.title) || "";
-		const title2 =
-			(e2.node && e2.node.frontmatter && e2.node.frontmatter.title) || "";
+		const title1 = (e1.node && e1.node.frontmatter && e1.node.frontmatter.title) || "";
+		const title2 = (e2.node && e2.node.frontmatter && e2.node.frontmatter.title) || "";
 
 		return title1.localeCompare(title2);
 	}

@@ -231,16 +231,14 @@ const WorkExperience: React.SFC<Work_2> = ({
 				<>
 					<h5>Projetos</h5>
 					<StyledExperienceProjects>
-						{projects
-							.filter(isNotNullish)
-							.map(({ name, url, description }) => (
-								<React.Fragment key={name!}>
-									<dt>
-										<a href={url!}>{name}</a>
-									</dt>
-									{description && <dd>{description}</dd>}
-								</React.Fragment>
-							))}
+						{projects.filter(isNotNullish).map(({ name, url, description }) => (
+							<React.Fragment key={name!}>
+								<dt>
+									<a href={url!}>{name}</a>
+								</dt>
+								{description && <dd>{description}</dd>}
+							</React.Fragment>
+						))}
 					</StyledExperienceProjects>
 				</>
 			)}

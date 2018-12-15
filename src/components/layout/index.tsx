@@ -81,10 +81,7 @@ const StyledMain = styled.main`
 	}
 
 	@media (min-width: ${fromTheme("responsiveBreakpoint")}) {
-		--width: calc(
-			100vw - ${fromTheme("sidebarWidth")} - 2 *
-				${fromTheme("rootPadding")}
-		);
+		--width: calc(100vw - ${fromTheme("sidebarWidth")} - 2 * ${fromTheme("rootPadding")});
 	}
 `;
 
@@ -109,8 +106,8 @@ const StyledRoot = styled.div`
 		font-family: emoji;
 
 		src: local("EmojiOneMozilla"), local("EmojiOne"), local("Twemoji"),
-			local("Apple Color Emoji"), local("Android Emoji"),
-			local("Segoe UI"), local(EmojiSymbols), local(Symbola);
+			local("Apple Color Emoji"), local("Android Emoji"), local("Segoe UI"),
+			local(EmojiSymbols), local(Symbola);
 
 		/* Emoji unicode blocks */
 		unicode-range: U+1F300-1F5FF, U+1F600-1F64F, U+1F680-1F6FF, U+2600-26FF;
@@ -124,15 +121,8 @@ interface ILayoutData {
 	personalJson: PersonalJson;
 }
 
-const RawLayout: React.SFC<ILayoutData> = ({
-	site: { siteMetadata },
-	personalJson,
-	children,
-}) => {
-	const plainTextDescription = siteMetadata.description!.replace(
-		/\[([^\]]+)\]\([^\)]+\)/g,
-		"$1",
-	);
+const RawLayout: React.SFC<ILayoutData> = ({ site: { siteMetadata }, personalJson, children }) => {
+	const plainTextDescription = siteMetadata.description!.replace(/\[([^\]]+)\]\([^\)]+\)/g, "$1");
 
 	const personLinkedData = {
 		"@context": "http://schema.org",
@@ -190,8 +180,7 @@ const RawLayout: React.SFC<ILayoutData> = ({
 							},
 							{
 								name: "google-site-verification",
-								content:
-									"RHQh7j4JKTIEmRsQrcOD1Pk7OoLoW8VK9YG4LscV7d0",
+								content: "RHQh7j4JKTIEmRsQrcOD1Pk7OoLoW8VK9YG4LscV7d0",
 							},
 						]}
 					>
@@ -205,10 +194,7 @@ const RawLayout: React.SFC<ILayoutData> = ({
 							rel="pingback"
 							href="https://webmention.io/victormagalhaes.codes/xmlrpc"
 						/>
-						<link
-							rel="canonical"
-							href="https://victormagalhaes.codes"
-						/>
+						<link rel="canonical" href="https://victormagalhaes.codes" />
 					</Helmet>
 
 					<SkipNavLink>Pular para conteúdo</SkipNavLink>

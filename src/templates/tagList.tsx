@@ -50,9 +50,7 @@ const StyledTagUl = styled.ul`
 	}
 `;
 
-const TagList: React.SFC<ITagListProps> = ({
-	pathContext: { tags, listTitle },
-}) => {
+const TagList: React.SFC<ITagListProps> = ({ pathContext: { tags, listTitle } }) => {
 	const title = `Tags - ${listTitle}`;
 
 	return (

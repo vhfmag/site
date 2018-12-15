@@ -44,11 +44,7 @@ export interface ITableOfContentsProps {
 	title?: string;
 	headings?: Array<ITreeNode<string>>;
 }
-const ContentsTree = ({
-	headings,
-}: {
-	headings?: Array<ITreeNode<string>>;
-}) => {
+const ContentsTree = ({ headings }: { headings?: Array<ITreeNode<string>> }) => {
 	if (!headings || headings.length === 0) {
 		return null;
 	}

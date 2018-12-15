@@ -13,7 +13,5 @@ declare module "@reach/visually-hidden" {
 declare module "@reach/skip-nav" {
 	import * as React from "react";
 	export const SkipNavContent: React.ComponentType;
-	export const SkipNavLink: React.ComponentType<
-		React.HTMLProps<HTMLAnchorElement>
-	>;
+	export const SkipNavLink: React.ComponentType<React.HTMLProps<HTMLAnchorElement>>;
 }

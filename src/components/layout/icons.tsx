@@ -1,11 +1,5 @@
 import { library } from "@fortawesome/fontawesome-svg-core";
-import {
-	faRss,
-	faPenNib,
-	faBook,
-	faBookmark,
-	faCircle,
-} from "@fortawesome/free-solid-svg-icons";
+import { faRss, faPenNib, faBook, faBookmark, faCircle } from "@fortawesome/free-solid-svg-icons";
 import {
 	faMastodon,
 	faGitlab,

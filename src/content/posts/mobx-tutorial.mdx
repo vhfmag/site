@@ -44,9 +44,7 @@ class TaskStore {
 			this.tasks = [];
 		}
 
-		autorun(() =>
-			localStorage.setItem("tasks", JSON.stringify(this.tasks)),
-		);
+		autorun(() => localStorage.setItem("tasks", JSON.stringify(this.tasks)));
 	}
 }
 ```
@@ -74,9 +72,7 @@ class ExamStore {
 	public results: ExamResult[] = [];
 
 	public averageGrade() {
-		return (
-			this.results.reduce((acc, el) => acc + el, 0) / this.results.length
-		);
+		return this.results.reduce((acc, el) => acc + el, 0) / this.results.length;
 	}
 }
 
@@ -86,9 +82,7 @@ store.results.push({ student: "Clara", grade: 8 });
 store.results.push({ student: "Dygufa", grade: 9 });
 
 console.log(store.averageGrade());
-document.querySelector(
-	"avg",
-).innerText = `Média da turma: ${store.averageGrade()}`;
+document.querySelector("avg").innerText = `Média da turma: ${store.averageGrade()}`;
 ```
 
 Nesse exemplo, `averageGrade` é chamado duas vezes, recalculando a média desnecessariamente. Isso poderia ser otimizado, já que enquanto `results` não mudar, a média permanecerá a mesma (para quem é familiar com Redux, nesse contexto se usariam seletores). E é justamente para isso que serve o `computed`, mais uma função da biblioteca. O exemplo acima ficaria assim, quando reescrito para utilizar `computed`:
@@ -107,9 +101,7 @@ class ExamStore {
 
 	@computed
 	public get averageGrade() {
-		return (
-			this.results.reduce((acc, el) => acc + el, 0) / this.results.length
-		);
+		return this.results.reduce((acc, el) => acc + el, 0) / this.results.length;
 	}
 }
 
@@ -119,9 +111,7 @@ store.results.push({ student: "Clara", grade: 8 });
 store.results.push({ student: "Dygufa", grade: 9 });
 
 console.log(store.averageGrade);
-document.querySelector("avg").innerText = `Média da turma: ${
-	store.averageGrade
-}`;
+document.querySelector("avg").innerText = `Média da turma: ${store.averageGrade}`;
 ```
 
 As mudanças foram:
@@ -140,7 +130,11 @@ Com essas 3 mudanças, o MobX otimiza o cálculo da média, fazendo-o apenas qua
 
 Antes de introduzir outros conceitos de MobX, gostaria de tornar nossos exemplos mais práticos, usando o MobX em uma aplicação React:
 
-<iframe src="https://codesandbox.io/embed/vq3p417997?fontsize=12" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
+<iframe
+	src="https://codesandbox.io/embed/vq3p417997?fontsize=12"
+	style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;"
+	sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"
+/>
 
 Observação: O exemplo acima é editável, dá pra abrir ele no [CodeSandbox](https://codesandbox.io/), fazer mudanças e ver o resultado em tempo real (dá pra experimentar colocar um `console.log` no `computed` `todoCount`, por exemplo, pra verificar se ele de fato só é chamado quando há mudanças)
 
@@ -160,7 +154,11 @@ Pensando nisso, o `mobx` introduz o conceito de `action`: funções que modifica
 
 A seguir, o exemplo anterior, reescrito para usar actions:
 
-<iframe src="https://codesandbox.io/embed/31ozyr4nv1?fontsize=12" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
+<iframe
+	src="https://codesandbox.io/embed/31ozyr4nv1?fontsize=12"
+	style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;"
+	sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"
+/>
 
 Como se pode ver, `action` pode ser usado como decorador e como higher-order function, assim como `observer`. Outra novidade é o `configure({ enforceActions: true })`: essa configuração faz o MobX disparar um erro sempre que um estado for mudado de fora de uma `action`.
 
@@ -198,7 +196,11 @@ A solução oficial para esse problema é uma nova função chamada `flow`, sobr
 
 No começo desse artigo, o MobX foi citado como alternativa para o Redux. No entanto, até agora, só usamos o MobX para gerenciar estado local, enquanto seu concorrente é comumente utilizado para gerenciar o estado global da aplicação. Para fazer o mesmo com a biblioteca em questão, usaremos a função `inject` e o componente `Provider` (similares ao `connect` e ao `Provider` do `react-redux`, respectivamente), ambos de `mobx-react`. Segue exemplo:
 
-<iframe src="https://codesandbox.io/embed/7wz19ylm1?fontsize=12" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
+<iframe
+	src="https://codesandbox.io/embed/7wz19ylm1?fontsize=12"
+	style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;"
+	sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"
+/>
 
 O Provider é um componente que recebe um objeto cujas chaves são os nomes das stores e cujos valores são as stores (exemplo: `{ taskStore: new TaskStore() }`, onde 'taskStore' é o nome da store `new TaskStore()`). Ele deve estar sempre no topo da hierarquia, acima de qualquer componente que possa usar o estado global. O Provider disponibiliza as stores para todos os componentes abaixo dele através de [contexto](https://reactjs.org/docs/context.html).
 

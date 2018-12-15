@@ -40,9 +40,7 @@ interface IHeading {
 	depth: number;
 }
 
-function headingsToTree(
-	hs: Array<Required<IHeading>>,
-): Array<ITreeNode<string>> {
+function headingsToTree(hs: Array<Required<IHeading>>): Array<ITreeNode<string>> {
 	return hs.reduce<Array<ITreeNode<string>>>(
 		(nodes, h): Array<ITreeNode<string>> => {
 			const newNode: ITreeNode<string> = {
@@ -79,12 +77,7 @@ function headingsToTree(
 	);
 }
 
-export const Entry: React.SFC<IEntryProps> = ({
-	content,
-	headings,
-	children,
-	...headerProps
-}) => (
+export const Entry: React.SFC<IEntryProps> = ({ content, headings, children, ...headerProps }) => (
 	<StyledEntry className="h-entry">
 		<Helmet title={headerProps.title} />
 		<EntryHeader {...headerProps} isFullPage={true} />

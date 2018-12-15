@@ -80,12 +80,7 @@ interface ITodoItemProps extends TodoJson {
 	toggleCurrentTag(tag: string): void;
 }
 
-const Todo: React.SFC<ITodoItemProps> = ({
-	tags,
-	title,
-	currentTag,
-	toggleCurrentTag,
-}) => (
+const Todo: React.SFC<ITodoItemProps> = ({ tags, title, currentTag, toggleCurrentTag }) => (
 	<TodoWrapper>
 		<TodoTitle>
 			<p dangerouslySetInnerHTML={{ __html: title! }} />
@@ -95,9 +90,7 @@ const Todo: React.SFC<ITodoItemProps> = ({
 				{tags.map(tag => (
 					<TodoTag
 						key={tag!}
-						className={
-							(currentTag === tag && "active") || undefined
-						}
+						className={(currentTag === tag && "active") || undefined}
 						onClick={() => toggleCurrentTag(tag!)}
 					>
 						{tag}
@@ -108,9 +101,7 @@ const Todo: React.SFC<ITodoItemProps> = ({
 	</TodoWrapper>
 );
 
-const isTodoHighlighted = (currentTag: string | undefined) => ({
-	tags,
-}: TodoJson): boolean => {
+const isTodoHighlighted = (currentTag: string | undefined) => ({ tags }: TodoJson): boolean => {
 	if (currentTag && tags) {
 		return tags.includes(currentTag);
 	} else {
@@ -118,10 +109,7 @@ const isTodoHighlighted = (currentTag: string | undefined) => ({
 	}
 };
 
-const todoComparer = (currentTag: string | undefined) => (
-	t1: TodoJson,
-	t2: TodoJson,
-): number => {
+const todoComparer = (currentTag: string | undefined) => (t1: TodoJson, t2: TodoJson): number => {
 	const [h1, h2] = [t1, t2].map(isTodoHighlighted(currentTag));
 
 	if (h1 === h2) {
@@ -134,9 +122,7 @@ const todoComparer = (currentTag: string | undefined) => (
 };
 
 const TodoPage: React.SFC<ITodoPageProps> = ({ data: { allTodoJson } }) => {
-	const [currentTag, setCurrentTag] = React.useState<string | undefined>(
-		undefined,
-	);
+	const [currentTag, setCurrentTag] = React.useState<string | undefined>(undefined);
 
 	const todos = allTodoJson.edges.map(({ node }) => node);
 	const toggleCurrentTag = (newTag: string) =>
