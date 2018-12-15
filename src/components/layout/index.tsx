@@ -41,6 +41,12 @@ const GlobalStyle = createGlobalStyle`
 		opacity: 0.75;
 	}
 
+	dl {
+		dd {
+			margin-left: 1em;
+		}
+	}
+
 	[data-reach-skip-link]:focus {
 		background-color: ${fromTheme("themeColor")} !important;
 		color: ${fromTheme("backgroundColor")} !important;
@@ -235,6 +241,10 @@ const RawLayout: React.SFC<ILayoutData> = ({
 							{
 								name: "todo",
 								url: "/todo/",
+							},
+							{
+								name: "links",
+								url: "/links/",
 							},
 							{
 								name: "currículo",
