@@ -91,7 +91,9 @@ function createEntryPages({
 				.map(edge => {
 					edge.node.frontmatter.tags =
 						edge.node.frontmatter.tags &&
-						edge.node.frontmatter.tags.map(tag => tag.trim());
+						edge.node.frontmatter.tags
+							.filter(v => v)
+							.map(tag => tag.trim());
 					return edge;
 				})
 				.sort(compareEntryEdges);
