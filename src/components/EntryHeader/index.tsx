@@ -125,7 +125,7 @@ export const EntryHeader: React.SFC<
 			</Title>
 			{subtitle && <Subtitle>{subtitle}</Subtitle>}
 			<StyledMetadata>
-				{isFullPage && <span className="p-category">{category}</span>}
+				<span className="p-category">{category}</span>
 				{authors && (
 					<span>
 						Por{" "}

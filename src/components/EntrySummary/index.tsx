@@ -1,19 +1,11 @@
 import * as React from "react";
 import styled, { ThemeContext } from "../../styles/styled";
-import { folderToCategory } from "../../utils/consts";
 import { IEntryHeaderProps, EntryHeader } from "../EntryHeader";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { Folder } from "../../utils/types";
-import { fromTheme } from "../../styles/theme";
 
 type IEntrySummaryProps = IEntryHeaderProps;
-
-const StyledEntryCategoryName = styled.div`
-	margin-top: 4pt;
-	font-size: 0.8em;
-	color: ${fromTheme("themeColor")};
-`;
 
 const StyledEntryCategory = styled.div`
 	display: flex;
@@ -24,7 +16,7 @@ const StyledEntryCategory = styled.div`
 const StyledEntrySummary = styled.article`
 	display: grid;
 	grid-gap: 8pt;
-	grid-template-columns: 10ch auto;
+	grid-template-columns: min-content auto;
 
 	p,
 	h2,
@@ -73,9 +65,6 @@ export const EntrySummary: React.SFC<IEntrySummaryProps> = ({
 						icon={iconPerFolder[headerProps.folderName]}
 					/>
 				</span>
-				<StyledEntryCategoryName>
-					{folderToCategory[headerProps.folderName]}
-				</StyledEntryCategoryName>
 			</StyledEntryCategory>
 			<EntryHeader {...headerProps} isFullPage={false} />
 		</StyledEntrySummary>
