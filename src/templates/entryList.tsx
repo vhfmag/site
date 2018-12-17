@@ -7,6 +7,7 @@ import { Paginator } from "../components/Paginator";
 import { IGeneralMetadataFragment, IMarkdownEntryFragment } from "../fragments";
 import styled from "../styles/styled";
 import { isFolder } from "../utils/types";
+import { fromTheme } from "../styles/theme";
 
 const ListWrapper = styled.div`
 	margin: 1rem 0;
@@ -24,20 +25,49 @@ interface IBookmarkListProps {
 const BlogNav = styled.nav`
 	--nav-gap: 4pt;
 
+	h2 {
+		display: inline-block;
+		margin-bottom: 0.5em;
+		margin-right: 0.5em;
+
+		::after {
+			content: ":";
+		}
+	}
+
 	ul {
 		all: unset;
-		display: flex;
+		display: inline-flex;
 		flex-wrap: wrap;
 		margin: calc(-1 * var(--nav-gap));
 
 		li {
 			all: unset;
 			margin: var(--nav-gap);
+
+			a.current {
+				font-weight: bold;
+			}
 		}
 	}
 `;
 
 const bodyAttributes = { class: "h-feed" };
+
+const blogSections = [
+	{
+		path: "/",
+		label: "Posts",
+	},
+	{
+		path: "/bookmarks/",
+		label: "Bookmarks",
+	},
+	{
+		path: "/archive/",
+		label: "Arquivo",
+	},
+];
 
 const EntryList: React.SFC<IBookmarkListProps> = ({
 	pathContext,
@@ -59,22 +89,18 @@ const EntryList: React.SFC<IBookmarkListProps> = ({
 		<DefaultLayout>
 			<Helmet title={listTitle} bodyAttributes={bodyAttributes} />
 			<h1>{listTitle}</h1>
-			<details>
-				<summary>Outras seções do blog</summary>
-				<BlogNav>
-					<ul>
-						<li>
-							<Link to="/">Posts</Link>
+			<BlogNav>
+				<h2>Seções do blog</h2>
+				<ul>
+					{blogSections.map(({ path, label }) => (
+						<li key={path}>
+							<Link activeClassName="current" to={path}>
+								{label}
+							</Link>
 						</li>
-						<li>
-							<Link to="/bookmarks">Bookmarks</Link>
-						</li>
-						<li>
-							<Link to="/archive">Arquivo</Link>
-						</li>
-					</ul>
-				</BlogNav>
-			</details>
+					))}
+				</ul>
+			</BlogNav>
 			<Paginator {...pathContext} />
 			<ListWrapper>
 				{posts.map(
