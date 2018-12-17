@@ -109,15 +109,16 @@ interface ISidebarProps {
 export interface ISidebarNavLink {
 	name: string;
 	url: string;
+	lang?: string;
 	subNav?: ISidebarNavLink[];
 }
 
 function NavLinks({ navs }: { navs: ISidebarNavLink[] }) {
 	return (
 		<ul>
-			{navs.map(({ name, url, subNav }) => (
+			{navs.map(({ name, url, subNav, lang }) => (
 				<li key={name}>
-					<Link activeClassName={activeLinkClassName} to={url}>
+					<Link activeClassName={activeLinkClassName} aria-lang={lang} to={url}>
 						{name}
 					</Link>
 					{subNav && <NavLinks navs={subNav} />}
@@ -155,15 +156,17 @@ export const Sidebar: React.SFC<ISidebarProps> = ({
 		<StyledNav>
 			<NavLinks navs={nav} />
 		</StyledNav>
-		<SocialLinks>
-			<li>
-				<SocialLink icon="rss" serviceName="RSS" rel="alternate" url="/rss.xml" />
-			</li>
-			{social!.filter(isNotNullish).map(socialProps => (
-				<li key={socialProps.serviceName!}>
-					<SocialLink {...socialProps} />
+		<nav>
+			<SocialLinks aria-label="Links para mídias sociais">
+				<li>
+					<SocialLink icon="rss" serviceName="RSS" rel="alternate" url="/rss.xml" />
 				</li>
-			))}
-		</SocialLinks>
+				{social!.filter(isNotNullish).map(socialProps => (
+					<li key={socialProps.serviceName!}>
+						<SocialLink {...socialProps} />
+					</li>
+				))}
+			</SocialLinks>
+		</nav>
 	</StyledSidebar>
 );

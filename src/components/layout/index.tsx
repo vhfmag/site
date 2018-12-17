@@ -236,7 +236,8 @@ const RawLayout: React.SFC<ILayoutData> = ({ site: { siteMetadata }, personalJso
 								url: "/",
 							},
 							{
-								name: "todo",
+								name: "to do",
+								lang: "en",
 								url: "/todo/",
 							},
 							{

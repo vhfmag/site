@@ -156,15 +156,17 @@ export const EntryHeader: React.SFC<IEntryHeaderProps & { isFullPage: boolean }>
 				</StyledMetadata>
 			)}
 			{tags && (
-				<StyledTags aria-label="Tags">
-					{tags.map(tag => (
-						<li key={tag}>
-							<a rel="tag" href={`/${folderName}/tags/${slugify(tag.trim())}`}>
-								{tag}
-							</a>
-						</li>
-					))}
-				</StyledTags>
+				<nav>
+					<StyledTags aria-label="Tags">
+						{tags.map(tag => (
+							<li key={tag}>
+								<a rel="tag" href={`/${folderName}/tags/${slugify(tag.trim())}`}>
+									{tag}
+								</a>
+							</li>
+						))}
+					</StyledTags>
+				</nav>
 			)}
 		</StyledHeader>
 	);
