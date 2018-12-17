@@ -153,12 +153,13 @@ const TodoPage: React.SFC<ITodoPageProps> = ({ data: { allTodoJson } }) => {
 			<StyledTodoList>
 				<FlipMove typeName={null}>
 					{todosDone.sort(comparer).map(todo => (
-						<Todo
-							{...todo}
-							key={todo.title!}
-							currentTag={currentTag}
-							toggleCurrentTag={toggleCurrentTag}
-						/>
+						<div key={todo.title!}>
+							<Todo
+								{...todo}
+								currentTag={currentTag}
+								toggleCurrentTag={toggleCurrentTag}
+							/>
+						</div>
 					))}
 				</FlipMove>
 			</StyledTodoList>
