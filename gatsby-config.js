@@ -6,9 +6,9 @@ const { compareEntryEdges } = require("./src/utils/utils");
 
 const serializeFeed = ({ query: { site, allMdx } }) => {
 	return allMdx.edges.sort(compareEntryEdges).map(edge => {
-		const url = `${site.siteMetadata.siteUrl}/${
-			edge.node.parent.relativeDirectory
-		}/${edge.node.parent.name}`;
+		const url = `${site.siteMetadata.siteUrl}/${edge.node.parent.relativeDirectory}/${
+			edge.node.parent.name
+		}/?utm_source=rss`;
 
 		return Object.assign({}, edge.node.frontmatter, {
 			description: edge.node.excerpt,
@@ -24,8 +24,7 @@ const serializeFeed = ({ query: { site, allMdx } }) => {
 	});
 };
 
-const netlifyCacheControlHeader =
-	"Cache-Control: public, max-age=31536000, immutable";
+const netlifyCacheControlHeader = "Cache-Control: public, max-age=31536000, immutable";
 
 const makeFeedQuery = (pageKind = ".*") => graphql`
 {
@@ -74,8 +73,7 @@ module.exports = {
 		title: "Victor Magalhães",
 		siteUrl: "https://victormagalhaes.codes",
 		sourceUrl: "https://gitlab.com/vhfmag/vhfmag.gitlab.io/",
-		description:
-			"desenvolvedor, entusiasta da web, decentralização e privacidade",
+		description: "desenvolvedor, entusiasta da web, decentralização e privacidade",
 	},
 	plugins: [
 		"gatsby-plugin-typescript",
@@ -107,9 +105,7 @@ module.exports = {
 			resolve: "gatsby-mdx",
 			options: {
 				defaultLayouts: {
-					default: require.resolve(
-						"./src/components/layout/index.tsx",
-					),
+					default: require.resolve("./src/components/layout/index.tsx"),
 				},
 				gatsbyRemarkPlugins: [
 					{ resolve: "gatsby-remark-autolink-headers" },
@@ -200,13 +196,8 @@ module.exports = {
 						netlifyCacheControlHeader,
 					],
 					"/sw.js": ["Cache-Control: no-cache"],
-					"/*.webmanifest": [
-						"Content-Type: application/manifest+json; charset=utf-8",
-					],
-					"/*.css": [
-						"X-Content-Type-Options: nosniff",
-						netlifyCacheControlHeader,
-					],
+					"/*.webmanifest": ["Content-Type: application/manifest+json; charset=utf-8"],
+					"/*.css": ["X-Content-Type-Options: nosniff", netlifyCacheControlHeader],
 					"/*.png": [netlifyCacheControlHeader],
 					"/*.jpg": [netlifyCacheControlHeader],
 					"/*.jpeg": [netlifyCacheControlHeader],
