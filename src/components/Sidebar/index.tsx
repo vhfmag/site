@@ -118,7 +118,7 @@ function NavLinks({ navs }: { navs: ISidebarNavLink[] }) {
 		<ul>
 			{navs.map(({ name, url, subNav, lang }) => (
 				<li key={name}>
-					<Link activeClassName={activeLinkClassName} aria-lang={lang} to={url}>
+					<Link activeClassName={activeLinkClassName} lang={lang} to={url}>
 						{name}
 					</Link>
 					{subNav && <NavLinks navs={subNav} />}
