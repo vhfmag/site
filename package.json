@@ -27,7 +27,7 @@
 		"gatsby-plugin-brotli": "^1.0.0",
 		"gatsby-plugin-feed": "^2.0.8",
 		"gatsby-plugin-manifest": "^2.0.6",
-		"gatsby-plugin-matomo": "^0.5.0",
+		"gatsby-plugin-matomo": "^0.6.0",
 		"gatsby-plugin-netlify": "^2.0.2",
 		"gatsby-plugin-netlify-cache": "^1.0.0",
 		"gatsby-plugin-nprogress": "^2.0.7",
@@ -52,8 +52,8 @@
 		"gatsby-source-filesystem": "^2.0.1-beta.10",
 		"gatsby-transformer-json": "^2.1.4",
 		"gatsby-transformer-sharp": "^2.1.5",
-		"graphql-code-generator": "^0.14.5",
-		"graphql-codegen-typescript-template": "^0.14.5",
+		"graphql-code-generator": "^0.15.0",
+		"graphql-codegen-typescript-template": "^0.15.0",
 		"lodash-es": "^4.17.11",
 		"normalize-css": "^2.3.1",
 		"patch-package": "^5.1.1",
@@ -72,7 +72,7 @@
 		"typelevel-ts": "^0.3.1",
 		"typescript": "^3.0.1",
 		"typography": "^0.16.17",
-		"typography-breakpoint-constants": "^0.15.10"
+		"typography-breakpoint-constants": "^0.16.18"
 	},
 	"keywords": [
 		"gatsby, typescript"
@@ -89,6 +89,7 @@
 	},
 	"devDependencies": {
 		"prettier": "^1.13.6",
+		"react-axe": "^3.0.2",
 		"regenerator-runtime": "^0.13.1",
 		"tslint": "^5.11.0",
 		"tslint-config-prettier": "^1.15.0"
