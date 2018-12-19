@@ -5,6 +5,26 @@ exports.onClientEntry = () => {
 	if (process.env.NODE_ENV !== "production") {
 		const axe = require("react-axe");
 		axe(React, ReactDOM, 1000);
-		console.log("react-axe, everyone!");
+	}
+
+	if (typeof _paq !== "undefined" && typeof ReportingObserver !== "undefined") {
+		const paq = _paq;
+		const observer = new ReportingObserver(
+			reports => {
+				for (const report of reports) {
+					console.log({ report });
+					paq.push([
+						"trackEvent",
+						"ReportingObserver",
+						report.type,
+						JSON.stringify(report),
+					]);
+				}
+			},
+			{ buffered: true },
+		);
+
+		observer.observe();
+		console.log("observing!");
 	}
 };

@@ -18,4 +18,36 @@ declare interface IAuthor {
 
 type ObjectOmit<Obj, Props extends keyof Obj> = Pick<Obj, Exclude<keyof Obj, Props>>;
 
+declare var _paq: undefined | { push(args: [string, string, string, any]): void };
+
+interface IReport {
+	id: string;
+	type: string;
+	url: string;
+	body: {
+		message: string;
+		lineNumber: number;
+		columnNumber: number;
+		sourceFile: number;
+		anticipatedRemoval: boolean;
+	};
+}
+
+interface IReportObserverOptions {
+	types?: string[];
+	buffered?: boolean;
+}
+
+class ReportingObserverClass {
+	constructor(
+		handler: (reports: IReport[], observer: this) => void,
+		options?: IReportObserverOptions,
+	);
+
+	observe(): void;
+	disconnect(): void;
+}
+
+declare const ReportingObserver: undefined | typeof ReportingObserverClass;
+
 declare module "@mdx-js/tag";

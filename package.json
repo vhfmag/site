@@ -93,5 +93,11 @@
 		"regenerator-runtime": "^0.13.1",
 		"tslint": "^5.11.0",
 		"tslint-config-prettier": "^1.15.0"
+	},
+	"eslintConfig": {
+		"globals": {
+			"__paq": true,
+			"ReportingObserver": true
+		}
 	}
 }
