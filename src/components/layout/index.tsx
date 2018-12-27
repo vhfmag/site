@@ -11,13 +11,14 @@ import "typeface-montserrat";
 import "typeface-zilla-slab";
 import "./icons";
 import "prismjs/themes/prism-okaidia.css";
-import { generateLinkedDataTag } from "../LinkedData";
 
 import { dom } from "@fortawesome/fontawesome-svg-core";
 import { isNotNullish } from "../../utils/types";
 import { darkTheme, fromTheme } from "../../styles/theme";
+import VisuallyHidden from "@reach/visually-hidden";
 import { SkipNavContent, SkipNavLink } from "@reach/skip-nav";
 import "@reach/skip-nav/styles.css";
+import { blog, blogRef } from "../../utils/microdata";
 
 const GlobalStyle = createGlobalStyle`
 	* {
@@ -108,7 +109,7 @@ const StyledMain = styled.main`
 	hr,
 	dl {
 		max-width: 70ch;
-		text-align: justify;
+		visuallyhiddentext-align: justify;
 		hyphens: auto;
 	}
 
@@ -165,31 +166,10 @@ interface ILayoutData {
 const RawLayout: React.SFC<ILayoutData> = ({ site: { siteMetadata }, personalJson, children }) => {
 	const plainTextDescription = siteMetadata.description!.replace(/\[([^\]]+)\]\([^\)]+\)/g, "$1");
 
-	const personLinkedData = {
-		"@context": "http://schema.org",
-		"@type": "Person",
-		name: personalJson.name,
-		jobTitle: personalJson.jobTitle,
-		email: personalJson.email,
-		url: "https://victormagalhaes.codes",
-		sameAs: personalJson.social!.filter(isNotNullish).map(({ url }) => url),
-	};
-
-	const blogLinkedData = {
-		"@context": "http://schema.org",
-		"@type": "Blog",
-		url: siteMetadata.siteUrl,
-		name: siteMetadata.title,
-		author: {
-			"@type": "Person",
-			name: personalJson.name,
-		},
-	};
-
 	return (
 		<MDXProvider>
 			<ThemeProvider theme={darkTheme}>
-				<StyledRoot>
+				<StyledRoot itemScope itemType={blog} id={blogRef} itemId={blogRef}>
 					<GlobalStyle />
 					<Helmet
 						htmlAttributes={{
@@ -225,8 +205,6 @@ const RawLayout: React.SFC<ILayoutData> = ({ site: { siteMetadata }, personalJso
 							},
 						]}
 					>
-						{generateLinkedDataTag(personLinkedData)}
-						{generateLinkedDataTag(blogLinkedData)}
 						<link
 							rel="webmention"
 							href="https://webmention.io/victormagalhaes.codes/webmention"
@@ -238,6 +216,9 @@ const RawLayout: React.SFC<ILayoutData> = ({ site: { siteMetadata }, personalJso
 						<link rel="canonical" href="https://victormagalhaes.codes" />
 					</Helmet>
 
+					<VisuallyHidden>
+						<h1>Blog de {personalJson.name}</h1>
+					</VisuallyHidden>
 					<SkipNavLink>Pular para conteúdo</SkipNavLink>
 					<Sidebar
 						metadata={siteMetadata}

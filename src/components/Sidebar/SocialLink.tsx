@@ -27,11 +27,16 @@ export const SocialLink: React.SFC<ISocialLinkProps> = ({
 	const iconNameParts = icon!.split(" ");
 
 	return (
-		<StyledSocialLink rel={rel} className="u-url" href={url!}>
+		<StyledSocialLink
+			rel={rel}
+			href={url!}
+			className="u-url"
+			itemProp="sameAs"
+			title={serviceName!}
+			aria-label={serviceName!}
+		>
 			<FontAwesomeIcon
 				icon={(iconNameParts.length === 1 ? iconNameParts[0] : iconNameParts) as any}
-				title={serviceName!}
-				alt={serviceName!}
 			/>
 		</StyledSocialLink>
 	);

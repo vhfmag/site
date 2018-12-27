@@ -9,6 +9,8 @@ import { ScreenOnly } from "../../styles";
 import { SiteMetadata_2, PersonalJson } from "../../graphql-types";
 import { isNotNullish } from "../../utils/types";
 import { fromTheme } from "../../styles/theme";
+import { person, blogRef, personRef, organization } from "../../utils/microdata";
+import VisuallyHidden from "@reach/visually-hidden";
 
 const activeLinkClassName = "active";
 
@@ -130,22 +132,41 @@ function NavLinks({ navs }: { navs: ISidebarNavLink[] }) {
 
 export const Sidebar: React.SFC<ISidebarProps> = ({
 	metadata: { title, description, sourceUrl },
-	personalData: { email, social },
+	personalData: { email, social, jobTitle },
 	nav,
 }) => (
-	<StyledSidebar className="h-card">
+	<StyledSidebar
+		itemScope
+		itemType={[person, organization].join(" ")}
+		id={personRef}
+		itemId={personRef}
+		itemProp="author publisher"
+		className="h-card"
+	>
 		<SidebarSection itemProp="name">
-			<HeadLink className="p-name u-uid u-url" to="/">
+			<HeadLink
+				itemRef={[blogRef, personRef].join(" ")}
+				itemProp="url identifier"
+				className="p-name u-uid u-url"
+				to="/"
+			>
 				{title}
 			</HeadLink>
 		</SidebarSection>
+		<VisuallyHidden>
+			<SidebarSection className="p-job-title" itemProp="jobTitle">
+				{jobTitle}
+			</SidebarSection>
+			<img itemProp="logo" width={48} height={48} src="/icons/icon-48x48.png" />
+		</VisuallyHidden>
 		<SidebarSection
 			dangerouslySetInnerHTML={{ __html: description! }}
 			className="lead p-note"
+			itemProp="description"
 		/>
 		<SidebarSection>
 			<div>
-				<a className="u-email" href={`mailto:${email}`}>
+				<a itemProp="email" className="u-email" href={`mailto:${email}`}>
 					{email}
 				</a>
 			</div>
@@ -153,11 +174,11 @@ export const Sidebar: React.SFC<ISidebarProps> = ({
 				<a href={sourceUrl!}>ver código fonte</a>
 			</ScreenOnly>
 		</SidebarSection>
-		<StyledNav>
+		<StyledNav aria-label="Páginas do blog">
 			<NavLinks navs={nav} />
 		</StyledNav>
-		<nav>
-			<SocialLinks aria-label="Links para mídias sociais">
+		<nav aria-label="Links para mídias sociais">
+			<SocialLinks>
 				<li>
 					<SocialLink icon="rss" serviceName="RSS" rel="alternate" url="/rss.xml" />
 				</li>

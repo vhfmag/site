@@ -1,8 +1,6 @@
 import * as React from "react";
 import { Entry } from "../components/Entry";
-import { Helmet } from "react-helmet";
 import MDXRenderer from "gatsby-mdx/mdx-renderer";
-import { generateLinkedDataTag } from "../components/LinkedData";
 import { graphql } from "gatsby";
 import DefaultLayout from "../components/layout";
 import { isFolder } from "../utils/types";
@@ -38,33 +36,13 @@ const SingleEntryTemplate = ({
 		);
 	}
 
-	const linkedData = {
-		"@context": "http://schema.org",
-		"@type": "Review",
-		mainEntityOfPage: {
-			"@type": "Blog",
-			"@id": siteUrl,
-		},
-		itemReviewed: {
-			"@id": link,
-			url: link,
-			name: title,
-		},
-		reviewBody: excerpt,
-		author: {
-			"@type": "Person",
-			"@id": siteUrl,
-			url: siteUrl,
-			name,
-		},
-	};
-
 	return (
 		<DefaultLayout>
-			<Helmet>{generateLinkedDataTag(linkedData)}</Helmet>
 			<Entry
 				toc={toc}
 				title={title}
+				excerpt={excerpt}
+				selfAuthor={{ name, url: siteUrl }}
 				authors={authors}
 				fileName={fileName}
 				folderName={relativeDirectory}

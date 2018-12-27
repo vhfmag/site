@@ -4,11 +4,14 @@ import Helmet from "react-helmet";
 import { IEntryHeaderProps, EntryHeader } from "../EntryHeader";
 import { TableOfContents, ITreeNode } from "../TableOfContents";
 import { fromTheme } from "../../styles/theme";
+import { Folder } from "../../utils/types";
+import { blogPosting, review, blogRef, personRef } from "../../utils/microdata";
 
 type IEntryProps = IEntryHeaderProps & {
 	headings: Array<Required<IHeading>> | undefined;
 	toc: boolean | undefined;
 	content?: React.ReactNode;
+	excerpt: string;
 };
 
 const StyledEntry = styled.article`
@@ -77,11 +80,35 @@ function headingsToTree(hs: Array<Required<IHeading>>): Array<ITreeNode<string>>
 	);
 }
 
-export const Entry: React.SFC<IEntryProps> = ({ content, headings, children, ...headerProps }) => (
-	<StyledEntry className="h-entry">
+function folderNameToBodyProp(folderName: Folder) {
+	if (folderName === "posts") {
+		return "articleBody";
+	} else {
+		return "reviewBody";
+	}
+}
+
+export const Entry: React.SFC<IEntryProps> = ({
+	content,
+	headings,
+	excerpt,
+	children,
+	...headerProps
+}) => (
+	<StyledEntry
+		className="h-entry"
+		itemProp="blogPost"
+		itemScope
+		itemRef={personRef}
+		itemType={
+			headerProps.folderName === "posts" ? blogPosting : [blogPosting, review].join(" ")
+		}
+	>
+		<meta itemScope itemProp="mainEntityOfPage" content={blogRef} />
 		<Helmet title={headerProps.title} />
 		<EntryHeader {...headerProps} isFullPage={true} />
-		<section className="e-content">
+		{excerpt && <meta itemProp="description" content={excerpt} />}
+		<section className="e-content" itemProp={folderNameToBodyProp(headerProps.folderName)}>
 			{headings && headings.length > 0 && (
 				<TableOfContents headings={headingsToTree(headings)} />
 			)}
