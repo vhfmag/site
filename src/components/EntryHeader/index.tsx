@@ -5,7 +5,7 @@ import { formatDate, slugify } from "../../utils/utils";
 import { folderToCategory } from "../../utils/consts";
 import { Authors_2 } from "../../graphql-types";
 import { fromTheme } from "../../styles/theme";
-import { person, book, creativeWork, organization, personRef } from "../../utils/microdata";
+import { person, book, creativeWork } from "../../utils/microdata";
 import { Folder, isNotNullish } from "../../utils/types";
 
 export interface IEntryHeaderProps {
@@ -25,8 +25,6 @@ export interface IEntryHeaderProps {
 	wordCount: number;
 	timeToRead: number;
 }
-
-const gappedClassName = "has-gap";
 
 const StyledHeader = styled.header<{ isFullPage?: boolean }>`
 	margin-bottom: ${props => (props.isFullPage ? "32pt" : 0)};

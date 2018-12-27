@@ -13,7 +13,6 @@ import "./icons";
 import "prismjs/themes/prism-okaidia.css";
 
 import { dom } from "@fortawesome/fontawesome-svg-core";
-import { isNotNullish } from "../../utils/types";
 import { darkTheme, fromTheme } from "../../styles/theme";
 import VisuallyHidden from "@reach/visually-hidden";
 import { SkipNavContent, SkipNavLink } from "@reach/skip-nav";
