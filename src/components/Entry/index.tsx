@@ -104,7 +104,6 @@ export const Entry: React.SFC<IEntryProps> = ({
 			headerProps.folderName === "posts" ? blogPosting : [blogPosting, review].join(" ")
 		}
 	>
-		<meta itemScope itemProp="mainEntityOfPage" content={blogRef} />
 		<Helmet title={headerProps.title} />
 		<EntryHeader {...headerProps} isFullPage={true} />
 		{excerpt && <meta itemProp="description" content={excerpt} />}
