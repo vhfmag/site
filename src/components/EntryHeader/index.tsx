@@ -6,7 +6,7 @@ import { folderToCategory } from "../../utils/consts";
 import { Authors_2 } from "../../graphql-types";
 import { fromTheme } from "../../styles/theme";
 import { person, book, creativeWork, organization, personRef } from "../../utils/microdata";
-import { Folder } from "../../utils/types";
+import { Folder, isNotNullish } from "../../utils/types";
 
 export interface IEntryHeaderProps {
 	title: string;
@@ -113,7 +113,7 @@ function folderNameToReviewedItemType(folderName: Folder) {
 const renderAuthors = (authors: Authors_2[], isPublisher: boolean = false) => (
 	<span>
 		por{" "}
-		{authors.map(({ name, url: authorUrl }) => (
+		{authors.filter(isNotNullish).map(({ name, url: authorUrl }) => (
 			<StyledEnumeration
 				itemScope
 				itemType={isPublisher ? "" : person}
