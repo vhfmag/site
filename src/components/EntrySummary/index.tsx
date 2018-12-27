@@ -4,6 +4,7 @@ import { IEntryHeaderProps, EntryHeader } from "../EntryHeader";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { Folder } from "../../utils/types";
+import { personRef, blogPosting, review } from "../../utils/microdata";
 
 type IEntrySummaryProps = IEntryHeaderProps;
 
@@ -47,7 +48,15 @@ export const EntrySummary: React.SFC<IEntrySummaryProps> = ({ ...headerProps }) 
 	const theme = React.useContext(ThemeContext);
 
 	return (
-		<StyledEntrySummary className="h-entry">
+		<StyledEntrySummary
+			itemProp="blogPost"
+			itemScope
+			itemRef={personRef}
+			itemType={
+				headerProps.folderName === "posts" ? blogPosting : [blogPosting, review].join(" ")
+			}
+			className="h-entry"
+		>
 			<StyledEntryCategory>
 				<span className="fa-layers fa-fw fa-lg" role="presentation">
 					<FontAwesomeIcon

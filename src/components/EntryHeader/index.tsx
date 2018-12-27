@@ -28,12 +28,8 @@ export interface IEntryHeaderProps {
 
 const gappedClassName = "has-gap";
 
-const StyledHeader = styled.header`
-	margin-bottom: 32pt;
-
-	.${gappedClassName} {
-		margin-bottom: 0;
-	}
+const StyledHeader = styled.header<{ isFullPage?: boolean }>`
+	margin-bottom: ${props => (props.isFullPage ? "32pt" : 0)};
 
 	> h1,
 	> h2,
@@ -158,7 +154,7 @@ export const EntryHeader: React.SFC<IEntryHeaderProps & { isFullPage: boolean }>
 	const entryUrl = `/${folderName}/${fileName}`;
 
 	return (
-		<StyledHeader className={isFullPage ? gappedClassName : undefined}>
+		<StyledHeader isFullPage={isFullPage}>
 			<h2 itemProp="headline" className="post-title">
 				<Link itemProp="url" className="p-name u-url u-uid" to={entryUrl}>
 					{title}

@@ -7,7 +7,6 @@ import { Paginator } from "../components/Paginator";
 import { IGeneralMetadataFragment, IMarkdownEntryFragment } from "../fragments";
 import styled from "../styles/styled";
 import { isFolder } from "../utils/types";
-import { fromTheme } from "../styles/theme";
 
 const ListWrapper = styled.div`
 	margin: 1rem 0;
@@ -72,6 +71,9 @@ const blogSections = [
 const EntryList: React.SFC<IBookmarkListProps> = ({
 	pathContext,
 	data: {
+		site: {
+			siteMetadata: { siteUrl },
+		},
 		personalJson: { name },
 	},
 }) => {
@@ -131,6 +133,7 @@ const EntryList: React.SFC<IBookmarkListProps> = ({
 								folderName={relativeDirectory}
 								wordCount={words}
 								timeToRead={timeToRead}
+								selfAuthor={{ name, url: siteUrl }}
 							/>
 						);
 					},
