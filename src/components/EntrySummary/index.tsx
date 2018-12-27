@@ -57,6 +57,11 @@ export const EntrySummary: React.SFC<IEntrySummaryProps> = ({ ...headerProps }) 
 			}
 			className="h-entry"
 		>
+			<meta
+				itemScope
+				itemProp="mainEntityOfPage"
+				content={`/${headerProps.folderName}/${headerProps.fileName}`}
+			/>
 			<StyledEntryCategory>
 				<span className="fa-layers fa-fw fa-lg" role="presentation">
 					<FontAwesomeIcon
