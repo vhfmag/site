@@ -31,6 +31,10 @@ const GlobalStyle = createGlobalStyle`
 		padding: 0;
 	}
 
+	address {
+		all: unset;
+	}
+
 	a {
 		transition: 0.25s color ease, 0.25s opacity ease;
 	}

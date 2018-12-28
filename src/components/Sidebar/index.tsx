@@ -165,11 +165,11 @@ export const Sidebar: React.SFC<ISidebarProps> = ({
 			itemProp="description"
 		/>
 		<SidebarSection>
-			<div>
+			<address>
 				<a itemProp="email" className="u-email" href={`mailto:${email}`}>
 					{email}
 				</a>
-			</div>
+			</address>
 			<ScreenOnly>
 				<a href={sourceUrl!}>ver código fonte</a>
 			</ScreenOnly>
@@ -177,7 +177,7 @@ export const Sidebar: React.SFC<ISidebarProps> = ({
 		<StyledNav aria-label="Páginas do blog">
 			<NavLinks navs={nav} />
 		</StyledNav>
-		<nav aria-label="Links para mídias sociais">
+		<address aria-label="Links para mídias sociais">
 			<SocialLinks>
 				<li>
 					<SocialLink icon="rss" serviceName="RSS" rel="alternate" url="/rss.xml" />
@@ -188,6 +188,6 @@ export const Sidebar: React.SFC<ISidebarProps> = ({
 					</li>
 				))}
 			</SocialLinks>
-		</nav>
+		</address>
 	</StyledSidebar>
 );
