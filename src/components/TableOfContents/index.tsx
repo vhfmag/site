@@ -9,6 +9,7 @@ const StyledTOC = styled.aside`
 		float: right;
 		width: 400px;
 		max-width: 30vw;
+		padding: 1em;
 	}
 
 	@media (min-width: 1500px) {
