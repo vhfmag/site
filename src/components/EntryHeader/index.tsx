@@ -153,9 +153,8 @@ export const EntryHeader: React.SFC<IEntryHeaderProps & { isFullPage: boolean }>
 
 	return (
 		<StyledHeader isFullPage={isFullPage}>
-			<meta itemScope itemProp="mainEntityOfPage" content={entryUrl} />
 			<h2 itemProp="headline" className="post-title">
-				<Link itemProp="url" className="p-name u-url u-uid" to={entryUrl}>
+				<Link itemProp="url mainEntityOfPage" className="p-name u-url u-uid" to={entryUrl}>
 					{title}
 				</Link>
 			</h2>
