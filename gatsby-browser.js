@@ -1,5 +1,10 @@
 const React = require("react");
 const ReactDOM = require("react-dom");
+const { anchorate } = require("anchorate");
+
+exports.onRouteUpdate = () => {
+	anchorate();
+};
 
 exports.onClientEntry = () => {
 	if (process.env.NODE_ENV !== "production") {

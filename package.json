@@ -18,6 +18,7 @@
 		"@types/react-dom": "^16.0.6",
 		"@types/react-helmet": "^5.0.6",
 		"@types/styled-components": "^4.0.3",
+		"anchorate": "^1.2.3",
 		"babel-plugin-styled-components": "^1.5.1",
 		"gatsby": "^2",
 		"gatsby-cli": "^2",

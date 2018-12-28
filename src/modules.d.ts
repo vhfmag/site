@@ -1,3 +1,4 @@
+declare module "anchorate";
 declare module "typography";
 declare module "rehype-react";
 declare module "gray-percentage";
