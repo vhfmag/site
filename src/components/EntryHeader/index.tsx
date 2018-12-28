@@ -185,7 +185,13 @@ export const EntryHeader: React.SFC<IEntryHeaderProps & { isFullPage: boolean }>
 						itemType={folderNameToReviewedItemType(folderName)}
 					>
 						<meta itemProp="headline" content={title} />
-						<a itemProp="url" className="u-in-reply-to" href={replyTo}>
+						<a
+							itemProp="url"
+							rel="bookmark"
+							title={title}
+							className="u-in-reply-to"
+							href={replyTo}
+						>
 							{replyToText}
 						</a>{" "}
 						{authors && renderAuthors(authors)}
