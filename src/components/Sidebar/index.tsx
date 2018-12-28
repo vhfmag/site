@@ -157,7 +157,7 @@ export const Sidebar: React.SFC<ISidebarProps> = ({
 			<SidebarSection className="p-job-title" itemProp="jobTitle">
 				{jobTitle}
 			</SidebarSection>
-			<img itemProp="logo" width={48} height={48} src="/icons/icon-48x48.png" />
+			<img itemProp="logo" aria-hidden width={48} height={48} src="/icons/icon-48x48.png" />
 		</VisuallyHidden>
 		<SidebarSection
 			dangerouslySetInnerHTML={{ __html: description! }}
