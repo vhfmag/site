@@ -1,3 +1,5 @@
+const Slugger = require("github-slugger");
+
 const dateFormatter = new Intl.DateTimeFormat(
 	(typeof navigator !== "undefined" && navigator.language) || "pt-BR",
 	{
@@ -53,6 +55,8 @@ function compareEntryEdges(e1, e2) {
 	}
 }
 
+const slugger = new Slugger();
+
 /**
  *	Turns this kind of stuff into this-kind-of-stuff
  *
@@ -60,10 +64,8 @@ function compareEntryEdges(e1, e2) {
  * @returns {string} slugified text
  */
 function slugify(text) {
-	return text
-		.toLowerCase()
-		.split(" ")
-		.join("-");
+	slugger.reset();
+	return slugger.slug(text);
 }
 
 module.exports = {

@@ -53,6 +53,7 @@
 		"gatsby-source-filesystem": "^2.0.1-beta.10",
 		"gatsby-transformer-json": "^2.1.4",
 		"gatsby-transformer-sharp": "^2.1.5",
+		"github-slugger": "^1.2.0",
 		"graphql-code-generator": "^0.15.0",
 		"graphql-codegen-typescript-template": "^0.15.0",
 		"lodash-es": "^4.17.11",

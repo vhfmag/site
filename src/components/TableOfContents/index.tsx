@@ -1,7 +1,7 @@
 import * as React from "react";
 import styled from "../../styles/styled";
-import { slugify } from "../../utils/utils";
 import { backgroundColor } from "../../utils/consts";
+import Slugger from "github-slugger";
 
 const StyledTOC = styled.aside`
 	@media (min-width: 1000px) {
@@ -62,7 +62,13 @@ export interface ITableOfContentsProps {
 	title?: string;
 	headings: Array<ITreeNode<string>> | undefined;
 }
-const ContentsTree = ({ headings }: { headings?: Array<ITreeNode<string>> }) => {
+
+interface IContentsTreeProps {
+	headings?: Array<ITreeNode<string>>;
+	slugger: Slugger;
+}
+
+const ContentsTree = ({ headings, slugger }: IContentsTreeProps) => {
 	if (!headings || headings.length === 0) {
 		return null;
 	}
@@ -75,17 +81,17 @@ const ContentsTree = ({ headings }: { headings?: Array<ITreeNode<string>> }) => 
 						<details>
 							<summary>
 								<p>
-									<a href={`#${slugify(h.value)}`}>{h.value}</a>
+									<a href={`#${slugger.slug(h.value)}`}>{h.value}</a>
 								</p>
 							</summary>
-							<ContentsTree headings={h.children} />
+							<ContentsTree slugger={slugger} headings={h.children} />
 						</details>
 					) : (
 						<>
 							<p>
-								<a href={`#${slugify(h.value)}`}>{h.value}</a>
+								<a href={`#${slugger.slug(h.value)}`}>{h.value}</a>
 							</p>
-							<ContentsTree headings={h.children} />
+							<ContentsTree slugger={slugger} headings={h.children} />
 						</>
 					)}
 				</li>
@@ -102,13 +108,15 @@ export const TableOfContents: React.SFC<ITableOfContentsProps> = ({
 		return null;
 	}
 
+	const slugger = new Slugger();
+
 	return (
 		<StyledTOC>
 			<details>
 				<summary>
 					<h2>{title}</h2>
 				</summary>
-				<ContentsTree headings={headings} />
+				<ContentsTree slugger={slugger} headings={headings} />
 			</details>
 		</StyledTOC>
 	);

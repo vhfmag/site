@@ -3,7 +3,16 @@ const ReactDOM = require("react-dom");
 const { anchorate } = require("anchorate");
 
 exports.onRouteUpdate = () => {
-	anchorate();
+	anchorate({
+		/**
+		 * @param {HTMLElement | undefined} element
+		 */
+		scroller: function(element) {
+			if (!element) return false;
+			element.scrollIntoView({ behavior: "smooth" });
+			return true;
+		},
+	});
 };
 
 exports.onClientEntry = () => {
@@ -30,6 +39,5 @@ exports.onClientEntry = () => {
 		);
 
 		observer.observe();
-		console.log("observing!");
 	}
 };
