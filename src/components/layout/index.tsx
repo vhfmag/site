@@ -168,7 +168,7 @@ const RawLayout: React.SFC<ILayoutData> = ({ site: { siteMetadata }, personalJso
 	return (
 		<MDXProvider>
 			<ThemeProvider theme={darkTheme}>
-				<StyledRoot itemScope itemType={blog} id={blogRef} itemId={blogRef}>
+				<StyledRoot itemScope itemType={blog} id={blogRef} itemID={blogRef}>
 					<GlobalStyle />
 					<Helmet
 						htmlAttributes={{

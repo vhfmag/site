@@ -5,7 +5,7 @@ import { IEntryHeaderProps, EntryHeader } from "../EntryHeader";
 import { TableOfContents, ITreeNode } from "../TableOfContents";
 import { fromTheme } from "../../styles/theme";
 import { Folder } from "../../utils/types";
-import { blogPosting, review, blogRef, personRef } from "../../utils/microdata";
+import { blogPosting, review, personRef } from "../../utils/microdata";
 
 type IEntryProps = IEntryHeaderProps & {
 	headings: Array<Required<IHeading>> | undefined;
@@ -69,7 +69,11 @@ function headingsToTree(hs: Array<Required<IHeading>>): Array<ITreeNode<string>>
 			}
 
 			if (lastNode && headingDepth > depth) {
-				lastNode.children.push(newNode);
+				if (lastNode.children) {
+					lastNode.children.push(newNode);
+				} else {
+					lastNode.children = [newNode];
+				}
 			} else {
 				lastNodeList.push(newNode);
 			}

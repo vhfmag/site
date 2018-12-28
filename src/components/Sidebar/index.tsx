@@ -139,7 +139,7 @@ export const Sidebar: React.SFC<ISidebarProps> = ({
 		itemScope
 		itemType={[person, organization].join(" ")}
 		id={personRef}
-		itemId={personRef}
+		itemID={personRef}
 		itemProp="author publisher"
 		className="h-card"
 	>

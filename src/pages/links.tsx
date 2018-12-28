@@ -2,7 +2,20 @@ import * as React from "react";
 import { graphql } from "gatsby";
 import DefaultLayout from "../components/layout";
 
-const LinksPage: React.FunctionComponent<{ data: any }> = ({ data }) => {
+interface IAllLinksJson {
+	allLinksJson: {
+		edges: Array<{
+			node: {
+				name: string;
+				links: Array<{ url: string; description: string; name: string }>;
+			};
+		}>;
+	};
+}
+
+const LinksPage: React.FunctionComponent<{
+	data: IAllLinksJson;
+}> = ({ data }) => {
 	return (
 		<DefaultLayout>
 			<h1>Links</h1>
