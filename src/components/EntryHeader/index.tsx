@@ -153,7 +153,7 @@ export const EntryHeader: React.SFC<IEntryHeaderProps & { isFullPage: boolean }>
 
 	return (
 		<StyledHeader isFullPage={isFullPage}>
-			<h2 itemProp="headline" className="post-title">
+			<h2 itemProp="headline title" className="post-title">
 				<Link itemProp="url mainEntityOfPage" className="p-name u-url u-uid" to={entryUrl}>
 					{title}
 				</Link>
@@ -166,7 +166,7 @@ export const EntryHeader: React.SFC<IEntryHeaderProps & { isFullPage: boolean }>
 				</span>
 				{publishDate && (
 					<time
-						itemProp="datePublished dateModified"
+						itemProp="datePublished dateModified pubdate"
 						className="dt-published"
 						dateTime={publishDate.toISOString()}
 					>
@@ -184,7 +184,7 @@ export const EntryHeader: React.SFC<IEntryHeaderProps & { isFullPage: boolean }>
 						itemScope
 						itemType={folderNameToReviewedItemType(folderName)}
 					>
-						<meta itemProp="headline" content={title} />
+						<meta itemProp="headline title" content={title} />
 						<a
 							itemProp="url"
 							rel="bookmark"
@@ -199,17 +199,15 @@ export const EntryHeader: React.SFC<IEntryHeaderProps & { isFullPage: boolean }>
 				)}
 			</StyledMetadata>
 			{tags && (
-				<nav>
-					<StyledTags aria-label="Tags" itemProp="keywords">
-						{tags.map(tag => (
-							<li key={tag}>
-								<a rel="tag" href={`/${folderName}/tags/${slugify(tag.trim())}`}>
-									{tag}
-								</a>
-							</li>
-						))}
-					</StyledTags>
-				</nav>
+				<StyledTags aria-label="Tags" itemProp="keywords">
+					{tags.map(tag => (
+						<li key={tag}>
+							<a rel="tag" href={`/${folderName}/tags/${slugify(tag.trim())}`}>
+								{tag}
+							</a>
+						</li>
+					))}
+				</StyledTags>
 			)}
 		</StyledHeader>
 	);
