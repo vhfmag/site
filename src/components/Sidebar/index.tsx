@@ -15,9 +15,9 @@ import VisuallyHidden from "@reach/visually-hidden";
 const activeLinkClassName = "active";
 
 const HeadLink = styled(Link)`
-	font-size: 2rem;
-	font-weight: 800;
-	line-height: 1.1;
+	h1 {
+		font-family: "Zilla Slab";
+	}
 `;
 
 const StyledNav = styled.nav`
@@ -150,7 +150,7 @@ export const Sidebar: React.SFC<ISidebarProps> = ({
 				className="p-name u-uid u-url"
 				to="/"
 			>
-				{title}
+				<h1>{title}</h1>
 			</HeadLink>
 		</SidebarSection>
 		<VisuallyHidden>
