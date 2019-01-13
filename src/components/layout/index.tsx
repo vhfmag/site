@@ -112,7 +112,7 @@ const StyledMain = styled.main`
 	hr,
 	dl {
 		max-width: 70ch;
-		visuallyhiddentext-align: justify;
+		text-align: justify;
 		hyphens: auto;
 	}
 
