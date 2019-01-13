@@ -109,6 +109,7 @@ const renderAuthors = (authors: Authors_2[], isPublisher: boolean = false) => (
 		por{" "}
 		{authors.filter(isNotNullish).map(({ name, url: authorUrl }) => (
 			<StyledEnumeration
+				key={name!}
 				itemScope
 				itemType={isPublisher ? "" : person}
 				itemProp={isPublisher ? "" : "author"}
