@@ -1,5 +1,5 @@
 import Typography from "typography";
-import { textColor, themeColor, backgroundColor } from "../utils/consts";
+// import { textColor, themeColor, backgroundColor } from "../utils/consts";
 import { MOBILE_MEDIA_QUERY } from "typography-breakpoint-constants";
 
 const typography = new Typography({
@@ -8,9 +8,9 @@ const typography = new Typography({
 	baseLineHeight: 1.6875,
 	headerFontFamily: ["Montserrat", "sans-serif"],
 	bodyFontFamily: ["Zilla Slab", "sans-serif"],
-	headerColor: themeColor,
-	bodyColor: textColor,
-	backgroundColor,
+	headerColor: "var(--theme-color)",
+	bodyColor: "var(--text-color)",
+	backgroundColor: "var(--background-color)",
 	headerWeight: 700,
 	bodyWeight: 400,
 	boldWeight: 700,

@@ -1,4 +1,5 @@
 import { textColor, themeColor, backgroundColor, responsiveBreakpoint } from "../utils/consts";
+import { kebabCase } from "lodash";
 
 export interface ITheme {
 	backgroundColor: string;
@@ -18,4 +19,4 @@ export const darkTheme: ITheme = {
 	sidebarWidth: "270px",
 };
 
-export const fromTheme = (field: keyof ITheme) => (props: { theme: ITheme }) => props.theme[field];
+export const fromTheme = (field: keyof ITheme) => `var(--${kebabCase(field)})`;

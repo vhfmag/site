@@ -1,5 +1,5 @@
 import * as React from "react";
-import styled, { ThemeContext } from "../../styles/styled";
+import styled from "../../styles/styled";
 import { IEntryHeaderProps, EntryHeader } from "../EntryHeader";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
@@ -45,8 +45,6 @@ const iconPerFolder: Record<Folder, IconProp> = {
 };
 
 export const EntrySummary: React.SFC<IEntrySummaryProps> = ({ ...headerProps }) => {
-	const theme = React.useContext(ThemeContext);
-
 	return (
 		<StyledEntrySummary
 			itemProp="blogPost"
@@ -63,10 +61,10 @@ export const EntrySummary: React.SFC<IEntrySummaryProps> = ({ ...headerProps }) 
 						icon="circle"
 						size="lg"
 						role="presentation"
-						color={theme.themeColor}
+						color="var(--theme-color)"
 					/>
 					<FontAwesomeIcon
-						color={theme.backgroundColor}
+						color="var(--background-color)"
 						transform="shrink-4"
 						role="presentation"
 						icon={iconPerFolder[headerProps.folderName]}

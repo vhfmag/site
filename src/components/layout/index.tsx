@@ -14,12 +14,19 @@ import "prismjs/themes/prism-okaidia.css";
 
 import { dom } from "@fortawesome/fontawesome-svg-core";
 import { darkTheme, fromTheme } from "../../styles/theme";
-import VisuallyHidden from "@reach/visually-hidden";
 import { SkipNavContent, SkipNavLink } from "@reach/skip-nav";
 import "@reach/skip-nav/styles.css";
 import { blog, blogRef } from "../../utils/microdata";
+import { kebabCase } from "lodash";
 
 const GlobalStyle = createGlobalStyle`
+	:root {
+		${({ theme }) =>
+			Object.entries(theme)
+				.map(([name, value]) => `--${kebabCase(name)}: ${value};`)
+				.join("\n")};
+	}
+
 	* {
 		box-sizing: border-box;
 	}
@@ -219,9 +226,6 @@ const RawLayout: React.SFC<ILayoutData> = ({ site: { siteMetadata }, personalJso
 						<link rel="canonical" href="https://victormagalhaes.codes" />
 					</Helmet>
 
-					<VisuallyHidden>
-						<h1>Blog de {personalJson.name}</h1>
-					</VisuallyHidden>
 					<SkipNavLink>Pular para conteúdo</SkipNavLink>
 					<Sidebar
 						metadata={siteMetadata}
