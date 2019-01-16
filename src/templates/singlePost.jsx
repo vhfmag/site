@@ -8,12 +8,14 @@ import { isFolder } from "../utils/types";
 /**
  * @typedef {Object} IPostTemplateProps
  * @property {import("../fragments").IGeneralMetadataFragment & { mdx: import("../fragments").IMarkdownEntryFragment, code: { body: any } }} data
+ * @property {import("@reach/router").WindowLocation} location
  */
 
 /**
  * @param {IPostTemplateProps} props
  */
 const SinglePostTemplate = ({
+	location,
 	data: {
 		site: {
 			siteMetadata: { siteUrl },
@@ -36,9 +38,12 @@ const SinglePostTemplate = ({
 		);
 	}
 
+	console.log({ location });
+
 	return (
 		<DefaultLayout>
 			<Entry
+				entryUrl={location.pathname}
 				toc={toc}
 				title={title}
 				excerpt={excerpt}

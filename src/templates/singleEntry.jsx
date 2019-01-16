@@ -8,12 +8,14 @@ import { isFolder } from "../utils/types";
 /**
  * @typedef {Object} IEntryTemplateProps
  * @property {import("../fragments").IGeneralMetadataFragment & { mdx: import("../fragments").IMarkdownEntryFragment, code: { body: any } }} data
+ * @property {import("@reach/router").WindowLocation} location
  */
 
 /**
  * @param {IEntryTemplateProps} props
  */
 const SingleEntryTemplate = ({
+	location,
 	data: {
 		site: {
 			siteMetadata: { siteUrl },
@@ -39,6 +41,7 @@ const SingleEntryTemplate = ({
 	return (
 		<DefaultLayout>
 			<Entry
+				entryUrl={location.pathname}
 				toc={toc}
 				title={title}
 				excerpt={excerpt}

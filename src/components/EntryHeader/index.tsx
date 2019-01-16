@@ -19,6 +19,7 @@ export interface IEntryHeaderProps {
 	replyTo?: string;
 	replyToText?: string;
 
+	entryUrl: string;
 	fileName: string;
 	folderName: keyof typeof folderToCategory;
 
@@ -135,7 +136,7 @@ const renderAuthors = (authors: Authors_2[], isPublisher: boolean = false) => (
 export const EntryHeader: React.SFC<IEntryHeaderProps & { isFullPage: boolean }> = ({
 	title,
 	subtitle,
-	fileName,
+	entryUrl,
 	folderName,
 	authors,
 	replyTo,
@@ -148,8 +149,6 @@ export const EntryHeader: React.SFC<IEntryHeaderProps & { isFullPage: boolean }>
 	tags,
 }) => {
 	const category = folderToCategory[folderName];
-
-	const entryUrl = `/${folderName}/${fileName}`;
 
 	return (
 		<StyledHeader isFullPage={isFullPage}>

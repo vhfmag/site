@@ -108,7 +108,14 @@ export const Entry: React.SFC<IEntryProps> = ({
 			headerProps.folderName === "posts" ? blogPosting : [blogPosting, review].join(" ")
 		}
 	>
-		<Helmet title={headerProps.title} />
+		<Helmet title={headerProps.title}>
+			<meta
+				property="og:image"
+				content={`https://s0.wordpress.com/mshots/v1/${encodeURIComponent(
+					`https://victormagalhaes.codes${headerProps.entryUrl}`,
+				)}}?w=800&h=400`}
+			/>
+		</Helmet>
 		<EntryHeader {...headerProps} isFullPage={true} />
 		{excerpt && <meta itemProp="description" content={excerpt} />}
 		<section className="e-content" itemProp={folderNameToBodyProp(headerProps.folderName)}>

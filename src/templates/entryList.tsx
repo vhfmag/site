@@ -51,8 +51,6 @@ const BlogNav = styled.nav`
 	}
 `;
 
-const bodyAttributes = { class: "h-feed" };
-
 const blogSections = [
 	{
 		path: "/",
@@ -89,7 +87,7 @@ const EntryList: React.SFC<IBookmarkListProps> = ({
 
 	return (
 		<DefaultLayout>
-			<Helmet title={listTitle} bodyAttributes={bodyAttributes} />
+			<Helmet title={listTitle} />
 			<h1>{listTitle}</h1>
 			<BlogNav>
 				<h2>Seções do blog</h2>
@@ -104,7 +102,7 @@ const EntryList: React.SFC<IBookmarkListProps> = ({
 				</ul>
 			</BlogNav>
 			<Paginator {...pathContext} />
-			<ListWrapper>
+			<ListWrapper className="h-feed">
 				{posts.map(
 					({
 						node: {
@@ -123,6 +121,7 @@ const EntryList: React.SFC<IBookmarkListProps> = ({
 
 						return (
 							<EntrySummary
+								entryUrl={`/${relativeDirectory}/${fileName}`}
 								key={fileAbsolutePath}
 								replyTo={link}
 								authors={authors || [meAuthor]}
