@@ -92,38 +92,52 @@ function folderNameToBodyProp(folderName: Folder) {
 	}
 }
 
+const imageWidth = 800;
+const imageHeight = 400;
+
 export const Entry: React.SFC<IEntryProps> = ({
 	content,
 	headings,
 	excerpt,
 	children,
 	...headerProps
-}) => (
-	<StyledEntry
-		className="h-entry"
-		itemProp="blogPost"
-		itemScope
-		itemRef={personRef}
-		itemType={
-			headerProps.folderName === "posts" ? blogPosting : [blogPosting, review].join(" ")
-		}
-	>
-		<Helmet title={headerProps.title}>
-			<meta
-				property="og:image"
-				content={`https://s0.wordpress.com/mshots/v1/${encodeURIComponent(
-					`https://victormagalhaes.codes${headerProps.entryUrl}`,
-				)}}?w=800&h=400`}
-			/>
-		</Helmet>
-		<EntryHeader {...headerProps} isFullPage={true} />
-		{excerpt && <meta itemProp="description" content={excerpt} />}
-		<section className="e-content" itemProp={folderNameToBodyProp(headerProps.folderName)}>
-			{headings && headings.length > 0 && (
-				<TableOfContents headings={headingsToTree(headings)} />
-			)}
-			{content && <p>{content}</p>}
-			{children}
-		</section>
-	</StyledEntry>
-);
+}) => {
+	const url = `https://victormagalhaes.codes${headerProps.entryUrl}`;
+	return (
+		<StyledEntry
+			className="h-entry"
+			itemProp="blogPost"
+			itemScope
+			itemRef={personRef}
+			itemType={
+				headerProps.folderName === "posts" ? blogPosting : [blogPosting, review].join(" ")
+			}
+		>
+			<Helmet title={headerProps.title}>
+				<meta property="og:title" content={headerProps.title} />
+				<meta property="og:type" content="article" />
+				<meta property="og:url" content={url} />
+				<meta property="og:locale" content="pt_BR" />
+				<meta property="og:site_name" content="Victor Magalhães" />
+				<meta
+					property="og:image"
+					content={`https://s0.wordpress.com/mshots/v1/${encodeURIComponent(
+						url,
+					)}}?w=${imageWidth}&h=${imageHeight}`}
+				/>
+				<meta property="og:image:alt" content="Screenshot da página" />
+				<meta property="og:image:width" content={imageWidth.toString()} />
+				<meta property="og:image:height" content={imageHeight.toString()} />
+			</Helmet>
+			<EntryHeader {...headerProps} isFullPage={true} />
+			{excerpt && <meta itemProp="description" content={excerpt} />}
+			<section className="e-content" itemProp={folderNameToBodyProp(headerProps.folderName)}>
+				{headings && headings.length > 0 && (
+					<TableOfContents headings={headingsToTree(headings)} />
+				)}
+				{content && <p>{content}</p>}
+				{children}
+			</section>
+		</StyledEntry>
+	);
+};
