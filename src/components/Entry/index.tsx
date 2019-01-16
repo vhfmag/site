@@ -114,7 +114,12 @@ export const Entry: React.SFC<IEntryProps> = ({
 			}
 		>
 			<Helmet title={headerProps.title}>
+				<meta property="twitter:card" content="summary" />
+				<meta property="twitter:creator" content="@vhfmag" />
 				<meta property="og:title" content={headerProps.title} />
+				{typeof headerProps.subtitle === "string" && (
+					<meta property="og:description" content={headerProps.subtitle} />
+				)}
 				<meta property="og:type" content="article" />
 				<meta property="og:url" content={url} />
 				<meta property="og:locale" content="pt_BR" />
