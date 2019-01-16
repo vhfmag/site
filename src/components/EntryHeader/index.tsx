@@ -117,14 +117,13 @@ const renderAuthors = (authors: Authors_2[], isPublisher: boolean = false) => (
 				{authorUrl ? (
 					<a
 						itemProp={isPublisher ? "" : "url identifier"}
-						// rel="author"
-						className="p-author h-card"
+						className="p-author"
 						href={authorUrl}
 					>
 						<span itemProp={isPublisher ? "" : "name"}>{name}</span>
 					</a>
 				) : (
-					<span itemProp={isPublisher ? "" : "name"} className="p-author h-card">
+					<span itemProp={isPublisher ? "" : "name"} className="p-author">
 						{name}
 					</span>
 				)}
