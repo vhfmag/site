@@ -38,8 +38,6 @@ const SinglePostTemplate = ({
 		);
 	}
 
-	console.log({ location });
-
 	return (
 		<DefaultLayout>
 			<Entry
