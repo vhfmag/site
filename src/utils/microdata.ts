@@ -7,6 +7,7 @@ export const blog = `${schemaNS}Blog`;
 export const book = `${schemaNS}Book`;
 export const person = `${schemaNS}Person`;
 export const review = `${schemaNS}Review`;
+export const comment = `${schemaNS}Comment`;
 export const blogPosting = `${schemaNS}BlogPosting`;
 export const organization = `${schemaNS}Organization`;
 export const creativeWork = `${schemaNS}CreativeWork`;

@@ -6,6 +6,8 @@ import { TableOfContents, ITreeNode } from "../TableOfContents";
 import { fromTheme } from "../../styles/theme";
 import { Folder } from "../../utils/types";
 import { blogPosting, review, personRef } from "../../utils/microdata";
+import { fetchWebMentions, WMFeed } from "../../utils/webmention";
+import { WebMentions } from "../WebMentions";
 
 type IEntryProps = IEntryHeaderProps & {
 	headings: Array<Required<IHeading>> | undefined;
@@ -103,6 +105,12 @@ export const Entry: React.SFC<IEntryProps> = ({
 	...headerProps
 }) => {
 	const url = `https://victormagalhaes.codes${headerProps.entryUrl}`;
+	const [mentions, setMentions] = React.useState<WMFeed | null>(null);
+
+	React.useEffect(() => {
+		fetchWebMentions(url).then(setMentions);
+	}, []);
+
 	return (
 		<StyledEntry
 			className="h-entry"
@@ -143,6 +151,11 @@ export const Entry: React.SFC<IEntryProps> = ({
 				{content && <p>{content}</p>}
 				{children}
 			</section>
+			{mentions && (
+				<footer>
+					<WebMentions mentions={mentions.children} />
+				</footer>
+			)}
 		</StyledEntry>
 	);
 };
