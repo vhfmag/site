@@ -38,7 +38,7 @@ export async function fetchWebMentions(page?: string) {
 	}
 
 	if (page) {
-		page = (page + "/").replace(/\/+/g, "/");
+		page = (page + "/").replace(/\/+$/, "/");
 	}
 
 	const url = `${apiBase}?token=${token}&${page ? `target=${page}` : `domain=${domain}`}`;
