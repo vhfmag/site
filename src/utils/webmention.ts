@@ -37,6 +37,10 @@ export async function fetchWebMentions(page?: string) {
 		throw new Error("Environment variable isn't available");
 	}
 
+	if (page) {
+		page = (page + "/").replace(/\/+/g, "/");
+	}
+
 	const url = `${apiBase}?token=${token}&${page ? `target=${page}` : `domain=${domain}`}`;
 
 	const response = await fetch(url);
