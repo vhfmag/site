@@ -12,6 +12,7 @@ import DefaultLayout from "../components/layout";
 import { graphql } from "gatsby";
 import { isNotNullish } from "../utils/types";
 import { fromTheme } from "../styles/theme";
+import { responsiveBreakpoint } from "../utils/consts";
 
 interface IResumePageProps {
 	data: {
@@ -77,12 +78,12 @@ const StyledCompetences = styled.section`
 		display: grid;
 		grid-gap: 8pt;
 
-		@media screen and (min-width: ${fromTheme("responsiveBreakpoint")}) {
+		@media screen and (min-width: ${responsiveBreakpoint}) {
 			grid-auto-flow: column;
 			grid-template-rows: auto auto;
 		}
 
-		@media print, (max-width: ${fromTheme("responsiveBreakpoint")}) {
+		@media print, (max-width: ${responsiveBreakpoint}) {
 			grid-auto-flow: row;
 			grid-template-columns: auto auto;
 		}

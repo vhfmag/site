@@ -17,6 +17,7 @@ import { darkTheme, fromTheme } from "../../styles/theme";
 import { SkipNavContent, SkipNavLink } from "@reach/skip-nav";
 import "@reach/skip-nav/styles.css";
 import { blog, blogRef } from "../../utils/microdata";
+import { responsiveBreakpoint } from "../../utils/consts";
 import { kebabCase } from "lodash";
 
 const GlobalStyle = createGlobalStyle`
@@ -27,15 +28,13 @@ const GlobalStyle = createGlobalStyle`
 				.join("\n")};
 	}
 
-	* {
-		box-sizing: border-box;
-	}
-
 	html,
 	body {
 		min-height: 100vh;
+		max-width: 100vw;
 		margin: 0;
 		padding: 0;
+		box-sizing: border-box;
 	}
 
 	address {
@@ -132,7 +131,7 @@ const StyledMain = styled.main`
 		margin-top: 0;
 	}
 
-	@media (min-width: ${fromTheme("responsiveBreakpoint")}) {
+	@media (min-width: ${responsiveBreakpoint}) {
 		--width: calc(100vw - ${fromTheme("sidebarWidth")} - 2 * ${fromTheme("rootPadding")});
 	}
 `;
@@ -141,7 +140,7 @@ const StyledRoot = styled.div`
 	display: flex;
 	align-items: stretch;
 
-	@media print, (max-width: ${fromTheme("responsiveBreakpoint")}) {
+	@media print, (max-width: ${responsiveBreakpoint}) {
 		flex-direction: column;
 	}
 
