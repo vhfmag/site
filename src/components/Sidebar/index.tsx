@@ -63,6 +63,10 @@ const StyledSidebar = styled.header`
 	flex: 0 0 ${fromTheme("sidebarWidth")};
 	padding: ${fromTheme("rootPadding")};
 
+	img[aria-hidden] {
+		max-width: unset;
+	}
+
 	p,
 	${StyledDescription}, ${SidebarSection}, ${StyledNav} {
 		margin: 1.2em 0;
