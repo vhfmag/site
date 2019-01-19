@@ -137,15 +137,6 @@ module.exports = {
 		},
 		"gatsby-transformer-json",
 		"gatsby-plugin-sharp",
-		{
-			resolve: "gatsby-plugin-nprogress",
-			options: {
-				color: themeColor,
-				showSpinner: false,
-			},
-		},
-		"gatsby-plugin-brotli",
-		"gatsby-plugin-zopfli",
 		"gatsby-plugin-sri",
 		"gatsby-transformer-sharp",
 		"gatsby-plugin-styled-components",
