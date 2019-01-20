@@ -5,7 +5,7 @@ import { graphql, Link } from "gatsby";
 import DefaultLayout from "../components/layout";
 import { Paginator } from "../components/Paginator";
 import { IGeneralMetadataFragment, IMarkdownEntryFragment } from "../fragments";
-import styled from "../styles/styled";
+import { styled } from "linaria/react";
 import { isFolder } from "../utils/types";
 
 const ListWrapper = styled.div`

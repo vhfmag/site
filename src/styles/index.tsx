@@ -1,4 +1,4 @@
-import styled from "../styles/styled";
+import { styled } from "linaria/react";
 
 export const PrintOnly = styled.div`
 	@media not print {

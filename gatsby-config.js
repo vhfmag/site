@@ -75,6 +75,7 @@ module.exports = {
 	},
 	plugins: [
 		"gatsby-plugin-typescript",
+		"gatsby-plugin-linaria",
 		{
 			resolve: "gatsby-plugin-webpack-bundle-analyzer",
 			options: {
@@ -131,7 +132,6 @@ module.exports = {
 		"gatsby-plugin-sharp",
 		"gatsby-plugin-sri",
 		"gatsby-transformer-sharp",
-		"gatsby-plugin-styled-components",
 		{
 			resolve: `gatsby-plugin-typography`,
 			options: {

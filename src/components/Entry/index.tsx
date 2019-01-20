@@ -1,5 +1,5 @@
 import * as React from "react";
-import styled from "../../styles/styled";
+import { styled } from "linaria/react";
 import Helmet from "react-helmet";
 import { IEntryHeaderProps, EntryHeader } from "../EntryHeader";
 import { TableOfContents, ITreeNode } from "../TableOfContents";

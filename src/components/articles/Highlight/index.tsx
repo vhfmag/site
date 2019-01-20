@@ -1,4 +1,4 @@
-import styled from "../../../styles/styled";
+import { styled } from "linaria/react";
 import { Float } from "../Float";
 import { withProps } from "../../../utils/types";
 

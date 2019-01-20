@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Helmet } from "react-helmet";
-import styled, { createGlobalStyle, ThemeProvider } from "../../styles/styled";
+import { css } from "linaria";
+import { styled } from "linaria/react";
 import { StaticQuery, graphql } from "gatsby";
 import { MDXProvider } from "@mdx-js/tag";
 
@@ -21,90 +22,97 @@ import { responsiveBreakpoint } from "../../utils/consts";
 import { kebabCase } from "lodash";
 import { components } from "../mdxComponents";
 
-const GlobalStyle = createGlobalStyle`
-	:root {
-		${({ theme }) =>
-			Object.entries(theme)
+const globalCss = css`
+	:global {
+		:root {
+			${Object.entries(darkTheme)
 				.map(([name, value]) => `--${kebabCase(name)}: ${value};`)
 				.join("\n")};
-	}
-
-	html,
-	body {
-		min-height: 100vh;
-		max-width: 100vw;
-		margin: 0;
-		padding: 0;
-		box-sizing: border-box;
-	}
-
-	address {
-		all: unset;
-	}
-
-	a {
-		transition: 0.25s color ease, 0.25s opacity ease;
-	}
-
-	a:hover,
-	a:active,
-	a:focus {
-		opacity: 0.75;
-	}
-
-	dl {
-		dd {
-			margin-left: 1em;
 		}
-	}
 
-	details {
-		--heading-margin-bottom: 1.6875em;
-		--indicator-width: 0.6em;
-		--indicator-length: 0.5em;
+		html,
+		body {
+			min-height: 100vh;
+			max-width: 100vw;
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
 
-		summary {
-			color: ${fromTheme("themeColor")};
-			margin-bottom: 1em;
+		address {
+			all: unset;
+		}
 
-			h1, h2, h3, h4, h5, h6, h7 {
-				margin-bottom: 0;
-			}
+		a {
+			transition: 0.25s color ease, 0.25s opacity ease;
+		}
 
-			&::before {
-				--indicator-x: var(--indicator-length);
-				--indicator-y: var(--indicator-width);
-				--indicator-vertical-margin: calc((1.6em - var(--indicator-x)) / 2);
-				--indicator-horizontal-margin: calc((2ch - var(--indicator-y)) / 2);
+		a:hover,
+		a:active,
+		a:focus {
+			opacity: 0.75;
+		}
 
-				content: "";
-				width: 0;
-				height: 0;
-				float: left;
-				margin: var(--indicator-vertical-margin) var(--indicator-horizontal-margin);
-				transition: all .25s ease;
-				border-top: calc(var(--indicator-width) / 2) solid transparent;
-				border-bottom: calc(var(--indicator-width) / 2) solid transparent;
-				border-left: var(--indicator-length) solid currentColor;
+		dl {
+			dd {
+				margin-left: 1em;
 			}
 		}
 
-		&[open] {
-			> summary::before {
-				--indicator-x: var(--indicator-length);
-				--indicator-y: var(--indicator-width);
-				transform: rotate(90deg);
+		details {
+			--heading-margin-bottom: 1.6875em;
+			--indicator-width: 0.6em;
+			--indicator-length: 0.5em;
+
+			summary {
+				color: ${fromTheme("themeColor")};
+				margin-bottom: 1em;
+
+				h1,
+				h2,
+				h3,
+				h4,
+				h5,
+				h6,
+				h7 {
+					margin-bottom: 0;
+				}
+
+				&::before {
+					--indicator-x: var(--indicator-length);
+					--indicator-y: var(--indicator-width);
+					--indicator-vertical-margin: calc((1.6em - var(--indicator-x)) / 2);
+					--indicator-horizontal-margin: calc((2ch - var(--indicator-y)) / 2);
+
+					content: "";
+					width: 0;
+					height: 0;
+					float: left;
+					margin: var(--indicator-vertical-margin) var(--indicator-horizontal-margin);
+					transition: all 0.25s ease;
+					border-top: calc(var(--indicator-width) / 2) solid transparent;
+					border-bottom: calc(var(--indicator-width) / 2) solid transparent;
+					border-left: var(--indicator-length) solid currentColor;
+				}
+			}
+
+			&[open] {
+				> summary::before {
+					--indicator-x: var(--indicator-length);
+					--indicator-y: var(--indicator-width);
+					transform: rotate(90deg);
+				}
 			}
 		}
-	}
 
-	[data-reach-skip-link]:focus {
-		background-color: ${fromTheme("themeColor")} !important;
-		color: ${fromTheme("backgroundColor")} !important;
-		opacity: 1;
-	}
+		[data-reach-skip-link]:focus {
+			background-color: ${fromTheme("themeColor")} !important;
+			color: ${fromTheme("backgroundColor")} !important;
+			opacity: 1;
+		}
 
-	${dom.css()}
+		${dom.css()}
+	}
 `;
 
 const StyledMain = styled.main`
@@ -178,84 +186,87 @@ const RawLayout: React.SFC<ILayoutData> = ({ site: { siteMetadata }, personalJso
 
 	return (
 		<MDXProvider components={components}>
-			<ThemeProvider theme={darkTheme}>
-				<StyledRoot itemScope itemType={blog} id={blogRef} itemID={blogRef}>
-					<GlobalStyle />
-					<Helmet
-						htmlAttributes={{
-							lang: "pt-br",
-						}}
-						defaultTitle={siteMetadata.title!}
-						titleTemplate={`%s — ${siteMetadata.title}`}
-						meta={[
-							{
-								name: "description",
-								content: plainTextDescription,
-							},
-							{
-								name: "keywords",
-								content: [
-									"javascript",
-									"typescript",
-									"development",
-									"web development",
-									"web",
-									"privacy",
-									"decentralized web",
-									"decentralization",
-									"p2p",
-									"personal",
-									"blog",
-									"brazilian",
-								].join(", "),
-							},
-							{
-								name: "google-site-verification",
-								content: "RHQh7j4JKTIEmRsQrcOD1Pk7OoLoW8VK9YG4LscV7d0",
-							},
-						]}
-					>
-						<link
-							rel="webmention"
-							href="https://webmention.io/victormagalhaes.codes/webmention"
-						/>
-						<link
-							rel="pingback"
-							href="https://webmention.io/victormagalhaes.codes/xmlrpc"
-						/>
-						<link rel="canonical" href="https://victormagalhaes.codes" />
-					</Helmet>
-
-					<SkipNavLink>Pular para conteúdo</SkipNavLink>
-					<Sidebar
-						metadata={siteMetadata}
-						personalData={personalJson}
-						nav={[
-							{
-								name: "blog",
-								url: "/",
-							},
-							{
-								name: "to do",
-								lang: "en",
-								url: "/todo/",
-							},
-							{
-								name: "links",
-								url: "/links/",
-							},
-							{
-								name: "currículo",
-								url: "/resume/",
-							},
-						]}
+			<StyledRoot
+				className={globalCss}
+				itemScope
+				itemType={blog}
+				id={blogRef}
+				itemID={blogRef}
+			>
+				<Helmet
+					htmlAttributes={{
+						lang: "pt-br",
+					}}
+					defaultTitle={siteMetadata.title!}
+					titleTemplate={`%s — ${siteMetadata.title}`}
+					meta={[
+						{
+							name: "description",
+							content: plainTextDescription,
+						},
+						{
+							name: "keywords",
+							content: [
+								"javascript",
+								"typescript",
+								"development",
+								"web development",
+								"web",
+								"privacy",
+								"decentralized web",
+								"decentralization",
+								"p2p",
+								"personal",
+								"blog",
+								"brazilian",
+							].join(", "),
+						},
+						{
+							name: "google-site-verification",
+							content: "RHQh7j4JKTIEmRsQrcOD1Pk7OoLoW8VK9YG4LscV7d0",
+						},
+					]}
+				>
+					<link
+						rel="webmention"
+						href="https://webmention.io/victormagalhaes.codes/webmention"
 					/>
+					<link
+						rel="pingback"
+						href="https://webmention.io/victormagalhaes.codes/xmlrpc"
+					/>
+					<link rel="canonical" href="https://victormagalhaes.codes" />
+				</Helmet>
 
-					<SkipNavContent />
+				<SkipNavLink>Pular para conteúdo</SkipNavLink>
+				<Sidebar
+					metadata={siteMetadata}
+					personalData={personalJson}
+					nav={[
+						{
+							name: "blog",
+							url: "/",
+						},
+						{
+							name: "to do",
+							lang: "en",
+							url: "/todo/",
+						},
+						{
+							name: "links",
+							url: "/links/",
+						},
+						{
+							name: "currículo",
+							url: "/resume/",
+						},
+					]}
+				/>
 
-					<StyledMain>{children}</StyledMain>
-				</StyledRoot>
-			</ThemeProvider>
+				<SkipNavContent />
+
+				<StyledMain>{children}</StyledMain>
+			</StyledRoot>
 		</MDXProvider>
 	);
 };

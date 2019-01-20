@@ -2,7 +2,7 @@ import * as React from "react";
 import Helmet from "react-helmet";
 import { IGeneralMetadataFragment } from "../fragments";
 import DefaultLayout from "../components/layout";
-import styled from "../styles/styled";
+import { styled } from "linaria/react";
 import { fromTheme } from "../styles/theme";
 
 type Comparator<T> = (a: T, b: T) => number;
