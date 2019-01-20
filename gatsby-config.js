@@ -1,7 +1,5 @@
 const { backgroundColor, themeColor } = require("./src/utils/consts");
-
 const { graphql } = require("./src/utils/taggedUtils");
-
 const { compareEntryEdges } = require("./src/utils/utils");
 
 const serializeFeed = ({ query: { site, allMdx } }) => {
@@ -121,12 +119,6 @@ module.exports = {
 						options: {
 							maxWidth: 590,
 							withWebp: true,
-						},
-					},
-					{
-						resolve: "gatsby-remark-prismjs",
-						options: {
-							inlineCodeMarker: "^",
 						},
 					},
 					{

@@ -19,6 +19,7 @@ import "@reach/skip-nav/styles.css";
 import { blog, blogRef } from "../../utils/microdata";
 import { responsiveBreakpoint } from "../../utils/consts";
 import { kebabCase } from "lodash";
+import { components } from "../mdxComponents";
 
 const GlobalStyle = createGlobalStyle`
 	:root {
@@ -176,7 +177,7 @@ const RawLayout: React.SFC<ILayoutData> = ({ site: { siteMetadata }, personalJso
 	const plainTextDescription = siteMetadata.description!.replace(/\[([^\]]+)\]\([^\)]+\)/g, "$1");
 
 	return (
-		<MDXProvider>
+		<MDXProvider components={components}>
 			<ThemeProvider theme={darkTheme}>
 				<StyledRoot itemScope itemType={blog} id={blogRef} itemID={blogRef}>
 					<GlobalStyle />

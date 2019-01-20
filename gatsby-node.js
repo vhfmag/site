@@ -1,9 +1,8 @@
 const path = require("path");
 
-const { zipObject, mapValues } = require("lodash");
+const { zipObject } = require("lodash");
 const { graphql } = require("./src/utils/taggedUtils");
 const { compareEntryEdges, slugify } = require("./src/utils/utils");
-const componentWithMDXScope = require("gatsby-mdx/component-with-mdx-scope");
 const createPaginatedPages = require("gatsby-paginate");
 
 const postTemplate = path.resolve(`src/templates/singlePost.jsx`);
@@ -91,21 +90,14 @@ function createEntryPages({
 				.map(edge => {
 					edge.node.frontmatter.tags =
 						edge.node.frontmatter.tags &&
-						edge.node.frontmatter.tags
-							.filter(v => v)
-							.map(tag => tag.trim());
+						edge.node.frontmatter.tags.filter(v => v).map(tag => tag.trim());
 					return edge;
 				})
 				.sort(compareEntryEdges);
 
-			const nonDraftEdges = allEdges.filter(
-				edge => !edge.node.frontmatter.draft,
-			);
+			const nonDraftEdges = allEdges.filter(edge => !edge.node.frontmatter.draft);
 
-			const postEdges =
-				process.env.NODE_ENV === "production"
-					? nonDraftEdges
-					: allEdges;
+			const postEdges = process.env.NODE_ENV === "production" ? nonDraftEdges : allEdges;
 
 			const tags = Array.from(
 				new Set(
@@ -121,15 +113,13 @@ function createEntryPages({
 				tags.map(tag =>
 					postEdges.filter(
 						edge =>
-							edge.node.frontmatter.tags &&
-							edge.node.frontmatter.tags.includes(tag),
+							edge.node.frontmatter.tags && edge.node.frontmatter.tags.includes(tag),
 					),
 				),
 			);
 
 			const basePath = `/${pathPrefix}/tags/`;
-			const getTagPath = tag =>
-				`${basePath}/${slugify(tag)}`.replace(/\/{2,}/g, "/");
+			const getTagPath = tag => `${basePath}/${slugify(tag)}`.replace(/\/{2,}/g, "/");
 
 			createPage({
 				path: basePath,
@@ -176,15 +166,11 @@ function createEntryPages({
 						node: {
 							fileAbsolutePath: markdownPath,
 							parent: { name: slug, relativeDirectory: folder },
-							code: { scope },
 						},
 					}) => {
 						createPage({
 							path: `/${folder}/${slug}`,
-							component: componentWithMDXScope(
-								folderToPageTemplate[folder],
-								[scope],
-							),
+							component: folderToPageTemplate[folder],
 							context: {
 								markdownPath,
 							},
@@ -253,8 +239,7 @@ function recurseOnObjectProcessingImages({ node, content = node, actions }) {
 					const imagePath = path.join(__dirname, "static", value); // (This is my asset path)
 					const relative = path.relative(contentPath, imagePath);
 
-					const existingValue =
-						node.fields && node.fields[`${key}_image`];
+					const existingValue = node.fields && node.fields[`${key}_image`];
 
 					if (existingValue && typeof existingValue === "string") {
 						createNodeField({

@@ -1,4 +1,5 @@
 declare module "anchorate";
+declare module "mdx-utils";
 declare module "typography";
 declare module "rehype-react";
 declare module "gray-percentage";

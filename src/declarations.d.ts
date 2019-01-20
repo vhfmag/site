@@ -1,3 +1,5 @@
+import { CSSProperties } from "react";
+
 declare type DeepNonNullable<T> = { [K in keyof T]-?: NonNullable<T[K]> };
 declare type NonNullableNode = NonNullable<React.ReactNode>;
 
