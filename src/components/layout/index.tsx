@@ -46,6 +46,10 @@ const GlobalStyle = createGlobalStyle`
 		transition: 0.25s color ease, 0.25s opacity ease;
 	}
 
+	abbr[title] {
+		border-bottom-color: ${fromTheme("themeColor")} !important;
+	}
+
 	a:hover,
 	a:active,
 	a:focus {
