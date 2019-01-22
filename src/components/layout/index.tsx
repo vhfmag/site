@@ -68,37 +68,10 @@ const GlobalStyle = createGlobalStyle`
 		--indicator-length: 0.5em;
 
 		summary {
+			/* without this, firefox doesn't show the trigger triangle */
+			display: list-item;
 			color: ${fromTheme("themeColor")};
 			margin-bottom: 1em;
-
-			h1, h2, h3, h4, h5, h6, h7 {
-				margin-bottom: 0;
-			}
-
-			&::before {
-				--indicator-x: var(--indicator-length);
-				--indicator-y: var(--indicator-width);
-				--indicator-vertical-margin: calc((1.6em - var(--indicator-x)) / 2);
-				--indicator-horizontal-margin: calc((2ch - var(--indicator-y)) / 2);
-
-				content: "";
-				width: 0;
-				height: 0;
-				float: left;
-				margin: var(--indicator-vertical-margin) var(--indicator-horizontal-margin);
-				transition: all .25s ease;
-				border-top: calc(var(--indicator-width) / 2) solid transparent;
-				border-bottom: calc(var(--indicator-width) / 2) solid transparent;
-				border-left: var(--indicator-length) solid currentColor;
-			}
-		}
-
-		&[open] {
-			> summary::before {
-				--indicator-x: var(--indicator-length);
-				--indicator-y: var(--indicator-width);
-				transform: rotate(90deg);
-			}
 		}
 	}
 

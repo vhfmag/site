@@ -33,6 +33,10 @@ const StyledTOC = styled.aside`
 	details {
 		summary {
 			margin: 0;
+
+			> * {
+				display: inline;
+			}
 		}
 	}
 
