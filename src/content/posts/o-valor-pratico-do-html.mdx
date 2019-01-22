@@ -8,6 +8,8 @@ draft: true
 
 import { Figure } from "../../../src/components/articles/Figure";
 
+Esse artigo complementa minha [apresentação](https://jsisnottheweb-html.netlify.com/) sobre o mesmo tema.
+
 A Web é uma plataforma aberta baseada em padrões abertos. Notavelmente, ela define quatro linguagens:
 
 -   HTML
@@ -32,15 +34,19 @@ Então, num mundo de <i lang='en'>React</i> e <i lang='en'>CSS-in-JS</i>, qual �
 
 ## Oferece uma base robusta e poupa trabalho
 
-### O que elementos nativos te dão
+Não é raro reproduzirmos elementos nativos com nosso próprio HTML, ou usarmos elementos nativos com significados distintos daqueles para que foram feitos.
 
-#### &lt;button>
+As razões variam: <i lang='en'>call-to-actions</i> que funcionam como links mas precisam parecer com botões acabam sendo implementados como `<button>`, a impossibilidade de estilizar `<option>` nos impede de atender nossas especificações de design usando `<select>` e a ausência de um elemento de <i lang='en'><a href="https://developer.apple.com/design/human-interface-guidelines/ios/controls/switches/">switch</a></i> nos faz implementá-lo com um `<input type='checkbox'>`, apesar das diferenças semânticas (pois é, eles são semanticamente diferentes).
 
-#### &lt;dialog>
+Muitos desses casos podem ser evitados (links implementados `<button>` + Javascript matam seu SEO), mas existem casos legitimos. Em todo caso, a tarefa em questão pode ser mais complexa do que parece, devido aos muitos comportamentos que o navegador garante para seus elementos interativos e à semântica desses elementos. Por exemplo, é esperado que campos de entrada numéricos tenham seu valor acrescido de um `step` quando as setas para cima ou para a direita são pressionadas e decrescido quando as setas para baixo ou para a esquerda são pressionadas, seja ele nativo ou não.
 
-#### &lt;a>
+O desafio de saber todos os comportamentos e semânticas associadas a um elemento é só o começo: é necessário também implementá-los. Sabendo disso, na maior parte das vezes a melhor opção acaba por ser usar os elementos nativos, talvez os estilizando. Nas seções a seguir, entraremos em mais detalhes quanto aos comportamentos e semânticas de elementos nativos.
 
-### Há pedras no caminho
+### &lt;button>
+
+### &lt;dialog>
+
+### &lt;a>
 
 ## Permite análise de máquina precisa
 
