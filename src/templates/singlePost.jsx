@@ -16,6 +16,7 @@ import { isFolder } from "../utils/types";
  */
 const SinglePostTemplate = ({
 	location,
+	pathContext: { slug: fileName, folder: relativeDirectory },
 	data: {
 		site: {
 			siteMetadata: { siteUrl },
@@ -27,7 +28,7 @@ const SinglePostTemplate = ({
 			code: { body },
 			frontmatter: { toc, date, title, description, tags },
 			timeToRead,
-			parent: { birthTime, name: fileName, relativeDirectory },
+			parent: { birthTime },
 			count: { words } = { words: -1 },
 		},
 	},

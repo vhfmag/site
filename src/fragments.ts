@@ -28,6 +28,13 @@ export interface IMarkdownEntryFragment {
 	};
 }
 
+export interface IMarkdownEntryNode extends IMarkdownEntryFragment {
+	context: {
+		slug: string;
+		folder: string;
+	};
+}
+
 export interface IGeneralMetadataFragment {
 	site: {
 		siteMetadata: {
@@ -36,6 +43,10 @@ export interface IGeneralMetadataFragment {
 	};
 	personalJson: {
 		name: string;
+	};
+	pathContext: {
+		slug: string;
+		folder: string;
 	};
 }
 

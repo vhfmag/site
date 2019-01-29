@@ -6,31 +6,37 @@ date: 2019-01-22
 draft: true
 ---
 
-import { Figure } from "../../../src/components/articles/Figure";
+import { Figure } from "../../../components/articles/Figure";
 
-Esse artigo complementa minha [apresentação](https://jsisnottheweb-html.netlify.com/) sobre o mesmo tema.
+> Esse artigo complementa minha [apresentação](https://jsisnottheweb-html.netlify.com/) sobre o mesmo tema.
 
 A Web é uma plataforma aberta baseada em padrões abertos. Notavelmente, ela define quatro linguagens:
 
 -   HTML
 -   CSS
 -   Javascript
--   WebAssembly 👶 (que é maravilhoso mas vai ser amplamente ignorado nesse artigo)
+-   WebAssembly 👶 (que é maravilhoso mas vai ser completamente ignorado nesse artigo)
 
-À medida que Javascript incorporou novas funcionalidades e foi portado para novas plataformas (<i lang='en'><a href="https://nodejs.org/">Node.js</a></i> no servidor, <i lang='en'><a href="http://johnny-five.io/">Johnny Five</a></i> em sistemas embarcados, etc), a linguagem ganhou proeminência, e com bibliotecas como o <i lang='en'>React</i>, escrevemos HTML no Javascript, e o mesmo acontece com CSS no espaço do <i lang='en'>CSS-in-JS</i>. Empresas focam cada vez mais no Javascript em suas seleções e desenvolvedores focam cada vez mais na linguagem, relegando o estudo de HTML e CSS ao segundo plano (talvez em resposta à comum ideia de que <q><i lang='en'>front-end</i> nem é programador</q>).
+Tradicionalmente, HTML descreve estrutura, CSS descreve estilo e Javascript adiciona animações e interatividade (a famosa [separação de funções](https://pt.wikipedia.org/wiki/Separa%C3%A7%C3%A3o_de_conceitos) ou <i lang='en'>separation of concerns</i>). O desenvolvedor (ou designer) front-end dedicava, nesse momento, igual atenção e esforço para as 3 linguagens da Web. Javascript era vista como uma linguagem de programação simples, para casos de uso simples. Era comum a ideia de que <q><i lang='en'>front-end</i> não é programador</q>.
 
 <Figure
 	title="Tirinha que satiriza a ideia de que front-end não é programação"
 	src="/images/posts/o-valor-pratico-do-html/back-vs-front.jpeg"
 />
 
-O fruto disso é que com cada vez mais frequência Javascript é visto como a principal, quando não única, linguagem que se precisa aprender para se tornar um desenvolvedor Web, e subsequente desvalorização do HTML e do CSS. Por exemplo:
+À medida que Javascript incorporou novas funcionalidades e foi portado para novas plataformas (como <i lang='en'><a href="https://nodejs.org/">Node.js</a></i> no servidor e <i lang='en'><a href="http://johnny-five.io/">Johnny Five</a></i> em sistemas embarcados), a linguagem ganhou popularidade, foi adotada por outros nichos de desenvolvimento (<i lang='en'>back-end</i>, por exemplo) e se tornou mais complexa. Tornou-se mais comum usar Javascript para gerar HTML e CSS, com bibliotecas como <i lang='en'>React</i> e <i lang='en'>styled-components</i>. Cada vez mais, empresas focam nela em suas seleções e desenvolvedores se especializam nela e apenas nela. A mudança de uma Web de documentos para uma de aplicativos apenas acentua a disparidade.
 
-> "As for HTML, there’s not much to learn right away and you can kind of learn as you go, but before making your first templates, know the difference between in-line elements like `&lt;span>` and how they differ from block ones like `&lt;div>`."
+Vendo isso, não é difícil entender porque ela tem sido vista como a principal, quando não única, linguagem a se aprender para se tornar um desenvolvedor Web, e a subsequente desvalorização do HTML e do CSS. Por exemplo:
+
+> "As for HTML, there’s not much to learn right away and you can kind of learn as you go, but before making your first templates, know the difference between in-line elements like `<span>` and how they differ from block ones like `<div>`."
 >
-> [10 things to learn for becoming a solid full-stack JavaScript developer](https://levelup.gitconnected.com/10-things-to-learn-for-becoming-a-solid-full-stack-javascript-developer-8b76467711ac) (vale dizer que o objetivo aqui não é criticar o autor do artigo, mas mostrar uma tendência)
+> [10 things to learn for becoming a solid full-stack JavaScript developer](https://levelup.gitconnected.com/10-things-to-learn-for-becoming-a-solid-full-stack-javascript-developer-8b76467711ac) (o objetivo aqui não é criticar o autor do artigo, mas ilustrar a tendência)
 
-Então, num mundo de <i lang='en'>React</i> e <i lang='en'>CSS-in-JS</i>, qual é o valor de se aprofundar em HTML? Como veremos se aprofundar em HTML e padrões associados (ARIA e dados estruturados) permite usar o melhor elemento para cada função, fazendo uso das funcionalidades nativas do navegador e atendendo as expectativas dos usuários sobre como um botão, link ou caixa de diálogo devem funcionar; permite que ferramentas extraiam estrutura, conteúdo e intenção de sua página e, a partir disso, forneçam modos de acesso diferentes; e prepara nossos sites para dispositivos, plataformas e modos de acesso que ainda estão por vir.
+Então, num mundo de <i lang='en'>React</i> e <i lang='en'>CSS-in-JS</i>, qual é o valor de se aprofundar em HTML e CSS? Como vimos, essas linguagens não deixaram de ser escritas, apesar da perda de prestígio; estas apenas passaram a ser frequentemente escritas através de uma biblioteca ou <i lang='en'>framework</i>. Muito se tem falado, no entanto, sobre como a qualidade destas tem diminuído, com sites inteiros feitos apenas com `&lt;div>`.
+
+1. Usar o melhor elemento para cada função, fazendo uso das funcionalidades nativas do navegador e atendendo as expectativas dos usuários sobre como um botão, link ou caixa de diálogo devem funcionar
+2. Permite que ferramentas extraiam estrutura, conteúdo e intenção de sua página e, a partir disso, forneçam modos de acesso diferentes
+3. Prepara nossos sites para dispositivos, plataformas e modos de acesso que ainda estão por vir
 
 ## Oferece uma base robusta e poupa trabalho
 
@@ -40,9 +46,19 @@ As razões variam: <i lang='en'>call-to-actions</i> que funcionam como links mas
 
 Muitos desses casos podem ser evitados (links implementados `<button>` + Javascript matam seu SEO), mas existem casos legitimos. Em todo caso, a tarefa em questão pode ser mais complexa do que parece, devido aos muitos comportamentos que o navegador garante para seus elementos interativos e à semântica desses elementos. Por exemplo, é esperado que campos de entrada numéricos tenham seu valor acrescido de um `step` quando as setas para cima ou para a direita são pressionadas e decrescido quando as setas para baixo ou para a esquerda são pressionadas, seja ele nativo ou não.
 
-O desafio de saber todos os comportamentos e semânticas associadas a um elemento é só o começo: é necessário também implementá-los. Sabendo disso, na maior parte das vezes a melhor opção acaba por ser usar os elementos nativos, talvez os estilizando. Nas seções a seguir, entraremos em mais detalhes quanto aos comportamentos e semânticas de elementos nativos.
+O desafio de saber todos os comportamentos e semânticas associadas a um elemento é só o começo, já que também é necessário também implementá-los. Sabendo disso, na maior parte das vezes a melhor opção acaba por ser usar os elementos nativos, talvez os estilizando. Nas seções a seguir, entraremos em mais detalhes quanto aos comportamentos e semânticas de elementos nativos.
 
 ### &lt;button>
+
+import { LiveCode } from "../../../components/Code/live";
+
+> <button onClick={() => alert("Oi!")}>Clique aqui</button>
+
+`<button>` é um dos elementos interativos mais fundamentais da Web, junto com o `<a>` e o `<input>`. Ele é, também, um dos que mais tem implementações customizadas, frequentemente feitas com `<a>`, como em `<a href="#" onClick="javascript:alert('Olá')" class="button">`. Se Web está cheia de links/botões, eles funcionam bem e não temos com que nos preocupar, certo?
+
+<LiveCode code={`<a href="#" onClick={() => alert("oi!")} class="button">Me clica pls</a>`} />
+
+Talvez você conheça a tecla <kbd>Tab</kbd> por usá-la para navegar formulários longos: preenche campo, pressiona <kbd>Tab</kbd>, preenche o próximo e assim vai. Se for esse o caso você provavelmente espera também que, ao final do formulário, você possa 'ir até o botão' (mover o foco para o botão) e pressionar <kbd>enter</kbd> ou <kbd>espaço</kbd> para submeter o formulário.
 
 ### &lt;dialog>
 
