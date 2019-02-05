@@ -42,6 +42,12 @@ const GlobalStyle = createGlobalStyle`
 		all: unset;
 	}
 
+	code {
+		background-color: rgba(255, 255, 255, 0.05);
+		padding: 0.1em;
+		color: ${fromTheme("themeColor")};
+	}
+
 	a {
 		color: ${fromTheme("themeColor")};
 		text-decoration: none;
