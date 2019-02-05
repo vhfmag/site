@@ -1,13 +1,9 @@
 import React from "react";
-import { LiveProvider, LiveEditor, LiveError, LivePreview } from "react-live";
+import { LiveProvider, LiveEditor, LiveError, LivePreview, LiveProviderProps } from "react-live";
 
-export interface LiveCodeProps {
-	code: string;
-}
-
-export const LiveCode = ({ code }: LiveCodeProps) => {
+export const LiveCode = ({ ref: _, ...providerProps }: LiveProviderProps) => {
 	return (
-		<LiveProvider code={code}>
+		<LiveProvider {...providerProps}>
 			<LiveEditor />
 			<LiveError />
 			<LivePreview />
