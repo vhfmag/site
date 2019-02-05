@@ -116,7 +116,10 @@ const StyledMain = styled.main`
 
 	p,
 	hr,
-	dl {
+	dl,
+	ul,
+	ol,
+	.react-live {
 		max-width: 70ch;
 		text-align: justify;
 		hyphens: auto;
