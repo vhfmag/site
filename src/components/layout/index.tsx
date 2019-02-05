@@ -43,17 +43,28 @@ const GlobalStyle = createGlobalStyle`
 	}
 
 	a {
-		transition: 0.25s color ease, 0.25s opacity ease;
+		color: ${fromTheme("themeColor")};
+		text-decoration: none;
+		box-shadow: inset 0 -1px 0 ${fromTheme("themeColor")};
+		transition: 0.25s color ease, 0.25s box-shadow ease;
 	}
 
 	abbr[title] {
 		border-bottom-color: ${fromTheme("themeColor")} !important;
 	}
 
+	h1, h2, h3, h4, h5, h6 {
+		a, a:hover, a:active, a:focus {
+			box-shadow: none;
+			color: unset;
+		}
+	}
+
 	a:hover,
 	a:active,
 	a:focus {
-		opacity: 0.75;
+		color: ${fromTheme("backgroundColor")};
+		box-shadow: inset 0 -1em 0 ${fromTheme("themeColor")};
 	}
 
 	dl {
