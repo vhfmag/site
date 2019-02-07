@@ -18,16 +18,14 @@ const StyledNav = styled.nav`
 		margin: 4pt;
 	}
 
-	a.current,
-	a.disabled.current {
-		color: ${fromTheme("themeColor")};
+	a.current {
 		font-weight: bold;
-		pointer-events: all;
 	}
 
-	a.disabled {
+	a.disabled:not(.current) {
 		pointer-events: none;
 		color: ${fromTheme("textColor")};
+		box-shadow: none;
 	}
 `;
 

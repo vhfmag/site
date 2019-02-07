@@ -70,7 +70,7 @@ const GlobalStyle = createGlobalStyle`
 	a:active,
 	a:focus {
 		color: ${fromTheme("backgroundColor")};
-		box-shadow: inset 0 -1em 0 ${fromTheme("themeColor")};
+		box-shadow: inset 0 -1.2em 0 ${fromTheme("themeColor")};
 	}
 
 	dl {
