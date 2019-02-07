@@ -94,9 +94,6 @@ function folderNameToBodyProp(folderName: Folder) {
 	}
 }
 
-const imageWidth = 800;
-const imageHeight = 400;
-
 export const Entry: React.SFC<IEntryProps> = ({
 	content,
 	headings,
@@ -139,8 +136,8 @@ export const Entry: React.SFC<IEntryProps> = ({
 					)}.png?theme=dark&fontSize=125px&images=https%3A%2F%2Fassets.zeit.co%2Fimage%2Fupload%2Ffront%2Fassets%2Fdesign%2Fnow-white.svg`}
 				/>
 				<meta property="og:image:alt" content={headerProps.title} />
-				<meta property="og:image:width" content={imageWidth.toString()} />
-				<meta property="og:image:height" content={imageHeight.toString()} />
+				<meta property="og:image:width" content="2048" />
+				<meta property="og:image:height" content="1170" />
 			</Helmet>
 			<EntryHeader {...headerProps} isFullPage={true} />
 			{excerpt && <meta itemProp="description" content={excerpt} />}
