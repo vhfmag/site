@@ -16,6 +16,7 @@ import { isFolder } from "../utils/types";
  */
 const SingleEntryTemplate = ({
 	location,
+	pathContext: { slug: fileName, folder: relativeDirectory },
 	data: {
 		site: {
 			siteMetadata: { siteUrl },
@@ -25,7 +26,7 @@ const SingleEntryTemplate = ({
 			excerpt,
 			headings,
 			frontmatter: { title, toc, authors, link, date, tags },
-			parent: { birthTime, name: fileName, relativeDirectory },
+			parent: { birthTime },
 			timeToRead,
 			count: { words },
 			code: { body },

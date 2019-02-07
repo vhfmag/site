@@ -7,9 +7,11 @@ import { fromTheme } from "../../styles/theme";
 const StyledSocialLink = styled.a`
 	font-size: 1.5em;
 	color: ${fromTheme("textColor")} !important;
+	box-shadow: none !important;
 
 	&:active,
-	&:hover {
+	&:hover,
+	&:focus {
 		color: ${fromTheme("themeColor")} !important;
 	}
 `;

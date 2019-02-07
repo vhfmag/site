@@ -199,13 +199,16 @@ export const EntryHeader: React.SFC<IEntryHeaderProps & { isFullPage: boolean }>
 			</StyledMetadata>
 			{tags && (
 				<StyledTags aria-label="Tags" itemProp="keywords">
-					{tags.map(tag => (
-						<li key={tag}>
-							<a rel="tag" href={`/${folderName}/tags/${slugify(tag.trim())}`}>
-								{tag}
-							</a>
-						</li>
-					))}
+					{tags.map(tag => {
+						const pathPrefix = folderName === "posts" ? "" : `/${folderName}`;
+						return (
+							<li key={tag}>
+								<a rel="tag" href={`${pathPrefix}/tags/${slugify(tag.trim())}`}>
+									{tag}
+								</a>
+							</li>
+						);
+					})}
 				</StyledTags>
 			)}
 		</StyledHeader>

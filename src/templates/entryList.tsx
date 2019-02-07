@@ -4,16 +4,17 @@ import Helmet from "react-helmet";
 import { graphql, Link } from "gatsby";
 import DefaultLayout from "../components/layout";
 import { Paginator } from "../components/Paginator";
-import { IGeneralMetadataFragment, IMarkdownEntryFragment } from "../fragments";
+import { IGeneralMetadataFragment, IMarkdownEntryNode } from "../fragments";
 import { styled } from "linaria/react";
 import { isFolder } from "../utils/types";
+import { GatsbyPaginatorProps } from "../declarations";
 
 const ListWrapper = styled.div`
 	margin: 1rem 0;
 `;
 
 interface IEntryNode {
-	node: IMarkdownEntryFragment;
+	node: IMarkdownEntryNode;
 }
 
 interface IBookmarkListProps {
@@ -109,8 +110,9 @@ const EntryList: React.SFC<IBookmarkListProps> = ({
 							fileAbsolutePath,
 							frontmatter: { title, authors, link, date, tags },
 							timeToRead,
-							parent: { birthTime, name: fileName, relativeDirectory },
+							parent: { birthTime },
 							count: { words },
+							context: { slug: fileName, folder: relativeDirectory },
 						},
 					}) => {
 						if (!isFolder(relativeDirectory)) {

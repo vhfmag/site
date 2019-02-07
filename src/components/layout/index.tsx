@@ -39,18 +39,43 @@ const globalCss = css`
 			box-sizing: border-box;
 		}
 
-		address {
-			all: unset;
+		code {
+			background-color: rgba(255, 255, 255, 0.05);
+			padding: 0.1em;
+			color: ${fromTheme("themeColor")};
 		}
 
 		a {
-			transition: 0.25s color ease, 0.25s opacity ease;
+			color: ${fromTheme("themeColor")};
+			text-decoration: none;
+			box-shadow: inset 0 -1px 0 ${fromTheme("themeColor")};
+			transition: 0.25s color ease, 0.25s box-shadow ease;
+		}
+
+		abbr[title] {
+			border-bottom-color: ${fromTheme("themeColor")} !important;
+		}
+
+		h1,
+		h2,
+		h3,
+		h4,
+		h5,
+		h6 {
+			a,
+			a:hover,
+			a:active,
+			a:focus {
+				box-shadow: none;
+				color: unset;
+			}
 		}
 
 		a:hover,
 		a:active,
 		a:focus {
-			opacity: 0.75;
+			color: ${fromTheme("backgroundColor")};
+			box-shadow: inset 0 -1.2em 0 ${fromTheme("themeColor")};
 		}
 
 		dl {
@@ -59,59 +84,26 @@ const globalCss = css`
 			}
 		}
 
-		details {
-			--heading-margin-bottom: 1.6875em;
-			--indicator-width: 0.6em;
-			--indicator-length: 0.5em;
-
-			summary {
-				color: ${fromTheme("themeColor")};
-				margin-bottom: 1em;
-
-				h1,
-				h2,
-				h3,
-				h4,
-				h5,
-				h6,
-				h7 {
-					margin-bottom: 0;
-				}
-
-				&::before {
-					--indicator-x: var(--indicator-length);
-					--indicator-y: var(--indicator-width);
-					--indicator-vertical-margin: calc((1.6em - var(--indicator-x)) / 2);
-					--indicator-horizontal-margin: calc((2ch - var(--indicator-y)) / 2);
-
-					content: "";
-					width: 0;
-					height: 0;
-					float: left;
-					margin: var(--indicator-vertical-margin) var(--indicator-horizontal-margin);
-					transition: all 0.25s ease;
-					border-top: calc(var(--indicator-width) / 2) solid transparent;
-					border-bottom: calc(var(--indicator-width) / 2) solid transparent;
-					border-left: var(--indicator-length) solid currentColor;
-				}
-			}
-
-			&[open] {
-				> summary::before {
-					--indicator-x: var(--indicator-length);
-					--indicator-y: var(--indicator-width);
-					transform: rotate(90deg);
-				}
-			}
-		}
-
-		[data-reach-skip-link]:focus {
-			background-color: ${fromTheme("themeColor")} !important;
-			color: ${fromTheme("backgroundColor")} !important;
-			opacity: 1;
+		summary {
+			/* without this, firefox doesn't show the trigger triangle */
+			display: list-item;
+			color: ${fromTheme("themeColor")};
+			margin-bottom: 1em;
 		}
 
 		${dom.css()}
+
+		.react-live {
+			border: 1px solid ${fromTheme("themeColor")};
+			margin-bottom: 1.6875em;
+
+			.prism-code {
+			}
+			.react-live-preview {
+				padding: 0.5rem;
+				background-color: rgba(255, 255, 255, 0.05);
+			}
+		}
 	}
 `;
 
@@ -125,7 +117,10 @@ const StyledMain = styled.main`
 
 	p,
 	hr,
-	dl {
+	dl,
+	ul,
+	ol,
+	.react-live {
 		max-width: 70ch;
 		text-align: justify;
 		hyphens: auto;

@@ -16,13 +16,6 @@ const typography = new Typography({
 	boldWeight: 700,
 	// @ts-ignore
 	overrideStyles: ({ adjustFontSizeTo, scale, rhythm }, options) => ({
-		"a, a:hover, a:visited, a:focus, a:active": {
-			color: options.headerColor,
-			textDecoration: "none",
-		},
-		"a:hover,a:active": {
-			opacity: 0.75,
-		},
 		em: {
 			opacity: 0.9,
 		},

@@ -65,7 +65,7 @@ function buildPageQuery(pageKind = ".*") {
 /**
  *
  * @typedef MdxEdge
- * @type {import("./src/graphql-types").MdxEdge & { node?: { parent?: import("./src/graphql-types").File }}}
+ * @type {import("./src/graphql-types").MdxEdge & { node?: { parent?: import("./src/graphql-types").File, context?: { slug: string, folder: string } }}}
  */
 
 function createEntryPages({
@@ -91,6 +91,14 @@ function createEntryPages({
 					edge.node.frontmatter.tags =
 						edge.node.frontmatter.tags &&
 						edge.node.frontmatter.tags.filter(v => v).map(tag => tag.trim());
+
+					let { name: slug, relativeDirectory: folder } = edge.node.parent;
+					if (slug === "index" && folder.split("/").length > 1) {
+						[folder, slug] = folder.split("/");
+					}
+
+					edge.node.context = { slug, folder };
+
 					return edge;
 				})
 				.sort(compareEntryEdges);
@@ -165,7 +173,7 @@ function createEntryPages({
 					({
 						node: {
 							fileAbsolutePath: markdownPath,
-							parent: { name: slug, relativeDirectory: folder },
+							context: { slug, folder },
 						},
 					}) => {
 						createPage({
@@ -173,6 +181,8 @@ function createEntryPages({
 							component: folderToPageTemplate[folder],
 							context: {
 								markdownPath,
+								folder,
+								slug,
 							},
 						});
 					},
@@ -301,5 +311,13 @@ exports.createPages = ({ actions, graphql: graphqlQuerier }) => {
 				}),
 			]),
 		);
+	});
+};
+
+exports.onCreateWebpackConfig = ({ actions }) => {
+	actions.setWebpackConfig({
+		resolve: {
+			modules: [path.resolve(__dirname, "src"), "node_modules"],
+		},
 	});
 };
