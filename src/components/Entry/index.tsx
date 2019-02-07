@@ -134,11 +134,11 @@ export const Entry: React.SFC<IEntryProps> = ({
 				<meta property="og:site_name" content="Victor Magalhães" />
 				<meta
 					property="og:image"
-					content={`https://s0.wordpress.com/mshots/v1/${encodeURIComponent(
-						url,
-					)}}?w=${imageWidth}&h=${imageHeight}`}
+					content={`https://og-image.now.sh/${encodeURIComponent(
+						headerProps.title,
+					)}.png?theme=dark&fontSize=125px&images=https%3A%2F%2Fassets.zeit.co%2Fimage%2Fupload%2Ffront%2Fassets%2Fdesign%2Fnow-white.svg`}
 				/>
-				<meta property="og:image:alt" content="Screenshot da página" />
+				<meta property="og:image:alt" content={headerProps.title} />
 				<meta property="og:image:width" content={imageWidth.toString()} />
 				<meta property="og:image:height" content={imageHeight.toString()} />
 			</Helmet>
