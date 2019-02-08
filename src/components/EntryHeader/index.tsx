@@ -94,7 +94,7 @@ const StyledEnumeration = styled.span`
 	}
 `;
 
-function folderNameToReviewedItemType(folderName: Folder) {
+export function folderNameToReviewedItemType(folderName: Folder) {
 	switch (folderName) {
 		case "posts":
 			throw new Error("Posts do not review stuff");
@@ -105,7 +105,7 @@ function folderNameToReviewedItemType(folderName: Folder) {
 	}
 }
 
-const renderAuthors = (authors: Authors_2[], isPublisher: boolean = false) => (
+export const renderAuthors = (authors: Authors_2[], isPublisher: boolean = false) => (
 	<span>
 		por{" "}
 		{authors.filter(isNotNullish).map(({ name, url: authorUrl }) => (
@@ -138,9 +138,6 @@ export const EntryHeader: React.SFC<IEntryHeaderProps & { isFullPage: boolean }>
 	subtitle,
 	entryUrl,
 	folderName,
-	authors,
-	replyTo,
-	replyToText = "Link da publicação",
 	publishDate,
 	isFullPage,
 	timeToRead,
@@ -177,25 +174,6 @@ export const EntryHeader: React.SFC<IEntryHeaderProps & { isFullPage: boolean }>
 					<abbr title="aproximadamente">~</abbr>
 					<span itemProp="timeRequired">{timeToRead} minutos</span> de leitura
 				</span>
-				{replyTo && (
-					<span
-						itemProp="itemReviewed"
-						itemScope
-						itemType={folderNameToReviewedItemType(folderName)}
-					>
-						<meta itemProp="headline title" content={title} />
-						<a
-							itemProp="url"
-							rel="bookmark"
-							title={title}
-							className="u-in-reply-to"
-							href={replyTo}
-						>
-							{replyToText}
-						</a>{" "}
-						{authors && renderAuthors(authors)}
-					</span>
-				)}
 			</StyledMetadata>
 			{tags && (
 				<StyledTags aria-label="Tags" itemProp="keywords">
