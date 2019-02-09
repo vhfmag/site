@@ -1,5 +1,6 @@
 import * as React from "react";
 import { Entry } from "../components/Entry";
+import { renderAuthors, folderNameToReviewedItemType } from "../components/EntryHeader";
 import MDXRenderer from "gatsby-mdx/mdx-renderer";
 import { graphql } from "gatsby";
 import DefaultLayout from "../components/layout";
@@ -39,6 +40,29 @@ const SingleEntryTemplate = ({
 		);
 	}
 
+	const replyTo = (
+		<span
+			itemProp="itemReviewed"
+			itemScope
+			itemType={folderNameToReviewedItemType(relativeDirectory)}
+		>
+			<meta itemProp="headline title" content={title} />
+			Bookmark em resposta a{" "}
+			<span>
+				<a
+					itemProp="url"
+					rel="bookmark"
+					title={title}
+					className="u-in-reply-to"
+					href={link}
+				>
+					{title}
+				</a>
+			</span>{" "}
+			{authors && renderAuthors(authors)}
+		</span>
+	);
+
 	return (
 		<DefaultLayout>
 			<Entry
@@ -57,6 +81,8 @@ const SingleEntryTemplate = ({
 				wordCount={words}
 				timeToRead={timeToRead}
 			>
+				{replyTo}
+				<hr style={{ margin: "1em 0" }} />
 				<MDXRenderer>{body}</MDXRenderer>
 			</Entry>
 		</DefaultLayout>
