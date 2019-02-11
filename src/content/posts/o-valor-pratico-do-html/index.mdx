@@ -47,34 +47,35 @@ O desafio de saber todos os comportamentos e semânticas associadas a um element
 
 ### &lt;button>
 
-import { LiveCode } from "components/Code/live";
-import styled from "styles/styled";
-
 > <button className="button" onClick={() => alert("Oi, eu sou o Goku!")}>
 > 	Clique aqui
 > </button>
 
-`<button>` é um dos elementos interativos mais fundamentais da Web, junto com o `<a>` e o `<input>`. Ele é, também, um dos que mais tem implementações customizadas, frequentemente feitas com `<a>`, como em `<a href="#" onClick="javascript:alert('Olá')" class="button">`. Se Web está cheia de links/botões, eles funcionam bem e não temos com que nos preocupar, certo?
+`<button>` é um dos elementos interativos mais fundamentais da Web, junto com o `<a>` e o `<input>`. Ele é, também, um dos que mais tem implementações customizadas, frequentemente feitas com `<a>` ou `<div>`. O problema é que o usuário tem _expectativas_ com relação a como um botão deve se comportar em um navegador. Espera-se, por exemplo, que botões:
 
-<LiveCode
-	code={`<div style={{ margin: ".5em" }}>
-	<style>{\`
-		a.button, button.button {
-			text-decoration: none;
-			padding: .2em 1em;
-			border-radius: .2em;
-			background-color: white;
-			color: black;
-		}
-	\`}</style>
-	<a href="#0" className="button">Me clica!</a>
-</div>
-`}
-/>
+-   Recebam foco e tenham seu estilo modificado
+-   Sejam ativados com clique, <kbd>Enter</kbd> ou <kbd>Espaço</kbd>
+    -   Quando ativados, `onclick` deve ser chamado
+        -   ⚠️ Divs estilizados como botões só chamam quando clicados
+        -   ⚠️ Links estilizados como botões não são ativados com Espaço
+-   Anunciem que tem papel de button (`role="button"`) por padrão
+    -   Exemplo de uso: leitores de tela
+        -   ⚠️ Divs estilizados como botões não tem `role`, já que por definição `div` e `span` não tem significado
+        -   ⚠️ Links estilizados como botões tem `role="link"`
 
-Talvez você conheça a tecla <kbd>Tab</kbd> por usá-la para navegar formulários longos: preenche campo, pressiona <kbd>Tab</kbd>, preenche o próximo e assim vai. Se for esse o caso você provavelmente espera também que, quando você terminar de preenchê-lo, você possa 'ir até o botão' (mover o foco para o botão) e pressionar <kbd>enter</kbd> ou <kbd>espaço</kbd> para submeter o formulário.
+Essas expectativas não são difíceis de atender (`<(a|div) tabindex="0" role="button">` já resolvem 2 dos 3 problemas), mas é raro que tenhamos esses requisitos em mente quando implementamos um botão personalizado, e o resultado disso são experiências frustradas para pessoas que fazem uso de <i lang='en'>softwares</i> assistivos, para usuários avançados, etc. Porém, por mais fácil que seja reimplementar botões, provavelmente continua mais fácil estilizá-los, principalmente com `all: unset`, uma única propriedade CSS que reseta todo o estilo de um elemento, com 87% de suporte global e 93% no Brasil, segundo o [Can I Use](https://caniuse.com/#feat=css-all).
+
+Outros comportamentos que o navegador implementa para botões e que podem ser esperados por usuários:
+
+-   Botões podem ser desabilitados com `disabled`
+    -   Recebendo um estilo adequado
+    -   Se tornando não-focáveis
+    -   Se tornando não-interativos
+-   Dentro de um formulários, botões podem submetê-lo ou resetá-lo
 
 ### &lt;dialog>
+
+Diálogos são
 
 ### &lt;a>
 
