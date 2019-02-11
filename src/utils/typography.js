@@ -27,6 +27,7 @@ const typography = new Typography({
 			paddingLeft: rhythm(13 / 16),
 			marginLeft: 0,
 			borderLeft: `${rhythm(3 / 16)} solid ${options.headerColor}`,
+			fontSize: "inherit",
 		},
 		"blockquote > :last-child": {
 			marginBottom: 0,
