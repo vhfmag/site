@@ -158,7 +158,7 @@ export const EntryHeader: React.SFC<IEntryHeaderProps & { isFullPage: boolean }>
 			<StyledMetadata>
 				<span>
 					<span className="p-category">{category}</span>{" "}
-					{renderAuthors([selfAuthor], true)}
+					{isFullPage && renderAuthors([selfAuthor], true)}
 				</span>
 				{publishDate && (
 					<time
