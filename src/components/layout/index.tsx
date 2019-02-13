@@ -59,13 +59,6 @@ const GlobalStyle = createGlobalStyle`
 		border-bottom-color: ${fromTheme("themeColor")} !important;
 	}
 
-	h1, h2, h3, h4, h5, h6 {
-		a, a:hover, a:active, a:focus {
-			box-shadow: none;
-			color: unset;
-		}
-	}
-
 	a:hover,
 	a:active,
 	a:focus {
