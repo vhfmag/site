@@ -95,7 +95,12 @@ const GlobalStyle = createGlobalStyle`
 		border: 1px solid ${fromTheme("themeColor")};
 		margin-bottom: 1.6875em;
 
-		.prism-code {}
+		.prism-code {
+			display: flex;
+			flex-wrap: wrap;
+			border-bottom: 1px solid ${fromTheme("themeColor")};
+		}
+
 		.react-live-preview {
 			padding: 0.5rem;
 			background-color: rgba(255, 255, 255, 0.05);
