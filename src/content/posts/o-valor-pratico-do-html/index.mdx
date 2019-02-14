@@ -7,15 +7,40 @@ draft: true
 ---
 
 import { Figure } from "components/articles/Figure";
+import { LiveCode } from "components/Code/live";
+
+<!--
+Assunto: O valor prático de saber HTML
+Evento: HTML está sendo subutilizado
+Perguntas:
+- Por que ele está sendo subutilizado?
+- Como utilizar ele corretamente?
+- Se aprofundar em HTML ajuda na profissão? Como?
+- Onde eu posso aprender sobre?
+-->
 
 > Esse artigo complementa minha [apresentação](https://jsisnottheweb-html.netlify.com/) sobre o mesmo tema.
+
+Formulários por si só são frustrantes o suficiente para que vários artigos tenham sido feitos sobre [como melhorar a experiência de preenchê-los](https://medium.com/@sympli/6-super-quick-ways-to-improve-the-ux-of-forms-9e0bf152b259) ou [como fazer alguém chegar a ter motivação pra fazer isso](https://medium.com/@prashanth.mahadeva/making-people-fill-forms-8569cc273047). Ainda mais frustrante é aquele <i lang='en'>checkbox</i> no final de um formulário de cadastro para aceitar termos de uso ou privacidade. Mas eu quero crer que, se existe justiça divina, existe alguma punição especial dedicada apenas àqueles que fazem esse <i lang='en'>checkbox</i> sem uma <i lang='en'>label</i>:
+
+<LiveCode code="<div><input type='checkbox'/> <span>Aceitar termos de uso</span></div>" />
+
+Bastaria ter substituído o insignificante (porque sem significado) `<span>` por um `<label>` e quem sabe eu teria conseguido clicar no seu <i lang='en'>checkbox</i> no meu celular, apesar de meu dedo gordo, e teria dado direito de venda sobre meus dados sem nem ler os termos:
+
+<LiveCode code="<div><input id='checkbox-id' type='checkbox'/> <label htmlFor='checkbox-id'>Aceitar termos de uso</label></div>" />
+
+Uhu, todos felizes! 🎉
+
+Porém essa e outras evitáveis experiências frustrantes tem se tornado cada vez mais comuns, na minha experiência. Ok, talvez isso seja porque eu sou um desenvolvedor <i lang='en'>web</i> paranoico que sempre checa se <i lang='en'>checkboxes</i> tem <i lang='en'>labels</i>, se botões submetem formulários e se dá para navegar num formulário apenas com o teclado. Mas eu discordo, e [especialistas parecem discordar também](https://www.brucelawson.co.uk/2018/the-practical-value-of-semantic-html/): talvez desenvolvedores estejam menos interessados em se aprofundar em HTML. Mas por quê?
+
+---
 
 A Web é uma plataforma aberta baseada em padrões abertos. Notavelmente, ela define quatro linguagens:
 
 -   HTML
 -   CSS
 -   Javascript
--   WebAssembly 👶 (que é maravilhoso mas vai ser completamente ignorado nesse artigo)
+-   WebAssembly 👶 (maravilhoso, mas completamente aqui)
 
 Tradicionalmente, HTML descreve estrutura, CSS descreve estilo e Javascript adiciona animações e interatividade (a famosa [separação de propósitos](https://pt.wikipedia.org/wiki/Separa%C3%A7%C3%A3o_de_conceitos) ou <i lang='en'>separation of concerns</i>). O desenvolvedor (ou designer) front-end dedicava, nesse momento, igual atenção e esforço para as 3 linguagens da Web. Javascript era vista como uma linguagem de programação simples, para casos de uso simples. Era comum a ideia de que <q><i lang='en'>front-end</i> não é programador</q>.
 
