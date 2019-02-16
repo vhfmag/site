@@ -170,6 +170,29 @@ module.exports = {
 			},
 		},
 		{
+			resolve: "gatsby-plugin-matomo",
+			options: {
+				siteId: "1",
+				matomoUrl: "https://yuno.victormagalhaes.codes/matomo",
+				siteUrl: "https://victormagalhaes.codes",
+			},
+		},
+		"gatsby-plugin-netlify-cache",
+		{
+			resolve: "gatsby-plugin-manifest",
+			options: {
+				name: "Victor Magalhães",
+				short_name: "Victor",
+				start_url: "/",
+				background_color: backgroundColor,
+				theme_color: themeColor,
+				display: "minimal-ui",
+				icon: "src/assets/images/icons/icon.png",
+			},
+		},
+		"gatsby-plugin-offline",
+		"gatsby-plugin-webpack-size",
+		{
 			resolve: "gatsby-plugin-netlify",
 			options: {
 				headers: {
@@ -194,28 +217,5 @@ module.exports = {
 				],
 			},
 		},
-		{
-			resolve: "gatsby-plugin-matomo",
-			options: {
-				siteId: "1",
-				matomoUrl: "https://yuno.victormagalhaes.codes/matomo",
-				siteUrl: "https://victormagalhaes.codes",
-			},
-		},
-		"gatsby-plugin-netlify-cache",
-		{
-			resolve: "gatsby-plugin-manifest",
-			options: {
-				name: "Victor Magalhães",
-				short_name: "Victor",
-				start_url: "/",
-				background_color: backgroundColor,
-				theme_color: themeColor,
-				display: "minimal-ui",
-				icon: "src/assets/images/icons/icon.png",
-			},
-		},
-		"gatsby-plugin-offline",
-		"gatsby-plugin-webpack-size",
 	],
 };
