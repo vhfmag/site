@@ -11,6 +11,8 @@ import "typeface-montserrat";
 import "typeface-zilla-slab";
 import "./icons";
 import "prismjs/themes/prism-okaidia.css";
+import "../../../gits/cssremedy/quotes.css";
+import "../../../gits/cssremedy/remedy.css";
 
 import { dom } from "@fortawesome/fontawesome-svg-core";
 import { darkTheme, fromTheme } from "../../styles/theme";
