@@ -2,7 +2,7 @@
 title: O valor prático de saber HTML
 description: "Muito além da div"
 tags: ["Técnico"]
-date: 2019-01-22
+date: 2019-02-18
 draft: true
 ---
 
@@ -21,40 +21,42 @@ Perguntas:
 
 > Esse artigo complementa minha [apresentação](https://jsisnottheweb-html.netlify.com/) sobre o mesmo tema.
 
-Formulários por si só são frustrantes o suficiente para que vários artigos tenham sido feitos sobre [como melhorar a experiência de preenchê-los](https://medium.com/@sympli/6-super-quick-ways-to-improve-the-ux-of-forms-9e0bf152b259) ou [como fazer alguém chegar a ter motivação pra fazer isso](https://medium.com/@prashanth.mahadeva/making-people-fill-forms-8569cc273047). Ainda mais frustrante é aquele <i lang='en'>checkbox</i> no final de um formulário de cadastro para aceitar termos de uso ou privacidade. Mas eu quero crer que, se existe justiça divina, existe alguma punição especial dedicada apenas àqueles que fazem esse <i lang='en'>checkbox</i> sem uma <i lang='en'>label</i>:
+Formulários por si só são frustrantes o suficiente para que vários artigos tenham sido feitos sobre [como melhorar a experiência de preencher um](https://medium.com/@sympli/6-super-quick-ways-to-improve-the-ux-of-forms-9e0bf152b259) ou [como convencer alguém a fazer isso](https://medium.com/@prashanth.mahadeva/making-people-fill-forms-8569cc273047). Ainda mais frustrante é aquele <i lang='en'>checkbox</i> de termos de privacidade no final de um formulário. Mas acredito que, se existe justiça divina, existe alguma punição dedicada apenas àqueles que fazem esse <i lang='en'>checkbox</i> sem uma <i lang='en'>label</i>:
 
 <LiveCode code="<div><input type='checkbox'/> <span>Aceitar termos de privacidade</span></div>" />
 
-Bastaria ter substituído o insignificante (porque sem significado) `<span>` por um `<label>` e quem sabe eu teria conseguido clicar no seu <i lang='en'>checkbox</i> no meu celular, apesar de meu dedo gordo, e teria dado direito de venda sobre meus dados sem nem ler os termos:
+Bastaria ter substituído o insignificante (porque sem significado) `<span>` por um `<label>` e quem sabe meu dedo gordo não teria me impedido de clicar no <i lang='en'>checkbox</i> no meu celular e eu teria dado direito de venda sobre meus dados sem nem ler os termos:
 
 <LiveCode code="<div><input id='sell-soul' type='checkbox'/> <label htmlFor='sell-soul'>Aceitar termos de privacidade</label></div>" />
 
 Uhu, todos felizes! 🎉
 
-Porém essa e outras evitáveis experiências frustrantes tem se tornado cada vez mais comuns, na minha experiência. Ok, talvez isso seja porque eu me tornei um desenvolvedor <i lang='en'>web</i> paranoico que sempre checa se <i lang='en'>checkboxes</i> tem <i lang='en'>labels</i>, se botões submetem formulários e se dá para navegar num formulário apenas com o teclado. Mas eu acho que não, e [especialistas parecem discordar também](https://www.brucelawson.co.uk/2018/the-practical-value-of-semantic-html/): talvez desenvolvedores estejam menos interessados em se aprofundar em HTML. Mas por quê?
+Mas essa e outras evitáveis experiências frustrantes tem se tornado mais comuns. Ok, talvez isso seja porque eu me tornei um desenvolvedor paranoico que sempre checa se <i lang='en'>checkboxes</i> tem <i lang='en'>labels</i>, se botões submetem formulários e se dá para navegar num formulário apenas com o teclado. Mas eu acho que não, e [especialistas parecem discordar também](https://www.brucelawson.co.uk/2018/the-practical-value-of-semantic-html/): talvez desenvolvedores estejam menos interessados em se aprofundar em HTML.
 
----
+Mas por quê? E quais são as vantagens de se aprofundar em HTML? É disso que falaremos nesse artigo.
 
-A Web é uma plataforma aberta baseada em padrões abertos. Notavelmente, ela define quatro linguagens:
+## <!-- isso deveria ser um heading -->
+
+As quatro linguagens da Web são:
 
 -   HTML
 -   CSS
 -   Javascript
--   WebAssembly 👶 (maravilhoso, mas completamente aqui)
+-   WebAssembly 👶 (maravilhoso, mas completamente ignorado aqui)
 
-Tradicionalmente, HTML descreve estrutura, CSS descreve estilo e Javascript adiciona animações e interatividade (a famosa [separação de propósitos](https://pt.wikipedia.org/wiki/Separa%C3%A7%C3%A3o_de_conceitos) ou <i lang='en'>separation of concerns</i>). O desenvolvedor (ou designer) front-end dedicava, nesse momento, igual atenção e esforço para as 3 linguagens da Web. Javascript era vista como uma linguagem de programação simples, para casos de uso simples. Era comum a ideia de que <q><i lang='en'>front-end</i> não é programador</q>.
+Dessas, HTML descreve estrutura, CSS descreve estilo e Javascript adiciona animações e interatividade (a conhecida [separação de propósitos](https://pt.wikipedia.org/wiki/Separa%C3%A7%C3%A3o_de_conceitos)). Inicialmente, desenvolvedores (ou designers) <i lang='en'>web</i> dedicavam igual atenção e esforço para as 3 linguagens. Javascript era vista como uma linguagem de programação simples, para casos de uso simples. Era comum a ideia de que <q><i lang='en'>front-end</i> não é programador</q>.
 
-À medida que Javascript incorporou novas funcionalidades e foi portado para novas plataformas (como <i lang='en'><a href="https://nodejs.org/">Node.js</a></i> no servidor e <i lang='en'><a href="http://johnny-five.io/">Johnny Five</a></i> em sistemas embarcados), a linguagem ganhou popularidade, foi adotada por outros nichos de desenvolvimento (<i lang='en'>back-end</i>, por exemplo) e se tornou mais complexa. Tornou-se mais comum usar Javascript para gerar HTML e CSS, com bibliotecas como <i lang='en'>React</i> e <i lang='en'>styled-components</i>. Cada vez mais, empresas focam nela em suas seleções e desenvolvedores se especializam nela e apenas nela. A mudança de uma Web de documentos para uma de aplicativos apenas acentua a disparidade.
+À medida que Javascript incorporou novas funcionalidades e foi portado para novas plataformas (como <i lang='en'><a href="https://nodejs.org/">Node.js</a></i> no servidor e <i lang='en'><a href="http://johnny-five.io/">Johnny Five</a></i> em sistemas embarcados), a linguagem ganhou popularidade, foi adotada por outros nichos de desenvolvimento e se tornou mais complexa. Tornou-se mais comum gerar HTML e CSS com bibliotecas como <i lang='en'>React</i> e <i lang='en'>styled-components</i>. Empresas focam em Javascript em suas seleções e desenvolvedores se especializam apenas nela. A mudança de uma Web de documentos para uma de aplicativos acentua a disparidade.
 
-Vendo isso, não é difícil entender porque ela tem sido vista como a principal, quando não única, linguagem a se aprender para se tornar um desenvolvedor Web, e a subsequente desvalorização do HTML e do CSS. Por exemplo:
+Vendo assim, não é difícil entender porque ela tem sido vista como a principal linguagem a se aprender para se tornar um desenvolvedor Web, tampouco a razão da desvalorização das demais. Isso fica claro em artigos de introdução a desenvolvimento web, como no exemplo abaixo:
 
-> "As for HTML, there’s not much to learn right away and you can kind of learn as you go, but before making your first templates, know the difference between in-line elements like `<span>` and how they differ from block ones like `<div>`."
+> <q>As for HTML, there’s not much to learn right away and you can kind of learn as you go, but before making your first templates, know the difference between in-line elements like `<span>` and how they differ from block ones like `<div>`.</q>
 >
 > [10 things to learn for becoming a solid full-stack JavaScript developer](https://levelup.gitconnected.com/10-things-to-learn-for-becoming-a-solid-full-stack-javascript-developer-8b76467711ac) (o objetivo aqui não é criticar o autor do artigo, mas ilustrar a tendência)
 
-Então, num mundo de <i lang='en'>React</i> e <i lang='en'>CSS-in-JS</i>, qual é o valor de se aprofundar em HTML e CSS? Como vimos, essas linguagens não deixaram de ser escritas, apesar da perda de prestígio; estas apenas passaram a ser frequentemente escritas através de uma biblioteca ou <i lang='en'>framework</i>. Muito se tem falado, no entanto, sobre como a qualidade destas tem diminuído, com autores abusando de `<div>` e reinventando a roda quando existem elementos nativos que suprem suas necessidades e podem ser corretamente estilizados.
+Então, num mundo de <i lang='en'>React</i> e <i lang='en'>CSS-in-JS</i>, qual é o valor de se aprofundar em HTML e CSS? Como vimos, essas linguagens não deixaram de ser escritas, apesar da perda de prestígio; apenas é mais frequente que elas são geradas através de uma biblioteca ou <i lang='en'>framework</i>. Muito se tem falado sobre como a qualidade destas tem diminuído, com autores abusando de `<div>` e reinventando a roda quando existem elementos nativos estilizáveis que suprem suas necessidades.
 
-Muitos dos que cometem esses erros são desenvolvedores relativamente jovens, que viveram pouco de uma era onde HTML e CSS tinham maior destaque e já aprenderam a desenvolver num curso <i lang='en'>online</i> ou <i lang='en'>bootcamp</i> (que com frequência tem como objetivo ensinar uma biblioteca ou <i lang='en'>framework específico</i>), e o podem fazê-lo por não saber o suficiente ou por não saber o que seria um bom HTML e CSS> Por isso, esse artigo tenta ilustrar quando e como um conhecimento avançado em HTML é útil e aplicável. Veremos que ele:
+Muitos dos que cometem esses erros são desenvolvedores relativamente jovens, que viveram pouco de uma era onde HTML e CSS tinham maior destaque e já aprenderam a desenvolver num curso <i lang='en'>online</i> ou <i lang='en'>bootcamp</i> (que com frequência tem como objetivo ensinar uma biblioteca ou <i lang='en'>framework</i> específico), e podem fazer isso por desconhecimento. Por isso, esse artigo tenta ilustrar quando e como um conhecimento avançado em HTML é útil e aplicável. Veremos que ele:
 
 1. Permite usar o melhor elemento em cada caso, fazendo uso das funcionalidades nativas do navegador e atendendo as expectativas dos usuários sobre como um botão, link ou caixa de diálogo devem funcionar
 2. Permite que ferramentas extraiam estrutura, conteúdo e intenção de sua página e, a partir disso, forneçam modos de acesso alternativos
@@ -62,13 +64,13 @@ Muitos dos que cometem esses erros são desenvolvedores relativamente jovens, qu
 
 ## Oferece uma base robusta e poupa trabalho
 
-Não é raro reproduzirmos elementos nativos com nosso próprio HTML, ou usarmos elementos nativos com significados distintos daqueles para que foram feitos.
+Frequentemente recriamos elementos nativos à mão, ou os usamos com um propósito diferente daquele para que ele foi feito.
 
 As razões variam: <i lang='en'>call-to-actions</i> que funcionam como links mas precisam parecer com botões acabam sendo implementados como `<button>`, a impossibilidade de estilizar `<option>` nos impede de atender nossas especificações de design usando `<select>` e a ausência de um elemento de <i lang='en'><a href="https://developer.apple.com/design/human-interface-guidelines/ios/controls/switches/">switch</a></i> nos faz implementá-lo com um `<input type='checkbox'>`, apesar das diferenças semânticas (pois é, eles são semanticamente diferentes).
 
-Muitos desses casos podem ser evitados (links implementados com `<button>` + Javascript matam seu SEO), mas existem casos legitimos. Em todo caso, a tarefa em questão pode ser mais complexa do que parece, devido aos muitos comportamentos que o navegador garante para seus elementos interativos e à semântica desses elementos. É, por exemplo, esperado que campos de entrada numéricos tenham seu valor acrescido de um `step` quando as setas para cima ou para a direita são pressionadas e decrescido quando as setas para baixo ou para a esquerda são pressionadas, seja ele nativo ou não.
+Muitos desses casos podem ser evitados (links implementados com `<button>` e Javascript matam seu SEO, fica a dica), mas existem casos legitimos. Ainda assim, esta tarefa é mais complexa do que parece, devido aos muitos comportamentos que o navegador garante para seus elementos interativos e à semântica desses elementos. É esperado que campos de texto sejam focáveis, desabilitáveis e submetam formulários ao se pressionar <kbd>ctrl + enter</kbd>, por exemplo, sejam eles nativos ou não.
 
-O desafio de saber todos os comportamentos e semânticas associadas a um elemento é só o começo, já que também é necessário também implementá-los. Sabendo disso, na maior parte das vezes a melhor opção acaba por ser usar os elementos nativos, talvez os estilizando. Nas seções a seguir, entraremos em mais detalhes quanto aos comportamentos e semânticas de alguns elementos nativos.
+Portanto, na maior parte das vezes a melhor opção é usar os elementos nativos, talvez os estilizando. Nas seções a seguir, entraremos em mais detalhes quanto aos comportamentos e semânticas de alguns deles.
 
 ### &lt;button>
 
@@ -76,7 +78,7 @@ O desafio de saber todos os comportamentos e semânticas associadas a um element
 > 	Clique aqui
 > </button>
 
-`<button>` é um dos elementos interativos mais fundamentais da Web, junto com o `<a>` e o `<input>`. Ele é, também, um dos que mais tem implementações customizadas, frequentemente feitas com `<a>` ou `<div>`. O problema é que o usuário tem _expectativas_ com relação a como um botão deve se comportar em um navegador. Espera-se, por exemplo, que botões:
+`<button>` é um dos elementos interativos mais fundamentais da Web, junto com o `<a>` e o `<input>`. Ele é, também, um dos que mais tem implementações customizadas, frequentemente feitas com `<a>` ou `<div>`. O problema é que o usuário tem _expectativas_ com relação a como um botão deve se comportar em um navegador. Por exemplo, se espera que botões:
 
 -   Recebam foco e tenham seu estilo modificado
 -   Sejam ativados com clique, <kbd>Enter</kbd> ou <kbd>Espaço</kbd>
@@ -88,7 +90,7 @@ O desafio de saber todos os comportamentos e semânticas associadas a um element
         -   ⚠️ Divs estilizados como botões não tem `role`, já que por definição `div` e `span` não tem significado
         -   ⚠️ Links estilizados como botões tem `role="link"`
 
-Essas expectativas não são difíceis de atender (`<(a|div) tabindex="0" role="button">` já resolvem 2 dos 3 problemas), mas é raro que tenhamos esses requisitos em mente quando implementamos um botão personalizado, e o resultado disso são experiências frustradas para pessoas que fazem uso de <i lang='en'>softwares</i> assistivos, para usuários avançados, etc. Porém, por mais fácil que seja reimplementar botões, provavelmente continua mais fácil estilizá-los, principalmente com `all: unset`, uma única propriedade CSS que reseta todo o estilo de um elemento, com 87% de suporte global e 93% no Brasil, segundo o [Can I Use](https://caniuse.com/#feat=css-all).
+Essas expectativas não são difíceis de atender (`<(a|div) tabindex="0" role="button">` já resolvem 2 dos 3 problemas), mas é raro que tenhamos esses requisitos em mente quando implementamos um botão personalizado, e o resultado disso são experiências frustradas para pessoas que fazem uso de <i lang='en'>softwares</i> assistivos, para usuários avançados, etc. E por mais fácil que seja reimplementar botões, provavelmente continua mais fácil estilizá-los, principalmente se usarmos `all: unset`, uma única propriedade CSS que reseta todo o estilo de um elemento, com 87% de suporte global e 93% no Brasil, segundo o [Can I Use](https://caniuse.com/#feat=css-all).
 
 Outros comportamentos que o navegador implementa para botões e que podem ser esperados por usuários:
 
@@ -100,38 +102,113 @@ Outros comportamentos que o navegador implementa para botões e que podem ser es
 
 ### &lt;dialog>
 
-Diálogos são
+Diálogos e modais são comuns na web, usados para pedir confirmação do usuário, informar sobre erros ou te pedir pra se inscrever em mais uma <i lang='en'>newsletter</i> 🙄. Mas o que define um diálogo, um quadrado sobre o restante da página que você pode fechar?
+
+Não exatamente, já que usuários tem diversas expectativas sobre o comportamento e semântica desses elementos:
+
+-   Diálogos devem impedir o usuário de interagir com o restante da página. Isso implica:
+    -   Que clicar ou tocar em elementos fora do diálogo não deve afetá-los
+    -   Que não seja possível mover o foco para algo que esteja fora do diálogo
+-   Devem fechar quando se clica fora deles, ou quando se pressiona <kbd>Esc</kbd>
+-   Quando fechados, devem devolver foco para o último elemento focado antes do diálogo ser aberto
+-   Modais devem estar _sempre_ no topo, independente de `z-index`
+-   Devem receber `role="dialog"` ou `role="alertdialog"`
+
+Quantos desses requisitos a sua implementação de modal atende?
+
+Eu sei de duas implementações que atendem esses (menos o 3º 🤫): a do navegador (`<dialog>`) e a do <i lang='en'><a href="https://github.com/GoogleChrome/dialog-polyfill">polyfill</a></i>. Sendo uma adição recente à especificação do HTML, seu [suporte ainda não é ideal](https://caniuse.com/#feat=dialog), mas, com o <i lang='en'>polyfill</i>, você já pode usar hoje um elemento nativo de diálogo que oferece uma ótima expêriencia de base para seus usuários, e pode assim focar em desenvolver o seu produto.
 
 ### &lt;a>
 
+Links são tão relevantes para a web hoje quanto eram quando ela foi criada: com a quantidade de tráfego que mecanismos de busca podem prover, <i lang='en'><abbr title="search engine optimization">SEO</abbr></i> é um alvo para grande parte dos sites comerciais - e links são fundamentais para ele. Bots de mecanismos de busca não contabilizam como links aqueles feitos com `<button onclick='javascript:location.href = "about"'>` (ou qualquer outro elemento que não seja `<a>`), não contribuindo para o seu posicionamento.
+
+Assim como essa, existem outras funcionalidades e características de links que não podem ser reproduzidas com outros elementos. Seguem alguns deles:
+
+-   Menu contextual e atalhos de teclado permitem:
+    -   Abrir o link em nova aba
+    -   Copiar a URL
+    -   Favoritar e salvar
+    -   Outras interações que venham de extensões (ex: para uma extensão do Google Translate, <q>traduzir link</q>)
+-   Permitem definir diferentes estilos para links já visitados, ativos, etc
+-   Permitem expressar a relação entre páginas com `rel`, por exemplo:
+    -   `rel="me"` indica que as duas páginas pertencem e se referem à mesma entidade (ex: site de empresa e perfil em mídia social)
+    -   `rel="alternate"` indica que as duas páginas são análogas e tem conteúdo semelhante (ex: `<a hreflang="es" rel="alternate">Veja essa página em espanhol</a>`)
+-   Permitem baixar o conteúdo do link ao invés de acessá-lo, através do atributo `download`
+
+Outras expectativas de usuário são que links:
+
+-   Devem receber foco e ter seu estilo modificado
+-   Devem ser ativados com clique ou Enter
+-   Costumam ter <u>underline</u> e diferentes estilos pra diferentes estados
+
+---
+
+Portanto, ao implementar um botão, link, diálogo, accordion, campo de texto e outros, devemos nos perguntar se o HTML tem um elemento para isso. Se tiver, devemos avaliar se ele atende as nossas necssidades (ex: se pode ser estilizado e oferecer a experiência que precisamos que ofereça). Se atende, problema resolvido. Se não existe ou se não atende, devemos ter em mente quais expectativas usuários tem sobre aquele tipo de elemento e devemos reproduzí-las de forma tão fiel quanto possível.
+
+A melhor opção pode ser apenas usar o que o navegador já nos dá. 😀
+
 ## Permite análise de máquina precisa
+
+Falamos há pouco de bots de mecanismo de busca, que analisam o conteúdo de nossas páginas buscando extrair conexões entre páginas, se elas são responsivas, se elas são lentas ou pesadas, etc. De forma mais geral, podemos dizer que eles fazem análise de máquina - e não são os únicos. Mídias sociais mostram cards com informações como título, descrição, foto, data de publicação e autor quando compartilhamos links nelas. Serviços, como o Pocket e o Instapaper, e navegadores, como o Firefox e o Safari, oferecem modos de leitura, em que exibem metadados semelhantes, acrescentando também o conteúdo extraído da página. Mecanismos de busca também exibem diversos tipos de cards, que enumeram notícias relacionadas a um tema, mostram o passo a passo de uma receita ou endereço e telefone de uma organização.
+
+E o que permite que tudo isso seja bem feito é um HTML semântico, com dados estruturados.
 
 ### HTML semântico
 
+Dizemos que um HTML é semântico quando, para cada conteúdo, ele usa o elemento que melhor aproxima seu signficado. Isso significa usar:
+
+-   `<ul>` ou `<ol>` para listas e enumerações
+-   `<table>` para tabelas (e só para tabelas, né [Hacker News](https://news.ycombinator.com/)?)
+-   `<button>` para botões
+-   `<a>` para links
+-   Para campos de texto, usar um `<input>` com o atributo `type` mais adequado (`tel`, `email`, `number`, `range`, etc)
+-   Para o label de um `<input>`, `<textarea>` ou `<select>`, usar um `<label>`
+-   Se atentar a semântica textual:
+    -   `<strong>` vs `<b>`
+    -   `<em>` vs `<i>`
+    -   `<mark>`, `<q>`, `<cite>`, etc
+
+Essa lista não é exaustiva e muitos dos mais de 100 elementos HTML não foram citados. Para saber mais, existem recursos como o [MDN](https://developer.mozilla.org/) e o [HTML Reference](https://htmlreference.io/). Alguns dos elementos não citados são o chamados [elementos de separação de conteúdo](https://developer.mozilla.org/pt-BR/docs/Web/HTML/Element#Separa%C3%A7%C3%A3o_de_conte%C3%BAdo), boa parte deles novidades do HTML 5, que permitem organizar o conteúdo de uma página em partes lógicas: cabeçalho, rodapé, seção principal, navegação, etc. Eles são especialmente importantes para a extração de conteúdo feita por modos de leitura e, para quem usa tecnologia assistiva, como leitores de tela, para navegação. Alguns deles:
+
+-   `<section>` para seções genéricas. Para seções com significados mais específicos, temos:
+    -   `<main>`, para o conteúdo principal da página. Só pode haver um por página
+    -   `<aside>`, para conteúdo secundário, geralmente barras laterais
+    -   `<nav>`, para navegação
+    -   `<body>` também define uma seção
+-   `<header>` e `<footer>` para cabeçalhos e rodapés de uma seção, respectivamente
+-   De `<h1>` a `<h6>`, para a estrutura de tópicos de um conteúdo (essas tags podem ser usadas para gerar o índice sumário de uma página, por exemplo)
+-   `<address>`, para informações de contato
+
+A seguir, alguns exemplos de funcionalidades que só são possíveis graças a HTML semântico:
+
+<!-- TODO: -->
+
 ### Dados estruturados
+
+<!-- TODO: -->
 
 ## HTML semântico é resiliente
 
-HTML é um padrão aberto associado à Web, uma plataforma aberta que tem como princípio básico ser retrocompatível. Essa breve mas carregada definição traz duas consequências relevantes:
+HTML é um padrão aberto associado à Web, uma plataforma aberta que tem como princípio fundamental ser retrocompatível. Essa definição carregada traz duas consequências relevantes:
 
 -   Sendo a Web aberta, baseada em padrões e desassociada de qualquer plataforma ou dispositivo em particular, a Web estará presente em dispositivos e plataformas do futuro
--   Os padrões estáveis de hoje muito provavelmente continuarão funcionando nesse futuro
+-   Os padrões estáveis de hoje continuarão funcionando nesse futuro
 
-Implementadores de navegadores, dispositivos, plataformas, ferramentas de desenvolvimento e ferramentas de acessibilidade, sabendo dessa estabilidade, fazem uso da semântica do HTML, do ARIA e de dados estruturados ao inovar, e continuarão fazendo. Por isso, HTML semântico:
+Implementadores de navegadores, dispositivos, plataformas, ferramentas de desenvolvimento e ferramentas de acessibilidade, sabendo dessa estabilidade, fazem uso da semântica do HTML, do ARIA e de dados estruturados ao inovar, e continuarão fazendo. É por isso que HTML semântico:
 
 ### Está pronto para dispositivos futuros
 
-Relógios, carros e <i lang='en'>headsets</i> de realidade virtual já tem navegadores e cada um deles, com seu formato e suas particularidades, impõe novas limitações e abre novas possibilidades sobre como interagir com a Web. Por exemplo: como vimos, o tamanho reduzido da tela do <i lang='en'>Apple Watch</i> impõe limitações severas de usabilidade – ler é difícil, clicar é difícil – e uma visualização simplificada como o modo de leitura é uma solução elegante que está disponível para sites que tenham sido produzidos com HTML semântico em mente. Bruce Lawson descreve melhor do que eu consigo:
+Relógios, carros e <i lang='en'>headsets</i> de realidade virtual já tem navegadores e cada um deles, com seu formato e suas particularidades, impõe novas limitações e abre novas possibilidades sobre como interagir com a Web. Como vimos, o tamanho reduzido da tela do <i lang='en'>Apple Watch</i> impõe limitações severas de usabilidade – ler é difícil, clicar é difícil – e uma visualização simplificada como o modo de leitura é uma solução elegante que está disponível para sites que tenham sido produzidos com HTML semântico em mente. Bruce Lawson descreve melhor do que eu:
 
-> "I didn’t choose to use &lt;article> and `itemprop` and input types because I wanted to support the Apple Watch; I did it before the Apple Watch existed, in order that my code is future-proof. By choosing the right semantics now, a machine that I don’t know about yet can understand my content and display it in the best way for its users"
+> <q>I didn’t choose to use &lt;article> and `itemprop` and input types because I wanted to support the Apple Watch; I did it before the Apple Watch existed, in order that my code is future-proof. By choosing the right semantics now, a machine that I don’t know about yet can understand my content and display it in the best way for its users</q>
 >
 > Bruce Lawson em [The practical value of semantic HTML](https://www.brucelawson.co.uk/2018/the-practical-value-of-semantic-html/)
 
-Como será um botão num navegador de realidade virtual daqui a 5 anos? Quanto tempo vai demorar até a <i lang='en'>Alexa</i> ou o <i lang='en'>Google Home</i> lerem a Web? Será que os navegadores que conhecemos hoje vão oferecer sumários de páginas no futuro, como fazem hoje alguns leitores de tela? Usando HTML semântico e outros padrões, já se pode estar razoavalmente preparado para essas incertas futuras realidades, hoje.
+Como será um botão num navegador de realidade virtual daqui a 5 anos? Quanto tempo vai demorar até a <i lang='en'>Alexa</i> ou o <i lang='en'>Google Home</i> lerem a Web? Será que os navegadores que conhecemos hoje vão oferecer sumários de páginas no futuro, como fazem hoje alguns leitores de tela? Usando HTML semântico e outros padrões, já se pode estar razoavalmente preparado para todas essas possibilidades, hoje.
 
 ### Permite otimizações de ferramentas
 
-> "when a HTML component sets the hidden={true} property, React will automatically change the priority of this subtree so that it won’t be part of the initial render. The idea is to e.g have a tab component that can render out every window in advance so switching tabs is super fast but it only needs to display the first tab’s content in the initial render so the hidden tabs can be deprioritized"
+> <q>when a HTML component sets the hidden={true} property, React will automatically change the priority of this subtree so that it won’t be part of the initial render. The idea is to e.g have a tab component that can render out every window in advance so switching tabs is super fast but it only needs to display the first tab’s content in the initial render so the hidden tabs can be deprioritized</q>
 >
 > Do repositório sobre Concurrent React, [página](https://github.com/sw-yx/fresh-concurrent-react/blob/master/apis/hidden.md) sobre `hidden={true}`
 
@@ -139,8 +216,8 @@ Como será um botão num navegador de realidade virtual daqui a 5 anos? Quanto t
 
 Erramos ao supor que todos acessam nossos sites:
 
--   A partir de um navegador (ex: Pocket, modos de leitura, <i lang='en'>Google Assistant</i>, <i lang='en'>widgets</i> de mecanismos de busca)
--   A partir de um computador, celular ou tablet (ex: <i lang='en'>Apple Watch</i>, <i lang='en'>smart TVs</i>, <i lang='en'>smart whatevers</i>)
+-   A partir de um navegador (ex: Pocket, <i lang='en'>Google Assistant</i>, <i lang='en'>widgets</i> de mecanismos de busca)
+-   A partir de um computador, celular ou tablet (ex: <i lang='en'>Apple Watch</i>, <i lang='en'>smart TVs</i>)
 -   Usando ou mouse e teclado ou uma tela sensível ao toque
 -   Visualmente (ex: leitores de tela e, quem sabe no futuro, a Alexa)
 -   Com uma conexão rápida (tamanho de <i lang='en'>bundle</i> também é acessibilidade)
@@ -148,3 +225,7 @@ Erramos ao supor que todos acessam nossos sites:
 Segundo estimativas da <abbr title="Organização mundial da saúde" aria-label="Organização mundial da saúde">OMS</abbr> publicadas em um [relatório de 2011](https://www.who.int/disabilities/world_report/2011/report/en/), 15% da população mundial convive com pelo menos uma forma de deficiência. Vale também ressaltar que aqueles de nós que não tem deficiências, [não as tem apenas temporariamente](https://www.invisionapp.com/inside-design/accessibility-design-for-the-future/), e que [acessibilidade não é o que se costuma pensar](https://boagworld.com/accessibility/accessibility-is-not-what-you-think/) (acessibilidade é fazer para todos, não fazer para poucos) e o que beneficia o usuário com baixa acuidade visual também beneficia quem usa seu site pelo celular na rua, no sol de meio-dia.
 
 As ferramentas que proveem modos de acesso alternativos à Web o fazem usando HTML semântico, ARIA e dados estruturados para extrair estrutura, conteúdo e intenção. Se atentar a esses padrões significa que damos acesso a uma maior parte da população, em uma maior gama de modos de acesso; e significa também estar preparados para modos de acesso que ainda não foram concebidos ou popularizados.
+
+## Conclusão
+
+<!-- TODO: -->
