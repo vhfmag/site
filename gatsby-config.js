@@ -114,10 +114,11 @@ module.exports = {
 							target: null,
 						},
 					},
+					{ resolve: "gatsby-remark-unwrap-images" },
 					{
 						resolve: `gatsby-remark-images`,
 						options: {
-							maxWidth: 590,
+							maxWidth: 800,
 							withWebp: true,
 						},
 					},

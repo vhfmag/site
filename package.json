@@ -46,6 +46,7 @@
 		"gatsby-remark-emoji-unicode": "^0.1.0",
 		"gatsby-remark-external-links": "^0.0.4",
 		"gatsby-remark-images": "3.0.4",
+		"gatsby-remark-unwrap-images": "^1.0.1",
 		"gatsby-source-filesystem": "^2.0.20",
 		"gatsby-transformer-json": "^2.1.8",
 		"gatsby-transformer-sharp": "^2.1.13",
