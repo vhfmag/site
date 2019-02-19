@@ -57,6 +57,10 @@ const GlobalStyle = createGlobalStyle`
 		transition: 0.25s color ease, 0.25s box-shadow ease;
 	}
 
+	a.gatsby-resp-image-link:any-link {
+		box-shadow: none;
+	}
+
 	abbr[title] {
 		border-bottom-color: ${fromTheme("themeColor")} !important;
 	}
