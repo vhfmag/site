@@ -43,6 +43,7 @@
 		"gatsby-plugin-webpack-size": "^0.0.3",
 		"gatsby-remark-a11y-emoji": "^1.0.0",
 		"gatsby-remark-autolink-headers": "2.0.14",
+		"gatsby-remark-embedded-codesandbox": "^1.2.0",
 		"gatsby-remark-emoji-unicode": "^0.1.0",
 		"gatsby-remark-external-links": "^0.0.4",
 		"gatsby-remark-images": "3.0.4",

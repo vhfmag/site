@@ -107,6 +107,17 @@ module.exports = {
 				},
 				gatsbyRemarkPlugins: [
 					{ resolve: "gatsby-remark-autolink-headers" },
+					{
+						resolve: "gatsby-remark-embedded-codesandbox",
+						options: {
+							directory: `${__dirname}`,
+							protocol: "codesandbox://",
+							embedOptions: {
+								view: "split",
+								module: "/index.html",
+							},
+						},
+					},
 					{ resolve: "gatsby-remark-emoji-unicode" },
 					{
 						resolve: "gatsby-remark-external-links",

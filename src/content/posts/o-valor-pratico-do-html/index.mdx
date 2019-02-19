@@ -20,6 +20,13 @@ import { LiveCode } from "components/Code/live";
     .gatsby-resp-image-link {
         max-width: 70ch;
     }
+
+    iframe.embedded-codesandbox {
+        max-width: 90vw;
+        width: 90ch;
+        max-height: 90vh;
+        height: 500px;
+    }
 `}</style>
 
 <!--
@@ -36,11 +43,15 @@ Perguntas:
 
 Formulários por si só são frustrantes o suficiente para que vários artigos tenham sido feitos sobre [como melhorar a experiência de preencher um](https://medium.com/@sympli/6-super-quick-ways-to-improve-the-ux-of-forms-9e0bf152b259) ou [como convencer alguém a fazer isso](https://medium.com/@prashanth.mahadeva/making-people-fill-forms-8569cc273047). Ainda mais frustrante é aquele <i lang='en'>checkbox</i> de termos de privacidade no final de um formulário. Mas acredito que, se existe justiça divina, existe alguma punição dedicada apenas àqueles que fazem esse <i lang='en'>checkbox</i> sem uma <i lang='en'>label</i>:
 
-<LiveCode code="<div><input type='checkbox'/> <span>Aceitar termos de privacidade</span></div>" />
+<!-- <LiveCode code="<div><input type='checkbox'/> <span>Aceitar termos de privacidade</span></div>" /> -->
+
+[uhu](codesandbox://src/content/posts/o-valor-pratico-do-html/assets/not-nice-input)
 
 Bastaria ter substituído o insignificante (porque sem significado) `<span>` por um `<label>` e quem sabe meu dedo gordo não teria me impedido de clicar no <i lang='en'>checkbox</i> no meu celular e eu teria dado direito de venda sobre meus dados sem nem ler os termos:
 
-<LiveCode code="<div><input id='sell-soul' type='checkbox'/> <label htmlFor='sell-soul'>Aceitar termos de privacidade</label></div>" />
+<!-- <LiveCode code="<div><input id='sell-soul' type='checkbox'/> <label htmlFor='sell-soul'>Aceitar termos de privacidade</label></div>" /> -->
+
+[uhu](codesandbox://src/content/posts/o-valor-pratico-do-html/assets/nice-input)
 
 Uhu, todos felizes! 🎉
 
@@ -48,7 +59,7 @@ Mas essa e outras evitáveis experiências frustrantes tem se tornado mais comun
 
 Mas por quê? E quais são as vantagens de se aprofundar em HTML? É disso que falaremos nesse artigo.
 
-## <!-- isso deveria ser um heading -->
+## Como chegamos aqui
 
 As quatro linguagens da Web são:
 
