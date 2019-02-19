@@ -9,6 +9,19 @@ draft: true
 import { Figure } from "components/articles/Figure";
 import { LiveCode } from "components/Code/live";
 
+<style>{`
+    .img-caption {
+        display: block;
+        max-width: 70ch;
+        text-align: center;
+        margin-bottom: 1.6875rem;
+    }
+
+    .gatsby-resp-image-link {
+        max-width: 70ch;
+    }
+`}</style>
+
 <!--
 Assunto: O valor prático de saber HTML
 Evento: HTML está sendo subutilizado
@@ -168,7 +181,7 @@ Dizemos que um HTML é semântico quando, para cada conteúdo, ele usa o element
     -   `<em>` vs `<i>`
     -   `<mark>`, `<q>`, `<cite>`, etc
 
-Essa lista não é exaustiva e muitos dos mais de 100 elementos HTML não foram citados. Para saber mais, existem recursos como o [MDN](https://developer.mozilla.org/) e o [HTML Reference](https://htmlreference.io/). Alguns dos elementos não citados são o chamados [elementos de separação de conteúdo](https://developer.mozilla.org/pt-BR/docs/Web/HTML/Element#Separa%C3%A7%C3%A3o_de_conte%C3%BAdo), boa parte deles novidades do HTML 5, que permitem organizar o conteúdo de uma página em partes lógicas: cabeçalho, rodapé, seção principal, navegação, etc. Eles são especialmente importantes para a extração de conteúdo feita por modos de leitura e, para quem usa tecnologia assistiva, como leitores de tela, para navegação. Alguns deles:
+Essa lista não é exaustiva e muitos dos mais de 100 elementos HTML não foram citados. Para saber mais, existem recursos como o [MDN](https://developer.mozilla.org/) e o [HTML Reference](https://htmlreference.io/). Alguns dos elementos não citados são o chamados [elementos de separação de conteúdo](https://developer.mozilla.org/pt-BR/docs/Web/HTML/Element#Separa%C3%A7%C3%A3o_de_conte%C3%BAdo) ou <i lang='en'>landmarks</i>, que permitem organizar o conteúdo de uma página em partes lógicas, como cabeçalho, rodapé, seção principal, navegação e outros. Alguns deles:
 
 -   `<section>` para seções genéricas. Para seções com significados mais específicos, temos:
     -   `<main>`, para o conteúdo principal da página. Só pode haver um por página
@@ -179,13 +192,80 @@ Essa lista não é exaustiva e muitos dos mais de 100 elementos HTML não foram 
 -   De `<h1>` a `<h6>`, para a estrutura de tópicos de um conteúdo (essas tags podem ser usadas para gerar o índice sumário de uma página, por exemplo)
 -   `<address>`, para informações de contato
 
-A seguir, alguns exemplos de funcionalidades que só são possíveis graças a HTML semântico:
+Eles são especialmente importantes para a extração de conteúdo e navegação com tecnologias assistivas, como nos exemplos a seguir:
 
-<!-- TODO: -->
+![Modo de leitura do Firefox](./assets/screenshots/firefox-readingmode.png)
+
+<div className="img-caption">Modo de leitura do Firefox</div>
+
+![Artigo no Pocket](./assets/screenshots/pocket.png)
+
+<div className="img-caption">Artigo no Pocket</div>
+
+![Outline de página usando landmarks](./assets/screenshots/landmark-navigation.png)
+
+<div className="img-caption">
+	Outline de página baseado em <i lang="en">landmarks</i>
+</div>
+
+![Leitura rápida do Telegram](./assets/screenshots/telegram-leiturarapida.jpg)
+
+<div className="img-caption">Leitura rápida do Telegram</div>
 
 ### Dados estruturados
 
-<!-- TODO: -->
+O vocabulário dos elementos HTML é útil, mas bastante limitado. Ele nos permite declarar qual é a estrutura da página, mas não identificar o significado do conteúdo de elementos ou a relação entre eles. Sem isso, seria difícil que mecanismos de busca exibissem o telefone de uma empresa ou que mídias sociais expusessem <i lang='en'>cards</i> com titulo, data de publicação, autor, foto, etc. Para suprir essa necessidade, foram criados vocabulários de metadados (como o [schema.org](https://schema.org/)) e formas de adicionar esses metadados no HTML (como o [Microdata](https://developer.mozilla.org/en-US/docs/Web/HTML/Microdata) e o [JSON-LD](https://json-ld.org/)).
+
+Vocabulários são coleções de tipos (como [Person](https://schema.org/Person) e [BlogPosting](https://schema.org/BlogPosting)) que definem as propriedades que esperam (ex: [birthDate](https://schema.org/birthDate), [children](https://schema.org/children) e [jobTitle](https://schema.org/jobTitle) são propriedades do tipo Person) e qual é o tipo (birthDate tem o tipo [Date](https://schema.org/Date)). Eles são, de fato, o vocabulário com que podemos descrever o conteúdo de nossas páginas.
+
+Já Microdata define como inserir esse vocabulário no HTML e o faz através de 5 atributos:
+
+-   `itemid` é um ID único para aquele item
+-   `itemprop` define uma propriedade de um item
+-   `itemtype` define o tipo do conteúdo de um elemento a partir da URL dele (`itemtype=https://schema.org/Person`)
+-   `itemscope`, quando presente, determina que os filhos de um elemento são sobre o item atual
+-   `itemref` aceita uma lista de ids (não `itemid`!) e permite declarar a que `itemscope` ele se refere
+
+Por exemplo:
+
+```html
+<article itemtype="https://schema.org/BlogPosting" itemscope>
+	<header>
+		<a href="/meu-blog-post" itemprop="url">
+			<h2 itemprop="headline">Meu blog post</h2>
+		</a>
+		<div itemprop="author" itemscope itemtype="https://schema.org/Person">
+			Por <span itemprop="name">João Santana</span>
+		</div>
+	</header>
+
+	<section>
+		<div class="lead" itemprop="alternativeHeadline">Não deixe de ler meu blog</div>
+
+		<p itemprop="text">Blablabla</p>
+	</section>
+</article>
+```
+
+Páginas que usam dados estruturados são mais legíveis para máquinas e permitem coisas como:
+
+![Busca por receita no Google](./assets/screenshots/google-receita.png)
+
+<div className="img-caption">Busca por receita no Google</div>
+
+![Busca por notícias no Google](./assets/screenshots/google-notícias.png)
+
+<div className="img-caption">Busca por notícias no Google</div>
+
+![Busca por filme no Google](./assets/screenshots/google-reviews.png)
+
+<div className="img-caption">Busca por filme no Google</div>
+
+![Resposta do Google Assistant](./assets/screenshots/googleassistant-preview.jpg)
+
+<div className="img-caption">Resposta do Google Assistant</div>
+
+Para saber mais, eu recomendo o [guia do Google sobre dados estruturados](https://developers.google.com/search/docs/guides/intro-structured-data), que é completo, cheio de exemplos e até oferece um validador.
 
 ## HTML semântico é resiliente
 
@@ -198,19 +278,39 @@ Implementadores de navegadores, dispositivos, plataformas, ferramentas de desenv
 
 ### Está pronto para dispositivos futuros
 
-Relógios, carros e <i lang='en'>headsets</i> de realidade virtual já tem navegadores e cada um deles, com seu formato e suas particularidades, impõe novas limitações e abre novas possibilidades sobre como interagir com a Web. Como vimos, o tamanho reduzido da tela do <i lang='en'>Apple Watch</i> impõe limitações severas de usabilidade – ler é difícil, clicar é difícil – e uma visualização simplificada como o modo de leitura é uma solução elegante que está disponível para sites que tenham sido produzidos com HTML semântico em mente. Bruce Lawson descreve melhor do que eu:
+Relógios, carros e <i lang='en'>headsets</i> de realidade virtual já tem navegadores e cada um deles, com seu formato e suas particularidades, impõe novas limitações e abre novas possibilidades sobre como interagir com a Web. O tamanho reduzido da tela do <i lang='en'>Apple Watch</i> impõe limitações severas de usabilidade – ler é difícil, clicar é difícil – e o modo de leitura é uma solução elegante que está disponível para sites que tenham sido feitos com HTML semântico. Bruce Lawson descreve melhor do que eu:
 
 > <q>I didn’t choose to use &lt;article> and `itemprop` and input types because I wanted to support the Apple Watch; I did it before the Apple Watch existed, in order that my code is future-proof. By choosing the right semantics now, a machine that I don’t know about yet can understand my content and display it in the best way for its users</q>
 >
 > Bruce Lawson em [The practical value of semantic HTML](https://www.brucelawson.co.uk/2018/the-practical-value-of-semantic-html/)
 
-Como será um botão num navegador de realidade virtual daqui a 5 anos? Quanto tempo vai demorar até a <i lang='en'>Alexa</i> ou o <i lang='en'>Google Home</i> lerem a Web? Será que os navegadores que conhecemos hoje vão oferecer sumários de páginas no futuro, como fazem hoje alguns leitores de tela? Usando HTML semântico e outros padrões, já se pode estar razoavalmente preparado para todas essas possibilidades, hoje.
+E qual são as vantagens disso? Alguns exemplos disso, no Apple Watch:
+
+![Modo de leitura](./assets/screenshots/applewatch-article.png)
+
+<div className="img-caption">Modo de leitura</div>
+
+![Exibição de figure](./assets/screenshots/applewatch-figure.png)
+
+<div className="img-caption">Exibição de figure</div>
+
+![Diferentes tipos de input](./assets/screenshots/applewatch-inputs.png)
+
+<div className="img-caption">Diferentes tipos de input</div>
+
+![Exibição de input com label](./assets/screenshots/applewatch-label.png)
+
+<div className="img-caption">Exibição de input com label</div>
+
+Como será um botão num navegador de realidade virtual daqui a 5 anos? Quanto tempo vai demorar até a <i lang='en'>Alexa</i> ou o <i lang='en'>Google Home</i> lerem a Web? Será que os navegadores que conhecemos hoje vão oferecer sumários de páginas no futuro, como fazem hoje alguns leitores de tela? Usando HTML semântico e outros padrões, podemos deixar a decisão de qual é a melhor forma de expor esses elementos com o navegador e estar preparados desde já.
 
 ### Permite otimizações de ferramentas
 
 > <q>when a HTML component sets the hidden={true} property, React will automatically change the priority of this subtree so that it won’t be part of the initial render. The idea is to e.g have a tab component that can render out every window in advance so switching tabs is super fast but it only needs to display the first tab’s content in the initial render so the hidden tabs can be deprioritized</q>
 >
 > Do repositório sobre Concurrent React, [página](https://github.com/sw-yx/fresh-concurrent-react/blob/master/apis/hidden.md) sobre `hidden={true}`
+
+<!-- TODO: -->
 
 ### Tem valor para quem não usa a Web como você
 
