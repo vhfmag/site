@@ -114,7 +114,6 @@ module.exports = {
 							protocol: "codesandbox://",
 							embedOptions: {
 								view: "split",
-								module: "/index.html",
 							},
 						},
 					},
