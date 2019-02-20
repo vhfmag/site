@@ -114,6 +114,11 @@ module.exports = {
 							protocol: "codesandbox://",
 							embedOptions: {
 								view: "split",
+								verticallayout: 1,
+								codemirror: 1,
+								hidenavigation: 1,
+								autoresize: 1,
+								runonclick: 0,
 							},
 						},
 					},
