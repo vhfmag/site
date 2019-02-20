@@ -40,6 +40,18 @@ const typography = new Typography({
 		"blockquote cite:before": {
 			content: '"— "',
 		},
+		"h1, h2, h3, h4, h5, h6": {
+			lineHeight: 1.25,
+		},
+		"caption, figcaption, label, legend": {
+			lineHeight: 1.375,
+		},
+		p: {
+			lineHeight: 1.5,
+		},
+		"p iframe": {
+			maxWidth: "100%",
+		},
 		[MOBILE_MEDIA_QUERY]: {
 			blockquote: {
 				marginLeft: rhythm(-3 / 4),
