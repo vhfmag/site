@@ -2,7 +2,7 @@
 title: O valor prático de saber HTML
 description: "Muito além da div"
 tags: ["Técnico"]
-date: 2019-02-18
+date: 2019-02-21
 draft: true
 ---
 
@@ -283,7 +283,7 @@ HTML é um padrão aberto associado à Web, uma plataforma aberta que tem como p
 
 Implementadores de navegadores, dispositivos, plataformas, ferramentas de desenvolvimento e ferramentas de acessibilidade, sabendo dessa estabilidade, fazem uso da semântica do HTML, do ARIA e de dados estruturados ao inovar, e continuarão fazendo. É por isso que HTML semântico:
 
-### Está pronto para dispositivos futuros
+### Está pronto para dispositivos e ferramentas futuros
 
 Relógios, carros e <i lang='en'>headsets</i> de realidade virtual já tem navegadores e cada um deles, com seu formato e suas particularidades, impõe novas limitações e abre novas possibilidades sobre como interagir com a Web. O tamanho reduzido da tela do <i lang='en'>Apple Watch</i> impõe limitações severas de usabilidade – ler é difícil, clicar é difícil – e o modo de leitura é uma solução elegante que está disponível para sites que tenham sido feitos com HTML semântico. Bruce Lawson descreve melhor do que eu:
 
@@ -311,17 +311,19 @@ E qual são as vantagens disso? Alguns exemplos disso, no Apple Watch:
 
 Como será um botão num navegador de realidade virtual daqui a 5 anos? Quanto tempo vai demorar até a <i lang='en'>Alexa</i> ou o <i lang='en'>Google Home</i> lerem a Web? Será que os navegadores que conhecemos hoje vão oferecer sumários de páginas no futuro, como fazem hoje alguns leitores de tela? Usando HTML semântico e outros padrões, podemos deixar a decisão de qual é a melhor forma de expor esses elementos com o navegador e estar preparados desde já.
 
-### Permite otimizações de ferramentas
+Além de navegadores e outros <i lang='en'><a href="https://en.wikipedia.org/wiki/User_agent">user agents</a></i>, ferramentas que geram ou interagem com HTML também podem se beneficiar de um HTML semântico. Como exemplo, o [React](https://reactjs.org/) vai reduzir a prioridade de renderização de elementos que tenham o atributo `hidden` do HTML 5 e de toda a sua sub-árvore, renderizando primeiro o conteúdo visível:
 
 > <q>when a HTML component sets the hidden={true} property, React will automatically change the priority of this subtree so that it won’t be part of the initial render. The idea is to e.g have a tab component that can render out every window in advance so switching tabs is super fast but it only needs to display the first tab’s content in the initial render so the hidden tabs can be deprioritized</q>
 >
 > Do repositório sobre Concurrent React, [página](https://github.com/sw-yx/fresh-concurrent-react/blob/master/apis/hidden.md) sobre `hidden={true}`
 
-<!-- TODO: -->
+É isso o que HTML é, afinal de contas: um vocabulário comum que contem os principais elementos interativos, tipográficos e de separação de conteúdo (discorda? falta algum? manda sua ideia pro [discourse do WICG](https://discourse.wicg.io/) e [contribua você também para a Web](https://medium.com/dev-channel/engaging-in-web-standards-the-compatible-with-most-web-developers-approach-eae5f624a5b7)). Ao usar esse vocabulário tão bem quanto possível, nossos dispositivos e ferramentas ficam bem informados e podem oferecer a melhor experiência para o seu usuário, de acordo com seu [fator de forma](<https://en.wikipedia.org/wiki/Form_factor_(design)>) e outras limitações.
 
 ### Tem valor para quem não usa a Web como você
 
-Erramos ao supor que todos acessam nossos sites:
+Nem todo mundo usa a Web como você. Talvez não você saiba, ou talvez você ache que isso não é relevante o seu nicho de mercado. Vamos tratar das duas hipóteses aqui.
+
+Eu acesso a Web com um navegador (Firefox desktop e mobile), usando teclado e mouse ou tela sensível ao toque, a partir de um computador ou celular e com uma conexão de boa a razoável. Mas eu erraria ao supor que todos acessam nossos sites nessas condições. Afinal, nem todos acessam:
 
 -   A partir de um navegador (ex: Pocket, <i lang='en'>Google Assistant</i>, <i lang='en'>widgets</i> de mecanismos de busca)
 -   A partir de um computador, celular ou tablet (ex: <i lang='en'>Apple Watch</i>, <i lang='en'>smart TVs</i>)
@@ -331,8 +333,15 @@ Erramos ao supor que todos acessam nossos sites:
 
 Segundo estimativas da <abbr title="Organização mundial da saúde" aria-label="Organização mundial da saúde">OMS</abbr> publicadas em um [relatório de 2011](https://www.who.int/disabilities/world_report/2011/report/en/), 15% da população mundial convive com pelo menos uma forma de deficiência. Vale também ressaltar que aqueles de nós que não tem deficiências, [não as tem apenas temporariamente](https://www.invisionapp.com/inside-design/accessibility-design-for-the-future/), e que [acessibilidade não é o que se costuma pensar](https://boagworld.com/accessibility/accessibility-is-not-what-you-think/) (acessibilidade é fazer para todos, não fazer para poucos) e o que beneficia o usuário com baixa acuidade visual também beneficia quem usa seu site pelo celular na rua, no sol de meio-dia.
 
-As ferramentas que proveem modos de acesso alternativos à Web o fazem usando HTML semântico, ARIA e dados estruturados para extrair estrutura, conteúdo e intenção. Se atentar a esses padrões significa que damos acesso a uma maior parte da população, em uma maior gama de modos de acesso; e significa também estar preparados para modos de acesso que ainda não foram concebidos ou popularizados.
+As ferramentas que proveem modos de acesso alternativos à Web o fazem usando HTML semântico, ARIA e dados estruturados para extrair estrutura, conteúdo e intenção. Se atentar a esses padrões significa que damos acesso a uma maior parte da população, em uma maior gama de modos de acesso; e significa também estar preparados para modos de acesso que ainda não foram concebidos ou popularizados. Vale lembrar que muitas tecnologias que hoje são populares em toda a população [começaram como pesquisa em acessibilidade](https://www.youtube.com/watch?v=T2CjuAwrAq8), como o reconhecimento e sintetização de voz, que são a base dos atuais assistentes de voz.
+
+Além disso, supor que pessoas com deficiência não são o seu nicho de mercado é apenas isso: uma suposição. Na era das <i lang='en'>data-driven decisions</i>, esperaria-se que validássemos isso comparando o <i lang='en'>bounce</i> ou <i lang='en'>churn rate</i> dos dois segmentos, mas [isso pode não ser possível](https://www.mightybytes.com/blog/how-many-users-with-disabilities-on-site/), já que pessoas com deficiência tem direito a manter isso em segredo e, portanto, navegadores não expoem essa infomação e ela não vai parar no seu <i lang='en'>analytics</i>.
 
 ## Conclusão
 
-<!-- TODO: -->
+Espero ter podido mostrar como HTML continua sendo uma habilidade essencial para o desenvolvedor Web, como essa habilidade te será útil e mostrar alguns recursos pra aprimorá-la. Os principais pontos foram:
+
+-   Você começar da base que o HTML te dá, ou começar do zero. Em geral, a primeira opção ganha
+-   HTML semântico e dados estruturados te permite expressar forma e conteúdo de uma forma inteligível por bots e <i lang='en'>crawlers</i>, melhorando o seu SEO e permitindo novas formas de interação com o seu site
+-   HTML semântico é resiliente, porque descreve sem prescrever, delegando ao <i lang='en'>user agent</i> a decisão de como expor aquele elemento
+    -   Exatamente por isso, HTML semântico dá acesso a quem não teria pleno acesso apenas com um navegador
