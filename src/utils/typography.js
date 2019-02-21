@@ -52,6 +52,9 @@ const typography = new Typography({
 		"p iframe": {
 			maxWidth: "100%",
 		},
+		"p code": {
+			display: "inline-block",
+		},
 		[MOBILE_MEDIA_QUERY]: {
 			blockquote: {
 				marginLeft: rhythm(-3 / 4),
