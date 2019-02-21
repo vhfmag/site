@@ -46,7 +46,7 @@ const typography = new Typography({
 		"caption, figcaption, label, legend": {
 			lineHeight: 1.375,
 		},
-		p: {
+		"p, ul, ol, dl, address": {
 			lineHeight: 1.5,
 		},
 		"p iframe": {
