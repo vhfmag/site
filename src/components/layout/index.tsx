@@ -185,13 +185,18 @@ interface ILayoutData {
 	personalJson: PersonalJson;
 }
 
-const RawLayout: React.SFC<ILayoutData> = ({ site: { siteMetadata }, personalJson, children }) => {
+const RawLayout: React.SFC<ILayoutData> = ({
+	site: { siteMetadata },
+	personalJson,
+	children,
+	...props
+}) => {
 	const plainTextDescription = siteMetadata.description!.replace(/\[([^\]]+)\]\([^\)]+\)/g, "$1");
 
 	return (
 		<MDXProvider components={components}>
 			<ThemeProvider theme={darkTheme}>
-				<StyledRoot itemScope itemType={blog} id={blogRef} itemID={blogRef}>
+				<StyledRoot {...props} itemScope itemType={blog} id={blogRef} itemID={blogRef}>
 					<GlobalStyle />
 					<Helmet
 						htmlAttributes={{
@@ -272,7 +277,8 @@ const RawLayout: React.SFC<ILayoutData> = ({ site: { siteMetadata }, personalJso
 	);
 };
 
-const DefaultLayout: React.SFC = ({ children }) => {
+const DefaultLayout: React.SFC = ({ children, ...parentProps }) => {
+	console.log({ parentProps });
 	return (
 		<StaticQuery
 			query={graphql`
@@ -297,7 +303,11 @@ const DefaultLayout: React.SFC = ({ children }) => {
 					}
 				}
 			`}
-			render={props => <RawLayout {...props}>{children}</RawLayout>}
+			render={props => (
+				<RawLayout {...parentProps} {...props}>
+					{children}
+				</RawLayout>
+			)}
 		/>
 	);
 };

@@ -1,6 +1,14 @@
 {
 	"work": [
 		{
+			"company": "Jusbrasil",
+			"link": "https://jusbrasil.com.br",
+			"image": "/images/companies/jusbrasil.svg",
+			"period": ["outubro de 2018"],
+			"role": "Desenvolvedor full-stack",
+			"skills": ["React", "Flow", "Jest", "TDD", "Enzyme", "Scala"]
+		},
+		{
 			"company": "Cubos",
 			"link": "https://cubos.io",
 			"image": "/images/companies/cubos.svg",
@@ -29,14 +37,6 @@
 					"description": "Startup baiana que desenvolve uma solução completa de gestão e pagamento para eventos e casas noturnas"
 				}
 			]
-		},
-		{
-			"company": "Jusbrasil",
-			"link": "https://jusbrasil.com.br",
-			"image": "/images/companies/jusbrasil.svg",
-			"period": ["outubro de 2018"],
-			"role": "Desenvolvedor full-stack",
-			"skills": ["React", "Flow", "Jest", "TDD", "Enzyme", "Scala"]
 		}
 	],
 	"volunteer": [],
