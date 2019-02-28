@@ -120,6 +120,11 @@ const StyledList = styled.div`
 			column-gap: 8pt;
 			column-width: 20ch;
 
+			@media (max-width: 500px) {
+				column-count: 1;
+				column-width: unset;
+			}
+
 			li {
 				break-inside: avoid;
 			}
