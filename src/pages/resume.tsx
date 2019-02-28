@@ -118,6 +118,7 @@ const StyledList = styled.div`
 			display: block;
 			column-count: var(--columns);
 			column-gap: 8pt;
+			column-width: 20ch;
 
 			li {
 				break-inside: avoid;
