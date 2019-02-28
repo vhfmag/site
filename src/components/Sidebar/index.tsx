@@ -170,11 +170,6 @@ export const Sidebar: React.SFC<ISidebarProps> = ({
 				src="/icons/icon-48x48.png"
 			/>
 		</VisuallyHidden>
-		<SidebarSection
-			dangerouslySetInnerHTML={{ __html: description! }}
-			className="lead p-note"
-			itemProp="description"
-		/>
 		<SidebarSection>
 			<address>
 				<a itemProp="email" className="u-email" href={`mailto:${email}`}>
