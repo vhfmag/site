@@ -1,0 +1,3 @@
+[submodule "submodules/cssremedy"]
+	path = submodules/cssremedy
+	url = https://github.com/mozdevs/cssremedy

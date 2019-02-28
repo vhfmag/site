@@ -27,6 +27,7 @@ const typography = new Typography({
 			paddingLeft: rhythm(13 / 16),
 			marginLeft: 0,
 			borderLeft: `${rhythm(3 / 16)} solid ${options.headerColor}`,
+			fontSize: "inherit",
 		},
 		"blockquote > :last-child": {
 			marginBottom: 0,
@@ -38,6 +39,21 @@ const typography = new Typography({
 		},
 		"blockquote cite:before": {
 			content: '"— "',
+		},
+		"h1, h2, h3, h4, h5, h6": {
+			lineHeight: 1.25,
+		},
+		"caption, figcaption, label, legend": {
+			lineHeight: 1.375,
+		},
+		"p, ul, ol, dl, address": {
+			lineHeight: 1.5,
+		},
+		"p iframe": {
+			maxWidth: "100%",
+		},
+		"p code": {
+			display: "inline-block",
 		},
 		[MOBILE_MEDIA_QUERY]: {
 			blockquote: {

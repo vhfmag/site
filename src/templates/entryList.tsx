@@ -55,15 +55,15 @@ const BlogNav = styled.nav`
 const blogSections = [
 	{
 		path: "/",
+		label: "Tudo",
+	},
+	{
+		path: "/posts/",
 		label: "Posts",
 	},
 	{
 		path: "/bookmarks/",
 		label: "Bookmarks",
-	},
-	{
-		path: "/archive/",
-		label: "Arquivo",
 	},
 ];
 
@@ -90,8 +90,8 @@ const EntryList: React.SFC<IBookmarkListProps> = ({
 		<DefaultLayout>
 			<Helmet title={listTitle} />
 			<h1>{listTitle}</h1>
-			<BlogNav>
-				<h2>Seções do blog</h2>
+			<BlogNav aria-describedby="blog-section-heading">
+				<h2 id="blog-section-heading">Seções do blog</h2>
 				<ul>
 					{blogSections.map(({ path, label }) => (
 						<li key={path}>

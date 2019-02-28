@@ -68,7 +68,7 @@ function buildPageQuery(pageKind = ".*") {
  * @type {import("./src/graphql-types").MdxEdge & { node?: { parent?: import("./src/graphql-types").File, context?: { slug: string, folder: string } }}}
  */
 
-function createEntryPages({
+async function createEntryPages({
 	pageKind = undefined,
 	createPage,
 	disableSinglePage = false,
@@ -76,123 +76,122 @@ function createEntryPages({
 	graphqlQuerier,
 	pathPrefix = "",
 }) {
-	graphqlQuerier(buildPageQuery(pageKind))
-		.then(result => {
-			if (result.errors) {
-				console.error(result.errors);
-				throw result.errors[0];
-			}
+	try {
+		const result = await graphqlQuerier(buildPageQuery(pageKind));
 
-			/** @type {MdxEdge[]} */
-			const rawEdges = result.data.allMdx.edges;
+		if (result.errors) {
+			console.error(result.errors);
+			throw result.errors[0];
+		}
 
-			const allEdges = rawEdges
-				.map(edge => {
-					edge.node.frontmatter.tags =
-						edge.node.frontmatter.tags &&
-						edge.node.frontmatter.tags.filter(v => v).map(tag => tag.trim());
+		/** @type {MdxEdge[]} */
+		const rawEdges = result.data.allMdx.edges;
 
-					let { name: slug, relativeDirectory: folder } = edge.node.parent;
-					if (slug === "index" && folder.split("/").length > 1) {
-						[folder, slug] = folder.split("/");
-					}
+		const allEdges = rawEdges
+			.map(edge => {
+				edge.node.frontmatter.tags =
+					edge.node.frontmatter.tags &&
+					edge.node.frontmatter.tags.filter(v => v).map(tag => tag.trim());
 
-					edge.node.context = { slug, folder };
+				let { name: slug, relativeDirectory: folder } = edge.node.parent;
+				if (slug === "index" && folder.split("/").length > 1) {
+					[folder, slug] = folder.split("/");
+				}
 
-					return edge;
-				})
-				.sort(compareEntryEdges);
+				edge.node.context = { slug, folder };
 
-			const nonDraftEdges = allEdges.filter(edge => !edge.node.frontmatter.draft);
+				return edge;
+			})
+			.sort(compareEntryEdges);
 
-			const postEdges = process.env.NODE_ENV === "production" ? nonDraftEdges : allEdges;
+		const nonDraftEdges = allEdges.filter(edge => !edge.node.frontmatter.draft);
 
-			const tags = Array.from(
-				new Set(
-					postEdges
-						.map(edge => edge.node.frontmatter.tags)
-						.filter(maybeArr => maybeArr)
-						.reduce((arr, el) => arr.concat(el), []),
+		const postEdges = process.env.NODE_ENV === "production" ? nonDraftEdges : allEdges;
+
+		const tags = Array.from(
+			new Set(
+				postEdges
+					.map(edge => edge.node.frontmatter.tags)
+					.filter(maybeArr => maybeArr)
+					.reduce((arr, el) => arr.concat(el), []),
+			),
+		);
+
+		const tagPagesMap = zipObject(
+			tags,
+			tags.map(tag =>
+				postEdges.filter(
+					edge => edge.node.frontmatter.tags && edge.node.frontmatter.tags.includes(tag),
 				),
-			);
+			),
+		);
 
-			const tagPagesMap = zipObject(
-				tags,
-				tags.map(tag =>
-					postEdges.filter(
-						edge =>
-							edge.node.frontmatter.tags && edge.node.frontmatter.tags.includes(tag),
-					),
-				),
-			);
+		const basePath = `/${pathPrefix}/tags/`;
+		const getTagPath = tag => `${basePath}/${slugify(tag)}`.replace(/\/{2,}/g, "/");
 
-			const basePath = `/${pathPrefix}/tags/`;
-			const getTagPath = tag => `${basePath}/${slugify(tag)}`.replace(/\/{2,}/g, "/");
+		createPage({
+			path: basePath,
+			component: tagListTemplate,
+			context: {
+				listTitle,
+				tags: Object.keys(tagPagesMap).map(tag => ({
+					tag,
+					count: tagPagesMap[tag].length,
+					url: getTagPath(tag),
+				})),
+			},
+		});
+
+		for (const tag in tagPagesMap) {
+			const tagEdges = tagPagesMap[tag];
+			const path = getTagPath(tag);
 
 			createPage({
-				path: basePath,
-				component: tagListTemplate,
+				path,
+				component: entryListTemplate,
 				context: {
-					listTitle,
-					tags: Object.keys(tagPagesMap).map(tag => ({
-						tag,
-						count: tagPagesMap[tag].length,
-						url: getTagPath(tag),
-					})),
+					group: tagEdges,
+					pathPrefix,
+					additionalContext: { listTitle: tag },
 				},
 			});
+		}
 
-			for (const tag in tagPagesMap) {
-				const tagEdges = tagPagesMap[tag];
-				const path = getTagPath(tag);
-
-				createPage({
-					path,
-					component: entryListTemplate,
-					context: {
-						group: tagEdges,
-						pathPrefix,
-						additionalContext: { listTitle: tag },
-					},
-				});
-			}
-
-			createPaginatedPages({
-				createPage,
-				pageTemplate: entryListTemplate,
-				edges: postEdges,
-				pathPrefix,
-				pageLength: 10,
-				context: {
-					listTitle,
-				},
-			});
-
-			if (!disableSinglePage) {
-				allEdges.forEach(
-					({
-						node: {
-							fileAbsolutePath: markdownPath,
-							context: { slug, folder },
-						},
-					}) => {
-						createPage({
-							path: `/${folder}/${slug}`,
-							component: folderToPageTemplate[folder],
-							context: {
-								markdownPath,
-								folder,
-								slug,
-							},
-						});
-					},
-				);
-			}
-		})
-		.catch(err => {
-			console.error(err);
-			process.exit(1);
+		createPaginatedPages({
+			createPage,
+			pageTemplate: entryListTemplate,
+			edges: postEdges,
+			pathPrefix,
+			pageLength: 10,
+			context: {
+				listTitle,
+			},
 		});
+
+		if (!disableSinglePage) {
+			allEdges.forEach(
+				({
+					node: {
+						fileAbsolutePath: markdownPath,
+						context: { slug, folder },
+					},
+				}) => {
+					createPage({
+						path: `/${folder}/${slug}`,
+						component: folderToPageTemplate[folder],
+						context: {
+							markdownPath,
+							folder,
+							slug,
+						},
+					});
+				},
+			);
+		}
+	} catch (err) {
+		console.error(err);
+		process.exit(1);
+	}
 }
 
 exports.onCreateNode = ({ node, actions }) => {
@@ -279,39 +278,35 @@ function recurseOnObjectProcessingImages({ node, content = node, actions }) {
 exports.createPages = ({ actions, graphql: graphqlQuerier }) => {
 	const { createPage } = actions;
 
-	return new Promise((resolve, reject) => {
-		resolve(
-			Promise.all([
-				createEntryPages({
-					pageKind: "posts",
-					graphqlQuerier,
-					createPage,
-					listTitle: "Blog",
-					disableSinglePage: true,
-				}),
-				createEntryPages({
-					graphqlQuerier,
-					createPage,
-					listTitle: "Blog / Arquivo",
-					pathPrefix: "archive",
-				}),
-				createEntryPages({
-					pageKind: "books",
-					graphqlQuerier,
-					createPage,
-					listTitle: "Blog / Livros",
-					pathPrefix: "books",
-				}),
-				createEntryPages({
-					pageKind: "bookmarks",
-					graphqlQuerier,
-					createPage,
-					listTitle: "Blog / Bookmarks",
-					pathPrefix: "bookmarks",
-				}),
-			]),
-		);
-	});
+	return Promise.all([
+		createEntryPages({
+			pageKind: "posts",
+			graphqlQuerier,
+			createPage,
+			pathPrefix: "posts",
+			listTitle: "Blog / Posts",
+		}),
+		createEntryPages({
+			graphqlQuerier,
+			createPage,
+			listTitle: "Blog",
+			disableSinglePage: true,
+		}),
+		createEntryPages({
+			pageKind: "books",
+			graphqlQuerier,
+			createPage,
+			listTitle: "Blog / Livros",
+			pathPrefix: "books",
+		}),
+		createEntryPages({
+			pageKind: "bookmarks",
+			graphqlQuerier,
+			createPage,
+			listTitle: "Blog / Bookmarks",
+			pathPrefix: "bookmarks",
+		}),
+	]);
 };
 
 exports.onCreateWebpackConfig = ({ actions }) => {

@@ -1,19 +1,22 @@
 image: node:9
 stages:
-- build
+    - build
+
+variables:
+    GIT_SUBMODULE_STRATEGY: recursive
 
 pages:
-  stage: build
-  script:
-  - yarn
-  - yarn build
-  artifacts:
-    paths:
-    - public
-  cache:
-    paths:
-    - node_modules
-    - .cache
-    - public
-  only:
-  - master
+    stage: build
+    script:
+        - yarn
+        - yarn build
+    artifacts:
+        paths:
+            - public
+    cache:
+        paths:
+            - node_modules
+            - .cache
+            - public
+    only:
+        - master

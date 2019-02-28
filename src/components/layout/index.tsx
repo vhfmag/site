@@ -12,6 +12,8 @@ import "typeface-montserrat";
 import "typeface-zilla-slab";
 import "./icons";
 import "prismjs/themes/prism-okaidia.css";
+import "../../../submodules/cssremedy/quotes.css";
+import "../../../submodules/cssremedy/remedy.css";
 
 import { dom } from "@fortawesome/fontawesome-svg-core";
 import { darkTheme, fromTheme } from "../../styles/theme";
@@ -45,11 +47,8 @@ const globalCss = css`
 			color: ${fromTheme("themeColor")};
 		}
 
-		a {
-			color: ${fromTheme("themeColor")};
-			text-decoration: none;
-			box-shadow: inset 0 -1px 0 ${fromTheme("themeColor")};
-			transition: 0.25s color ease, 0.25s box-shadow ease;
+		a.gatsby-resp-image-link:any-link {
+			box-shadow: none;
 		}
 
 		abbr[title] {
@@ -96,13 +95,17 @@ const globalCss = css`
 		.react-live {
 			border: 1px solid ${fromTheme("themeColor")};
 			margin-bottom: 1.6875em;
+		}
 
-			.prism-code {
-			}
-			.react-live-preview {
-				padding: 0.5rem;
-				background-color: rgba(255, 255, 255, 0.05);
-			}
+		.prism-code {
+			display: flex;
+			flex-wrap: wrap;
+			border-bottom: 1px solid ${fromTheme("themeColor")};
+		}
+
+		.react-live-preview {
+			padding: 0.5rem;
+			background-color: rgba(255, 255, 255, 0.05);
 		}
 	}
 `;

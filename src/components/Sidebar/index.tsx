@@ -185,10 +185,10 @@ export const Sidebar: React.SFC<ISidebarProps> = ({
 				<a href={sourceUrl!}>ver código fonte</a>
 			</ScreenOnly>
 		</SidebarSection>
-		<StyledNav aria-label="Páginas do blog">
+		<StyledNav aria-label="Principal">
 			<NavLinks navs={nav} />
 		</StyledNav>
-		<address aria-label="Links para mídias sociais">
+		<address aria-label="Mídias sociais">
 			<SocialLinks>
 				<li>
 					<SocialLink icon="rss" serviceName="RSS" rel="alternate" url="/rss.xml" />

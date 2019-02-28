@@ -1,0 +1,37 @@
+diff --git a/node_modules/gatsby-remark-a11y-emoji/index.js b/node_modules/gatsby-remark-a11y-emoji/index.js
+index 1bce1a0..1035193 100755
+--- a/node_modules/gatsby-remark-a11y-emoji/index.js
++++ b/node_modules/gatsby-remark-a11y-emoji/index.js
+@@ -1,19 +1,21 @@
+-'use strict';
++"use strict";
+ 
+-const emojiRegex = require('emoji-regex');
+-const gemoji = require('gemoji');
+-const visit = require('unist-util-visit');
++const emojiRegex = require("emoji-regex");
++const gemoji = require("gemoji");
++const visit = require("unist-util-visit");
+ 
+ function visitor(node) {
+-  node.value = node.value.replace(emojiRegex(), match => {
+-    node.type = 'html';
+-    const description = gemoji.unicode[match] ? gemoji.unicode[match].description : '';
+-    return `<span role="img" aria-labelledby="${description}">${match}</span>`;
+-  });
++	node.value = node.value.replace(emojiRegex(), match => {
++		node.type = "html";
++		const description = gemoji.unicode[match]
++			? `${gemoji.unicode[match].description} emoji`
++			: "";
++		return `<span role="img" aria-label="${description}">${match}</span>`;
++	});
+ }
+ 
+ module.exports = ({ markdownAST }) => {
+-  visit(markdownAST, 'text', visitor);
++	visit(markdownAST, "text", visitor);
+ 
+-  return markdownAST;
++	return markdownAST;
+ };

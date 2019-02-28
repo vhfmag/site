@@ -108,6 +108,21 @@ module.exports = {
 				},
 				gatsbyRemarkPlugins: [
 					{ resolve: "gatsby-remark-autolink-headers" },
+					{
+						resolve: "gatsby-remark-embedded-codesandbox",
+						options: {
+							directory: `${__dirname}`,
+							protocol: "codesandbox://",
+							embedOptions: {
+								view: "split",
+								verticallayout: 1,
+								codemirror: 1,
+								hidenavigation: 1,
+								autoresize: 1,
+								runonclick: 0,
+							},
+						},
+					},
 					{ resolve: "gatsby-remark-emoji-unicode" },
 					{
 						resolve: "gatsby-remark-external-links",
@@ -115,10 +130,11 @@ module.exports = {
 							target: null,
 						},
 					},
+					{ resolve: "gatsby-remark-unwrap-images" },
 					{
 						resolve: `gatsby-remark-images`,
 						options: {
-							maxWidth: 590,
+							maxWidth: 800,
 							withWebp: true,
 						},
 					},
@@ -170,6 +186,29 @@ module.exports = {
 			},
 		},
 		{
+			resolve: "gatsby-plugin-matomo",
+			options: {
+				siteId: "1",
+				matomoUrl: "https://yuno.victormagalhaes.codes/matomo",
+				siteUrl: "https://victormagalhaes.codes",
+			},
+		},
+		"gatsby-plugin-netlify-cache",
+		{
+			resolve: "gatsby-plugin-manifest",
+			options: {
+				name: "Victor Magalhães",
+				short_name: "Victor",
+				start_url: "/",
+				background_color: backgroundColor,
+				theme_color: themeColor,
+				display: "minimal-ui",
+				icon: "src/assets/images/icons/icon.png",
+			},
+		},
+		"gatsby-plugin-offline",
+		"gatsby-plugin-webpack-size",
+		{
 			resolve: "gatsby-plugin-netlify",
 			options: {
 				headers: {
@@ -194,28 +233,5 @@ module.exports = {
 				],
 			},
 		},
-		{
-			resolve: "gatsby-plugin-matomo",
-			options: {
-				siteId: "1",
-				matomoUrl: "https://yuno.victormagalhaes.codes/matomo",
-				siteUrl: "https://victormagalhaes.codes",
-			},
-		},
-		"gatsby-plugin-netlify-cache",
-		{
-			resolve: "gatsby-plugin-manifest",
-			options: {
-				name: "Victor Magalhães",
-				short_name: "Victor",
-				start_url: "/",
-				background_color: backgroundColor,
-				theme_color: themeColor,
-				display: "minimal-ui",
-				icon: "src/assets/images/icons/icon.png",
-			},
-		},
-		"gatsby-plugin-offline",
-		"gatsby-plugin-webpack-size",
 	],
 };
