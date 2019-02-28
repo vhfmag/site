@@ -54,15 +54,15 @@ const BlogNav = styled.nav`
 
 const blogSections = [
 	{
-		path: "/",
+		path: "/all",
 		label: "Tudo",
 	},
 	{
-		path: "/posts/",
+		path: "/posts",
 		label: "Posts",
 	},
 	{
-		path: "/bookmarks/",
+		path: "/bookmarks",
 		label: "Bookmarks",
 	},
 ];

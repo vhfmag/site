@@ -51,6 +51,7 @@ const StyledTags = styled.ul`
 	display: inline-flex;
 	flex-wrap: wrap;
 	margin: -4pt;
+	align-items: flex-start;
 
 	li {
 		all: unset;

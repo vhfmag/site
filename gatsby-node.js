@@ -290,6 +290,7 @@ exports.createPages = ({ actions, graphql: graphqlQuerier }) => {
 			graphqlQuerier,
 			createPage,
 			listTitle: "Blog",
+			pathPrefix: "all",
 			disableSinglePage: true,
 		}),
 		createEntryPages({
