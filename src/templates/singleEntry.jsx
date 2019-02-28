@@ -47,7 +47,7 @@ const SingleEntryTemplate = ({
 			itemType={folderNameToReviewedItemType(relativeDirectory)}
 		>
 			<meta itemProp="headline title" content={title} />
-			Bookmark em resposta a{" "}
+			Em resposta a{" "}
 			<span>
 				<a
 					itemProp="url"
