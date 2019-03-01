@@ -5,8 +5,8 @@ const { graphql } = require("./src/utils/taggedUtils");
 const { compareEntryEdges, slugify } = require("./src/utils/utils");
 const createPaginatedPages = require("gatsby-paginate");
 
-const postTemplate = path.resolve(`src/templates/singlePost.jsx`);
-const entryTemplate = path.resolve(`src/templates/singleEntry.jsx`);
+const postTemplate = path.resolve(`src/templates/singlePost.tsx`);
+const entryTemplate = path.resolve(`src/templates/singleEntry.tsx`);
 const entryListTemplate = path.resolve(`src/templates/entryList.tsx`);
 
 const tagListTemplate = path.resolve(`src/templates/tagList.tsx`);

@@ -1,21 +1,19 @@
 import * as React from "react";
 import { Entry } from "../components/Entry";
-import { renderAuthors, folderNameToReviewedItemType } from "../components/EntryHeader";
 import MDXRenderer from "gatsby-mdx/mdx-renderer";
 import { graphql } from "gatsby";
 import DefaultLayout from "../components/layout";
 import { isFolder } from "../utils/types";
+import { IGeneralMetadataFragment, IMarkdownEntryFragment } from "../fragments";
+import { WindowLocation } from "@reach/router";
 
-/**
- * @typedef {Object} IEntryTemplateProps
- * @property {import("../fragments").IGeneralMetadataFragment & { mdx: import("../fragments").IMarkdownEntryFragment, code: { body: any } }} data
- * @property {import("@reach/router").WindowLocation} location
- */
+interface IPostTemplateProps {
+	data: IGeneralMetadataFragment & { mdx: IMarkdownEntryFragment };
+	location: WindowLocation;
+	pathContext: any;
+}
 
-/**
- * @param {IEntryTemplateProps} props
- */
-const SingleEntryTemplate = ({
+const SinglePostTemplate = ({
 	location,
 	pathContext: { slug: fileName, folder: relativeDirectory },
 	data: {
@@ -24,44 +22,21 @@ const SingleEntryTemplate = ({
 		},
 		personalJson: { name },
 		mdx: {
-			excerpt,
 			headings,
-			frontmatter: { title, toc, authors, link, date, tags },
-			parent: { birthTime },
-			timeToRead,
-			count: { words },
+			excerpt,
 			code: { body },
+			frontmatter: { toc, date, title, description, tags },
+			timeToRead,
+			parent: { birthTime },
+			count: { words } = { words: -1 },
 		},
 	},
-}) => {
+}: IPostTemplateProps) => {
 	if (!isFolder(relativeDirectory)) {
 		throw new Error(
 			`There is an unhandled directory. Update 'folderToCategory' to include '${relativeDirectory}'`,
 		);
 	}
-
-	const replyTo = (
-		<span
-			itemProp="itemReviewed"
-			itemScope
-			itemType={folderNameToReviewedItemType(relativeDirectory)}
-		>
-			<meta itemProp="headline title" content={title} />
-			Em resposta a{" "}
-			<span>
-				<a
-					itemProp="url"
-					rel="bookmark"
-					title={title}
-					className="u-in-reply-to"
-					href={link}
-				>
-					{title}
-				</a>
-			</span>{" "}
-			{authors && renderAuthors(authors)}
-		</span>
-	);
 
 	return (
 		<DefaultLayout>
@@ -70,26 +45,23 @@ const SingleEntryTemplate = ({
 				toc={toc}
 				title={title}
 				excerpt={excerpt}
-				selfAuthor={{ name, url: siteUrl }}
-				authors={authors}
 				fileName={fileName}
 				folderName={relativeDirectory}
+				subtitle={description}
 				publishDate={new Date(date || birthTime)}
-				replyTo={link}
+				selfAuthor={{ name, url: siteUrl }}
 				headings={headings}
 				tags={tags}
 				wordCount={words}
 				timeToRead={timeToRead}
 			>
-				{replyTo}
-				<hr style={{ margin: "1em 0" }} />
 				<MDXRenderer>{body}</MDXRenderer>
 			</Entry>
 		</DefaultLayout>
 	);
 };
 
-export default SingleEntryTemplate;
+export default SinglePostTemplate;
 
 export const pageQuery = graphql`
 	query($markdownPath: String!) {
