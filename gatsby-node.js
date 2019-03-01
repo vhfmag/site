@@ -7,14 +7,19 @@ const createPaginatedPages = require("gatsby-paginate");
 
 const postTemplate = path.resolve(`src/templates/singlePost.tsx`);
 const entryTemplate = path.resolve(`src/templates/singleEntry.tsx`);
+const presentationTemplate = path.resolve(`src/templates/singlePresentation.tsx`);
 const entryListTemplate = path.resolve(`src/templates/entryList.tsx`);
 
 const tagListTemplate = path.resolve(`src/templates/tagList.tsx`);
 
+/**
+ * @type {Record<import("./src/utils/types").Folder, string>}
+ */
 const folderToPageTemplate = {
 	posts: postTemplate,
 	books: entryTemplate,
 	bookmarks: entryTemplate,
+	apresentacoes: presentationTemplate,
 };
 
 function buildPageQuery(pageKind = ".*") {
@@ -78,6 +83,10 @@ async function createEntryPages({
 }) {
 	try {
 		const result = await graphqlQuerier(buildPageQuery(pageKind));
+
+		if (pageKind === "apresentacoes") {
+			console.error({ result });
+		}
 
 		if (result.errors) {
 			console.error(result.errors);
@@ -291,7 +300,6 @@ exports.createPages = ({ actions, graphql: graphqlQuerier }) => {
 			createPage,
 			listTitle: "Blog",
 			pathPrefix: "all",
-			disableSinglePage: true,
 		}),
 		createEntryPages({
 			pageKind: "books",
@@ -306,6 +314,13 @@ exports.createPages = ({ actions, graphql: graphqlQuerier }) => {
 			createPage,
 			listTitle: "Blog / Bookmarks",
 			pathPrefix: "bookmarks",
+		}),
+		createEntryPages({
+			pageKind: "apresentacoes",
+			graphqlQuerier,
+			createPage,
+			listTitle: "Blog / Apresentações",
+			pathPrefix: "apresentacoes",
 		}),
 	]);
 };

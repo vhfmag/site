@@ -42,6 +42,7 @@ const iconPerFolder: Record<Folder, IconProp> = {
 	posts: "pen-nib",
 	books: "book",
 	bookmarks: "bookmark",
+	apresentacoes: "chalkboard",
 };
 
 export const EntrySummary: React.SFC<IEntrySummaryProps> = ({ ...headerProps }) => {

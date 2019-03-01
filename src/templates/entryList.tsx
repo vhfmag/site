@@ -65,6 +65,10 @@ const blogSections = [
 		path: "/bookmarks",
 		label: "Bookmarks",
 	},
+	{
+		path: "/apresentacoes",
+		label: "Apresentações",
+	},
 ];
 
 const EntryList: React.SFC<IBookmarkListProps> = ({

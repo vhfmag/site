@@ -16,6 +16,7 @@ interface HomePageProps {
 	data: {
 		posts: MarkdownEdges;
 		bookmarks: MarkdownEdges;
+		slides: MarkdownEdges;
 	};
 }
 
@@ -67,9 +68,11 @@ const HomeSection = ({
 							);
 						},
 					)}
-					<li>
-						<Link to={`/${sectionSlug}`}>Ver mais</Link>
-					</li>
+					{list.edges.length >= 5 && (
+						<li>
+							<Link to={`/${sectionSlug}`}>Ver mais</Link>
+						</li>
+					)}
 				</ul>
 			</nav>
 		</section>
@@ -79,9 +82,14 @@ const HomeSection = ({
 const StyledSection = styled.section`
 	display: flex;
 	flex-wrap: wrap;
+
+	@supports (display: grid) {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(45ch, max-content));
+	}
 `;
 
-const HomePage = ({ data: { posts, bookmarks } }: HomePageProps) => {
+const HomePage = ({ data: { posts, bookmarks, slides } }: HomePageProps) => {
 	const yearsOfExperience = Math.trunc(
 		(Date.now() - new Date(2016, 2, 1).valueOf()) / (1e3 * 60 * 60 * 24 * 365),
 	);
@@ -102,6 +110,11 @@ const HomePage = ({ data: { posts, bookmarks } }: HomePageProps) => {
 					sectionTitle="Últimos bookmarks"
 					sectionSlug="bookmarks"
 				/>
+				<HomeSection
+					list={slides}
+					sectionTitle="Últimas apresentações"
+					sectionSlug="apresentacoes"
+				/>
 			</StyledSection>
 		</DefaultLayout>
 	);
@@ -113,7 +126,7 @@ export const homeFragment = graphql`
 	{
 		posts: allMdx(
 			limit: 5
-			filter: { fileAbsolutePath: { regex: "/posts/.*.md/" } }
+			filter: { fileAbsolutePath: { regex: "content/posts/.*.md/" } }
 			sort: { fields: frontmatter___date, order: DESC }
 		) {
 			...MDXListingFragment
@@ -121,7 +134,15 @@ export const homeFragment = graphql`
 
 		bookmarks: allMdx(
 			limit: 5
-			filter: { fileAbsolutePath: { regex: "/bookmarks/.*.md/" } }
+			filter: { fileAbsolutePath: { regex: "content/bookmarks/.*.md/" } }
+			sort: { fields: frontmatter___date, order: DESC }
+		) {
+			...MDXListingFragment
+		}
+
+		slides: allMdx(
+			limit: 5
+			filter: { fileAbsolutePath: { regex: "content/apresentacoes/.*.md/" } }
 			sort: { fields: frontmatter___date, order: DESC }
 		) {
 			...MDXListingFragment
