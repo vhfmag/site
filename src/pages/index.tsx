@@ -20,6 +20,14 @@ interface HomePageProps {
 	};
 }
 
+const StyledEntrySection = styled.section`
+	max-width: calc(100vw - 2 * var(--root-padding));
+
+	ul {
+		margin: 0;
+	}
+`;
+
 const HomeSection = ({
 	sectionTitle,
 	sectionSlug,
@@ -30,7 +38,7 @@ const HomeSection = ({
 	list: MarkdownEdges;
 }) => {
 	return (
-		<section>
+		<StyledEntrySection>
 			<h2>{sectionTitle}</h2>
 			<nav>
 				<ul>
@@ -75,7 +83,7 @@ const HomeSection = ({
 					)}
 				</ul>
 			</nav>
-		</section>
+		</StyledEntrySection>
 	);
 };
 
@@ -85,6 +93,7 @@ const StyledSection = styled.section`
 
 	@supports (display: grid) {
 		display: grid;
+		grid-gap: 1rem;
 		grid-template-columns: repeat(auto-fill, minmax(45ch, max-content));
 	}
 `;
