@@ -107,9 +107,14 @@ const HomePage = ({ data: { posts, bookmarks, slides } }: HomePageProps) => {
 		<DefaultLayout>
 			<h1>Home</h1>
 			<p>
-				Olá! Meu nome é Victor Magalhães. Sou desenvolvedor de Salvador, Brasil e apaixonado
-				pela Web, decentralização e privacidade. Tenho {yearsOfExperience} anos de
-				experiência trabalhando com desenvolvimento front- e back-end.
+				Olá! Meu nome é Victor Magalhães. Sou um desenvolvedor de Salvador, Brasil e sou
+				apaixonado pela Web, decentralização e privacidade. Tenho {yearsOfExperience} anos
+				de experiência trabalhando com desenvolvimento front- e back-end.
+			</p>
+			<p>
+				Outros tópicos que me interessam são programação funcional, teoria de sistemas de
+				tipo, discutir filosofia e ciências humanas como se eu tivesse embasamento para tal,
+				curtir foto de tatuagem, colagem e cerâmica e pagar de harebo fazendo trilhas.
 			</p>
 
 			<StyledSection>
