@@ -68,23 +68,9 @@ const GlobalStyle = createGlobalStyle`
 
 		&:hover,
 		&:active,
-		&:focus,
-		&.selected {
+		&:focus {
 			color: ${fromTheme("backgroundColor")};
 			box-shadow: inset 0 var(--box-shadow-active-height) 0 ${fromTheme("themeColor")};
-		}
-	}
-
-	button.anchor {
-		border: 0;
-	    border-radius: 0;
-		background: unset;
-		cursor: pointer;
-
-		--box-shadow-active-height: -1.75em;
-
-		&[disabled] {
-			cursor: not-allowed;
 		}
 	}
 
