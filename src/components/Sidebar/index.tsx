@@ -137,12 +137,37 @@ function NavLinks({ navs }: { navs: ISidebarNavLink[] }) {
 
 const StyledThemeSelector = styled.div`
 	margin: -0.5em;
-	margin-top: 1em;
 	display: flex;
+	flex-wrap: wrap;
 
 	> * {
 		margin: 0.5em;
 	}
+`;
+
+const StyledThemeButton = styled.button`
+	--box-shadow-height: 0;
+
+	cursor: pointer;
+	color: var(--theme-color);
+	border: 1px solid var(--theme-color);
+	background-color: var(--background-color);
+	transition: box-shadow 0.5s ease, color 0.5s ease;
+	box-shadow: inset 0 var(--box-shadow-height) 0 var(--theme-color);
+
+	&.selected,
+	&:hover {
+		--box-shadow-height: 2em;
+		color: var(--background-color);
+	}
+
+	&[disabled] {
+		cursor: not-allowed;
+	}
+`;
+
+const StyledHR = styled.hr`
+	margin: 1em 0;
 `;
 
 const ThemeSelector: React.FunctionComponent<{ theme: ITheme }> = ({ children, theme }) => {
@@ -150,13 +175,13 @@ const ThemeSelector: React.FunctionComponent<{ theme: ITheme }> = ({ children, t
 	const isSelected = theme === currentTheme;
 
 	return (
-		<button
-			className={`anchor ${isSelected ? "selected" : ""}`}
+		<StyledThemeButton
+			className={`${isSelected ? "selected" : ""}`}
 			disabled={isSelected}
 			onClick={() => setTheme(theme)}
 		>
 			{children}
-		</button>
+		</StyledThemeButton>
 	);
 };
 
@@ -222,6 +247,7 @@ export const Sidebar: React.SFC<ISidebarProps> = ({
 					))}
 				</SocialLinks>
 			</address>
+			<StyledHR />
 			<StyledThemeSelector>
 				<ThemeSelector theme={darkTheme}>Tema escuro</ThemeSelector>
 				<ThemeSelector theme={lightTheme}>Tema claro</ThemeSelector>
