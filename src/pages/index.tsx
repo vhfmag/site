@@ -113,8 +113,8 @@ const HomePage = ({ data: { posts, bookmarks, slides } }: HomePageProps) => {
 			</p>
 			<p>
 				Outros tópicos que me interessam são programação funcional, teoria de sistemas de
-				tipo, discutir filosofia e ciências humanas como se eu tivesse embasamento para tal,
-				curtir foto de tatuagem, colagem e cerâmica e pagar de harebo fazendo trilhas.
+				tipo, discutir filosofia e ciências humanas como se eu tivesse embasamento para
+				isso, curtir foto de tatuagem, colagem e cerâmica e pagar de harebo fazendo trilhas.
 			</p>
 
 			<StyledSection>
