@@ -74,6 +74,7 @@ const GlobalStyle = createGlobalStyle`
 
 	button.anchor {
 		border: 0;
+	    border-radius: 0;
 		background: unset;
 		cursor: pointer;
 
