@@ -15,6 +15,10 @@ exports.onRouteUpdate = () => {
 	});
 };
 
+exports.onServiceWorkerUpdateReady = () => {
+	window.location.reload();
+};
+
 exports.onClientEntry = () => {
 	if (process.env.NODE_ENV !== "production") {
 		const axe = require("react-axe");
