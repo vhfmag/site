@@ -11,7 +11,7 @@ import { isNotNullish } from "../../utils/types";
 import { fromTheme, darkTheme, lightTheme, ITheme } from "../../styles/theme";
 import { person, blogRef, personRef, organization } from "../../utils/microdata";
 import VisuallyHidden from "@reach/visually-hidden";
-import { ThemeContext, ThemeContextValue } from "../layout";
+import { ThemeContext } from "../layout";
 
 const activeLinkClassName = "active";
 
