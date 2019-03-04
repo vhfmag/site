@@ -211,7 +211,8 @@ const shouldUseLightTheme =
 const defaultTheme = shouldUseLightTheme ? lightTheme : darkTheme;
 
 const getCurrentTheme = () => {
-	const persistedThemeName = localStorage.getItem("currentTheme");
+	const persistedThemeName =
+		typeof localStorage !== "undefined" && localStorage.getItem("currentTheme");
 	return !persistedThemeName
 		? defaultTheme
 		: persistedThemeName === "light"
@@ -235,7 +236,10 @@ const RawLayout: React.SFC<ILayoutData> = ({
 	const [theme, rawSetTheme] = React.useState(getCurrentTheme());
 
 	const setTheme: typeof rawSetTheme = newTheme => {
-		localStorage.setItem("currentTheme", newTheme === lightTheme ? "light" : "dark");
+		if (typeof localStorage !== "undefined") {
+			localStorage.setItem("currentTheme", newTheme === lightTheme ? "light" : "dark");
+		}
+
 		rawSetTheme(newTheme);
 	};
 
