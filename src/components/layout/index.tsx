@@ -299,13 +299,12 @@ const RawLayout: React.SFC<ILayoutData> = ({
 						personalData={personalJson}
 						nav={[
 							{
-								name: "blog",
+								name: "home",
 								url: "/",
 							},
 							{
-								name: "to do",
-								lang: "en",
-								url: "/todo/",
+								name: "blog",
+								url: "/posts",
 							},
 							{
 								name: "links",
