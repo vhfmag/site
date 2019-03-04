@@ -25,6 +25,9 @@ import { components } from "../mdxComponents";
 
 const GlobalStyle = createGlobalStyle`
 	:root {
+		--root-padding: 24px;
+		-sidebar-width: 270px;
+
 		${({ theme }) =>
 			Object.entries(theme)
 				.map(([name, value]) => `--${kebabCase(name)}: ${value};`)
@@ -140,7 +143,7 @@ const GlobalStyle = createGlobalStyle`
 const StyledMain = styled.main`
 	--width: auto;
 
-	padding: ${fromTheme("rootPadding")};
+	padding: var(--root-padding);
 	flex: 0 1 var(--width);
 	max-width: var(--width);
 	font-size: calc(1rem + 0.25vw);
@@ -166,7 +169,7 @@ const StyledMain = styled.main`
 	}
 
 	@media (min-width: ${responsiveBreakpoint}) {
-		--width: calc(100vw - ${fromTheme("sidebarWidth")} - 2 * ${fromTheme("rootPadding")});
+		--width: calc(100vw - var(--sidebar-width) - 2 * var(--root-padding));
 	}
 `;
 

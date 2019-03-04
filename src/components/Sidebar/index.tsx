@@ -61,8 +61,8 @@ const SidebarSection = styled.div``;
 const StyledDescription = styled.p``;
 
 const StyledSidebar = styled.header`
-	flex: 0 0 ${fromTheme("sidebarWidth")};
-	padding: ${fromTheme("rootPadding")};
+	flex: 0 0 var(--sidebar-width);
+	padding: var(--root-padding);
 
 	img[aria-hidden] {
 		max-width: unset;
