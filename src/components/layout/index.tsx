@@ -40,6 +40,10 @@ const GlobalStyle = createGlobalStyle`
 		box-sizing: border-box;
 	}
 
+	body {
+		border: 6px solid var(--theme-color);
+	}
+
 	address {
 		all: unset;
 	}
