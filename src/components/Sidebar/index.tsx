@@ -165,8 +165,6 @@ export const Sidebar: React.SFC<ISidebarProps> = ({
 	personalData: { email, social, jobTitle },
 	nav,
 }) => {
-	const { theme, setTheme } = React.useContext(ThemeContext);
-
 	return (
 		<StyledSidebar
 			itemScope
