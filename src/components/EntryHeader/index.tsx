@@ -64,6 +64,8 @@ const StyledTags = styled.ul`
 
 		a {
 			color: inherit;
+			box-shadow: none;
+			text-decoration: none;
 		}
 	}
 `;
