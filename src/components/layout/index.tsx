@@ -25,8 +25,8 @@ import { components } from "../mdxComponents";
 
 const GlobalStyle = createGlobalStyle`
 	:root {
-		--root-padding: 24px;
-		-sidebar-width: 270px;
+		--root-padding: 32px;
+		--sidebar-width: 270px;
 
 		${({ theme }) =>
 			Object.entries(theme)
@@ -45,7 +45,7 @@ const GlobalStyle = createGlobalStyle`
 	}
 
 	body {
-		border: 6px solid var(--theme-color);
+		border: 10px solid var(--theme-color);
 	}
 
 	address {
