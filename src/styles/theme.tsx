@@ -13,7 +13,15 @@ export const darkTheme: ITheme = {
 	textColor,
 	backgroundColor,
 	themeColor,
-	rootPadding: "16px",
+	rootPadding: "24px",
+	sidebarWidth: "270px",
+};
+
+export const lightTheme: ITheme = {
+	textColor: backgroundColor,
+	backgroundColor: textColor,
+	themeColor: "hsla(125, 51%, 32%, 1)",
+	rootPadding: "24px",
 	sidebarWidth: "270px",
 };
 

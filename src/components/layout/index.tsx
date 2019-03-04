@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Helmet } from "react-helmet";
-import styled, { createGlobalStyle, ThemeProvider } from "../../styles/styled";
+import styled, { createGlobalStyle } from "../../styles/styled";
 import { StaticQuery, graphql } from "gatsby";
 import { MDXProvider } from "@mdx-js/tag";
 
@@ -15,7 +15,7 @@ import "../../../submodules/cssremedy/quotes.css";
 import "../../../submodules/cssremedy/remedy.css";
 
 import { dom } from "@fortawesome/fontawesome-svg-core";
-import { darkTheme, fromTheme } from "../../styles/theme";
+import { darkTheme, lightTheme, fromTheme, ITheme } from "../../styles/theme";
 import { SkipNavContent, SkipNavLink } from "@reach/skip-nav";
 import "@reach/skip-nav/styles.css";
 import { blog, blogRef } from "../../utils/microdata";
@@ -50,11 +50,33 @@ const GlobalStyle = createGlobalStyle`
 		color: ${fromTheme("themeColor")};
 	}
 
-	a {
+	a, .anchor {
 		color: ${fromTheme("themeColor")};
 		text-decoration: none;
 		box-shadow: inset 0 -1px 0 ${fromTheme("themeColor")};
 		transition: 0.25s color ease, 0.25s box-shadow ease;
+
+		--box-shadow-active-height: -1.2em;
+
+		&:hover,
+		&:active,
+		&:focus,
+		&.selected {
+			color: ${fromTheme("backgroundColor")};
+			box-shadow: inset 0 var(--box-shadow-active-height) 0 ${fromTheme("themeColor")};
+		}
+	}
+
+	button.anchor {
+		border: 0;
+		background: unset;
+		cursor: pointer;
+
+		--box-shadow-active-height: -1.5em;
+
+		&[disabled] {
+			cursor: not-allowed;
+		}
 	}
 
 	a.gatsby-resp-image-link:any-link {
@@ -63,13 +85,6 @@ const GlobalStyle = createGlobalStyle`
 
 	abbr[title] {
 		border-bottom-color: ${fromTheme("themeColor")} !important;
-	}
-
-	a:hover,
-	a:active,
-	a:focus {
-		color: ${fromTheme("backgroundColor")};
-		box-shadow: inset 0 -1.2em 0 ${fromTheme("themeColor")};
 	}
 
 	dl {
@@ -185,6 +200,16 @@ interface ILayoutData {
 	personalJson: PersonalJson;
 }
 
+const shouldUseLightTheme =
+	typeof matchMedia === "function" && matchMedia("(prefers-color-scheme: light)").matches;
+const defaultTheme = shouldUseLightTheme ? lightTheme : darkTheme;
+
+export interface ThemeContextValue {
+	theme: ITheme;
+	setTheme(theme: ITheme): void;
+}
+export const ThemeContext = React.createContext<ThemeContextValue>({ theme: defaultTheme } as any);
+
 const RawLayout: React.SFC<ILayoutData> = ({
 	site: { siteMetadata },
 	personalJson,
@@ -192,12 +217,13 @@ const RawLayout: React.SFC<ILayoutData> = ({
 	...props
 }) => {
 	const plainTextDescription = siteMetadata.description!.replace(/\[([^\]]+)\]\([^\)]+\)/g, "$1");
+	const [theme, setTheme] = React.useState(defaultTheme);
 
 	return (
 		<MDXProvider components={components}>
-			<ThemeProvider theme={darkTheme}>
+			<ThemeContext.Provider value={{ theme, setTheme }}>
 				<StyledRoot {...props} itemScope itemType={blog} id={blogRef} itemID={blogRef}>
-					<GlobalStyle />
+					<GlobalStyle theme={theme} />
 					<Helmet
 						htmlAttributes={{
 							lang: "pt-br",
@@ -272,13 +298,12 @@ const RawLayout: React.SFC<ILayoutData> = ({
 
 					<StyledMain>{children}</StyledMain>
 				</StyledRoot>
-			</ThemeProvider>
+			</ThemeContext.Provider>
 		</MDXProvider>
 	);
 };
 
 const DefaultLayout: React.SFC = ({ children, ...parentProps }) => {
-	console.log({ parentProps });
 	return (
 		<StaticQuery
 			query={graphql`

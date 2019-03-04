@@ -8,9 +8,10 @@ import { responsiveBreakpoint } from "../../utils/consts";
 import { ScreenOnly } from "../../styles";
 import { SiteMetadata_2, PersonalJson } from "../../graphql-types";
 import { isNotNullish } from "../../utils/types";
-import { fromTheme } from "../../styles/theme";
+import { fromTheme, darkTheme, lightTheme, ITheme } from "../../styles/theme";
 import { person, blogRef, personRef, organization } from "../../utils/microdata";
 import VisuallyHidden from "@reach/visually-hidden";
+import { ThemeContext, ThemeContextValue } from "../layout";
 
 const activeLinkClassName = "active";
 
@@ -134,66 +135,99 @@ function NavLinks({ navs }: { navs: ISidebarNavLink[] }) {
 	);
 }
 
+const StyledThemeSelector = styled.div`
+	margin: -0.5em;
+	margin-top: 1em;
+	display: flex;
+
+	> * {
+		margin: 0.5em;
+	}
+`;
+
+const ThemeSelector: React.FunctionComponent<{ theme: ITheme }> = ({ children, theme }) => {
+	const { theme: currentTheme, setTheme } = React.useContext(ThemeContext);
+	const isSelected = theme === currentTheme;
+
+	return (
+		<button
+			className={`anchor ${isSelected ? "selected" : ""}`}
+			disabled={isSelected}
+			onClick={() => setTheme(theme)}
+		>
+			{children}
+		</button>
+	);
+};
+
 export const Sidebar: React.SFC<ISidebarProps> = ({
-	metadata: { title, description, sourceUrl },
+	metadata: { title, sourceUrl },
 	personalData: { email, social, jobTitle },
 	nav,
-}) => (
-	<StyledSidebar
-		itemScope
-		itemType={[person, organization].join(" ")}
-		id={personRef}
-		itemID={personRef}
-		itemProp="author publisher"
-		className="h-card"
-	>
-		<SidebarSection itemProp="name">
-			<HeadLink
-				itemRef={[blogRef, personRef].join(" ")}
-				itemProp="url identifier"
-				className="p-name u-uid u-url"
-				to="/"
-			>
-				<h1>{title}</h1>
-			</HeadLink>
-		</SidebarSection>
-		<VisuallyHidden>
-			<SidebarSection className="p-job-title" itemProp="jobTitle">
-				{jobTitle}
+}) => {
+	const { theme, setTheme } = React.useContext(ThemeContext);
+
+	return (
+		<StyledSidebar
+			itemScope
+			itemType={[person, organization].join(" ")}
+			id={personRef}
+			itemID={personRef}
+			itemProp="author publisher"
+			className="h-card"
+		>
+			<SidebarSection itemProp="name">
+				<HeadLink
+					itemRef={[blogRef, personRef].join(" ")}
+					itemProp="url identifier"
+					className="p-name u-uid u-url"
+					to="/"
+				>
+					<h1>{title}</h1>
+				</HeadLink>
 			</SidebarSection>
-			<img
-				className="u-photo"
-				itemProp="logo"
-				aria-hidden
-				width={48}
-				height={48}
-				src="/icons/icon-48x48.png"
-			/>
-		</VisuallyHidden>
-		<SidebarSection>
-			<address>
-				<a itemProp="email" className="u-email" href={`mailto:${email}`}>
-					{email}
-				</a>
-			</address>
-			<ScreenOnly>
-				<a href={sourceUrl!}>ver código fonte</a>
-			</ScreenOnly>
-		</SidebarSection>
-		<StyledNav aria-label="Principal">
-			<NavLinks navs={nav} />
-		</StyledNav>
-		<address aria-label="Mídias sociais">
-			<SocialLinks>
-				<li>
-					<SocialLink icon="rss" serviceName="RSS" rel="alternate" url="/rss.xml" />
-				</li>
-				{social!.filter(isNotNullish).map(socialProps => (
-					<li key={socialProps.serviceName!}>
-						<SocialLink {...socialProps} />
+			<VisuallyHidden>
+				<SidebarSection className="p-job-title" itemProp="jobTitle">
+					{jobTitle}
+				</SidebarSection>
+				<img
+					className="u-photo"
+					itemProp="logo"
+					aria-hidden
+					width={48}
+					height={48}
+					src="/icons/icon-48x48.png"
+				/>
+			</VisuallyHidden>
+			<SidebarSection>
+				<address>
+					<a itemProp="email" className="u-email" href={`mailto:${email}`}>
+						{email}
+					</a>
+				</address>
+				<ScreenOnly>
+					<a href={sourceUrl!}>ver código fonte</a>
+				</ScreenOnly>
+			</SidebarSection>
+			<StyledNav aria-label="Principal">
+				<NavLinks navs={nav} />
+			</StyledNav>
+			<address aria-label="Mídias sociais">
+				<SocialLinks>
+					<li>
+						<SocialLink icon="rss" serviceName="RSS" rel="alternate" url="/rss.xml" />
 					</li>
-				))}
-			</SocialLinks>
-		</address>
-	</StyledSidebar>
-);
+					{social!.filter(isNotNullish).map(socialProps => (
+						<li key={socialProps.serviceName!}>
+							<SocialLink {...socialProps} />
+						</li>
+					))}
+				</SocialLinks>
+			</address>
+			<StyledThemeSelector>
+				<ThemeSelector theme={darkTheme}>Tema escuro</ThemeSelector>
+				<ThemeSelector theme={lightTheme}>Tema claro</ThemeSelector>
+			</StyledThemeSelector>
+		</StyledSidebar>
+	);
+};
