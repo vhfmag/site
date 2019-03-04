@@ -210,6 +210,15 @@ const shouldUseLightTheme =
 	typeof matchMedia === "function" && matchMedia("(prefers-color-scheme: light)").matches;
 const defaultTheme = shouldUseLightTheme ? lightTheme : darkTheme;
 
+const getCurrentTheme = () => {
+	const persistedThemeName = localStorage.getItem("currentTheme");
+	return !persistedThemeName
+		? defaultTheme
+		: persistedThemeName === "light"
+		? lightTheme
+		: darkTheme;
+};
+
 export interface ThemeContextValue {
 	theme: ITheme;
 	setTheme(theme: ITheme): void;
@@ -223,7 +232,12 @@ const RawLayout: React.SFC<ILayoutData> = ({
 	...props
 }) => {
 	const plainTextDescription = siteMetadata.description!.replace(/\[([^\]]+)\]\([^\)]+\)/g, "$1");
-	const [theme, setTheme] = React.useState(defaultTheme);
+	const [theme, rawSetTheme] = React.useState(getCurrentTheme());
+
+	const setTheme: typeof rawSetTheme = newTheme => {
+		localStorage.setItem("currentTheme", newTheme === lightTheme ? "light" : "dark");
+		rawSetTheme(newTheme);
+	};
 
 	return (
 		<MDXProvider components={components}>
