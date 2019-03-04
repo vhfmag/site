@@ -78,7 +78,7 @@ const GlobalStyle = createGlobalStyle`
 		background: unset;
 		cursor: pointer;
 
-		--box-shadow-active-height: -1.5em;
+		--box-shadow-active-height: -1.75em;
 
 		&[disabled] {
 			cursor: not-allowed;
