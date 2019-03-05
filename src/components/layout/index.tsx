@@ -233,85 +233,87 @@ const RawLayout: React.SFC<ILayoutData> = ({
 	};
 
 	return (
-		<MDXProvider components={components}>
-			<ThemeContext.Provider value={{ theme, setTheme }}>
-				<StyledRoot {...props} itemScope itemType={blog} id={blogRef} itemID={blogRef}>
-					<GlobalStyle theme={theme} />
-					<Helmet
-						htmlAttributes={{
-							lang: "pt-br",
-						}}
-						defaultTitle={siteMetadata.title!}
-						titleTemplate={`%s — ${siteMetadata.title}`}
-						meta={[
-							{
-								name: "description",
-								content: plainTextDescription,
-							},
-							{
-								name: "keywords",
-								content: [
-									"javascript",
-									"typescript",
-									"development",
-									"web development",
-									"web",
-									"privacy",
-									"decentralized web",
-									"decentralization",
-									"p2p",
-									"personal",
-									"blog",
-									"brazilian",
-								].join(", "),
-							},
-							{
-								name: "google-site-verification",
-								content: "RHQh7j4JKTIEmRsQrcOD1Pk7OoLoW8VK9YG4LscV7d0",
-							},
-						]}
-					>
-						<link
-							rel="webmention"
-							href="https://webmention.io/victormagalhaes.codes/webmention"
+		<React.StrictMode>
+			<MDXProvider components={components}>
+				<ThemeContext.Provider value={{ theme, setTheme }}>
+					<StyledRoot {...props} itemScope itemType={blog} id={blogRef} itemID={blogRef}>
+						<GlobalStyle theme={theme} />
+						<Helmet
+							htmlAttributes={{
+								lang: "pt-br",
+							}}
+							defaultTitle={siteMetadata.title!}
+							titleTemplate={`%s — ${siteMetadata.title}`}
+							meta={[
+								{
+									name: "description",
+									content: plainTextDescription,
+								},
+								{
+									name: "keywords",
+									content: [
+										"javascript",
+										"typescript",
+										"development",
+										"web development",
+										"web",
+										"privacy",
+										"decentralized web",
+										"decentralization",
+										"p2p",
+										"personal",
+										"blog",
+										"brazilian",
+									].join(", "),
+								},
+								{
+									name: "google-site-verification",
+									content: "RHQh7j4JKTIEmRsQrcOD1Pk7OoLoW8VK9YG4LscV7d0",
+								},
+							]}
+						>
+							<link
+								rel="webmention"
+								href="https://webmention.io/victormagalhaes.codes/webmention"
+							/>
+							<link
+								rel="pingback"
+								href="https://webmention.io/victormagalhaes.codes/xmlrpc"
+							/>
+							<link rel="canonical" href="https://victormagalhaes.codes" />
+						</Helmet>
+
+						<SkipNavLink>Pular para conteúdo</SkipNavLink>
+						<Sidebar
+							metadata={siteMetadata}
+							personalData={personalJson}
+							nav={[
+								{
+									name: "home",
+									url: "/",
+								},
+								{
+									name: "blog",
+									url: "/posts",
+								},
+								{
+									name: "links",
+									url: "/links/",
+								},
+								{
+									name: "currículo",
+									url: "/resume/",
+								},
+							]}
 						/>
-						<link
-							rel="pingback"
-							href="https://webmention.io/victormagalhaes.codes/xmlrpc"
-						/>
-						<link rel="canonical" href="https://victormagalhaes.codes" />
-					</Helmet>
 
-					<SkipNavLink>Pular para conteúdo</SkipNavLink>
-					<Sidebar
-						metadata={siteMetadata}
-						personalData={personalJson}
-						nav={[
-							{
-								name: "home",
-								url: "/",
-							},
-							{
-								name: "blog",
-								url: "/posts",
-							},
-							{
-								name: "links",
-								url: "/links/",
-							},
-							{
-								name: "currículo",
-								url: "/resume/",
-							},
-						]}
-					/>
+						<SkipNavContent />
 
-					<SkipNavContent />
-
-					<StyledMain>{children}</StyledMain>
-				</StyledRoot>
-			</ThemeContext.Provider>
-		</MDXProvider>
+						<StyledMain>{children}</StyledMain>
+					</StyledRoot>
+				</ThemeContext.Provider>
+			</MDXProvider>
+		</React.StrictMode>
 	);
 };
 
