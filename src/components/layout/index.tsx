@@ -10,9 +10,6 @@ import { Sidebar } from "../Sidebar";
 import "typeface-montserrat";
 import "typeface-zilla-slab";
 import "./icons";
-import "prismjs/themes/prism-okaidia.css";
-import "../../../submodules/cssremedy/quotes.css";
-import "../../../submodules/cssremedy/remedy.css";
 
 import { dom } from "@fortawesome/fontawesome-svg-core";
 import { darkTheme, lightTheme, fromTheme, ITheme } from "../../styles/theme";
@@ -159,7 +156,9 @@ const StyledMain = styled.main`
 	}
 
 	@media (min-width: ${responsiveBreakpoint}) {
-		--width: calc(100vw - var(--sidebar-width) - 2 * var(--root-padding) - 2 * var(--root-border-width));
+		--width: calc(
+			100vw - var(--sidebar-width) - 2 * var(--root-padding) - 2 * var(--root-border-width)
+		);
 	}
 `;
 

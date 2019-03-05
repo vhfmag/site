@@ -1,8 +1,12 @@
-const React = require("react");
-const ReactDOM = require("react-dom");
-const { anchorate } = require("anchorate");
+import * as React from "react";
+import * as ReactDOM from "react-dom";
+import { anchorate } from "anchorate";
 
-exports.onRouteUpdate = () => {
+import "prismjs/themes/prism-okaidia.css";
+import "./submodules/cssremedy/quotes.css";
+import "./submodules/cssremedy/remedy.css";
+
+export const onRouteUpdate = () => {
 	anchorate({
 		/**
 		 * @param {HTMLElement | undefined} element
@@ -15,11 +19,11 @@ exports.onRouteUpdate = () => {
 	});
 };
 
-exports.onServiceWorkerUpdateReady = () => {
+export const onServiceWorkerUpdateReady = () => {
 	window.location.reload();
 };
 
-exports.onClientEntry = () => {
+export const onClientEntry = () => {
 	if (process.env.NODE_ENV !== "production") {
 		const axe = require("react-axe");
 		axe(React, ReactDOM, 1000);
