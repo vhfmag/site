@@ -26,6 +26,7 @@ import { components } from "../mdxComponents";
 const GlobalStyle = createGlobalStyle`
 	:root {
 		--root-padding: 32px;
+		--root-border-width: 10px;
 		--sidebar-width: 270px;
 
 		${({ theme }) =>
@@ -48,7 +49,7 @@ const GlobalStyle = createGlobalStyle`
 	}
 
 	body {
-		border: 10px solid var(--theme-color);
+		border: var(--root-border-width) solid var(--theme-color);
 	}
 
 	address {
@@ -158,7 +159,7 @@ const StyledMain = styled.main`
 	}
 
 	@media (min-width: ${responsiveBreakpoint}) {
-		--width: calc(100vw - var(--sidebar-width) - 2 * var(--root-padding));
+		--width: calc(100vw - var(--sidebar-width) - 2 * var(--root-padding) - 2 * var(--root-border-width));
 	}
 `;
 

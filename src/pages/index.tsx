@@ -21,7 +21,7 @@ interface HomePageProps {
 }
 
 const StyledEntrySection = styled.section`
-	max-width: calc(100vw - 2 * var(--root-padding));
+	max-width: calc(100vw - 2 * var(--root-padding) - 2 * var(--root-border-width));
 
 	ul {
 		margin: 0;
