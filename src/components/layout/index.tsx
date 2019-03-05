@@ -204,11 +204,12 @@ const defaultTheme = shouldUseLightTheme ? lightTheme : darkTheme;
 const getCurrentTheme = () => {
 	const persistedThemeName =
 		typeof localStorage !== "undefined" && localStorage.getItem("currentTheme");
-	return !persistedThemeName
-		? defaultTheme
-		: persistedThemeName === "light"
+
+	return persistedThemeName === "light"
 		? lightTheme
-		: darkTheme;
+		: persistedThemeName === "dark"
+		? darkTheme
+		: undefined;
 };
 
 export interface ThemeContextValue {
