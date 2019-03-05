@@ -185,13 +185,12 @@ const StyledHR = styled.hr`
 const supportsColorScheme = (() => {
 	if (typeof matchMedia === "undefined") {
 		// never include button during SSR
+		// progressive enhancement :D
 		return false;
 	} else {
-		const getQuery = (value: string) => `(prefers-color-scheme: ${value})`;
 		return (
-			matchMedia(getQuery("light")).matches ||
-			matchMedia(getQuery("dark")).matches ||
-			matchMedia(getQuery("no-preference")).matches
+			matchMedia("(prefers-color-scheme: dark)").matches ||
+			matchMedia("not (prefers-color-scheme: dark)").matches
 		);
 	}
 })();
