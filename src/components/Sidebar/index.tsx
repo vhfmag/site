@@ -143,6 +143,18 @@ const StyledThemeSelector = styled.div`
 	> * {
 		margin: 0.5em;
 	}
+
+	@supports (display: grid) {
+		display: grid;
+		grid-gap: 0.5em;
+		grid-template-columns: max-content;
+
+		margin: 0;
+
+		> * {
+			margin: unset;
+		}
+	}
 `;
 
 const StyledThemeButton = styled.button`
