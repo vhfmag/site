@@ -1,6 +1,5 @@
 import * as React from "react";
 import { Entry } from "../components/Entry";
-import { renderAuthors, folderNameToReviewedItemType } from "../components/EntryHeader";
 import MDXRenderer from "gatsby-mdx/mdx-renderer";
 import { graphql } from "gatsby";
 import DefaultLayout from "../components/layout";
