@@ -170,7 +170,24 @@ const StyledHR = styled.hr`
 	margin: 1em 0;
 `;
 
-const ThemeSelector: React.FunctionComponent<{ theme: ITheme }> = ({ children, theme }) => {
+const supportsColorScheme = (() => {
+	if (typeof matchMedia === "undefined") {
+		// never include button during SSR
+		return false;
+	} else {
+		const getQuery = (value: string) => `(prefers-color-scheme: ${value})`;
+		return (
+			matchMedia(getQuery("light")).matches ||
+			matchMedia(getQuery("dark")).matches ||
+			matchMedia(getQuery("no-preference")).matches
+		);
+	}
+})();
+
+const ThemeSelector: React.FunctionComponent<{ theme: ITheme | undefined }> = ({
+	children,
+	theme,
+}) => {
 	const { theme: currentTheme, setTheme } = React.useContext(ThemeContext);
 	const isSelected = theme === currentTheme;
 
@@ -249,6 +266,9 @@ export const Sidebar: React.SFC<ISidebarProps> = ({
 			</address>
 			<StyledHR />
 			<StyledThemeSelector>
+				{supportsColorScheme && (
+					<ThemeSelector theme={undefined}>Tema automático</ThemeSelector>
+				)}
 				<ThemeSelector theme={darkTheme}>Tema escuro</ThemeSelector>
 				<ThemeSelector theme={lightTheme}>Tema claro</ThemeSelector>
 			</StyledThemeSelector>
