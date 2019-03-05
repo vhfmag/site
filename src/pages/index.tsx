@@ -5,6 +5,7 @@ import { IMarkdownEntryFragment } from "../fragments";
 import { EntrySummary } from "../components/EntrySummary";
 import styled from "../styles/styled";
 import { Folder } from "../utils/types";
+import { responsiveBreakpoint } from "../utils/consts";
 
 interface MarkdownEdges {
 	edges: Array<{
@@ -21,7 +22,11 @@ interface HomePageProps {
 }
 
 const StyledEntrySection = styled.section`
-	max-width: calc(100vw - 2 * var(--root-padding) - 2 * var(--root-border-width));
+	max-width: var(--max-width-desktop);
+
+	@media (max-width: ${responsiveBreakpoint}) {
+		max-width: var(--max-width-mobile);
+	}
 
 	ul {
 		margin: 0;

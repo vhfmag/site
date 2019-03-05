@@ -26,6 +26,9 @@ const GlobalStyle = createGlobalStyle`
 		--root-border-width: 10px;
 		--sidebar-width: 270px;
 
+		--max-width-mobile: calc(100vw - 2 * var(--root-border-width) - 2 * var(--root-padding));
+		--max-width-desktop: calc(var(--max-width-mobile) - var(--sidebar-width));
+
 		${({ theme }) =>
 			Object.entries(theme)
 				.map(([name, value]) => `--${kebabCase(name)}: ${value};`)

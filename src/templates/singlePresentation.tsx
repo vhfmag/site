@@ -8,6 +8,7 @@ import { isFolder } from "../utils/types";
 import { IGeneralMetadataFragment, IMarkdownEntryFragment } from "../fragments";
 import { WindowLocation } from "@reach/router";
 import styled from "../styles/styled";
+import { responsiveBreakpoint } from "../utils/consts";
 
 interface IEntryTemplateProps {
 	data: IGeneralMetadataFragment & { mdx: IMarkdownEntryFragment };
@@ -17,8 +18,13 @@ interface IEntryTemplateProps {
 
 const StyledIFrame = styled.iframe`
 	width: 70ch;
-	max-width: 90vw;
 	height: 50ch;
+
+	max-width: var(--max-width-desktop);
+
+	@media (max-width: ${responsiveBreakpoint}) {
+		max-width: var(--max-width-mobile);
+	}
 `;
 
 const SingleEntryTemplate = ({
