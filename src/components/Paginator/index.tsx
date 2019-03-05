@@ -9,16 +9,11 @@ export type IPaginatorProps = ObjectOmit<GatsbyPaginatorProps<any>, "group"> & {
 };
 
 const StyledNav = styled.nav`
-	--paginator-gap: 1rem;
-
-	display: flex;
-	align-items: center;
-	justify-content: start;
-	margin: calc(-1 * var(--paginator-gap));
-
-	& > * {
-		margin: var(--paginator-gap);
-	}
+	display: grid;
+	grid-gap: 0.25rem 0.75rem;
+	justify-items: flex-start;
+	justify-content: flex-start;
+	grid-template-columns: repeat(auto-fit, minmax(1ch, 2ch));
 
 	a.current {
 		font-weight: bold;

@@ -23,7 +23,10 @@ interface IBookmarkListProps {
 }
 
 const BlogNav = styled.nav`
-	--nav-gap: 4pt;
+	--nav-h-gap: 0.25em;
+	--nav-v-gap: 0em;
+
+	margin: 0.5rem 0;
 
 	h2 {
 		display: inline-block;
@@ -39,11 +42,11 @@ const BlogNav = styled.nav`
 		all: unset;
 		display: inline-flex;
 		flex-wrap: wrap;
-		margin: calc(-1 * var(--nav-gap));
+		margin: calc(-1 * var(--nav-v-gap)) calc(-1 * var(--nav-h-gap));
 
 		li {
 			all: unset;
-			margin: var(--nav-gap);
+			margin: var(--nav-v-gap) var(--nav-h-gap);
 
 			a.current {
 				font-weight: bold;
