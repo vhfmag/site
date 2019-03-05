@@ -5766,6 +5766,13 @@ gatsby-plugin-page-creator@^2.0.8:
     parse-filepath "^1.0.1"
     slash "^1.0.0"
 
+gatsby-plugin-preact@^2.0.9:
+  version "2.0.9"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-preact/-/gatsby-plugin-preact-2.0.9.tgz#96a795fc1b30cef751ecc0315aac6e4c974f285e"
+  integrity sha512-Y9OWc3jhx8KhKdNm8dm3Ea/U8wSxHudrGrwjO0WPxhMsPxAwNyu5NZIeFzFdR+EyNjYie/hwNs5sOe/Itn/sww==
+  dependencies:
+    "@babel/runtime" "^7.0.0"
+
 gatsby-plugin-purify-css@^2.2.1:
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/gatsby-plugin-purify-css/-/gatsby-plugin-purify-css-2.2.1.tgz#a3716a0d53ac2bae669d8c01afd13fe7c79aaa81"
@@ -11061,6 +11068,13 @@ potrace@^2.1.1:
   integrity sha1-eREahYGX82ZBiEX2Z/6Pf6wKeds=
   dependencies:
     jimp "^0.2.24"
+
+preact@^10.0.0-alpha.0:
+  version "10.0.0-alpha.0"
+  resolved "https://registry.yarnpkg.com/preact/-/preact-10.0.0-alpha.0.tgz#24f35f5bd47c81387f4ee99517fc5c2320dbafa0"
+  integrity sha512-GO2JTMOuoys4m3652dEv8knD+F36LMCA37aIgCeHjsF6hGkNQJcV68qmRDdEFy79lsJcoaa+me8SGc4AOWnllg==
+  dependencies:
+    prop-types "^15.6.2"
 
 prebuild-install@^5.2.2:
   version "5.2.2"

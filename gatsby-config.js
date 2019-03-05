@@ -74,6 +74,7 @@ module.exports = {
 		description: "desenvolvedor, entusiasta da web, decentralização e privacidade",
 	},
 	plugins: [
+		"gatsby-plugin-preact",
 		"gatsby-plugin-typescript",
 		{
 			resolve: "gatsby-plugin-webpack-bundle-analyzer",
