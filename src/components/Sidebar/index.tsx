@@ -151,7 +151,7 @@ const StyledThemeButton = styled.button`
 	cursor: pointer;
 	color: var(--theme-color);
 	border: 1px solid var(--theme-color);
-	background-color: var(--background-color);
+	background-color: transparent;
 	transition: box-shadow 0.5s ease, color 0.5s ease;
 	box-shadow: inset 0 var(--box-shadow-height) 0 var(--theme-color);
 
