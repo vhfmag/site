@@ -84,10 +84,6 @@ async function createEntryPages({
 	try {
 		const result = await graphqlQuerier(buildPageQuery(pageKind));
 
-		if (pageKind === "apresentacoes") {
-			console.error({ result });
-		}
-
 		if (result.errors) {
 			console.error(result.errors);
 			throw result.errors[0];
