@@ -41,7 +41,10 @@ const GlobalStyle = createGlobalStyle`
 		margin: 0;
 		padding: 0;
 		box-sizing: border-box;
-		transition: background-color .1s ease, color .1s ease;
+		
+		* {
+			transition: background-color .5s ease, color .5s ease, border-color .5s ease, fill .5s ease, stroke .5s ease;
+		}
 	}
 
 	body {
