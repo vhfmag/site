@@ -140,7 +140,10 @@ export const homeFragment = graphql`
 	{
 		posts: allMdx(
 			limit: 5
-			filter: { fileAbsolutePath: { regex: "content/posts/.*.md/" } }
+			filter: {
+				fileAbsolutePath: { regex: "content/posts/.*.md/" }
+				frontmatter: { draft: { ne: true } }
+			}
 			sort: { fields: frontmatter___date, order: DESC }
 		) {
 			...MDXListingFragment
@@ -148,7 +151,10 @@ export const homeFragment = graphql`
 
 		bookmarks: allMdx(
 			limit: 5
-			filter: { fileAbsolutePath: { regex: "content/bookmarks/.*.md/" } }
+			filter: {
+				fileAbsolutePath: { regex: "content/bookmarks/.*.md/" }
+				frontmatter: { draft: { ne: true } }
+			}
 			sort: { fields: frontmatter___date, order: DESC }
 		) {
 			...MDXListingFragment
@@ -156,7 +162,10 @@ export const homeFragment = graphql`
 
 		slides: allMdx(
 			limit: 5
-			filter: { fileAbsolutePath: { regex: "content/apresentacoes/.*.md/" } }
+			filter: {
+				fileAbsolutePath: { regex: "content/apresentacoes/.*.md/" }
+				frontmatter: { draft: { ne: true } }
+			}
 			sort: { fields: frontmatter___date, order: DESC }
 		) {
 			...MDXListingFragment
