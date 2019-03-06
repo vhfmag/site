@@ -26,6 +26,9 @@ const GlobalStyle = createGlobalStyle`
 		--root-border-width: 10px;
 		--sidebar-width: 270px;
 
+		--max-width-mobile: calc(100vw - 2 * var(--root-border-width) - 2 * var(--root-padding));
+		--max-width-desktop: calc(var(--max-width-mobile) - var(--sidebar-width));
+
 		${({ theme }) =>
 			Object.entries(theme)
 				.map(([name, value]) => `--${kebabCase(name)}: ${value};`)
@@ -201,18 +204,19 @@ const defaultTheme = shouldUseLightTheme ? lightTheme : darkTheme;
 const getCurrentTheme = () => {
 	const persistedThemeName =
 		typeof localStorage !== "undefined" && localStorage.getItem("currentTheme");
-	return !persistedThemeName
-		? defaultTheme
-		: persistedThemeName === "light"
+
+	return persistedThemeName === "light"
 		? lightTheme
-		: darkTheme;
+		: persistedThemeName === "dark"
+		? darkTheme
+		: undefined;
 };
 
 export interface ThemeContextValue {
-	theme: ITheme;
-	setTheme(theme: ITheme): void;
+	theme: ITheme | undefined;
+	setTheme(theme?: ITheme): void;
 }
-export const ThemeContext = React.createContext<ThemeContextValue>({ theme: defaultTheme } as any);
+export const ThemeContext = React.createContext<ThemeContextValue>({ theme: undefined } as any);
 
 const RawLayout: React.SFC<ILayoutData> = ({
 	site: { siteMetadata },
@@ -221,11 +225,17 @@ const RawLayout: React.SFC<ILayoutData> = ({
 	...props
 }) => {
 	const plainTextDescription = siteMetadata.description!.replace(/\[([^\]]+)\]\([^\)]+\)/g, "$1");
-	const [theme, rawSetTheme] = React.useState(getCurrentTheme());
+	const [chosenTheme, rawSetTheme] = React.useState<ITheme | undefined>(getCurrentTheme());
 
-	const setTheme: typeof rawSetTheme = newTheme => {
+	const theme = chosenTheme || defaultTheme;
+
+	const setTheme: (theme?: ITheme) => void = newTheme => {
 		if (typeof localStorage !== "undefined") {
-			localStorage.setItem("currentTheme", newTheme === lightTheme ? "light" : "dark");
+			if (newTheme) {
+				localStorage.setItem("currentTheme", newTheme === lightTheme ? "light" : "dark");
+			} else {
+				localStorage.removeItem("currentTheme");
+			}
 		}
 
 		rawSetTheme(newTheme);
@@ -234,7 +244,7 @@ const RawLayout: React.SFC<ILayoutData> = ({
 	return (
 		<React.StrictMode>
 			<MDXProvider components={components}>
-				<ThemeContext.Provider value={{ theme, setTheme }}>
+				<ThemeContext.Provider value={{ theme: chosenTheme, setTheme }}>
 					<StyledRoot {...props} itemScope itemType={blog} id={blogRef} itemID={blogRef}>
 						<GlobalStyle theme={theme} />
 						<Helmet

@@ -8,7 +8,7 @@ import { responsiveBreakpoint } from "../../utils/consts";
 import { ScreenOnly } from "../../styles";
 import { SiteMetadata_2, PersonalJson } from "../../graphql-types";
 import { isNotNullish } from "../../utils/types";
-import { fromTheme, darkTheme, lightTheme, ITheme } from "../../styles/theme";
+import { darkTheme, lightTheme, ITheme } from "../../styles/theme";
 import { person, blogRef, personRef, organization } from "../../utils/microdata";
 import VisuallyHidden from "@reach/visually-hidden";
 import { ThemeContext } from "../layout";
@@ -136,12 +136,32 @@ function NavLinks({ navs }: { navs: ISidebarNavLink[] }) {
 }
 
 const StyledThemeSelector = styled.div`
-	margin: -0.5em;
+	display: flex;
+	justify-content: space-between;
+`;
+
+const StyledThemeButtons = styled.div`
+	margin: -0.25em;
 	display: flex;
 	flex-wrap: wrap;
+	align-items: center;
 
 	> * {
-		margin: 0.5em;
+		margin: 0.25em;
+	}
+
+	@supports (display: grid) {
+		@media (min-width: ${responsiveBreakpoint}) {
+			display: grid;
+			grid-gap: 0.5em;
+			grid-template-columns: max-content;
+
+			margin: 0;
+
+			> * {
+				margin: unset;
+			}
+		}
 	}
 `;
 
@@ -170,7 +190,23 @@ const StyledHR = styled.hr`
 	margin: 1em 0;
 `;
 
-const ThemeSelector: React.FunctionComponent<{ theme: ITheme }> = ({ children, theme }) => {
+const supportsColorScheme = (() => {
+	if (typeof matchMedia === "undefined") {
+		// never include button during SSR
+		// progressive enhancement :D
+		return false;
+	} else {
+		return (
+			matchMedia("(prefers-color-scheme: dark)").matches ||
+			matchMedia("not (prefers-color-scheme: dark)").matches
+		);
+	}
+})();
+
+const ThemeSelector: React.FunctionComponent<{ theme: ITheme | undefined }> = ({
+	children,
+	theme,
+}) => {
 	const { theme: currentTheme, setTheme } = React.useContext(ThemeContext);
 	const isSelected = theme === currentTheme;
 
@@ -248,9 +284,15 @@ export const Sidebar: React.SFC<ISidebarProps> = ({
 				</SocialLinks>
 			</address>
 			<StyledHR />
-			<StyledThemeSelector>
-				<ThemeSelector theme={darkTheme}>Tema escuro</ThemeSelector>
-				<ThemeSelector theme={lightTheme}>Tema claro</ThemeSelector>
+			<StyledThemeSelector style={{ display: "flex" }}>
+				Tema:
+				<StyledThemeButtons>
+					{supportsColorScheme && (
+						<ThemeSelector theme={undefined}>Automático</ThemeSelector>
+					)}
+					<ThemeSelector theme={darkTheme}>Escuro</ThemeSelector>
+					<ThemeSelector theme={lightTheme}>Claro</ThemeSelector>
+				</StyledThemeButtons>
 			</StyledThemeSelector>
 		</StyledSidebar>
 	);
