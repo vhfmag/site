@@ -6,13 +6,13 @@ import { fromTheme } from "../../styles/theme";
 
 const StyledSocialLink = styled.a`
 	font-size: 1.5em;
-	color: ${fromTheme("textColor")} !important;
+	color: ${fromTheme("themeColor")} !important;
 	box-shadow: none !important;
 
 	&:active,
 	&:hover,
 	&:focus {
-		color: ${fromTheme("themeColor")} !important;
+		color: ${fromTheme("textColor")} !important;
 	}
 `;
 

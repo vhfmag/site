@@ -22,7 +22,7 @@
 	"soft": [
 		{ "name": "Comunicação efetiva", "intensity": 90 },
 		{ "name": "Resolução criativa de problemas", "intensity": 80 },
-		{ "name": "Metodologia ágil (scrum)", "intensity": 60 },
+		{ "name": "Desenvolvimento ágil (scrum)", "intensity": 60 },
 		{ "name": "Rápido aprendizado", "intensity": 100 },
 		{ "name": "Pensamento crítico", "intensity": 90 },
 		{ "name": "Versatilidade", "intensity": 90 }

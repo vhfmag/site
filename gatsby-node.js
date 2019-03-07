@@ -5,16 +5,21 @@ const { graphql } = require("./src/utils/taggedUtils");
 const { compareEntryEdges, slugify } = require("./src/utils/utils");
 const createPaginatedPages = require("gatsby-paginate");
 
-const postTemplate = path.resolve(`src/templates/singlePost.jsx`);
-const entryTemplate = path.resolve(`src/templates/singleEntry.jsx`);
+const postTemplate = path.resolve(`src/templates/singlePost.tsx`);
+const entryTemplate = path.resolve(`src/templates/singleEntry.tsx`);
+const presentationTemplate = path.resolve(`src/templates/singlePresentation.tsx`);
 const entryListTemplate = path.resolve(`src/templates/entryList.tsx`);
 
 const tagListTemplate = path.resolve(`src/templates/tagList.tsx`);
 
+/**
+ * @type {Record<import("./src/utils/types").Folder, string>}
+ */
 const folderToPageTemplate = {
 	posts: postTemplate,
 	books: entryTemplate,
 	bookmarks: entryTemplate,
+	apresentacoes: presentationTemplate,
 };
 
 function buildPageQuery(pageKind = ".*") {
@@ -290,7 +295,7 @@ exports.createPages = ({ actions, graphql: graphqlQuerier }) => {
 			graphqlQuerier,
 			createPage,
 			listTitle: "Blog",
-			disableSinglePage: true,
+			pathPrefix: "all",
 		}),
 		createEntryPages({
 			pageKind: "books",
@@ -305,6 +310,13 @@ exports.createPages = ({ actions, graphql: graphqlQuerier }) => {
 			createPage,
 			listTitle: "Blog / Bookmarks",
 			pathPrefix: "bookmarks",
+		}),
+		createEntryPages({
+			pageKind: "apresentacoes",
+			graphqlQuerier,
+			createPage,
+			listTitle: "Blog / Apresentações",
+			pathPrefix: "apresentacoes",
 		}),
 	]);
 };

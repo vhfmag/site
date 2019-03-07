@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { Folder } from "../../utils/types";
 import { personRef, blogPosting, review } from "../../utils/microdata";
+import { folderToCategory } from "../../utils/consts";
 
 type IEntrySummaryProps = IEntryHeaderProps;
 
@@ -42,9 +43,12 @@ const iconPerFolder: Record<Folder, IconProp> = {
 	posts: "pen-nib",
 	books: "book",
 	bookmarks: "bookmark",
+	apresentacoes: "chalkboard",
 };
 
 export const EntrySummary: React.SFC<IEntrySummaryProps> = ({ ...headerProps }) => {
+	const category = folderToCategory[headerProps.folderName];
+
 	return (
 		<StyledEntrySummary
 			itemProp="blogPost"
@@ -56,7 +60,12 @@ export const EntrySummary: React.SFC<IEntrySummaryProps> = ({ ...headerProps }) 
 			className="h-entry"
 		>
 			<StyledEntryCategory>
-				<span className="fa-layers fa-fw fa-lg" role="presentation">
+				<span
+					className="fa-layers fa-fw fa-lg"
+					role="presentation"
+					title={category}
+					aria-label={category}
+				>
 					<FontAwesomeIcon
 						icon="circle"
 						size="lg"

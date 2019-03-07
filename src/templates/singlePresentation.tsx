@@ -1,20 +1,31 @@
 import * as React from "react";
 import { Entry } from "../components/Entry";
-import { renderAuthors, folderNameToReviewedItemType } from "../components/EntryHeader";
 import MDXRenderer from "gatsby-mdx/mdx-renderer";
 import { graphql } from "gatsby";
 import DefaultLayout from "../components/layout";
 import { isFolder } from "../utils/types";
+import { IGeneralMetadataFragment, IMarkdownEntryFragment } from "../fragments";
+import { WindowLocation } from "@reach/router";
+import styled from "../styles/styled";
+import { responsiveBreakpoint } from "../utils/consts";
 
-/**
- * @typedef {Object} IEntryTemplateProps
- * @property {import("../fragments").IGeneralMetadataFragment & { mdx: import("../fragments").IMarkdownEntryFragment, code: { body: any } }} data
- * @property {import("@reach/router").WindowLocation} location
- */
+interface IEntryTemplateProps {
+	data: IGeneralMetadataFragment & { mdx: IMarkdownEntryFragment };
+	location: WindowLocation;
+	pathContext: any;
+}
 
-/**
- * @param {IEntryTemplateProps} props
- */
+const StyledIFrame = styled.iframe`
+	width: 70ch;
+	height: 50ch;
+
+	max-width: var(--max-width-desktop);
+
+	@media (max-width: ${responsiveBreakpoint}) {
+		max-width: var(--max-width-mobile);
+	}
+`;
+
 const SingleEntryTemplate = ({
 	location,
 	pathContext: { slug: fileName, folder: relativeDirectory },
@@ -33,35 +44,12 @@ const SingleEntryTemplate = ({
 			code: { body },
 		},
 	},
-}) => {
+}: IEntryTemplateProps) => {
 	if (!isFolder(relativeDirectory)) {
 		throw new Error(
 			`There is an unhandled directory. Update 'folderToCategory' to include '${relativeDirectory}'`,
 		);
 	}
-
-	const replyTo = (
-		<span
-			itemProp="itemReviewed"
-			itemScope
-			itemType={folderNameToReviewedItemType(relativeDirectory)}
-		>
-			<meta itemProp="headline title" content={title} />
-			Bookmark em resposta a{" "}
-			<span>
-				<a
-					itemProp="url"
-					rel="bookmark"
-					title={title}
-					className="u-in-reply-to"
-					href={link}
-				>
-					{title}
-				</a>
-			</span>{" "}
-			{authors && renderAuthors(authors)}
-		</span>
-	);
 
 	return (
 		<DefaultLayout>
@@ -81,9 +69,23 @@ const SingleEntryTemplate = ({
 				wordCount={words}
 				timeToRead={timeToRead}
 			>
-				{replyTo}
-				<hr style={{ margin: "1em 0" }} />
-				<MDXRenderer>{body}</MDXRenderer>
+				<p>
+					<a href={link} rel="external">
+						Clique para ver a apresentação
+					</a>
+					, ou veja daqui mesmo:
+				</p>
+				<StyledIFrame
+					src={link}
+					title="Slides da apresentação"
+					sandbox="allow-same-origin allow-scripts"
+				/>
+				{body && (
+					<>
+						<hr style={{ margin: "1em 0" }} />
+						<MDXRenderer>{body}</MDXRenderer>
+					</>
+				)}
 			</Entry>
 		</DefaultLayout>
 	);

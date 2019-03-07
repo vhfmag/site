@@ -7,5 +7,6 @@ module.exports = {
 		posts: "Post",
 		books: "Livro",
 		bookmarks: "Recomendação",
+		apresentacoes: "Apresentação",
 	},
 };

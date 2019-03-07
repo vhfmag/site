@@ -1,6 +1,5 @@
 import * as React from "react";
 import { styled } from "linaria/react";
-import { backgroundColor } from "../../utils/consts";
 import Slugger from "github-slugger";
 
 const StyledTOC = styled.aside`
@@ -17,7 +16,7 @@ const StyledTOC = styled.aside`
 		top: 1em;
 	}
 
-	background-color: ${backgroundColor};
+	background-color: var(--background-color);
 	margin-bottom: 1.6875em;
 
 	ol {

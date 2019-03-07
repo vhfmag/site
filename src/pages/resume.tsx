@@ -12,7 +12,6 @@ import DefaultLayout from "../components/layout";
 import { graphql } from "gatsby";
 import { isNotNullish } from "../utils/types";
 import { fromTheme } from "../styles/theme";
-import { responsiveBreakpoint } from "../utils/consts";
 
 interface IResumePageProps {
 	data: {
@@ -73,30 +72,17 @@ export const pageQuery = graphql`
 	}
 `;
 
-const StyledCompetences = styled.section`
-	dl {
-		display: grid;
-		grid-gap: 8pt;
-
-		@media screen and (min-width: ${responsiveBreakpoint}) {
-			grid-auto-flow: column;
-			grid-template-rows: auto auto;
-		}
-
-		@media print, (max-width: ${responsiveBreakpoint}) {
-			grid-auto-flow: row;
-			grid-template-columns: auto auto;
-		}
-	}
-`;
-
-const innerListMargin = "8pt";
-
 const StyledListWrapper = styled.div`
+	--horizontal-margin: 16pt;
+	--vertical-margin: 16pt;
+
 	display: flex;
 	flex-wrap: wrap;
-	padding: ${innerListMargin};
-	margin: -${innerListMargin};
+	margin: calc(-1 * var(--vertical-margin)) calc(-1 * var(--horizontal-margin));
+
+	& > * {
+		margin: var(--vertical-margin) var(--horizontal-margin);
+	}
 
 	@media print {
 		flex-direction: column;
@@ -114,15 +100,34 @@ const StyledList = styled.div`
 
 	ul {
 		display: grid;
-		margin: ${innerListMargin};
+		margin: 8pt 0 0;
 		margin-left: 1em;
 		padding: 0;
-		grid-gap: 4pt;
+		grid-gap: 4pt 8pt;
 		grid-template-columns: repeat(var(--columns), 1fr);
 
 		li {
 			margin-left: 1em;
 			margin-bottom: 0;
+			word-wrap: normal;
+		}
+	}
+
+	@supports (column-count: 2) {
+		ul {
+			display: block;
+			column-count: var(--columns);
+			column-gap: 8pt;
+			column-width: 20ch;
+
+			@media (max-width: 500px) {
+				column-count: 1;
+				column-width: unset;
+			}
+
+			li {
+				break-inside: avoid;
+			}
 		}
 	}
 `;
@@ -197,7 +202,13 @@ const StyledExperience = styled.div`
 	}
 
 	& + & {
-		margin-top: 64pt;
+		margin-top: 32pt;
+	}
+`;
+
+const Layout = styled(DefaultLayout)`
+	h2 {
+		margin-top: 1.5em;
 	}
 `;
 
@@ -258,32 +269,15 @@ const WorkExperience: React.SFC<Work_2> = ({
 };
 
 const ResumePage: React.SFC<IResumePageProps> = ({
-	data: {
-		allCompetencesJson: { edges: competences },
-		experiencesJson: experiences,
-		interestsJson: interests,
-		skillsJson: skills,
-	},
+	data: { experiencesJson: experiences, interestsJson: interests, skillsJson: skills },
 }) => (
-	<DefaultLayout>
+	<Layout>
 		<Helmet title="Currículo" />
 		<h1>Currículo</h1>
 		<h2>Competências</h2>
-		<h3>Como posso ser útil</h3>
-		<StyledCompetences>
-			<dl>
-				{competences.map(({ node: { name, description } }) => (
-					<React.Fragment key={name!}>
-						<dt>{name}</dt>
-						<dd>{description}</dd>
-					</React.Fragment>
-				))}
-			</dl>
-		</StyledCompetences>
-		<h3>Habilidades e interesses</h3>
 		<StyledListWrapper>
 			<StyledList data-columns={2}>
-				<h4>Habilidades técnicas</h4>
+				<h3>Habilidades técnicas</h3>
 				<ul>
 					{skills.technical!.map(skill => (
 						<li key={skill!.name!}>{skill!.name}</li>
@@ -291,7 +285,7 @@ const ResumePage: React.SFC<IResumePageProps> = ({
 				</ul>
 			</StyledList>
 			<StyledList data-columns={1}>
-				<h4>Soft skills</h4>
+				<h3>Soft skills</h3>
 				<ul>
 					{skills.soft!.map(skill => (
 						<li key={skill!.name!}>{skill!.name}</li>
@@ -299,7 +293,7 @@ const ResumePage: React.SFC<IResumePageProps> = ({
 				</ul>
 			</StyledList>
 			<StyledList data-columns={3}>
-				<h4>Demais interesses</h4>
+				<h3>Demais interesses</h3>
 				<ul>
 					{interests.subjects!.map(skill => (
 						<li key={skill!.name!}>{skill!.name}</li>
@@ -309,7 +303,7 @@ const ResumePage: React.SFC<IResumePageProps> = ({
 		</StyledListWrapper>
 		<h2>Experiências</h2>
 		{experiences.work!.filter(isNotNullish).map(WorkExperience)}
-	</DefaultLayout>
+	</Layout>
 );
 
 export default ResumePage;

@@ -11,12 +11,9 @@ import { Sidebar } from "../Sidebar";
 import "typeface-montserrat";
 import "typeface-zilla-slab";
 import "./icons";
-import "prismjs/themes/prism-okaidia.css";
-import "../../../submodules/cssremedy/quotes.css";
-import "../../../submodules/cssremedy/remedy.css";
 
 import { dom } from "@fortawesome/fontawesome-svg-core";
-import { darkTheme, fromTheme } from "../../styles/theme";
+import { darkTheme, lightTheme, fromTheme, ITheme } from "../../styles/theme";
 import { SkipNavContent, SkipNavLink } from "@reach/skip-nav";
 import "@reach/skip-nav/styles.css";
 import { blog, blogRef } from "../../utils/microdata";
@@ -25,11 +22,13 @@ import { kebabCase } from "lodash";
 import { components } from "../mdxComponents";
 
 const globalCss = css`
-	:global {
 		:root {
-			${Object.entries(darkTheme)
-				.map(([name, value]) => `--${kebabCase(name)}: ${value};`)
-				.join("\n")};
+			--root-padding: 32px;
+			--root-border-width: 10px;
+			--sidebar-width: 270px;
+
+			--max-width-mobile: calc(100vw - 2 * var(--root-border-width) - 2 * var(--root-padding));
+			--max-width-desktop: calc(var(--max-width-mobile) - var(--sidebar-width));
 		}
 
 		html,
@@ -41,10 +40,37 @@ const globalCss = css`
 			box-sizing: border-box;
 		}
 
-		code {
-			background-color: rgba(255, 255, 255, 0.05);
-			padding: 0.1em;
+		body {
+			border: var(--root-border-width) solid var(--theme-color);
+		}
+
+		address {
+			all: unset;
+		}
+
+		html,
+		body {
+			min-height: 100vh;
+			max-width: 100vw;
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+
+		a, .anchor {
 			color: ${fromTheme("themeColor")};
+			text-decoration: none;
+			box-shadow: inset 0 -1px 0 ${fromTheme("themeColor")};
+			transition: 0.25s color ease, 0.25s box-shadow ease;
+
+			--box-shadow-active-height: -1.2em;
+
+			&:hover,
+			&:active,
+			&:focus {
+				color: ${fromTheme("backgroundColor")};
+				box-shadow: inset 0 var(--box-shadow-active-height) 0 ${fromTheme("themeColor")};
+			}
 		}
 
 		a.gatsby-resp-image-link:any-link {
@@ -53,28 +79,6 @@ const globalCss = css`
 
 		abbr[title] {
 			border-bottom-color: ${fromTheme("themeColor")} !important;
-		}
-
-		h1,
-		h2,
-		h3,
-		h4,
-		h5,
-		h6 {
-			a,
-			a:hover,
-			a:active,
-			a:focus {
-				box-shadow: none;
-				color: unset;
-			}
-		}
-
-		a:hover,
-		a:active,
-		a:focus {
-			color: ${fromTheme("backgroundColor")};
-			box-shadow: inset 0 -1.2em 0 ${fromTheme("themeColor")};
 		}
 
 		dl {
@@ -113,7 +117,7 @@ const globalCss = css`
 const StyledMain = styled.main`
 	--width: auto;
 
-	padding: ${fromTheme("rootPadding")};
+	padding: var(--root-padding);
 	flex: 0 1 var(--width);
 	max-width: var(--width);
 	font-size: calc(1rem + 0.25vw);
@@ -139,7 +143,9 @@ const StyledMain = styled.main`
 	}
 
 	@media (min-width: ${responsiveBreakpoint}) {
-		--width: calc(100vw - ${fromTheme("sidebarWidth")} - 2 * ${fromTheme("rootPadding")});
+		--width: calc(
+			100vw - var(--sidebar-width) - 2 * var(--root-padding) - 2 * var(--root-border-width)
+		);
 	}
 `;
 
@@ -179,97 +185,149 @@ interface ILayoutData {
 	personalJson: PersonalJson;
 }
 
-const RawLayout: React.SFC<ILayoutData> = ({ site: { siteMetadata }, personalJson, children }) => {
+const shouldUseLightTheme =
+	typeof matchMedia === "function" && matchMedia("(prefers-color-scheme: light)").matches;
+const defaultTheme = shouldUseLightTheme ? lightTheme : darkTheme;
+
+const getCurrentTheme = () => {
+	const persistedThemeName =
+		typeof localStorage !== "undefined" && localStorage.getItem("currentTheme");
+
+	return persistedThemeName === "light"
+		? lightTheme
+		: persistedThemeName === "dark"
+		? darkTheme
+		: undefined;
+};
+
+export interface ThemeContextValue {
+	theme: ITheme | undefined;
+	setTheme(theme?: ITheme): void;
+}
+export const ThemeContext = React.createContext<ThemeContextValue>({ theme: undefined } as any);
+
+const RawLayout: React.SFC<ILayoutData> = ({
+	site: { siteMetadata },
+	personalJson,
+	children,
+	...props
+}) => {
 	const plainTextDescription = siteMetadata.description!.replace(/\[([^\]]+)\]\([^\)]+\)/g, "$1");
+	const [chosenTheme, rawSetTheme] = React.useState<ITheme | undefined>(getCurrentTheme());
+
+	const theme = chosenTheme || defaultTheme;
+
+	const setTheme: (theme?: ITheme) => void = newTheme => {
+		if (typeof localStorage !== "undefined") {
+			if (newTheme) {
+				localStorage.setItem("currentTheme", newTheme === lightTheme ? "light" : "dark");
+			} else {
+				localStorage.removeItem("currentTheme");
+			}
+		}
+
+		rawSetTheme(newTheme);
+	};
 
 	return (
-		<MDXProvider components={components}>
-			<StyledRoot
-				className={globalCss}
-				itemScope
-				itemType={blog}
-				id={blogRef}
-				itemID={blogRef}
-			>
-				<Helmet
-					htmlAttributes={{
-						lang: "pt-br",
-					}}
-					defaultTitle={siteMetadata.title!}
-					titleTemplate={`%s — ${siteMetadata.title}`}
-					meta={[
-						{
-							name: "description",
-							content: plainTextDescription,
-						},
-						{
-							name: "keywords",
-							content: [
-								"javascript",
-								"typescript",
-								"development",
-								"web development",
-								"web",
-								"privacy",
-								"decentralized web",
-								"decentralization",
-								"p2p",
-								"personal",
-								"blog",
-								"brazilian",
-							].join(", "),
-						},
-						{
-							name: "google-site-verification",
-							content: "RHQh7j4JKTIEmRsQrcOD1Pk7OoLoW8VK9YG4LscV7d0",
-						},
-					]}
-				>
-					<link
-						rel="webmention"
-						href="https://webmention.io/victormagalhaes.codes/webmention"
-					/>
-					<link
-						rel="pingback"
-						href="https://webmention.io/victormagalhaes.codes/xmlrpc"
-					/>
-					<link rel="canonical" href="https://victormagalhaes.codes" />
-				</Helmet>
+		<React.StrictMode>
+			<MDXProvider components={components}>
+				<ThemeContext.Provider value={{ theme: chosenTheme, setTheme }}>
+					<StyledRoot
+						{...props}
+						className={globalCss}
+						itemScope
+						itemType={blog}
+						id={blogRef}
+						itemID={blogRef}
+					>
+						<style>{`
+							:root {
+								${Object.entries(theme)
+									.map(([name, value]) => `--${kebabCase(name)}: ${value};`)
+									.join("\n")}
+							};
+						`}</style>
+						<Helmet
+							htmlAttributes={{
+								lang: "pt-br",
+							}}
+							defaultTitle={siteMetadata.title!}
+							titleTemplate={`%s — ${siteMetadata.title}`}
+							meta={[
+								{
+									name: "description",
+									content: plainTextDescription,
+								},
+								{
+									name: "keywords",
+									content: [
+										"javascript",
+										"typescript",
+										"development",
+										"web development",
+										"web",
+										"privacy",
+										"decentralized web",
+										"decentralization",
+										"p2p",
+										"personal",
+										"blog",
+										"brazilian",
+									].join(", "),
+								},
+								{
+									name: "google-site-verification",
+									content: "RHQh7j4JKTIEmRsQrcOD1Pk7OoLoW8VK9YG4LscV7d0",
+								},
+							]}
+						>
+							<link
+								rel="webmention"
+								href="https://webmention.io/victormagalhaes.codes/webmention"
+							/>
+							<link
+								rel="pingback"
+								href="https://webmention.io/victormagalhaes.codes/xmlrpc"
+							/>
+							<link rel="canonical" href="https://victormagalhaes.codes" />
+						</Helmet>
 
-				<SkipNavLink>Pular para conteúdo</SkipNavLink>
-				<Sidebar
-					metadata={siteMetadata}
-					personalData={personalJson}
-					nav={[
-						{
-							name: "blog",
-							url: "/",
-						},
-						{
-							name: "to do",
-							lang: "en",
-							url: "/todo/",
-						},
-						{
-							name: "links",
-							url: "/links/",
-						},
-						{
-							name: "currículo",
-							url: "/resume/",
-						},
-					]}
-				/>
+						<SkipNavLink>Pular para conteúdo</SkipNavLink>
+						<Sidebar
+							metadata={siteMetadata}
+							personalData={personalJson}
+							nav={[
+								{
+									name: "home",
+									url: "/",
+								},
+								{
+									name: "blog",
+									url: "/posts",
+								},
+								{
+									name: "links",
+									url: "/links/",
+								},
+								{
+									name: "currículo",
+									url: "/resume/",
+								},
+							]}
+						/>
 
-				<SkipNavContent />
+						<SkipNavContent />
 
-				<StyledMain>{children}</StyledMain>
-			</StyledRoot>
-		</MDXProvider>
+						<StyledMain>{children}</StyledMain>
+					</StyledRoot>
+				</ThemeContext.Provider>
+			</MDXProvider>
+		</React.StrictMode>
 	);
 };
 
-const DefaultLayout: React.SFC = ({ children }) => {
+const DefaultLayout: React.SFC = ({ children, ...parentProps }) => {
 	return (
 		<StaticQuery
 			query={graphql`
@@ -294,7 +352,11 @@ const DefaultLayout: React.SFC = ({ children }) => {
 					}
 				}
 			`}
-			render={props => <RawLayout {...props}>{children}</RawLayout>}
+			render={props => (
+				<RawLayout {...parentProps} {...props}>
+					{children}
+				</RawLayout>
+			)}
 		/>
 	);
 };

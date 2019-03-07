@@ -58,8 +58,8 @@ const TodoTag = styled.div`
 	font-size: 0.8em;
 	border-radius: 4pt;
 	font-variant: small-caps;
-	color: ${fromTheme("backgroundColor")};
-	background-color: white;
+	color: ${fromTheme("themeColor")};
+	background-color: ${fromTheme("backgroundColor")};
 	cursor: pointer;
 	transition: opacity 0.5s ease;
 	opacity: 0.8;

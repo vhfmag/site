@@ -5,16 +5,18 @@ export interface ITheme {
 	backgroundColor: string;
 	themeColor: string;
 	textColor: string;
-	rootPadding: string;
-	sidebarWidth: string;
 }
 
 export const darkTheme: ITheme = {
 	textColor,
 	backgroundColor,
 	themeColor,
-	rootPadding: "16px",
-	sidebarWidth: "270px",
+};
+
+export const lightTheme: ITheme = {
+	textColor: backgroundColor,
+	backgroundColor: textColor,
+	themeColor: "hsla(125, 51%, 32%, 1)",
 };
 
 export const fromTheme = (field: keyof ITheme) => `var(--${kebabCase(field)})`;

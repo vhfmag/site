@@ -4,16 +4,15 @@ import MDXRenderer from "gatsby-mdx/mdx-renderer";
 import { graphql } from "gatsby";
 import DefaultLayout from "../components/layout";
 import { isFolder } from "../utils/types";
+import { IGeneralMetadataFragment, IMarkdownEntryFragment } from "../fragments";
+import { WindowLocation } from "@reach/router";
 
-/**
- * @typedef {Object} IPostTemplateProps
- * @property {import("../fragments").IGeneralMetadataFragment & { mdx: import("../fragments").IMarkdownEntryFragment, code: { body: any } }} data
- * @property {import("@reach/router").WindowLocation} location
- */
+interface IPostTemplateProps {
+	data: IGeneralMetadataFragment & { mdx: IMarkdownEntryFragment };
+	location: WindowLocation;
+	pathContext: any;
+}
 
-/**
- * @param {IPostTemplateProps} props
- */
 const SinglePostTemplate = ({
 	location,
 	pathContext: { slug: fileName, folder: relativeDirectory },
@@ -32,7 +31,7 @@ const SinglePostTemplate = ({
 			count: { words } = { words: -1 },
 		},
 	},
-}) => {
+}: IPostTemplateProps) => {
 	if (!isFolder(relativeDirectory)) {
 		throw new Error(
 			`There is an unhandled directory. Update 'folderToCategory' to include '${relativeDirectory}'`,
