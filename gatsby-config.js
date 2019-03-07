@@ -126,7 +126,6 @@ module.exports = {
 								codemirror: 1,
 								hidenavigation: 1,
 								autoresize: 1,
-								runonclick: 0,
 							},
 						},
 					},
