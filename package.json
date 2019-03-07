@@ -31,6 +31,7 @@
 		"gatsby-plugin-netlify": "2.0.11",
 		"gatsby-plugin-netlify-cache": "1.1.0",
 		"gatsby-plugin-offline": "2.0.24",
+		"gatsby-plugin-polyfill-io": "^1.1.0",
 		"gatsby-plugin-purify-css": "^2.2.1",
 		"gatsby-plugin-react-helmet": "3.0.7",
 		"gatsby-plugin-sharp": "2.0.22",
@@ -102,5 +103,8 @@
 			"__paq": true,
 			"ReportingObserver": true
 		}
-	}
+	},
+	"browserslist": [
+		"last 2 versions and not dead and not IE 11 and not IE_mob 11"
+	]
 }

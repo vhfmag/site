@@ -67,6 +67,7 @@ const makeFeedQuery = (pageKind = ".*") => graphql`
 `;
 
 module.exports = {
+	polyfill: false,
 	siteMetadata: {
 		title: "Victor Magalhães",
 		siteUrl: "https://victormagalhaes.codes",
@@ -75,6 +76,13 @@ module.exports = {
 	},
 	plugins: [
 		"gatsby-plugin-typescript",
+		{
+			resolve: "gatsby-plugin-polyfill-io",
+			options: {
+				features: ["es5", "es6", "es7"],
+				flags: ["gated"],
+			},
+		},
 		{
 			resolve: "gatsby-plugin-webpack-bundle-analyzer",
 			options: {
