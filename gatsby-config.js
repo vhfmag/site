@@ -76,6 +76,7 @@ module.exports = {
 	},
 	plugins: [
 		"gatsby-plugin-typescript",
+		"gatsby-plugin-subfont",
 		{
 			resolve: "gatsby-plugin-polyfill-io",
 			options: {
