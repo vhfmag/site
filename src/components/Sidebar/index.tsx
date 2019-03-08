@@ -18,6 +18,7 @@ const activeLinkClassName = "active";
 const HeadLink = styled(Link)`
 	h1 {
 		font-family: "Zilla Slab";
+		margin-top: 0;
 	}
 `;
 
