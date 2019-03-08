@@ -107,22 +107,6 @@ const GlobalStyle = createGlobalStyle`
 		opacity: 1;
 	}
 
-	.react-live {
-		border: 1px solid ${fromTheme("themeColor")};
-		margin-bottom: 1.6875em;
-
-		.prism-code {
-			display: flex;
-			flex-wrap: wrap;
-			border-bottom: 1px solid ${fromTheme("themeColor")};
-		}
-
-		.react-live-preview {
-			padding: 0.5rem;
-			background-color: rgba(255, 255, 255, 0.05);
-		}
-	}
-
 	${dom.css()}
 `;
 
@@ -138,8 +122,7 @@ const StyledMain = styled.main`
 	hr,
 	dl,
 	ul,
-	ol,
-	.react-live {
+	ol {
 		max-width: 70ch;
 		text-align: justify;
 		hyphens: auto;
@@ -180,6 +163,7 @@ const StyledRoot = styled.div`
 
 	@font-face {
 		font-family: emoji;
+		font-display: swap;
 
 		src: local("EmojiOneMozilla"), local("EmojiOne"), local("Twemoji"),
 			local("Apple Color Emoji"), local("Android Emoji"), local("Segoe UI"),
