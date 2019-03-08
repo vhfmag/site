@@ -181,9 +181,9 @@ interface ILayoutData {
 	personalJson: PersonalJson;
 }
 
-const shouldUseLightTheme =
-	typeof matchMedia === "function" && matchMedia("(prefers-color-scheme: light)").matches;
-const defaultTheme = shouldUseLightTheme ? lightTheme : darkTheme;
+const shouldUseDarkTheme =
+	typeof matchMedia === "function" && matchMedia("(prefers-color-scheme: dark)").matches;
+const defaultTheme = shouldUseDarkTheme ? darkTheme : lightTheme;
 
 const getCurrentTheme = () => {
 	const persistedThemeName =
