@@ -5,12 +5,24 @@ date: 2019-03-10
 draft: true
 ---
 
+Existem tantas linguagens compilam para Javascript ([centenas, sério](https://github.com/jashkenas/coffeescript/wiki/List-of-languages-that-compile-to-JS)), que já se falou sobre Javascript ser a <i lang='en'>assembly language</i> da Web <sup>[1](https://www.hanselman.com/blog/JavaScriptIsWebAssemblyLanguageAndThatsOK.aspx)</sup>. Se era, não é mais.
+
 ## O que é WebAssembly?
+
+Em novembro de 2017, Safari e Edge se juntaram ao Firefox e ao Chrome ao lançar suas primeiras versões com suporte a uma nova linguagem da Web, o [WebAssembly](https://webassembly.org/) <sup>[2](https://blog.mozilla.org/blog/2017/11/13/webassembly-in-browsers/)</sup>. Sendo um alvo de compilação para a Web com sintaxe binária compacta, garantias de segurança e performance previsível e próxima de nativa, ela traz novas possibilidades para a Web. Quais? Alguns exemplos:
+
+-   Aplicações pesadas [como o Autocad](https://duckduckgo.com/?q=autocad+webassembly&t=ffab&atb=v154-1&ia=web) podem ser portadas para a Web
+-   Jogos na Web tem acesso a um novo patamar de recursos – e <i lang='en'>engines</i> como [o <i lang='en'>Unity</i>](https://blogs.unity3d.com/2018/08/15/webassembly-is-here/) já geram WebAssembly
+-   Algoritmos como os de [visão computacional](https://github.com/Web-Sight/WebSight) podem ser portados para a Web com performance satisfatória:
+
+![Gravação de comparativo de performance entre WebAssembly, asm.js e Javascript](https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2017/09/websight.gif)
+
+Ou seja, WebAssembly enterra de uma vez por todas o passado sombrio da Web de Flash e Java applets. Agora, performance próxima de nativa é uma funcionalidade especificada na Web e implementada pelos principais navegadores.
 
 Fala de:
 
 -   Histórico
-    -   [asm.js](https://en.wikipedia.org/wiki/Asm.js) e [NaCL](https://en.wikipedia.org/wiki/Google_Native_Client) (subsets de Javascript compilados que permitem retrocompatibilidade e performance)
+    -   [asm.js](https://en.wikipedia.org/wiki/Asm.js) (subsets de Javascript compilados que permitem retrocompatibilidade e performance)
 -   Objetivos
     -   Links
         -   https://webassembly.org/docs/high-level-goals/
