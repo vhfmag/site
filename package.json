@@ -61,7 +61,7 @@
 		"normalize-css": "^2.3.1",
 		"patch-package": "6.0.5",
 		"postinstall-prepare": "^1.0.1",
-		"preact": "^10.0.0-alpha.0",
+		"preact": "^10.0.0-alpha.1",
 		"prism-react-renderer": "0.1.6",
 		"prismjs": "^1.15.0",
 		"react": "16.8.4",
@@ -93,7 +93,7 @@
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"devDependencies": {
-		"gatsby-plugin-preact": "^2.0.9",
+		"gatsby-plugin-preact": "^2.0.10",
 		"prettier": "^1.16.4",
 		"react-axe": "^3.0.2",
 		"regenerator-runtime": "^0.13.1",

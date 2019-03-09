@@ -5949,10 +5949,10 @@ gatsby-plugin-polyfill-io@^1.1.0:
   dependencies:
     babel-runtime "^6.26.0"
 
-gatsby-plugin-preact@^2.0.9:
-  version "2.0.9"
-  resolved "https://registry.yarnpkg.com/gatsby-plugin-preact/-/gatsby-plugin-preact-2.0.9.tgz#96a795fc1b30cef751ecc0315aac6e4c974f285e"
-  integrity sha512-Y9OWc3jhx8KhKdNm8dm3Ea/U8wSxHudrGrwjO0WPxhMsPxAwNyu5NZIeFzFdR+EyNjYie/hwNs5sOe/Itn/sww==
+gatsby-plugin-preact@^2.0.10:
+  version "2.0.10"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-preact/-/gatsby-plugin-preact-2.0.10.tgz#64c52859a727b7cbd6a3cb416946970ea7018cea"
+  integrity sha512-DmO8r0df41cybVsp8JJGhc6hdSjvDrhGgMpfCHhfxMTuKTFL9d/LrV/lRawwddXMZOFMXL3zf/4qsc7PJcDPWQ==
   dependencies:
     "@babel/runtime" "^7.0.0"
 
@@ -11408,10 +11408,10 @@ potrace@^2.1.1:
   dependencies:
     jimp "^0.2.24"
 
-preact@^10.0.0-alpha.0:
-  version "10.0.0-alpha.0"
-  resolved "https://registry.yarnpkg.com/preact/-/preact-10.0.0-alpha.0.tgz#24f35f5bd47c81387f4ee99517fc5c2320dbafa0"
-  integrity sha512-GO2JTMOuoys4m3652dEv8knD+F36LMCA37aIgCeHjsF6hGkNQJcV68qmRDdEFy79lsJcoaa+me8SGc4AOWnllg==
+preact@^10.0.0-alpha.1:
+  version "10.0.0-alpha.1"
+  resolved "https://registry.yarnpkg.com/preact/-/preact-10.0.0-alpha.1.tgz#0c8ee161fcd23839568cd52487d2dc07ca1b3166"
+  integrity sha512-9mDFKeU8SkepfCcjsoq/lODLKBtjgZj/aGBJaVXTNOEZV5XgOfE2TZQkFWDejE7w/q1qKUh1tJZaAeICxAKJ1g==
   dependencies:
     prop-types "^15.6.2"
 
