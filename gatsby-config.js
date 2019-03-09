@@ -131,12 +131,7 @@ module.exports = {
 						},
 					},
 					{ resolve: "gatsby-remark-emoji-unicode" },
-					{
-						resolve: "gatsby-remark-external-links",
-						options: {
-							target: null,
-						},
-					},
+					{ resolve: "gatsby-remark-external-links" },
 					{ resolve: "gatsby-remark-unwrap-images" },
 					{
 						resolve: `gatsby-remark-images`,
