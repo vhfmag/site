@@ -1,0 +1,21 @@
+.description {
+	.from {
+		font-style: italic;
+	}
+
+	.author + .from {
+		&:before {
+			content: ", ";
+		}
+	}
+}
+
+cite {
+	&:before {
+		content: open-quote;
+	}
+
+	&:after {
+		content: close-quote;
+	}
+}

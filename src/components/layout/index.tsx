@@ -1,6 +1,5 @@
 import * as React from "react";
 import { Helmet } from "react-helmet";
-import styled, { createGlobalStyle } from "styled-components";
 import { StaticQuery, graphql } from "gatsby";
 import { MDXProvider } from "@mdx-js/tag";
 
@@ -11,170 +10,21 @@ import "typeface-montserrat";
 import "typeface-zilla-slab";
 import "./icons";
 
-import { dom } from "@fortawesome/fontawesome-svg-core";
-import { darkTheme, lightTheme, fromTheme, ITheme } from "../../styles/theme";
+// import { dom } from "@fortawesome/fontawesome-svg-core";
+import { darkTheme, lightTheme, ITheme } from "../../styles/theme";
 import { SkipNavContent, SkipNavLink } from "@reach/skip-nav";
 import "@reach/skip-nav/styles.css";
 import { blog, blogRef } from "../../utils/microdata";
-import { responsiveBreakpoint } from "../../utils/consts";
 import kebabCase from "lodash/kebabCase";
 import { components } from "../mdxComponents";
+import s from "./style.module.scss";
+import "./style.global.scss";
 
-const GlobalStyle = createGlobalStyle`
-	:root {
-		--root-padding: 32px;
-		--root-border-width: 10px;
-		--sidebar-width: 270px;
+interface ILayoutProps {
+	className?: string;
+}
 
-		--max-width-mobile: calc(100vw - 2 * var(--root-border-width) - 2 * var(--root-padding));
-		--max-width-desktop: calc(var(--max-width-mobile) - var(--sidebar-width));
-
-		${({ theme }) =>
-			Object.entries(theme)
-				.map(([name, value]) => `--${kebabCase(name)}: ${value};`)
-				.join("\n")};
-	}
-
-	html,
-	body {
-		min-height: 100vh;
-		max-width: 100vw;
-		margin: 0;
-		padding: 0;
-		box-sizing: border-box;
-	}
-
-	body {
-		border: var(--root-border-width) solid var(--theme-color);
-	}
-
-	address {
-		all: unset;
-	}
-
-	code {
-		background-color: rgba(255, 255, 255, 0.05);
-		padding: 0.1em;
-		color: ${fromTheme("themeColor")};
-	}
-
-	a, .anchor {
-		color: ${fromTheme("themeColor")};
-		text-decoration: none;
-		box-shadow: inset 0 -1px 0 ${fromTheme("themeColor")};
-		transition: 0.25s color ease, 0.25s box-shadow ease;
-
-		--box-shadow-active-height: -1.2em;
-
-		&:hover,
-		&:active,
-		&:focus {
-			color: ${fromTheme("backgroundColor")};
-			box-shadow: inset 0 var(--box-shadow-active-height) 0 ${fromTheme("themeColor")};
-		}
-	}
-
-	a.gatsby-resp-image-link:any-link {
-		box-shadow: none;
-	}
-
-	abbr[title] {
-		border-bottom-color: ${fromTheme("themeColor")} !important;
-	}
-
-	dl {
-		dd {
-			margin-left: 1em;
-		}
-	}
-
-	details {
-		--heading-margin-bottom: 1.6875em;
-		--indicator-width: 0.6em;
-		--indicator-length: 0.5em;
-
-		summary {
-			/* without this, firefox doesn't show the trigger triangle */
-			display: list-item;
-			color: ${fromTheme("themeColor")};
-			margin-bottom: 1em;
-		}
-	}
-
-	[data-reach-skip-link]:focus {
-		background-color: ${fromTheme("themeColor")} !important;
-		color: ${fromTheme("backgroundColor")} !important;
-		opacity: 1;
-	}
-
-	${dom.css()}
-`;
-
-const StyledMain = styled.main`
-	--width: auto;
-
-	padding: var(--root-padding);
-	flex: 0 1 var(--width);
-	max-width: var(--width);
-	font-size: calc(1rem + 0.25vw);
-
-	p,
-	hr,
-	dl,
-	ul,
-	ol {
-		max-width: 70ch;
-		text-align: justify;
-		hyphens: auto;
-	}
-
-	& > h1:first-child,
-	& > h2:first-child,
-	& > h3:first-child,
-	& > h4:first-child,
-	& > h5:first-child,
-	& > h6:first-child {
-		margin-top: 0;
-	}
-
-	@media (min-width: ${responsiveBreakpoint}) {
-		--width: calc(
-			100vw - var(--sidebar-width) - 2 * var(--root-padding) - 2 * var(--root-border-width)
-		);
-	}
-`;
-
-const StyledRoot = styled.div`
-	display: flex;
-	align-items: stretch;
-
-	@media print, (max-width: ${responsiveBreakpoint}) {
-		flex-direction: column;
-	}
-
-	hr {
-		background-color: ${fromTheme("themeColor")};
-	}
-
-	.emojione {
-		height: 1.25em;
-		margin: 0;
-	}
-
-	@font-face {
-		font-family: emoji;
-		font-display: swap;
-
-		src: local("EmojiOneMozilla"), local("EmojiOne"), local("Twemoji"),
-			local("Apple Color Emoji"), local("Android Emoji"), local("Segoe UI"),
-			local(EmojiSymbols), local(Symbola);
-
-		/* Emoji unicode blocks */
-		unicode-range: U+1F300-1F5FF, U+1F600-1F64F, U+1F680-1F6FF, U+2600-26FF;
-	}
-`;
-
-interface ILayoutData {
+interface ILayoutData extends ILayoutProps {
 	site: {
 		siteMetadata: SiteMetadata_2;
 	};
@@ -183,40 +33,49 @@ interface ILayoutData {
 
 const shouldUseDarkTheme =
 	typeof matchMedia === "function" && matchMedia("(prefers-color-scheme: dark)").matches;
-const defaultTheme = shouldUseDarkTheme ? darkTheme : lightTheme;
+const defaultTheme = shouldUseDarkTheme ? "dark" : "light";
 
-const getCurrentTheme = () => {
+const getCurrentTheme = (): ThemeName | undefined => {
 	const persistedThemeName =
 		typeof localStorage !== "undefined" && localStorage.getItem("currentTheme");
 
-	return persistedThemeName === "light"
-		? lightTheme
-		: persistedThemeName === "dark"
-		? darkTheme
-		: undefined;
+	if (persistedThemeName === "dark" || persistedThemeName === "light") {
+		return persistedThemeName;
+	}
+
+	return undefined;
 };
 
+export type ThemeName = "dark" | "light";
+
 export interface ThemeContextValue {
-	theme: ITheme | undefined;
-	setTheme(theme?: ITheme): void;
+	theme: ThemeName | undefined;
+	setTheme(theme?: ThemeName): void;
 }
 export const ThemeContext = React.createContext<ThemeContextValue>({ theme: undefined } as any);
+
+function themeToCSS(theme: ITheme) {
+	return Object.entries(theme)
+		.map(([name, value]) => `--${kebabCase(name)}: ${value};`)
+		.join("\n");
+}
 
 const RawLayout: React.SFC<ILayoutData> = ({
 	site: { siteMetadata },
 	personalJson,
 	children,
+	className,
 	...props
 }) => {
 	const plainTextDescription = siteMetadata.description!.replace(/\[([^\]]+)\]\([^\)]+\)/g, "$1");
-	const [chosenTheme, rawSetTheme] = React.useState<ITheme | undefined>(getCurrentTheme());
+	const [chosenTheme, rawSetTheme] = React.useState(getCurrentTheme());
 
 	const theme = chosenTheme || defaultTheme;
 
-	const setTheme: (theme?: ITheme) => void = newTheme => {
+	const setTheme: (theme?: ThemeName) => void = newTheme => {
 		if (typeof localStorage !== "undefined") {
 			if (newTheme) {
-				localStorage.setItem("currentTheme", newTheme === lightTheme ? "light" : "dark");
+				localStorage.setItem("currentTheme", newTheme);
 			} else {
 				localStorage.removeItem("currentTheme");
 			}
@@ -229,12 +88,19 @@ const RawLayout: React.SFC<ILayoutData> = ({
 		<React.StrictMode>
 			<MDXProvider components={components}>
 				<ThemeContext.Provider value={{ theme: chosenTheme, setTheme }}>
-					<StyledRoot {...props} itemScope itemType={blog} id={blogRef} itemID={blogRef}>
-						<GlobalStyle theme={theme} />
+					<div
+						{...props}
+						className={`${s.root} ${className}`}
+						itemScope
+						itemType={blog}
+						id={blogRef}
+						itemID={blogRef}
+					>
 						<Helmet
 							htmlAttributes={{
 								lang: "pt-br",
 							}}
+							bodyAttributes={{ class: theme }}
 							defaultTitle={siteMetadata.title!}
 							titleTemplate={`%s — ${siteMetadata.title}`}
 							meta={[
@@ -265,6 +131,15 @@ const RawLayout: React.SFC<ILayoutData> = ({
 								},
 							]}
 						>
+							<style>{`
+								body.dark {
+									${themeToCSS(darkTheme)};
+								}
+
+								body.light {
+									${themeToCSS(lightTheme)};
+								}
+							`}</style>
 							<link
 								rel="webmention"
 								href="https://webmention.io/victormagalhaes.codes/webmention"
@@ -302,15 +177,15 @@ const RawLayout: React.SFC<ILayoutData> = ({
 
 						<SkipNavContent />
 
-						<StyledMain>{children}</StyledMain>
-					</StyledRoot>
+						<main className={s.main}>{children}</main>
+					</div>
 				</ThemeContext.Provider>
 			</MDXProvider>
 		</React.StrictMode>
 	);
 };
 
-const DefaultLayout: React.SFC = ({ children, ...parentProps }) => {
+const DefaultLayout: React.SFC<ILayoutProps> = ({ children, ...parentProps }) => {
 	return (
 		<StaticQuery
 			query={graphql`

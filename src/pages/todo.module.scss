@@ -1,0 +1,61 @@
+// const StyledTodoList = styled.div`
+.todoList {
+	display: flex;
+	flex-wrap: wrap;
+	position: relative;
+	align-items: flex-start;
+
+	margin: -4pt;
+
+	&:not(:last-child) {
+		margin-bottom: 16pt;
+	}
+}
+
+// const TodoWrapper = styled.div`
+.todoWrapper {
+	margin: 4pt;
+	padding: 8pt;
+	max-width: 500px;
+	background-color: rgba(255, 255, 255, 0.5);
+}
+
+// const TodoTitle = styled.div`
+.title {
+	p {
+		margin: 0;
+	}
+}
+
+// const TodoTags = styled.div`
+.tags {
+	display: flex;
+	flex-wrap: wrap;
+	margin: -8pt;
+
+	& > * {
+		margin: 8pt;
+	}
+}
+
+// const TodoTag = styled.div`
+.tag {
+	padding: 0 4pt;
+	font-size: 0.8em;
+	border-radius: 4pt;
+	font-variant: small-caps;
+	color: var(--theme-color);
+	background-color: var(--background-color);
+	cursor: pointer;
+	transition: opacity 0.5s ease;
+	opacity: 0.8;
+
+	&:hover {
+		opacity: 0.9;
+	}
+
+	&:active,
+	&.active {
+		opacity: 1;
+	}
+}

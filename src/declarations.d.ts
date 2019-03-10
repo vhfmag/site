@@ -53,3 +53,5 @@ class ReportingObserverClass {
 declare const ReportingObserver: undefined | typeof ReportingObserverClass;
 
 declare module "@mdx-js/tag";
+
+declare module "*.scss";

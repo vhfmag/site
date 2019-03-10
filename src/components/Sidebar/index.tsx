@@ -1,112 +1,16 @@
 import * as React from "react";
-import styled from "styled-components";
 import { Link } from "gatsby";
 
 import { SocialLink } from "./SocialLink";
-import { responsiveBreakpoint } from "../../utils/consts";
 
-import { ScreenOnly } from "../../styles";
 import { SiteMetadata_2, PersonalJson } from "../../graphql-types";
 import { isNotNullish } from "../../utils/types";
-import { darkTheme, lightTheme, ITheme } from "../../styles/theme";
 import { person, blogRef, personRef, organization } from "../../utils/microdata";
 import VisuallyHidden from "@reach/visually-hidden";
-import { ThemeContext } from "../layout";
+import { ThemeContext, ThemeName } from "../layout";
+import s from "./style.module.scss";
 
 const activeLinkClassName = "active";
-
-const HeadLink = styled(Link)`
-	h1 {
-		font-family: "Zilla Slab";
-		margin-top: 0;
-	}
-`;
-
-const StyledNav = styled.nav`
-	ul {
-		list-style: none;
-		margin: -2pt -4pt;
-		display: flex;
-		flex-wrap: wrap;
-		flex-direction: column;
-
-		& ul {
-			padding-left: 1em;
-		}
-
-		@media print, (max-width: ${responsiveBreakpoint}) {
-			flex-direction: row;
-
-			li,
-			ul {
-				display: contents;
-			}
-
-			a {
-				margin: 2pt 4pt;
-			}
-		}
-
-		li {
-			margin: 2pt 4pt;
-
-			a.${activeLinkClassName} {
-				font-weight: bold;
-			}
-		}
-	}
-`;
-
-const SidebarSection = styled.div``;
-
-const StyledDescription = styled.p``;
-
-const StyledSidebar = styled.header`
-	flex: 0 0 var(--sidebar-width);
-	padding: var(--root-padding);
-
-	img[aria-hidden] {
-		max-width: unset;
-	}
-
-	p,
-	${StyledDescription}, ${SidebarSection}, ${StyledNav} {
-		margin: 1.2em 0;
-
-		:first-child {
-			margin-top: 0;
-		}
-	}
-
-	> h1 {
-		margin-top: 0;
-		text-transform: lowercase;
-	}
-
-	@media screen and (min-width: ${responsiveBreakpoint}) {
-		max-height: 100vh;
-		position: sticky;
-		top: 0;
-	}
-
-	@media print, (max-width: ${responsiveBreakpoint}) {
-		font-size: 0.9em;
-		flex-basis: auto;
-	}
-`;
-
-const SocialLinks = styled(ScreenOnly.withComponent("ul"))`
-	display: grid;
-	grid-template-columns: repeat(auto-fill, 1.75em);
-	grid-auto-flow: row dense;
-	grid-gap: 4pt;
-	list-style-type: none;
-	margin: 0;
-
-	li {
-		margin: 0;
-	}
-`;
 
 interface ISidebarProps {
 	metadata: SiteMetadata_2;
@@ -136,61 +40,6 @@ function NavLinks({ navs }: { navs: ISidebarNavLink[] }) {
 	);
 }
 
-const StyledThemeSelector = styled.div`
-	display: flex;
-	justify-content: space-between;
-`;
-
-const StyledThemeButtons = styled.div`
-	margin: -0.25em;
-	display: flex;
-	flex-wrap: wrap;
-	align-items: center;
-
-	> * {
-		margin: 0.25em;
-	}
-
-	@supports (display: grid) {
-		@media (min-width: ${responsiveBreakpoint}) {
-			display: grid;
-			grid-gap: 0.5em;
-			grid-template-columns: max-content;
-
-			margin: 0;
-
-			> * {
-				margin: unset;
-			}
-		}
-	}
-`;
-
-const StyledThemeButton = styled.button`
-	--box-shadow-height: 0;
-
-	cursor: pointer;
-	color: var(--theme-color);
-	border: 1px solid var(--theme-color);
-	background-color: transparent;
-	transition: box-shadow 0.5s ease, color 0.5s ease;
-	box-shadow: inset 0 var(--box-shadow-height) 0 var(--theme-color);
-
-	&.selected,
-	&:hover {
-		--box-shadow-height: 2em;
-		color: var(--background-color);
-	}
-
-	&[disabled] {
-		cursor: not-allowed;
-	}
-`;
-
-const StyledHR = styled.hr`
-	margin: 1em 0;
-`;
-
 const supportsColorScheme = (() => {
 	if (typeof matchMedia === "undefined") {
 		// never include button during SSR
@@ -204,7 +53,7 @@ const supportsColorScheme = (() => {
 	}
 })();
 
-const ThemeSelector: React.FunctionComponent<{ theme: ITheme | undefined }> = ({
+const ThemeSelector: React.FunctionComponent<{ theme: ThemeName | undefined }> = ({
 	children,
 	theme,
 }) => {
@@ -212,13 +61,13 @@ const ThemeSelector: React.FunctionComponent<{ theme: ITheme | undefined }> = ({
 	const isSelected = theme === currentTheme;
 
 	return (
-		<StyledThemeButton
+		<button
 			className={`${isSelected ? "selected" : ""}`}
 			disabled={isSelected}
 			onClick={() => setTheme(theme)}
 		>
 			{children}
-		</StyledThemeButton>
+		</button>
 	);
 };
 
@@ -228,28 +77,28 @@ export const Sidebar: React.SFC<ISidebarProps> = ({
 	nav,
 }) => {
 	return (
-		<StyledSidebar
+		<header
 			itemScope
 			itemType={[person, organization].join(" ")}
 			id={personRef}
 			itemID={personRef}
 			itemProp="author publisher"
-			className="h-card"
+			className={`${s.sidebar} h-card`}
 		>
-			<SidebarSection itemProp="name">
-				<HeadLink
+			<div className={s.section} itemProp="name">
+				<Link
+					className={`${s.headLink} p-name u-uid u-url`}
 					itemRef={[blogRef, personRef].join(" ")}
 					itemProp="url identifier"
-					className="p-name u-uid u-url"
 					to="/"
 				>
 					<h1>{title}</h1>
-				</HeadLink>
-			</SidebarSection>
+				</Link>
+			</div>
 			<VisuallyHidden>
-				<SidebarSection className="p-job-title" itemProp="jobTitle">
+				<div className={`${s.section} p-job-title`} itemProp="jobTitle">
 					{jobTitle}
-				</SidebarSection>
+				</div>
 				<img
 					className="u-photo"
 					itemProp="logo"
@@ -259,21 +108,21 @@ export const Sidebar: React.SFC<ISidebarProps> = ({
 					src="/icons/icon-48x48.png"
 				/>
 			</VisuallyHidden>
-			<SidebarSection>
+			<div className={s.section}>
 				<address>
 					<a itemProp="email" className="u-email" href={`mailto:${email}`}>
 						{email}
 					</a>
 				</address>
-				<ScreenOnly>
+				<div>
 					<a href={sourceUrl!}>ver código fonte</a>
-				</ScreenOnly>
-			</SidebarSection>
-			<StyledNav aria-label="Principal">
+				</div>
+			</div>
+			<nav className={s.nav} aria-label="Principal">
 				<NavLinks navs={nav} />
-			</StyledNav>
+			</nav>
 			<address aria-label="Mídias sociais">
-				<SocialLinks>
+				<ul className={s.socialLinks}>
 					<li>
 						<SocialLink icon="rss" serviceName="RSS" rel="alternate" url="/rss.xml" />
 					</li>
@@ -282,19 +131,19 @@ export const Sidebar: React.SFC<ISidebarProps> = ({
 							<SocialLink {...socialProps} />
 						</li>
 					))}
-				</SocialLinks>
+				</ul>
 			</address>
-			<StyledHR />
-			<StyledThemeSelector style={{ display: "flex" }}>
+			<hr />
+			<div className={s.themeSelector}>
 				Tema:
-				<StyledThemeButtons>
+				<div className={s.themeButtons}>
 					{supportsColorScheme && (
 						<ThemeSelector theme={undefined}>Automático</ThemeSelector>
 					)}
-					<ThemeSelector theme={darkTheme}>Escuro</ThemeSelector>
-					<ThemeSelector theme={lightTheme}>Claro</ThemeSelector>
-				</StyledThemeButtons>
-			</StyledThemeSelector>
-		</StyledSidebar>
+					<ThemeSelector theme="dark">Escuro</ThemeSelector>
+					<ThemeSelector theme="light">Claro</ThemeSelector>
+				</div>
+			</div>
+		</header>
 	);
 };

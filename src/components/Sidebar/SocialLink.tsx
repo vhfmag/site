@@ -1,20 +1,7 @@
 import * as React from "react";
-import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Social_2 } from "../../graphql-types";
-import { fromTheme } from "../../styles/theme";
-
-const StyledSocialLink = styled.a`
-	font-size: 1.5em;
-	color: ${fromTheme("themeColor")} !important;
-	box-shadow: none !important;
-
-	&:active,
-	&:hover,
-	&:focus {
-		color: ${fromTheme("textColor")} !important;
-	}
-`;
+import s from "./SocialLink.module.scss";
 
 export interface ISocialLinkProps extends Social_2 {
 	rel?: string;
@@ -29,10 +16,10 @@ export const SocialLink: React.SFC<ISocialLinkProps> = ({
 	const iconNameParts = icon!.split(" ");
 
 	return (
-		<StyledSocialLink
+		<a
 			rel={rel}
 			href={url!}
-			className="u-url"
+			className={s.socialLink}
 			itemProp="sameAs"
 			title={serviceName!}
 			aria-label={serviceName!}
@@ -40,6 +27,6 @@ export const SocialLink: React.SFC<ISocialLinkProps> = ({
 			<FontAwesomeIcon
 				icon={(iconNameParts.length === 1 ? iconNameParts[0] : iconNameParts) as any}
 			/>
-		</StyledSocialLink>
+		</a>
 	);
 };

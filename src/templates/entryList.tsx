@@ -5,13 +5,9 @@ import { graphql, Link } from "gatsby";
 import DefaultLayout from "../components/layout";
 import { Paginator } from "../components/Paginator";
 import { IGeneralMetadataFragment, IMarkdownEntryNode } from "../fragments";
-import styled from "styled-components";
 import { isFolder } from "../utils/types";
 import { GatsbyPaginatorProps } from "../declarations";
-
-const ListWrapper = styled.div`
-	margin: 1rem 0;
-`;
+import s from "./entryList.module.scss";
 
 interface IEntryNode {
 	node: IMarkdownEntryNode;
@@ -21,39 +17,6 @@ interface IBookmarkListProps {
 	data: IGeneralMetadataFragment;
 	pathContext: GatsbyPaginatorProps<IEntryNode>;
 }
-
-const BlogNav = styled.nav`
-	--nav-h-gap: 0.25em;
-	--nav-v-gap: 0em;
-
-	margin: 0.5rem 0;
-
-	h2 {
-		display: inline-block;
-		margin-bottom: 0.5em;
-		margin-right: 0.5em;
-
-		::after {
-			content: ":";
-		}
-	}
-
-	ul {
-		all: unset;
-		display: inline-flex;
-		flex-wrap: wrap;
-		margin: calc(-1 * var(--nav-v-gap)) calc(-1 * var(--nav-h-gap));
-
-		li {
-			all: unset;
-			margin: var(--nav-v-gap) var(--nav-h-gap);
-
-			a.current {
-				font-weight: bold;
-			}
-		}
-	}
-`;
 
 const blogSections = [
 	{
@@ -97,7 +60,7 @@ const EntryList: React.SFC<IBookmarkListProps> = ({
 		<DefaultLayout>
 			<Helmet title={listTitle} />
 			<h1>{listTitle}</h1>
-			<BlogNav aria-describedby="blog-section-heading">
+			<nav className={s.blogNav} aria-describedby="blog-section-heading">
 				<h2 id="blog-section-heading">Seções do blog</h2>
 				<ul>
 					{blogSections.map(({ path, label }) => (
@@ -108,9 +71,9 @@ const EntryList: React.SFC<IBookmarkListProps> = ({
 						</li>
 					))}
 				</ul>
-			</BlogNav>
+			</nav>
 			<Paginator {...pathContext} />
-			<ListWrapper className="h-feed">
+			<div className={`${s.listWrapper} h-feed`}>
 				{posts.map(
 					({
 						node: {
@@ -146,7 +109,7 @@ const EntryList: React.SFC<IBookmarkListProps> = ({
 						);
 					},
 				)}
-			</ListWrapper>
+			</div>
 			<Paginator {...pathContext} />
 		</DefaultLayout>
 	);

@@ -1,0 +1,23 @@
+.entry {
+	:global(.footnotes) {
+		clear: both;
+
+		li {
+			p {
+				margin: 0;
+				display: inline;
+			}
+		}
+	}
+
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		:global(.anchor) path {
+			fill: --theme-color;
+		}
+	}
+}

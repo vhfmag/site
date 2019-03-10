@@ -2,8 +2,7 @@ import * as React from "react";
 import Helmet from "react-helmet";
 import { IGeneralMetadataFragment } from "../fragments";
 import DefaultLayout from "../components/layout";
-import styled from "styled-components";
-import { fromTheme } from "../styles/theme";
+import s from "./tagList.module.scss";
 
 type Comparator<T> = (a: T, b: T) => number;
 function pipeComparators<T>(
@@ -35,21 +34,6 @@ interface ITagListProps {
 	pathContext: IEntryNode;
 }
 
-const StyledTagUl = styled.ul`
-	display: flex;
-	flex-wrap: wrap;
-	margin: -8pt;
-
-	> li,
-	> [role="listitem"] {
-		margin: 8pt;
-		padding: 2pt 4pt;
-		border-radius: 4pt;
-		color: ${fromTheme("backgroundColor")};
-		background-color: ${fromTheme("themeColor")};
-	}
-`;
-
 const TagList: React.SFC<ITagListProps> = ({ pathContext: { tags, listTitle } }) => {
 	const title = `Tags - ${listTitle}`;
 
@@ -57,7 +41,7 @@ const TagList: React.SFC<ITagListProps> = ({ pathContext: { tags, listTitle } })
 		<DefaultLayout>
 			<Helmet title={title} />
 			<h1>{title}</h1>
-			<StyledTagUl>
+			<ul className={s.tagList}>
 				{tags
 					.sort(
 						pipeComparators(
@@ -70,7 +54,7 @@ const TagList: React.SFC<ITagListProps> = ({ pathContext: { tags, listTitle } })
 							{tag.tag} ({tag.count})
 						</a>
 					))}
-			</StyledTagUl>
+			</ul>
 		</DefaultLayout>
 	);
 };

@@ -1,0 +1,17 @@
+.nav {
+	display: grid;
+	grid-gap: 0.25rem 0.75rem;
+	justify-items: flex-start;
+	justify-content: flex-start;
+	grid-template-columns: repeat(auto-fit, minmax(1ch, 2ch));
+
+	a.current {
+		font-weight: bold;
+	}
+
+	a.disabled:not(.current) {
+		pointer-events: none;
+		color: var(--text-color);
+		box-shadow: none;
+	}
+}

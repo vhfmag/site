@@ -1,30 +1,11 @@
 import * as React from "react";
-import styled from "styled-components";
 import { Link } from "gatsby";
 import VisuallyHidden from "@reach/visually-hidden";
-import { fromTheme } from "../../styles/theme";
+import s from "./style.module.scss";
 
 export type IPaginatorProps = ObjectOmit<GatsbyPaginatorProps<any>, "group"> & {
 	className?: string;
 };
-
-const StyledNav = styled.nav`
-	display: grid;
-	grid-gap: 0.25rem 0.75rem;
-	justify-items: flex-start;
-	justify-content: flex-start;
-	grid-template-columns: repeat(auto-fit, minmax(1ch, 2ch));
-
-	a.current {
-		font-weight: bold;
-	}
-
-	a.disabled:not(.current) {
-		pointer-events: none;
-		color: ${fromTheme("textColor")};
-		box-shadow: none;
-	}
-`;
 
 const buildPath = ({ pathPrefix, index }: { pathPrefix: string; index: number }) =>
 	(pathPrefix ? `/${pathPrefix}` : "") + (index === 1 ? "/" : `/${index}`);
@@ -43,7 +24,7 @@ export const Paginator: React.SFC<IPaginatorProps> = ({
 	}
 
 	return (
-		<StyledNav aria-label="Paginação" className={className}>
+		<nav aria-label="Paginação" className={`${s.nav} ${className}`}>
 			{" "}
 			<Link
 				className={(first && "disabled") || ""}
@@ -102,6 +83,6 @@ export const Paginator: React.SFC<IPaginatorProps> = ({
 				{" "}
 				<span aria-hidden>&gt;&gt;</span> <VisuallyHidden>Última página</VisuallyHidden>
 			</Link>{" "}
-		</StyledNav>
+		</nav>
 	);
 };

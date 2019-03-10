@@ -1,23 +1,5 @@
 import * as React from "react";
-import styled from "styled-components";
-
-export const StyledHighlight = styled.blockquote`
-	@media (min-width: 600px) {
-		width: 33%;
-		min-width: 100px;
-		margin-left: 40px;
-
-		&.left {
-			float: left;
-			clear: left;
-		}
-
-		&.right {
-			float: right;
-			clear: right;
-		}
-	}
-`;
+import s from "./style.module.scss";
 
 export interface IFloatProps extends React.HTMLProps<HTMLQuoteElement> {
 	position?: "right" | "left";
@@ -28,14 +10,15 @@ export function Float({
 	ref: _,
 	children,
 	as,
+	className,
 	...blockquoteProps
 }: IFloatProps): React.ReactElement<{}> {
 	return (
-		<StyledHighlight
+		<blockquote
 			{...blockquoteProps}
-			className={`${blockquoteProps.className || ""} ${position || ""}`}
+			className={`${s.float} ${className || ""} ${s[position] || ""}`}
 		>
 			{children}
-		</StyledHighlight>
+		</blockquote>
 	);
 }

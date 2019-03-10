@@ -1,0 +1,11 @@
+a.socialLink {
+	font-size: 1.5em;
+	color: var(--theme-color) !important;
+	box-shadow: none !important;
+
+	&:active,
+	&:hover,
+	&:focus {
+		color: var(--text-color) !important;
+	}
+}

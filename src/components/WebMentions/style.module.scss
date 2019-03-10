@@ -1,0 +1,52 @@
+.section {
+	> section > ul {
+		margin: 0;
+
+		> li {
+			list-style: none;
+		}
+	}
+
+	.in-reply-to + .in-reply-to {
+		margin-top: 2em;
+	}
+}
+
+.mention {
+	> p {
+		margin-top: 0.5em;
+	}
+}
+
+.mentionHeader {
+	display: grid;
+	grid-template-columns: max-content auto;
+	grid-template-areas: "photo name" "photo metadata";
+	justify-content: flex-start;
+	grid-column-gap: 1em;
+
+	--image-size: 4em;
+
+	img {
+		margin: 0;
+		width: var(--image-size);
+		height: var(--image-size);
+		object-fit: cover;
+		object-position: center;
+		grid-area: photo;
+	}
+
+	a {
+		grid-area: name;
+	}
+
+	.metadata {
+		grid-area: metadata;
+
+		* + * {
+			&:before {
+				content: " - ";
+			}
+		}
+	}
+}
