@@ -5,7 +5,7 @@ import { graphql, Link } from "gatsby";
 import DefaultLayout from "../components/layout";
 import { Paginator } from "../components/Paginator";
 import { IGeneralMetadataFragment, IMarkdownEntryNode } from "../fragments";
-import styled from "../styles/styled";
+import styled from "styled-components";
 import { isFolder } from "../utils/types";
 import { GatsbyPaginatorProps } from "../declarations";
 

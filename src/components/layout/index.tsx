@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Helmet } from "react-helmet";
-import styled, { createGlobalStyle } from "../../styles/styled";
+import styled, { createGlobalStyle } from "styled-components";
 import { StaticQuery, graphql } from "gatsby";
 import { MDXProvider } from "@mdx-js/tag";
 
@@ -17,7 +17,7 @@ import { SkipNavContent, SkipNavLink } from "@reach/skip-nav";
 import "@reach/skip-nav/styles.css";
 import { blog, blogRef } from "../../utils/microdata";
 import { responsiveBreakpoint } from "../../utils/consts";
-import { kebabCase } from "lodash";
+import kebabCase from "lodash/kebabCase";
 import { components } from "../mdxComponents";
 
 const GlobalStyle = createGlobalStyle`

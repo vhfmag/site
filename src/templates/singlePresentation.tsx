@@ -6,7 +6,7 @@ import DefaultLayout from "../components/layout";
 import { isFolder } from "../utils/types";
 import { IGeneralMetadataFragment, IMarkdownEntryFragment } from "../fragments";
 import { WindowLocation } from "@reach/router";
-import styled from "../styles/styled";
+import styled from "styled-components";
 import { responsiveBreakpoint } from "../utils/consts";
 
 interface IEntryTemplateProps {

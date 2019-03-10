@@ -3,7 +3,7 @@ import { graphql, Link } from "gatsby";
 import DefaultLayout from "../components/layout";
 import { IMarkdownEntryFragment } from "../fragments";
 import { EntrySummary } from "../components/EntrySummary";
-import styled from "../styles/styled";
+import styled from "styled-components";
 import { Folder } from "../utils/types";
 import { responsiveBreakpoint } from "../utils/consts";
 

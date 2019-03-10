@@ -1,5 +1,5 @@
 import * as React from "react";
-import styled from "../../../styles/styled";
+import styled from "styled-components";
 
 export const StyledHighlight = styled.blockquote`
 	@media (min-width: 600px) {

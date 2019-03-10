@@ -1,8 +1,8 @@
 import * as React from "react";
-import { groupBy } from "lodash";
+import groupBy from "lodash/groupBy";
 import { WebMention, WebMentionProperty } from "../../utils/webmention";
 import { formatDate } from "../../utils/utils";
-import styled from "../../styles/styled";
+import styled from "styled-components";
 
 export interface WebMentionsProps {
 	mentions: WebMention[];

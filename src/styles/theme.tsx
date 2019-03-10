@@ -1,5 +1,5 @@
 import { textColor, themeColor, backgroundColor } from "../utils/consts";
-import { kebabCase } from "lodash";
+import kebabCase from "lodash/kebabCase";
 
 export interface ITheme {
 	backgroundColor: string;

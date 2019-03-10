@@ -1,5 +1,5 @@
 import * as React from "react";
-import styled from "../styles/styled";
+import styled from "styled-components";
 import { Helmet } from "react-helmet";
 import FlipMove from "react-flip-move";
 import DefaultLayout from "../components/layout";
