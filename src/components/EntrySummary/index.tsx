@@ -1,5 +1,5 @@
 import * as React from "react";
-import styled from "../../styles/styled";
+import styled from "styled-components";
 import { IEntryHeaderProps, EntryHeader } from "../EntryHeader";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
