@@ -150,12 +150,28 @@ module.exports = {
 		"gatsby-plugin-sharp",
 		"gatsby-plugin-sri",
 		"gatsby-transformer-sharp",
-		"gatsby-plugin-sass",
+		{
+			resolve: "gatsby-plugin-sass",
+			options: {
+				cssLoaderOptions: {
+					localIdentName:
+						process.env.NODE_ENV === "production"
+							? "[local]--[hash:base64:5]"
+							: "[path][name]__[local]--[hash:base64:5]",
+				},
+			},
+		},
 		{
 			resolve: `gatsby-plugin-typography`,
 			options: {
 				pathToConfigModule: `src/utils/typography`,
 				omitGoogleFont: true,
+			},
+		},
+		{
+			resolve: "gatsby-plugin-purgecss",
+			options: {
+				printRejected: true,
 			},
 		},
 		"gatsby-plugin-sitemap",

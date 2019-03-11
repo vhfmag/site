@@ -80,7 +80,7 @@
 	"license": "MIT",
 	"main": "n/a",
 	"scripts": {
-		"build": "gatsby build",
+		"build": "NODE_ENV=production gatsby build",
 		"start": "gatsby serve",
 		"prepare": "patch-package",
 		"develop": "gatsby develop",
@@ -88,6 +88,7 @@
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"devDependencies": {
+		"gatsby-plugin-purgecss": "^3.1.0",
 		"prettier": "^1.16.4",
 		"react-axe": "^3.0.2",
 		"regenerator-runtime": "^0.13.1",
