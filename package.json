@@ -80,7 +80,7 @@
 	"license": "MIT",
 	"main": "n/a",
 	"scripts": {
-		"build": "gatsby build",
+		"build": "NODE_ENV=production gatsby build",
 		"start": "gatsby serve",
 		"prepare": "patch-package",
 		"develop": "gatsby develop",
