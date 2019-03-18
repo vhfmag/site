@@ -10,7 +10,7 @@ import "typeface-montserrat";
 import "typeface-zilla-slab";
 import "./icons";
 
-// import { dom } from "@fortawesome/fontawesome-svg-core";
+import { dom } from "@fortawesome/fontawesome-svg-core";
 import { darkTheme, lightTheme, ITheme } from "../../styles/theme";
 import { SkipNavContent, SkipNavLink } from "@reach/skip-nav";
 import "@reach/skip-nav/styles.css";
@@ -139,6 +139,8 @@ const RawLayout: React.SFC<ILayoutData> = ({
 								body.light {
 									${themeToCSS(lightTheme)};
 								}
+
+								${dom.css()}
 							`}</style>
 							<link
 								rel="webmention"
