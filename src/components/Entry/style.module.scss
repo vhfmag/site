@@ -10,6 +10,25 @@
 		}
 	}
 
+	[itemprop="articleBody"] {
+		--fluid-type-min-size: 1;
+		--fluid-type-max-size: 1.4;
+		--fluid-type-min-screen: 20;
+		--fluid-type-max-screen: 100;
+
+		/* We multiply by 1rem to essentially stick a rem unit to a number. */
+		font-size: calc(
+			(var(--fluid-type-min-size) * 1rem) +
+				(var(--fluid-type-max-size) - var(--fluid-type-min-size)) *
+				(100vw - (var(--fluid-type-min-screen) * 1rem)) /
+				(var(--fluid-type-max-screen) - var(--fluid-type-min-screen))
+		);
+	}
+
+	p {
+		margin: 1em 0;
+	}
+
 	h1,
 	h2,
 	h3,
