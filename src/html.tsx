@@ -18,7 +18,10 @@ export default function HTML(props: any) {
 				<div key={`body`} id="___gatsby" dangerouslySetInnerHTML={{ __html: props.body }} />
 				{props.postBodyComponents}
 			</body>
-			<script type="text/javascript">{`
+			<script
+				type="text/javascript"
+				dangerouslySetInnerHTML={{
+					__html: `
         (function() {
           // Change these if you use something different in your hook.
           var storageKey = 'currentTheme';
@@ -56,7 +59,9 @@ export default function HTML(props: any) {
             localStorage.setItem(storageKey, JSON.stringify(isDarkMode));
           }
         })();
-      `}</script>
+      `,
+				}}
+			/>
 		</html>
 	);
 }
