@@ -12,6 +12,8 @@ export default function HTML(props: any) {
 					name="viewport"
 					content="width=device-width, initial-scale=1, shrink-to-fit=no"
 				/>
+				<link rel="preconnect" href="https://yuno.victormagalhaes.codes" />
+				<link rel="preconnect" href="https://cdn.polyfill.io" />
 				{props.headComponents}
 			</head>
 			<body {...props.bodyAttributes}>
