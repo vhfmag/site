@@ -1,0 +1,54 @@
+diff --git a/node_modules/mdx-utils/index.js b/node_modules/mdx-utils/index.js
+index f0c208f..341e29a 100755
+--- a/node_modules/mdx-utils/index.js
++++ b/node_modules/mdx-utils/index.js
+@@ -1,30 +1,23 @@
+ exports.preToCodeBlock = preProps => {
+-  if (
+-    // children is code element
+-    preProps.children &&
+-    // code props
+-    preProps.children.props &&
+-    // if children is actually a <code>
+-    preProps.children.props.mdxType === "code"
+-  ) {
+-    // we have a <pre><code> situation
+-    const {
+-      children: codeString,
+-      className = "",
+-      ...props
+-    } = preProps.children.props;
++	if (
++		// children is code element
++		preProps.children &&
++		// code props
++		preProps.children.props &&
++		// if children is actually a <code>
++		preProps.children.props.mdxType === "code"
++	) {
++		// we have a <pre><code> situation
++		const { children: codeString, className = "", ...props } = preProps.children.props;
+ 
+-    const matches = className.match(/language-(?<lang>.*)/);
++		const matches = className.match(/language-(.*)/);
+ 
+-    return {
+-      codeString: codeString.trim(),
+-      className,
+-      language:
+-        matches && matches.groups && matches.groups.lang
+-          ? matches.groups.lang
+-          : "",
+-      ...props
+-    };
+-  }
+-  return undefined;
++		return {
++			codeString: codeString.trim(),
++			className,
++			language: matches && matches[1] ? matches[1] : "",
++			...props,
++		};
++	}
++	return undefined;
+ };
