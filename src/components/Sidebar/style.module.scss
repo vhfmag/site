@@ -80,17 +80,17 @@
 	}
 }
 
-.socialLinks {
+.socialLinkItem {
+	margin: 2pt;
+}
+
+.socialLinkList {
 	display: grid;
 	grid-template-columns: repeat(auto-fill, 1.75em);
 	grid-auto-flow: row dense;
 	grid-gap: 4pt;
 	list-style-type: none;
 	margin: 0;
-
-	li {
-		margin: 0;
-	}
 }
 
 .themeSelector {
@@ -142,4 +142,9 @@
 			}
 		}
 	}
+}
+
+.email {
+	display: block;
+	margin-bottom: 2pt;
 }

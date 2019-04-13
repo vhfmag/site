@@ -109,25 +109,23 @@ export const Sidebar: React.SFC<ISidebarProps> = ({
 				/>
 			</VisuallyHidden>
 			<div className={s.section}>
-				<address>
+				<address className={s.email}>
 					<a itemProp="email" className="u-email" href={`mailto:${email}`}>
 						{email}
 					</a>
 				</address>
-				<div>
-					<a href={sourceUrl!}>ver código fonte</a>
-				</div>
+				<a href={sourceUrl!}>ver código fonte</a>
 			</div>
 			<nav className={s.nav} aria-label="Principal">
 				<NavLinks navs={nav} />
 			</nav>
 			<address aria-label="Mídias sociais">
-				<ul className={s.socialLinks}>
-					<li>
+				<ul className={s.socialLinkList}>
+					<li className={s.socialLinkItem}>
 						<SocialLink icon="rss" serviceName="RSS" rel="alternate" url="/rss.xml" />
 					</li>
 					{social!.filter(isNotNullish).map(socialProps => (
-						<li key={socialProps.serviceName!}>
+						<li key={socialProps.serviceName!} className={s.socialLinkItem}>
 							<SocialLink {...socialProps} />
 						</li>
 					))}
