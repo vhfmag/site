@@ -35,8 +35,26 @@
 	h4,
 	h5,
 	h6 {
-		:global(.anchor) path {
-			fill: --theme-color;
+		position: relative;
+
+		:global(.anchor) {
+			opacity: 0;
+			position: absolute;
+			right: calc(100% + 1ch);
+			box-shadow: none;
+			transition: opacity 0.5s ease;
+
+			svg {
+				fill: var(--theme-color);
+			}
+		}
+
+		&:hover :global(.anchor),
+		&:target :global(.anchor),
+		:global(.anchor):active,
+		:global(.anchor):hover,
+		:global(.anchor):focus {
+			opacity: 1;
 		}
 	}
 }
