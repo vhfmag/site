@@ -8,6 +8,7 @@ import { IGeneralMetadataFragment, IMarkdownEntryNode } from "../fragments";
 import { isFolder } from "../utils/types";
 import { GatsbyPaginatorProps } from "../declarations";
 import s from "./entryList.module.scss";
+import { collection } from "../utils/microdata";
 
 interface IEntryNode {
 	node: IMarkdownEntryNode;
@@ -73,7 +74,7 @@ const EntryList: React.SFC<IBookmarkListProps> = ({
 				</ul>
 			</nav>
 			<Paginator {...pathContext} />
-			<div className={`${s.listWrapper} h-feed`}>
+			<div className={`${s.listWrapper} h-feed`} itemType={collection}>
 				{posts.map(
 					({
 						node: {
