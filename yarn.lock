@@ -6033,10 +6033,10 @@ gatsby-plugin-polyfill-io@^1.1.0:
   dependencies:
     babel-runtime "^6.26.0"
 
-gatsby-plugin-preact@^2.0.10:
-  version "2.0.10"
-  resolved "https://registry.yarnpkg.com/gatsby-plugin-preact/-/gatsby-plugin-preact-2.0.10.tgz#64c52859a727b7cbd6a3cb416946970ea7018cea"
-  integrity sha512-DmO8r0df41cybVsp8JJGhc6hdSjvDrhGgMpfCHhfxMTuKTFL9d/LrV/lRawwddXMZOFMXL3zf/4qsc7PJcDPWQ==
+gatsby-plugin-preact@2.0.11:
+  version "2.0.11"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-preact/-/gatsby-plugin-preact-2.0.11.tgz#c4bdbeeb2231ff36e4d1c1724bcd9dd0ad1c293d"
+  integrity sha512-ArxnURrqLnPb3BTI1dsOuRNpl6kEVnUoYeg9l0kr8Y+Ywzy5DolwMs4q9qOETW3TP4BVaQG4MH38YIIyB1vk5A==
   dependencies:
     "@babel/runtime" "^7.0.0"
 
