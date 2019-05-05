@@ -1,0 +1,17 @@
+diff --git a/node_modules/gatsby-plugin-preact/gatsby-node.js b/node_modules/gatsby-plugin-preact/gatsby-node.js
+index 67e5319..840c88d 100755
+--- a/node_modules/gatsby-plugin-preact/gatsby-node.js
++++ b/node_modules/gatsby-plugin-preact/gatsby-node.js
+@@ -11,9 +11,9 @@ exports.onCreateWebpackConfig = function (_ref) {
+     actions.setWebpackConfig({
+       resolve: {
+         alias: {
+-          react: "preact-compat",
+-          "react-dom": "preact-compat",
+-          "create-react-class": "preact-compat/lib/create-react-class"
++          react: "preact/compat",
++          "react-dom": "preact/compat",
++          "create-react-class": "preact/compat/lib/create-react-class"
+         }
+       }
+     });

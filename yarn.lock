@@ -6033,6 +6033,13 @@ gatsby-plugin-polyfill-io@^1.1.0:
   dependencies:
     babel-runtime "^6.26.0"
 
+gatsby-plugin-preact@2.0.11:
+  version "2.0.11"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-preact/-/gatsby-plugin-preact-2.0.11.tgz#c4bdbeeb2231ff36e4d1c1724bcd9dd0ad1c293d"
+  integrity sha512-ArxnURrqLnPb3BTI1dsOuRNpl6kEVnUoYeg9l0kr8Y+Ywzy5DolwMs4q9qOETW3TP4BVaQG4MH38YIIyB1vk5A==
+  dependencies:
+    "@babel/runtime" "^7.0.0"
+
 gatsby-plugin-purify-css@^2.2.1:
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/gatsby-plugin-purify-css/-/gatsby-plugin-purify-css-2.2.1.tgz#a3716a0d53ac2bae669d8c01afd13fe7c79aaa81"
@@ -11710,6 +11717,11 @@ potrace@^2.1.1:
   integrity sha1-eREahYGX82ZBiEX2Z/6Pf6wKeds=
   dependencies:
     jimp "^0.2.24"
+
+preact@^10.0.0-beta.1:
+  version "10.0.0-beta.1"
+  resolved "https://registry.yarnpkg.com/preact/-/preact-10.0.0-beta.1.tgz#f7d524668db72ed74e99d447f09600fa4db0b186"
+  integrity sha512-1uhj3JXOEzEPUof5t/iQW5heEvTOpexwS0FLAjJQfgfT8OCXICyzI2TwkYyFJ+W9q9GsDmhZgFagH2G0akFveQ==
 
 prebuild-install@^5.3.0:
   version "5.3.0"
