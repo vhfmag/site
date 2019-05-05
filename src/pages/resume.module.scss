@@ -1,0 +1,155 @@
+// const StyledListWrapper = styled.div`
+.listWrapper {
+	--horizontal-margin: 16pt;
+	--vertical-margin: 16pt;
+
+	display: flex;
+	flex-wrap: wrap;
+	margin: calc(-1 * var(--vertical-margin)) calc(-1 * var(--horizontal-margin));
+
+	& > * {
+		margin: var(--vertical-margin) var(--horizontal-margin);
+	}
+
+	@media print {
+		flex-direction: column;
+	}
+
+	[data-columns="1"] {
+		--columns: 1;
+	}
+
+	[data-columns="2"] {
+		--columns: 2;
+	}
+
+	[data-columns="3"] {
+		--columns: 3;
+	}
+}
+
+// const StyledList = styled.div`
+.list {
+	@media print {
+		--columns: 3;
+		break-inside: avoid;
+		page-break-inside: avoid;
+	}
+
+	ul {
+		display: grid;
+		margin: 8pt 0 0;
+		margin-left: 1em;
+		padding: 0;
+		grid-gap: 4pt 8pt;
+		grid-template-columns: repeat(var(--columns), 1fr);
+
+		li {
+			margin-left: 1em;
+			margin-bottom: 0;
+			word-wrap: normal;
+		}
+	}
+
+	@supports (column-count: 2) {
+		ul {
+			display: block;
+			column-count: var(--columns);
+			column-gap: 8pt;
+			column-width: 20ch;
+
+			@media (max-width: 500px) {
+				column-count: 1;
+				column-width: unset;
+			}
+
+			li {
+				break-inside: avoid;
+			}
+		}
+	}
+}
+
+// const StyledExperienceInfo = styled.div`}
+
+// const StyledExperienceProjects = styled.dl`
+.experienceProjects {
+	all: unset;
+
+	dt {
+		all: unset;
+	}
+
+	dd {
+		all: unset;
+	}
+
+	dt,
+	dd {
+		display: block;
+	}
+}
+
+// const StyledExperienceSkills = styled.ul`
+.experienceSkills {
+	all: unset;
+	display: flex;
+	flex-wrap: wrap;
+	align-items: flex-start;
+	margin: -4pt;
+
+	li {
+		all: unset;
+		margin: 4pt;
+		font-size: 0.8em;
+		padding: 0.25em 0.5em;
+		border-radius: 4pt;
+		color: var(--background-color);
+		background-color: var(--theme-color);
+	}
+}
+
+// const StyledExperience = styled.div`
+.experience {
+	display: grid;
+	grid-gap: 20px;
+	grid-template-rows: repeat(3, auto);
+	grid-template-columns: 180px auto;
+
+	img {
+		grid-row: 1/3;
+		grid-column: 1;
+		align-self: stretch;
+		justify-self: stretch;
+		min-height: 100px;
+	}
+
+	h4 {
+		all: unset;
+		color: var(--theme-color);
+		font-weight: bold;
+		font-size: 1.2em;
+	}
+
+	h5 {
+		all: unset;
+		color: var(--theme-color);
+		font-weight: bold;
+	}
+
+	h4,
+	.experienceInfo {
+		grid-column: 2;
+	}
+
+	& + & {
+		margin-top: 32pt;
+	}
+}
+
+// const Layout = styled(DefaultLayout)`
+.layout {
+	h2 {
+		margin-top: 1.5em;
+	}
+}

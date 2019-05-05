@@ -1,43 +1,13 @@
 import * as React from "react";
-import styled from "styled-components";
 import { IEntryHeaderProps, EntryHeader } from "../EntryHeader";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { Folder } from "../../utils/types";
 import { personRef, blogPosting, review } from "../../utils/microdata";
 import { folderToCategory } from "../../utils/consts";
+import s from "./style.module.scss";
 
 type IEntrySummaryProps = IEntryHeaderProps;
-
-const StyledEntryCategory = styled.div`
-	display: flex;
-	align-items: flex-end;
-	flex-direction: column;
-`;
-
-const StyledEntrySummary = styled.article`
-	display: grid;
-	grid-gap: 8pt;
-	grid-template-columns: min-content auto;
-
-	p,
-	h2,
-	h3 {
-		margin: 0;
-	}
-
-	h2 {
-		font-size: 1.5rem;
-	}
-
-	h3 {
-		font-size: 1.15rem;
-	}
-
-	& + & {
-		margin-top: 16pt;
-	}
-`;
 
 const iconPerFolder: Record<Folder, IconProp> = {
 	posts: "pen-nib",
@@ -50,16 +20,16 @@ export const EntrySummary: React.SFC<IEntrySummaryProps> = ({ ...headerProps }) 
 	const category = folderToCategory[headerProps.folderName];
 
 	return (
-		<StyledEntrySummary
+		<article
+			className={`${s.entrySummary} h-entry`}
 			itemProp="blogPost"
 			itemScope
 			itemRef={personRef}
 			itemType={
 				headerProps.folderName === "posts" ? blogPosting : [blogPosting, review].join(" ")
 			}
-			className="h-entry"
 		>
-			<StyledEntryCategory>
+			<div className={s.category}>
 				<span
 					className="fa-layers fa-fw fa-lg"
 					role="presentation"
@@ -79,8 +49,8 @@ export const EntrySummary: React.SFC<IEntrySummaryProps> = ({ ...headerProps }) 
 						icon={iconPerFolder[headerProps.folderName]}
 					/>
 				</span>
-			</StyledEntryCategory>
+			</div>
 			<EntryHeader {...headerProps} isFullPage={false} />
-		</StyledEntrySummary>
+		</article>
 	);
 };

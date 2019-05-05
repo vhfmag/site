@@ -1,33 +1,6 @@
 import * as React from "react";
-import styled from "styled-components";
 import { Float, IFloatProps } from "../Float";
-
-const CitationFloat = styled(Float)`
-	.description {
-		.author {
-		}
-
-		.from {
-			font-style: italic;
-		}
-
-		.author + .from {
-			&:before {
-				content: ", ";
-			}
-		}
-	}
-
-	cite {
-		&:before {
-			content: open-quote;
-		}
-
-		&:after {
-			content: close-quote;
-		}
-	}
-`;
+import s from "./style.module.scss";
 
 export interface ICitationProps extends IFloatProps {
 	quote?: string;
@@ -46,15 +19,15 @@ export function Citation({
 	...blockquoteProps
 }: ICitationProps) {
 	return (
-		<CitationFloat {...blockquoteProps}>
+		<Float {...blockquoteProps}>
 			{quote && <cite>{quote}</cite>}
 			{(author || from) && (
-				<div className="description">
-					{author && <span className="author">{author}</span>}
-					{from && <span className="from">{from}</span>}
+				<div className={s.description}>
+					{author && <span className={s.author}>{author}</span>}
+					{from && <span className={s.from}>{from}</span>}
 				</div>
 			)}
 			{children}
-		</CitationFloat>
+		</Float>
 	);
 }

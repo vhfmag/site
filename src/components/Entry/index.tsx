@@ -1,13 +1,12 @@
 import * as React from "react";
-import styled from "styled-components";
 import Helmet from "react-helmet";
 import { IEntryHeaderProps, EntryHeader } from "../EntryHeader";
 import { TableOfContents, ITreeNode } from "../TableOfContents";
-import { fromTheme } from "../../styles/theme";
 import { Folder } from "../../utils/types";
 import { blogPosting, review, personRef } from "../../utils/microdata";
 import { fetchWebMentions, WMFeed } from "../../utils/webmention";
 import { WebMentions } from "../WebMentions";
+import s from "./style.module.scss";
 
 type IEntryProps = IEntryHeaderProps & {
 	headings: Array<Required<IHeading>> | undefined;
@@ -15,30 +14,6 @@ type IEntryProps = IEntryHeaderProps & {
 	content?: React.ReactNode;
 	excerpt: string;
 };
-
-const StyledEntry = styled.article`
-	.footnotes {
-		clear: both;
-
-		li {
-			p {
-				margin: 0;
-				display: inline;
-			}
-		}
-	}
-
-	h1,
-	h2,
-	h3,
-	h4,
-	h5,
-	h6 {
-		.anchor path {
-			fill: ${fromTheme("themeColor")};
-		}
-	}
-`;
 
 interface IHeading {
 	value: string;
@@ -109,8 +84,8 @@ export const Entry: React.SFC<IEntryProps> = ({
 	}, []);
 
 	return (
-		<StyledEntry
-			className="h-entry"
+		<article
+			className={`${s.entry} h-entry`}
 			itemProp="blogPost"
 			itemScope
 			itemRef={personRef}
@@ -153,6 +128,6 @@ export const Entry: React.SFC<IEntryProps> = ({
 					<WebMentions mentions={mentions.children} />
 				</footer>
 			)}
-		</StyledEntry>
+		</article>
 	);
 };

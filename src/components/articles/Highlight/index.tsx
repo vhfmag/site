@@ -1,8 +1,11 @@
-import styled from "styled-components";
-import { Float } from "../Float";
-import { withProps } from "../../../utils/types";
+import * as React from "react";
+import { Float, IFloatProps } from "../Float";
+import s from "./style.module.scss";
 
-export const Highlight = styled(withProps<{ size?: "small" | "medium" }, typeof Float>(Float))`
-	font-size: ${({ size }) => (size === "small" ? "1.25em" : size === "medium" ? "1.5em" : "2em")};
-	line-height: 1;
-`;
+export interface HighlightProps extends IFloatProps {
+	size?: "small" | "medium";
+}
+
+export const Highlight = ({ size, className, ...floatProps }: HighlightProps) => (
+	<Float {...floatProps} className={`${className} ${(size && s[size]) || ""}`} />
+);

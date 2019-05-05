@@ -1,61 +1,6 @@
 import * as React from "react";
-import styled from "styled-components";
 import Slugger from "github-slugger";
-
-const StyledTOC = styled.aside`
-	@media (min-width: 1000px) {
-		margin: 0 1em 1em;
-		float: right;
-		width: 400px;
-		max-width: 30vw;
-		padding: 1em;
-	}
-
-	@media (min-width: 1500px) {
-		position: sticky;
-		top: 1em;
-	}
-
-	background-color: var(--background-color);
-	margin-bottom: 1.6875em;
-
-	ol {
-		counter-reset: item;
-		list-style-type: none;
-
-		ol {
-			margin-top: 0;
-			margin-bottom: 0;
-		}
-	}
-
-	details {
-		summary {
-			margin: 0;
-
-			> * {
-				display: inline;
-			}
-		}
-	}
-
-	li {
-		position: relative;
-		margin-bottom: 0;
-
-		p {
-			margin: 0;
-		}
-	}
-
-	li:before {
-		left: 0;
-		transform: translateX(calc(-100% - 1ch));
-		position: absolute;
-		content: counters(item, ".") ". ";
-		counter-increment: item;
-	}
-`;
+import s from "./style.module.scss";
 
 export interface ITreeNode<T> {
 	value: T;
@@ -115,13 +60,13 @@ export const TableOfContents: React.SFC<ITableOfContentsProps> = ({
 	const slugger = new Slugger();
 
 	return (
-		<StyledTOC>
+		<aside className={s.toc}>
 			<details>
 				<summary>
 					<h2>{title}</h2>
 				</summary>
 				<ContentsTree slugger={slugger} headings={headings} />
 			</details>
-		</StyledTOC>
+		</aside>
 	);
 };

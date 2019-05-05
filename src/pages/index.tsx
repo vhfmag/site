@@ -3,9 +3,8 @@ import { graphql, Link } from "gatsby";
 import DefaultLayout from "../components/layout";
 import { IMarkdownEntryFragment } from "../fragments";
 import { EntrySummary } from "../components/EntrySummary";
-import styled from "styled-components";
 import { Folder } from "../utils/types";
-import { responsiveBreakpoint } from "../utils/consts";
+import s from "./home.module.scss";
 
 interface MarkdownEdges {
 	edges: Array<{
@@ -21,18 +20,6 @@ interface HomePageProps {
 	};
 }
 
-const StyledEntrySection = styled.section`
-	max-width: var(--max-width-desktop);
-
-	@media (max-width: ${responsiveBreakpoint}) {
-		max-width: var(--max-width-mobile);
-	}
-
-	ul {
-		margin: 0;
-	}
-`;
-
 const HomeSection = ({
 	sectionTitle,
 	sectionSlug,
@@ -43,7 +30,7 @@ const HomeSection = ({
 	list: MarkdownEdges;
 }) => {
 	return (
-		<StyledEntrySection>
+		<section className={s.entrySection}>
 			<h2>{sectionTitle}</h2>
 			<nav>
 				<ul>
@@ -88,20 +75,9 @@ const HomeSection = ({
 					)}
 				</ul>
 			</nav>
-		</StyledEntrySection>
+		</section>
 	);
 };
-
-const StyledSection = styled.section`
-	display: flex;
-	flex-wrap: wrap;
-
-	@supports (display: grid) {
-		display: grid;
-		grid-gap: 1rem;
-		grid-template-columns: repeat(auto-fill, minmax(45ch, max-content));
-	}
-`;
 
 const HomePage = ({ data: { posts, bookmarks, slides } }: HomePageProps) => {
 	const yearsOfExperience = Math.trunc(
@@ -122,7 +98,7 @@ const HomePage = ({ data: { posts, bookmarks, slides } }: HomePageProps) => {
 				isso, curtir foto de tatuagem, colagem e cerâmica e pagar de harebo fazendo trilhas.
 			</p>
 
-			<StyledSection>
+			<section className={s.section}>
 				<HomeSection list={posts} sectionTitle="Últimos posts" sectionSlug="posts" />
 				<HomeSection
 					list={bookmarks}
@@ -134,7 +110,7 @@ const HomePage = ({ data: { posts, bookmarks, slides } }: HomePageProps) => {
 					sectionTitle="Últimas apresentações"
 					sectionSlug="apresentacoes"
 				/>
-			</StyledSection>
+			</section>
 		</DefaultLayout>
 	);
 };

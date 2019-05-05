@@ -1,0 +1,81 @@
+:root {
+	--root-padding: 32px;
+	--root-border-width: 10px;
+	--sidebar-width: 270px;
+
+	--max-width-mobile: calc(100vw - 2 * var(--root-border-width) - 2 * var(--root-padding));
+	--max-width-desktop: calc(var(--max-width-mobile) - var(--sidebar-width));
+}
+
+html,
+body {
+	min-height: 100vh;
+	max-width: 100vw;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	border: var(--root-border-width) solid var(--theme-color);
+}
+
+address {
+	all: unset;
+}
+
+code {
+	background-color: rgba(255, 255, 255, 0.05);
+	padding: 0.1em;
+	color: var(--theme-color);
+}
+
+a,
+.anchor {
+	color: var(--theme-color);
+	text-decoration: none;
+	box-shadow: inset 0 -1px 0 var(--theme-color);
+	transition: 0.25s color ease, 0.25s box-shadow ease;
+
+	--box-shadow-active-height: -1.2em;
+
+	&:hover,
+	&:active,
+	&:focus {
+		color: var(--background-color);
+		box-shadow: inset 0 var(--box-shadow-active-height) 0 var(--theme-color);
+	}
+}
+
+a.gatsby-resp-image-link:any-link {
+	box-shadow: none;
+}
+
+abbr[title] {
+	border-bottom-color: var(--theme-color) !important;
+}
+
+dl {
+	dd {
+		margin-left: 1em;
+	}
+}
+
+details {
+	--heading-margin-bottom: 1.6875em;
+	--indicator-width: 0.6em;
+	--indicator-length: 0.5em;
+
+	summary {
+		/* without this, firefox doesn't show the trigger triangle */
+		display: list-item;
+		color: var(--theme-color);
+		margin-bottom: 1em;
+	}
+}
+
+[data-reach-skip-link]:focus {
+	background-color: var(--theme-color) !important;
+	color: var(--background-color) !important;
+	opacity: 1;
+}

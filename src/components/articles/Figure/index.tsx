@@ -1,27 +1,5 @@
 import * as React from "react";
-import styled from "styled-components";
-
-const StyledFigure = styled.figure`
-	padding: 16pt;
-	display: grid;
-	grid-gap: 8pt;
-
-	img {
-		margin: 0;
-	}
-
-	figcaption {
-		display: contents;
-	}
-
-	p,
-	h1,
-	h2,
-	h3,
-	h4 {
-		margin: 0;
-	}
-`;
+import s from "./style.module.scss";
 
 export interface IFigureProps {
 	src: string;
@@ -31,7 +9,7 @@ export interface IFigureProps {
 }
 
 export const Figure: React.SFC<IFigureProps> = ({ alt, attr, src, title }) => (
-	<StyledFigure>
+	<figure className={s.figure}>
 		<img src={require(`../../../assets${src}`)} alt={alt} />
 		{(title || attr) && (
 			<figcaption>
@@ -39,5 +17,5 @@ export const Figure: React.SFC<IFigureProps> = ({ alt, attr, src, title }) => (
 				{attr && <p>{attr}</p>}
 			</figcaption>
 		)}
-	</StyledFigure>
+	</figure>
 );

@@ -1,0 +1,14 @@
+.tagList {
+	display: flex;
+	flex-wrap: wrap;
+	margin: -8pt;
+
+	& > li,
+	& > [role="listitem"] {
+		margin: 8pt;
+		padding: 2pt 4pt;
+		border-radius: 4pt;
+		color: var(--background-color);
+		background-color: var(--theme-color);
+	}
+}

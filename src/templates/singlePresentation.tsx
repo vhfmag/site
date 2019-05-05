@@ -6,25 +6,13 @@ import DefaultLayout from "../components/layout";
 import { isFolder } from "../utils/types";
 import { IGeneralMetadataFragment, IMarkdownEntryFragment } from "../fragments";
 import { WindowLocation } from "@reach/router";
-import styled from "styled-components";
-import { responsiveBreakpoint } from "../utils/consts";
+import s from "./singlePresentation.module.scss";
 
 interface IEntryTemplateProps {
 	data: IGeneralMetadataFragment & { mdx: IMarkdownEntryFragment };
 	location: WindowLocation;
 	pathContext: any;
 }
-
-const StyledIFrame = styled.iframe`
-	width: 70ch;
-	height: 50ch;
-
-	max-width: var(--max-width-desktop);
-
-	@media (max-width: ${responsiveBreakpoint}) {
-		max-width: var(--max-width-mobile);
-	}
-`;
 
 const SingleEntryTemplate = ({
 	location,
@@ -75,9 +63,10 @@ const SingleEntryTemplate = ({
 					</a>
 					, ou veja daqui mesmo:
 				</p>
-				<StyledIFrame
+				<iframe
 					src={link}
 					title="Slides da apresentação"
+					className={s.presentation}
 					sandbox="allow-same-origin allow-scripts"
 				/>
 				{body && (

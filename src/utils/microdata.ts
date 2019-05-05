@@ -11,3 +11,4 @@ export const comment = `${schemaNS}Comment`;
 export const blogPosting = `${schemaNS}BlogPosting`;
 export const organization = `${schemaNS}Organization`;
 export const creativeWork = `${schemaNS}CreativeWork`;
+export const collection = `${schemaNS}Collection`;

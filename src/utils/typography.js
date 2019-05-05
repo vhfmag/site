@@ -55,6 +55,9 @@ const typography = new Typography({
 		"p code": {
 			display: "inline-block",
 		},
+		code: {
+			fontSize: "0.85em",
+		},
 		[MOBILE_MEDIA_QUERY]: {
 			blockquote: {
 				marginLeft: rhythm(-3 / 4),
