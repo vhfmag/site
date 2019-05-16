@@ -144,6 +144,9 @@ module.exports = {
 					{
 						resolve: "gatsby-remark-a11y-emoji",
 					},
+					{
+						resolve: `gatsby-remark-prismjs`,
+					},
 				],
 			},
 		},
