@@ -2,12 +2,27 @@ import Typography from "typography";
 // import { textColor, themeColor, backgroundColor } from "../utils/consts";
 import { MOBILE_MEDIA_QUERY } from "typography-breakpoint-constants";
 
+const systemFontStack = [
+	"-apple-system",
+	"BlinkMacSystemFont",
+	"Segoe UI",
+	"Roboto",
+	"Oxygen-Sans",
+	"Ubuntu",
+	"Cantarell",
+	"Helvetica Neue",
+	"sans-serif",
+	"Apple Color Emoji",
+	"Segoe UI Emoji",
+	"Segoe UI Symbol",
+];
+
 const typography = new Typography({
 	title: "Grand View",
 	baseFontSize: "16px",
 	baseLineHeight: 1.6875,
-	headerFontFamily: ["Montserrat", "sans-serif"],
-	bodyFontFamily: ["Zilla Slab", "sans-serif"],
+	headerFontFamily: systemFontStack,
+	bodyFontFamily: systemFontStack,
 	headerColor: "var(--theme-color)",
 	bodyColor: "var(--text-color)",
 	backgroundColor: "var(--background-color)",

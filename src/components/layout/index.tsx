@@ -6,8 +6,6 @@ import { MDXProvider } from "@mdx-js/tag";
 import { SiteMetadata_2, PersonalJson } from "../../graphql-types";
 import { Sidebar } from "../Sidebar";
 
-import "typeface-montserrat";
-import "typeface-zilla-slab";
 import "./icons";
 
 import { dom } from "@fortawesome/fontawesome-svg-core";
@@ -85,53 +83,52 @@ const RawLayout: React.SFC<ILayoutData> = ({
 	};
 
 	return (
-		<React.StrictMode>
-			<MDXProvider components={components}>
-				<ThemeContext.Provider value={{ theme: chosenTheme, setTheme }}>
-					<div
-						{...props}
-						className={`${s.root} ${className}`}
-						itemScope
-						itemType={blog}
-						id={blogRef}
-						itemID={blogRef}
+		<MDXProvider components={components}>
+			<ThemeContext.Provider value={{ theme: chosenTheme, setTheme }}>
+				<div
+					{...props}
+					className={`${s.root} ${className}`}
+					itemScope
+					itemType={blog}
+					id={blogRef}
+					itemID={blogRef}
+				>
+					<Helmet
+						htmlAttributes={{
+							lang: "pt-br",
+						}}
+						bodyAttributes={{ class: theme }}
+						defaultTitle={siteMetadata.title!}
+						titleTemplate={`%s — ${siteMetadata.title}`}
+						meta={[
+							{
+								name: "description",
+								content: plainTextDescription,
+							},
+							{
+								name: "keywords",
+								content: [
+									"javascript",
+									"typescript",
+									"development",
+									"web development",
+									"web",
+									"privacy",
+									"decentralized web",
+									"decentralization",
+									"p2p",
+									"personal",
+									"blog",
+									"brazilian",
+								].join(", "),
+							},
+							{
+								name: "google-site-verification",
+								content: "RHQh7j4JKTIEmRsQrcOD1Pk7OoLoW8VK9YG4LscV7d0",
+							},
+						]}
 					>
-						<Helmet
-							htmlAttributes={{
-								lang: "pt-br",
-							}}
-							bodyAttributes={{ class: theme }}
-							defaultTitle={siteMetadata.title!}
-							titleTemplate={`%s — ${siteMetadata.title}`}
-							meta={[
-								{
-									name: "description",
-									content: plainTextDescription,
-								},
-								{
-									name: "keywords",
-									content: [
-										"javascript",
-										"typescript",
-										"development",
-										"web development",
-										"web",
-										"privacy",
-										"decentralized web",
-										"decentralization",
-										"p2p",
-										"personal",
-										"blog",
-										"brazilian",
-									].join(", "),
-								},
-								{
-									name: "google-site-verification",
-									content: "RHQh7j4JKTIEmRsQrcOD1Pk7OoLoW8VK9YG4LscV7d0",
-								},
-							]}
-						>
-							<style>{`
+						<style>{`
 								body.dark {
 									${themeToCSS(darkTheme)};
 								}
@@ -142,48 +139,47 @@ const RawLayout: React.SFC<ILayoutData> = ({
 
 								${dom.css()}
 							`}</style>
-							<link
-								rel="webmention"
-								href="https://webmention.io/victormagalhaes.codes/webmention"
-							/>
-							<link
-								rel="pingback"
-								href="https://webmention.io/victormagalhaes.codes/xmlrpc"
-							/>
-							<link rel="canonical" href="https://victormagalhaes.codes" />
-						</Helmet>
-
-						<SkipNavLink>Pular para conteúdo</SkipNavLink>
-						<Sidebar
-							metadata={siteMetadata}
-							personalData={personalJson}
-							nav={[
-								{
-									name: "home",
-									url: "/",
-								},
-								{
-									name: "blog",
-									url: "/posts",
-								},
-								{
-									name: "links",
-									url: "/links/",
-								},
-								{
-									name: "currículo",
-									url: "/resume/",
-								},
-							]}
+						<link
+							rel="webmention"
+							href="https://webmention.io/victormagalhaes.codes/webmention"
 						/>
+						<link
+							rel="pingback"
+							href="https://webmention.io/victormagalhaes.codes/xmlrpc"
+						/>
+						<link rel="canonical" href="https://victormagalhaes.codes" />
+					</Helmet>
 
-						<SkipNavContent />
+					<SkipNavLink>Pular para conteúdo</SkipNavLink>
+					<Sidebar
+						metadata={siteMetadata}
+						personalData={personalJson}
+						nav={[
+							{
+								name: "home",
+								url: "/",
+							},
+							{
+								name: "blog",
+								url: "/posts",
+							},
+							{
+								name: "links",
+								url: "/links/",
+							},
+							{
+								name: "currículo",
+								url: "/resume/",
+							},
+						]}
+					/>
 
-						<main className={s.main}>{children}</main>
-					</div>
-				</ThemeContext.Provider>
-			</MDXProvider>
-		</React.StrictMode>
+					<SkipNavContent />
+
+					<main className={s.main}>{children}</main>
+				</div>
+			</ThemeContext.Provider>
+		</MDXProvider>
 	);
 };
 
