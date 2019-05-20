@@ -13,6 +13,7 @@ import { darkTheme, lightTheme, ITheme } from "../../styles/theme";
 import { SkipNavContent, SkipNavLink } from "@reach/skip-nav";
 import "@reach/skip-nav/styles.css";
 import { blog, blogRef } from "../../utils/microdata";
+import kebabCase from "lodash/kebabCase";
 import { components } from "../mdxComponents";
 import s from "./style.module.scss";
 import "./style.global.scss";
@@ -53,7 +54,7 @@ export const ThemeContext = React.createContext<ThemeContextValue>({ theme: unde
 
 function themeToCSS(theme: ITheme) {
 	return Object.entries(theme)
-		.map(([name, value]) => `--${name}: ${value};`)
+		.map(([name, value]) => `--${kebabCase(name)}: ${value};`)
 		.join("\n");
 }
 

@@ -1,4 +1,5 @@
 import { textColor, themeColor, backgroundColor } from "../utils/consts";
+import kebabCase from "lodash/kebabCase";
 
 export interface ITheme {
 	backgroundColor: string;
@@ -18,4 +19,4 @@ export const lightTheme: ITheme = {
 	themeColor: "hsla(125, 51%, 32%, 1)",
 };
 
-export const fromTheme = (field: keyof ITheme) => `var(--${field})`;
+export const fromTheme = (field: keyof ITheme) => `var(--${kebabCase(field)})`;
