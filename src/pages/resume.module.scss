@@ -104,8 +104,8 @@
 		font-size: 0.8em;
 		padding: 0.25em 0.5em;
 		border-radius: 4pt;
-		color: var(--background-color);
-		background-color: var(--theme-color);
+		color: var(--backgroundColor);
+		background-color: var(--themeColor);
 	}
 }
 
@@ -126,14 +126,14 @@
 
 	h4 {
 		all: unset;
-		color: var(--theme-color);
+		color: var(--themeColor);
 		font-weight: bold;
 		font-size: 1.2em;
 	}
 
 	h5 {
 		all: unset;
-		color: var(--theme-color);
+		color: var(--themeColor);
 		font-weight: bold;
 	}
 

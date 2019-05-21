@@ -33,8 +33,8 @@
 		padding: 2pt 4pt;
 		cursor: pointer;
 		border-radius: 4pt;
-		background-color: var(--theme-color);
-		color: var(--background-color);
+		background-color: var(--themeColor);
+		color: var(--backgroundColor);
 
 		a {
 			color: inherit;
@@ -50,7 +50,7 @@
 	line-height: 1.4;
 
 	> * + *::before {
-		color: var(--text-color);
+		color: var(--textColor);
 		content: " | ";
 	}
 

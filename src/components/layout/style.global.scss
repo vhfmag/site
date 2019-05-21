@@ -17,7 +17,7 @@ body {
 }
 
 body {
-	border: var(--root-border-width) solid var(--theme-color);
+	border: var(--root-border-width) solid var(--themeColor);
 }
 
 address {
@@ -27,14 +27,14 @@ address {
 code {
 	background-color: rgba(255, 255, 255, 0.05);
 	padding: 0.1em;
-	color: var(--theme-color);
+	color: var(--themeColor);
 }
 
 a,
 .anchor {
-	color: var(--theme-color);
+	color: var(--themeColor);
 	text-decoration: none;
-	box-shadow: inset 0 -1px 0 var(--theme-color);
+	box-shadow: inset 0 -1px 0 var(--themeColor);
 	transition: 0.25s color ease, 0.25s box-shadow ease;
 
 	--box-shadow-active-height: -1.2em;
@@ -42,8 +42,8 @@ a,
 	&:hover,
 	&:active,
 	&:focus {
-		color: var(--background-color);
-		box-shadow: inset 0 var(--box-shadow-active-height) 0 var(--theme-color);
+		color: var(--backgroundColor);
+		box-shadow: inset 0 var(--box-shadow-active-height) 0 var(--themeColor);
 	}
 }
 
@@ -52,7 +52,7 @@ a.gatsby-resp-image-link:any-link {
 }
 
 abbr[title] {
-	border-bottom-color: var(--theme-color) !important;
+	border-bottom-color: var(--themeColor) !important;
 }
 
 dl {
@@ -69,13 +69,13 @@ details {
 	summary {
 		/* without this, firefox doesn't show the trigger triangle */
 		display: list-item;
-		color: var(--theme-color);
+		color: var(--themeColor);
 		margin-bottom: 1em;
 	}
 }
 
 [data-reach-skip-link]:focus {
-	background-color: var(--theme-color) !important;
-	color: var(--background-color) !important;
+	background-color: var(--themeColor) !important;
+	color: var(--backgroundColor) !important;
 	opacity: 1;
 }

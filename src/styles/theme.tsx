@@ -17,5 +17,3 @@ export const lightTheme: ITheme = {
 	backgroundColor: textColor,
 	themeColor: "hsla(125, 51%, 32%, 1)",
 };
-
-export const fromTheme = (field: keyof ITheme) => `var(--${field})`;

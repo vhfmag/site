@@ -40,10 +40,10 @@ export const EntrySummary: React.SFC<IEntrySummaryProps> = ({ ...headerProps }) 
 						icon="circle"
 						size="lg"
 						role="presentation"
-						color="var(--theme-color)"
+						color="var(--themeColor)"
 					/>
 					<FontAwesomeIcon
-						color="var(--background-color)"
+						color="var(--backgroundColor)"
 						transform="shrink-4"
 						role="presentation"
 						icon={iconPerFolder[headerProps.folderName]}
