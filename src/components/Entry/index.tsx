@@ -1,65 +1,20 @@
 import * as React from "react";
 import Helmet from "react-helmet";
 import { IEntryHeaderProps, EntryHeader } from "../EntryHeader";
-import { TableOfContents, ITreeNode } from "../TableOfContents";
+import { TableOfContents } from "../TableOfContents";
 import { Folder } from "../../utils/types";
 import { blogPosting, review, personRef } from "../../utils/microdata";
 import { fetchWebMentions, WMFeed } from "../../utils/webmention";
 import { WebMentions } from "../WebMentions";
 import s from "./style.module.scss";
+import { IMarkdownEntryTOC } from "../../fragments";
 
 type IEntryProps = IEntryHeaderProps & {
-	headings: Array<Required<IHeading>> | undefined;
+	tableOfContents: IMarkdownEntryTOC;
 	toc: boolean | undefined;
 	content?: React.ReactNode;
 	excerpt: string;
 };
-
-interface IHeading {
-	value: string;
-	depth: number;
-}
-
-function headingsToTree(hs: Array<Required<IHeading>>): Array<ITreeNode<string>> {
-	return hs.reduce<Array<ITreeNode<string>>>(
-		(nodes, h): Array<ITreeNode<string>> => {
-			const newNode: ITreeNode<string> = {
-				value: h.value!,
-				children: [],
-			};
-
-			const headingDepth = h.depth! - 1;
-
-			let depth = 1;
-			let lastNodeList = nodes;
-			let lastNode = nodes[nodes.length - 1];
-
-			while (
-				depth < headingDepth &&
-				lastNode &&
-				lastNode.children &&
-				lastNode.children.length > 0
-			) {
-				depth++;
-				lastNodeList = lastNode.children;
-				lastNode = lastNodeList[lastNodeList.length - 1];
-			}
-
-			if (lastNode && headingDepth > depth) {
-				if (lastNode.children) {
-					lastNode.children.push(newNode);
-				} else {
-					lastNode.children = [newNode];
-				}
-			} else {
-				lastNodeList.push(newNode);
-			}
-
-			return nodes;
-		},
-		[] as Array<ITreeNode<string>>,
-	);
-}
 
 function folderNameToBodyProp(folderName: Folder) {
 	if (folderName === "posts") {
@@ -71,7 +26,7 @@ function folderNameToBodyProp(folderName: Folder) {
 
 export const Entry: React.SFC<IEntryProps> = ({
 	content,
-	headings,
+	tableOfContents,
 	excerpt,
 	children,
 	...headerProps
@@ -117,8 +72,8 @@ export const Entry: React.SFC<IEntryProps> = ({
 			<EntryHeader {...headerProps} isFullPage={true} />
 			{excerpt && <meta itemProp="description" content={excerpt} />}
 			<section className="e-content" itemProp={folderNameToBodyProp(headerProps.folderName)}>
-				{headings && headings.length > 0 && (
-					<TableOfContents headings={headingsToTree(headings)} />
+				{tableOfContents.items && tableOfContents.items.length > 0 && (
+					<TableOfContents tableOfContents={tableOfContents} />
 				)}
 				{content && <p>{content}</p>}
 				{children}

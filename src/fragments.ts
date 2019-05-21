@@ -1,7 +1,11 @@
 import { graphql } from "gatsby";
 
+export interface IMarkdownEntryTOC {
+	items?: Array<IMarkdownEntryTOC & { url: string; title: string }>;
+}
+
 export interface IMarkdownEntryFragment {
-	headings?: Array<{ depth: number; value: string }>;
+	tableOfContents: IMarkdownEntryTOC;
 	excerpt: string;
 	timeToRead: number;
 	code: { body: any };
@@ -63,10 +67,7 @@ export const fragments = graphql`
 	}
 
 	fragment MarkdownEntry on Mdx {
-		headings {
-			depth
-			value
-		}
+		tableOfContents
 		code {
 			scope
 			body

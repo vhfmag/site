@@ -52,7 +52,6 @@
 		"gatsby-source-filesystem": "2.0.36",
 		"gatsby-transformer-json": "2.1.11",
 		"gatsby-transformer-sharp": "2.1.19",
-		"github-slugger": "^1.2.0",
 		"graphql-code-generator": "0.18.2",
 		"graphql-codegen-typescript-template": "0.18.2",
 		"mdx-utils": "0.1.1",

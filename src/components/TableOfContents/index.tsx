@@ -1,63 +1,48 @@
 import * as React from "react";
-import Slugger from "github-slugger";
 import s from "./style.module.scss";
-
-export interface ITreeNode<T> {
-	value: T;
-	children?: Array<ITreeNode<T>>;
-}
+import { IMarkdownEntryTOC } from "../../fragments";
 
 export interface ITableOfContentsProps {
 	title?: string;
-	headings: Array<ITreeNode<string>> | undefined;
+	tableOfContents: IMarkdownEntryTOC;
 }
 
 interface IContentsTreeProps {
-	headings?: Array<ITreeNode<string>>;
-	slugger: Slugger;
+	tableOfContents: IMarkdownEntryTOC;
 }
 
-const ContentsTree = ({ headings, slugger }: IContentsTreeProps) => {
-	if (!headings || headings.length === 0) {
-		return null;
-	}
-
-	return (
-		<ol>
-			{headings.map(h => (
-				<li key={h.value}>
-					{h.children && h.children.length > 0 ? (
-						<details>
-							<summary>
-								<p>
-									<a href={`#${slugger.slug(h.value)}`}>{h.value}</a>
-								</p>
-							</summary>
-							<ContentsTree slugger={slugger} headings={h.children} />
-						</details>
-					) : (
-						<>
+const ContentsTree = ({ tableOfContents }: IContentsTreeProps) => (
+	<ol>
+		{tableOfContents.items!.map(h => (
+			<li key={h.url}>
+				{h.items && h.items.length > 0 ? (
+					<details>
+						<summary>
 							<p>
-								<a href={`#${slugger.slug(h.value)}`}>{h.value}</a>
+								<a href={h.url}>{h.title}</a>
 							</p>
-							<ContentsTree slugger={slugger} headings={h.children} />
-						</>
-					)}
-				</li>
-			))}
-		</ol>
-	);
-};
+						</summary>
+						<ContentsTree tableOfContents={h} />
+					</details>
+				) : (
+					<>
+						<p>
+							<a href={h.url}>{h.title}</a>
+						</p>
+					</>
+				)}
+			</li>
+		))}
+	</ol>
+);
 
 export const TableOfContents: React.SFC<ITableOfContentsProps> = ({
 	title = "Conteúdo",
-	headings,
+	tableOfContents: tableOfContents,
 }) => {
-	if (!headings || headings.length === 0) {
+	if (!tableOfContents.items || tableOfContents.items.length === 0) {
 		return null;
 	}
-
-	const slugger = new Slugger();
 
 	return (
 		<aside className={s.toc}>
@@ -65,7 +50,7 @@ export const TableOfContents: React.SFC<ITableOfContentsProps> = ({
 				<summary>
 					<h2>{title}</h2>
 				</summary>
-				<ContentsTree slugger={slugger} headings={headings} />
+				<ContentsTree tableOfContents={tableOfContents} />
 			</details>
 		</aside>
 	);

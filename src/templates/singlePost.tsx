@@ -22,7 +22,7 @@ const SinglePostTemplate = ({
 		},
 		personalJson: { name },
 		mdx: {
-			headings,
+			tableOfContents,
 			excerpt,
 			code: { body },
 			frontmatter: { toc, date, title, description, tags },
@@ -50,7 +50,7 @@ const SinglePostTemplate = ({
 				subtitle={description}
 				publishDate={new Date(date || birthTime)}
 				selfAuthor={{ name, url: siteUrl }}
-				headings={headings}
+				tableOfContents={tableOfContents}
 				tags={tags}
 				wordCount={words}
 				timeToRead={timeToRead}

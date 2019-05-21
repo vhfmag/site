@@ -24,7 +24,7 @@ const SingleEntryTemplate = ({
 		personalJson: { name },
 		mdx: {
 			excerpt,
-			headings,
+			tableOfContents,
 			frontmatter: { title, toc, authors, link, date, tags },
 			parent: { birthTime },
 			timeToRead,
@@ -75,7 +75,7 @@ const SingleEntryTemplate = ({
 				folderName={relativeDirectory}
 				publishDate={new Date(date || birthTime)}
 				replyTo={link}
-				headings={headings}
+				tableOfContents={tableOfContents}
 				tags={tags}
 				wordCount={words}
 				timeToRead={timeToRead}

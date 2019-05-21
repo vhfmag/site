@@ -6,12 +6,6 @@ declare module "gray-percentage";
 declare module "typography-breakpoint-constants";
 declare module "gatsby-mdx/mdx-renderer";
 
-declare module "github-slugger" {
-	export default class {
-		slug(str: string): string;
-		reset(): void;
-	}
-}
 
 declare module "@reach/visually-hidden" {
 	import * as React from "react";
