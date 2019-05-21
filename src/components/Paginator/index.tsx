@@ -3,7 +3,7 @@ import { Link } from "gatsby";
 import VisuallyHidden from "@reach/visually-hidden";
 import s from "./style.module.scss";
 
-export type IPaginatorProps = ObjectOmit<GatsbyPaginatorProps<any>, "group"> & {
+export type IPaginatorProps = Omit<GatsbyPaginatorProps<any>, "group"> & {
 	className?: string;
 };
 

@@ -6,7 +6,6 @@ import DefaultLayout from "../components/layout";
 import { Paginator } from "../components/Paginator";
 import { IGeneralMetadataFragment, IMarkdownEntryNode } from "../fragments";
 import { isFolder } from "../utils/types";
-import { GatsbyPaginatorProps } from "../declarations";
 import s from "./entryList.module.scss";
 import { collection } from "../utils/microdata";
 

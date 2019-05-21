@@ -1,7 +1,6 @@
-import { CSSProperties } from "react";
-
-declare type DeepNonNullable<T> = { [K in keyof T]-?: NonNullable<T[K]> };
+declare type DeepNonNullable<T> = { [K in keyof T]-?: DeepNonNullable<T[K]> };
 declare type NonNullableNode = NonNullable<React.ReactNode>;
+declare type Omit<T extends object, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 
 declare interface GatsbyPaginatorProps<T> {
 	first: boolean;
@@ -51,7 +50,3 @@ class ReportingObserverClass {
 }
 
 declare const ReportingObserver: undefined | typeof ReportingObserverClass;
-
-declare module "@mdx-js/tag";
-
-declare module "*.scss";

@@ -2,7 +2,7 @@ import * as React from "react";
 import { Float, IFloatProps } from "../Float";
 import s from "./style.module.scss";
 
-export interface HighlightProps extends IFloatProps {
+export interface HighlightProps extends Omit<IFloatProps, "size"> {
 	size?: "small" | "medium";
 }
 

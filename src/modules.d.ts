@@ -5,7 +5,8 @@ declare module "rehype-react";
 declare module "gray-percentage";
 declare module "typography-breakpoint-constants";
 declare module "gatsby-mdx/mdx-renderer";
-
+declare module "@mdx-js/tag";
+declare module "*.module.scss";
 
 declare module "@reach/visually-hidden" {
 	import * as React from "react";
