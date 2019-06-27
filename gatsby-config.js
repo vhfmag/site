@@ -249,6 +249,9 @@ module.exports = {
 				],
 			},
 		},
-		isProduction && { resolve: "gatsby-plugin-no-javascript", options: { exclude: "sw.js" } },
+		isProduction && {
+			resolve: "gatsby-plugin-no-javascript",
+			options: { exclude: "(sw\\.js|workbox)" },
+		},
 	].filter(x => x),
 };
