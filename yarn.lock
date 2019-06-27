@@ -6127,10 +6127,10 @@ gatsby-plugin-netlify@2.1.0:
     lodash "^4.17.10"
     webpack-assets-manifest "^3.0.2"
 
-gatsby-plugin-no-javascript@1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/gatsby-plugin-no-javascript/-/gatsby-plugin-no-javascript-1.0.2.tgz#56f38b99f2efda06658430b17527470b7e499b43"
-  integrity sha512-A714ncRUdC1Ty/HcwCy35jKue9V2MKLd2SAfke68g3Bq97gR7umtG9+oYBdbea4Kd6yo0aNU6HdJ0xfUTqgS6A==
+gatsby-plugin-no-javascript@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-no-javascript/-/gatsby-plugin-no-javascript-1.1.1.tgz#9571382a64953bd9428ceff717eb0bf01744c1d2"
+  integrity sha512-4x8YrHnt7aLaZcgeS74qOOmGh71hxF4MdGXO7ycLDeUs9qaHD3/TGsjVj93RtHG9b50zzt9xVHGL4UdHd6jSZw==
 
 gatsby-plugin-offline@2.2.0:
   version "2.2.0"

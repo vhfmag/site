@@ -89,7 +89,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
-    "gatsby-plugin-no-javascript": "1.0.2",
+    "gatsby-plugin-no-javascript": "^1.1.1",
     "gatsby-plugin-preact": "3.1.2",
     "prettier": "1.18.2",
     "react-axe": "3.1.0",
