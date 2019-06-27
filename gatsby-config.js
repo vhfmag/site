@@ -2,11 +2,11 @@ const { backgroundColor, themeColor } = require("./src/utils/consts");
 const { graphql } = require("./src/utils/taggedUtils");
 const { compareEntryEdges } = require("./src/utils/utils");
 
+const isProduction = process.env.NODE_ENV === "production";
+
 const serializeFeed = ({ query: { site, allMdx } }) => {
 	return allMdx.edges.sort(compareEntryEdges).map(edge => {
-		const url = `${site.siteMetadata.siteUrl}/${edge.node.parent.relativeDirectory}/${
-			edge.node.parent.name
-		}/?utm_source=rss`;
+		const url = `${site.siteMetadata.siteUrl}/${edge.node.parent.relativeDirectory}/${edge.node.parent.name}/?utm_source=rss`;
 
 		return Object.assign({}, edge.node.frontmatter, {
 			description: edge.node.excerpt,
@@ -158,10 +158,9 @@ module.exports = {
 			resolve: "gatsby-plugin-sass",
 			options: {
 				cssLoaderOptions: {
-					localIdentName:
-						process.env.NODE_ENV === "production"
-							? "[local]--[hash:base64:5]"
-							: "[path][name]__[local]--[hash:base64:5]",
+					localIdentName: isProduction
+						? "[local]--[hash:base64:5]"
+						: "[path][name]__[local]--[hash:base64:5]",
 				},
 			},
 		},
@@ -250,5 +249,9 @@ module.exports = {
 				],
 			},
 		},
-	],
+		isProduction && {
+			resolve: "gatsby-plugin-no-javascript",
+			options: { exclude: "(sw\\.js|workbox)" },
+		},
+	].filter(x => x),
 };

@@ -64,6 +64,38 @@ export default function HTML(props: any) {
           `).code!,
 				}}
 			/>
+			<script
+				defer
+				dangerouslySetInnerHTML={{
+					__html: `
+if ("https:" !== window.location.protocol && "localhost" !== window.location.hostname) {
+  console.error("Service workers can only be used over HTTPS, or on localhost for development");
+} else if ("serviceWorker" in navigator) {
+  navigator.serviceWorker
+    .register("/sw.js")
+    .then(function(swRegistration) {
+      swRegistration.addEventListener("updatefound", () => {
+        const sw = swRegistration.installing;
+        console.log("installingWorker", sw),
+          sw.addEventListener("statechange", () => {
+            switch (sw.state) {
+              case "installed":
+                console.log("Content is now available offline!");
+                break;
+              case "redundant":
+                console.error("The installing service worker became redundant.");
+                break;
+            }
+          });
+      });
+    })
+    .catch(function(t) {
+      console.error("Error during service worker registration:", t);
+    });
+}
+          `,
+				}}
+			/>
 		</html>
 	);
 }
