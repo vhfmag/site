@@ -1,8 +1,0 @@
-diff --git a/node_modules/gatsby-plugin-typography/.cache/typography.js b/node_modules/gatsby-plugin-typography/.cache/typography.js
-new file mode 100644
-index 0000000..a947f7b
---- /dev/null
-+++ b/node_modules/gatsby-plugin-typography/.cache/typography.js
-@@ -0,0 +1 @@
-+module.exports = require("/home/vhfmag/dev/vhfmag.gitlab.io/src/utils/typography")
-\ No newline at end of file
