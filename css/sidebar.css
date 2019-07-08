@@ -1,4 +1,6 @@
 .main-sidebar {
+	flex-grow: 0;
+	flex-shrink: 0;
 	width: var(--sidebar-width);
 
 	--stack-margin: var(--s1);

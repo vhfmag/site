@@ -127,3 +127,9 @@ blockquote {
 	line-height: var(--s1);
 	border-left: var(--s-3) solid var(--themeColor);
 }
+
+body {
+	display: grid;
+	grid-template-columns: min-content auto;
+	grid-gap: calc(2 * var(--root-padding));
+}
