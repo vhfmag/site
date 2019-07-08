@@ -113,3 +113,17 @@ h1 {
 body > .sidebar {
 	--sidebar-gap: var(--root-padding) * 2;
 }
+
+blockquote {
+	margin-left: 0;
+	margin-right: var(--s1);
+	margin-top: 0;
+	padding-bottom: 0;
+	padding-left: var(--s0);
+	padding-right: 0;
+	padding-top: 0;
+	margin-bottom: var(--s1);
+	font-size: inherit;
+	line-height: var(--s1);
+	border-left: var(--s-3) solid var(--themeColor);
+}
