@@ -1,6 +1,7 @@
 {
 	"scripts": {
-		"dev": "eleventy --serve"
+		"build": "eleventy --passthroughall",
+		"dev": "yarn build --serve"
 	},
 	"devDependencies": {
 		"@11ty/eleventy": "^0.8.3"

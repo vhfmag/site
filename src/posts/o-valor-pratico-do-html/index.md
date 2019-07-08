@@ -185,21 +185,21 @@ Essa lista não é exaustiva e muitos dos mais de 100 elementos HTML não foram 
 
 Eles são especialmente importantes para a extração de conteúdo e navegação com tecnologias assistivas, como nos exemplos a seguir:
 
-![Modo de leitura do Firefox](./assets/screenshots/firefox-readingmode.png)
+![Modo de leitura do Firefox](assets/screenshots/firefox-readingmode.png)
 
 <div className="img-caption">Modo de leitura do Firefox</div>
 
-![Artigo no Pocket](./assets/screenshots/pocket.png)
+![Artigo no Pocket](assets/screenshots/pocket.png)
 
 <div className="img-caption">Artigo no Pocket</div>
 
-![Outline de página usando landmarks](./assets/screenshots/landmark-navigation.png)
+![Outline de página usando landmarks](assets/screenshots/landmark-navigation.png)
 
 <div className="img-caption">
 	Outline de página baseado em <i lang="en">landmarks</i>
 </div>
 
-![Leitura rápida do Telegram](./assets/screenshots/telegram-leiturarapida.jpg)
+![Leitura rápida do Telegram](assets/screenshots/telegram-leiturarapida.jpg)
 
 <div className="img-caption">Leitura rápida do Telegram</div>
 
@@ -240,19 +240,19 @@ Por exemplo:
 
 Páginas que usam dados estruturados são mais legíveis para máquinas e permitem coisas como:
 
-![Busca por receita no Google](./assets/screenshots/google-receita.png)
+![Busca por receita no Google](assets/screenshots/google-receita.png)
 
 <div className="img-caption">Busca por receita no Google</div>
 
-![Busca por notícias no Google](./assets/screenshots/google-notícias.png)
+![Busca por notícias no Google](assets/screenshots/google-notícias.png)
 
 <div className="img-caption">Busca por notícias no Google</div>
 
-![Busca por filme no Google](./assets/screenshots/google-reviews.png)
+![Busca por filme no Google](assets/screenshots/google-reviews.png)
 
 <div className="img-caption">Busca por filme no Google</div>
 
-![Resposta do Google Assistant](./assets/screenshots/googleassistant-preview.jpg)
+![Resposta do Google Assistant](assets/screenshots/googleassistant-preview.jpg)
 
 <div className="img-caption">Resposta do Google Assistant</div>
 
@@ -277,19 +277,19 @@ Relógios, carros e <i lang='en'>headsets</i> de realidade virtual já tem naveg
 
 Alguns exemplos disso, no Apple Watch:
 
-![Modo de leitura](./assets/screenshots/applewatch-article.png)
+![Modo de leitura](assets/screenshots/applewatch-article.png)
 
 <div className="img-caption">Modo de leitura</div>
 
-![Exibição de figure](./assets/screenshots/applewatch-figure.png)
+![Exibição de figure](assets/screenshots/applewatch-figure.png)
 
 <div className="img-caption">Exibição de figure</div>
 
-![Diferentes tipos de input](./assets/screenshots/applewatch-inputs.png)
+![Diferentes tipos de input](assets/screenshots/applewatch-inputs.png)
 
 <div className="img-caption">Diferentes tipos de input</div>
 
-![Exibição de input com label](./assets/screenshots/applewatch-label.png)
+![Exibição de input com label](assets/screenshots/applewatch-label.png)
 
 <div className="img-caption">Exibição de input com label</div>
 
