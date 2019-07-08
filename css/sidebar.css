@@ -1,0 +1,37 @@
+.main-sidebar {
+	width: var(--sidebar-width);
+
+	--stack-margin: var(--s1);
+}
+
+.main-sidebar hr {
+	border-color: var(--themeColor);
+}
+
+.theme-selector-wrapper {
+	display: flex;
+	justify-content: space-between;
+}
+
+.theme-selector-buttons {
+	display: flex;
+	flex-direction: column;
+
+	display: grid;
+	grid-auto-flow: row;
+	gap: var(--s-3);
+}
+
+.self_link {
+	font-size: 2em;
+	font-weight: bold;
+	text-decoration: none;
+	line-height: 1.1;
+}
+
+body[data-theme="auto"] button[data-theme="auto"],
+body[data-theme="dark"] button[data-theme="dark"],
+body[data-theme="light"] button[data-theme="light"] {
+	color: var(--backgroundColor);
+	background-color: var(--themeColor);
+}

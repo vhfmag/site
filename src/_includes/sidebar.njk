@@ -1,9 +1,50 @@
-<header>
-    <h1>Victor Magalhães</h1>
+<header
+    itemscope=""
+    itemtype="https://schema.org/Person https://schema.org/Organization"
+    id="mdata-author"
+    itemid="mdata-author"
+    itemprop="author publisher"
+    class="main-sidebar stack"
+>
+    <link rel="stylesheet" href="/css/sidebar.css"/>
 
-    <nav>
+    <a class="self_link" href="/" itemref="mdata-blog mdata-author" itemprop="url identifier">
+        <span itemprop="name">Victor Magalhães</span>
+    </a>
+
+    <address itemprop="email">
+        <a class="u-email" href="mailto:vhfmag@protonmail.com">vhfmag@protonmail.com</a>
+    </address>
+    <a href="https://gitlab.com/vhfmag/vhfmag.gitlab.io/">ver código fonte</a>
+
+    <nav aria-label="Principal">
         <ul>
-            <li>Home</li>
+            <li>
+                <a href="/">home</a>
+            </li>
+            <li>
+                <a href="/blog">blog</a>
+            </li>
+            <li>
+                <a href="/links">links</a>
+            </li>
+            <li>
+                <a href="/resume">currículo</a>
+            </li>
         </ul>
     </nav>
+
+    <!-- links de mídias sociais -->
+
+    <hr/>
+
+    <div hidden class="theme-selector-wrapper" id="theme-selector-wrapper">
+        Tema:
+        <div class="theme-selector-buttons">
+            <button type="button" class="theme-button" data-theme="auto" hidden>Automático</button>
+            <button type="button" class="theme-button" data-theme="dark">Escuro</button>
+            <button type="button" class="theme-button" data-theme="light">Claro</button>
+        </div>
+        <script src="/js/theme.js" defer></script>
+    </div>
 </header>

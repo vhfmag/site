@@ -1,5 +1,5 @@
 ---
-title: My Rad Blog
+title: Victor Magalhães
 ---
 
 <!doctype html>
@@ -7,16 +7,21 @@ title: My Rad Blog
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="css/styles.css"/>
+        <link rel="stylesheet" href="/css/layout.css"/>
+        <link rel="stylesheet" href="/css/utility.css"/>
         <title>{{ title }}</title>
     </head>
-    <body>
+    <body
+        itemscope=""
+        itemtype="https://schema.org/Blog"
+        id="mdata-blog"
+        itemid="mdata-blog"
+        data-theme="auto"
+    >
         <div class="sidebar">
             <div>
                 {% include 'sidebar.njk' %}
-                <section>
-                    {{ content | safe }}
-                </section>
+                <main class="{{ mainClass }}">{{ content | safe }}</main>
             </div>
         </div>
     </body>

@@ -1,0 +1,36 @@
+---
+layout: default
+---
+
+{% macro listAuthors(authors) %}
+    {% for author in authors %}
+        {% if author.url %}
+            <a href="{{author.url}}" class="p-author h-card u-url" itemprop="">{{ author.name }}</a>
+        {% else %}
+            <span class="p-author h-card" itemprop="">{{ author.name }}</span>
+        {% endif %}
+    {% endfor %}
+{% endmacro %}
+
+<article>
+    <header>
+        <h1 class="post-title" itemprop="headline title">{{ title }}</h1>
+        {% if description %}
+            <p itemprop="alternativeHeadline">{{ description }}</p>
+        {% endif %}
+        <div class="metadata" data-separator="—">
+            <span>
+                Post por {{ listAuthors(authors if authors else [me]) }}
+            </span>
+            <span>
+                Publicado em
+                <time class="dt-published" itemprop="datePublished pubdate" datetime="{{ date | formatDateISO }}">
+                    {{ date | formatDate }}
+                </time>
+            </span>
+            <span>{{ content | striptags | wordcount }} palavras</span>
+        </div>
+    </header>
+
+    {{ content | safe }}
+</article>
