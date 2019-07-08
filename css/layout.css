@@ -77,10 +77,6 @@ a:any-link {
 	color: var(--themeColor);
 }
 
-/* body > .sidebar > * {
-	min-height: 100vh;
-} */
-
 nav > ul,
 nav > ol {
 	list-style-type: none;
