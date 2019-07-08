@@ -1,0 +1,36 @@
+main.home {
+	max-width: 90ch;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	align-content: flex-start;
+	grid-column-gap: var(--s2);
+}
+
+main.home h1,
+main.home section {
+	grid-column: 1 / -1;
+}
+
+main.home section.main p:first-of-type {
+	font-size: var(--s1);
+}
+
+main.home section.half {
+	grid-column: span 1;
+}
+
+@media (max-width: 1000px) {
+	main.home {
+		grid-template-columns: 1fr;
+	}
+}
+
+main.home .post-list {
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+}
+
+main.home .post-list li h3 {
+	font-size: 1em;
+}

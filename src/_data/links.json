@@ -1,0 +1,82 @@
+[
+	{
+		"url": "http://www.kottke.org/",
+		"name": "Kottke",
+		"description": "Blog <i lang=\"en\">old-school</i> que recomenda e comenta outros links e leituras"
+	},
+	{
+		"url": "https://staltz.com/",
+		"name": "André Staltz",
+		"description": "O blog de André Staltz, que fala sobre <i lang=\"en\">software</i>,&nbsp;<i lang=\"en\">open-source</i>, privacidade, decentralização e monopólios de empresas de tecnologia"
+	},
+	{
+		"url": "https://meltingasphalt.com/",
+		"name": "Melting Asphalt",
+		"description": "Blog sensacional com ensaios longos sobre filosofia, comportamento humano e, de vez em quando, <i lang=\"en\">software</i>"
+	},
+	{
+		"url": "https://www.ribbonfarm.com/",
+		"name": "Ribbonfarm",
+		"description": "Com a <i lang=\"en\">tagline</i> \"<em>experimentos em percepção refatorada</em>\", esse blog de ensaios explora perspectivas pouco usuais sobre temas novos ou já familiares."
+	},
+	{
+		"url": "https://putanumonit.com/",
+		"name": "Put a num on it",
+		"description": "Numa linha próxima dos <a href=\"https://what-if.xkcd.com/\">What if</a> do&nbsp;<a href=\"https://xkcd.com/\">xkcd</a>, esse blog vai longe demais na análise de situações cotidianas com estatística"
+	},
+	{
+		"url": "https://everythingstudies.com/",
+		"name": "Everything Studies",
+		"description": "Blog que me apresentou o conceito de erisiologia e uma parte dos outros blogs dessa lista, ele trata de filosofia no cotidiano e da perspectiva de um programador/matemático/logicista. Dá pra ficar melhor?"
+	},
+	{
+		"url": "https://fieldnotes.resistant.tech/",
+		"name": "Field Notes",
+		"description": "Blog da sensacional Sarah Jamie Lewis, diretora do openprivacy.ca, que fala principalmente sobre decentralização"
+	},
+	{
+		"url": "https://ncase.me/",
+		"name": "Nicky Case",
+		"description": "Nicky Case me apresentou ao conceito de <a href='https://explorabl.es/'>explicações exploráveis</a>, projetos que aproveitam todo o potencial da web para elaborar explicações com que se pode brincar e explorar conceitos ❤"
+	},
+	{
+		"url": "https://www.lesswrong.com/",
+		"name": "LessWrong 2.0",
+		"description": "Comunidade dedicada à capacidade humana da racionalidade. Seus textos, de diversos autores da comunidade, investigam como agir para extrair o máxima de verdade de nossos sentidos incompletos e enviesados e nossas narrativas engenhadas por outrem."
+	},
+	{
+		"url": "https://aeon.co/",
+		"name": "Aeon",
+		"description": "Revista digital profunda e provocativa, sobre filosofia, sociedade, ciência e artes. Minha preferida ❤️"
+	},
+	{
+		"url": "https://nautil.us/",
+		"name": "Nautilus",
+		"description": "Revista digital científica com edições mensais que analisam um tema de acordo com diversos ângulos, de diversas perspectivas científicas"
+	},
+	{
+		"url": "https://logicmag.io/",
+		"name": "Logic Magazine",
+		"description": "Revista sobre tecnologia que busca encontrar bom senso no meio dos gritos dos tecnófobos e dos tecno-utópicos e relatar avanços e implicações de tecnologias, ontem, hoje e sempre"
+	},
+	{
+		"url": "https://meaningness.com/",
+		"name": "Meaningness",
+		"description": "Livro hipertextual e metablog, esse projeto explora sistemas de significado e suas implicações na forma como vemos e interagimos com o mundo"
+	},
+	{
+		"url": "https://www.youtube.com/channel/UCYO_jab_esuFRV4b17AJtAw",
+		"name": "3Blue1Brown",
+		"description": "Canal de Grant Sanderson que explica conceitos matemáticos (ou não) com animações maravilhosas. O <a href='https://www.youtube.com/watch?v=yuVqxCSsE7c'>vídeo</a> que resolve o problema do colar de pedras preciosas com topologia é um excelente exemplo"
+	},
+	{
+		"url": "https://www.youtube.com/user/Vsauce",
+		"name": "VSauce",
+		"description": "Canal de Michael Stevens. Nerd, bastante."
+	},
+	{
+		"url": "https://www.youtube.com/user/1veritasium",
+		"name": "Veritasium",
+		"description": "Parecido com o VSauce, mas mais focado em experimentos."
+	}
+]

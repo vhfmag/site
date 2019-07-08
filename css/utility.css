@@ -1,7 +1,7 @@
 /* modular scale */
 
 :root {
-	--ratio: 1.5;
+	--ratio: 1.61803;
 	--s-5: calc(var(--s-4) / var(--ratio));
 	--s-4: calc(var(--s-3) / var(--ratio));
 	--s-3: calc(var(--s-2) / var(--ratio));
@@ -52,4 +52,36 @@
 .stack > * + * {
 	margin-top: var(--s0);
 	margin-top: var(--stack-margin);
+}
+
+.visually-hidden {
+	position: absolute !important;
+	height: 1px;
+	width: 1px;
+	overflow: hidden;
+	clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+	clip: rect(1px, 1px, 1px, 1px);
+}
+
+.inline-list {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	text-align: justify;
+}
+
+.inline-list li {
+	display: inline;
+}
+
+.inline-list li + li::before {
+	content: ", ";
+}
+
+.inline-list li + li:last-child::before {
+	content: " & ";
+}
+
+.inline-list li + li[data-separator]::before {
+	content: attr(data-separator);
 }

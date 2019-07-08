@@ -22,7 +22,7 @@ module.exports = function(eleventyConfig) {
 	});
 
 	return {
-		templateFormats: ["md", "njk"],
+		templateFormats: ["md", "njk", "pug"],
 		dir: {
 			input: "src",
 			output: "public",
