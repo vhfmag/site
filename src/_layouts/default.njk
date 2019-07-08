@@ -1,5 +1,4 @@
 ---
-title: Victor Magalhães
 ---
 
 <!doctype html>
@@ -9,7 +8,9 @@ title: Victor Magalhães
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="/css/layout.css"/>
         <link rel="stylesheet" href="/css/utility.css"/>
-        <title>{{ title }}</title>
+        <title>
+            {% if title %}{{title}} – {% endif %}Victor Magalhães
+        </title>
     </head>
     <body
         itemscope=""
@@ -18,7 +19,7 @@ title: Victor Magalhães
         itemid="mdata-blog"
         data-theme="auto"
     >
-                {% include 'sidebar.njk' %}
-                <main class="{{ mainClass }}">{{ content | safe }}</main>
+        {% include 'sidebar.njk' %}
+        <main class="{{ mainClass }}">{{ content | safe }}</main>
     </body>
 </html>
