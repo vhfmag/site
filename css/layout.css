@@ -124,6 +124,14 @@ blockquote {
 	border-left: var(--s-3) solid var(--themeColor);
 }
 
+main {
+	max-width: 70ch;
+}
+
+p {
+	text-align: justify;
+}
+
 body {
 	display: grid;
 	grid-template-columns: min-content auto;
