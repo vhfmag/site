@@ -25,6 +25,7 @@ module.exports = function(eleventyConfig) {
 		templateFormats: ["md", "njk"],
 		dir: {
 			input: "src",
+			output: "public",
 			layouts: "_layouts",
 		},
 	};
