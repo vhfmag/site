@@ -5,7 +5,6 @@ mdEntryType: blogPost
 mainClass: collection
 pagination:
     data: collections.all
-    reverse: true
     alias: entries
     size: 5
 ---
@@ -22,42 +21,40 @@ pagination:
 
 <ol aria-label="{{ collectionName }}">
     {%- for entry in entries -%}
-        {% if not entry.data.draft %}
-            <li>
-                <article
-                    itemprop="{{ mdEntryType }}"
-                    itemscope=""
-                    itemref="mdata-author"
-                    itemtype="https://schema.org/BlogPosting"
-                >
-                    <header>
-                        <h2 itemprop="headline title" class="post-title">
-                            <a href="{{entry.url}}">{{ entry.data.title }}</a>
-                        </h2>
-                        <div class="metadata">
-                            <span>{{ entry.data.tags }}</span>
-                            <time
-                                    itemprop="datePublished dateModified pubdate"
-                                    class="dt-published"
-                                    datetime="{{ entry.data.date | formatDateISO }}"
-                                >
-                                {{ entry.data.date | formatDate }}
-                            </time>
-                            <span><span itemprop="wordCount">{{ entry.data.content | striptags | wordcount }}</span> palavras</span>
-                        </div>
-                        {# {% if entry.data.customTags %}
-                            <ul itemprop="keywords" aria-label="Tags">
-                                {% for tag in entry.data.customTags %}
-                                    <li>
-                                        <a rel="tag" href="/tags/{{ tag | slug }}">{{ tag }}</a>
-                                    </li>
-                                {% endfor %}
-                            </ul>
-                        {% endif %} #}
-                    </header>
-                </article>
-            </li>
-        {% endif %}
+        <li>
+            <article
+                itemprop="{{ mdEntryType }}"
+                itemscope=""
+                itemref="mdata-author"
+                itemtype="https://schema.org/BlogPosting"
+            >
+                <header>
+                    <h2 itemprop="headline title" class="post-title">
+                        <a href="{{entry.url}}">{{ entry.data.title }}</a>
+                    </h2>
+                    <div class="metadata">
+                        <span>{{ entry.data.tags }}</span>
+                        <time
+                            itemprop="datePublished dateModified pubdate"
+                            class="dt-published"
+                            datetime="{{ entry.data.date | formatDateISO }}"
+                        >
+                            {{ entry.data.date | formatDate }}
+                        </time>
+                        <span><span itemprop="wordCount">{{ entry.data.content | striptags | wordcount }}</span> palavras</span>
+                    </div>
+                    {# {% if entry.data.customTags %}
+                        <ul itemprop="keywords" aria-label="Tags">
+                            {% for tag in entry.data.customTags %}
+                                <li>
+                                    <a rel="tag" href="/tags/{{ tag | slug }}">{{ tag }}</a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %} #}
+                </header>
+            </article>
+        </li>
     {%- endfor -%}
 </ol>
 

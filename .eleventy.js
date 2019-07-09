@@ -1,6 +1,30 @@
+const excerptPlugin = require("eleventy-plugin-excerpt");
+const pwaPlugin = require("eleventy-plugin-pwa");
+
+const fs = require("fs");
+
 module.exports = function(eleventyConfig) {
 	eleventyConfig.addPassthroughCopy("css");
 	eleventyConfig.addPassthroughCopy("js");
+
+	eleventyConfig.addPlugin(excerptPlugin);
+	eleventyConfig.addPlugin(pwaPlugin);
+
+	const collectionNames = fs
+		.readdirSync("./src/")
+		.filter(path => !path.startsWith("_") && fs.statSync(`./src/${path}`).isDirectory);
+
+	for (const collectionName of collectionNames) {
+		eleventyConfig.addCollection(collectionName, collection => {
+			let files = [...collection.getFilteredByGlob(`./src/${collectionName}/**/*.md`)];
+
+			if (process.env.NODE_ENV === "production") {
+				files = files.filter(p => !p.data.draft);
+			}
+
+			return files.reverse();
+		});
+	}
 
 	eleventyConfig.addFilter("formatDateISO", date => {
 		date = new Date(date);
