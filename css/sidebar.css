@@ -1,6 +1,4 @@
 .main-sidebar {
-	flex-grow: 0;
-	flex-shrink: 0;
 	width: var(--sidebar-width);
 
 	--stack-margin: var(--s1);
@@ -12,6 +10,7 @@
 
 .theme-selector-wrapper {
 	display: flex;
+	flex-wrap: wrap;
 	justify-content: space-between;
 }
 
@@ -36,4 +35,29 @@ body[data-theme="dark"] button[data-theme="dark"],
 body[data-theme="light"] button[data-theme="light"] {
 	color: var(--backgroundColor);
 	background-color: var(--themeColor);
+}
+
+@media (max-width: 800px) {
+	.main-sidebar {
+		width: unset;
+	}
+
+	.theme-selector-buttons {
+		flex-direction: row;
+		flex-wrap: wrap;
+
+		grid-auto-flow: column;
+	}
+
+	.main-sidebar > nav > ul {
+		--list-gap: var(--s-3);
+
+		display: flex;
+		flex-wrap: wrap;
+		margin: calc(-1 * var(--list-gap));
+	}
+
+	.main-sidebar > nav > ul > li {
+		margin: var(--list-gap);
+	}
 }
