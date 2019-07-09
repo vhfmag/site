@@ -18,7 +18,7 @@ module.exports = function(eleventyConfig) {
 		eleventyConfig.addCollection(collectionName, collection => {
 			let files = [...collection.getFilteredByGlob(`./src/${collectionName}/**/*.md`)];
 
-			if (process.env.NODE_ENV === "production") {
+			if (process.env.NODE_ENV !== "development") {
 				files = files.filter(p => !p.data.draft);
 			}
 
