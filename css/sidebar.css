@@ -8,6 +8,10 @@
 	border-color: var(--themeColor);
 }
 
+.main-sidebar a.current {
+	font-weight: bold;
+}
+
 .theme-selector-wrapper {
 	display: flex;
 	flex-wrap: wrap;

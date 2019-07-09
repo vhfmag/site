@@ -1,3 +1,21 @@
+{% macro nav_link(href, text, exact = false) %}
+    {% set exactCurrent = href == page.url %}
+    {% set nonExactCurrent = page
+        .url
+        .startsWith(href) %}
+    <a
+        {% if exactCurrent or (not exact and nonExactCurrent) %}
+        class="current"
+        {% endif %}
+        {% if exactCurrent %}
+        aria-current="page"
+        {% endif %}
+        href="{{ href }}"
+    >
+        {{ text }}
+    </a>
+{% endmacro %}
+
 <header
     itemscope=""
     itemtype="https://schema.org/Person https://schema.org/Organization"
@@ -20,19 +38,19 @@
     <nav aria-label="Principal">
         <ul>
             <li>
-                <a href="/">home</a>
+                {{ nav_link("/", "home", true) }}
             </li>
             <li>
-                <a href="/posts">posts</a>
+                {{ nav_link("/posts", "posts") }}
             </li>
             <li>
-                <a href="/notes">notas</a>
+                {{ nav_link("/notes", "notas") }}
             </li>
             <li>
-                <a href="/links">links</a>
+                {{ nav_link("/links", "links") }}
             </li>
             <li>
-                <a href="/resume">currículo</a>
+                {{ nav_link("/resume", "currículo") }}
             </li>
         </ul>
     </nav>
