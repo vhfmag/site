@@ -14,7 +14,7 @@ module.exports = function(eleventyConfig) {
 
 	const collectionNames = fs
 		.readdirSync("./src/")
-		.filter(path => !path.startsWith("_") && fs.statSync(`./src/${path}`).isDirectory);
+		.filter(path => !path.startsWith("_") && fs.statSync(`./src/${path}`).isDirectory());
 
 	for (const collectionName of collectionNames) {
 		eleventyConfig.addCollection(collectionName, collection => {
