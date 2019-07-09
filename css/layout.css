@@ -125,7 +125,8 @@ blockquote {
 }
 
 main {
-	max-width: 70ch;
+	--main-max-width: 70ch;
+	max-width: var(--main-max-width);
 }
 
 p {

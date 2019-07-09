@@ -1,3 +1,19 @@
+main.entry {
+	max-width: calc(var(--main-max-width) * 3 / 2);
+}
+
+main.entry > article > p,
+main.entry > article > ul,
+main.entry > article > ol,
+main.entry > article > figure,
+main.entry > article > img,
+main.entry > article > video,
+main.entry > article > blockquote,
+main.entry > article > pre,
+main.entry > article > iframe {
+	max-width: var(--main-max-width);
+}
+
 main.entry figure {
 	display: flex;
 	flex-direction: column;
@@ -11,18 +27,20 @@ main.entry figure > picture {
 
 @media (min-width: 600px) {
 	main.entry .float {
-		width: 33%;
+		--entry-float-margin: 20px;
+
+		width: calc(33% - var(--entry-float-margin));
 		min-width: 100px;
 
 		margin: 0;
-		margin-left: 20px;
+		margin-left: var(--entry-float-margin);
 
 		float: right;
 		clear: right;
 	}
 
 	main.entry .float.left {
-		margin-right: 20px;
+		margin-right: var(--entry-float-margin);
 		margin-left: 0;
 
 		float: left;
