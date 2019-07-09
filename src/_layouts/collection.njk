@@ -13,11 +13,7 @@ pagination:
 
 <link rel="stylesheet" href="/css/collection.css"/>
 
-<h1>
-    Blog
-    {% if (collectionName) %} / {{ collectionName }}
-    {% endif %}
-</h1>
+<h1>{{ collectionName }}</h1>
 
 <ol aria-label="{{ collectionName }}">
     {%- for entry in entries -%}
