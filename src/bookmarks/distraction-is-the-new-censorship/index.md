@@ -8,13 +8,7 @@ authors:
       url: "https://longreads.com/author/cusickcatherine/"
 ---
 
-import { Figure } from "../../../src/components/articles/Figure";
-
-<Figure
-	src="/images/bookmarks/estatua-bandeirantes-noise-awareness.jpg"
-	title="Monument to the Bandeiras, International Noise Awareness Day in Brazil."
-	attr="(Dario Oliveira/Anadolu Agency/Getty Images)"
-/>
+{% figure "images/estatua-bandeirantes-noise-awareness.jpg" "Monument to the Bandeiras, International Noise Awareness Day in Brazil." "(Dario Oliveira/Anadolu Agency/Getty Images)" %}
 
 > In today’s attention economy, ideas don’t need to be deleted or redacted to be silenced. They can be drowned out privately, screen by screen, by unchecked noise from decoy bots, doxxing campaigns, and filter bubbles.
 

@@ -3,6 +3,8 @@ const pwaPlugin = require("eleventy-plugin-pwa");
 
 const fs = require("fs");
 
+const { figureShortcode } = require("./src/_shortcodes/figure");
+
 module.exports = function(eleventyConfig) {
 	eleventyConfig.addPassthroughCopy("css");
 	eleventyConfig.addPassthroughCopy("js");
@@ -44,6 +46,8 @@ module.exports = function(eleventyConfig) {
 
 		return `${day.padStart(2, "0")}/${month.padStart(2, "0")}/${date.getFullYear()}`;
 	});
+
+	eleventyConfig.addShortcode("figure", figureShortcode);
 
 	return {
 		templateFormats: ["md", "njk", "pug"],

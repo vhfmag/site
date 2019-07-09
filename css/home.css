@@ -34,3 +34,15 @@ main.home .post-list {
 main.home .post-list li h3 {
 	font-size: 1em;
 }
+
+main.home p.excerpt {
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 3;
+	overflow: hidden;
+}
+
+main.home h1,
+main.home h2 {
+	border-bottom: 2px solid var(--themeColor);
+}

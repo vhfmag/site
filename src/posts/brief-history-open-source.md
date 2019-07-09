@@ -5,18 +5,15 @@ customTags: ["Software livre", "Código aberto"]
 date: 2018-05-31
 ---
 
-import { Highlight } from "../../../src/components/articles/Highlight";
-import { Citation } from "../../../src/components/articles/Citation";
-
 Esse é o primeiro de uma série de posts que explora como os conceitos de _código aberto_ e _software livre_ tem sido expandidos para além do desenvolvimento de software. Esse não é um texto técnico e não supõe que o leitor tenha familiaridade com desenvolvimento. O primeiro post da série explica um pouco da história do código aberto e do software livre, para que possamos expandir os conceitos e seus valores para outros domínios nos próximos posts.
 
 ## Código aberto?
 
 > _Atenção_: se você já sabe o que significa _código_ e _código aberto_, pode pular pra próxima seção, já que o objetivo desta é introduzir conceitos
 
-<Highlight>
+<blockquote class="float">
 	se uma torta fosse um programa de computador, sua receita seria o código-fonte
-</Highlight>
+</blockquote>
 
 O trabalho de um desenvolvedor consiste, em grande parte, em redigir instruções que computadores (máquinas que calculam muito bem e muito rápido, mas que não são particularmente inteligentes por si só) sejam capazes de compreender e executar e que sejam úteis para determinada aplicação (exibir uma página na internet ou aplicar filtros na imagem de uma câmera, por exemplo). A essas instruções, dá-se o nome de _código-fonte_. Esse código, quando compilado (ou interpretado), torna-se um _programa_ - um aplicativo de celular ou um navegador, por exemplo. Uma analogia comum ao explicar os conceitos é o de uma receita: se uma torta fosse um programa de computador, sua receita seria o código-fonte.
 
@@ -32,30 +29,17 @@ Com isso, estamos prontos para um pouco de história.
 
 A forma como desenvolvedores colaboram para além das fronteiras de suas empresas mudou fundamentalmente nos últimas décadas. Enquanto em 2001 Steve Ballmer, CEO da _Microsoft_ - empresa então no auge de sua fase [adotar, extender e extinguir](https://pt.wikipedia.org/wiki/Adoptar,_estender_e_extinguir), dizia que "_Linux is a cancer that attaches itself in an intellectual property sense to everything it touches_" [^linux-is-a-cancer], em 2016 a mesma empresa foi líder em número de contribuidores em repositórios open-source na maior plataforma de compartilhamento e hospedagem de código, o [Github](https://github.com)[^microsoft-github-leader] e até incluiu um subsistema _Linux_ (um sistema operacional de código aberto) no seu sistema operacional, o onipresente _Windows_[^enabling-linux-on-windows].
 
-<Citation
-	quote="Linux is a cancer that attaches itself in an intellectual property sense to everything it touches"
-	author="Steve Ballmer"
-	from="CEO da Microsoft"
-/>
+<blockquote class="float"><cite><q>Linux is a cancer that attaches itself in an intellectual property sense to everything it touches</q></cite>Steve Ballmer, ex-CEO da Microsoft</blockquote>
 
 A _Microsoft_ não está sozinha: o _Facebook_ disponibilizou sua biblioteca de UI para a web, o _React_; e a _Google_, o _Tensorflow_, biblioteca utilizada para processar de forma eficiente grandes quantidades de dados usando GPU. Esses são apenas alguns exemplos da infinidade de empresas e organizações que tornam públicas, abertas e facilmente copiáveis algumas aplicações e bibliotecas, em que se investiu bastante tempo e dinheiro. O que mudou nesses 15 anos? O que motiva grandes empresas a disponibilizarem seu trabalho gratuitamente?
 
 ## No príncipio, tudo era open source - até chegar a propriedade intelectual
 
-<Citation
-	position="right"
-	quote="Sharing software [...] is as old as computers, just as sharing recipes is as old as cooking"
-	author="Richard Stallman"
-	from="Free Software, Free Society"
-/>
+<blockquote class="float"><cite><q>Sharing software [...] is as old as computers, just as sharing recipes is as old as cooking</q></cite>Richard Stallman, em Free Software, Free Society</blockquote>
 
 Da década de 50 até meados dos anos 70, nas suas origens acadêmicas, a programação era largamente colaborativa e aberta (_desde que você se encontrasse na elite acadêmica de países desenvolvidos, claro_): pesquisadores compartilhavam suas técnicas e programas, frequentemente licenciados como _domínio público_ - no espírito de abertura e cooperação típico da pesquisa acadêmica[^software-before-80s]. O TeX é um exemplo de _software livre_ da época em uso e desenvolvimento até os dias atuais.
 
-<Citation
-	quote="computer programs, to the extent that they embody an author's original creation, are proper subject matter of copyright"
-	author="US Commission on New Technological Uses of Copyrighted Works (CONTU)"
-	from="1974"
-/>
+<blockquote class="float"><cite><q>computer programs, to the extent that they embody an author's original creation, are proper subject matter of copyright</q></cite>US Commission on New Technological Uses of Copyrighted Works (CONTU), 1974</blockquote>
 
 No final da década de 60, a produção de software passou a competir com os distribuidores de hardware (cujos custos do software embarcado estavam incluídos no preço de venda do hardware), enquanto os custos de produção subiam dramaticamente e não havia modelo de negócio para o ramo. Até 1974, 'programas de computador' não estavam sujeitos a propriedade intelectual - assim sendo, não havia licenças pagas e eles eram distribuídos junto a seu código fonte. Tudo mudou em 1974, quando a CONTU - _Commission on New Technological Uses of Copyrighted Works_ - decidiu que o software pode estar sujeito a propriedade intelectual[^software-before-80s]. O ecossistema mudou rapidamente: entre o final da década de 70 e o início da de 80, licenças de software se tornaram costumeiros e os programas eram distribuídos já compilados, obfuscados, sem acesso ao código fonte.
 
@@ -63,7 +47,7 @@ No final da década de 60, a produção de software passou a competir com os dis
 
 É dessa época o esforço de _Richard Stallman_ em popularizar o conceito de _software livre_, em contraste com o _software proprietário_, com código fechado e licenças restritas, que não permitiam experimentação com o código ou redistribuição de cópias do mesmo. Com isso em mente, ele fundou a [FSF (_Free Software Foundation_)](https://www.fsf.org/); o conceito de [copyleft](https://en.wikipedia.org/wiki/Copyleft) e sua primeira implementação, a licença [GPU (_General Public License_)](https://en.wikipedia.org/wiki/General_Public_License)[^software-after-copyright]; e o [Projeto GNU](https://www.gnu.org/gnu/why-programs-should-be-shared.html).
 
-<Citation quote="free as in speech, not free as in beer" author="Richard Stallman" />
+<blockquote class="float"><cite><q>free as in speech, not free as in beer</q></cite> – Richard Stallman</blockquote>
 
 Um software pode ser classificado como livre quando atende as seguintes liberdades para os usuários, segundo a FSF:
 
@@ -80,9 +64,9 @@ Vale citar também que licenças _copyleft_, com o objetivo de promover o softwa
 
 ## Corporações aderem ao código aberto
 
-<Highlight size="medium">
+<blockquote class="float">
 	Biblioteca (computação): conjunto de porções reutilizáveis de código com aplicações específicas
-</Highlight>
+</blockquote>
 
 A controversa relação de empresas de tecnologia com os movimentos do código aberto e (principalmente) do software livre parecia indicar polos opostos: empresas contra o código enquanto bem comum. No entanto, o que se viu com empresas de tecnologia das novas gerações foi muito diferente: enquanto a maioria delas continua não disponibilizando seus principais produtos como código aberto, elas o fazem com _bibliotecas_.
 
