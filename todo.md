@@ -3,9 +3,11 @@
 ## MVP
 
 -   [-] página de links
+    -   [x] Criar página
     -   [ ] Revisar descrições
--   [ ] página de 404
--   [ ] currículo
+-   [x] página de 404
+-   [-] currículo
+-   [ ] revisar se faltou trazer outras imagens da pasta /images
 -   [ ] cache buster
 -   [ ] headers do netlify
     -   [ ] cache de assets
@@ -19,6 +21,7 @@
 -   [ ] página /now
 -   [ ] relayout de notas
 -   [ ] mover political statement pra sidebar (sempre visível)
+-   [ ] seletor de tema as fieldset + radio
 
 ## Upcoming
 
