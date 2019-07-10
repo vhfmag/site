@@ -56,11 +56,12 @@ main.work .experience {
 main.work .experience .kind {
 	color: var(--themeColor);
 	font-weight: bold;
+	text-transform: uppercase;
 }
 
-main.work .experience .kind,
 main.work .experience .period {
-	text-transform: uppercase;
+	margin-left: var(--s-2);
+	text-transform: lowercase;
 }
 
 main.work .experience h3 {
