@@ -54,14 +54,15 @@ body[data-theme="light"] button[data-theme="light"] {
 	}
 
 	.main-sidebar > nav > ul {
-		--list-gap: var(--s-3);
+		--list-h-gap: var(--s-3);
+		--list-v-gap: var(--s-5);
 
 		display: flex;
 		flex-wrap: wrap;
-		margin: calc(-1 * var(--list-gap));
+		margin: calc(-1 * var(--list-v-gap)) calc(-1 * var(--list-h-gap));
 	}
 
 	.main-sidebar > nav > ul > li {
-		margin: var(--list-gap);
+		margin: var(--list-v-gap) var(--list-h-gap);
 	}
 }
