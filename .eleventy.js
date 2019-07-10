@@ -9,6 +9,7 @@ const { figureShortcode } = require("./src/_shortcodes/figure");
 module.exports = function(eleventyConfig) {
 	eleventyConfig.addPassthroughCopy("css");
 	eleventyConfig.addPassthroughCopy("js");
+	eleventyConfig.addPassthroughCopy("icons");
 
 	eleventyConfig.addPlugin(excerptPlugin);
 	eleventyConfig.addPlugin(cacheBusterPlugin({ outputDirectory: "public" }));
