@@ -1,0 +1,28 @@
+---
+title: Trabalho
+mainClass: work
+layout: default
+---
+
+link(rel="stylesheet", href="/css/work.css")
+
+h1 Trabalho
+
+section
+    h2 Habilidades
+
+    ul.knows
+
+    ul.wants
+
+    ul.likes
+
+section
+    h2 Linha do tempo
+
+    ol.timeline
+        - for (const exp of work.experiences)
+            li: section.experience
+                div #[span.kind=exp.kind] #[span.period #[time=exp.period[0]] – #[time=exp.period[1] || "presente"]]
+                h3 #{exp.role} #[a(href=exp.url)=exp.company]
+                != exp.description

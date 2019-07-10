@@ -1,0 +1,34 @@
+[
+	{
+		"company": "Jusbrasil",
+		"url": "https://jusbrasil.com.br",
+		"period": ["outubro de 2018"],
+		"role": "Desenvolvimento na",
+		"kind": "Trabalho",
+		"description": "<p>Atualmente, trabalho no time do <a href='https://escritorioonline.jusbrasil.com.br/'>Escritório Online</a> na Jusbrasil. Minha principal responsabilidade é implementar e manter o web app e os serviços associados. Algumas das tecnologias utilizadas diariamente são Javascript, Typescript, React, Node, Kubernetes, Python e Scala.</p>"
+	},
+	{
+		"company": "Cubos",
+		"url": "https://cubos.io",
+		"period": ["março de 2016", "outubro de 2018"],
+		"role": "Desenvolvimento na",
+		"kind": "Trabalho",
+		"description": "<p>Na cubos, trabalhei como desenvolvedor em diversos produtos, de agregadores e buscadores de hotel ao <q>uber das marmitas</q>. O que eu passei mais tempo foi o <a href='https://zigpay.com.br/'>ZigPay</a>, um dos maiores players em <i lang='en'>live events</i> no Brasil.</p>"
+	},
+	{
+		"company": "ENSTA Bretagne",
+		"url": "https://www.ensta-bretagne.fr/",
+		"period": ["julho de 2014", "junho de 2015"],
+		"role": "Tecnologias da informação na",
+		"kind": "Faculdade",
+		"description": "<p>Estudei por um ano na ENSTA Bretagne como parte um intercâmbio, e lá aprendi francês, tive meu primeiro contato com Ruby on Rails e tive contato com outras culturas e perspectivas sobre educação, trabalho, políticas públicas e mais.</p>"
+	},
+	{
+		"company": "UFBA",
+		"url": "https://ufba.br",
+		"period": ["fevereiro de 2012", "agosto de 2016"],
+		"role": "Engenharia elétrica na",
+		"kind": "Faculdade",
+		"description": "<p>Apesar de sempre ter tido o pé em programação, eu cursei engenharia elétrica durante a maior parte do meu tempo na UFBA. Na univerdade, pude trabalhar brevement em uma <a href='https://www.eletrojr.com.br/'>empresa júnior</a>, atuar como voluntário na nossa seção local do IEEE e ser bolsista no <a href='http://www.peteletrica.eng.ufba.br/'>programa PET</a>. Aliás, o site do PET foi uma dos meus primeiros trabalhos na web!</p>"
+	}
+]

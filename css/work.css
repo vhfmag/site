@@ -1,0 +1,74 @@
+main.work .timeline {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
+main.work .timeline > li {
+	--marker-box: 1em;
+	--marker-size: 0.8em;
+	--marker-top: var(--s-2);
+	--marker-margin: calc((var(--marker-box) - var(--marker-size)) / 2);
+
+	padding-left: var(--s1);
+	padding-bottom: var(--s1);
+	position: relative;
+}
+
+main.work .timeline > li:last-child {
+	padding-bottom: 0;
+}
+
+main.work .timeline > li::before {
+	position: absolute;
+	top: var(--marker-top);
+	left: 0;
+	width: var(--marker-size);
+	height: var(--marker-size);
+	margin: var(--marker-margin);
+	border-radius: 50%;
+	border: 2px solid var(--themeColor);
+	background-color: var(--backgroundColor);
+	content: "";
+	z-index: 1;
+}
+
+main.work .timeline > li::after {
+	position: absolute;
+	top: calc(var(--marker-top) + var(--marker-margin));
+	left: calc(0.5em - 1px);
+	height: 100%;
+	width: 0;
+	border-left: 2px solid var(--textColor);
+	content: "";
+	opacity: 0.3;
+}
+
+main.work .timeline > li:last-child::after {
+	content: unset;
+}
+
+main.work .experience {
+	display: flex;
+	flex-direction: column;
+}
+
+main.work .experience .kind {
+	color: var(--themeColor);
+	font-weight: bold;
+}
+
+main.work .experience .kind,
+main.work .experience .period {
+	text-transform: uppercase;
+}
+
+main.work .experience h3 {
+	font-size: var(--s1);
+	margin-bottom: var(--s-2);
+	margin-top: var(--s0);
+}
+
+main.work .experience p {
+	margin-top: 0;
+}
