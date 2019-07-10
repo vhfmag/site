@@ -1,5 +1,6 @@
 const excerptPlugin = require("eleventy-plugin-excerpt");
 const pwaPlugin = require("eleventy-plugin-pwa");
+const cacheBusterPlugin = require("@mightyplow/eleventy-plugin-cache-buster");
 
 const fs = require("fs");
 
@@ -10,6 +11,7 @@ module.exports = function(eleventyConfig) {
 	eleventyConfig.addPassthroughCopy("js");
 
 	eleventyConfig.addPlugin(excerptPlugin);
+	eleventyConfig.addPlugin(cacheBusterPlugin({ outputDirectory: "public" }));
 	eleventyConfig.addPlugin(pwaPlugin);
 
 	const collectionNames = fs
