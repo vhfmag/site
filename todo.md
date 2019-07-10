@@ -6,9 +6,9 @@
     -   [x] Criar página
     -   [ ] Revisar descrições
 -   [x] página de 404
--   [-] currículo
--   [ ] revisar se faltou trazer outras imagens da pasta /images
--   [ ] cache buster
+-   [x] currículo
+-   [x] revisar se faltou trazer outras imagens da pasta /images
+-   [x] cache buster
 -   [ ] headers do netlify
     -   [ ] cache de assets
     -   [ ] redirect pro 404
