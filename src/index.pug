@@ -47,4 +47,10 @@ section.half
             li
                 h3: a(href=link.url)= link.name
 
+section.half
+    h2 No fone
+    ul.inline-list
+        - for (artist of listeningTo)
+            li= artist
+
 link(rel="stylesheet", href="/css/home.css")
