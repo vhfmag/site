@@ -12,6 +12,8 @@
 -   [ ] links codesandbox://
 -   [x] manifesto
 -   [ ] skip nav
+-   [x] sitemap
+-   [ ] RSS
 -   [x] headers do netlify
     -   [x] cache de assets
     -   [x] redirect pro 404
