@@ -9,12 +9,16 @@
 -   [x] currículo
 -   [x] revisar se faltou trazer outras imagens da pasta /images
 -   [x] cache buster
--   [ ] headers do netlify
-    -   [ ] cache de assets
-    -   [ ] redirect pro 404
-    -   [ ] redirect old routes to new routes
-        -   [ ] bookmarks -> notes
-        -   [ ] links -> blogroll
+-   [ ] links codesandbox://
+-   [x] manifesto
+-   [ ] skip nav
+-   [x] headers do netlify
+    -   [x] cache de assets
+    -   [x] redirect pro 404
+    -   [x] redirect old routes to new routes
+        -   [x] bookmarks -> notes
+        -   [x] links -> blogroll
+        -   [x] resume -> work
 
 ## Up next
 
