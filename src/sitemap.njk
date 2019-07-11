@@ -9,8 +9,8 @@ sitemapIgnore: true
             <url>
                 <loc>{{ site.canonicalUrl }}{{ item.url }}</loc>
                 <lastmod>{{ item.date and item.date.toISOString() }}</lastmod>
-                <changefreq>{{ item.data.changefreq or "monthly" }}</changefreq>
-                <priority>{{ item.data.priority or "0.5" }}</priority>
+                <changefreq>{{ item.data.sitemapChangefreq or "monthly" }}</changefreq>
+                <priority>{{ item.data.sitemapPriority or "0.5" }}</priority>
             </url>
         {%- endif %}
     {%- endfor %}
