@@ -13,7 +13,7 @@
 -   [x] manifesto
 -   [ ] skip nav
 -   [x] sitemap
--   [ ] RSS
+-   [x] RSS
 -   [x] headers do netlify
     -   [x] cache de assets
     -   [x] redirect pro 404
@@ -26,8 +26,8 @@
 
 -   [ ] página /now
 -   [ ] relayout de notas
--   [ ] mover political statement pra sidebar (sempre visível)
--   [ ] seletor de tema as fieldset + radio
+-   [x] mover political statement pra sidebar (sempre visível)
+-   [x] seletor de tema as fieldset + radio
 
 ## Upcoming
 
