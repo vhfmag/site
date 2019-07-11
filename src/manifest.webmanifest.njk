@@ -3,11 +3,12 @@ permalink: manifest.webmanifest
 ---
 {
 	"name": "{{ site.title }}",
+	"short_name": "{{ site.title }}",
 	"start_url": "/",
 	"background_color": "{{ site.backgroundColor }}",
 	"theme_color": "{{ site.themeColor }}",
 	"serviceworker": {"src": "./service-worker.js" },
-	"display": "browser",
+	"display": "minimal-ui",
 	"lang": "pt-BR",
 	"icons": [
 		{

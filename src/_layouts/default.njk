@@ -38,6 +38,13 @@
         {% endfor %}
 
         <link rel="shortcut icon" href="/icons/icon-48x48.png"/>
+
+        <script>
+            if ("serviceWorker" in navigator) 
+                navigator
+                    .serviceWorker
+                    .register("/service-worker.js");
+        </script>
     </head>
     <body
         itemscope=""
