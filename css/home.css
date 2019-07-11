@@ -45,4 +45,5 @@ main.home p.excerpt {
 main.home h1,
 main.home h2 {
 	border-bottom: 2px solid var(--themeColor);
+	padding-bottom: var(--s-3);
 }
