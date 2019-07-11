@@ -12,7 +12,7 @@
         {% endif %}
         href="{{ href }}"
     >
-        {{ text }}
+        /{{ text }}
     </a>
 {% endmacro %}
 
@@ -27,11 +27,11 @@
     <link rel="stylesheet" href="/css/sidebar.css"/>
 
     <a class="self_link" href="/" itemref="mdata-blog mdata-author" itemprop="url identifier">
-        <span itemprop="name">Victor Magalhães</span>
+        <span itemprop="name">{{ site.title }}</span>
     </a>
 
     <address itemprop="email">
-        <a class="u-email" href="mailto:vhfmag@protonmail.com">vhfmag@protonmail.com</a>
+        <a class="u-email" href="mailto:{{ me.email }}">{{ me.email }}</a>
     </address>
 
     <nav aria-label="Principal">
@@ -87,7 +87,7 @@
             <p>Apoia o atual presidente? Você não é bem vindo. Saia.</p>
 
             <p>
-                <a href="https://www.smithsonianmag.com/science-nature/climate-change-will-accelerate-earths-sixth-mass-extinction-180955138/">Espécies estão sendo extintas</a>; <a href="https://theoutline.com/post/1859/drowning-cities?zd=1&zi=m55bcfbz">cidades, afundadas</a>; <a href="https://www.wfpusa.org/explore/wfps-work/drivers-of-hunger/climate-change/">já está faltando comida</a>. Ainda dá pra fazer algo contra a <strong>catástrofe climática</strong>:
+                <a href="https://www.smithsonianmag.com/science-nature/climate-change-will-accelerate-earths-sixth-mass-extinction-180955138/">Espécies estão sendo extintas</a>; <a href="https://theoutline.com/post/1859/drowning-cities?zd=1&zi=m55bcfbz">cidades, afundadas</a>; <a href="https://www.wfpusa.org/explore/wfps-work/drivers-of-hunger/climate-change/">já está faltando comida</a>. Mas ainda dá pra fazer algo contra a <strong>catástrofe climática</strong>:
             </p>
 
             <ul style="padding-left: var(--s0)">
