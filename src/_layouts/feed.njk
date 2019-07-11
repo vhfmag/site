@@ -6,7 +6,7 @@ permalink: feed.{{ feedId }}.xml
   <title>{{ title }}</title>
   <subtitle>{{ subtitle }}</subtitle>
   <link href="{{ site.canonicalUrl }}{{ page.url }}" rel="self"></link>
-  <link href="{{ page.url }}"></link>
+  <link href="{{ site.canonicalUrl }}"></link>
   <updated>{{ collections[rssCollection] | rssLastUpdatedDate }}</updated>
   <id>{{ feedId }}</id>
   <author>
