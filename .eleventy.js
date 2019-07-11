@@ -7,9 +7,11 @@ const fs = require("fs");
 
 const { figureShortcode } = require("./src/_shortcodes/figure");
 
-function addCollection(eleventyConfig, collectionName, collectionFolder) {
+function addCollection(eleventyConfig, collectionName, collectionFolders) {
 	eleventyConfig.addCollection(collectionName, collection => {
-		let files = [...collection.getFilteredByGlob(`./src/${collectionFolder}/**/*.md`)];
+		let files = collectionFolders.flatMap(folder => [
+			...collection.getFilteredByGlob(`./src/${folder}/**/*.md`),
+		]);
 
 		if (process.env.NODE_ENV !== "development") {
 			files = files.filter(p => !p.data.draft);
@@ -50,9 +52,9 @@ module.exports = function(eleventyConfig) {
 		.readdirSync("./src/")
 		.filter(path => !path.startsWith("_") && fs.statSync(`./src/${path}`).isDirectory());
 
-	addCollection(eleventyConfig, "tudo", `(${collectionNames.join("|")})`);
+	addCollection(eleventyConfig, "tudo", collectionNames);
 	for (const collectionName of collectionNames) {
-		addCollection(eleventyConfig, collectionName, collectionName);
+		addCollection(eleventyConfig, collectionName, [collectionName]);
 	}
 
 	eleventyConfig.addFilter("formatDateISO", date => {
