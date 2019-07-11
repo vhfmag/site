@@ -7,7 +7,7 @@
 :root {
 	--root-padding: 32px;
 	--root-border-width: var(--s-1);
-	--sidebar-width: 180px;
+	--sidebar-width: 220px;
 	--max-width-mobile: calc(100vw - 2 * var(--root-border-width) - 2 * var(--root-padding));
 	--max-width-desktop: calc(var(--max-width-mobile) - var(--sidebar-width));
 }
@@ -147,5 +147,6 @@ body {
 	body {
 		grid-template-columns: 1fr;
 		grid-template-rows: min-content auto;
+		grid-gap: var(--root-padding);
 	}
 }
