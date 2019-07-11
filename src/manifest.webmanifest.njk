@@ -1,10 +1,14 @@
+---
+permalink: manifest.webmanifest
+---
 {
-	"name": "Victor Magalhães",
-	"short_name": "Victor",
+	"name": "{{ site.title }}",
 	"start_url": "/",
-	"background_color": "#222222",
-	"theme_color": "rgb(92, 194, 101)",
-	"display": "minimal-ui",
+	"background_color": "{{ site.backgroundColor }}",
+	"theme_color": "{{ site.themeColor }}",
+	"serviceworker": {"src": "./service-worker.js" },
+	"display": "browser",
+	"lang": "pt-BR",
 	"icons": [
 		{
 			"src": "icons/icon-48x48.png?v=393098781f00f67c2868e7260a385115",
