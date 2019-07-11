@@ -50,7 +50,12 @@ module.exports = function(eleventyConfig) {
 
 	const collectionNames = fs
 		.readdirSync("./src/")
-		.filter(path => !path.startsWith("_") && fs.statSync(`./src/${path}`).isDirectory());
+		.filter(
+			path =>
+				path !== "feed" &&
+				!path.startsWith("_") &&
+				fs.statSync(`./src/${path}`).isDirectory(),
+		);
 
 	addCollection(eleventyConfig, "tudo", collectionNames);
 	for (const collectionName of collectionNames) {
