@@ -13,9 +13,9 @@
 }
 
 body[data-theme="auto"] {
-	--textColor: rgb(237, 237, 237);
-	--backgroundColor: rgb(42, 42, 42);
-	--themeColor: rgb(92, 194, 101);
+	--textColor: rgb(42, 42, 42);
+	--backgroundColor: rgb(237, 237, 237);
+	--themeColor: hsla(125, 51%, 32%, 1);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -23,14 +23,6 @@ body[data-theme="auto"] {
 		--textColor: rgb(237, 237, 237);
 		--backgroundColor: rgb(42, 42, 42);
 		--themeColor: rgb(92, 194, 101);
-	}
-}
-
-@media (prefers-color-scheme: light) {
-	body[data-theme="auto"] {
-		--textColor: rgb(42, 42, 42);
-		--backgroundColor: rgb(237, 237, 237);
-		--themeColor: hsla(125, 51%, 32%, 1);
 	}
 }
 
