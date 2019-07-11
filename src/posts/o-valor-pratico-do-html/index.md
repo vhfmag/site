@@ -244,7 +244,7 @@ Páginas que usam dados estruturados são mais legíveis para máquinas e permit
 
 <div className="img-caption">Busca por receita no Google</div>
 
-![Busca por notícias no Google](assets/screenshots/google-notícias.png)
+![Busca por notícias no Google](assets/screenshots/google-noticias.png)
 
 <div className="img-caption">Busca por notícias no Google</div>
 
