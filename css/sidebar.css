@@ -19,6 +19,8 @@
 }
 
 .theme-selector-buttons {
+	all: unset;
+
 	display: flex;
 	flex-direction: column;
 
@@ -34,9 +36,9 @@
 	line-height: 1.1;
 }
 
-body[data-theme="auto"] button[data-theme="auto"],
-body[data-theme="dark"] button[data-theme="dark"],
-body[data-theme="light"] button[data-theme="light"] {
+body[data-theme="auto"] [data-theme="auto"],
+body[data-theme="dark"] [data-theme="dark"],
+body[data-theme="light"] [data-theme="light"] {
 	color: var(--backgroundColor);
 	background-color: var(--themeColor);
 }
@@ -49,6 +51,7 @@ body[data-theme="light"] button[data-theme="light"] {
 	.theme-selector-buttons {
 		flex-direction: row;
 		flex-wrap: wrap;
+		justify-content: flex-start;
 
 		grid-auto-flow: column;
 	}

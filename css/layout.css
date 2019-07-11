@@ -86,12 +86,14 @@ nav > ol {
 	padding: 0;
 }
 
-button {
+button,
+.button {
 	border: 1px solid var(--themeColor);
 	padding: var(--s-2);
 	color: var(--themeColor);
 	background-color: var(--backgroundColor);
 	line-height: 1;
+	text-align: center;
 }
 
 body {

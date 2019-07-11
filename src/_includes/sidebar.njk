@@ -56,13 +56,27 @@
 
     <!-- links de mídias sociais -->
 
-    <div hidden class="theme-selector-wrapper" id="theme-selector-wrapper">
-        Tema:
-        <div class="theme-selector-buttons">
-            <button type="button" class="theme-button" data-theme="auto" hidden>Automático</button>
-            <button type="button" class="theme-button" data-theme="dark">Escuro</button>
-            <button type="button" class="theme-button" data-theme="light">Claro</button>
-        </div>
+    <div>
+        <details hidden class="theme-selector-wrapper" id="theme-selector-wrapper">
+            <summary>Tema</summary>
+
+            <fieldset class="theme-selector-buttons">
+                <legend class="visually-hidden">Tema</legend>
+
+                <label class="button theme-button" data-theme="auto" hidden>
+                    <input type="radio" name="theme" class="visually-hidden"/>
+                Automático
+            </label>
+                <label class="button theme-button" data-theme="dark">
+                    <input type="radio" name="theme" class="visually-hidden"/>
+                Escuro
+            </label>
+                <label class="button theme-button" data-theme="light">
+                    <input type="radio" name="theme" class="visually-hidden"/>
+                Claro
+            </label>
+            </fieldset>
         <script src="/js/theme.js" defer></script>
+        </details>
     </div>
 </header>
