@@ -25,7 +25,24 @@ module.exports = function(eleventyConfig) {
 	eleventyConfig.addPassthroughCopy("icons");
 
 	eleventyConfig.addPlugin(excerptPlugin);
-	eleventyConfig.addPlugin(cacheBusterPlugin({ outputDirectory: "public" }));
+	eleventyConfig.addPlugin(
+		cacheBusterPlugin({
+			outputDirectory: "public",
+			sourceAttributes: { img: "src", video: "src", source: "srcset" },
+			resourceExtensions: [
+				"js",
+				"css",
+				"gif",
+				"jpg",
+				"jpeg",
+				"png",
+				"svg",
+				"webm",
+				"mp4",
+				"webp",
+			],
+		}),
+	);
 	eleventyConfig.addPlugin(pwaPlugin);
 	eleventyConfig.addPlugin(rssPlugin);
 

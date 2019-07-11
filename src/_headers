@@ -9,6 +9,30 @@
 /*.css
   X-Content-Type-Options: nosniff
   Cache-Control: public, max-age=31536000, immutable
+/*.gif
+  X-Content-Type-Options: nosniff
+  Cache-Control: public, max-age=31536000, immutable
+/*.jpg
+  X-Content-Type-Options: nosniff
+  Cache-Control: public, max-age=31536000, immutable
+/*.jpeg
+  X-Content-Type-Options: nosniff
+  Cache-Control: public, max-age=31536000, immutable
+/*.png
+  X-Content-Type-Options: nosniff
+  Cache-Control: public, max-age=31536000, immutable
+/*.svg
+  X-Content-Type-Options: nosniff
+  Cache-Control: public, max-age=31536000, immutable
+/*.webm
+  X-Content-Type-Options: nosniff
+  Cache-Control: public, max-age=31536000, immutable
+/*.mp4
+  X-Content-Type-Options: nosniff
+  Cache-Control: public, max-age=31536000, immutable
+/*.webp
+  X-Content-Type-Options: nosniff
+  Cache-Control: public, max-age=31536000, immutable
 /*
   X-Frame-Options: DENY
   X-XSS-Protection: 1; mode=block
