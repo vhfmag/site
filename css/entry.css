@@ -25,6 +25,27 @@ main.entry figure > picture {
 	width: 100%;
 }
 
+main.entry .footnote-item:target p {
+	outline: 1px dotted;
+}
+
+main.entry h1,
+main.entry h2,
+main.entry h3,
+main.entry h4,
+main.entry h5,
+main.entry h6 {
+	position: relative;
+}
+
+main.entry .header-anchor {
+	position: absolute;
+	left: 0;
+	transform: translateX(-100%);
+	padding-right: var(--s-2);
+	opacity: 0.5;
+}
+
 @media (min-width: 600px) {
 	main.entry .float {
 		--entry-float-margin: 20px;

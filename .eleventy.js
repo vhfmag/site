@@ -3,9 +3,18 @@ const pwaPlugin = require("eleventy-plugin-pwa");
 const cacheBusterPlugin = require("@mightyplow/eleventy-plugin-cache-buster");
 const rssPlugin = require("@11ty/eleventy-plugin-rss");
 
+const markdownIt = require("markdown-it");
+const mdPluginPrism = require("markdown-it-prism");
+const mdPluginAttrs = require("markdown-it-attrs");
+const mdPluginTocDoneRight = require("markdown-it-toc-done-right");
+const mdPluginAnchor = require("markdown-it-anchor");
+const mdPluginFootnote = require("markdown-it-footnote");
+
 const fs = require("fs");
 
 const { figureShortcode } = require("./src/_shortcodes/figure");
+
+const IS_DEV = process.env.NODE_ENV === "development";
 
 function addCollection(eleventyConfig, collectionName, collectionFolders) {
 	eleventyConfig.addCollection(collectionName, collection => {
@@ -13,7 +22,7 @@ function addCollection(eleventyConfig, collectionName, collectionFolders) {
 			...collection.getFilteredByGlob(`./src/${folder}/**/*.md`),
 		]);
 
-		if (process.env.NODE_ENV !== "development") {
+		if (!IS_DEV) {
 			files = files.filter(p => !p.data.draft);
 		}
 
@@ -25,6 +34,21 @@ module.exports = function(eleventyConfig) {
 	eleventyConfig.addPassthroughCopy("css");
 	eleventyConfig.addPassthroughCopy("js");
 	eleventyConfig.addPassthroughCopy("icons");
+
+	eleventyConfig.setLibrary(
+		"md",
+		markdownIt({
+			html: true,
+			breaks: true,
+			linkify: true,
+			typographer: true,
+		})
+			.use(mdPluginPrism, {})
+			.use(mdPluginAttrs, {})
+			.use(mdPluginAnchor, { permalink: true, permalinkBefore: true, permalinkSymbol: "§" })
+			.use(mdPluginTocDoneRight, {})
+			.use(mdPluginFootnote, {}),
+	);
 
 	eleventyConfig.addPlugin(excerptPlugin);
 	eleventyConfig.addPlugin(
@@ -45,8 +69,11 @@ module.exports = function(eleventyConfig) {
 			],
 		}),
 	);
-	eleventyConfig.addPlugin(pwaPlugin);
 	eleventyConfig.addPlugin(rssPlugin);
+
+	if (!IS_DEV) {
+		eleventyConfig.addPlugin(pwaPlugin);
+	}
 
 	const collectionNames = fs
 		.readdirSync("./src/")
