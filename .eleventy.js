@@ -9,6 +9,7 @@ const mdPluginPrism = require("markdown-it-prism");
 const mdPluginAttrs = require("markdown-it-attrs");
 const mdPluginAnchor = require("markdown-it-anchor");
 const mdPluginFootnote = require("markdown-it-footnote");
+const mdPluginCodesandboxEmbed = require("markdown-it-codesandbox-embed");
 
 const fs = require("fs");
 
@@ -43,6 +44,7 @@ module.exports = function(eleventyConfig) {
 			linkify: true,
 			typographer: true,
 		})
+			.use(mdPluginCodesandboxEmbed, { directory: "code-examples" })
 			.use(mdPluginPrism, {})
 			.use(mdPluginAttrs, {})
 			.use(mdPluginAnchor, { permalink: true, permalinkBefore: true, permalinkSymbol: "§" })

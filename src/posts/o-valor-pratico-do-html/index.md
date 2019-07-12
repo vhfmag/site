@@ -12,28 +12,17 @@ date: 2019-02-21
         text-align: center;
         margin-bottom: 1.6875rem;
     }
-
-    .gatsby-resp-image-link {
-        max-width: 70ch;
-    }
-
-    iframe.embedded-codesandbox {
-        max-width: 100%;
-        width: 90ch;
-        max-height: 90vh;
-        height: 500px;
-    }
 </style>
 
 > Veja também minha [apresentação](https://jsisnottheweb-html.netlify.com/) sobre o mesmo tema.
 
 Preencher formulários é frustrante o suficiente para que vários artigos tenham sido feitos sobre [como melhorar a experiência de preencher um](https://medium.com/@sympli/6-super-quick-ways-to-improve-the-ux-of-forms-9e0bf152b259) ou até [como convencer alguém a fazer isso](https://medium.com/@prashanth.mahadeva/making-people-fill-forms-8569cc273047). Pior ainda é aquele <i lang='en'>checkbox</i> de termos de privacidade no final de um formulário. Mas se existe justiça divina, existe alguma punição pra quem faz esse <i lang='en'>checkbox</i> sem uma <i lang='en'>label</i>, impedindo de clicar no texto pra marcar:
 
-[Checkbox feito por um monstro sem empatia](codesandbox://src/content/posts/o-valor-pratico-do-html/assets/not-nice-input?module=/index.html)
+@[codesandbox](o-valor-pratico-do-html/not-nice-input)
 
 Bastaria ter substituído o insignificante (porque sem significado) `<span>` por um `<label>` e meu dedo gordo não teria me impedido de marcar o <i lang='en'>checkbox</i> em meu celular e eu teria dado direito de venda sobre meus dados sem nem ler os termos:
 
-[Um lindo checkbox que se comporta como deveria](codesandbox://src/content/posts/o-valor-pratico-do-html/assets/nice-input?module=/index.html)
+@[codesandbox](o-valor-pratico-do-html/nice-input)
 
 Uhu, todos felizes! 🎉
 

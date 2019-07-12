@@ -14,6 +14,7 @@
 		"escape-html": "^1.0.3",
 		"markdown-it-anchor": "^5.2.4",
 		"markdown-it-attrs": "^2.4.1",
+		"markdown-it-codesandbox-embed": "^0.1.0",
 		"markdown-it-footnote": "^3.0.2",
 		"markdown-it-prism": "^2.0.2",
 		"patch-package": "^6.1.2",
