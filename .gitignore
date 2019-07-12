@@ -9,6 +9,7 @@ public/
 yarn-error.log
 /.gtm/
 .netlify
+.lazyimages.json
 # Reports
 siteaudit/
 hint-report/
