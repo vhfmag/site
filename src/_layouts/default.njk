@@ -56,7 +56,8 @@
         itemid="mdata-blog"
         data-theme="auto"
     >
+        <a href="#main" class="skip-nav">Pular para conteúdo</a>
         {% include 'sidebar.njk' %}
-        <main class="{{ mainClass }}">{{ content | safe }}</main>
+        <main id="main" class="{{ mainClass }}">{{ content | safe }}</main>
     </body>
 </html>

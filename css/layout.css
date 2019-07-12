@@ -148,6 +148,32 @@ body {
 	grid-gap: calc(2 * var(--root-padding));
 }
 
+.skip-nav {
+	border: 0;
+	clip: rect(0 0 0 0);
+	height: 1px;
+	width: 1px;
+	margin: -1px;
+	padding: 0;
+	overflow: hidden;
+	position: absolute;
+}
+
+.skip-nav:focus {
+	padding: 1rem;
+	position: fixed;
+	top: var(--root-border-width);
+	left: var(--root-border-width);
+	z-index: 1;
+	width: auto;
+	height: auto;
+	clip: auto;
+
+	background-color: var(--themeColor);
+	color: var(--backgroundColor);
+	opacity: 1;
+}
+
 @media (max-width: 800px) {
 	body {
 		grid-template-columns: 1fr;

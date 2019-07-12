@@ -11,7 +11,7 @@
 -   [x] cache buster
 -   [ ] links codesandbox://
 -   [x] manifesto
--   [ ] skip nav
+-   [x] skip nav
 -   [x] sitemap
 -   [x] RSS
 -   [x] headers do netlify
