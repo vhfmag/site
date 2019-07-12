@@ -29,7 +29,8 @@ mainClass: entry
                     {{ date | formatDate }}
                 </time>
             </span>
-            <span>{{ templateContent | wordcount }} palavras, <abbr aria-label="aproximadamente" title="aproximadamente">~</abbr>{{ content | readingTime(raw=true) }} minutos de leitura</span>
+            <span>{{ templateContent | wordcount }} palavras, <abbr aria-label="aproximadamente" title="aproximadamente">~</abbr>
+                <span itemprop="timeRequired">{{ content | readingTime(raw=true) }} minutos</span> de leitura</span>
         </div>
     </header>
 
