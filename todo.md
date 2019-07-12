@@ -23,6 +23,12 @@
 
 ## Up next
 
+-   [ ] microformats
+    -   [ ] [h-entry](http://microformats.org/wiki/h-entry)
+    -   [ ] [h-card](http://microformats.org/wiki/h-card)
+    -   [ ] [h-feed](http://microformats.org/wiki/h-feed)
+    -   [ ] [h-resume](http://microformats.org/wiki/h-resume)
+-   [ ] adicionar `rel="nofollow"` em todo link externo (plugin?)
 -   [ ] Revisar descrições da página de links
 -   [ ] página /now
 -   [ ] relayout de notas
@@ -35,3 +41,4 @@
 -   [ ] integrar netlify cms com indieweb https://github.com/netlify/netlify-cms
     -   [ ] (netlify cms + webhooks) + netlify functions minhas que mandei webmention, etc?
 -   [ ] micropub? usar git gateway do netlify? https://github.com/netlify/git-gateway
+-   [ ] https://indieweb.org/IndieMark
