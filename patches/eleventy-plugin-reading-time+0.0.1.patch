@@ -1,0 +1,17 @@
+diff --git a/node_modules/eleventy-plugin-reading-time/lib/reading-time.js b/node_modules/eleventy-plugin-reading-time/lib/reading-time.js
+index ce07585..1337f43 100755
+--- a/node_modules/eleventy-plugin-reading-time/lib/reading-time.js
++++ b/node_modules/eleventy-plugin-reading-time/lib/reading-time.js
+@@ -8,7 +8,11 @@ module.exports = function readingTime(
+       : postOrContent.templateContent;
+ 
+   if (!htmlContent) {
+-    return `0 ${printSeconds ? 'seconds' : 'minutes'}`;
++    if (raw) {
++      return '0';
++    } else {
++      return `0 ${printSeconds ? 'seconds' : 'minutes'}`;
++    }
+   }
+ 
+   const content = htmlContent.replace(/(<([^>]+)>)/gi, '');

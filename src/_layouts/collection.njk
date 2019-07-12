@@ -31,7 +31,7 @@ pagination:
                         <a href="{{entry.url}}">{{ entry.data.title }}</a>
                     </h2>
                     <div class="metadata">
-                        <span>{{ entry.data.tags }}</span>
+                        <span>{{ collection }}</span>
                         <time
                             itemprop="datePublished dateModified pubdate"
                             class="dt-published"
@@ -39,7 +39,7 @@ pagination:
                         >
                             {{ entry.data.date | formatDate }}
                         </time>
-                        <span><span itemprop="wordCount">{{ entry.data.content | striptags | wordcount }}</span> palavras</span>
+                        <span><span itemprop="wordCount">{{ entry.templateContent | wordcount }}</span> palavras, <abbr aria-label="aproximadamente" title="aproximadamente">~</abbr>{{ entry | readingTime(raw=true) }} minutos de leitura</span>
                     </div>
                     {# {% if entry.data.customTags %}
                         <ul itemprop="keywords" aria-label="Tags">
