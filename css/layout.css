@@ -91,13 +91,6 @@ a:any-link {
 	color: var(--themeColor);
 }
 
-nav > ul,
-nav > ol {
-	list-style-type: none;
-	margin: 0;
-	padding: 0;
-}
-
 button,
 .button {
 	border: 1px solid var(--themeColor);

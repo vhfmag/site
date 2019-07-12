@@ -8,6 +8,12 @@
 	border-color: var(--themeColor);
 }
 
+.main-sidebar nav > ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
 .main-sidebar a.current {
 	font-weight: bold;
 }

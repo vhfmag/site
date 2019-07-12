@@ -47,7 +47,8 @@ main.entry .header-anchor {
 }
 
 @media (min-width: 600px) {
-	main.entry .float {
+	main.entry .float,
+	main.entry .toc {
 		--entry-float-margin: 20px;
 
 		width: calc(33% - var(--entry-float-margin));
