@@ -49,6 +49,13 @@ body[data-theme="light"] [data-theme="light"] {
 	background-color: var(--themeColor);
 }
 
+.main-sidebar .social-media address {
+	padding: var(--s-2);
+	display: grid;
+	grid-template-columns: repeat(auto-fit, var(--s1));
+	grid-gap: var(--s-1);
+}
+
 @media (max-width: 800px) {
 	.main-sidebar {
 		width: unset;

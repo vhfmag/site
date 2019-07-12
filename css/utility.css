@@ -54,6 +54,12 @@
 	margin-top: var(--stack-margin);
 }
 
+/* hack to avoid nested stacks from interfering with each other */
+.stack2 > * + * {
+	margin-top: var(--s0);
+	margin-top: var(--stack-margin-2);
+}
+
 .visually-hidden {
 	position: absolute !important;
 	height: 1px;
