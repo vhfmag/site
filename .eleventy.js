@@ -3,7 +3,6 @@ const pwaPlugin = require("eleventy-plugin-pwa");
 const cacheBusterPlugin = require("@mightyplow/eleventy-plugin-cache-buster");
 const rssPlugin = require("@11ty/eleventy-plugin-rss");
 const nestingTocPlugin = require("eleventy-plugin-nesting-toc");
-const eleventyPluginTypesetPlugin = require("eleventy-plugin-typeset");
 const eleventyPluginReadingTimePlugin = require("eleventy-plugin-reading-time");
 const eleventyPluginLazyimagesPlugin = require("eleventy-plugin-lazyimages");
 
@@ -75,7 +74,6 @@ module.exports = function(eleventyConfig) {
 	);
 	eleventyConfig.addPlugin(rssPlugin);
 	eleventyConfig.addPlugin(nestingTocPlugin, { headingText: "Índice" });
-	eleventyConfig.addPlugin(eleventyPluginTypesetPlugin({ only: "main.entry" }));
 	eleventyConfig.addPlugin(eleventyPluginReadingTimePlugin);
 
 	if (!IS_DEV) {
