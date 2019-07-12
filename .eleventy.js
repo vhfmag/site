@@ -6,7 +6,6 @@ const rssPlugin = require("@11ty/eleventy-plugin-rss");
 const markdownIt = require("markdown-it");
 const mdPluginPrism = require("markdown-it-prism");
 const mdPluginAttrs = require("markdown-it-attrs");
-const mdPluginTocDoneRight = require("markdown-it-toc-done-right");
 const mdPluginAnchor = require("markdown-it-anchor");
 const mdPluginFootnote = require("markdown-it-footnote");
 
@@ -46,7 +45,6 @@ module.exports = function(eleventyConfig) {
 			.use(mdPluginPrism, {})
 			.use(mdPluginAttrs, {})
 			.use(mdPluginAnchor, { permalink: true, permalinkBefore: true, permalinkSymbol: "§" })
-			.use(mdPluginTocDoneRight, {})
 			.use(mdPluginFootnote, {}),
 	);
 
