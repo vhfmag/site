@@ -46,9 +46,23 @@ main.entry .header-anchor {
 	opacity: 0.5;
 }
 
-@media (min-width: 600px) {
-	main.entry .float,
+@media (min-width: 1350px) {
 	main.entry .toc {
+		--entry-float-margin: 20px;
+
+		width: calc(33% - var(--entry-float-margin));
+		min-width: 100px;
+
+		margin: 0;
+		margin-left: var(--entry-float-margin);
+
+		float: right;
+		clear: right;
+	}
+}
+
+@media (min-width: 600px) {
+	main.entry .float {
 		--entry-float-margin: 20px;
 
 		width: calc(33% - var(--entry-float-margin));
