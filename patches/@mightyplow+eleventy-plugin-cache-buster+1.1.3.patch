@@ -1,0 +1,200 @@
+diff --git a/node_modules/@mightyplow/eleventy-plugin-cache-buster/src/addHashes.js b/node_modules/@mightyplow/eleventy-plugin-cache-buster/src/addHashes.js
+index 1612363..021f58f 100755
+--- a/node_modules/@mightyplow/eleventy-plugin-cache-buster/src/addHashes.js
++++ b/node_modules/@mightyplow/eleventy-plugin-cache-buster/src/addHashes.js
+@@ -1,61 +1,60 @@
+-const parse5 = require('parse5');
+-const merge = require('deepmerge');
++const parse5 = require("parse5");
++const merge = require("deepmerge");
+ 
+-const replaceStrings = require('./replaceStrings');
+-const findNodes = require('./findNodes.js');
+-const appendQueryParameter = require('./appendQueryParameter.js');
+-const nodeHelper = require('./nodeHelper.js');
+-const createResourceHash = require('./createResourceHash.js');
++const replaceStrings = require("./replaceStrings");
++const findNodes = require("./findNodes.js");
++const appendQueryParameter = require("./appendQueryParameter.js");
++const nodeHelper = require("./nodeHelper.js");
++const createResourceHash = require("./createResourceHash.js");
+ 
+ const parserOptions = {
+-    // required to get the tags' start and end position
+-    sourceCodeLocationInfo: true
++	// required to get the tags' start and end position
++	sourceCodeLocationInfo: true,
+ };
+ 
+ const defaultOptions = {
+-    hashParameter: 'v',
+-    sourceAttributes: {
+-        link: 'href',
+-        script: 'src'
+-    },
+-    createResourceHash
++	hashParameter: "v",
++	sourceAttributes: {
++		link: "href",
++		script: "src",
++	},
++	createResourceHash,
+ };
+ 
+-module.exports = function (outputDir, options = defaultOptions) {
+-    const {
+-        hashParameter,
+-        sourceAttributes,
+-        createResourceHash
+-    } = merge(defaultOptions, options);
+-
+-    const resourceTagNames = Object.keys(sourceAttributes);
+-    const isResourceTag = (node) => resourceTagNames.includes(node.tagName);
+-    const findResourceNodes = findNodes.bind(null, isResourceTag);
+-
+-    return function addContentHashes (content, target) {
+-        // ignore empty contents
+-        if (!content.trim().length) {
+-            return content;
+-        }
+-
+-        const document = parse5.parse(content, parserOptions);
+-
+-        const resourceNodes = findResourceNodes(document)
+-            .map((node) => nodeHelper({ sourceAttributes }, node))
+-            .filter((node) => node.hasValidSource());
+-
+-        const replacements = resourceNodes.map(function (nodeHelper) {
+-            const source = nodeHelper.getSource();
+-            const hash = createResourceHash(outputDir, source, target);
+-            nodeHelper.setSource(appendQueryParameter(source, hashParameter, hash));
+-
+-            return {
+-                start: nodeHelper.getStart(),
+-                end: nodeHelper.getEnd(),
+-                value: parse5.serialize({ childNodes: [nodeHelper.getNode()] })
+-            };
+-        });
+-
+-        return replaceStrings(content, replacements);
+-    };
++module.exports = function(outputDir, options = defaultOptions) {
++	const { hashParameter, sourceAttributes, createResourceHash, resourceExtensions } = merge(
++		defaultOptions,
++		options,
++	);
++
++	const resourceTagNames = Object.keys(sourceAttributes);
++	const isResourceTag = node => resourceTagNames.includes(node.tagName);
++	const findResourceNodes = findNodes.bind(null, isResourceTag);
++
++	return function addContentHashes(content, target) {
++		// ignore empty contents
++		if (!content.trim().length) {
++			return content;
++		}
++
++		const document = parse5.parse(content, parserOptions);
++
++		const resourceNodes = findResourceNodes(document)
++			.map(node => nodeHelper({ sourceAttributes, resourceExtensions }, node))
++			.filter(node => node.hasValidSource());
++
++		const replacements = resourceNodes.map(function(nodeHelper) {
++			const source = nodeHelper.getSource();
++			const hash = createResourceHash(outputDir, source, target);
++			nodeHelper.setSource(appendQueryParameter(source, hashParameter, hash));
++
++			return {
++				start: nodeHelper.getStart(),
++				end: nodeHelper.getEnd(),
++				value: parse5.serialize({ childNodes: [nodeHelper.getNode()] }),
++			};
++		});
++
++		return replaceStrings(content, replacements);
++	};
+ };
+diff --git a/node_modules/@mightyplow/eleventy-plugin-cache-buster/src/createFileChecksum.js b/node_modules/@mightyplow/eleventy-plugin-cache-buster/src/createFileChecksum.js
+index 2b02925..6f95f57 100755
+--- a/node_modules/@mightyplow/eleventy-plugin-cache-buster/src/createFileChecksum.js
++++ b/node_modules/@mightyplow/eleventy-plugin-cache-buster/src/createFileChecksum.js
+@@ -1,5 +1,6 @@
+-const fs = require('fs');
+-const md5 = require('md5');
++const fs = require("fs");
++const path = require("path");
++const md5 = require("md5");
+ 
+ /**
+  * Reads the content of a file and creates a checksum.
+@@ -7,7 +8,11 @@ const md5 = require('md5');
+  * @param {string} filePath
+  * @return {string}
+  */
+-module.exports = function createFileChecksum (filePath) {
+-    const fileContent = fs.readFileSync(filePath);
+-    return md5(fileContent.toString());
++module.exports = function createFileChecksum(filePath) {
++	if (fs.statSync(filePath).isDirectory()) {
++		filePath = path.join(filePath, "index.html");
++	}
++
++	const fileContent = fs.readFileSync(filePath);
++	return md5(fileContent.toString());
+ };
+diff --git a/node_modules/@mightyplow/eleventy-plugin-cache-buster/src/findNodes.js b/node_modules/@mightyplow/eleventy-plugin-cache-buster/src/findNodes.js
+index c5eb556..5213e34 100755
+--- a/node_modules/@mightyplow/eleventy-plugin-cache-buster/src/findNodes.js
++++ b/node_modules/@mightyplow/eleventy-plugin-cache-buster/src/findNodes.js
+@@ -9,13 +9,13 @@
+  * @param tree
+  * @return {*}
+  */
+-module.exports = function findNodes (predicate, tree) {
+-    return (function inner (foundNodes, node) {
+-        const { childNodes } = node;
+-        const matchingNodes = predicate(node) ? [node] : [];
++module.exports = function findNodes(predicate, tree) {
++	return (function inner(foundNodes, node) {
++		const { childNodes } = node;
++		const matchingNodes = predicate(node) ? [node] : [];
+ 
+-        return childNodes && childNodes.length
+-            ? foundNodes.concat(...matchingNodes, ...childNodes.map(inner.bind(null, foundNodes)))
+-            : foundNodes.concat(...matchingNodes);
+-    }([], tree));
++		return childNodes && childNodes.length
++			? foundNodes.concat(...matchingNodes, ...childNodes.map(inner.bind(null, foundNodes)))
++			: foundNodes.concat(...matchingNodes);
++	})([], tree);
+ };
+diff --git a/node_modules/@mightyplow/eleventy-plugin-cache-buster/src/nodeHelper.js b/node_modules/@mightyplow/eleventy-plugin-cache-buster/src/nodeHelper.js
+index df4e938..5155d54 100755
+--- a/node_modules/@mightyplow/eleventy-plugin-cache-buster/src/nodeHelper.js
++++ b/node_modules/@mightyplow/eleventy-plugin-cache-buster/src/nodeHelper.js
+@@ -7,7 +7,8 @@ function getNodeAttribute (node, attributeName) {
+ 
+ module.exports = function (options, node) {
+     const {
+-        sourceAttributes
++        sourceAttributes,
++        resourceExtensions
+     } = options;
+ 
+     const sourceAttribute = sourceAttributes[node.tagName];
+@@ -31,7 +32,13 @@ module.exports = function (options, node) {
+         },
+ 
+         hasValidSource () {
+-            return node && isRelativeUrl(this.getSource()) ;
++            const isValidURL = node && isRelativeUrl(this.getSource());
++
++            if (resourceExtensions) {
++                return isValidURL && resourceExtensions.some(ext => this.getSource().endsWith(`.${ext}`));
++            } else {
++                return isValidURL;
++            }
+         },
+ 
+         getStart () {

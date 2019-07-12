@@ -1,0 +1,7 @@
+/links /blogroll
+/resume /work
+
+/bookmarks/* /notes/:splat
+
+# 404
+/* /404.html 404

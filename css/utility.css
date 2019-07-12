@@ -1,0 +1,93 @@
+/* modular scale */
+
+:root {
+	--ratio: 1.61803;
+	--s-5: calc(var(--s-4) / var(--ratio));
+	--s-4: calc(var(--s-3) / var(--ratio));
+	--s-3: calc(var(--s-2) / var(--ratio));
+	--s-2: calc(var(--s-1) / var(--ratio));
+	--s-1: calc(var(--s0) / var(--ratio));
+	--s0: 1rem;
+	--s1: calc(var(--s0) * var(--ratio));
+	--s2: calc(var(--s1) * var(--ratio));
+	--s3: calc(var(--s2) * var(--ratio));
+	--s4: calc(var(--s3) * var(--ratio));
+	--s5: calc(var(--s4) * var(--ratio));
+}
+
+/* sidebar */
+
+.sidebar {
+	overflow: hidden;
+}
+
+.sidebar > * {
+	display: flex;
+	flex-wrap: wrap;
+	gap: calc(var(--sidebar-gap));
+}
+
+@supports not (gap: 1rem) {
+	.sidebar > * {
+		margin: calc(-1 * var(--sidebar-gap) / 2);
+	}
+
+	.sidebar > * > * {
+		margin: calc(var(--sidebar-gap) / 2);
+	}
+}
+
+.sidebar > * > * {
+	flex-grow: 1;
+}
+
+.sidebar > * > :last-child {
+	flex-basis: 0;
+	flex-grow: 999;
+	min-width: calc(50% - var(--sidebar-gap) * 2);
+}
+
+/* stack */
+
+.stack > * + * {
+	margin-top: var(--s0);
+	margin-top: var(--stack-margin);
+}
+
+/* hack to avoid nested stacks from interfering with each other */
+.stack2 > * + * {
+	margin-top: var(--s0);
+	margin-top: var(--stack-margin-2);
+}
+
+.visually-hidden {
+	position: absolute !important;
+	height: 1px;
+	width: 1px;
+	overflow: hidden;
+	clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+	clip: rect(1px, 1px, 1px, 1px);
+}
+
+.inline-list {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	text-align: justify;
+}
+
+.inline-list li {
+	display: inline;
+}
+
+.inline-list li + li::before {
+	content: ", ";
+}
+
+.inline-list li + li:last-child::before {
+	content: " & ";
+}
+
+.inline-list li + li[data-separator]::before {
+	content: attr(data-separator);
+}

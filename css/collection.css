@@ -1,0 +1,28 @@
+.collection ol {
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+}
+
+.collection h2 {
+	margin-top: var(--s0);
+	margin-bottom: 0;
+	line-height: 1.5;
+}
+
+.collection .pagination {
+	display: flex;
+	margin-top: var(--s1);
+}
+
+.collection .pagination a {
+	display: inline-block;
+}
+
+.collection .pagination .prev {
+	margin-right: auto;
+}
+
+.collection .pagination .next {
+	margin-left: auto;
+}

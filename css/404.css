@@ -1,0 +1,31 @@
+main.not-found {
+	display: inline-grid;
+	grid-auto-columns: min-content;
+	justify-content: center;
+	align-content: center;
+	max-width: unset;
+}
+
+main.not-found h1 {
+	margin: 0;
+	font-size: calc(1em * var(--ratio) * var(--ratio));
+}
+
+main.not-found .big {
+	font-weight: bold;
+	font-size: 8em;
+	line-height: 0.8;
+	color: var(--themeColor);
+}
+
+@media (min-width: 400px) {
+	main.not-found {
+		font-size: 1.5em;
+	}
+}
+
+@media (min-width: 600px) {
+	main.not-found {
+		font-size: 2em;
+	}
+}
