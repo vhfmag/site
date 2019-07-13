@@ -58,6 +58,9 @@ main.entry .header-anchor {
 
 		float: right;
 		clear: right;
+
+		position: sticky;
+		top: var(--root-padding);
 	}
 }
 
