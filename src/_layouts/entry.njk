@@ -1,6 +1,7 @@
 ---
 layout: default
 mainClass: entry
+htmlClass: h-entry
 ---
 
 {% macro listAuthors(authors) %}
@@ -15,13 +16,15 @@ mainClass: entry
 
 <article>
     <header>
-        <h1 class="post-title" itemprop="headline title">{{ title }}</h1>
+        <h1 class="post-title p-name" itemprop="headline title">
+            <a class="u-url u-uid" href="{{ page.url }}">{{ title }}</a>
+        </h1>
         {% if description %}
             <p itemprop="alternativeHeadline">{{ description }}</p>
         {% endif %}
         <div class="metadata" data-separator="—">
             <span>
-                Post por {{ listAuthors(authors if authors else [me]) }}
+                <span class="p-category">Post</span> por {{ listAuthors(authors if authors else [me]) }}
             </span>
             <span>
                 Publicado em
@@ -34,7 +37,7 @@ mainClass: entry
         </div>
     </header>
 
-    {{ content | safe }}
+    <section class="e-content">{{ content | safe }}</section>
 </article>
 
 <link rel="stylesheet" href="/css/entry.css"/>

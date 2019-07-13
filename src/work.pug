@@ -2,20 +2,22 @@
 title: Trabalho
 mainClass: work
 layout: default
+titleClass: p-name
+htmlClass: h-resume
 ---
 
 link(rel="stylesheet", href="/css/work.css")
 
 h1 Trabalho
 
-p Trabalho com desenvolvimento desde 2016. Na maior parte do tempo trabalhei com #[i(lang="en") front-end], mas também tenho experiência desenvolvendo para #[i(lang="en") back-end]. Sou fluente em Javascript, HTML semântico, CSS moderno, Typescript, Node e React, além de ter habilidade com Scala, Python e bancos dados #[i(lang="en") no-SQL]. Tenho interesse por Elixir, Rust, Svelte, #[i(lang="en") web components], programação funcional e teoria de sistemas de tipo.
+p.p-summary Trabalho com desenvolvimento desde 2016. Na maior parte do tempo trabalhei com #[i(lang="en") front-end], mas também tenho experiência desenvolvendo para #[i(lang="en") back-end]. Sou fluente em Javascript, HTML semântico, CSS moderno, Typescript, Node e React, além de ter habilidade com Scala, Python e bancos dados #[i(lang="en") no-SQL]. Tenho interesse por Elixir, Rust, Svelte, #[i(lang="en") web components], programação funcional e teoria de sistemas de tipo.
 
 section
     h2 Carreira e formação
 
     ol.timeline
         - for (const exp of work.experiences)
-            li: section.experience
-                div #[span.kind=exp.kind] #[span.period #[time=exp.period[0]] – #[time=exp.period[1] || "presente"]]
-                h3 #{exp.role} #[a(href=exp.url)=exp.company]
+            li: section.experience(class=`${exp.microformatsType} ${exp.current ? "p-affiliation" : ""}`)
+                div #[span.kind=exp.kind] #[span.h-event.period #[time.dt-start=exp.period[0]] – #[time(class=exp.period[1] ? "dt-end" : "")=exp.period[1] || "presente"]]
+                h3 #{exp.role} #[a.h-card.u-url.u-uid.p-name(href=exp.url)=exp.company]
                 != exp.description

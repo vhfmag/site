@@ -2,15 +2,15 @@ main.entry {
 	max-width: calc(var(--main-max-width) * 3 / 2);
 }
 
-main.entry > article > p,
-main.entry > article > ul,
-main.entry > article > ol,
-main.entry > article > figure,
-main.entry > article > img,
-main.entry > article > video,
-main.entry > article > blockquote,
-main.entry > article > pre,
-main.entry > article > iframe {
+main.entry .e-content > p,
+main.entry .e-content > ul,
+main.entry .e-content > ol,
+main.entry .e-content > figure,
+main.entry .e-content > img,
+main.entry .e-content > video,
+main.entry .e-content > blockquote,
+main.entry .e-content > pre,
+main.entry .e-content > iframe {
 	max-width: var(--main-max-width);
 }
 

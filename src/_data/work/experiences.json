@@ -5,6 +5,8 @@
 		"period": ["outubro de 2018"],
 		"role": "Desenvolvimento na",
 		"kind": "Trabalho",
+		"microformatsType": "h-experience",
+		"current": true,
 		"description": "<p>Atualmente, trabalho no time do <a href='https://escritorioonline.jusbrasil.com.br/'>Escritório Online</a> na Jusbrasil. Minha principal responsabilidade é implementar e manter o web app e os serviços associados. Algumas das tecnologias utilizadas diariamente são Javascript, Typescript, React, Node, Kubernetes, Python e Scala.</p>"
 	},
 	{
@@ -13,6 +15,7 @@
 		"period": ["março de 2016", "outubro de 2018"],
 		"role": "Desenvolvimento na",
 		"kind": "Trabalho",
+		"microformatsType": "h-experience",
 		"description": "<p>Na cubos, trabalhei como desenvolvedor em diversos produtos, de agregadores e buscadores de hotel ao <q>uber das marmitas</q>. O que eu passei mais tempo foi o <a href='https://zigpay.com.br/'>ZigPay</a>, um dos maiores players em <i lang='en'>live events</i> no Brasil.</p>"
 	},
 	{
@@ -21,6 +24,7 @@
 		"period": ["julho de 2014", "junho de 2015"],
 		"role": "Tecnologia da informação na",
 		"kind": "Faculdade",
+		"microformatsType": "h-education",
 		"description": "<p>Estudei por um ano na ENSTA Bretagne como parte um intercâmbio, e lá aprendi francês, usei Ruby on Rails pela primeira vez e tive contato com outras culturas e perspectivas sobre educação, trabalho, políticas públicas e mais.</p><p>Foi lá que eu decidi mudar de carreira e trabalhar com desenvolvimento.</p>"
 	},
 	{
@@ -29,6 +33,7 @@
 		"period": ["fevereiro de 2012", "agosto de 2016"],
 		"role": "Engenharia elétrica na",
 		"kind": "Faculdade",
+		"microformatsType": "h-education",
 		"description": "<p>Apesar de sempre ter tido o pé em programação, eu cursei engenharia elétrica durante a maior parte do meu tempo na UFBA. Na univerdade, pude trabalhar brevement em uma <a href='https://www.eletrojr.com.br/'>empresa júnior</a>, atuar como voluntário na nossa seção local do IEEE e ser bolsista no <a href='http://www.peteletrica.eng.ufba.br/'>programa PET</a>. Aliás, o site do PET foi uma dos meus primeiros trabalhos na web!</p>"
 	}
 ]

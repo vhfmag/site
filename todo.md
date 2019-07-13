@@ -23,11 +23,11 @@
 
 ## Up next
 
--   [ ] microformats
-    -   [ ] [h-entry](http://microformats.org/wiki/h-entry)
-    -   [ ] [h-card](http://microformats.org/wiki/h-card)
-    -   [ ] [h-feed](http://microformats.org/wiki/h-feed)
-    -   [ ] [h-resume](http://microformats.org/wiki/h-resume)
+-   [x] microformats
+    -   [x] [h-entry](http://microformats.org/wiki/h-entry)
+    -   [x] [h-card](http://microformats.org/wiki/h-card)
+    -   [x] [h-feed](http://microformats.org/wiki/h-feed)
+    -   [x] [h-resume](http://microformats.org/wiki/h-resume)
 -   [ ] adicionar `rel="nofollow"` em todo link externo (plugin?)
 -   [ ] Revisar descrições da página de links
 -   [ ] página /now
