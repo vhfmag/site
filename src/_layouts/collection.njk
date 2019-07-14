@@ -66,12 +66,12 @@ pagination:
 
 <nav class="pagination" aria-label="Paginação de {{collectionName}}">
     {% if pagination.pageNumber != 0 %}
-        <a class="prev" href="{{ pagination.previousPageHref }}">
+        <a class="prev" rel="prev" href="{{ pagination.previousPageHref }}">
             ‹ Itens anteriores
         </a>
     {% endif %}
     {% if pagination.pageNumber != pagination.hrefs.length - 1 %}
-        <a class="next" href="{{ pagination.nextPageHref }}">
+        <a class="next" rel="next" href="{{ pagination.nextPageHref }}">
             Próximos itens ›
         </a>
     {% endif %}
