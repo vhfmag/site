@@ -1,0 +1,9 @@
+{% macro listAuthors(authors) %}
+    {% for author in authors %}
+        {% if author.url %}
+            <a href="{{author.url}}" class="p-author h-card u-url" itemprop="">{{ author.name }}</a>
+        {% else %}
+            <span class="p-author h-card" itemprop="">{{ author.name }}</span>
+        {% endif %}
+    {% endfor %}
+{% endmacro %}

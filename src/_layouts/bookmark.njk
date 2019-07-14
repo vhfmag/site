@@ -1,0 +1,11 @@
+---
+layout: default
+mainClass: entry
+htmlClass: h-entry
+---
+
+{% extends 'templates/entry.njk' %}
+
+{% block category %}
+    <span class="p-category">Bookmark</span> de <a href="{{ link }}" class="u-bookmark-of">{{ title }}</a>
+{% endblock %}

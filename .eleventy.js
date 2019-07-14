@@ -81,18 +81,24 @@ module.exports = function(eleventyConfig) {
 		eleventyConfig.addPlugin(pwaPlugin);
 	}
 
-	const collectionNames = fs
-		.readdirSync("./src/")
-		.filter(
-			path =>
-				path !== "feed" &&
-				!path.startsWith("_") &&
-				fs.statSync(`./src/${path}`).isDirectory(),
-		);
+	const collections = [
+		{
+			folders: ["posts"],
+			name: "posts",
+		},
+		{
+			folders: ["apresentacoes"],
+			name: "apresentacoes",
+		},
+		{
+			folders: ["notes", "bookmarks"],
+			name: "notes",
+		},
+	];
 
-	addCollection(eleventyConfig, "tudo", collectionNames);
-	for (const collectionName of collectionNames) {
-		addCollection(eleventyConfig, collectionName, [collectionName]);
+	addCollection(eleventyConfig, "tudo", collections.flatMap(x => x.folders));
+	for (const collection of collections) {
+		addCollection(eleventyConfig, collection.name, collection.folders);
 	}
 
 	eleventyConfig.addFilter("formatDateISO", date => {

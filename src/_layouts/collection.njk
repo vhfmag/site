@@ -12,15 +12,7 @@ pagination:
     size: 5
 ---
 
-{% macro listAuthors(authors) %}
-    {% for author in authors %}
-        {% if author.url %}
-            <a href="{{author.url}}" class="p-author h-card u-url" itemprop="">{{ author.name }}</a>
-        {% else %}
-            <span class="p-author h-card" itemprop="">{{ author.name }}</span>
-        {% endif %}
-    {% endfor %}
-{% endmacro %}
+{% from 'macros/authors.njk' import listAuthors %}
 
 {{ content | safe }}
 
@@ -45,7 +37,7 @@ pagination:
                         <a class="u-url u-uid" href="{{entry.url}}">{{ entry.data.title }}</a>
                     </h2>
                     <div class="metadata">
-                        <span><span class="p-category">{{ collection }}</span>
+                        <span><span class="p-category">{{ entry.data.collection }}</span>
                             <span class="visually-hidden"> por {{ listAuthors(authors if authors else [me]) }}</span></span>
                         <time
                             itemprop="datePublished dateModified pubdate"
