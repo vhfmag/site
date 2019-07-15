@@ -1,6 +1,6 @@
-{% macro authorPhotos(wms, pageUrl, prop, singularName, pluralName = singularName, authorUrl = false) %}
+{% macro authorPhotos(wms, pageUrl, prop, singularName, pluralName = singularName, authorUrl = false, open = false) %}
     {% if wms[pageUrl][prop] | length > 0 %}
-        <details open class="author-photos {{ prop }}">
+        <details {% if open %}open{% endif %} class="author-photos {{ prop }}">
             {% set entries = wms[pageUrl][prop] %}
             <summary>
                 {{ entries | length }}
@@ -24,9 +24,9 @@
     {% endif %}
 {% endmacro %}
 
-{% macro comment(wms, pageUrl, prop, singularName, pluralName = singularName) %}
+{% macro comment(wms, pageUrl, prop, singularName, pluralName = singularName, open = false) %}
     {% if wms[pageUrl][prop] | length > 0 %}
-        <details open class="comment {{ prop }}">
+        <details {% if open %}open{% endif %} class="comment {{ prop }}">
             {% set entries = wms[pageUrl][prop] %}
             <summary>
                 {{ entries | length }}

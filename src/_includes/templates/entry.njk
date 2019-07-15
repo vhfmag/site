@@ -32,10 +32,11 @@
     <section class="webmentions">
         {% import 'macros/webmentions.njk' as wms %}
 
-        {{ wms.authorPhotos(webmentions, page.url, "like-of", "curtida", "curtidas", true) }}
-        {{ wms.authorPhotos(webmentions, page.url, "bookmark-of", "favoritaram", "favoritou", true) }}
+        {{ wms.authorPhotos(webmentions, page.url, "like-of", "curtida", "curtidas", authorUrl = true) }}
+        {{ wms.authorPhotos(webmentions, page.url, "bookmark-of", "favoritaram", "favoritou", authorUrl = true) }}
         {{ wms.authorPhotos(webmentions, page.url, "repost-of", "repostagem", "repostagens") }}
         {{ wms.comment(webmentions, page.url, "mention-of", "menção", "menções") }}
+        {{ wms.comment(webmentions, page.url, "in-reply-to", "resposta", "respostas", open = true) }}
     </section>
 </article>
 
