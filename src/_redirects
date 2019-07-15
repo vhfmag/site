@@ -5,3 +5,9 @@
 
 # 404
 /* /404.html 404
+
+# fed.brid.gy
+/.well-known/host-meta https://fed.brid.gy/.well-known/host-meta
+/.well-known/host-meta.xrd https://fed.brid.gy/.well-known/host-meta.xrd
+/.well-known/host-meta.jrd https://fed.brid.gy/.well-known/host-meta.jrd
+/.well-known/webfinger https://fed.brid.gy/.well-known/webfinger
