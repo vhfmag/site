@@ -5,3 +5,20 @@ htmlClass: h-entry
 ---
 
 {% extends 'templates/entry.njk' %}
+
+{% block metadata %}
+    {% for link in links %}
+        <span>
+            {% for type in link.types %}
+                <span class="wm-property">{{ wmType[type].singular }}
+                    {{ wmType[type].connective }}</span>
+            {% endfor %}
+
+            {% set typeClasses %}
+            {% for type in link.types %} u-{{type}}
+            {% endfor %}{% endset %}
+
+            <a href="{{ link.link }}" class="{{ typeClasses }}">{{ title }}</a>
+        </span>
+    {% endfor %}
+{% endblock %}

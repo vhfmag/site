@@ -11,6 +11,23 @@ main.entry > article > header::after {
 	margin-bottom: var(--s2);
 }
 
+main.entry > article > header .wm-property {
+	text-transform: lowercase;
+}
+
+main.entry > article > header .wm-property:first-of-type {
+	text-transform: unset;
+}
+
+main.entry > article > header .wm-property + .wm-property::before {
+	content: ", ";
+}
+
+main.entry > article > header .wm-property + .wm-property:last-of-type::before {
+	content: " e ";
+}
+
+main.entry > article > header > .metadata,
 main.entry .e-content > p,
 main.entry .e-content > ul,
 main.entry .e-content > ol,
