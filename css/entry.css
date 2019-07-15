@@ -23,6 +23,16 @@ main.entry .e-content > iframe {
 	max-width: var(--main-max-width);
 }
 
+main.entry article > hr {
+	max-width: var(--main-max-width);
+	border: 0;
+	border-bottom: 2px dotted var(--themeColor);
+	margin-right: auto;
+	margin-left: unset;
+	margin-top: var(--s1);
+	margin-bottom: var(--s1);
+}
+
 main.entry figure {
 	display: flex;
 	flex-direction: column;
@@ -55,7 +65,44 @@ main.entry .header-anchor {
 	opacity: 0.5;
 }
 
-main.entry .webmentions .author-photos ul {
+main.entry .webmentions .comment > ul > li + li {
+	margin-top: var(--s3);
+}
+
+main.entry .webmentions .comment article {
+	display: grid;
+	grid-template-areas: "photo title" "photo date" "photo link" "photo content";
+	grid-template-columns: min-content auto;
+}
+
+main.entry .webmentions .comment article header {
+	display: contents;
+}
+
+main.entry .webmentions .comment article header img {
+	grid-area: photo;
+	width: var(--s2);
+	height: var(--s2);
+}
+
+main.entry .webmentions .comment article header .name {
+	grid-area: title;
+}
+
+main.entry .webmentions .comment article header time {
+	grid-area: date;
+}
+
+main.entry .webmentions .comment article header a {
+	grid-area: link;
+}
+
+main.entry .webmentions .comment article p {
+	grid-area: content;
+	margin-top: var(--s2);
+}
+
+main.entry .webmentions details > ul {
 	list-style-type: none;
 	margin: 0;
 	padding: 0;
