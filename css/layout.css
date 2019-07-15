@@ -68,9 +68,13 @@ html {
 	background-color: var(--backgroundColor);
 	color: var(--textColor);
 
-	font-size: 100%;
+	font-size: 16px;
 	line-height: var(--ratio);
 	font-family: emoji, system;
+
+	hyphens: auto;
+	word-break: break-all;
+	word-break: break-word;
 }
 
 body {
@@ -174,10 +178,21 @@ body {
 	opacity: 1;
 }
 
+ul,
+ol {
+	padding-left: var(--s0);
+}
+
 @media (max-width: 800px) {
 	body {
 		grid-template-columns: 1fr;
 		grid-template-rows: min-content auto;
 		grid-gap: var(--root-padding);
+
+		font-size: 14px;
+	}
+
+	main {
+		--main-max-width: calc(100vw - 2 * (var(--root-padding) + var(--root-border-width)));
 	}
 }
