@@ -45,12 +45,12 @@
 ## Upcoming
 
 -   [ ] function pra gerar imagem pra posts a partir do título
--   [ ] integrar com indieweb
-    -   [-] receber webmentions
+-   [-] integrar com indieweb
+    -   [x] receber webmentions
         -   [x] configurar pra receber https://webmention.io
         -   [x] configurar https://brid.gy/
-        -   [ ] consumir https://webmention.io através de https://www.11ty.io/docs/data-js/
-        -   [ ] configurar webhook em pra fazer redeploy do site https://webmention.io
+        -   [x] consumir https://webmention.io através de https://www.11ty.io/docs/data-js/
+        -   [x] configurar webhook em pra fazer redeploy do site https://webmention.io
     -   [ ] mandar webmention
         -   [ ] webhook de deploy + functions? — https://github.com/strugee/lazymention
     -   [ ] POSSE

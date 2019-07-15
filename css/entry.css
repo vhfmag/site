@@ -55,6 +55,41 @@ main.entry .header-anchor {
 	opacity: 0.5;
 }
 
+main.entry .webmentions .author-photos ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
+main.entry .webmentions .author-photos li {
+	display: inline-flex;
+	justify-content: stretch;
+	align-items: stretch;
+}
+
+main.entry .webmentions .author-photos li + li {
+	margin-left: calc(-1 * var(--s-1));
+	transition: margin-left 0.5s ease;
+}
+
+main.entry .webmentions .author-photos:hover li + li {
+	margin-left: 0;
+}
+
+main.entry .webmentions .author-photos li,
+main.entry .webmentions .author-photos a,
+main.entry .webmentions .author-photos article,
+main.entry .webmentions .author-photos img {
+	width: var(--s2);
+	height: var(--s2);
+	border-radius: 50%;
+}
+
+main.entry .webmentions .author-photos img {
+	object-fit: cover;
+	object-position: center;
+}
+
 @media (min-width: 1350px) {
 	main.entry .toc {
 		--entry-float-margin: 20px;

@@ -28,6 +28,15 @@
     </header>
 
     <section class="e-content">{{ content | safe }}</section>
+
+    <section class="webmentions">
+        {% import 'macros/webmentions.njk' as wms %}
+
+        {{ wms.authorPhotos(webmentions, page.url, "like-of", "curtida", "curtidas", true) }}
+        {{ wms.authorPhotos(webmentions, page.url, "bookmark-of", "favoritaram", "favoritou", true) }}
+        {{ wms.authorPhotos(webmentions, page.url, "repost-of", "repostagem", "repostagens") }}
+        {{ wms.comment(webmentions, page.url, "mention-of", "menção", "menções") }}
+    </section>
 </article>
 
 <link rel="stylesheet" href="/css/entry.css"/>
