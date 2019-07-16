@@ -1,5 +1,6 @@
 ---
 title: How every part of the world has warmed and could continue to warm
+date: "2019-07-16"
 links:
     - link: https://www.carbonbrief.org/mapped-how-every-part-of-the-world-has-warmed-and-could-continue-to-warm
       types: [bookmark-of, mention-of]
