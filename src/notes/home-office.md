@@ -6,4 +6,4 @@ links:
       types: ["mention-of", "bookmark-of"]
 ---
 
-Tudo o que eu penso sobre uberização, <q>startups legais e super liberais e jovens e modernas</q> e afins, mas nunca pesquisei o suficiente pra estruturar. QUE HINO DE VÍDEO.
+Tudo o que eu penso sobre uberização, <q>startups legais e super liberais, jovens e modernas</q> e afins, mas nunca pesquisei o suficiente pra estruturar (é legal? é. mas esteja ciente do que você tá dando em troca). QUE HINO DE VÍDEO.
