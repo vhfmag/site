@@ -13,6 +13,8 @@ const mdPluginAnchor = require("markdown-it-anchor");
 const mdPluginFootnote = require("markdown-it-footnote");
 const mdPluginCodesandboxEmbed = require("markdown-it-codesandbox-embed");
 
+const wmTypeStrings = require("./src/_data/wmType.json");
+
 const fs = require("fs");
 
 const { figureShortcode } = require("./src/_shortcodes/figure");
@@ -129,6 +131,11 @@ module.exports = function(eleventyConfig) {
 
 		return `${day.padStart(2, "0")}/${month.padStart(2, "0")}/${date.getFullYear()}`;
 	});
+
+	eleventyConfig.addFilter("wmTypeString", wmType => wmTypeStrings[wmType]);
+	eleventyConfig.addFilter("wmTypeStrings", wmTypes =>
+		wmTypes.map(wmType => wmTypeStrings[wmType]),
+	);
 
 	eleventyConfig.addShortcode("figure", figureShortcode);
 
