@@ -5,7 +5,7 @@ mainClass: blogroll
 ---
 
 -
-    const linksByType = links.reduce((acc, link) => {
+    const linksByType = blogroll.reduce((acc, link) => {
         if (!acc[link.type]) acc[link.type] = [];
         acc[link.type].push(link);
         return acc;

@@ -43,7 +43,7 @@ section.half
 section.half
     h2 Blogroll
     ul.post-list
-        - for (const link of links.slice(0, 5))
+        - for (const link of blogroll.slice(0, 5))
             li
                 h3: a(href=link.url)= link.name
 
