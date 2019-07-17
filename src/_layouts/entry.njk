@@ -7,6 +7,10 @@ htmlClass: h-entry
 {% extends 'templates/entry.njk' %}
 
 {% block body_start %}
+    {% for link in invisibleLinks %}
+        <a href="{{ link }}"></a>
+    {% endfor %}
+
     {% for link in links %}
         <aside class="wm-properties">
             {% set wmTypes = link.types | wmTypeStrings %}
