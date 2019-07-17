@@ -11,19 +11,24 @@ main.entry > article > header::after {
 	margin-bottom: var(--s2);
 }
 
-main.entry > article > header .wm-property {
+.wm-properties {
+	padding: var(--s-1);
+	background-color: rgba(0, 0, 0, 0.1);
+}
+
+.wm-properties .wm-property {
 	text-transform: lowercase;
 }
 
-main.entry > article > header .wm-property:first-of-type {
+.wm-properties .wm-property:first-of-type {
 	text-transform: unset;
 }
 
-main.entry > article > header .wm-property + .wm-property::before {
+.wm-properties .wm-property + .wm-property::before {
 	content: ", ";
 }
 
-main.entry > article > header .wm-property + .wm-property:last-of-type::before {
+.wm-properties .wm-property + .wm-property:last-of-type::before {
 	content: " e ";
 }
 
@@ -31,6 +36,7 @@ main.entry > article > header > .metadata,
 main.entry .e-content > p,
 main.entry .e-content > ul,
 main.entry .e-content > ol,
+main.entry .e-content > aside,
 main.entry .e-content > figure,
 main.entry .e-content > p > img,
 main.entry .e-content > p > video,

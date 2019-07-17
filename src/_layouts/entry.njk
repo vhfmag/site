@@ -6,9 +6,9 @@ htmlClass: h-entry
 
 {% extends 'templates/entry.njk' %}
 
-{% block metadata %}
+{% block body_start %}
     {% for link in links %}
-        <span>
+        <aside class="wm-properties">
             {% set wmTypes = link.types | wmTypeStrings %}
 
             {% for connective, types in wmTypes | groupby('connective') %}
@@ -26,6 +26,6 @@ htmlClass: h-entry
             {% endset %}
 
             <a href="{{ link.link }}" class="{{ typeClasses }}">{{ title }}</a>
-        </span>
+        </aside>
     {% endfor %}
 {% endblock %}

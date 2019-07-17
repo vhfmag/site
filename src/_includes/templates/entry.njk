@@ -27,7 +27,11 @@
         {% block header %}{% endblock %}
     </header>
 
-    <section class="e-content">{{ content | safe }}</section>
+    <section class="e-content">
+        {% block body_start %}{% endblock %}
+        {{ content | safe }}
+        {% block body_end %}{% endblock %}
+    </section>
 
     <hr/>
 
