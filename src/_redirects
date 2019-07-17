@@ -11,3 +11,7 @@
 /.well-known/host-meta.xrd https://fed.brid.gy/.well-known/host-meta.xrd
 /.well-known/host-meta.jrd https://fed.brid.gy/.well-known/host-meta.jrd
 /.well-known/webfinger https://fed.brid.gy/.well-known/webfinger
+
+# Renamed stuff
+
+/notes/the-billionaire’s-typewriter /notes/the-billionaires-typewriter
