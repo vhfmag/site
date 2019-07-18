@@ -7,7 +7,7 @@ htmlClass: h-entry
 {% extends 'templates/entry.njk' %}
 
 {% block body_start %}
-    {% for link in invisibleLinks %}
+    {% for link in syndicationLinks %}
         <a href="{{ link }}"></a>
     {% endfor %}
 
