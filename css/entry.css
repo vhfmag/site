@@ -27,6 +27,23 @@ main.entry > article > header::after {
 	content: " e ";
 }
 
+main.entry .embed-container {
+	position: relative;
+	padding-bottom: 57.25%;
+	height: 0;
+	overflow: hidden;
+}
+
+main.entry .embed-container > iframe,
+main.entry .embed-container > object,
+main.entry .embed-container > embed {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
 main.entry > article > header > .metadata,
 main.entry .e-content > p,
 main.entry .e-content > ul,
@@ -39,7 +56,8 @@ main.entry .e-content > img,
 main.entry .e-content > video,
 main.entry .e-content > blockquote,
 main.entry .e-content > pre,
-main.entry .e-content > iframe {
+main.entry .e-content > iframe,
+main.entry .e-content > .embed-container {
 	max-width: var(--main-max-width);
 }
 
