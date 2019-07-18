@@ -2,7 +2,7 @@
 title: Why should you read "One Hundred Years of Solitude"?
 links:
     - link: https://www.youtube.com/watch?v=B2zhLYz4pYo
-      types: [repost-of, bookmark-of]
+      types: [bookmark-of]
 syndicationLinks:
     - https://brid.gy/publish/twitter
 twitterContent: por que ler 'Cem Anos de Solidão'? (esse e Amor nos Tempos do Cólera, de Gabriel García Marquez, são LINDOS)

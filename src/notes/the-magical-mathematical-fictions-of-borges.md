@@ -2,7 +2,7 @@
 title: The magical, mathematical fictions of Jorge Luis Borges
 links:
     - link: https://www.youtube.com/watch?v=mJeLGd3JV2I
-      types: [repost-of, bookmark-of]
+      types: [bookmark-of]
 syndicationLinks:
     - https://brid.gy/publish/twitter
 twitterContent: sobre Borges e suas explorações do infinito ❤
