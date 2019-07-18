@@ -10,6 +10,9 @@ htmlClass: h-entry
     {% for link in syndicationLinks %}
         <a href="{{ link }}"></a>
     {% endfor %}
+    {% if twitterContent %}
+        <p hidden class="p-bridgy-twitter-content">{{ twitterContent }}</p>
+    {% endif %}
 {% endblock %}
 
 {% if links | length > 0 %}
