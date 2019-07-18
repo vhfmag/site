@@ -11,11 +11,6 @@ main.entry > article > header::after {
 	margin-bottom: var(--s2);
 }
 
-.wm-properties {
-	padding: var(--s-1);
-	background-color: rgba(0, 0, 0, 0.1);
-}
-
 .wm-properties .wm-property {
 	text-transform: lowercase;
 }
