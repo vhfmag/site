@@ -33,9 +33,8 @@
         {% block body_end %}{% endblock %}
     </section>
 
-    <hr/>
-
     {% if webmentions[page.url].all | length > 0 %}
+        <hr/>
         <section class="webmentions">
             {% import 'macros/webmentions.njk' as wms %}
 
