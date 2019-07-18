@@ -1,15 +1,4 @@
 @font-face {
-	font-family: emoji;
-	font-display: swap;
-
-	src: local("EmojiOneMozilla"), local("EmojiOne"), local("Twemoji"), local("Apple Color Emoji"),
-		local("Android Emoji"), local("Segoe UI"), local(EmojiSymbols), local(Symbola);
-
-	/* Emoji unicode blocks */
-	unicode-range: U+1F300-1F5FF, U+1F600-1F64F, U+1F680-1F6FF, U+2600-26FF;
-}
-
-@font-face {
 	font-family: system;
 	font-style: normal;
 	font-weight: 300;
@@ -70,7 +59,7 @@ html {
 
 	font-size: 100%;
 	line-height: var(--ratio);
-	font-family: emoji, system;
+	font-family: system;
 
 	hyphens: auto;
 	word-break: break-all;
