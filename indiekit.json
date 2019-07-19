@@ -1,0 +1,24 @@
+{
+	"syndicate-to": [
+		{
+			"uid": "https://twitter.com/vhfmag/",
+			"name": "Victor Magalhães no Twitter"
+		},
+		{
+			"uid": "https://sunbeam.city/@vhfmag/",
+			"name": "Victor Magalhães no Mastodon"
+		}
+	],
+	"post-types": {
+		"note": {
+			"name": "Micro note",
+			"icon": ":memo:",
+			"path": {
+				"template": "_micropub/note.njk",
+				"post": "src/notes/{​{ published | date('yyyy-MM-dd') }}-{​{ slug }}.md",
+				"url": "notes/{​{ published | date('yyyy-MM-dd') }}-{​{ slug }}/",
+				"file": "uploads/{​{ published | date('yyyy/MM') }}/{​{ filename }}"
+			}
+		}
+	}
+}

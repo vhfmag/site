@@ -1,0 +1,27 @@
+---
+title: '{{ title }}'
+date: {{ published }}
+links:
+{% if mentionOf %}
+    - types: [mention-of]
+      link: {{ mentionOf }}
+{% endif %}
+{% if inReplyTo %}
+    - types: [in-reply-to]
+      link: {{ inReplyTo }}
+{% endif %}
+{% if bookmarkOf %}
+    - types: [bookmark-of]
+      link: {{ bookmarkOf }}
+{% endif %}
+{% if repostOf %}
+    - types: [repost-of]
+      link: {{ repostOf }}
+{% endif %}
+{% if likeOf %}
+    - types: [like-of]
+      link: {{ likeOf }}
+{% endif %}
+---
+
+{​{ content | safe }}
