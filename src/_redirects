@@ -3,9 +3,6 @@
 
 /bookmarks/* /notes/:splat
 
-# 404
-/* /404.html 404
-
 # fed.brid.gy
 /.well-known/host-meta https://fed.brid.gy/.well-known/host-meta
 /.well-known/host-meta.xrd https://fed.brid.gy/.well-known/host-meta.xrd
@@ -13,5 +10,10 @@
 /.well-known/webfinger https://fed.brid.gy/.well-known/webfinger
 
 # Renamed stuff
-
 /notes/the-billionaire’s-typewriter /notes/the-billionaires-typewriter
+
+# Search
+/search q=:query https://duckduckgo.com/?q=:query%20site:victormagalhaes.codes
+
+# 404
+/* /404.html 404
