@@ -16,7 +16,7 @@
 		"eleventy-plugin-reading-time": "^0.0.1",
 		"escape-html": "^1.0.3",
 		"isomorphic-fetch": "^2.2.1",
-		"lodash": "^4.17.14",
+		"lodash": "^4.17.15",
 		"markdown-it-anchor": "^5.2.4",
 		"markdown-it-attrs": "^2.4.1",
 		"markdown-it-codesandbox-embed": "^0.1.0",
