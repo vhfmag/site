@@ -193,13 +193,15 @@ main.entry .webmentions .author-photos img {
 		min-width: 100px;
 
 		margin: 0;
-		margin-left: var(--entry-float-margin);
+		padding: var(--s-1);
 
 		float: right;
 		clear: right;
 
 		position: sticky;
 		top: var(--root-padding);
+
+		background-color: var(--backgroundColor);
 	}
 }
 
