@@ -2,27 +2,6 @@
 
 ## MVP ✅
 
--   [-] página de links
-    -   [x] Criar página
--   [x] página de 404
--   [x] currículo
--   [x] revisar se faltou trazer outras imagens da pasta /images
--   [x] cache buster
--   [x] links codesandbox://
--   [x] manifesto
--   [x] skip nav
--   [x] sitemap
--   [x] RSS
--   [x] headers do netlify
-    -   [x] cache de assets
-    -   [x] redirect pro 404
-    -   [x] redirect old routes to new routes
-        -   [x] bookmarks -> notes
-        -   [x] links -> blogroll
-        -   [x] resume -> work
-
-## Up next
-
 -   [x] microformats
     -   [x] [h-entry](http://microformats.org/wiki/h-entry)
     -   [x] [h-card](http://microformats.org/wiki/h-card)
@@ -37,14 +16,13 @@
         -   [x] reply (default / photo / video)
         -   [x] quotation (para RTs)
         -   [ ] review?
--   [ ] usar /search?q= pra fazer um campo de busca na sidebar
+    -   [ ] layout a parte, já que títulos são opcionais
+-   [ ] usar `/search?q=` pra fazer um campo de busca na sidebar
 -   [ ] adicionar `rel="nofollow"` em todo link externo (plugin?)
 -   [ ] Revisar descrições da página de links
 -   [ ] página /now
+-   [ ] linha do tempo (https://colly.com/journal/timeline, https://kirk.is/timelines/)
 -   [ ] function pra gerar imagem pra posts a partir do título (algo como https://og-image.now.sh/)
-
-## Upcoming
-
 -   [-] integrar com indieweb
     -   [x] receber webmentions
         -   [x] configurar pra receber https://webmention.io
@@ -56,5 +34,6 @@
     -   [x] POSSE
         -   [x] https://brid.gy/about#webmentions
     -   [ ] form de envio de webmention a partir de link?
--   [ ] micropub? https://paulrobertlloyd.github.io/indiekit/config 😱
+-   [x] micropub? https://paulrobertlloyd.github.io/indiekit/config 😱
+    -   [ ] entender o bug 😐
 -   [ ] https://indieweb.org/IndieMark
