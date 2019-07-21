@@ -11,12 +11,20 @@ main.home section {
 	grid-column: 1 / -1;
 }
 
+main.home section {
+	grid-row: span 2;
+}
+
 main.home section.main p:first-of-type {
 	font-size: var(--s1);
 }
 
-main.home section.half {
+main.home section.half-column {
 	grid-column: span 1;
+}
+
+main.home section.half-row {
+	grid-row: span 1;
 }
 
 @media (max-width: 1000px) {

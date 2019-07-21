@@ -12,7 +12,7 @@ section.main
 
     p Atualmente, trabalho na <a href="https://jusbrasil.com.br">Jusbrasil</a> como engenheiro de software, com uma <i lang="en">stack</i> que inclui Javascript, Typescript, React, Node, Scala, Python e outros. Também já trabalhei na <a href="https://cubos.io/">Cubos</a>.
 
-section.half
+section.half-column
     h2 Do que eu gosto
     ul.inline-list
         li CSS
@@ -29,35 +29,41 @@ section.half
         li direitos de minorias
         li reparação histórica
 
-section.half
+section.half-column
     h2 Como esse site foi feito
     p Esse site foi feito usando <a href="https://www.11ty.io/">Eleventy</a>, Nunjucks, Markdown, Pug e tecnologias web. #[a(href="https://gitlab.com/vhfmag/vhfmag.gitlab.io/") Veja o código]!
 
-section.half
+section.half-column
     h2 Últimos posts
     ol.post-list
         - for (const entry of collections.posts.slice(0, 5))
             li
                 h3: a(href=entry.url)= entry.data.title
 
-section.half
+section.half-column
     h2 Últimas notas
     ol.post-list
         - for (const entry of collections.notes.slice(0, 5))
             li
                 h3: a(href=entry.url)= entry.data.title
 
-section.half
+section.half-column
     h2 Blogroll
     ul.post-list
         - for (const link of blogroll.slice(0, 5))
             li
                 h3: a(href=link.url)= link.name
 
-section.half
+section.half-column.half-row
     h2 No fone
     ul.inline-list
         - for (artist of listeningTo)
             li= artist
+
+section.half-column.half-row
+    h2 Na estante
+    ul.inline-list
+        - for (book of reading)
+            li(data-separator="; ")= book
 
 link(rel="stylesheet", href="/css/home.css")
