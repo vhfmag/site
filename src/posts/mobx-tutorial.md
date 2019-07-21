@@ -1,6 +1,6 @@
 ---
 title: "Uma introdução a MobX"
-description: "Apresentando os principais conceitos da biblioteca de gerenciamento de estado para aplicativos web"
+description: "Entendendo os principais conceitos dessa biblioteca de gerenciamento de estado para web apps"
 customTags: ["Técnico", "MobX"]
 date: 2018-04-25
 ---
