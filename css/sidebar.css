@@ -56,6 +56,10 @@ body[data-theme="light"] [data-theme="light"] {
 	grid-gap: var(--s-1);
 }
 
+.main-sidebar form input {
+	max-width: 100%;
+}
+
 @media (max-width: 800px) {
 	.main-sidebar {
 		width: unset;

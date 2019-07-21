@@ -13,7 +13,7 @@
 /notes/the-billionaire’s-typewriter /notes/the-billionaires-typewriter
 
 # Search
-/search q=:query https://duckduckgo.com/?q=:query%20site:victormagalhaes.codes
+/search q=:query https://www.startpage.com/do/search?cat=web&query=:query%20site:victormagalhaes.codes
 
 # 404
 /* /404.html 404
