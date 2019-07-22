@@ -20,6 +20,26 @@
 				"path": "uploads/{{ published | date('yyyy/MM') }}/{{ filename }}"
 			}
 		},
+		"repost": {
+			"template": "_micropub/note.njk",
+			"post": {
+				"path": "src/notes/{{ published | date('yyyy-MM-dd') }}-{{ slug }}.md",
+				"url": "notes/{{ published | date('yyyy-MM-dd') }}-{{ slug }}/"
+			},
+			"file": {
+				"path": "uploads/{{ published | date('yyyy/MM') }}/{{ filename }}"
+			}
+		},
+		"reply": {
+			"template": "_micropub/note.njk",
+			"post": {
+				"path": "src/notes/{{ published | date('yyyy-MM-dd') }}-{{ slug }}.md",
+				"url": "notes/{{ published | date('yyyy-MM-dd') }}-{{ slug }}/"
+			},
+			"file": {
+				"path": "uploads/{{ published | date('yyyy/MM') }}/{{ filename }}"
+			}
+		},
 		"bookmark": {
 			"template": "_micropub/bookmark.njk",
 			"post": {
