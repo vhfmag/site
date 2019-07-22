@@ -17,6 +17,7 @@ htmlClass: h-entry
 
 {% if links != null and links | length > 0 %}
     {% block metadata %}
+        <span class="wm-properties">
             {% for link in links %}
                 {% set wmTypes = link.types | wmTypeStrings %}
 
