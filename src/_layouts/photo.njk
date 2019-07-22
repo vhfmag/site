@@ -1,0 +1,49 @@
+---
+layout: default
+mainClass: entry photo
+htmlClass: h-entry
+---
+
+{% extends 'templates/entry.njk' %}
+
+{% block body_start %}
+    {% for link in syndicationLinks %}
+        <a href="{{ link }}"></a>
+    {% endfor %}
+    {% if twitterContent %}
+        <p hidden class="p-bridgy-twitter-content">{{ twitterContent }}</p>
+    {% endif %}
+
+    <section>
+        {% for photo in photos %}
+            <img src="{{ photo.url }}" alt="{{ photo.alt }}"/>
+        {% endfor %}
+        {{ entry.templateContent | safe }}
+    </section>
+{% endblock %}
+
+{% if links != null and links | length > 0 %}
+    {% block metadata %}
+        <span class="wm-properties">
+            {% for link in links %}
+                {% set wmTypes = link.types | wmTypeStrings %}
+
+                {% for connective, types in wmTypes | groupby('connective') %}
+                    <span class="wm-property">
+                        {% for type in types %}
+                            <span class="wm-property">{{ type.singular }}</span>
+                        {% endfor %}
+                        {{ connective }}
+                    </span>
+                {% endfor %}
+
+                {% set typeClasses %}
+                {% for type in link.types %} u-{{type}}
+                {% endfor %}
+                {% endset %}
+
+                <a href="{{ link.link }}" class="{{ typeClasses }}">{{ link.title or title }}</a>
+            {% endfor %}
+        </span>
+    {% endblock %}
+{% endif %}

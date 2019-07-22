@@ -3,6 +3,7 @@
 {{ content | safe }}
 
 <link rel="stylesheet" href="/css/collection.css"/>
+{% block css %}{% endblock %}
 
 <h1 class="p-name">
     <a class="u-url" href="{{ page.url }}">{{ collectionName }}</a>

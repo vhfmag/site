@@ -112,6 +112,10 @@ module.exports = function(eleventyConfig) {
 			folders: ["bookmarks"],
 			name: "bookmarks",
 		},
+		{
+			folders: ["photos"],
+			name: "photos",
+		},
 	];
 
 	addCollection(eleventyConfig, "tudo", collections.flatMap(x => x.folders));

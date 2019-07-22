@@ -29,6 +29,17 @@
 			"file": {
 				"path": "uploads/{{ published | date('yyyy/MM') }}/{{ filename }}"
 			}
+		},
+		"photo": {
+			"template": "_micropub/photo.njk",
+			"post": {
+				"path": "src/photos/{{ published | date('X') }}/index.md",
+				"url": "photos/{{ published | date('X') }}"
+			},
+			"file": {
+				"path": "src/photos/{{ published | date('X') }}/images/{{ filename }}.{{ fileext }}",
+				"url": "photos/{{ published | date('X') }}/images/{{ filename }}.{{ fileext }}"
+			}
 		}
 	}
 }
