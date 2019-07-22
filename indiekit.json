@@ -37,8 +37,8 @@
 				"url": "photos/{{ published | date('X') }}"
 			},
 			"file": {
-				"path": "src/photos/{{ published | date('X') }}/images/{{ filename }}.{{ fileext }}",
-				"url": "photos/{{ published | date('X') }}/images/{{ filename }}.{{ fileext }}"
+				"path": "src/photos/{{ published | date('X') }}/images/{{ filename }}",
+				"url": "photos/{{ published | date('X') }}/images/{{ filename }}"
 			}
 		}
 	}
