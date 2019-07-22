@@ -1,7 +1,6 @@
 ---
-title: '{{ title }}'
 date: {{ published }}
-links:
+links: {% filter trim %}
 {% if mentionOf %}
     - types: [mention-of]
       link: {{ mentionOf }}
@@ -22,6 +21,7 @@ links:
     - types: [like-of]
       link: {{ likeOf }}
 {% endif %}
+{% endfilter %}
 ---
 
 {{ content | safe }}

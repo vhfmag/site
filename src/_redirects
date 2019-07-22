@@ -1,8 +1,6 @@
 /links /blogroll
 /resume /work
 
-/bookmarks/* /notes/:splat
-
 # fed.brid.gy
 /.well-known/host-meta https://fed.brid.gy/.well-known/host-meta
 /.well-known/host-meta.xrd https://fed.brid.gy/.well-known/host-meta.xrd

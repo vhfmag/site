@@ -105,8 +105,12 @@ module.exports = function(eleventyConfig) {
 			name: "apresentacoes",
 		},
 		{
-			folders: ["notes", "bookmarks"],
+			folders: ["notes"],
 			name: "notes",
+		},
+		{
+			folders: ["bookmarks"],
+			name: "bookmarks",
 		},
 	];
 
@@ -132,6 +136,22 @@ module.exports = function(eleventyConfig) {
 		const month = String(date.getMonth() + 1);
 
 		return `${day.padStart(2, "0")}/${month.padStart(2, "0")}/${date.getFullYear()}`;
+	});
+
+	eleventyConfig.addFilter("formatDateTime", date => {
+		date = new Date(date);
+
+		if (Number.isNaN(date.valueOf())) return "";
+
+		const minute = String(date.getMinutes());
+		const hour = String(date.getHours());
+		const day = String(date.getDate());
+		const month = String(date.getMonth() + 1);
+
+		return `${day.padStart(2, "0")}/${month.padStart(
+			2,
+			"0",
+		)}/${date.getFullYear()} - ${hour.padStart(2, "0")}:${minute.padStart(2, "0")}`;
 	});
 
 	eleventyConfig.addFilter("wmTypeString", wmType => wmTypeStrings[wmType]);

@@ -14,12 +14,14 @@
                     <span class="p-category">{{ collection }}</span> por {{ listAuthors(authors if authors else [me]) }}
                 {% endblock %}
             </span>
-            <span>
-                Publicado em
-                <time class="dt-published" itemprop="datePublished pubdate" datetime="{{ date | formatDateISO }}">
-                    {{ date | formatDate }}
-                </time>
-            </span>
+            {% if date %}
+                <span>
+                    Publicado em
+                    <time class="dt-published" itemprop="datePublished pubdate" datetime="{{ date | formatDateISO }}">
+                        {{ date | formatDate }}
+                    </time>
+                </span>
+            {% endif %}
             <span>{{ content | wordcount }} palavras, <abbr aria-label="aproximadamente" title="aproximadamente">~</abbr>
                 <span itemprop="timeRequired">{{ content | readingTime(raw=true) }} minutos</span> de leitura</span>
             {% block metadata %}{% endblock %}
