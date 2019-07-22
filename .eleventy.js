@@ -82,17 +82,6 @@ module.exports = function(eleventyConfig) {
 
 	if (!IS_DEV) {
 		eleventyConfig.addPlugin(eleventyPluginLazyimagesPlugin);
-		eleventyConfig.addPlugin(pwaPlugin, {
-			skipWaiting: true,
-			clientsClaim: true,
-			navigationPreload: true,
-			runtimeCaching: [
-				{
-					urlPattern: ({ event }) => event.request.mode === "navigate",
-					handler: "NetworkOnly",
-				},
-			],
-		});
 	}
 
 	const collections = [
