@@ -35,7 +35,7 @@ htmlClass: h-entry
                 {% endfor %}
                 {% endset %}
 
-                <a href="{{ link.link }}" class="{{ typeClasses }}">{{ link.title or title }}</a>
+                <a href="{{ link.link }}" class="{{ typeClasses }}">{{ link.title or title or link.link }}</a>
             {% endfor %}
         </span>
     {% endblock %}
