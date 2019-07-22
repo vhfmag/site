@@ -43,7 +43,7 @@ section.half-column
 section.half-column
     h2 Últimas Recomendações
     ol.post-list
-        - for (const entry of collections.notes.slice(0, 5))
+        - for (const entry of collections.bookmarks.slice(0, 5))
             li
                 h3: a(href=entry.url)= entry.data.title
 
