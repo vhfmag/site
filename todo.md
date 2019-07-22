@@ -18,7 +18,7 @@
         -   [ ] review?
     -   [ ] layout a parte, já que títulos são opcionais
 -   [ ] usar `/search?q=` pra fazer um campo de busca na sidebar
--   [ ] adicionar `rel="nofollow"` em todo link externo (plugin?)
+-   [ ] adicionar `rel="noopener noreferrer"` em todo link externo (plugin?)
 -   [ ] Revisar descrições da página de links
 -   [ ] página /now
 -   [ ] linha do tempo (https://colly.com/journal/timeline, https://kirk.is/timelines/)
