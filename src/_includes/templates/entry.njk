@@ -37,7 +37,7 @@
 
     {% if webmentions[page.url].all | length > 0 %}
         <hr/>
-        <section class="webmentions">
+        <section class="webmentions" id="webmentions">
             {% import 'macros/webmentions.njk' as wms %}
 
             {{ wms.authorPhotos(webmentions, page.url, "like-of", "curtida", "curtidas", authorUrl = true) }}
