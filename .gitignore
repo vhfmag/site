@@ -6,6 +6,7 @@ node_modules
 .env.*
 # Build directory
 public/
+_site/
 .DS_Store
 yarn-error.log
 /.gtm/
