@@ -119,8 +119,9 @@ main.entry .webmentions .comment > ul > li + li {
 
 main.entry .webmentions .comment article {
 	display: grid;
-	grid-template-areas: "photo title" "photo date" "photo link" "photo content";
-	grid-template-columns: min-content auto;
+	grid-template-areas: "photo title" "photo metadata" "photo content";
+	grid-template-columns: max-content auto;
+	grid-column-gap: var(--s-2);
 }
 
 main.entry .webmentions .comment article header {
@@ -131,23 +132,23 @@ main.entry .webmentions .comment article header img {
 	grid-area: photo;
 	width: var(--s2);
 	height: var(--s2);
+	margin-top: var(--s-3);
+	border-radius: 50%;
 }
 
 main.entry .webmentions .comment article header .name {
 	grid-area: title;
+	font-weight: bold;
 }
 
-main.entry .webmentions .comment article header time {
-	grid-area: date;
-}
-
-main.entry .webmentions .comment article header a {
-	grid-area: link;
+main.entry .webmentions .comment article header .metadata {
+	grid-area: metadata;
+	font-size: small;
 }
 
 main.entry .webmentions .comment article p {
 	grid-area: content;
-	margin-top: var(--s2);
+	margin: var(--s0) 0 0;
 }
 
 main.entry .webmentions details > ul {

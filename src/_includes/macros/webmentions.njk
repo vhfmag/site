@@ -42,11 +42,19 @@
                             <header>
                                 <img src="{{ entry.author.photo }}" alt=""/>
                                 <div class="name">{{ entry.author.name }}</div>
-                                <time datetime="{{ entry.published | formatDateISO }}" class="name">{{ entry.published | formatDate }}</time>
-                                <a href="{{ entry.url }}">Link pro original</a>
+                                <div class="metadata">
+                                    <time datetime="{{ entry.published | formatDateISO }}">{{ entry.published | formatDate }}</time>
+                                    <span>
+                                        <a href="{{ entry.url }}">Link pro original</a>
+                                    </span>
+                                </div>
                             </header>
 
-                            <p>{{ entry.content.html | safe }}</p>
+                            {% if entry.content.html %}
+                                <p>{{ entry.content.html | safe }}</p>
+                            {% else %}
+                                <p>{{ entry.content.text | safe }}</p>
+                            {% endif %}
                         </article>
                     </li>
                 {% endfor %}
