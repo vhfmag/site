@@ -1,0 +1,9 @@
+main.collection.notes .entry-list > li + li {
+	margin-top: var(--s0);
+	padding-top: var(--s0);
+	border-top: 2px dotted var(--themeColor);
+}
+
+main.collection.notes .entry-list > li > article section :first-child {
+	margin-top: 0;
+}
