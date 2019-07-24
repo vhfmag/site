@@ -1,5 +1,6 @@
 ---
 title: Why should you read "One Hundred Years of Solitude"?
+date: 2019-07-18
 links:
     - link: https://www.youtube.com/watch?v=B2zhLYz4pYo
       types: [bookmark-of]
