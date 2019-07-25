@@ -64,6 +64,8 @@ html {
 	hyphens: auto;
 	word-break: break-all;
 	word-break: break-word;
+	
+	scroll-behavior: smooth;
 }
 
 body {
