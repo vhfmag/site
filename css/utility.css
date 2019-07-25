@@ -1,7 +1,7 @@
 /* modular scale */
 
 :root {
-	--ratio: 1.61803;
+	--ratio: 1.9;
 	--s-10: calc(var(--s-9) / var(--ratio));
 	--s-9: calc(var(--s-8) / var(--ratio));
 	--s-8: calc(var(--s-7) / var(--ratio));

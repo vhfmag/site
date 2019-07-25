@@ -48,14 +48,6 @@ h6 {
 	line-height: 1;
 }
 
-p,
-ul,
-ol,
-dl,
-address {
-	line-height: 1.5;
-}
-
 pre {
 	white-space: pre-wrap;
 }
