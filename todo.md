@@ -42,7 +42,10 @@
 -   [ ] linha do tempo (https://colly.com/journal/timeline, https://kirk.is/timelines/)
 -   [ ] function pra gerar imagem pra posts a partir do título (algo como https://og-image.now.sh/)
 -   [ ] integrar com indieweb
-    -   [ ] form de envio de webmention a partir de link?
+    -   [ ] form de envio de webmention a partir de link? (Conforme https://andy-bell.design/notes/229/)
+        -   [ ] form[target="POST", action="https://webmention.io/victormagalhaes.codes/webmention"]
+        -   [ ] link - input[type=url, required, name=source]
+        -   [ ] target - input[type=hidden, name=target]
 -   [ ] contribuir pro IndieKit
     -   [ ] passar dados de sindicação pro contexto de renderização
     -   [ ] fazer upload de imagens
