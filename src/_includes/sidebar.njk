@@ -1,15 +1,12 @@
-{% macro nav_link(href, text, exact = false) %}
+{% macro nav_link(href, text, exact = false, directory = false) %}
     {% set exactCurrent = href == page.url %}
     {% set nonExactCurrent = page
         .url
         .startsWith(href) %}
     <a
-        {% if exactCurrent or (not exact and nonExactCurrent) %}
-        class="current"
-        {% endif %}
-        {% if exactCurrent %}
-        aria-current="page"
-        {% endif %}
+        {% if exactCurrent or (not exact and nonExactCurrent) %}class="current"{% endif %}
+        {% if exactCurrent %}aria-current="page"{% endif %}
+        {% if directory and nonExactCurrent and not exactCurrent %}rel="directory"{% endif %}
         href="{{ href }}"
     >
         {{ text }}
@@ -26,7 +23,7 @@
     itemprop="author publisher"
     class="main-sidebar stack h-card"
 >
-    <a class="u-url u-uid self_link" href="/" itemref="mdata-blog mdata-author" itemprop="url identifier">
+    <a class="u-url u-uid self_link" rel="home" href="/" itemref="mdata-blog mdata-author" itemprop="url identifier">
         <span class="p-name" itemprop="name">{{ site.title }}</span>
     </a>
 
@@ -40,16 +37,16 @@
                 {{ nav_link("/", "home", true) }}
             </li>
             <li>
-                {{ nav_link("/posts", "posts") }}
+                {{ nav_link("/posts", "posts", directory = true) }}
             </li>
             <li>
-                {{ nav_link("/bookmarks", "recomendações") }}
+                {{ nav_link("/bookmarks", "recomendações", directory = true) }}
             </li>
             <li>
-                {{ nav_link("/notes", "notas") }}
+                {{ nav_link("/notes", "notas", directory = true) }}
             </li>
             <li>
-                {{ nav_link("/apresentacoes", "apresentações") }}
+                {{ nav_link("/apresentacoes", "apresentações", directory = true) }}
             </li>
             <li>
                 {{ nav_link("/blogroll", "blogroll") }}
