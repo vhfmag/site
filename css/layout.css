@@ -64,7 +64,7 @@ html {
 	hyphens: auto;
 	word-break: break-all;
 	word-break: break-word;
-	
+
 	scroll-behavior: smooth;
 }
 
@@ -132,17 +132,43 @@ body > .sidebar {
 }
 
 blockquote {
-	margin-left: 0;
-	margin-right: var(--s1);
-	margin-top: 0;
-	padding-bottom: 0;
-	padding-left: var(--s0);
-	padding-right: 0;
-	padding-top: 0;
-	margin-bottom: var(--s1);
 	font-size: inherit;
-	line-height: var(--s1);
-	border-left: var(--s-3) solid var(--themeColor);
+	line-height: inherit;
+}
+
+blockquote::after,
+blockquote::before {
+	content: '"';
+	color: var(--themeColor);
+	font-size: var(--s1);
+	display: block;
+	height: 1.3em;
+	text-align: center;
+	font-weight: bold;
+}
+
+blockquote > * {
+	font-weight: bold;
+}
+
+blockquote > :first-child {
+	margin-top: 0;
+}
+
+blockquote > :last-child {
+	margin-bottom: 0;
+}
+
+blockquote > :first-child:last-child {
+	text-align: center;
+}
+
+blockquote::after {
+	content: close-quote;
+}
+
+blockquote::before {
+	content: open-quote;
 }
 
 main {
