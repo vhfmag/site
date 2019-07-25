@@ -23,13 +23,13 @@ pagination:
 
     <section>{{ entry.templateContent | safe }}</section>
     <header>
-        <a class="u-url" href="{{ entry.url }}">
+        — <a class="u-url" href="{{ entry.url }}">
             {% if entry.data.date %}
                 <time
-    itemprop="datePublished dateModified pubdate"
-    class="dt-published"
-    datetime="{{ entry.data.date | formatDateISO }}"
->
+                    itemprop="datePublished dateModified pubdate"
+                    class="dt-published"
+                    datetime="{{ entry.data.date | formatDateISO }}"
+                >
                     {{ entry.data.date | formatDateTime }}
                 </time>
             {% endif %}
