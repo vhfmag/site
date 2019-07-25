@@ -14,7 +14,11 @@
 	padding: 0;
 }
 
-.main-sidebar a.current {
+.main-sidebar nav a {
+	font-weight: normal;
+}
+
+.main-sidebar nav a.current {
 	font-weight: bold;
 }
 
@@ -35,7 +39,19 @@
 	gap: var(--s-3);
 }
 
+.main-sidebar :any-link {
+	color: var(--themeColor);
+	border-bottom: none;
+}
+
 .self_link {
+	font-size: 2em;
+	font-weight: bold;
+	text-decoration: none;
+	line-height: 1.1;
+}
+
+.self_link:any-link {
 	font-size: 2em;
 	font-weight: bold;
 	text-decoration: none;

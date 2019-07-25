@@ -72,7 +72,6 @@ body {
 	border: var(--root-border-width) solid var(--themeColor);
 }
 
-a,
 h1,
 h2,
 h3,
@@ -82,7 +81,23 @@ h6 {
 	color: var(--themeColor);
 }
 
-a:any-link {
+h1 :any-link,
+h2 :any-link,
+h3 :any-link,
+h4 :any-link,
+h5 :any-link,
+h6 :any-link {
+	color: unset;
+}
+
+:any-link {
+	color: var(--textColor);
+	font-weight: bolder;
+	text-decoration: none;
+	border-bottom: 2px solid var(--themeColor);
+}
+
+nav :any-link {
 	color: var(--themeColor);
 }
 
