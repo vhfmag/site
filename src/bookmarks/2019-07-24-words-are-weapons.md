@@ -9,11 +9,11 @@ links:
 
 > We won’t fix Big Tech with better public policy alone. We also need better language. We need new metaphors, a new discourse, a new set of symbols that illuminate how these companies work, how they are rewiring our world, and how we as a democracy can respond.
 
-Pois é, <abbr aria-described-by="dfn-pea" title="pessoa arrogante de exatas">PAE</abbr> (<span id="dfn-pea">pessoa arrogante de exatas</span>). A resposta tá fora das exatas. Chocante, né? 🤯 Não, só seu ego te impedia de ver mesmo. Mas nem sei porque eu finjo que você tá me ouvindo, você provavelmente sequer reconhece que há problemas.
+Pois é, pessoa de exatas. A resposta tá fora das exatas. Chocante, né? 🤯 Não tanto. Mas você provavelmente sequer reconhece que há problemas mesmo.
 
 > Tech companies themselves are very aware of the importance of language. For years, they have spent hundreds of millions of dollars in Washington and on public relations to preserve control of the narrative around their products.
 
-Pois é, <abbr aria-described-by="dfn-pea" title="pessoa arrogante de exatas">PAE</abbr>, não basta só você não saber, também te manipularam pela arrogância. Parabéns.
+Pois é, não basta só você não saber, também usaram isso pra te manipular.
 
 > The biggest insight in George Orwell’s 1984 was not about the role of surveillance in totalitarian regimes, but rather the primacy of language in shaping our sense of reality and our ability to act within it. In the book’s dystopian world, the Party continuously revises the dictionary, removing words as they try to extinguish the expressive potential of language. Their goal is to make it impossible for vague senses of dread and dissatisfaction to find linguistic form and evolve into politically actionable concepts.
 >
@@ -41,8 +41,10 @@ A nojenta _alt-right_{lang=en} já resolveu isso:
 >
 > The red pill is a toxic idea, but it is also a powerful one. It provides a new way to talk about how ideology shapes the world and extends an invitation to consider how the world could be radically different.
 
-Quem sabe a <abbr aria-described-by="dfn-pea" title="pessoa arrogante de exatas">PAE</abbr> possa ajudar:
+Mas quem sabe a pessoa de exatas possa ajudar:
 
 > A hint of where we may find this new political language recently appeared in the form of the White Collar Crime Risk Zones app from The New Inquiry. The app applies the same techniques used in predictive-policing algorithms—profoundly flawed technologies which tend to criminalize being a poor person of color—to white-collar crime.
 >
 > Seeing the business districts of Manhattan and San Francisco blaze red, with mugshots of suspects generated from LinkedIn profile photos of largely white professionals, makes its point in short order. It seems absurd—until you realize that it is exactly what happens in poor communities of color, with crushing consequences. What if police started frisking white guys in suits downtown?
+
+Novas mídias, novos formatos. Afinal, <q>o meio é a mensagem</q>.
