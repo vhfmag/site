@@ -15,15 +15,27 @@ const mdPluginCodesandboxEmbed = require("markdown-it-codesandbox-embed");
 
 const wmTypeStrings = require("./src/_data/wmType.json");
 
-const fs = require("fs");
-
 const { figureShortcode } = require("./src/_shortcodes/figure");
+
+/**
+ *
+ * @template T
+ * @template U
+ * @param {T[]} arr
+ * @param {(v: T) => U[]} fn
+ * @returns {U[]}
+ */
+const flatMap = (arr, fn) =>
+	arr.reduce((acc, el) => {
+		acc.push(...fn(el));
+		return acc;
+	}, []);
 
 const IS_DEV = process.env.NODE_ENV === "development";
 
 function addCollection(eleventyConfig, collectionName, collectionFolders) {
 	eleventyConfig.addCollection(collectionName, collection => {
-		let files = collectionFolders.flatMap(folder => [
+		let files = flatMap(collectionFolders, folder => [
 			...collection.getFilteredByGlob(`./src/${folder}/**/*.md`),
 		]);
 
@@ -107,7 +119,7 @@ module.exports = function(eleventyConfig) {
 		},
 	];
 
-	addCollection(eleventyConfig, "tudo", collections.flatMap(x => x.folders));
+	addCollection(eleventyConfig, "tudo", flatMap(collections, x => x.folders));
 	for (const collection of collections) {
 		addCollection(eleventyConfig, collection.name, collection.folders);
 	}
