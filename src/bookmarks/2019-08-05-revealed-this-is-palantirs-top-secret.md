@@ -1,5 +1,5 @@
 ---
-title: Revealed: "This Is Palantir’s Top-Secret User Manual for Cops - VICE"
+title: "Revealed: This Is Palantir’s Top-Secret User Manual for Cops - VICE"
 links:
     - types: [bookmark-of]
       link: "https://www.vice.com/en_us/article/9kx4z8/revealed-this-is-palantirs-top-secret-user-manual-for-cops"
