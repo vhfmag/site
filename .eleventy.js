@@ -1,5 +1,4 @@
 const excerptPlugin = require("eleventy-plugin-excerpt");
-const pwaPlugin = require("eleventy-plugin-pwa");
 const cacheBusterPlugin = require("@mightyplow/eleventy-plugin-cache-buster");
 const rssPlugin = require("@11ty/eleventy-plugin-rss");
 const nestingTocPlugin = require("eleventy-plugin-nesting-toc");
