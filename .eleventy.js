@@ -122,6 +122,10 @@ module.exports = function(eleventyConfig) {
 			folders: ["photos"],
 			name: "photos",
 		},
+		{
+			folders: ["likes"],
+			name: "likes",
+		},
 	];
 
 	addCollection(eleventyConfig, "tudo", flatMap(collections, x => x.folders));
@@ -151,16 +155,16 @@ module.exports = function(eleventyConfig) {
 	eleventyConfig.addAsyncShortcode(
 		"titleFromUrl",
 		memoize(url => {
-		return new Promise((res, rej) => {
-			urlInfoScraper(url, (error, linkInfo) => {
+			return new Promise((res, rej) => {
+				urlInfoScraper(url, (error, linkInfo) => {
 					if (error || !linkInfo.title) {
 						console.error(error);
 						res(url);
-				} else {
-					res(linkInfo.title);
-				}
+					} else {
+						res(linkInfo.title);
+					}
+				});
 			});
-		});
 		}),
 	);
 

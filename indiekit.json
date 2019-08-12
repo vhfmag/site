@@ -20,6 +20,16 @@
 				"path": "uploads/{{ published | date('yyyy/MM') }}/{{ filename }}"
 			}
 		},
+		"like": {
+			"template": "_micropub/like.njk",
+			"post": {
+				"path": "src/likes/{{ published | date('yyyy-MM-dd') }}-{{ slug }}.md",
+				"url": "likes/{{ published | date('yyyy-MM-dd') }}-{{ slug }}/"
+			},
+			"file": {
+				"path": "uploads/{{ published | date('yyyy/MM') }}/{{ filename }}"
+			}
+		},
 		"repost": {
 			"template": "_micropub/note.njk",
 			"post": {
