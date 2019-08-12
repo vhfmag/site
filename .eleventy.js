@@ -13,8 +13,11 @@ const mdPluginAnchor = require("markdown-it-anchor");
 const mdPluginFootnote = require("markdown-it-footnote");
 const mdPluginCodesandboxEmbed = require("markdown-it-codesandbox-embed");
 
+const urlInfoScraper = require("url-info-scraper");
+
 const wmTypeStrings = require("./src/_data/wmType.json");
 
+const addAsyncShortcode = require("./utils/add-async-shortcode");
 const { figureShortcode } = require("./src/_shortcodes/figure");
 
 /**
@@ -48,6 +51,8 @@ function addCollection(eleventyConfig, collectionName, collectionFolders) {
 }
 
 module.exports = function(eleventyConfig) {
+	eleventyConfig.addAsyncShortcode = addAsyncShortcode;
+
 	eleventyConfig.addPassthroughCopy("css");
 	eleventyConfig.addPassthroughCopy("js");
 	eleventyConfig.addPassthroughCopy("icons");
@@ -141,6 +146,18 @@ module.exports = function(eleventyConfig) {
 		const month = String(date.getMonth() + 1);
 
 		return `${day.padStart(2, "0")}/${month.padStart(2, "0")}/${date.getFullYear()}`;
+	});
+
+	eleventyConfig.addAsyncShortcode("titleFromUrl", url => {
+		return new Promise((res, rej) => {
+			urlInfoScraper(url, (error, linkInfo) => {
+				if (error) {
+					rej(error);
+				} else {
+					res(linkInfo.title);
+				}
+			});
+		});
 	});
 
 	eleventyConfig.addFilter("formatDateTime", date => {
