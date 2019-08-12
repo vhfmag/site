@@ -13,6 +13,7 @@ const mdPluginFootnote = require("markdown-it-footnote");
 const mdPluginCodesandboxEmbed = require("markdown-it-codesandbox-embed");
 
 const urlInfoScraper = require("url-info-scraper");
+const { memoize } = require("lodash");
 
 const wmTypeStrings = require("./src/_data/wmType.json");
 
@@ -147,17 +148,21 @@ module.exports = function(eleventyConfig) {
 		return `${day.padStart(2, "0")}/${month.padStart(2, "0")}/${date.getFullYear()}`;
 	});
 
-	eleventyConfig.addAsyncShortcode("titleFromUrl", url => {
+	eleventyConfig.addAsyncShortcode(
+		"titleFromUrl",
+		memoize(url => {
 		return new Promise((res, rej) => {
 			urlInfoScraper(url, (error, linkInfo) => {
-				if (error) {
-					rej(error);
+					if (error || !linkInfo.title) {
+						console.error(error);
+						res(url);
 				} else {
 					res(linkInfo.title);
 				}
 			});
 		});
-	});
+		}),
+	);
 
 	eleventyConfig.addFilter("formatDateTime", date => {
 		date = new Date(date);
