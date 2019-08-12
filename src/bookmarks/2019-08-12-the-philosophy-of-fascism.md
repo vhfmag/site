@@ -1,0 +1,9 @@
+---
+title: The Philosophy of Antifa
+date: 2019-07-30
+links:
+    - link: https://invidio.us/watch?v=bgwS_FMZ3nQ
+      types: [bookmark-of]
+---
+
+<div class="embed-container"><iframe src="https://invidio.us/embed/bgwS_FMZ3nQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
