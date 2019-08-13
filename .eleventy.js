@@ -193,7 +193,7 @@ module.exports = function(eleventyConfig) {
 	);
 
 	eleventyConfig.addShortcode("figure", figureShortcode);
-	eleventyConfig.addShortcode("embed", embedShortcode);
+	eleventyConfig.addShortcode("siloEmbed", embedShortcode);
 
 	return {
 		templateFormats: ["md", "njk", "pug"],

@@ -5,4 +5,5 @@ layout: entry
 {{ content | safe }}
 
 {% for link in links %}
-    {% embed link.link %}{% endfor %}
+    {% siloEmbed link.link %}
+{% endfor %}
