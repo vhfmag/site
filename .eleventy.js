@@ -46,7 +46,9 @@ function addCollection(eleventyConfig, collectionName, collectionFolders) {
 			files = files.filter(p => !p.data.draft);
 		}
 
-		return files.reverse();
+		files.sort((f1, f2) => f2.date - f1.date);
+
+		return files;
 	});
 }
 
