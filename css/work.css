@@ -71,5 +71,5 @@ main.work .experience h3 {
 }
 
 main.work .experience p {
-	margin-top: 0;
+	margin-top: var(--s0);
 }
