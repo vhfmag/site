@@ -134,6 +134,8 @@ body > .sidebar {
 blockquote {
 	font-size: inherit;
 	line-height: inherit;
+	margin: 0;
+	padding: var(--s0) var(--s2);
 }
 
 blockquote::after,
@@ -169,6 +171,22 @@ blockquote::after {
 
 blockquote::before {
 	content: open-quote;
+}
+
+blockquote blockquote {
+	margin: 0;
+	padding: 0;
+	padding-left: var(--s1);
+	border-left: var(--s-1) solid var(--themeColor);
+}
+
+blockquote blockquote > :first-child:last-child {
+	text-align: left;
+}
+
+blockquote blockquote::after,
+blockquote blockquote::before {
+	display: none;
 }
 
 main {
