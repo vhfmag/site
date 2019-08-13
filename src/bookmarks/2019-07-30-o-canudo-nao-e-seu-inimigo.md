@@ -7,5 +7,3 @@ links:
 ---
 
 Tempero Drag é meu canal favorito nesse exato momento. Apenas.
-
-<div class="embed-container"><iframe src="https://invidio.us/embed/5idQl9CIl0I" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>

@@ -2,8 +2,7 @@
 layout: entry
 ---
 
-<a href="{{ likeOf }}" class="u-like-of">{% titleFromUrl likeOf %}</a>
-foi curtido
+{{ content | safe }}
 
 {% for link in links %}
     {% embed link.link %}{% endfor %}

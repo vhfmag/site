@@ -19,6 +19,7 @@ const wmTypeStrings = require("./src/_data/wmType.json");
 
 const addAsyncShortcode = require("./utils/add-async-shortcode");
 const { figureShortcode } = require("./src/_shortcodes/figure");
+const { embedShortcode } = require("./src/_shortcodes/embed");
 
 /**
  *
@@ -192,6 +193,7 @@ module.exports = function(eleventyConfig) {
 	);
 
 	eleventyConfig.addShortcode("figure", figureShortcode);
+	eleventyConfig.addShortcode("embed", embedShortcode);
 
 	return {
 		templateFormats: ["md", "njk", "pug"],
