@@ -40,6 +40,8 @@ section.half-column
         - for (const entry of collections.posts.slice(0, 5))
             li
                 h3: a(href=entry.url)= entry.data.title
+        li
+            a(href="/posts") Ver mais
 
 section.half-column
     h2 Últimas Recomendações
@@ -47,6 +49,8 @@ section.half-column
         - for (const entry of collections.bookmarks.slice(0, 5))
             li
                 h3: a(href=entry.url)= entry.data.title
+        li
+            a(href="/bookmarks") Ver mais
 
 section.half-column
     h2 Blogroll
