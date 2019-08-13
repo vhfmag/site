@@ -6,4 +6,4 @@ links:
 date: 2019-08-13T20:02:27.724+00:00
 ---
 
-![][https://cdn-images-1.medium.com/max/600/1*xXGtT_k5zUjbOhMC3rlymg.png]
+![](/uploads/hate-mondays.png)
