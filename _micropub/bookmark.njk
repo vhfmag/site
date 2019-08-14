@@ -4,6 +4,10 @@ links:
     - types: [bookmark-of]
       link: "{{ bookmarkOf }}"
 date: {{ published }}
+syndicationLinks:
+{% for link in syndicateTo %}
+    - {{ link }}
+{% endfor %}
 ---
 
 {{ content | safe }}
