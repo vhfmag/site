@@ -4,8 +4,12 @@
 	list-style-type: none;
 }
 
+.collection h1 {
+	margin-bottom: var(--s2);
+}
+
 .collection h2 {
-	margin-top: var(--s0);
+	margin-top: var(--s1);
 	margin-bottom: 0;
 	line-height: 1.5;
 }
