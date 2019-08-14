@@ -21,6 +21,10 @@ links:
     - types: [like-of]
       link: {{ likeOf }}
 {% endif %}
+syndicationLinks:
+{% for link in syndicateTo %}
+    - {{ link }}
+{% endfor %}
 ---
 
 {{ content | safe }}
