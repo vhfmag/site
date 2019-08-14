@@ -1,6 +1,6 @@
 main.collection.notes .entry-list > li + li {
-	margin-top: var(--s0);
-	padding-top: var(--s0);
+	margin-top: var(--s2);
+	padding-top: var(--s2);
 	border-top: 2px dotted var(--themeColor);
 }
 
