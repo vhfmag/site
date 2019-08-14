@@ -1,12 +1,8 @@
 {
 	"syndicate-to": [
 		{
-			"uid": "https://twitter.com/vhfmag/",
+			"uid": "https://brid.gy/publish/twitter",
 			"name": "Victor Magalhães no Twitter"
-		},
-		{
-			"uid": "https://sunbeam.city/@vhfmag/",
-			"name": "Victor Magalhães no Mastodon"
 		}
 	],
 	"post-types": {
