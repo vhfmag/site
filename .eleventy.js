@@ -128,10 +128,15 @@ module.exports = function(eleventyConfig) {
 		{
 			folders: ["likes"],
 			name: "likes",
+			removeFromAll: true,
 		},
 	];
 
-	addCollection(eleventyConfig, "tudo", flatMap(collections, x => x.folders));
+	addCollection(
+		eleventyConfig,
+		"tudo",
+		flatMap(collections.filter(x => !x.removeFromAll), x => x.folders),
+	);
 	for (const collection of collections) {
 		addCollection(eleventyConfig, collection.name, collection.folders);
 	}
