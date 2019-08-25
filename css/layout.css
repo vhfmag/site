@@ -138,15 +138,14 @@ blockquote {
 	padding: var(--s0) var(--s2);
 }
 
-blockquote::after,
-blockquote::before {
+blockquote > *:last-child::after,
+blockquote > *:first-child::before {
 	content: '"';
 	color: var(--themeColor);
 	font-size: var(--s1);
-	display: block;
-	height: 1.3em;
-	text-align: center;
+	display: inline;
 	font-weight: bold;
+	line-height: 0.7;
 }
 
 blockquote > * {
@@ -165,11 +164,11 @@ blockquote > :first-child:last-child {
 	text-align: center;
 }
 
-blockquote::after {
+blockquote > *:last-child::after {
 	content: close-quote;
 }
 
-blockquote::before {
+blockquote > *:first-child::before {
 	content: open-quote;
 }
 
