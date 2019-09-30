@@ -5,7 +5,7 @@ customTags: ["Técnico", "MobX"]
 date: 2018-04-25
 ---
 
-O [MobX](https://github.com/mobxjs/mobx/) é uma biblioteca de gerenciamento de estado para Javascript frequentemente utilizada com React. Ela tem uma curva de aprendizado menos abrupta do que a sua alternativa mais popular, o [Redux](https://redux.js.org/), apesar de (de acordo com minha experiência na [Cubos](https://cubos.io/)) más práticas emergirem com mais frequência com seu uso. Nesse artigo, usaremos alguns exemplos de código em [Typescript](https://typescriptlang.org/) para explicar os principais conceitos, boas práticas e alguns gotchas.
+O [MobX](https://github.com/mobxjs/mobx/) é uma biblioteca de gerenciamento de estado para Javascript frequentemente utilizada com React. Ela tem uma curva de aprendizado menos abrupta do que a sua alternativa mais popular, o [Redux](https://redux.js.org/), apesar de (de acordo com minha experiência na [Cubos](https://cubos.io/)) más práticas emergirem com mais frequência com seu uso. Nesse artigo, usaremos alguns exemplos de código em [Typescript](https://www.typescriptlang.org/) para explicar os principais conceitos, boas práticas e alguns gotchas.
 
 ## O que é MobX
 

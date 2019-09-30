@@ -30,7 +30,7 @@ Eu tenho tido algum contato a comunidade do [OpenStreetMaps](https://openstreetm
 
 Voltei à hype de GraphQL desde a [apresentação de Mateus](https://slides.com/matheuscruzrocha/graphql-2#/) sobre o assunto no [ReactSSA](http://react.salvador.br/) e resolvi ler uns guias mais completos.
 
--   [Why GraphQL: Advantages, Disadvantages & Alternatives](https://www.robinwieruch.de/why-graphql-advantages-disadvantages-alternatives/)
+-   [Why GraphQL: Advantages, Disadvantages & Alternatives](https://www.robinwieruch.de/why-graphql-advantages-disadvantages/)
 
 -   [Why Apollo: Advantages, Disadvantages & Alternatives](https://www.robinwieruch.de/why-apollo-advantages-disadvantages-alternatives/)
 

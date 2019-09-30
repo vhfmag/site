@@ -44,8 +44,6 @@ Assim, percebe-se a importância da diversidade na indústria de tecnologia (se 
 
 E é por isso e por outras tantas razões que representatividade e diversidade no ambiente de trabalho contam!
 
-> Publicado originalmente [no blog da cubos](https://cubos.io/blog/o-preconceito-em-nossas-tecnologias/)
-
 [^1]: [ Oscar 2016: atores negros estão ausentes pelo 2º ano seguido](http://g1.globo.com/pop-arte/oscar/2016/noticia/2016/01/oscar-nao-indica-nenhum-ator-negro-ao-pelo-segundo-ano-consecutivo.html)
 [^2]: [A beauty contest was judged by AI and the robots didn’t like dark skin](https://www.theguardian.com/technology/2016/sep/08/artificial-intelligence-beauty-contest-doesnt-like-black-people)
 [^3]: [Microsoft made a chatbot that tweets like a teen](http://www.theverge.com/2016/3/23/11290200/tay-ai-chatbot-released-microsoft)

@@ -25,7 +25,7 @@ Por fim, a comunidade TypeScript é grande e ativa e projetos como o [Definitely
 
 ## React
 
-Como citado na seção anterior, nós usamos [React](https://reactjs.org/), uma biblioteca open source para criação de interfaces de usuário disponibilizada pelo Facebook e onipresente na web, utilizada por empresas como Airbnb, Netflix, Yahoo e Mozilla — todas organizações que contribuem ativamente para o ecossistema. Segundo o clássico [State of JS](http://stateofjs.com/2016/frontend/), praticamente ninguém da comunidade front-end nunca ouviu falar da biblioteca, 58% dela já usou e 92% dos que já usaram ficaram satisfeitos.
+Como citado na seção anterior, nós usamos [React](https://reactjs.org/), uma biblioteca open source para criação de interfaces de usuário disponibilizada pelo Facebook e onipresente na web, utilizada por empresas como Airbnb, Netflix, Yahoo e Mozilla — todas organizações que contribuem ativamente para o ecossistema. Segundo o clássico [State of JS](http://2016.stateofjs.com/2016/frontend/), praticamente ninguém da comunidade front-end nunca ouviu falar da biblioteca, 58% dela já usou e 92% dos que já usaram ficaram satisfeitos.
 
 Nós utilizamos React por esta ser uma biblioteca poderosa e extremamente flexível, que dá ao desenvolvedor o poder de escolha com relação a praticamente todos os detalhes do desenvolvimento — da gestão de estado à plataforma da interface (não limitada à web: a biblioteca pode ser usada para criar aplicativos nativos e realidade virtual, por exemplo). A isso se adiciona a maturidade de seu ecossistema, rico em [componentes](https://github.com/brillout/awesome-react-components) e com mais de 60 mil perguntas no [StackOverflow](https://stackoverflow.com/questions/tagged/reactjs).
 

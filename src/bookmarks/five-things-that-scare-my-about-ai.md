@@ -2,7 +2,7 @@
 title: Five Things That Scare Me About AI
 links:
     - types: [mention-of, bookmark-of]
-      link: "https://www.fast.ai/2019/01/29/five-things-that-scare-my-about-ai/"
+      link: "https://www.fast.ai/2019/01/29/five-scary-things/"
 date: "2019-02-11"
 customTags:
     - Privacidade

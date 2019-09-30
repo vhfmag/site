@@ -23,12 +23,12 @@ toc: true
 -   [This "Creepy" Time-Tracking Software Is Like Having Your Boss Watch You Every Second](https://www.buzzfeednews.com/article/carolineodonovan/upwork-freelancers-work-diary-keystrokes-screenshot)
 -   [I don’t trust Signal](https://drewdevault.com/2018/08/08/Signal.html)
 -   [I'm joining the campaign to deactivate my Twitter account on August 17](https://boingboing.net/2018/08/12/im-joining-the-campaign-to-d.html)
--   [Mind the b(older) eyeballs](https://remotedesignteam.com/2018/08/mind-the-bolder-eyeballs/)
+-   [Mind the b(older) eyeballs (link quebrado)](https://remotedesignteam.com/2018/08/mind-the-bolder-eyeballs/)
 -   [The Video Wars of 2027 – Mozilla Hacks - the Web developer blog](https://hacks.mozilla.org/2018/08/the-video-wars-of-2027/)
 
 ### Firefox coletando dados pra sugerir sites (ué?)
 
--   [Laserlike + Firefox](https://blog.laserlike.com/laserlike-firefox-ea538b5aab5c)
+-   [Laserlike + Firefox (link quebrado)](https://blog.laserlike.com/laserlike-firefox-ea538b5aab5c)
 -   [Advancing the Web](https://medium.com/firefox-test-pilot/advancing-the-web-f9fe7ca810ec)
 
 ### Outros
