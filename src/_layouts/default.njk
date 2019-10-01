@@ -46,11 +46,13 @@
         <link rel="shortcut icon" href="/icons/icon-48x48.png"/>
 
         <script>
-            if (typeof navigator !== "undefined" && "serviceWorker" in navigator) 
+            if ("serviceWorker" in navigator) 
                 navigator
                     .serviceWorker
-                    .getRegistrations()
-                    .then(sws => Promise.all(sws.map(sw => sw.unregister())));
+                    .register("/service-worker.js")
+                    .then(reg => {
+                        reg.addEventListener('updatefound', () => reg.update());
+                    });
         </script>
     </head>
     <body
