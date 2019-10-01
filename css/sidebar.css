@@ -90,8 +90,8 @@ body[data-theme="light"] [data-theme="light"] {
 	}
 
 	.main-sidebar > nav > ul {
-		--list-h-gap: var(--s-3);
-		--list-v-gap: var(--s-5);
+		--list-h-gap: var(--s-2);
+		--list-v-gap: var(--s-3);
 
 		display: flex;
 		flex-wrap: wrap;
