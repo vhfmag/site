@@ -44,6 +44,15 @@ main.entry .embed-container > embed {
 	height: 100%;
 }
 
+main.entry > article .e-content,
+main.entry > article .e-content * {
+	contain: none;
+}
+
+main.entry > article > header > .metadata > * {
+	contain: layout;
+}
+
 main.entry > article > header > .metadata,
 main.entry .e-content > p,
 main.entry .e-content > ul,

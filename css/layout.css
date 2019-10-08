@@ -11,6 +11,21 @@
 *::after,
 *::before {
 	box-sizing: border-box;
+	contain: content;
+}
+
+li,
+a {
+	contain: layout;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	contain: none;
 }
 
 :root {

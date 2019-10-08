@@ -39,6 +39,11 @@ main.home .post-list {
 	list-style-type: none;
 }
 
+main.home .post-list,
+main.home .post-list li {
+	contain: none;
+}
+
 main.home .post-list li h3 {
 	font-size: 1em;
 	line-height: inherit;

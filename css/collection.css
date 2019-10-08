@@ -30,3 +30,10 @@
 .collection .pagination .next {
 	margin-left: auto;
 }
+
+.entry-list,
+.entry-list > li,
+.entry-list > li > article,
+.entry-list > li > article > header {
+	contain: paint;
+}
