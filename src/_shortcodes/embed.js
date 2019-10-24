@@ -6,7 +6,7 @@ const embedShortcode = link => {
 	const { query, hostname } = url.parse(link);
 	const { v } = qs.parse(query);
 
-	if (["invidio.us", "www.invidio.us", "youtube.com"].includes(hostname) && v) {
+	if (["invidio.us", "www.invidio.us", "youtube.com", "youtu.be"].includes(hostname) && v) {
 		return html`
 			<div class="embed-container">
 				<iframe
