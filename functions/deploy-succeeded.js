@@ -3,8 +3,7 @@ const WebMention = require("@remy/webmention");
 const wm = new WebMention({ limit: 10, send: true });
 
 exports.handler = async function sendWebmentions(event, context, callback) {
-	console.log("[sendWebmentions] Successfully called!");
-	wm.fetch("https://victormagalhaes.codes/feed.all.xml");
+	console.log("[sendWebmentions] Hook called!");
 
 	wm.on("end", () => {
 		console.log("[sendWebmentions] Success! ");
@@ -15,4 +14,7 @@ exports.handler = async function sendWebmentions(event, context, callback) {
 		console.error("[sendWebmentions] Error! ", error);
 		callback(null, { statusCode: 500 });
 	});
+
+	wm.fetch("https://victormagalhaes.codes/feed.all.xml");
+	console.log("[sendWebmentions] Fetch triggered!");
 };
