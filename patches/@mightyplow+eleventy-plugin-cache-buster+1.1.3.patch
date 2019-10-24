@@ -26,3 +26,18 @@ index 2b02925..9eb06d9 100755
 +	const fileContent = fs.readFileSync(filePath);
 +	return md5(fileContent.toString());
  };
+diff --git a/node_modules/@mightyplow/eleventy-plugin-cache-buster/src/nodeHelper.js b/node_modules/@mightyplow/eleventy-plugin-cache-buster/src/nodeHelper.js
+index df4e938..3a3bf51 100755
+--- a/node_modules/@mightyplow/eleventy-plugin-cache-buster/src/nodeHelper.js
++++ b/node_modules/@mightyplow/eleventy-plugin-cache-buster/src/nodeHelper.js
+@@ -31,7 +31,9 @@ module.exports = function (options, node) {
+         },
+ 
+         hasValidSource () {
+-            return node && isRelativeUrl(this.getSource()) ;
++            const { resourceExtensions } = options;
++            const url = this.getSource();
++            return node && isRelativeUrl(url) && resourceExtensions.some(ext => url.endsWith(`.${ext}`));
+         },
+ 
+         getStart () {
