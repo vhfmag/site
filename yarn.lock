@@ -390,10 +390,10 @@
     "@nodelib/fs.scandir" "2.1.2"
     fastq "^1.6.0"
 
-"@remy/webmention@1.3.6":
-  version "1.3.6"
-  resolved "https://registry.yarnpkg.com/@remy/webmention/-/webmention-1.3.6.tgz#b00e5f4bef1144cf14e0c9efcd4ed462029cab0b"
-  integrity sha512-DSRhb4oJdyo2nCrjmzVrp3LVuYcoBADItbA8rs6L+QwBhWVxHK2PkUCcb5jquU4WFXQlHKYh1wTuDAplP2Eziw==
+"@remy/webmention@1.4.2":
+  version "1.4.2"
+  resolved "https://registry.yarnpkg.com/@remy/webmention/-/webmention-1.4.2.tgz#4c9a8f5bb723e0be8df7a076e9ffd22b2819e6cb"
+  integrity sha512-XfUCOUip0jXd4TxQUIam2NrMXeH1NVa7brXC6h1RE+GphhFXaMuLsLmCXU94VEu3M7/FzGW4bIlGEzzwvUFLIw==
   dependencies:
     cheerio "0.22.0"
     clui "^0.3.6"
@@ -1209,11 +1209,6 @@ cheerio@^1.0.0-rc.3:
     lodash "^4.15.0"
     parse5 "^3.0.1"
 
-child-process@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/child-process/-/child-process-1.0.2.tgz#98974dc7ed1ee4c6229f8e305fa7313a6885a7f2"
-  integrity sha1-mJdNx+0e5MYin44wX6cxOmiFp/I=
-
 chokidar@^2.0.0, chokidar@^2.0.4:
   version "2.1.6"
   resolved "https://registry.yarnpkg.com/chokidar/-/chokidar-2.1.6.tgz#b6cad653a929e244ce8a834244164d241fa954c5"
@@ -1907,10 +1902,10 @@ dot-prop@^4.1.0:
   dependencies:
     is-obj "^1.0.0"
 
-dotenv@8.1.0:
-  version "8.1.0"
-  resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-8.1.0.tgz#d811e178652bfb8a1e593c6dd704ec7e90d85ea2"
-  integrity sha512-GUE3gqcDCaMltj2++g6bRQ5rBJWtkWTmqmD0fo1RnnMuUqHNCt2oTPeDnS9n6fKYvlhn7AeBkb38lymBtWBQdA==
+dotenv@8.2.0:
+  version "8.2.0"
+  resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-8.2.0.tgz#97e619259ada750eea3e4ea3e26bceea5424b16a"
+  integrity sha512-8sJ78ElpbDJBHNeBzUbUVLsqKdccaa/BXF1uPTw3GrvQTBgrQrtObr2mUrE38vzYd8cEv+m/JBfDLioYcfXoaw==
 
 duplexer3@^0.1.4:
   version "0.1.4"
@@ -3822,10 +3817,10 @@ map-visit@^1.0.0:
   dependencies:
     object-visit "^1.0.0"
 
-markdown-it-anchor@^5.2.4:
-  version "5.2.4"
-  resolved "https://registry.yarnpkg.com/markdown-it-anchor/-/markdown-it-anchor-5.2.4.tgz#d39306fe4c199705b4479d3036842cf34dcba24f"
-  integrity sha512-n8zCGjxA3T+Mx1pG8HEgbJbkB8JFUuRkeTZQuIM8iPY6oQ8sWOPRZJDFC9a/pNg2QkHEjjGkhBEl/RSyzaDZ3A==
+markdown-it-anchor@5.2.5:
+  version "5.2.5"
+  resolved "https://registry.yarnpkg.com/markdown-it-anchor/-/markdown-it-anchor-5.2.5.tgz#dbf13cfcdbffd16a510984f1263e1d479a47d27a"
+  integrity sha512-xLIjLQmtym3QpoY9llBgApknl7pxAcN3WDRc2d3rwpl+/YvDZHPmKscGs+L6E05xf2KrCXPBvosWt7MZukwSpQ==
 
 markdown-it-attrs@^2.4.1:
   version "2.4.1"
