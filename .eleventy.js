@@ -80,24 +80,24 @@ module.exports = function(eleventyConfig) {
 	);
 
 	eleventyConfig.addPlugin(excerptPlugin);
-	eleventyConfig.addPlugin(
-		cacheBusterPlugin({
-			outputDirectory: "public",
-			sourceAttributes: { img: "src", video: "src", source: "srcset" },
-			resourceExtensions: [
-				"js",
-				"css",
-				"gif",
-				"jpg",
-				"jpeg",
-				"png",
-				"svg",
-				"webm",
-				"mp4",
-				"webp",
-			],
-		}),
-	);
+	// eleventyConfig.addPlugin(
+	// 	cacheBusterPlugin({
+	// 		outputDirectory: "public",
+	// 		sourceAttributes: { img: "src", video: "src", source: "srcset" },
+	// 		resourceExtensions: [
+	// 			"js",
+	// 			"css",
+	// 			"gif",
+	// 			"jpg",
+	// 			"jpeg",
+	// 			"png",
+	// 			"svg",
+	// 			"webm",
+	// 			"mp4",
+	// 			"webp",
+	// 		],
+	// 	}),
+	// );
 	eleventyConfig.addPlugin(rssPlugin);
 	eleventyConfig.addPlugin(nestingTocPlugin, { headingText: "Índice" });
 	eleventyConfig.addPlugin(eleventyPluginReadingTimePlugin);
