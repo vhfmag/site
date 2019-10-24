@@ -2,7 +2,11 @@
 	"syndicate-to": [
 		{
 			"uid": "https://brid.gy/publish/twitter",
-			"name": "Victor Magalhães no Twitter"
+			"name": "twitter.com/vhfmag"
+		},
+		{
+			"uid": "https://brid.gy/publish/mastodon",
+			"name": "sunbeam.city/@vhfmag"
 		}
 	],
 	"post-types": {
