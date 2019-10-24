@@ -1,16 +1,18 @@
-const { promisify } = require("util");
-const { join } = require("path");
-const { exec } = require("child_process");
+const WebMention = require("@remy/webmention");
 
-const promiseExec = promisify(exec);
+const wm = new WebMention({ limit: 10, send: true });
 
 exports.handler = async function sendWebmentions(event, context, callback) {
 	console.log("[sendWebmentions] Successfully called!");
-	const binPath = join(require.resolve("@remy/webmention"), "../../bin/wm.js");
-	console.log("[sendWebmentions] bin path: ", binPath);
-	const results = await promiseExec(
-		`${binPath} https://victormagalhaes.codes/feed.all.xml --send --debug`,
-	);
-	console.log("[sendWebmentions] results: ", results);
-	callback(null, { statusCode: 200, body: JSON.stringify(results) });
+	wm.fetch("https://victormagalhaes.codes/feed.all.xml");
+
+	wm.on("end", () => {
+		console.log("[sendWebmentions] Success! ");
+		callback(null, { statusCode: 200 });
+	});
+
+	wm.on("error", error => {
+		console.error("[sendWebmentions] Error! ", error);
+		callback(null, { statusCode: 500 });
+	});
 };
