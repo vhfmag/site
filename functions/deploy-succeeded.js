@@ -3,7 +3,7 @@ const WebMention = require("@remy/webmention");
 const wm = new WebMention({ limit: 1, send: true });
 
 exports.handler = function sendWebmentions(event, context, callback) {
-	console.log("[sendWebmentions] Hook called!", JSON.stringify({ event, context }, undefined, 4));
+	console.log("[sendWebmentions] Hook called!");
 
 	wm.on("end", () => {
 		console.log("[sendWebmentions] Success!");
