@@ -5,6 +5,8 @@ const wm = new WebMention({ limit: 1, send: true });
 exports.handler = function sendWebmentions(event, context, callback) {
 	console.log("[sendWebmentions] Hook called!");
 
+	wm.on("log", (...args) => console.log("[sendWebmentions] ", ...args));
+
 	wm.on("end", () => {
 		console.log("[sendWebmentions] Success!");
 		callback(null, { statusCode: 200, body: "Success!" });
