@@ -2,11 +2,11 @@
 	"syndicate-to": [
 		{
 			"uid": "https://brid.gy/publish/twitter",
-			"name": "twitter.com/vhfmag"
+			"name": "https://brid.gy/publish/twitter"
 		},
 		{
 			"uid": "https://brid.gy/publish/mastodon",
-			"name": "sunbeam.city/@vhfmag"
+			"name": "https://brid.gy/publish/mastodon"
 		}
 	],
 	"post-types": {
