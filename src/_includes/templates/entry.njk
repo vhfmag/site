@@ -33,6 +33,15 @@
     </header>
 
     <section class="e-content">
+        <div hidden>
+            {% bridgyLinks links %}
+            {% bridgyLinks syndicationLinks %}
+
+            {% if twitterContent %}
+                <p hidden class="p-bridgy-twitter-content">{{ twitterContent }}</p>
+            {% endif %}
+        </div>
+
         {% block body_start %}{% endblock %}
         {{ content | safe }}
         {% block body_end %}{% endblock %}

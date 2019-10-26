@@ -7,13 +7,6 @@ htmlClass: h-entry
 {% extends 'templates/entry.njk' %}
 
 {% block body_start %}
-    {% for link in syndicationLinks %}
-        <a href="{{ link }}"></a>
-    {% endfor %}
-    {% if twitterContent %}
-        <p hidden class="p-bridgy-twitter-content">{{ twitterContent }}</p>
-    {% endif %}
-
     <section>
         {% for photo in photos %}
             <img src="{{ photo.url }}" alt="{{ photo.alt }}"/>

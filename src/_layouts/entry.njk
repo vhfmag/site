@@ -6,13 +6,6 @@ htmlClass: h-entry
 
 {% extends 'templates/entry.njk' %}
 
-{% block body_start %}
-    {% bridgyLinks links %}
-    {% if twitterContent %}
-        <p hidden class="p-bridgy-twitter-content">{{ twitterContent }}</p>
-    {% endif %}
-{% endblock %}
-
 {% if links != null and links | length > 0 %}
     {% block metadata %}
         <span class="wm-properties">
