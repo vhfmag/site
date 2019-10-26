@@ -1,3 +1,26 @@
+diff --git a/node_modules/@mightyplow/eleventy-plugin-cache-buster/src/addHashes.js b/node_modules/@mightyplow/eleventy-plugin-cache-buster/src/addHashes.js
+index 1612363..636d4bf 100755
+--- a/node_modules/@mightyplow/eleventy-plugin-cache-buster/src/addHashes.js
++++ b/node_modules/@mightyplow/eleventy-plugin-cache-buster/src/addHashes.js
+@@ -25,7 +25,8 @@ module.exports = function (outputDir, options = defaultOptions) {
+     const {
+         hashParameter,
+         sourceAttributes,
+-        createResourceHash
++        createResourceHash,
++        resourceExtensions,
+     } = merge(defaultOptions, options);
+ 
+     const resourceTagNames = Object.keys(sourceAttributes);
+@@ -41,7 +42,7 @@ module.exports = function (outputDir, options = defaultOptions) {
+         const document = parse5.parse(content, parserOptions);
+ 
+         const resourceNodes = findResourceNodes(document)
+-            .map((node) => nodeHelper({ sourceAttributes }, node))
++            .map((node) => nodeHelper({ sourceAttributes, resourceExtensions }, node))
+             .filter((node) => node.hasValidSource());
+ 
+         const replacements = resourceNodes.map(function (nodeHelper) {
 diff --git a/node_modules/@mightyplow/eleventy-plugin-cache-buster/src/createFileChecksum.js b/node_modules/@mightyplow/eleventy-plugin-cache-buster/src/createFileChecksum.js
 index 2b02925..9eb06d9 100755
 --- a/node_modules/@mightyplow/eleventy-plugin-cache-buster/src/createFileChecksum.js
