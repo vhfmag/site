@@ -49,10 +49,12 @@
             if ("serviceWorker" in navigator) 
                 navigator
                     .serviceWorker
-                    .register("/service-worker.js")
+                    .getRegistrations()
+                    .then(sws => Promise.all(sws.map(sw => sw.unregister())))
+                    /*.register("/service-worker.js")
                     .then(reg => {
                         reg.addEventListener('updatefound', () => reg.update());
-                    });
+                    });*/
         </script>
     </head>
     <body
