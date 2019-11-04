@@ -59,9 +59,14 @@
 
 /* stack */
 
-.stack > * + * {
+.stack > * + *,
+.sub-stack > * + * {
 	margin-top: var(--s0);
 	margin-top: var(--stack-margin);
+}
+
+.sub-stack > * + * {
+	--stack-margin: inherit;
 }
 
 /* hack to avoid nested stacks from interfering with each other */

@@ -1,9 +1,12 @@
 main.home {
+	--heading-margin: var(--s1);
+
 	max-width: 90ch;
 	display: grid;
 	grid-template-columns: 1fr 1fr;
 	align-content: flex-start;
 	grid-column-gap: var(--s2);
+	margin-top: calc(-1 * var(--heading-margin));
 }
 
 main.home h1,
@@ -64,4 +67,5 @@ main.home h1,
 main.home h2 {
 	border-bottom: 2px solid var(--themeColor);
 	padding-bottom: var(--s-3);
+	margin-top: var(--heading-margin);
 }

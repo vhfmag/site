@@ -36,30 +36,26 @@ h6 {
 	--max-width-desktop: calc(var(--max-width-mobile) - var(--sidebar-width));
 }
 
-body[data-theme="auto"] {
-	--textColor: rgb(42, 42, 42);
+body,
+body[data-theme="auto"],
+body[data-theme="light"] {
+	--textColor: black;
 	--backgroundColor: rgb(237, 237, 237);
-	--themeColor: hsla(125, 51%, 32%, 1);
+	--themeColor: rgb(153, 51, 200);
 }
 
 @media (prefers-color-scheme: dark) {
 	body[data-theme="auto"] {
 		--textColor: rgb(237, 237, 237);
-		--backgroundColor: rgb(42, 42, 42);
-		--themeColor: rgb(92, 194, 101);
+		--backgroundColor: black;
+		--themeColor: rgb(182, 63, 236);
 	}
 }
 
 body[data-theme="dark"] {
 	--textColor: rgb(237, 237, 237);
-	--backgroundColor: rgb(42, 42, 42);
-	--themeColor: rgb(92, 194, 101);
-}
-
-body[data-theme="light"] {
-	--textColor: rgb(42, 42, 42);
-	--backgroundColor: rgb(237, 237, 237);
-	--themeColor: hsla(125, 51%, 32%, 1);
+	--backgroundColor: black;
+	--themeColor: rgb(182, 63, 236);
 }
 
 body,
