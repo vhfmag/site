@@ -13,6 +13,9 @@
     </a>
 {% endmacro %}
 
+{% set nameTag = "h1" if mainClass == "home" else 
+    "span" %}
+
 <link rel="stylesheet" href="/css/sidebar.css"/>
 
 <header
@@ -24,16 +27,28 @@
     class="main-sidebar stack h-card"
 >
     <a class="u-url u-uid self_link" rel="home" href="/" itemref="mdata-blog mdata-author" itemprop="url identifier">
-        <span class="p-name" itemprop="name">{{ site.title }}</span>
+        Olá 👋🏾, sou<br/>
+        <{{nameTag}} class="p-name" itemprop="name">{{ site.title }}</{{nameTag}}>
     </a>
+
+    <div hidden><img class="u-photo" src="/uploads/avatar.png" alt="Eu!"/></div>
+
+    <div class="p-note">
+        <dl>
+            <dt>Pronomes:</dt>
+            <dd>
+                <span class="p-x-pronoun-nominative">ele</span>/<span class="p-x-pronoun-possessive">dele</span>.
+            </dd>
+        </dl>
+
+        <p>
+            Desenvolvedor de Salvador, Brasil com {{ current.year - work.startedAt }} anos de experiência em front- e back-end.
+        </p>
+    </div>
 
     <address itemprop="email">
         <a class="u-email" href="mailto:{{ me.email }}">{{ me.email }}</a>
     </address>
-
-    <div>
-        <span class="p-x-pronoun-nominative">ele</span>/<span class="p-x-pronoun-possessive">dele</span>
-    </div>
 
     <nav aria-label="Principal">
         <ul>

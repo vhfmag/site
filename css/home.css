@@ -12,7 +12,7 @@ main.home section {
 }
 
 main.home section {
-	grid-row: span 2;
+	grid-row: span 6;
 }
 
 main.home section.main p:first-of-type {
@@ -24,7 +24,11 @@ main.home section.half-column {
 }
 
 main.home section.half-row {
-	grid-row: span 1;
+	grid-row: span 3;
+}
+
+main.home section.row-3 {
+	grid-row: span 2;
 }
 
 @media (max-width: 1000px) {

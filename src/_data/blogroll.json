@@ -1,5 +1,17 @@
 [
 	{
+		"url": "https://baixacultura.org/",
+		"name": "Baixa Cultura",
+		"description": "Um laboratório online que trabalha com documentação, pesquisa, formação e experimentação em cultura livre.",
+		"type": "Publicações"
+	},
+	{
+		"url": "https://logicmag.io/",
+		"name": "Logic Magazine",
+		"description": "Revista sobre tecnologia que busca encontrar bom senso no meio dos gritos dos tecnófobos e dos tecno-utópicos e relatar avanços e implicações de tecnologias, ontem, hoje e sempre",
+		"type": "Publicações"
+	},
+	{
 		"url": "http://www.kottke.org/",
 		"name": "Kottke",
 		"description": "Blog <i lang=\"en\">old-school</i> que recomenda e comenta outros links e leituras",
@@ -63,12 +75,6 @@
 		"url": "https://nautil.us/",
 		"name": "Nautilus",
 		"description": "Revista digital científica com edições mensais que analisam um tema de acordo com diversos ângulos, de diversas perspectivas científicas",
-		"type": "Publicações"
-	},
-	{
-		"url": "https://logicmag.io/",
-		"name": "Logic Magazine",
-		"description": "Revista sobre tecnologia que busca encontrar bom senso no meio dos gritos dos tecnófobos e dos tecno-utópicos e relatar avanços e implicações de tecnologias, ontem, hoje e sempre",
 		"type": "Publicações"
 	},
 	{

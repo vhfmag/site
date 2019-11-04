@@ -5,13 +5,6 @@ sitemapPriority: 1
 mainClass: home
 ---
 
-section.main
-  h1 Home
-
-  p Olá! 👋🏾 Sou Victor Magalhães, desenvolvedor de Salvador, Brasil e tenho #{new Date().getFullYear() - work.startedAt} anos de experiência trabalhando com desenvolvimento front- e back-end.
-
-  p Atualmente, trabalho na <a href="https://jusbrasil.com.br">Jusbrasil</a> como engenheiro de software, com uma <i lang="en">stack</i> que inclui Javascript, Typescript, React, Node, Scala, Python e outros. Também já trabalhei na <a href="https://cubos.io/">Cubos</a>.
-
 section.half-column
   h2 Do que eu gosto
   ul.inline-list
@@ -55,20 +48,26 @@ section.half-column
 section.half-column
   h2 Blogroll
   ul.post-list
-    - for (const link of blogroll.slice(0, 5))
+    - for (const link of blogroll.slice(0, 10))
       li
         h3: a(href=link.url)= link.name
 
-section.half-column.half-row
+section.half-column.row-3
   h2 No fone
   ul.inline-list
     - for (artist of listeningTo)
       li= artist
 
-section.half-column.half-row
+section.half-column.row-3
   h2 Na estante
   ul.inline-list
     - for (book of reading)
       li(data-separator="; ")= book
+
+section.half-column.row-3
+  h2 No #[i(lang="en") streaming]
+  ul.inline-list
+    - for (thing of watching)
+      li= thing
 
 link(rel="stylesheet", href="/css/home.css")

@@ -11,12 +11,8 @@ main.entry > article > header::after {
 	margin-bottom: var(--s2);
 }
 
-.wm-properties .wm-property {
+.wm-properties .wm-property:not(:first-of-type) {
 	text-transform: lowercase;
-}
-
-.wm-properties .wm-property:first-of-type {
-	text-transform: unset;
 }
 
 .wm-properties .wm-property + .wm-property::before {

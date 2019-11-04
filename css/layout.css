@@ -29,9 +29,9 @@ h6 {
 }
 
 :root {
-	--root-padding: 32px;
+	--root-padding: 2em;
 	--root-border-width: var(--s-1);
-	--sidebar-width: 220px;
+	--sidebar-width: 13em;
 	--max-width-mobile: calc(100vw - 2 * var(--root-border-width) - 2 * var(--root-padding));
 	--max-width-desktop: calc(var(--max-width-mobile) - var(--sidebar-width));
 }

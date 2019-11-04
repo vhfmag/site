@@ -1,7 +1,7 @@
 .main-sidebar {
 	width: var(--sidebar-width);
 
-	--stack-margin: var(--s1);
+	--stack-margin: var(--s0);
 }
 
 .main-sidebar hr {
@@ -45,17 +45,19 @@
 }
 
 .self_link {
-	font-size: 2em;
 	font-weight: bold;
 	text-decoration: none;
 	line-height: 1.1;
 }
 
 .self_link:any-link {
-	font-size: 2em;
 	font-weight: bold;
 	text-decoration: none;
 	line-height: 1.1;
+}
+
+.self_link .p-name {
+	font-size: 2em;
 }
 
 body[data-theme="auto"] [data-theme="auto"],
@@ -105,4 +107,18 @@ body[data-theme="light"] [data-theme="light"] {
 	.main-sidebar > nav > ul > li {
 		margin: var(--list-v-gap) var(--list-h-gap);
 	}
+}
+
+.p-note dl dt {
+	font-weight: bolder;
+}
+
+.p-note dl dt::after {
+	content: " ";
+}
+
+.p-note dl dt,
+.p-note dl dd {
+	display: inline;
+	margin: 0;
 }
