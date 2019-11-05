@@ -43,6 +43,7 @@
 
         {% block body_start %}{% endblock %}
         <div class="{% if not twitterContent %}p-bridgy-twitter-content{% endif %}">
+            <div hidden>{{ title }} — </div>
             {{ content | safe }}
         </div>
         {% block body_end %}{% endblock %}
