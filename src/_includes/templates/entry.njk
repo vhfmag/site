@@ -37,12 +37,14 @@
             {% bridgyLinks syndicationLinks %}
 
             {% if twitterContent %}
-                <p hidden class="p-bridgy-twitter-content">{{ twitterContent }}</p>
+                <p class="p-bridgy-twitter-content">{{ twitterContent }}</p>
             {% endif %}
         </div>
 
         {% block body_start %}{% endblock %}
-        {{ content | safe }}
+        <div class="{% if not twitterContent %}p-bridgy-twitter-content{% endif %}">
+            {{ content | safe }}
+        </div>
         {% block body_end %}{% endblock %}
     </section>
 
