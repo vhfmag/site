@@ -51,21 +51,20 @@
 
         {% block body_start %}{% endblock %}
         <div class="{% if not twitterContent %}p-bridgy-twitter-content{% endif %} {% if not mastodonContent %}p-bridgy-mastodon-content{% endif %} {% if not mediumContent %}p-bridgy-medium-content{% endif %}">
-            <div hidden>{{ title }} — </div>{{ content | safe }}
-        </div>
-        {% block body_end %}{% endblock %}
-    </section>
-
-    {% if webmentions[page.url].all | length > 0 %}
-        <hr/>
-        <section class="webmentions" id="webmentions">
-            {% import 'macros/webmentions.njk' as wms %}
-
-            {{ wms.authorPhotos(webmentions, page.url, "like-of", "curtida", "curtidas", authorUrl = true) }}
-            {{ wms.authorPhotos(webmentions, page.url, "bookmark-of", "favoritaram", "favoritou", authorUrl = true) }}
-            {{ wms.authorPhotos(webmentions, page.url, "repost-of", "repostagem", "repostagens") }}
-            {{ wms.comment(webmentions, page.url, "mention-of", "menção", "menções") }}
-            {{ wms.comment(webmentions, page.url, "in-reply-to", "resposta", "respostas", open = true) }}
+            {% if title %}<div hidden>{{ title }} — </div>{% endif %}{{ content | safe }}
+            {% block body_end %}{% endblock %}
         </section>
-    {% endif %}
-</article>
+
+        {% if webmentions[page.url].all | length > 0 %}
+            <hr/>
+            <section class="webmentions" id="webmentions">
+                {% import 'macros/webmentions.njk' as wms %}
+
+                {{ wms.authorPhotos(webmentions, page.url, "like-of", "curtida", "curtidas", authorUrl = true) }}
+                {{ wms.authorPhotos(webmentions, page.url, "bookmark-of", "favoritaram", "favoritou", authorUrl = true) }}
+                {{ wms.authorPhotos(webmentions, page.url, "repost-of", "repostagem", "repostagens") }}
+                {{ wms.comment(webmentions, page.url, "mention-of", "menção", "menções") }}
+                {{ wms.comment(webmentions, page.url, "in-reply-to", "resposta", "respostas", open = true) }}
+            </section>
+        {% endif %}
+    </article>
