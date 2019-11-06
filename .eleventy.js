@@ -4,7 +4,7 @@ const cacheBusterPlugin = require("@mightyplow/eleventy-plugin-cache-buster");
 const rssPlugin = require("@11ty/eleventy-plugin-rss");
 const nestingTocPlugin = require("eleventy-plugin-nesting-toc");
 const eleventyPluginReadingTimePlugin = require("eleventy-plugin-reading-time");
-const eleventyPluginLazyimagesPlugin = require("eleventy-plugin-lazyimages");
+// const eleventyPluginLazyimagesPlugin = require("eleventy-plugin-lazyimages");
 
 const markdownIt = require("markdown-it");
 const mdPluginPrism = require("markdown-it-prism");
@@ -103,7 +103,6 @@ module.exports = function(eleventyConfig) {
 	eleventyConfig.addPlugin(eleventyPluginReadingTimePlugin);
 
 	if (!IS_DEV) {
-		eleventyConfig.addPlugin(eleventyPluginLazyimagesPlugin);
 		eleventyConfig.addPlugin(pwaPlugin, {
 			skipWaiting: true,
 			clientsClaim: true,
