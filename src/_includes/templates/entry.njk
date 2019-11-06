@@ -39,12 +39,19 @@
             {% if twitterContent %}
                 <p class="p-bridgy-twitter-content">{{ twitterContent }}</p>
             {% endif %}
+
+            {% if mastodonContent %}
+                <p class="p-bridgy-mastodon-content">{{ mastodonContent }}</p>
+            {% endif %}
+
+            {% if mediumContent %}
+                <p class="p-bridgy-medium-content">{{ mediumContent }}</p>
+            {% endif %}
         </div>
 
         {% block body_start %}{% endblock %}
-        <div class="{% if not twitterContent %}p-bridgy-twitter-content{% endif %}">
-            <div hidden>{{ title }} — </div>
-            {{ content | safe }}
+        <div class="{% if not twitterContent %}p-bridgy-twitter-content{% endif %} {% if not mastodonContent %}p-bridgy-mastodon-content{% endif %} {% if not mediumContent %}p-bridgy-medium-content{% endif %}">
+            <div hidden>{{ title }} — </div>{{ content | safe }}
         </div>
         {% block body_end %}{% endblock %}
     </section>
