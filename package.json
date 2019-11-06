@@ -1,6 +1,6 @@
 {
 	"scripts": {
-		"build": "eleventy --passthroughall",
+		"build": "NODE_ENV=production eleventy --passthroughall",
 		"dev": "NODE_ENV=development yarn build --serve",
 		"postinstall": "patch-package"
 	},
