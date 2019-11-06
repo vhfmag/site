@@ -7,6 +7,10 @@
 		{
 			"uid": "https://brid.gy/publish/mastodon",
 			"name": "https://brid.gy/publish/mastodon"
+		},
+		{
+			"uid": "https://brid.gy/publish/medium",
+			"name": "https://brid.gy/publish/medium"
 		}
 	],
 	"post-types": {
