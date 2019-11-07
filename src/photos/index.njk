@@ -1,6 +1,6 @@
 ---
 title: Notas
-layout: default
+layout: default.liquid
 tags: []
 collection: photos
 mdEntryType: blogPost
@@ -17,29 +17,29 @@ pagination:
 {% extends 'templates/collection.njk' %}
 
 {% block css %}
-    <link rel="stylesheet" href="/css/photo-collection.css"/>
+	<link rel="stylesheet" href="/css/photo-collection.css"/>
 {% endblock %}
 
 {% block entry %}
 
-    <a class="u-url" href="{{ entry.url }}">
-        {% set photo = entry
-            .data
-            .photos[0] %}
-        <img src="{{ photo.url }}" alt="{{ photo.alt }}"/>
-        <header>
+	<a class="u-url" href="{{ entry.url }}">
+		{% set photo = entry
+			.data
+			.photos[0] %}
+		<img src="{{ photo.url }}" alt="{{ photo.alt }}"/>
+		<header>
 
-            {% if entry.data.date %}
-                <time
+			{% if entry.data.date %}
+				<time
                         itemprop="datePublished dateModified pubdate"
                         class="dt-published"
                         datetime="{{ entry.data.date | formatDateISO }}"
                     >
-                    {{ entry.data.date | formatDateTime }}
-                </time>
-            {% endif %}
-        </header>
-    </a>
+					{{ entry.data.date | formatDateTime }}
+				</time>
+			{% endif %}
+		</header>
+	</a>
 
 {% endblock %}
 

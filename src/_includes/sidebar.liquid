@@ -1,19 +1,4 @@
-{% macro nav_link(href, text, exact = false, directory = false) %}
-    {% set exactCurrent = href == page.url %}
-    {% set nonExactCurrent = page
-        .url
-        .startsWith(href) %}
-    <a
-        {% if exactCurrent or (not exact and nonExactCurrent) %}class="current"{% endif %}
-        {% if exactCurrent %}aria-current="page"{% endif %}
-        {% if directory and nonExactCurrent and not exactCurrent %}rel="directory"{% endif %}
-        href="{{ href }}"
-    >
-        {{ text }}
-    </a>
-{% endmacro %}
-
-{% set nameTag = "h1" if mainClass == "home" else 
+{% assign nameTag = "h1" if mainClass == "home" else 
     "span" %}
 
 <link rel="stylesheet" href="/css/sidebar.css"/>
@@ -53,25 +38,25 @@
     <nav aria-label="Principal">
         <ul>
             <li>
-                {{ nav_link("/", "home", true) }}
+                {% include navLink href="/" text="home" exact=true %}
             </li>
             <li>
-                {{ nav_link("/posts", "posts", directory = true) }}
+                {% include navLink href="/posts" text="posts" directory = true %}
             </li>
             <li>
-                {{ nav_link("/bookmarks", "recomendações", directory = true) }}
+                {% include navLink href="/bookmarks" text="recomendações" directory = true %}
             </li>
             <li>
-                {{ nav_link("/notes", "notas", directory = true) }}
+                {% include navLink href="/notes" text="notas" directory = true %}
             </li>
             <li>
-                {{ nav_link("/apresentacoes", "apresentações", directory = true) }}
+                {% include navLink href="/apresentacoes" text="apresentações" directory = true %}
             </li>
             <li>
-                {{ nav_link("/blogroll", "blogroll") }}
+                {% include navLink href="/blogroll" text="blogroll" %}
             </li>
             <li>
-                {{ nav_link("/work", "trabalho") }}
+                {% include navLink href="/work" text="trabalho" %}
             </li>
         </ul>
     </nav>

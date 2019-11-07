@@ -1,7 +1,7 @@
 {
 	"scripts": {
-		"build": "NODE_ENV=production eleventy --passthroughall",
-		"dev": "NODE_ENV=development yarn build --serve",
+		"build": "eleventy --passthroughall",
+		"dev": "yarn build --serve",
 		"postinstall": "patch-package"
 	},
 	"devDependencies": {
@@ -14,9 +14,10 @@
 		"eleventy-plugin-nesting-toc": "^1.1.0",
 		"eleventy-plugin-pwa": "^1.0.8",
 		"eleventy-plugin-reading-time": "^0.0.1",
+		"eleventy-plugin-seo": "^0.4.3",
 		"escape-html": "^1.0.3",
-		"isomorphic-fetch": "^2.2.1",
 		"lodash": "^4.17.15",
+		"make-fetch-happen": "^6.0.1",
 		"markdown-it-anchor": "5.2.5",
 		"markdown-it-attrs": "^2.4.1",
 		"markdown-it-codesandbox-embed": "^0.1.0",
@@ -26,7 +27,7 @@
 		"postinstall-postinstall": "^2.0.0"
 	},
 	"dependencies": {
-		"@remy/webmention": "1.4.2",
+		"@remy/webmention": "1.4.3",
 		"babel-loader": "^8.0.6",
 		"url-info-scraper": "^0.1.3"
 	}

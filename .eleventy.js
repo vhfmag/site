@@ -4,6 +4,7 @@ const cacheBusterPlugin = require("@mightyplow/eleventy-plugin-cache-buster");
 const rssPlugin = require("@11ty/eleventy-plugin-rss");
 const nestingTocPlugin = require("eleventy-plugin-nesting-toc");
 const eleventyPluginReadingTimePlugin = require("eleventy-plugin-reading-time");
+const seoPlugin = require("eleventy-plugin-seo");
 // const eleventyPluginLazyimagesPlugin = require("eleventy-plugin-lazyimages");
 
 const markdownIt = require("markdown-it");
@@ -17,6 +18,8 @@ const urlInfoScraper = require("url-info-scraper");
 const { memoize } = require("lodash");
 
 const wmTypeStrings = require("./src/_data/wmType.json");
+const { title, description } = require("./src/_data/site.json");
+const { name: authorName, url } = require("./src/_data/me.json");
 
 const addAsyncShortcode = require("./utils/add-async-shortcode");
 const { figureShortcode } = require("./src/_shortcodes/figure");
@@ -75,10 +78,20 @@ module.exports = function(eleventyConfig) {
 			.use(mdPluginCodesandboxEmbed, { directory: "code-examples" })
 			.use(mdPluginPrism, {})
 			.use(mdPluginAttrs, {})
-			.use(mdPluginAnchor, { permalink: true, permalinkBefore: true, permalinkSymbol: "§" })
+			.use(mdPluginAnchor, {
+				/*  permalink: true, permalinkBefore: false, permalinkSymbol: "§"  */
+			})
 			.use(mdPluginFootnote, {}),
 	);
 
+	eleventyConfig.addPlugin(seoPlugin, {
+		title,
+		description,
+		url,
+		author: authorName,
+		twitter: "vhfmag",
+		img: "icons/icon-512x512.png",
+	});
 	eleventyConfig.addPlugin(excerptPlugin);
 	eleventyConfig.addPlugin(
 		cacheBusterPlugin({
@@ -212,6 +225,8 @@ module.exports = function(eleventyConfig) {
 	eleventyConfig.addShortcode("figure", figureShortcode);
 	eleventyConfig.addShortcode("siloEmbed", embedShortcode);
 	eleventyConfig.addShortcode("bridgyLinks", bridgyLinksShortcode);
+
+	eleventyConfig.setFrontMatterParsingOptions({ excerpt: true /* , excerpt_alias: "excerpt" */ });
 
 	return {
 		templateFormats: ["md", "njk", "pug"],

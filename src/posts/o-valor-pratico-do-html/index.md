@@ -67,9 +67,7 @@ Quais são as expectativas de comportamento e semântica dos elementos nativos? 
 
 ### &lt;button>
 
-> <button className="button" onClick={() => alert("Oi, eu sou o Goku!")}>
-> 	Clique aqui
-> </button>
+<button class="button" style="all: revert" onclick='javascript:alert("Oi, eu sou o Goku!")'>Clique aqui</button>
 
 `<button>` é um dos elementos interativos mais fundamentais da Web, junto com o `<a>` e o `<input>`. Ele também é um dos que mais tem implementações customizadas, frequentemente feitas com `<a>` ou `<div>` e quebrando as expectativas e comportamento de um botão. Por exemplo, se espera que eles:
 
@@ -176,21 +174,21 @@ Eles são especialmente importantes para a extração de conteúdo e navegação
 
 ![Modo de leitura do Firefox](assets/screenshots/firefox-readingmode.png)
 
-<div className="img-caption">Modo de leitura do Firefox</div>
+<div class="img-caption">Modo de leitura do Firefox</div>
 
 ![Artigo no Pocket](assets/screenshots/pocket.png)
 
-<div className="img-caption">Artigo no Pocket</div>
+<div class="img-caption">Artigo no Pocket</div>
 
 ![Outline de página usando landmarks](assets/screenshots/landmark-navigation.png)
 
-<div className="img-caption">
+<div class="img-caption">
 	Outline de página baseado em <i lang="en">landmarks</i>
 </div>
 
 ![Leitura rápida do Telegram](assets/screenshots/telegram-leiturarapida.jpg)
 
-<div className="img-caption">Leitura rápida do Telegram</div>
+<div class="img-caption">Leitura rápida do Telegram</div>
 
 ### Dados estruturados
 
@@ -231,19 +229,19 @@ Páginas que usam dados estruturados são mais legíveis para máquinas e permit
 
 ![Busca por receita no Google](assets/screenshots/google-receita.png)
 
-<div className="img-caption">Busca por receita no Google</div>
+<div class="img-caption">Busca por receita no Google</div>
 
 ![Busca por notícias no Google](assets/screenshots/google-noticias.png)
 
-<div className="img-caption">Busca por notícias no Google</div>
+<div class="img-caption">Busca por notícias no Google</div>
 
 ![Busca por filme no Google](assets/screenshots/google-reviews.png)
 
-<div className="img-caption">Busca por filme no Google</div>
+<div class="img-caption">Busca por filme no Google</div>
 
 ![Resposta do Google Assistant](assets/screenshots/googleassistant-preview.jpg)
 
-<div className="img-caption">Resposta do Google Assistant</div>
+<div class="img-caption">Resposta do Google Assistant</div>
 
 Para saber mais, eu recomendo o [guia do Google sobre dados estruturados](https://developers.google.com/search/docs/guides/intro-structured-data), que é completo, cheio de exemplos e oferece até um validador.
 
@@ -268,19 +266,19 @@ Alguns exemplos disso, no Apple Watch:
 
 ![Modo de leitura](assets/screenshots/applewatch-article.png)
 
-<div className="img-caption">Modo de leitura</div>
+<div class="img-caption">Modo de leitura</div>
 
 ![Exibição de figure](assets/screenshots/applewatch-figure.png)
 
-<div className="img-caption">Exibição de figure</div>
+<div class="img-caption">Exibição de figure</div>
 
 ![Diferentes tipos de input](assets/screenshots/applewatch-inputs.png)
 
-<div className="img-caption">Diferentes tipos de input</div>
+<div class="img-caption">Diferentes tipos de input</div>
 
 ![Exibição de input com label](assets/screenshots/applewatch-label.png)
 
-<div className="img-caption">Exibição de input com label</div>
+<div class="img-caption">Exibição de input com label</div>
 
 Como será um botão num navegador de realidade virtual daqui a 5 anos? Quanto tempo até a <i lang='en'>Alexa</i> ou o <i lang='en'>Google Home</i> lerem a Web? Será que navegadores vão oferecer sumários de páginas, como fazem hoje alguns leitores de tela? Usando HTML semântico e outros padrões, podemos deixar a decisão de qual é a melhor forma de expor esses elementos com o navegador e estar preparados desde já.
 

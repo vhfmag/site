@@ -1,23 +1,23 @@
 ---
-layout: default
+layout: default.liquid
 title: Blogroll
 mainClass: blogroll
 ---
 
 -
-    const linksByType = blogroll.reduce((acc, link) => {
-        if (!acc[link.type]) acc[link.type] = [];
-        acc[link.type].push(link);
-        return acc;
-    }, {});
+	const linksByType = blogroll.reduce((acc, link) => {
+		if (!acc[link.type]) acc[link.type] = [];
+		acc[link.type].push(link);
+		return acc;
+	}, {});
 
 h1 Blog roll
 
 p Blogs, canais e outros sites que eu acompanho e recomendo
 
 - for (const [type, linksOfType] of Object.entries(linksByType))
-    section
-        h2= type
-        ul
-            - for (const link of linksOfType)
-                li #[a(href=link.url)= link.name] – !{link.description}
+	section
+		h2= type
+		ul
+			- for (const link of linksOfType)
+				li #[a(href=link.url)= link.name] – !{link.description}

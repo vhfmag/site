@@ -1,5 +1,5 @@
 require("dotenv").config();
-require("isomorphic-fetch");
+const fetch = require("make-fetch-happen").defaults({ cacheManager: "./.wm-cache" });
 const _ = require("lodash");
 
 const apiBase = "https://webmention.io/api/mentions.jf2";
@@ -94,10 +94,6 @@ async function fetchWebMentionsPage(page) {
  * @returns {Promise<GroupedWebMentions>} a promise for a feed
  */
 module.exports = async function fetchWebMentions() {
-	if (process.env.NODE_ENV === "development") {
-		return {};
-	}
-
 	/**
 	 * @type {WebMention[]}
 	 */

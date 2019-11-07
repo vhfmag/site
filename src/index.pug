@@ -1,73 +1,73 @@
 ---
-layout: default
+layout: default.liquid
 sitemapChangefreq: weekly
 sitemapPriority: 1
 mainClass: home
 ---
 
 section.half-column
-  h2 Do que eu gosto
-  ul.inline-list
-    li CSS
-    li HTML semântico
-    li Javascript
-    li decentralização (Dat, IPFS, SSB, etc)
-    li IndieWeb
-    li de uma web diversa e aberta
-    li programação funcional
-    li sistemas de tipo
-    li humanas
-    li ecoturismo
-    li veganismo (quem sabe um dia)
-    li direitos de minorias
-    li reparação histórica
-    li: a(href="https://pt.wikipedia.org/wiki/Decrescimento_(economia)") decrescimento econômico
+	h2 Do que eu gosto
+	ul.inline-list
+		li CSS
+		li HTML semântico
+		li Javascript
+		li decentralização (Dat, IPFS, SSB, etc)
+		li IndieWeb
+		li de uma web diversa e aberta
+		li programação funcional
+		li sistemas de tipo
+		li humanas
+		li ecoturismo
+		li veganismo (quem sabe um dia)
+		li direitos de minorias
+		li reparação histórica
+		li: a(href="https://pt.wikipedia.org/wiki/Decrescimento_(economia)") decrescimento econômico
 
 section.half-column
-  h2 Como esse site foi feito
-  p Esse site foi feito usando <a href="https://www.11ty.io/">Eleventy</a>, Nunjucks, Markdown, Pug e tecnologias web. Ele se integra com a #[a(href="https://indieweb.org/") IndieWeb] usando serviços como #[a(href="https://webmention.io/") webmention.io], #[a(href="https://webmention.app/") webmention.app] e #[a(href="https://brid.gy/") Bridgy], além do #[a(href="https://paulrobertlloyd.github.io/indiekit/") IndieKit]. #[a(href="https://gitlab.com/vhfmag/vhfmag.gitlab.io/") Veja o código]!
+	h2 Como esse site foi feito
+	p Esse site foi feito usando <a href="https://www.11ty.io/">Eleventy</a>, Nunjucks, Markdown, Pug e tecnologias web. Ele se integra com a #[a(href="https://indieweb.org/") IndieWeb] usando serviços como #[a(href="https://webmention.io/") webmention.io], #[a(href="https://webmention.app/") webmention.app] e #[a(href="https://brid.gy/") Bridgy], além do #[a(href="https://paulrobertlloyd.github.io/indiekit/") IndieKit]. #[a(href="https://gitlab.com/vhfmag/vhfmag.gitlab.io/") Veja o código]!
 
 section.half-column
-  h2 Últimos posts
-  ol.post-list
-    - for (const entry of collections.posts.slice(0, 5))
-      li
-        h3: a(href=entry.url)= entry.data.title
-    li
-      a(href="/posts") Ver mais
+	h2 Últimos posts
+	ol.post-list
+		- for (const entry of collections.posts.slice(0, 5))
+			li
+				h3: a(href=entry.url)= entry.data.title
+		li
+			a(href="/posts") Ver mais
 
 section.half-column
-  h2 Últimas Recomendações
-  ol.post-list
-    - for (const entry of collections.bookmarks.slice(0, 5))
-      li
-        h3: a(href=entry.url)= entry.data.title
-    li
-      a(href="/bookmarks") Ver mais
+	h2 Últimas Recomendações
+	ol.post-list
+		- for (const entry of collections.bookmarks.slice(0, 5))
+			li
+				h3: a(href=entry.url)= entry.data.title
+		li
+			a(href="/bookmarks") Ver mais
 
 section.half-column
-  h2 Blogroll
-  ul.post-list
-    - for (const link of blogroll.slice(0, 10))
-      li
-        h3: a(href=link.url)= link.name
+	h2 Blogroll
+	ul.post-list
+		- for (const link of blogroll.slice(0, 10))
+			li
+				h3: a(href=link.url)= link.name
 
 section.half-column.row-3
-  h2 No fone
-  ul.inline-list
-    - for (artist of listeningTo)
-      li= artist
+	h2 No fone
+	ul.inline-list
+		- for (artist of listeningTo)
+			li= artist
 
 section.half-column.row-3
-  h2 Na estante
-  ul.inline-list
-    - for (book of reading)
-      li(data-separator="; ")= book
+	h2 Na estante
+	ul.inline-list
+		- for (book of reading)
+			li(data-separator="; ")= book
 
 section.half-column.row-3
-  h2 No #[i(lang="en") streaming]
-  ul.inline-list
-    - for (thing of watching)
-      li= thing
+	h2 No #[i(lang="en") streaming]
+	ul.inline-list
+		- for (thing of watching)
+			li= thing
 
 link(rel="stylesheet", href="/css/home.css")

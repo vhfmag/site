@@ -1,6 +1,6 @@
 ---
 title: Curtidas
-layout: default
+layout: default.liquid
 tags: []
 collection: notes
 mdEntryType: blogPost
@@ -16,29 +16,29 @@ pagination:
 
 {% extends 'templates/collection.njk' %}
 {% block css %}
-    <link rel="stylesheet" href="/css/collection-notes.css"/>
+	<link rel="stylesheet" href="/css/collection-notes.css"/>
 {% endblock %}
 
 {% block entry %}
 
-    <section>
-        {# Por algum motivo isso não funciona. Por quê? #}
-        {# <a href="{{entry.data.likeOf}}" class="u-like-of">{% titleFromUrl entry.data.likeOf %}</a> #}
-        <a href="{{entry.data.likeOf}}" class="u-like-of">{{ entry.data.likeOf }}</a> foi curtido
+	<section>
+		{# Por algum motivo isso não funciona. Por quê? #}
+		{# <a href="{{entry.data.likeOf}}" class="u-like-of">{% titleFromUrl entry.data.likeOf %}</a> #}
+		<a href="{{entry.data.likeOf}}" class="u-like-of">{{ entry.data.likeOf }}</a> foi curtido
     </section>
-    <header>
+	<header>
         — <a class="u-url" href="{{ entry.url }}">
-            {% if entry.data.date %}
-                <time
+			{% if entry.data.date %}
+				<time
                     itemprop="datePublished dateModified pubdate"
                     class="dt-published"
                     datetime="{{ entry.data.date | formatDateISO }}"
                 >
-                    {{ entry.data.date | formatDateTime }}
-                </time>
-            {% endif %}
-        </a>
-    </header>
+					{{ entry.data.date | formatDateTime }}
+				</time>
+			{% endif %}
+		</a>
+	</header>
 
 {% endblock %}
 

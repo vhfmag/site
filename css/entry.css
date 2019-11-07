@@ -41,7 +41,9 @@ main.entry .embed-container > embed {
 }
 
 main.entry > article .e-content,
-main.entry > article .e-content * {
+main.entry > article .e-content *,
+main.entry > article .e-content ::after,
+main.entry > article .e-content ::before {
 	contain: none;
 }
 
@@ -100,20 +102,12 @@ main.entry h6 {
 	position: relative;
 }
 
-main.entry h1:hover .header-anchor,
-main.entry h2:hover .header-anchor,
-main.entry h3:hover .header-anchor,
-main.entry h4:hover .header-anchor,
-main.entry h5:hover .header-anchor,
-main.entry h6:hover .header-anchor {
+main.entry :hover > .header-anchor {
 	opacity: 1;
 }
 
 main.entry .header-anchor {
-	position: absolute;
-	left: 0;
-	transform: translateX(-100%);
-	padding-right: var(--s-2);
+	margin-left: var(--s-2);
 	opacity: 0;
 	transition: opacity ease 0.25s;
 }

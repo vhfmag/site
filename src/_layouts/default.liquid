@@ -1,4 +1,5 @@
 ---
+ogtype: website
 ---
 
 <!doctype html>
@@ -11,9 +12,9 @@
         <link rel="stylesheet" href="/css/utility.css"/>
         <link rel="stylesheet" href="/css/layout.css"/>
 
-        <title class="{{ titleClass }}">
+        {% comment %} <title class="{{ titleClass }}">
             {% if title %}{{title}} – {% endif %}Victor Magalhães
-        </title>
+        </title> {% endcomment %}
 
         <link rel="manifest" href="/manifest.webmanifest"/>
         <meta name="theme-color" content="{{ site.themeColor }}"/>
@@ -25,7 +26,6 @@
         <link rel="token_endpoint" href="{{ site.indieAuthTokenUrl }}">
         <link rel="micropub" href="{{ site.micropubUrl }}">
 
-        <meta name="description" content="{{ site.description }}"/>
         <meta name="google-site-verification" content="RHQh7j4JKTIEmRsQrcOD1Pk7OoLoW8VK9YG4LscV7d0"/>
 
         <link rel="apple-touch-icon" sizes="48x48" href="/icons/icon-48x48.png"/>
@@ -51,11 +51,14 @@
                     .serviceWorker
                     .getRegistrations()
                     .then(sws => Promise.all(sws.map(sw => sw.unregister())))
-                    /*.register("/service-worker.js")
+                /*.register("/service-worker.js")
                     .then(reg => {
                         reg.addEventListener('updatefound', () => reg.update());
                     });*/
         </script>
+
+        <!-- SEO! -->
+        {% seo %}
     </head>
     <body
         itemscope=""
@@ -65,7 +68,7 @@
         data-theme="auto"
     >
         <a href="#main" class="skip-nav">Pular para conteúdo</a>
-        {% include 'sidebar.njk' %}
+        {% include sidebar %}
         <main id="main" class="{{ mainClass }}">{{ content | safe }}</main>
     </body>
 </html>
