@@ -38,25 +38,25 @@
     <nav aria-label="Principal">
         <ul>
             <li>
-                {% include navLink href="/" text="home" exact=true %}
+                {% include navLink with href: "/", text: "home", exact: true %}
             </li>
             <li>
-                {% include navLink href="/posts" text="posts" directory = true %}
+                {% include navLink with href: "/posts", text: "posts", directory: true %}
             </li>
             <li>
-                {% include navLink href="/bookmarks" text="recomendações" directory = true %}
+                {% include navLink with href: "/bookmarks", text: "recomendações", directory: true %}
             </li>
             <li>
-                {% include navLink href="/notes" text="notas" directory = true %}
+                {% include navLink with href: "/notes", text: "notas", directory: true %}
             </li>
             <li>
-                {% include navLink href="/apresentacoes" text="apresentações" directory = true %}
+                {% include navLink with href: "/apresentacoes", text: "apresentações", directory: true %}
             </li>
             <li>
-                {% include navLink href="/blogroll" text="blogroll" %}
+                {% include navLink with href: "/blogroll", text: "blogroll" %}
             </li>
             <li>
-                {% include navLink href="/work" text="trabalho" %}
+                {% include navLink with href: "/work", text: "trabalho" %}
             </li>
         </ul>
     </nav>

@@ -1,14 +1,7 @@
-{% assign href = include.href %}
-{% assign text = include.text %}
-{% assign exact = include.exact %}
-{% assign directory = include.directory %}
-
-{% assign exactCurrent = href == page.url %}
-{% assign nonExactCurrent = page.url contains href %}
 <a
-    {% if exact != true and nonExactCurrent or exactCurrent %}class="current"{% endif %}
-    {% if exactCurrent %}aria-current="page"{% endif %}
-    {% if directory and nonExactCurrent and exactCurrent != true %}rel="directory"{% endif %}
+    {% if exact != true and page.url contains href or href == page.url %}class="current"{% endif %}
+    {% if href == page.url %}aria-current="page"{% endif %}
+    {% if directory and page.url contains href and href == page.url != true %}rel="directory"{% endif %}
     href="{{ href }}"
 >
     {{ text }}
