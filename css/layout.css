@@ -47,14 +47,14 @@ body[data-theme="light"] {
 @media (prefers-color-scheme: dark) {
 	body[data-theme="auto"] {
 		--textColor: rgb(237, 237, 237);
-		--backgroundColor: black;
+		--backgroundColor: #1d1d1d;
 		--themeColor: rgb(182, 63, 236);
 	}
 }
 
 body[data-theme="dark"] {
 	--textColor: rgb(237, 237, 237);
-	--backgroundColor: black;
+	--backgroundColor: #1d1d1d;
 	--themeColor: rgb(182, 63, 236);
 }
 
