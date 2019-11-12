@@ -112,6 +112,7 @@ module.exports = function(eleventyConfig) {
 		}),
 	);
 	eleventyConfig.addPlugin(rssPlugin);
+	eleventyConfig.addPlugin(require("./plugins/images"));
 	eleventyConfig.addPlugin(nestingTocPlugin, { headingText: "Índice" });
 	eleventyConfig.addPlugin(eleventyPluginReadingTimePlugin);
 
