@@ -146,17 +146,10 @@ blockquote {
 	font-size: inherit;
 	line-height: inherit;
 	margin: 0;
-	padding: var(--s0) var(--s2);
-}
-
-blockquote > *:last-child::after,
-blockquote > *:first-child::before {
-	content: '"';
-	color: var(--themeColor);
-	font-size: var(--s1);
-	display: inline;
-	font-weight: bold;
-	line-height: 0.7;
+	padding-top: var(--s-1);
+	padding-bottom: var(--s-1);
+	padding-left: var(--s0);
+	border-inline-start: var(--s-1) solid var(--themeColor);
 }
 
 blockquote > * {
@@ -171,23 +164,9 @@ blockquote > :last-child {
 	margin-bottom: 0;
 }
 
-blockquote > :first-child:last-child {
-	text-align: center;
-}
-
-blockquote > *:last-child::after {
-	content: close-quote;
-}
-
-blockquote > *:first-child::before {
-	content: open-quote;
-}
-
 blockquote blockquote {
 	margin: 0;
 	padding: 0;
-	padding-left: var(--s1);
-	border-left: var(--s-1) solid var(--themeColor);
 }
 
 blockquote blockquote > :first-child:last-child {

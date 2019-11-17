@@ -7,3 +7,7 @@ main.collection .entry-list > li + li {
 main.collection .entry-list > li > article section :first-child {
 	margin-top: 0;
 }
+
+article header > * + ::before {
+	content: " – ";
+}
