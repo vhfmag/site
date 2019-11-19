@@ -47,7 +47,7 @@ section.half-column
 
 section.half-column
 	h2 Blogroll
-	ul.post-list
+	ul.post-list.columns
 		- for (const link of blogroll.slice(0, 10))
 			li
 				h3: a(href=link.url)= link.name
