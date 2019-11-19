@@ -106,8 +106,8 @@ h6 :any-link {
 :any-link {
 	color: var(--textColor);
 	font-weight: bolder;
-	text-decoration: none;
-	border-bottom: 2px solid var(--themeColor);
+	text-decoration-line: underline;
+	text-decoration-thickness: from-font;
 }
 
 nav :any-link {
