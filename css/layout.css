@@ -178,12 +178,6 @@ blockquote blockquote::before {
 	display: none;
 }
 
-main {
-	--main-max-width: 70ch;
-	max-width: var(--main-max-width);
-	font-size: calc(1em + 0.15vw);
-}
-
 p {
 	text-align: justify;
 }
@@ -223,6 +217,12 @@ body {
 ul,
 ol {
 	padding-left: var(--s0);
+}
+
+main {
+	--main-max-width: 70ch;
+	max-width: var(--main-max-width);
+	font-size: calc(1em + 0.15vw);
 }
 
 @media (max-width: 800px) {

@@ -227,3 +227,19 @@ main.entry .webmentions .author-photos img {
 		clear: left;
 	}
 }
+
+pre[class*="language-"] {
+	max-width: 100%;
+}
+
+main > article {
+	max-width: calc(
+		100vw - 2 * var(--root-border-width) - 4 * var(--root-padding) - var(--sidebar-width)
+	);
+}
+
+@media (max-width: 800px) {
+	main > article {
+		max-width: calc(100vw - var(--root-border-width) * 2 - 2 * var(--root-padding));
+	}
+}
