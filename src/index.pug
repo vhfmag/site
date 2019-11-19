@@ -8,6 +8,14 @@ mainClass: home
 section.half-column
 	h2 Do que eu gosto
 	ul.inline-list
+		li Antirracismo
+		li feminismo
+		li anti-homofobia
+		li antitransfobia
+		li decolonialismo
+		li reparação histórica
+		li #[a(href="https://pt.wikipedia.org/wiki/Decrescimento_(economia)") decrescimento econômico]
+		li veganismo (quem sabe um dia)
 		li CSS
 		li HTML semântico
 		li Javascript
@@ -18,10 +26,6 @@ section.half-column
 		li sistemas de tipo
 		li humanas
 		li ecoturismo
-		li veganismo (quem sabe um dia)
-		li direitos de minorias
-		li reparação histórica
-		li: a(href="https://pt.wikipedia.org/wiki/Decrescimento_(economia)") decrescimento econômico
 
 section.half-column
 	h2 Como esse site foi feito
@@ -48,8 +52,8 @@ section.half-column
 section.half-column
 	h2 Blogroll
 	ul.post-list.columns
-		- for (const link of blogroll.slice(0, 10))
-			li
+		- for (const link of blogroll.filter(b => !b.hide))
+			li(title=link.description && link.description.replace(/<[^>]+>([^<]*)<\/[^>]+>/g, "$1"))
 				h3: a(href=link.url)= link.name
 
 section.half-column.row-3

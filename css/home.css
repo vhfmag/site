@@ -53,7 +53,7 @@ main.home .post-list li {
 
 @supports (display: flow-root list-item) {
 	main.home .post-list.columns {
-		column-width: 200px;
+		column-width: 20ch;
 	}
 
 	main.home .post-list li {
