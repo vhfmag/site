@@ -25,8 +25,10 @@ pagination:
 
 	<section>{{ entry.templateContent | safe }}</section>
 	<header>
-        — <a class="u-url" href="{{ entry.url }}">
+    <span>
+			<a class="u-url" href="{{ entry.url }}">Nota</a>
 			{% if entry.data.date %}
+				publicada em 
 				<time
                     itemprop="datePublished dateModified pubdate"
                     class="dt-published"
@@ -35,7 +37,7 @@ pagination:
 					{{ entry.data.date | formatDateTime }}
 				</time>
 			{% endif %}
-		</a>
+		</span>
 		{{ wmDescriptions(entry.data.links) }}
 
 	</header>
