@@ -8,7 +8,7 @@ syndicationLinks:
 
 ---
 
-Post de [Venkatesh Rao](https://www.ribbonfarm.com/author/admin/) do [Ribbonfarm](https://www.ribbonfarm.com) sobre hiperlinks e como eles tornam a web uma mídia à parte, e seus efeitos sobre retórica e consumo de conteúdo, e sobre como cada navegação na Web é um livro infinito sem começo nem fim.
+Post de [Venkatesh Rao](https://www.ribbonfarm.com/author/admin/) do [Ribbonfarm](https://www.ribbonfarm.com) sobre hiperlinks e como eles tornam a web uma mídia à parte, e seus efeitos sobre retórica e consumo de conteúdo, e sobre como cada navegação é um livro infinito sem começo nem fim.
 
 ---
 
