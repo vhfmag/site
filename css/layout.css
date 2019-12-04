@@ -39,23 +39,23 @@ h6 {
 body,
 body[data-theme="auto"],
 body[data-theme="light"] {
-	--textColor: black;
-	--backgroundColor: rgb(237, 237, 237);
-	--themeColor: rgb(153, 51, 200);
+	--textColor: hsl(0, 0%, 0%);
+	--backgroundColor: hsl(0, 0%, 93%);
+	--themeColor: hsl(281, 59%, 49%);
 }
 
 @media (prefers-color-scheme: dark) {
 	body[data-theme="auto"] {
-		--textColor: rgb(237, 237, 237);
-		--backgroundColor: #1d1d1d;
-		--themeColor: rgb(182, 63, 236);
+		--textColor: hsl(0, 0%, 93%);
+		--backgroundColor: hsl(0, 0%, 10%);
+		--themeColor: hsl(281, 82%, 65%);
 	}
 }
 
 body[data-theme="dark"] {
-	--textColor: rgb(237, 237, 237);
-	--backgroundColor: #1d1d1d;
-	--themeColor: rgb(182, 63, 236);
+	--textColor: hsl(0, 0%, 93%);
+	--backgroundColor: hsl(0, 0%, 10%);
+	--themeColor: hsl(281, 82%, 65%);
 }
 
 body,
