@@ -47,15 +47,15 @@ body[data-theme="light"] {
 @media (prefers-color-scheme: dark) {
 	body[data-theme="auto"] {
 		--textColor: hsl(0, 0%, 93%);
-		--backgroundColor: hsl(0, 0%, 10%);
-		--themeColor: hsl(281, 82%, 65%);
+		--backgroundColor: #27292d;
+		--themeColor: hsl(281, 82%, 70%);
 	}
 }
 
 body[data-theme="dark"] {
 	--textColor: hsl(0, 0%, 93%);
-	--backgroundColor: hsl(0, 0%, 10%);
-	--themeColor: hsl(281, 82%, 65%);
+	--backgroundColor: #27292d;
+	--themeColor: hsl(281, 82%, 70%);
 }
 
 body,
