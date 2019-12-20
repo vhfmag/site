@@ -45,17 +45,7 @@ ogtype: website
 
         <link rel="shortcut icon" href="/icons/icon-48x48.png"/>
 
-        <script>
-            if ("serviceWorker" in navigator) 
-                navigator
-                    .serviceWorker
-                    .getRegistrations()
-                    .then(sws => Promise.all(sws.map(sw => sw.unregister())))
-                /*.register("/service-worker.js")
-                    .then(reg => {
-                        reg.addEventListener('updatefound', () => reg.update());
-                    });*/
-        </script>
+        <script src="/js/sw-register.js" defer></script>
 
         <!-- SEO! -->
         {% seo %}
