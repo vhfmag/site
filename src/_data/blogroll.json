@@ -1,5 +1,29 @@
 [
 	{
+		"url": "https://wiki.opensourceecology.org/wiki/Open_Source_Ecology",
+		"name": "Open Source Ecology",
+		"description": "Com a tagline <q><i lang='en'>open-sourced blueprints for civilization</i></q>, o principal objetivo atual desse projeto é completar o <i lang='en'>Global Village Construction Set</i>, um conjunto de 50 máquinas vistas como essenciais para a vida moderna que inclui tratores, fornos de pão e criadores de circuitos elétricos",
+		"type": "<i lang='en'>Open source everything</i>"
+	},
+	{
+		"url": "https://openstructures.net/",
+		"name": "OpenStructures",
+		"description": "<q><i lang='en'>OpenStructures is an exploration on open modular construction where anyone designs for everyone on the basis of one shared grid. OS generates parts that are widely interchangeable, objects that allow infinite adaption and repair, and a more sustainably built environment. OS is about imagining solutions together at a moment in time in which resources are becoming increasingly scarce and change is the new status quo, in which everybody is connected to everybody and everything can be produced everywhere.</i></q>",
+		"type": "<i lang='en'>Open source everything</i>"
+	},
+	{
+		"url": "https://glitch.com/",
+		"name": "Glitch",
+		"description": "<q><i lang='en'>Presto, the web is creative again. Glitch is three things: 1. A simple tool for creating web apps; 2. A friendly, creative community; 3. A different kind of company.</i></q>",
+		"type": "Inovações na web como mídia"
+	},
+	{
+		"url": "https://observablehq.com/",
+		"name": "ObservableHQ",
+		"description": "<i lang='en'>Notebooks</i> no estilo Jupyter, mas na web. Uma plataforma rica e interativa para explorar dados em tempo real, ensinar e aprender.",
+		"type": "Inovações na web como mídia"
+	},
+	{
 		"url": "https://roarmag.org/",
 		"name": "ROAR Magazine",
 		"description": "<i lang='en'>ROAR is an online magazine of the radical imagination, providing grassroots perspectives from the front-lines of the global struggle for real democracy.</i>",
@@ -14,7 +38,7 @@
 	{
 		"url": "https://logicmag.io/",
 		"name": "Logic Magazine",
-		"description": "Revista sobre tecnologia que busca encontrar bom senso no meio dos gritos dos tecnófobos e dos tecnoutópicos e relatar avanços e implicações de tecnologias, ontem, hoje e sempre",
+		"description": "Revista sobre tecnologia que busca encontrar bom senso no meio dos gritos dos tecnófobos e dos tecno-utópicos e relatar avanços e implicações de tecnologias, ontem, hoje e sempre",
 		"type": "Publicações"
 	},
 	{
@@ -110,5 +134,11 @@
 		"description": "Parecido com o VSauce, mas mais focado em experimentos.",
 		"type": "Canais de vídeo",
 		"hide": true
+	},
+	{
+		"url": "http://wikispeed.org/",
+		"name": "WikiSpeed",
+		"description": "Projeto que desenvolve e aprimora carros <i lang='en'>open source</i>",
+		"type": "<i lang='en'>Open source everything</i>"
 	}
 ]

@@ -17,7 +17,7 @@ p Blogs, canais e outros sites que eu acompanho e recomendo
 
 - for (const [type, linksOfType] of Object.entries(linksByType))
 	section
-		h2= type
+		h2 !{type}
 		ul
 			- for (const link of linksOfType)
 				li #[a(href=link.url)= link.name] – !{link.description}
