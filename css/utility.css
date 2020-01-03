@@ -89,6 +89,13 @@
 	margin: 0;
 	padding: 0;
 	text-align: justify;
+
+	--data-separator: ", ";
+	--data-separator-last: " & ";
+}
+
+.inline-list.semicolon {
+	--data-separator: "; ";
 }
 
 .inline-list li {
@@ -96,11 +103,11 @@
 }
 
 .inline-list li + li::before {
-	content: ", ";
+	content: var(--data-separator);
 }
 
 .inline-list li + li:last-child::before {
-	content: " & ";
+	content: var(--data-separator-last);
 }
 
 .inline-list li + li[data-separator]::before {
