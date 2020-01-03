@@ -94,6 +94,10 @@ async function fetchWebMentionsPage(page) {
  * @returns {Promise<GroupedWebMentions>} a promise for a feed
  */
 module.exports = async function fetchWebMentions() {
+	if (process.env.ELEVENTY_ENV === "production") {
+		return {};
+	}
+
 	/**
 	 * @type {WebMention[]}
 	 */
@@ -107,8 +111,11 @@ module.exports = async function fetchWebMentions() {
 		page += 1;
 	} while (lastWms.children.length > 0);
 
-	return _.mapValues(_.groupBy(allWms, l => normalizeTarget(l[l["wm-property"]])), links => ({
-		..._.groupBy(links, l => l["wm-property"]),
-		all: links,
-	}));
+	return _.mapValues(
+		_.groupBy(allWms, l => normalizeTarget(l[l["wm-property"]])),
+		links => ({
+			..._.groupBy(links, l => l["wm-property"]),
+			all: links,
+		}),
+	);
 };
