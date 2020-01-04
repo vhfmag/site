@@ -14,6 +14,10 @@
 	padding: 0;
 }
 
+.main-sidebar nav > ul li + li {
+	margin-top: calc(var(--stack-margin) / 4);
+}
+
 .main-sidebar nav a {
 	font-weight: normal;
 }
@@ -70,7 +74,7 @@ body[data-theme="light"] [data-theme="light"] {
 .main-sidebar .me-elsewhere address {
 	padding: var(--s-2);
 	display: grid;
-	grid-template-columns: repeat(auto-fit, var(--s1));
+	grid-template-columns: repeat(auto-fit, 1.5em);
 	grid-gap: var(--s-1);
 }
 
@@ -129,4 +133,9 @@ body[data-theme="light"] [data-theme="light"] {
 .p-note dl dd {
 	display: inline;
 	margin: 0;
+}
+
+.main-sidebar [role="search"],
+.main-sidebar [role="search"] * {
+	contain: none;
 }
