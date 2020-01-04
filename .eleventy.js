@@ -40,7 +40,7 @@ const flatMap = (arr, fn) =>
 		return acc;
 	}, []);
 
-const IS_DEV = process.env.NODE_ENV === "development";
+const IS_PROD = process.env.NODE_ENV === "production";
 
 function addCollection(eleventyConfig, collectionName, collectionFolders) {
 	eleventyConfig.addCollection(collectionName, collection => {
@@ -48,7 +48,7 @@ function addCollection(eleventyConfig, collectionName, collectionFolders) {
 			...collection.getFilteredByGlob(`./src/${folder}/**/*.md`),
 		]);
 
-		if (!IS_DEV) {
+		if (IS_PROD) {
 			files = files.filter(p => !p.data.draft);
 		}
 
@@ -93,30 +93,30 @@ module.exports = function(eleventyConfig) {
 		img: "icons/icon-512x512.png",
 	});
 	eleventyConfig.addPlugin(excerptPlugin);
-	eleventyConfig.addPlugin(
-		cacheBusterPlugin({
-			outputDirectory: "public",
-			sourceAttributes: { img: "src", video: "src", source: "srcset" },
-			resourceExtensions: [
-				"js",
-				"css",
-				"gif",
-				"jpg",
-				"jpeg",
-				"png",
-				"svg",
-				"webm",
-				"mp4",
-				"webp",
-			],
-		}),
-	);
 	eleventyConfig.addPlugin(rssPlugin);
-	eleventyConfig.addPlugin(require("./plugins/images"));
 	eleventyConfig.addPlugin(nestingTocPlugin, { headingText: "Índice" });
 	eleventyConfig.addPlugin(eleventyPluginReadingTimePlugin);
 
-	if (!IS_DEV) {
+	if (IS_PROD) {
+		eleventyConfig.addPlugin(
+			cacheBusterPlugin({
+				outputDirectory: "public",
+				sourceAttributes: { img: "src", video: "src", source: "srcset" },
+				resourceExtensions: [
+					"js",
+					"css",
+					"gif",
+					"jpg",
+					"jpeg",
+					"png",
+					"svg",
+					"webm",
+					"mp4",
+					"webp",
+				],
+			}),
+		);
+		eleventyConfig.addPlugin(require("./plugins/images"));
 		eleventyConfig.addPlugin(pwaPlugin, {
 			skipWaiting: true,
 			clientsClaim: true,
@@ -161,7 +161,10 @@ module.exports = function(eleventyConfig) {
 	addCollection(
 		eleventyConfig,
 		"tudo",
-		flatMap(collections.filter(x => !x.removeFromAll), x => x.folders),
+		flatMap(
+			collections.filter(x => !x.removeFromAll),
+			x => x.folders,
+		),
 	);
 	for (const collection of collections) {
 		addCollection(eleventyConfig, collection.name, collection.folders);
@@ -188,18 +191,20 @@ module.exports = function(eleventyConfig) {
 
 	eleventyConfig.addAsyncShortcode(
 		"titleFromUrl",
-		memoize(url => {
-			return new Promise((res, rej) => {
-				urlInfoScraper(url, (error, linkInfo) => {
-					if (error || !linkInfo.title) {
-						console.error(error);
-						res(url);
-					} else {
-						res(linkInfo.title);
-					}
-				});
-			});
-		}),
+		IS_PROD
+			? memoize(url => {
+					return new Promise((res, rej) => {
+						urlInfoScraper(url, (error, linkInfo) => {
+							if (error || !linkInfo.title) {
+								console.error(error);
+								res(url);
+							} else {
+								res(linkInfo.title);
+							}
+						});
+					});
+			  })
+			: url => url,
 	);
 
 	eleventyConfig.addFilter("formatDateTime", date => {

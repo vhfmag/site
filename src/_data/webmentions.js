@@ -94,7 +94,7 @@ async function fetchWebMentionsPage(page) {
  * @returns {Promise<GroupedWebMentions>} a promise for a feed
  */
 module.exports = async function fetchWebMentions() {
-	if (process.env.ELEVENTY_ENV === "production") {
+	if (process.env.NODE_ENV !== "production") {
 		return {};
 	}
 
