@@ -102,6 +102,12 @@
 		"type": "Blogs"
 	},
 	{
+		"url": "https://www.kickscondor.com/",
+		"name": "Kicks Condor",
+		"description": "<q><i lang='en'>Leeching and linking in the hypertext kingdom</i></q>",
+		"type": "Blogs"
+	},
+	{
 		"url": "https://ncase.me/",
 		"name": "Nicky Case",
 		"description": "Nicky Case me apresentou ao conceito de <a href='https://explorabl.es/'>explicações exploráveis</a>, projetos que aproveitam todo o potencial da web para elaborar explicações com que se pode brincar e explorar conceitos ❤",
@@ -145,6 +151,12 @@
 		"description": "Canal de Michael Stevens. Nerd, bastante.",
 		"type": "Canais de vídeo",
 		"hide": true
+	},
+	{
+		"url": "https://www.youtube.com/channel/UCNvsIonJdJ5E4EXMa65VYpA",
+		"name": "ContraPoints",
+		"description": "<q><i lang='en'>YouTuber, ex-philosopher. Sex, drugs, and social justice. 🌸</i></q>",
+		"type": "Canais de vídeo"
 	},
 	{
 		"url": "https://www.youtube.com/user/1veritasium",
