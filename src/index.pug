@@ -54,7 +54,7 @@ section.half-column
 	h2 Blogroll
 	ul.post-list.columns
 		- for (const link of blogroll.filter(b => !b.hide))
-			li(title=link.description && link.description.replace(/<[^>]+>([^<]*)<\/[^>]+>/g, "$1"))
+			li(title=link.description && link.description.replace(/<[^>]+>/g, ""))
 				h3: a(href=link.url)= link.name
 
 section.half-column.row-3
