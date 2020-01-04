@@ -16,6 +16,15 @@ main.home section {
 
 main.home section {
 	grid-row: span 6;
+	padding-bottom: 1em;
+}
+
+main.home section > * {
+	margin: 0;
+}
+
+main.home section > * + * {
+	margin-top: 1em !important;
 }
 
 main.home section.main p:first-of-type {
