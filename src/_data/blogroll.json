@@ -8,7 +8,19 @@
 	{
 		"url": "https://openstructures.net/",
 		"name": "OpenStructures",
-		"description": "<q><i lang='en'>OpenStructures is an exploration on open modular construction where anyone designs for everyone on the basis of one shared grid. OS generates parts that are widely interchangeable, objects that allow infinite adaption and repair, and a more sustainably built environment. OS is about imagining solutions together at a moment in time in which resources are becoming increasingly scarce and change is the new status quo, in which everybody is connected to everybody and everything can be produced everywhere.</i></q>",
+		"description": "<q><i lang='en'>OpenStructures is an exploration on open modular construction where anyone designs for everyone on the basis of one shared grid. OS generates parts that are widely interchangeable, objects that allow infinite adaption and repair, and a more sustainably built environment.</i></q>",
+		"type": "<i lang='en'>Open source everything</i>"
+	},
+	{
+		"url": "https://www.wikihouse.cc/About",
+		"name": "WikiHouse",
+		"description": "<q><i lang='en'>WikiHouse is a digitally-manufactured building system. It aims to make it simple for anyone to design, manufacture and assemble beautiful, high-performance homes that are customised to their needs.</i></q>",
+		"type": "<i lang='en'>Open source everything</i>"
+	},
+	{
+		"url": "https://www.opentecture.com/concept",
+		"name": "OpenTecture",
+		"description": "<q><i lang='en'>The OpenStructures standard, created by Thomas Lommee, is a 2x2cm grid standard framework useful for building interoperable physical products. The standard provides a basic unit to be interfaced with, thus, it is a basic unit of interface (you can think of it sorta-like lifesize LEGO™s).</i></q>",
 		"type": "<i lang='en'>Open source everything</i>"
 	},
 	{
