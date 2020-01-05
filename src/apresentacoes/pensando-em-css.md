@@ -1,5 +1,5 @@
 ---
-title: "O valor prático de saber HTML"
+title: "Pensando em CSS"
 link: https://pensando-em-css.netlify.com/
 date: 2020-01-04
 ---
