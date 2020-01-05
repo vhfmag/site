@@ -55,14 +55,8 @@ main.home .post-list {
 	list-style-type: none;
 }
 
-@supports (display: flow-root list-item) {
-	main.home .post-list.columns {
-		column-width: 20ch;
-	}
-
-	main.home .post-list li {
-		display: flow-root list-item;
-	}
+main.home .post-list.columns {
+	column-width: 15ch;
 }
 
 main.home .post-list li h3 {
