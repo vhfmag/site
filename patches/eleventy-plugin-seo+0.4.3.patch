@@ -1,0 +1,18 @@
+diff --git a/node_modules/eleventy-plugin-seo/src/MetaRobots.js b/node_modules/eleventy-plugin-seo/src/MetaRobots.js
+index e0a486c..a0d9cf7 100755
+--- a/node_modules/eleventy-plugin-seo/src/MetaRobots.js
++++ b/node_modules/eleventy-plugin-seo/src/MetaRobots.js
+@@ -9,7 +9,12 @@ class MetaRobots extends BaseTag {
+       "pagination.pageNumber",
+       0
+     );
+-    if (pageNumber > 0) {
++    
++    const draft = scope.contexts[0].draft || false;
++    
++    if (draft) {
++      robots = "noindex,nofollow";
++    } else if (pageNumber > 0) {
+       robots = `no${robots}`;
+     }
+ 
