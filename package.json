@@ -1,7 +1,8 @@
 {
 	"scripts": {
-		"build": "NODE_ENV=production eleventy --passthroughall",
-		"dev": "yarn build --serve",
+		"build": "NODE_ENV=production yarn build-dev",
+		"build-dev": "eleventy --passthroughall",
+		"dev": "yarn build-dev --serve",
 		"postinstall": "patch-package"
 	},
 	"devDependencies": {
