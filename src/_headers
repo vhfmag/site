@@ -38,4 +38,4 @@
   X-XSS-Protection: 1; mode=block
   X-Content-Type-Options: nosniff
   Referrer-Policy: same-origin
-  Content-Security-Policy: default-src 'none'; img-src 'self'; script-src 'self' https://instant.page/3.0.0; style-src 'self'; manifest-src 'self'; base-uri: 'self'; form-action: 'self'
+  Content-Security-Policy: default-src 'self'; img-src 'self'; script-src 'self' https://instant.page/3.0.0; style-src 'self' 'unsafe-inline'; manifest-src 'self'; base-uri: 'self'; form-action: 'self'
