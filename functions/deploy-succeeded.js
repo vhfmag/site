@@ -18,5 +18,6 @@ exports.handler = function sendWebmentions(event, context, callback) {
 	});
 
 	wm.fetch("https://victormagalhaes.codes/feed.all.xml");
+	wm.fetch("https://victormagalhaes.codes/feed.likes.xml");
 	console.log("[sendWebmentions] Fetch triggered!");
 };
