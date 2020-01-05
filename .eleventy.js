@@ -94,7 +94,11 @@ module.exports = function(eleventyConfig) {
 	});
 	eleventyConfig.addPlugin(excerptPlugin);
 	eleventyConfig.addPlugin(rssPlugin);
-	eleventyConfig.addPlugin(nestingTocPlugin, { headingText: "Índice" });
+	eleventyConfig.addPlugin(nestingTocPlugin, {
+		headingText: "Índice",
+		headingTag: "summary",
+		wrapper: "details",
+	});
 	eleventyConfig.addPlugin(eleventyPluginReadingTimePlugin);
 
 	if (IS_PROD) {

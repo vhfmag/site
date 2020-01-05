@@ -185,49 +185,6 @@ main.entry .webmentions .author-photos img {
 	object-position: center;
 }
 
-@media (min-width: 1350px) {
-	main.entry .toc {
-		--entry-float-margin: 20px;
-
-		width: calc(33% - var(--entry-float-margin));
-		min-width: 100px;
-
-		margin: 0;
-		padding: var(--s-1);
-
-		float: right;
-		clear: right;
-
-		position: sticky;
-		top: var(--root-padding);
-
-		background-color: var(--backgroundColor);
-	}
-}
-
-@media (min-width: 600px) {
-	main.entry .float {
-		--entry-float-margin: 20px;
-
-		width: calc(33% - var(--entry-float-margin));
-		min-width: 100px;
-
-		margin: 0;
-		margin-left: var(--entry-float-margin);
-
-		float: right;
-		clear: right;
-	}
-
-	main.entry .float.left {
-		margin-right: var(--entry-float-margin);
-		margin-left: 0;
-
-		float: left;
-		clear: left;
-	}
-}
-
 pre[class*="language-"] {
 	max-width: 100%;
 }
@@ -249,4 +206,19 @@ main > article {
 	main > article {
 		max-width: calc(100vw - var(--root-border-width) * 2 - 2 * var(--root-padding));
 	}
+}
+
+main.entry .toc summary {
+	font-weight: bolder;
+	font-size: 1.2em;
+}
+
+main.entry .toc ol {
+	counter-reset: toc-section;
+	list-style-type: none;
+}
+
+main.entry .toc ol li::before {
+	counter-increment: toc-section;
+	content: counters(toc-section, ".") ". ";
 }

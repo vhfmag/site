@@ -3,6 +3,10 @@ layout: entry
 mainClass: "entry post"
 ---
 
-{{ content | toc | safe }}
+<aside>
+  <nav aria-label="Índice">
+    {{ content | toc | safe }}
+  </nav>
+</aside>
 
 {{ content | safe }}
