@@ -55,11 +55,6 @@ main.home .post-list {
 	list-style-type: none;
 }
 
-main.home .post-list,
-main.home .post-list li {
-	contain: none;
-}
-
 @supports (display: flow-root list-item) {
 	main.home .post-list.columns {
 		column-width: 20ch;

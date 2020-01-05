@@ -134,8 +134,3 @@ body[data-theme="light"] [data-theme="light"] {
 	display: inline;
 	margin: 0;
 }
-
-.main-sidebar [role="search"],
-.main-sidebar [role="search"] * {
-	contain: none;
-}
