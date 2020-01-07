@@ -134,7 +134,7 @@ Antes de introduzir outros conceitos de MobX, gostaria de tornar nossos exemplos
 	src="https://codesandbox.io/embed/vq3p417997?fontsize=12"
 	style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;"
 	sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"
-/>
+></iframe>
 
 Observação: O exemplo acima é editável, dá pra abrir ele no [CodeSandbox](https://codesandbox.io/), fazer mudanças e ver o resultado em tempo real (dá pra experimentar colocar um `console.log` no `computed` `todoCount`, por exemplo, pra verificar se ele de fato só é chamado quando há mudanças)
 
@@ -158,7 +158,7 @@ A seguir, o exemplo anterior, reescrito para usar actions:
 	src="https://codesandbox.io/embed/31ozyr4nv1?fontsize=12"
 	style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;"
 	sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"
-/>
+></iframe>
 
 Como se pode ver, `action` pode ser usado como decorador e como higher-order function, assim como `observer`. Outra novidade é o `configure({ enforceActions: true })`: essa configuração faz o MobX disparar um erro sempre que um estado for mudado de fora de uma `action`.
 
@@ -200,7 +200,7 @@ No começo desse artigo, o MobX foi citado como alternativa para o Redux. No ent
 	src="https://codesandbox.io/embed/7wz19ylm1?fontsize=12"
 	style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;"
 	sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"
-/>
+></iframe>
 
 O Provider é um componente que recebe um objeto cujas chaves são os nomes das stores e cujos valores são as stores (exemplo: `{ taskStore: new TaskStore() }`, onde 'taskStore' é o nome da store `new TaskStore()`). Ele deve estar sempre no topo da hierarquia, acima de qualquer componente que possa usar o estado global. O Provider disponibiliza as stores para todos os componentes abaixo dele através de [contexto](https://reactjs.org/docs/context.html).
 
