@@ -1,6 +1,6 @@
 ---
 links:
-    - types: [reply-to]
+    - types: [in-reply-to]
       link: "https://www.kickscondor.com/hrefhunt/"
 date: 2020-01-28T07:35:00.000-03:00
 ---
