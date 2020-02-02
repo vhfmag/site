@@ -5,7 +5,6 @@ main.entry {
 main.entry > article > header::after {
 	content: "";
 	display: block;
-	max-width: var(--main-max-width);
 	border-bottom: 2px dotted var(--themeColor);
 	padding-top: var(--s0);
 	margin-bottom: var(--s2);
@@ -40,7 +39,6 @@ main.entry .embed-container > embed {
 	height: 100%;
 }
 
-main.entry > article > header > .metadata,
 main.entry .e-content > p,
 main.entry .e-content > ul,
 main.entry .e-content > ol,
