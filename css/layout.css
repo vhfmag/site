@@ -17,7 +17,7 @@ html {
 	html {
 		font-family: "Inter var", system;
 		font-variation-settings: "wght" 250;
-		font-feature-settings: "zero", "frac", "ss01", "ss02";
+		font-feature-settings: "zero", "ss01", "ss02";
 	}
 }
 
@@ -39,6 +39,7 @@ body[data-theme="light"] {
 	--textColor: hsl(0, 0%, 0%);
 	--backgroundColor: hsl(0, 0%, 93%);
 	--themeColor: hsl(281, 59%, 49%);
+	--themeColor60: hsla(281, 59%, 49%, 60%);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -46,6 +47,7 @@ body[data-theme="light"] {
 		--textColor: hsl(0, 0%, 93%);
 		--backgroundColor: #27292d;
 		--themeColor: hsl(281, 82%, 70%);
+		--themeColor60: hsla(281, 82%, 70%, 60%);
 	}
 }
 
@@ -53,6 +55,7 @@ body[data-theme="dark"] {
 	--textColor: hsl(0, 0%, 93%);
 	--backgroundColor: #27292d;
 	--themeColor: hsl(281, 82%, 70%);
+	--themeColor60: hsla(281, 82%, 70%, 60%);
 }
 
 body,
@@ -272,9 +275,19 @@ figure > p:last-child {
 strong,
 b {
 	font-variation-settings: "wght" 700;
+	color: var(--themeColor);
 }
 
 em,
 i {
 	font-style: italic;
+}
+
+::selection {
+	background-color: var(--themeColor60);
+	color: var(--textColor);
+}
+
+figcaption {
+	font-size: 0.9em;
 }
