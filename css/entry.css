@@ -186,7 +186,7 @@ main > article {
 
 .img-caption {
 	display: block;
-	max-width: 70ch;
+	max-width: var(--main-max-width);
 	text-align: center;
 	margin-bottom: 1.6875rem;
 }

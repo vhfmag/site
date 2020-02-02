@@ -22,7 +22,7 @@
         <dl>
             <dt>Pronomes:</dt>
             <dd>
-                <span class="p-x-pronoun-nominative">ele</span>/<span class="p-x-pronoun-possessive">dele</span>.
+                <span class="p-x-pronoun-nominative">ele</span>/<span class="p-x-pronoun-possessive">dele</span>
             </dd>
         </dl>
     </div>
@@ -30,6 +30,12 @@
     <address itemprop="email">
         <a class="u-email" href="mailto:{{ me.email }}">{{ me.email }}</a>
     </address>
+
+    <form action="/search" role="search">
+        <label aria-label="Busque aqui">
+            <input name="q" placeholder="Busque aqui"/>
+        </label>
+    </form>
 
     <nav aria-label="Principal">
         <ul>
@@ -56,14 +62,6 @@
             </li>
         </ul>
     </nav>
-
-    <div role="search">
-        <form action="/search">
-            <label aria-label="Busque aqui">
-                <input name="q" placeholder="Busque aqui"/>
-            </label>
-        </form>
-    </div>
 
     <div class="stack2" style="--stack-margin-2: var(--s-2)">
         <details class="me-elsewhere">

@@ -1,5 +1,6 @@
 .main-sidebar {
 	width: var(--sidebar-width);
+	text-align: right;
 
 	--stack-margin: var(--s0);
 }
@@ -23,7 +24,7 @@
 }
 
 .main-sidebar nav a.current {
-	font-weight: bold;
+	font-variation-settings: "wght" 500;
 }
 
 .theme-selector-wrapper {
@@ -71,11 +72,16 @@ body[data-theme="light"] [data-theme="light"] {
 	background-color: var(--themeColor);
 }
 
+.main-sidebar details ul {
+	text-align: left;
+}
+
 .main-sidebar .me-elsewhere address {
 	padding: var(--s-2);
 	display: grid;
 	grid-template-columns: repeat(auto-fit, 1.5em);
 	grid-gap: var(--s-1);
+	justify-content: flex-end;
 }
 
 .main-sidebar form label {
@@ -83,12 +89,19 @@ body[data-theme="light"] [data-theme="light"] {
 }
 
 .main-sidebar form input {
-	max-width: 100%;
+	width: 100%;
+}
+
+@media (min-width: 800px) {
+	.main-sidebar summary {
+		direction: rtl;
+	}
 }
 
 @media (max-width: 800px) {
 	.main-sidebar {
 		width: unset;
+		text-align: unset;
 	}
 
 	.theme-selector-buttons {

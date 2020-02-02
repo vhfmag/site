@@ -30,7 +30,7 @@ html {
 :root {
 	--root-padding: 2em;
 	--root-border-width: 0;
-	--sidebar-width: 13em;
+	--sidebar-width: 12em;
 	--max-width-mobile: calc(100vw - 2 * var(--root-border-width) - 2 * var(--root-padding));
 	--max-width-desktop: calc(var(--max-width-mobile) - var(--sidebar-width));
 }
@@ -209,7 +209,7 @@ p {
 body {
 	display: grid;
 	grid-template-columns: min-content auto;
-	grid-gap: calc(2 * var(--root-padding));
+	grid-gap: var(--root-padding);
 }
 
 .skip-nav {
@@ -244,7 +244,7 @@ ol {
 }
 
 main {
-	--main-max-width: 70ch;
+	--main-max-width: 60ch;
 	max-width: var(--main-max-width);
 	font-size: calc(1em + 0.15vw);
 }
@@ -261,4 +261,12 @@ main {
 	main {
 		--main-max-width: calc(100vw - 2 * (var(--root-padding) + var(--root-border-width)));
 	}
+}
+
+figure > p:first-child {
+	margin-top: 0;
+}
+
+figure > p:last-child {
+	margin-bottom: 0;
 }
