@@ -1,5 +1,9 @@
 .main-sidebar {
-	width: var(--sidebar-width);
+	max-width: var(--fallback-sidebar-width);
+
+	width: var(--fallback-sidebar-width);
+	width: max-content;
+
 	text-align: right;
 
 	--stack-margin: var(--s0);
@@ -50,13 +54,13 @@
 }
 
 .self_link {
-	font-weight: bold;
+	font-variation-settings: "wght" 600; /* fgpt */
 	text-decoration: none;
 	line-height: 1.1;
 }
 
 .self_link:any-link {
-	font-weight: bold;
+	font-variation-settings: "wght" 350; /* fgpt */
 	text-decoration: none;
 	line-height: 1.1;
 }
@@ -135,7 +139,7 @@ body[data-theme="light"] [data-theme="light"] {
 }
 
 .p-note dl dt {
-	font-weight: bolder;
+	font-variation-settings: "wght" 500; /* fgpt */
 }
 
 .p-note dl dt::after {

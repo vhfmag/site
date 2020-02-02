@@ -124,7 +124,7 @@ main.entry .webmentions .comment article header img {
 
 main.entry .webmentions .comment article header .name {
 	grid-area: title;
-	font-weight: bold;
+	font-variation-settings: "wght" 600; /* fgpt */
 }
 
 main.entry .webmentions .comment article header .metadata {
@@ -176,12 +176,6 @@ pre[class*="language-"] {
 	max-width: 100%;
 }
 
-main > article {
-	max-width: calc(
-		100vw - 2 * var(--root-border-width) - 4 * var(--root-padding) - var(--sidebar-width)
-	);
-}
-
 .img-caption {
 	display: block;
 	max-width: var(--main-max-width);
@@ -196,7 +190,7 @@ main > article {
 }
 
 main.entry .toc summary {
-	font-weight: bolder;
+	font-variation-settings: "wght" 500; /* fgpt */
 	font-size: 1.2em;
 }
 

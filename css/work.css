@@ -55,7 +55,7 @@ main.work .experience {
 
 main.work .experience .kind {
 	color: var(--themeColor);
-	font-weight: bold;
+	font-variation-settings: "wght" 600; /* fgpt */
 	text-transform: uppercase;
 }
 

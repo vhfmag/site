@@ -106,7 +106,7 @@ pre[class*="language-"] {
 
 .token.important,
 .token.bold {
-	font-weight: bold;
+	font-variation-settings: "wght" 600; /* fgpt */
 }
 .token.italic {
 	font-style: italic;
