@@ -1,3 +1,5 @@
+@import url("https://rsms.me/inter/inter.css");
+
 @font-face {
 	font-family: system;
 	font-style: normal;
@@ -5,6 +7,18 @@
 	src: local(".SFNSText-Light"), local(".HelveticaNeueDeskInterface-Light"),
 		local(".LucidaGrandeUI"), local("Ubuntu Light"), local("Segoe UI Light"),
 		local("Roboto-Light"), local("DroidSans"), local("Tahoma");
+}
+
+html {
+	font-family: "Inter", system;
+}
+
+@supports (font-variation-settings: normal) {
+	html {
+		font-family: "Inter var", system;
+		font-variation-settings: "wght" 250;
+		font-feature-settings: "zero", "frac", "ss01", "ss02";
+	}
 }
 
 *,
@@ -15,7 +29,7 @@
 
 :root {
 	--root-padding: 2em;
-	--root-border-width: var(--s-1);
+	--root-border-width: 0;
 	--sidebar-width: 13em;
 	--max-width-mobile: calc(100vw - 2 * var(--root-border-width) - 2 * var(--root-padding));
 	--max-width-desktop: calc(var(--max-width-mobile) - var(--sidebar-width));
@@ -55,7 +69,6 @@ html {
 
 	font-size: 100%;
 	line-height: var(--ratio);
-	font-family: system;
 
 	hyphens: auto;
 	word-break: break-all;
@@ -75,6 +88,32 @@ h4,
 h5,
 h6 {
 	color: var(--themeColor);
+}
+
+@supports (font-variation-settings: normal) {
+	h1 {
+		font-variation-settings: "wght" 800;
+	}
+
+	h2 {
+		font-variation-settings: "wght" 750;
+	}
+
+	h3 {
+		font-variation-settings: "wght" 700;
+	}
+
+	h4 {
+		font-variation-settings: "wght" 650;
+	}
+
+	h5 {
+		font-variation-settings: "wght" 600;
+	}
+
+	h6 {
+		font-variation-settings: "wght" 550;
+	}
 }
 
 h1 :any-link,
