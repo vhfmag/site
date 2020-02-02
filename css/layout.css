@@ -273,8 +273,7 @@ figure > p:last-child {
 
 strong,
 b {
-	/* font-variation-settings: 'wght' 700; */
-	font-weight: bold;
+	font-variation-settings: "wght" 700;
 }
 
 em,
