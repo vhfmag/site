@@ -147,3 +147,11 @@ body[data-theme="light"] [data-theme="light"] {
 	display: inline;
 	margin: 0;
 }
+
+[role="search"] input {
+	border: 1px solid var(--themeColor);
+	background-color: unset;
+	color: var(--textColor);
+	padding: 0.4em;
+	border-radius: 0.2em;
+}
