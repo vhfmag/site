@@ -1,7 +1,7 @@
 ---
 draft: true
 title: "Information Architecture: For the Web and Beyond"
-description: "Um fichamento do livro 'Information Architecture: For the Web and Beyond'"
+description: "Um fichamento do livro 'Information Architecture: For the Web and Beyond' de Jorge Arango, Peter Morville e Louis Rosenfeld"
 customTags: ["Fichamento", "Arquitetura da Informação", "Design"]
 links:
     - types: [bookmark-of]
