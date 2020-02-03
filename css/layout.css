@@ -289,5 +289,6 @@ i {
 }
 
 figcaption {
-	font-size: 0.9em;
+	font-size: 0.85em;
+	opacity: 0.7;
 }

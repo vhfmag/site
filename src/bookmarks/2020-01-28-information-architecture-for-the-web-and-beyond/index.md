@@ -222,3 +222,67 @@ Outra forma de classificar esses componentes e seus derivados é:
     </ul>
   </dd>
 </dl>
+
+## Capítulo 6 - <i lang='en'>Organization Systems</i>
+
+Sistemas de organização podem ser:
+
+<dl>
+<dt>Exatos</dt>
+<dd>Qualquer conteúdo pode ser classficado em exatamente uma categoria, como na ordenação alfabética de uma lista de contatos, na cronológica de um site de notícias e na geográfica de uma busca no Google Maps. O principal problema desse tipo de organização é que, para encontrar um conteúdo, a pessoa precisa saber pelo que está procurando; em outras palavras, ele só atende bem buscas por item conhecido (ex: contatos)</dd>
+
+<dt>Ambíguos</dt>
+<dd>
+
+<figure style="float: right; margin: 0; margin-left: 1em;">
+
+![Navegação por audiência do CERN em 3 de fevereiro de 2020](./assets/cern-audience-nav.png){style="max-width: 150px"}
+
+<figcaption>Navegação por<br>audiência do CERN</figcaption>
+</figure>
+
+Por lidarem com categorias subjetivas, diferentes pessoas com diferentes necessidades de informação poderiam classificar um dado conteúdo em diferentes categorias; além disso, é comum que conteúdos estejam em mais de uma categoria. Exemplos incluem a organização por tipo do supermercado, a organização por tarefa a ser realizada do Microsoft Word, e a organização por público-alvo de sites como o do CERN.
+
+<figure style="margin-left: 0; margin-right: 0">
+
+![Navegação por tarefa do Microsoft Word](./assets/word-nav.png)
+
+<figcaption>Navegação por tarefa do Microsoft Word</figcaption>
+</figure>
+
+</dd>
+</dl>
+
+<dt>Baseados em metáforas</dt>
+<dd>Pense no seu explorador de arquivos: você tem diretórios, pastas e arquivos, uma lixeira, etc.</dd>
+
+<dt>Híbridos</dt>
+<dd>Uma mistura de tipos. Pode confundir o usuário e forçá-lo a navegar para entender onde o conteúdo desejado pode estar.</dd>
+
+### Estruturas de organização
+
+#### Hierarquia (<i lang='en'>top-down</i>)
+
+A hierarquia do seu conteúdo precisa ser planejada de acordo com os três pilares da <abbr title="arquitetura da informação">AI</abbr>: contexto, usuários e conteúdo. Uma hierarquia ampla permite que mais conteúdos sejam acessados com menos cliques, mas precisa de muito espaço para a navegação e pode ter mais categorias do que a maioria dos usuários vão ler. Em compensação, uma hierarquia estreita envolve cliques demais e pode levar o usuário a desistir da busca. Equilíbrio é a chave.
+
+<figure style="margin: auto; max-width: 600px">
+
+![](./assets/broad-shallow-deep-hierarchy.png)
+
+<figcaption>Exemplos de hierarquias rasas e amplas vs profundas e estreitas</figcaption>
+
+</figure>
+
+#### Banco de dados (<i lang='en'>bottom-up</i>)
+
+A estrutura interna de um item inclui seu conteúdo, seus metadados e sua relação com outros conteúdos.
+
+#### Hyperlinks
+
+A estrutura mais poderosa, mais difícil de controlar e mais difícil de tornar consistente.
+
+### Classificação social
+
+Exemplos são (hash)tags, trending topics do Twitter, recomendações de competência do LinkedIn, etc.
+
+## Capítulo 7 - <i lang='en'>Sistemas de rotulagem</i>
