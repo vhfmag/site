@@ -104,7 +104,8 @@ body[data-theme="light"] [data-theme="light"] {
 
 @media (max-width: 800px) {
 	.main-sidebar {
-		width: unset;
+		width: calc(100vw - 2 * var(--root-padding));
+		max-width: unset;
 		text-align: unset;
 	}
 
