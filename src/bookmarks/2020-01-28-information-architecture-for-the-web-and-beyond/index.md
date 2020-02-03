@@ -11,7 +11,7 @@ date: 2020-01-28T07:45:55.920-03:00
 
 <style>
   dt {
-    font-variation-settings: "wght" 600; /* fgpt */
+    font-variation-settings: "wght" 600;
     color: var(--themeColor);
   }
 </style>

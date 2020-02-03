@@ -13,7 +13,7 @@ main.not-found h1 {
 }
 
 main.not-found .big {
-	font-variation-settings: "wght" 600; /* fgpt */
+	font-variation-settings: "wght" 600;
 	font-size: 8em;
 	line-height: 0.8;
 	color: var(--themeColor);

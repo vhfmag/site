@@ -54,13 +54,13 @@
 }
 
 .self_link {
-	font-variation-settings: "wght" 600; /* fgpt */
+	font-variation-settings: "wght" 600;
 	text-decoration: none;
 	line-height: 1.1;
 }
 
 .self_link:any-link {
-	font-variation-settings: "wght" 350; /* fgpt */
+	font-variation-settings: "wght" 350;
 	text-decoration: none;
 	line-height: 1.1;
 }
@@ -139,7 +139,7 @@ body[data-theme="light"] [data-theme="light"] {
 }
 
 .p-note dl dt {
-	font-variation-settings: "wght" 500; /* fgpt */
+	font-variation-settings: "wght" 500;
 }
 
 .p-note dl dt::after {

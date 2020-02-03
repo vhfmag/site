@@ -130,7 +130,7 @@ h6 :any-link {
 
 :any-link {
 	color: var(--textColor);
-	font-variation-settings: "wght" 500; /* fgpt */
+	font-variation-settings: "wght" 500;
 	text-decoration-line: underline;
 	text-decoration-thickness: from-font;
 }
@@ -178,7 +178,7 @@ blockquote {
 }
 
 blockquote > * {
-	font-variation-settings: "wght" 600; /* fgpt */
+	font-variation-settings: "wght" 600;
 }
 
 blockquote > :first-child {

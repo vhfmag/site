@@ -124,7 +124,7 @@ main.entry .webmentions .comment article header img {
 
 main.entry .webmentions .comment article header .name {
 	grid-area: title;
-	font-variation-settings: "wght" 600; /* fgpt */
+	font-variation-settings: "wght" 600;
 }
 
 main.entry .webmentions .comment article header .metadata {
@@ -190,7 +190,7 @@ pre[class*="language-"] {
 }
 
 main.entry .toc summary {
-	font-variation-settings: "wght" 500; /* fgpt */
+	font-variation-settings: "wght" 500;
 	font-size: 1.2em;
 }
 
