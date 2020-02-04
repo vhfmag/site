@@ -285,4 +285,18 @@ A estrutura mais poderosa, mais difícil de controlar e mais difícil de tornar 
 
 Exemplos são (hash)tags, trending topics do Twitter, recomendações de competência do LinkedIn, etc.
 
-## Capítulo 7 - <i lang='en'>Sistemas de rotulagem</i>
+## Capítulo 7 - <i lang='en'>Labelling Systems</i>
+
+<figure style="float: left; max-width: 220px; margin-left: 0">
+
+![](./assets/labelling-starbucks.png)
+
+<figcaption>Navegação global da Starbucks</figcaption>
+
+</figure>
+
+O que você espera encontrar no item <i lang="en">menu</i> da navegação do Starbucks? O cardápio ou um submenu? E no item <i lang='en'>coffehouse</i>? Uma lista das lojas deles? Você estaria certo... mas também encontraria os aplicativos da rede. E no item <i lang='en'>card</i>? É sobre o cartão de fidelidade, cartões de presente ou sobre o cartão de crédito que você registrou quando criou a conta? Evitar essas ambiguidades e facilitar o entendimento da organização do conteúdo são papeis dos **sistemas de rotulagem**.
+
+Alguns dos problemas que encontramos nessa navegação são que alguns rótulos: não representam bem seus conteúdos; não se diferenciam uns dos outros; são jargões e não são bem compreendidos pela população geral; não geram boas impressões; e, por consequência dos anteriores, desperdiçam dinheiro.
+
+Os principais tipos de rótulos são: cabeçalhos; links contextuais; navegação global; e termos de índice (palavras-chave, tags, categorias). Essas categorias não são mutualmente exclusivas.
