@@ -1,0 +1,19 @@
+version: 2
+jobs:
+    build:
+        docker:
+            - image: circleci/ruby:2.4.1-node-browsers
+        working_directory: ~/repo
+        steps:
+            - checkout
+            - run:
+                  name: install dependencies
+                  command: |
+                      npm install
+                      gem install percy-cli
+
+            - run:
+                  name: run tests
+                  command: |
+                      npm run build
+                      percy snapshot public
