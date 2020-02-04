@@ -176,6 +176,10 @@ pre[class*="language-"] {
 	max-width: 100%;
 }
 
+main > article {
+	max-width: calc(100vw - 3 * var(--root-padding) - var(--sidebar-width));
+}
+
 .img-caption {
 	display: block;
 	max-width: var(--main-max-width);
@@ -185,7 +189,7 @@ pre[class*="language-"] {
 
 @media (max-width: 800px) {
 	main > article {
-		max-width: calc(100vw - var(--root-border-width) * 2 - 2 * var(--root-padding));
+		max-width: calc(100vw - 2 * var(--root-padding));
 	}
 }
 
