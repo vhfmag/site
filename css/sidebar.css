@@ -1,8 +1,5 @@
 .main-sidebar {
-	max-width: var(--fallback-sidebar-width);
-
-	width: var(--fallback-sidebar-width);
-	width: max-content;
+	width: var(--sidebar-width);
 
 	text-align: right;
 

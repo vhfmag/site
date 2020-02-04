@@ -30,7 +30,7 @@ html {
 :root {
 	--root-padding: 2em;
 	--root-border-width: 0;
-	--fallback-sidebar-width: 12.04em;
+	--sidebar-width: 21ch;
 }
 
 body,
