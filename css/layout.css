@@ -1,8 +1,7 @@
 /* Font stuff */
 
 @import url("/fonts/inter/inter.css");
-@import url("/fonts/source-serif/source-serif-pro.css");
-@import url("/fonts/source-serif/source-serif-variable.css");
+@import url("/fonts/lora/lora.css");
 
 @font-face {
 	font-family: system;
@@ -23,7 +22,7 @@ h3,
 h4,
 h5,
 h6 {
-	font-family: "Source Serif Pro", system;
+	font-family: "Lora", system;
 }
 
 @supports (font-variation-settings: normal) {
@@ -39,7 +38,7 @@ h6 {
 	h4,
 	h5,
 	h6 {
-		font-family: "Source Serif Variable", system;
+		font-family: "Lora var", system;
 	}
 }
 
@@ -121,27 +120,27 @@ h6 {
 
 @supports (font-variation-settings: normal) {
 	h1 {
-		font-variation-settings: "wght" 800;
-	}
-
-	h2 {
-		font-variation-settings: "wght" 750;
-	}
-
-	h3 {
 		font-variation-settings: "wght" 700;
 	}
 
-	h4 {
+	h2 {
 		font-variation-settings: "wght" 650;
 	}
 
-	h5 {
+	h3 {
 		font-variation-settings: "wght" 600;
 	}
 
-	h6 {
+	h4 {
 		font-variation-settings: "wght" 550;
+	}
+
+	h5 {
+		font-variation-settings: "wght" 500;
+	}
+
+	h6 {
+		font-variation-settings: "wght" 450;
 	}
 }
 
