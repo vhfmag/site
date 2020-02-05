@@ -3,6 +3,7 @@
 	font-weight: 200;
 	font-style: normal;
 	font-stretch: normal;
+	font-display: swap;
 	src: url("./WOFF2/TTF/SourceSerifPro-ExtraLight.ttf.woff2") format("woff2"),
 		url("./WOFF/OTF/SourceSerifPro-ExtraLight.otf.woff") format("woff"),
 		url("./OTF/SourceSerifPro-ExtraLight.otf") format("opentype"),
@@ -14,6 +15,7 @@
 	font-weight: 200;
 	font-style: italic;
 	font-stretch: normal;
+	font-display: swap;
 	src: url("./WOFF2/TTF/SourceSerifPro-ExtraLightIt.ttf.woff2") format("woff2"),
 		url("./WOFF/OTF/SourceSerifPro-ExtraLightIt.otf.woff") format("woff"),
 		url("./OTF/SourceSerifPro-ExtraLightIt.otf") format("opentype"),
@@ -25,6 +27,7 @@
 	font-weight: 300;
 	font-style: normal;
 	font-stretch: normal;
+	font-display: swap;
 	src: url("./WOFF2/TTF/SourceSerifPro-Light.ttf.woff2") format("woff2"),
 		url("./WOFF/OTF/SourceSerifPro-Light.otf.woff") format("woff"),
 		url("./OTF/SourceSerifPro-Light.otf") format("opentype"),
@@ -36,6 +39,7 @@
 	font-weight: 300;
 	font-style: italic;
 	font-stretch: normal;
+	font-display: swap;
 	src: url("./WOFF2/TTF/SourceSerifPro-LightIt.ttf.woff2") format("woff2"),
 		url("./WOFF/OTF/SourceSerifPro-LightIt.otf.woff") format("woff"),
 		url("./OTF/SourceSerifPro-LightIt.otf") format("opentype"),
@@ -47,6 +51,7 @@
 	font-weight: 400;
 	font-style: normal;
 	font-stretch: normal;
+	font-display: swap;
 	src: url("./WOFF2/TTF/SourceSerifPro-Regular.ttf.woff2") format("woff2"),
 		url("./WOFF/OTF/SourceSerifPro-Regular.otf.woff") format("woff"),
 		url("./OTF/SourceSerifPro-Regular.otf") format("opentype"),
@@ -58,6 +63,7 @@
 	font-weight: 400;
 	font-style: italic;
 	font-stretch: normal;
+	font-display: swap;
 	src: url("./WOFF2/TTF/SourceSerifPro-It.ttf.woff2") format("woff2"),
 		url("./WOFF/OTF/SourceSerifPro-It.otf.woff") format("woff"),
 		url("./OTF/SourceSerifPro-It.otf") format("opentype"),
@@ -69,6 +75,7 @@
 	font-weight: 600;
 	font-style: normal;
 	font-stretch: normal;
+	font-display: swap;
 	src: url("./WOFF2/TTF/SourceSerifPro-Semibold.ttf.woff2") format("woff2"),
 		url("./WOFF/OTF/SourceSerifPro-Semibold.otf.woff") format("woff"),
 		url("./OTF/SourceSerifPro-Semibold.otf") format("opentype"),
@@ -80,6 +87,7 @@
 	font-weight: 600;
 	font-style: italic;
 	font-stretch: normal;
+	font-display: swap;
 	src: url("./WOFF2/TTF/SourceSerifPro-SemiboldIt.ttf.woff2") format("woff2"),
 		url("./WOFF/OTF/SourceSerifPro-SemiboldIt.otf.woff") format("woff"),
 		url("./OTF/SourceSerifPro-SemiboldIt.otf") format("opentype"),
@@ -91,6 +99,7 @@
 	font-weight: 700;
 	font-style: normal;
 	font-stretch: normal;
+	font-display: swap;
 	src: url("./WOFF2/TTF/SourceSerifPro-Bold.ttf.woff2") format("woff2"),
 		url("./WOFF/OTF/SourceSerifPro-Bold.otf.woff") format("woff"),
 		url("./OTF/SourceSerifPro-Bold.otf") format("opentype"),
@@ -102,6 +111,7 @@
 	font-weight: 700;
 	font-style: italic;
 	font-stretch: normal;
+	font-display: swap;
 	src: url("./WOFF2/TTF/SourceSerifPro-BoldIt.ttf.woff2") format("woff2"),
 		url("./WOFF/OTF/SourceSerifPro-BoldIt.otf.woff") format("woff"),
 		url("./OTF/SourceSerifPro-BoldIt.otf") format("opentype"),
@@ -113,6 +123,7 @@
 	font-weight: 900;
 	font-style: normal;
 	font-stretch: normal;
+	font-display: swap;
 	src: url("./WOFF2/TTF/SourceSerifPro-Black.ttf.woff2") format("woff2"),
 		url("./WOFF/OTF/SourceSerifPro-Black.otf.woff") format("woff"),
 		url("./OTF/SourceSerifPro-Black.otf") format("opentype"),
@@ -124,6 +135,7 @@
 	font-weight: 900;
 	font-style: italic;
 	font-stretch: normal;
+	font-display: swap;
 	src: url("./WOFF2/TTF/SourceSerifPro-BlackIt.ttf.woff2") format("woff2"),
 		url("./WOFF/OTF/SourceSerifPro-BlackIt.otf.woff") format("woff"),
 		url("./OTF/SourceSerifPro-BlackIt.otf") format("opentype"),
