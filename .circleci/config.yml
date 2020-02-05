@@ -7,12 +7,26 @@ jobs:
         steps:
             - checkout
             - run:
-                  name: install dependencies
+                  name: install dependencies and build website
                   command: |
                       npm install
-
+                      npm run build
+    test:
+        docker:
+            - image: percyio/agent
+        steps:
             - run:
                   name: run tests
-                  command: |
-                      npm run build
-                      npx percy snapshot public --ignore-files "/bookmarks/**"
+                  command: npx percy snapshot public --ignore-files "/bookmarks/**"
+
+workflows:
+    build-and-test:
+        jobs:
+            - build:
+                  filters:
+                      branches:
+                          only:
+                              - master
+            - test:
+                  requires:
+                      - build
