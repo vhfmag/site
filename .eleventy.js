@@ -61,9 +61,10 @@ function addCollection(eleventyConfig, collectionName, collectionFolders) {
 module.exports = function(eleventyConfig) {
 	eleventyConfig.addAsyncShortcode = addAsyncShortcode;
 
-	eleventyConfig.addPassthroughCopy("css");
 	eleventyConfig.addPassthroughCopy("js");
+	eleventyConfig.addPassthroughCopy("css");
 	eleventyConfig.addPassthroughCopy("icons");
+	eleventyConfig.addPassthroughCopy("fonts");
 	eleventyConfig.addPassthroughCopy("uploads");
 	eleventyConfig.addPassthroughCopy(".well-known");
 
