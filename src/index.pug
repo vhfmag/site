@@ -62,10 +62,10 @@ section.half-column
 
 section.half-column
 	h2 Blogroll
-	ul.post-list.columns
+	ul.post-list.columns.blogroll
 		- for (const link of blogroll.filter(b => !b.hide))
 			li(title=link.description && link.description.replace(/<[^>]+>/g, ""))
-				h3: a(href=link.url)= link.name
+				a(href=link.url)= link.name
 
 section.half-column.row-3
 	h2 No fone

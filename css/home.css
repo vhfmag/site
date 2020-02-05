@@ -78,3 +78,7 @@ main.home h2 {
 	padding-bottom: var(--s-3);
 	margin-top: var(--heading-margin);
 }
+
+main.home ul.blogroll li :any-link {
+	color: var(--themeColor);
+}
