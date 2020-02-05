@@ -3,6 +3,7 @@ const fetch = require("make-fetch-happen").defaults({ cacheManager: "./.wm-cache
 const _ = require("lodash");
 
 const apiBase = "https://webmention.io/api/mentions.jf2";
+const shouldSkipWebmentions = process.env.SKIP_WEBMENTIONIO;
 const token = process.env.WEBMENTIONIO_TOKEN;
 
 /**
@@ -73,7 +74,7 @@ function normalizeTarget(target) {
  */
 async function fetchWebMentionsPage(page) {
 	if (!token) {
-		throw new Error("Environment variable isn't available");
+		throw new Error("Environment variable WEBMENTIONIO_TOKEN isn't available");
 	}
 
 	const url = `${apiBase}?domain=victormagalhaes.codes&token=${token}&page=${page}`;
@@ -94,7 +95,7 @@ async function fetchWebMentionsPage(page) {
  * @returns {Promise<GroupedWebMentions>} a promise for a feed
  */
 module.exports = async function fetchWebMentions() {
-	if (process.env.NODE_ENV !== "production") {
+	if (process.env.NODE_ENV !== "production" || shouldSkipWebmentions) {
 		return {};
 	}
 
