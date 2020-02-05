@@ -16,4 +16,4 @@ jobs:
                   name: run tests
                   command: |
                       npm run build
-                      percy snapshot public -i="/bookmarks/**"
+                      percy snapshot public -i "/bookmarks/**"
