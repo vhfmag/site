@@ -10,10 +10,9 @@ jobs:
                   name: install dependencies
                   command: |
                       npm install
-                      gem install percy-cli
 
             - run:
                   name: run tests
                   command: |
                       npm run build
-                      percy snapshot public -i "/bookmarks/**"
+                      npx percy snapshot public --ignore-files "/bookmarks/**"
