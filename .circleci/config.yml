@@ -17,4 +17,4 @@ jobs:
                       npm run build
             - run:
                   name: run tests
-                  command: npx percy snapshot public --ignore-files "/bookmarks/**"
+                  command: npx percy snapshot public --ignore-files "bookmarks/**"
