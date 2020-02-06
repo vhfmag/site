@@ -15,7 +15,7 @@ const mdPluginFootnote = require("markdown-it-footnote");
 const mdPluginCodesandboxEmbed = require("markdown-it-codesandbox-embed");
 
 const urlInfoScraper = require("url-info-scraper");
-const { memoize } = require("lodash");
+const { memoize, deburr } = require("lodash");
 
 const wmTypeStrings = require("./src/_data/wmType.json");
 const { title, description } = require("./src/_data/site.json");
@@ -80,7 +80,18 @@ module.exports = function(eleventyConfig) {
 			.use(mdPluginPrism, {})
 			.use(mdPluginAttrs, {})
 			.use(mdPluginAnchor, {
-				/*  permalink: true, permalinkBefore: false, permalinkSymbol: "§"  */
+				permalink: true,
+				permalinkBefore: false,
+				permalinkSymbol: "🔗",
+				slugify: s =>
+					encodeURIComponent(
+						deburr(
+							String(s)
+								.trim()
+								.toLowerCase()
+								.replace(/\s+/g, "-"),
+						),
+					),
 			})
 			.use(mdPluginFootnote, {}),
 	);

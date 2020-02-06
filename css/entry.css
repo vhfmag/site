@@ -97,6 +97,7 @@ main.entry .header-anchor {
 	margin-left: var(--s-2);
 	opacity: 0;
 	transition: opacity ease 0.25s;
+	text-decoration: none;
 }
 
 main.entry .webmentions .comment > ul > li + li {
