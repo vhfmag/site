@@ -211,6 +211,6 @@ main.entry .toc ol li::before {
 
 main.entry article header [itemprop="alternativeHeadline"],
 main.entry article header .metadata {
-	font-size: 0.95em;
+	font-size: 0.9em;
 	opacity: 0.8;
 }

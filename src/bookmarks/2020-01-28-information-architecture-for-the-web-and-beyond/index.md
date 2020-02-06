@@ -6,7 +6,7 @@ customTags: ["Fichamento", "Arquitetura da Informação", "Design"]
 links:
     - types: [bookmark-of]
       link: "https://www.oreilly.com/library/view/information-architecture-4th/9781491913529/"
-date: 2020-01-28T07:45:55.920-03:00
+date: 2020-02-06T07:45:55.920-03:00
 ---
 
 <style>
@@ -299,4 +299,105 @@ O que você espera encontrar no item <i lang="en">menu</i> da navegação do Sta
 
 Alguns dos problemas que encontramos nessa navegação são que alguns rótulos: não representam bem seus conteúdos; não se diferenciam uns dos outros; são jargões e não são bem compreendidos pela população geral; não geram boas impressões; e, por consequência dos anteriores, desperdiçam dinheiro.
 
-Os principais tipos de rótulos são: cabeçalhos; links contextuais; navegação global; e termos de índice (palavras-chave, tags, categorias). Essas categorias não são mutualmente exclusivas.
+Os principais tipos de rótulos são:
+
+<dl>
+
+<dt>Links contextuais</dt>
+<dd>
+
+Rótulos que descrevem hiperlinks no corpo do texto e tem ele como contexto descritivo. Eles são a base da Web e são fáceis de criar, mas não costumam ser criados de forma sistematizada e por isso podem ser muito inconsistentes. Podemos verificar se o rótulo de um link contextual é representativo nos perguntando <q>o usuário espera ser para que tipo de informação levado nesse contexto?</q>.
+
+</dd>
+
+<dt>Cabeçalhos</dt>
+<dd>
+
+Cabeçalhos tem uma hierarquia inerente, comunicada através de aspectos do design: estilo, tamanho fonte, cores, etc. Essa hierarquia precisa estar devidamente representada nos rótulos destes cabeçalhos, sem misturar categorias diferentes, ou estes serão bastante confusos.
+
+</dd>
+
+<dt>Navegação global</dt>
+<dd>
+
+Sendo um dos menores vocabulários e estando em praticamente todas as páginas, esses rótulos são os que precisam de maior atenção, pesquisa e consistência.
+
+</dd>
+
+<dt>Termos de índice (palavras-chave, tags, categorias)</dt>
+<dd>
+
+Essenciais para <i lang='en'><abbr title="search engine optimization">SEO</abbr></i>, esses rótulos também facilitam a navegação interna do usuário em seu produto digital.
+
+</dd>
+
+</dl>
+
+Algumas recomendações básicas são:
+
+-   Mantenha o escopo tão estreito quanto possível
+-   Rotulagem é mais fácil quando seu conteúdo, contexto e público-alvo são simples e com foco claro
+-   Desenvolva sistemas de rotulagem, não rótulos individuais
+
+Algumas possíveis fontes de rótulo são:
+
+-   A hierarquia ou ontologia atual de seus conteúdos
+-   Análise da competição
+-   Thesauri e vocabulários controlados
+-   Diretamente pelos usuários
+    -   [<i lang='en'>Card sorting</i>](https://www.toptal.com/designers/ia/card-sorting)
+    -   <i lang='en'>Free listing</i>
+-   Indiretamente pelos usuários
+    -   Análise de logs de busca
+
+## Capítulo 8 - <i lang='en'>Navigation Systems</i>
+
+> In digital information environments, navigation is rarely a life or death issue. However, getting lost in a large website can be confusing and frustrating. While a well-designed taxonomy may reduce the chances that users will become lost, complementary navigation tools are often needed to provide context and to allow for greater flexibility. Structure and organization are about building rooms. **Navigation design is about adding doors and windows.**
+
+Os principais tipos de navegação são:
+
+### Navegação primária ou embutida
+
+<figure style="margin-left: auto; margin-right: auto; max-width: 500px">
+
+![](assets/nav-map.png)
+
+<figcaption>Os tipos de navegação embutida: global, local e contextual</figcaption>
+
+</figure>
+
+<dl>
+
+<dt>Global<dt>
+<dd></dd>
+
+<dt>Local<dt>
+<dd></dd>
+
+<dt>Contextual<dt>
+<dd></dd>
+
+</dl>
+
+### Navegação suplementar
+
+<figure style="margin-left: auto; margin-right: auto; max-width: 500px">
+
+![](assets/supplemental-nav.png)
+
+<figcaption>Os principais tipos de navegação suplementar: mapas de site, índices e guias</figcaption>
+
+</figure>
+
+<dl>
+
+<dt>Mapas do site<dt>
+<dd></dd>
+
+<dt>Índices<dt>
+<dd></dd>
+
+<dt>Guias<dt>
+<dd></dd>
+
+</dl>
