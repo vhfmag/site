@@ -12,8 +12,8 @@
     class="main-sidebar stack h-card"
 >
     <a class="u-url u-uid self_link" rel="home" href="/" itemref="mdata-blog mdata-author" itemprop="url identifier">
-        Olá 👋🏾, eu sou<br/>
-        <{{nameTag}} class="p-name" itemprop="name">Victor<br>Magalhães</{{nameTag}}>
+        <span class="desktop-only">Olá 👋🏾, eu sou<br/></span>
+        <{{nameTag}} class="p-name" itemprop="name">Victor<br class="desktop-only"> Magalhães</{{nameTag}}>
     </a>
 
     <div hidden>
@@ -23,11 +23,11 @@
         </picture>
     </div>
 
-    <div>
+    <div class="inline-mobile">
         <span class="p-x-pronoun-nominative">ele</span>/<span class="p-x-pronoun-possessive">dele</span>
     </div>
 
-    <address itemprop="email">
+    <address class="inline-mobile" itemprop="email">
         <a class="u-email" href="mailto:{{ me.email }}">{{ me.email }}</a>
     </address>
 
@@ -63,7 +63,7 @@
         </ul>
     </nav>
 
-    <div class="stack2" style="--stack-margin-2: var(--s-2)">
+    <div class="stack2 desktop-only" style="--stack-margin-2: var(--s-2)">
         <details class="me-elsewhere">
             <summary>Mídias sociais</summary>
             <address>

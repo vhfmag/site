@@ -278,6 +278,10 @@ main {
 }
 
 @media (max-width: 800px) {
+	.desktop-only {
+		display: none;
+	}
+
 	body {
 		grid-template-columns: 1fr;
 		grid-template-rows: min-content auto;
