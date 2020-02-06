@@ -208,3 +208,9 @@ main.entry .toc ol li::before {
 	counter-increment: toc-section;
 	content: counters(toc-section, ".") ". ";
 }
+
+main.entry article header [itemprop="alternativeHeadline"],
+main.entry article header .metadata {
+	font-size: 0.95em;
+	opacity: 0.8;
+}

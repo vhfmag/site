@@ -21,7 +21,8 @@ h2,
 h3,
 h4,
 h5,
-h6 {
+h6,
+dt {
 	font-family: "Lora", system;
 }
 
@@ -37,7 +38,8 @@ h6 {
 	h3,
 	h4,
 	h5,
-	h6 {
+	h6,
+	dt {
 		font-family: "Lora var", system;
 	}
 }
