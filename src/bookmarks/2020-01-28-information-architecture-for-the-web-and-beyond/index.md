@@ -14,6 +14,10 @@ date: 2020-02-06T07:45:55.920-03:00
     font-variation-settings: "wght" 600;
     color: var(--themeColor);
   }
+
+  h1, h2, h3, h4, h5, h6 {
+    clear: both;
+  }
 </style>
 
 Eu sempre li rápido, a ponto de esquecer o que lia. Pra tentar tirar melhor proveito da boa fase de leitura em que eu estou, pensei em escrever algo como fichamentos dos livros, e esse é o primeiro 🤓.
@@ -254,7 +258,7 @@ Por lidarem com categorias subjetivas, diferentes pessoas com diferentes necessi
 </dl>
 
 <dt>Baseados em metáforas</dt>
-<dd>Pense no seu explorador de arquivos: você tem diretórios, pastas e arquivos, uma lixeira, etc.</dd>
+<dd>Pense no seu explorador de arquivos: você tem diretórios, pastas e arquivos, uma lixeira, etc: todas metáforas associadas a coisas que se pode encontrar em um escritório.</dd>
 
 <dt>Híbridos</dt>
 <dd>Uma mistura de tipos. Pode confundir o usuário e forçá-lo a navegar para entender onde o conteúdo desejado pode estar.</dd>
@@ -366,18 +370,40 @@ Os principais tipos de navegação são:
 
 </figure>
 
-<dl>
+#### Global
 
-<dt>Global<dt>
-<dd></dd>
+Está em todas as páginas de um site por definição, e costuma ser implementada como uma **barra de navegação no topo** de cada página. Características comuns incluem um link pra home, frequentemente com a logo da organização; um campo de busca; dicas de onde no site o usuário está nesse momento; etc.
 
-<dt>Local<dt>
-<dd></dd>
+<figure>
 
-<dt>Contextual<dt>
-<dd></dd>
+![](./assets/adidas-navbar.png)
 
-</dl>
+<figcaption>Barra de navegação da Adidas</figcaption>
+</figure>
+
+Outros padrões frequentes são mega menus e _fat footers_{lang=en}:
+
+<figure>
+
+![](./assets/adidas-mega-menu.png)
+
+<figcaption><i lang='en'>Mega menu</i> da Adidas</figcaption>
+</figure>
+
+Os **mega menus** são como os menus comuns, mas multiníveis, e costumam tomar toda a largura da página.
+
+<figure>
+
+![](./assets/adidas-fat-footer.png)
+
+<figcaption><i lang='en'>Fat footer</i> da Adidas</figcaption>
+</figure>
+
+Já **fat footers**{lang=en} costumam revelar a organização básica dos conteúdos do site, muitas vezes até o segundo nível, e incluir links diretos para conteúdos secundários como termos de serviço e privacidade, etc.
+
+#### Local
+
+#### Contextual
 
 ### Navegação suplementar
 
@@ -389,15 +415,8 @@ Os principais tipos de navegação são:
 
 </figure>
 
-<dl>
+#### Mapas do site
 
-<dt>Mapas do site<dt>
-<dd></dd>
+#### Índices
 
-<dt>Índices<dt>
-<dd></dd>
-
-<dt>Guias<dt>
-<dd></dd>
-
-</dl>
+#### Guias
