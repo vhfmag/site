@@ -185,7 +185,6 @@ body {
 h1 {
 	margin-top: 0;
 	line-height: 1.15;
-	font-size: 2rem;
 }
 
 .metadata > * + *::before {
