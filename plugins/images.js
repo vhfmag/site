@@ -7,6 +7,8 @@ const sizeOf = memoize(promisify(require("image-size")));
 /* TODO: use https://npm.im/webp-converter to add a webp source */
 /* TODO: use https://npm.im/cacache or what else to cache this shit */
 
+const EMEBD_CONTAINER_CLASS = "embed-container";
+
 /**
  * @param {string} src
  * @param {string} outputPath
@@ -38,33 +40,43 @@ const processImage = outputPath => async img => {
 };
 
 /**
- * @param {string} rawContent
+ * @param {string} originalContent
  * @param {string} outputPath
  * @returns {string}
  */
-async function transformMarkup(rawContent, outputPath) {
-	let content = rawContent;
+async function transformMarkup(originalContent, outputPath) {
+	if (!outputPath.endsWith(".html")) {
+		return originalContent;
+	}
 
-	if (outputPath.endsWith(".html")) {
-		const dom = new JSDOM(content);
-		/** @type {HTMLImageElement[]} */
-		const images = [...dom.window.document.querySelectorAll("img")];
+	const dom = new JSDOM(originalContent);
+	/** @type {Window} */
+	const { window } = dom;
+	/** @type {HTMLImageElement[]} */
+	const images = [...window.document.querySelectorAll("img")];
 
-		if (images.length > 0) {
-			console.log(`found ${images.length} images in ${outputPath}`);
-			await Promise.all(images.map(processImage(outputPath)));
-			console.log(`processed ${images.length} images in ${outputPath}`);
+	/** @type {HTMLIFrameElement[]} */
+	const iframes = [...window.document.querySelectorAll("iframe")];
 
-			content = dom.serialize();
-		}
+	if (images.length > 0) {
+		console.log(`found ${images.length} images in ${outputPath}`);
+		await Promise.all(images.map(processImage(outputPath)));
+		console.log(`processed ${images.length} images in ${outputPath}`);
+	}
 
-		/** @type {HTMLIFrameElement[]} */
-		for (const iframe of dom.window.document.querySelectorAll("iframe")) {
-			iframe.setAttribute("loading", "lazy");
+	for (const iframe of iframes) {
+		iframe.setAttribute("loading", "lazy");
+
+		// makes sure it's responsive
+		if (!iframe.parentElement.classList.contains(EMEBD_CONTAINER_CLASS)) {
+			const wrapper = window.document.createElement("div");
+			wrapper.classList.add(EMEBD_CONTAINER_CLASS);
+			iframe.parentElement.replaceChild(wrapper, iframe);
+			wrapper.appendChild(iframe);
 		}
 	}
 
-	return content;
+	return dom.serialize();
 }
 
 module.exports = {
