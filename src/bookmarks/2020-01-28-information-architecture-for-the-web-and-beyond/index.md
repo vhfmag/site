@@ -403,7 +403,26 @@ Já **fat footers**{lang=en} costumam revelar a organização básica dos conte�
 
 #### Local
 
+A navegação global é frequentemente acompanhada por uma navegação local que permite aos usuários **explorar as imediações** da página em que está.
+
+<figure>
+
+![](./assets/amazon-toys.png)
+![](./assets/amazon-books.png)
+
+<figcaption>Navegação local da Amazon nas seções de brinquedos e de livros, respectivamente</figcaption>
+</figure>
+
 #### Contextual
+
+As navegações globais e locais nem sempre dão conta de todas as relações entre conteúdos e de todos os caminhos possíveis. É o caso dos links de "veja mais", "quem compra esse produto também gosta de" e de links dentro do corpo do texto, como na Wikipedia.
+
+<figure>
+
+![](./assets/wikipedia-contextual-local.png)
+
+<figcaption>Navegação local e contexutal na Wikipedia</figcaption>
+</figure>
 
 ### Navegação suplementar
 
@@ -415,8 +434,6 @@ Já **fat footers**{lang=en} costumam revelar a organização básica dos conte�
 
 </figure>
 
-#### Mapas do site
+## Capítulo 9 - <i lang='en'>Search Systems</i>
 
-#### Índices
-
-#### Guias
+> If your product is more like a library than a software application, then search probably makes sense.
