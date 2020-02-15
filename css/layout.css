@@ -168,7 +168,19 @@ a:visited:not(:target) {
 	color: var(--themeColor);
 }
 
+*:not(:focus) {
+	outline: 1px dotted transparent;
+	outline-offset: 3em;
+	transition: outline-color 0.25s ease-in-out, outline-offset 0.25s ease-in-out;
+}
+
+:target {
+	outline: 1px dotted var(--textColor);
+	outline-offset: 0.25em;
+}
+
 a:target {
+	outline: none;
 	background-color: var(--themeColor60);
 }
 
