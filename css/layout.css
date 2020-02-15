@@ -170,10 +170,10 @@ a:visited:not(:target) {
 *:not(:focus) {
 	outline: 1px dotted transparent;
 	outline-offset: 3em;
-	transition: outline-color 0.25s ease-in-out, outline-offset 0.25s ease-in-out;
 }
 
 :target {
+	transition: outline-color 0.25s ease-in-out, outline-offset 0.25s ease-in-out;
 	outline: 1px dotted var(--textColor);
 	outline-offset: 0.25em;
 }
