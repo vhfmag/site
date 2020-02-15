@@ -34,6 +34,6 @@
   X-XSS-Protection: 1; mode=block
   X-Content-Type-Options: nosniff
   Referrer-Policy: same-origin
-  Content-Security-Policy: default-src 'self'; img-src 'self' https://webmention.io *.amazonaws.com; script-src 'self' https://instant.page/3.0.0; style-src 'self' 'unsafe-inline' https://rsms.me/; font-src 'self' https://rsms.me/; manifest-src 'self'; base-uri: 'self'; form-action: 'self'; frame-src 'self' *.netlify.com https://codesandbox.io
+  Content-Security-Policy: default-src 'self'; img-src 'self' https://webmention.io *.amazonaws.com; script-src 'self' https://instant.page/3.0.0; style-src 'self' 'unsafe-inline' https://rsms.me/; font-src 'self' https://rsms.me/; manifest-src 'self'; base-uri: 'self'; form-action: 'self'; frame-src 'self' *.youtube.com *.youtu.be invidio.us *.netlify.com https://codesandbox.io
 /sw.js
   Cache-Control: no-cache
