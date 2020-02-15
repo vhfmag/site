@@ -1,12 +1,11 @@
 ---
-draft: true
 title: "Information Architecture: For the Web and Beyond"
 description: "Um fichamento do livro 'Information Architecture: For the Web and Beyond' de Jorge Arango, Peter Morville e Louis Rosenfeld"
 customTags: ["Fichamento", "Arquitetura da Informação", "Design"]
 links:
     - types: [bookmark-of]
       link: "https://www.oreilly.com/library/view/information-architecture-4th/9781491913529/"
-date: 2020-02-06T07:45:55.920-03:00
+date: 2020-02-15T12:45:55.920-03:00
 ---
 
 <style>
