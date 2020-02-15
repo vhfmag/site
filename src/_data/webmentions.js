@@ -73,7 +73,9 @@ function normalizeTarget(target) {
  * @returns {Promise<Response>}
  */
 async function fetchWebMentionsPage(page) {
-	if (!token) {
+	if (process.env.MOCK_WMS) {
+		return { children: [] };
+	} else if (!token) {
 		throw new Error("Environment variable WEBMENTIONIO_TOKEN isn't available");
 	}
 
