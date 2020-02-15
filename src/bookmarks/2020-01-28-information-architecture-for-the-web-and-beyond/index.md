@@ -65,7 +65,7 @@ Para projetar um produto cujos conteúdos sejam encontráveis, precisamos primei
 <dt>Busca exploratória</dt>
 <dd>Imagine que você está buscando por restaurantes numa cidade por onde você vai passar em uma viagem: você não quer encontrar um restaurante específico, mas sim ter uma ideia de que tipos de restaurante existem, quão caros eles são, onde eles ficam na cidade...</dd>
 
-<dt>Busca exaustiva</dt>
+<dt id="busca-exaustiva">Busca exaustiva</dt>
 <dd>Imagine agora que você está analisando o mercado para a sua nova ideia de negócio: não mapear um concorrente pode ser decisivo para o sucesso do seu empreendimento, então você provavelmente quer encontrar <em>todos</em> os resultados relevantes.</dd>
 
 <dt>Re-busca</dt>
@@ -436,4 +436,88 @@ As navegações globais e locais nem sempre dão conta de todas as relações en
 
 ## Capítulo 9 - <i lang='en'>Search Systems</i>
 
-> If your product is more like a library than a software application, then search probably makes sense.
+Começando pelo começo: nem todo produto precisa de busca.
+
+### Seu produto precisa de busca?
+
+> If your product is more like a library than a software application, then search probably makes sense.{id=more-lib-than-app}
+
+Fatores a serem considerados:
+
+- Quantidade de informação
+- Tempo e conhecimento para otimizar o sistema de busca
+- Presença de sistemas navigacionais úteis
+
+Quando busca ajuda:
+
+- Quando se tem informação demais pra navegar
+- Quanto o site é fragmentado
+- Quando o site é dinâmico e novos conteúdos são adicionados com frequência
+
+Além disso, a busca é uma ferramenta para se aprender as necessidades dos usuários.
+
+### Como estruturar a busca
+
+O livro explica como determinar zonas de busca (ex: roupas, calçados e acessórios), como escolher o que indexar (spoiler: não indexem páginas de navegação) e cita escolhas comuns: indexar para diferentes audiências, por tópico, cronologicamente, etc. Não vou entrar em detalhes nessa seção. 😬
+
+### <i lang='en'>Recall</i> vs precisão
+
+<dl>
+
+<dt><i lang='en'>Recall</i></dt>
+<dd>Proporção dos resultados relevantes que foram retornados</dd>
+
+<dt>Precisão</dt>
+<dd>Proporção dos resultados retornados que foram relevantes</dd>
+
+</dl>
+
+Existe um <i lang='en'>trade-off</i> fundamental entre essas duas métricas de performance de busca: há um limite pra quanto se pode melhorar uma sem piorar a outra. Por isso, é necessário entender a necessidade de seu usuário:
+
+- Caso se precise encontrar todos os itens relevantes ([busca exaustiva](#busca-exaustiva), ex: preciso encontrar todas as notas fiscais de um determinado mês pra elaborar relatórios de contabilidade), o foco deve ser estar no <i lang='en'>recall</i>
+- Caso se precise encontrar uma fonte relevante (ex: preciso descobrir como tirar uma mancha de vinho da minha camisa), o foco deve ser estar na precisão
+
+Para entender porque o <i lang='en'>trade-off</i> existe, analisemos a técnica do <i lang='en'>stemming</i>: é frequente que ao pesquisarmos algo como "computadores", o mecanismo de busca pode procurar por todas as palavras que tenham o mesmo radical (computador, computacional, computado, computando), aumentando <i lang='en'>recall</i> e diminuindo precisão; ou pesquisar apenas por itens que tenham exatamente a palavra computadores, aumentando a precisão e diminuindo o <i lang='en'>recall</i>.{id=stemming}
+
+### Algoritmos de busca e técnicas relacionadas
+
+<dl>
+
+<dt><i lang='en'>Stemming</i></dt>
+<dd>
+
+[Como dito acima](#stemming), buscas por palavras específicas podem incluir todas as palavras com o mesmo radical
+
+</dd>
+
+<dt>Corretor de texto</dt>
+<dd>Pesquisas por computadres podem incluir resultados para a palavra correta, computadores</dd>
+
+<dt>Inclusão de palavras relacionadas</dt>
+<dd>Pesquisas por SSA podem incluir resultados para Salvador, assim como pesquisas aguardente podem incluir resultados para cachaça</dd>
+
+<dt>Detecção de intenção com NLP</dt>
+<dd>O resultado de pesquisas que incluem "como + verbo", "rota para", "definição de" e outros podem ter resultados focados nas suas respectivas intenções de busca: guias de como fazer, rotas no mapa, definições de palavras e conceitos, etc</dd>
+
+<dt>Encaminhamento pra itens relacionados</dt>
+<dd>Resultados de pesquisa podem incluir links para resultados no mesmo domínio, resultados que linkam para ele ou para que ele linka, resultados relacionados, etc</dd>
+
+</dl>
+
+### Exibindo resultados
+
+- Formatos mais comuns: listagem, galeria de imagens e mapas.
+- Em caso de resultados difíceis de distinguir (ex: títulos similares), incluir informações que ajudem a distinguir (ex: capa, autor e ano de publicação de livro)
+- Ordenações: alfabética, cronológica, por distância, popularidade, nota e a galinha dos ovos de ouro: por relevância.
+
+## Capítulo 10 - <i lang='en'>Search Systems</i>
+
+Fica pra próxima 😅
+
+## Capítulo 11, 12 e 13 - <i lang='en'>Research, Strategy & Design and documentation</i>
+
+Não li esses capítulos por estar mais interessado em aprender sobre arquitetura da informação do que em detalhes e recomendações de como abordar, pesquisar, implementar e documentar mudanças na área. 😬
+
+## Recapitulando
+
+O "livro do urso polar" é uma excelente referência pro tema e é universalmente conhecido por aqueles que ainda estudam sobre. Digo isso porque, conversando com um colega após ter lido ele, fiquei sabendo que <abbr title="arquitetura da informação">AI</abbr> é um tema relativamente negligenciado por instituições de ensino e profissionais, que priorizam assuntos mais "atuais" como design de experiência e afins. Faz parte dos ciclos do livre mercado de ideias. Mas recomendo o estudo do tema e a leitura desse livro em particular especialmente para aqueles que trabalham com produtos que [mais parecem bibliotecas do que aplicações](#more-lib-than-app).
