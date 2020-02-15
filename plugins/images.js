@@ -25,6 +25,7 @@ const processImage = outputPath => async (/** @type {HTMLImageElement} */ img) =
 	const { width, height } = await sizeOf(srcPath);
 	img.setAttribute("width", width);
 	img.setAttribute("height", height);
+	img.setAttribute("loading", "lazy");
 };
 
 /**
