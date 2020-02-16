@@ -213,7 +213,7 @@ h1 {
 }
 
 .metadata > * + *::before {
-	content: " – ";
+	content: " ∙ ";
 }
 
 body > .sidebar {

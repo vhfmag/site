@@ -2,11 +2,7 @@ main.entry {
 	max-width: calc(var(--main-max-width) * 3 / 2);
 }
 
-main.entry > article > header::after {
-	content: "";
-	display: block;
-	border-bottom: 2px dotted var(--themeColor);
-	padding-top: var(--s0);
+main.entry > article > header {
 	margin-bottom: var(--s2);
 }
 
@@ -80,13 +76,13 @@ main.entry .footnote-item:target p {
 	outline: 1px dotted;
 }
 
-main.entry h1,
-main.entry h2,
-main.entry h3,
-main.entry h4,
-main.entry h5,
-main.entry h6 {
-	position: relative;
+main.entry article h1:not(:first-child),
+main.entry article h2:not(:first-child),
+main.entry article h3:not(:first-child),
+main.entry article h4:not(:first-child),
+main.entry article h5:not(:first-child),
+main.entry article h6:not(:first-child) {
+	margin-top: 2em;
 }
 
 main.entry :hover > .header-anchor {
@@ -194,7 +190,7 @@ main > article {
 	}
 }
 
-main.entry .toc summary {
+main.entry .toc > summary {
 	font-variation-settings: "wght" 500;
 	font-size: 1.2em;
 }
@@ -204,13 +200,52 @@ main.entry .toc ol {
 	list-style-type: none;
 }
 
+main.entry .toc > ol {
+	font-size: 0.9em;
+}
+
+main.entry .toc ol li {
+	display: flex;
+}
+
 main.entry .toc ol li::before {
 	counter-increment: toc-section;
 	content: counters(toc-section, ".") ". ";
+	white-space: pre-wrap;
+	font-feature-settings: "tnum";
+}
+
+main.entry .toc ol li > a,
+main.entry .toc ol ol {
+	padding-left: 1.1em;
+}
+
+@supports (grid-template-columns: subgrid) {
+	main.entry .toc ol {
+		display: grid;
+		grid-template-columns: max-content auto;
+	}
+
+	main.entry .toc ol li {
+		display: grid;
+		grid-template-columns: subgrid;
+		grid-column: 1 / -1;
+	}
+
+	main.entry .toc ol li::before {
+		text-align: right;
+	}
 }
 
 main.entry article header [itemprop="alternativeHeadline"],
 main.entry article header .metadata {
-	font-size: 0.9em;
 	opacity: 0.8;
+}
+
+main.entry article header [itemprop="alternativeHeadline"] {
+	font-size: 1.1em;
+}
+
+main.entry article header .metadata {
+	font-size: 0.85em;
 }

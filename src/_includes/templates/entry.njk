@@ -8,27 +8,28 @@
         <h1 class="post-title p-name" itemprop="headline title">
             <a class="u-url u-uid" href="{{ page.url }}">{{ title }}</a>
         </h1>
-        {% if description %}
-            <p itemprop="alternativeHeadline">{{ description }}</p>
-        {% endif %}
-        <div class="metadata" data-separator="—">
+        <div class="metadata">
             <span>
                 {% block category %}
-                    <span class="p-category">{{ collection }}</span> por {{ listAuthors(authors if authors else [me]) }}
+                    <span class="p-category">{{ collection }}</span>
                 {% endblock %}
             </span>
+            <span>{{ listAuthors(authors if authors else [me]) }}</span>
             {% if date %}
                 <span>
-                    Publicado em
                     <time class="dt-published" itemprop="datePublished pubdate" datetime="{{ date | formatDateISO }}">
                         {{ date | formatDate }}
                     </time>
                 </span>
             {% endif %}
-            <span>{{ content | wordcount }} palavras, <abbr aria-label="aproximadamente" title="aproximadamente">~</abbr>
-                <span itemprop="timeRequired">{{ content | readingTime(raw=true) }} minutos</span> de leitura</span>
+            <span>
+                <abbr aria-label="aproximadamente" title="aproximadamente">~</abbr><span itemprop="timeRequired">{{ content | readingTime(raw=true) }} minutos</span> de leitura
+            </span>
             {% block metadata %}{% endblock %}
         </div>
+        {% if description %}
+            <p itemprop="alternativeHeadline">{{ description }}</p>
+        {% endif %}
         {% block header %}{% endblock %}
     </header>
 
