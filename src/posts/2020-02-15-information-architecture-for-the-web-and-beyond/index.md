@@ -453,7 +453,7 @@ Quando busca ajuda:
 -   Quanto o site é fragmentado
 -   Quando o site é dinâmico e novos conteúdos são adicionados com frequência
 
-Além disso, a busca é uma ferramenta para se aprender as necessidades dos usuários.
+Além disso, a busca é uma ferramenta útil para se aprender as necessidades dos usuários, através da análise de <i lang='en'>search logs</i>.
 
 ### Como estruturar a busca
 
