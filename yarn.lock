@@ -2079,10 +2079,10 @@ eleventy-plugin-reading-time@^0.0.1:
   resolved "https://registry.yarnpkg.com/eleventy-plugin-reading-time/-/eleventy-plugin-reading-time-0.0.1.tgz#e57c85aa26e9d055b3beca2809c650099ecaa610"
   integrity sha512-6MRHwrWMYm/u9lJK4/mnyS+6SyQxJSQcTfa1DqQS9fpQRPsZ9mdO9rZ/6DAhZpX2/cXxrbc6qxgcv6Qj90im1g==
 
-eleventy-plugin-seo@^0.4.3:
-  version "0.4.3"
-  resolved "https://registry.yarnpkg.com/eleventy-plugin-seo/-/eleventy-plugin-seo-0.4.3.tgz#688e7131a6a7c79d32e8131dc0935390547c4c0e"
-  integrity sha512-rThJp7muUWnzXkPXli58rFL4M5yDA1Pf8fTSFqTx37QSvhsa1+V4/eayObqEQ/g+pzbSrQgGotwMByC6QnIiZg==
+eleventy-plugin-seo@0.5.0:
+  version "0.5.0"
+  resolved "https://registry.yarnpkg.com/eleventy-plugin-seo/-/eleventy-plugin-seo-0.5.0.tgz#a20d2714f1d34b7cca4752daa05ea9e5974c28b3"
+  integrity sha512-7rXya1RwbRCb7IxWt3FqHYTet2JV0GJvhjiVvs7RFakLY+7Gy7pBhOlVI4tIQZr9irftEYbf0Jo1n+1ufBY2AQ==
   dependencies:
     html-entities "^1.2.1"
 
