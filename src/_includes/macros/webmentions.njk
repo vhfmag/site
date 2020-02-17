@@ -14,7 +14,7 @@
                     <li title="{{ entry.author.name }}">
                         <article>
                             <a href="{% if authorUrl %}{{ entry.author.url }}{% else %}{{ entry.url }}{% endif %}">
-                                <img src="{{ entry.author.photo }}" alt="{{ entry.author.name }}"/>
+                                <img loading="lazy" width="1" height="1" src="{{ entry.author.photo }}" alt="{{ entry.author.name }}"/>
                             </a>
                         </article>
                     </li>
