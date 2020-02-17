@@ -74,11 +74,11 @@ Para projetar um produto cujos conteúdos sejam encontráveis, precisamos primei
 
 ... e esses são só alguns exemplos.
 
-![](./assets/information-needs.png){style="width: 100%; max-width: 500px; margin: auto"}
+![](./assets/information-needs.png){style="width: 100%; max-width: 500px; margin: auto; border: 1vw solid white"}
 
 Outra limitação do modelo é que ele não vê a iteratividade do processo: alternância entre busca e navegação, refinamentos de busca ou mesmo mudança de propósito da busca devido aos resultados encontrados em etapas anteriores.
 
-![](./assets/berrypicking.png){style="width: 100%; max-width: 500px; margin: auto"}
+![](./assets/berrypicking.png){style="width: 100%; max-width: 500px; margin: auto; border: 1vw solid white"}
 
 As necessidades e comportamentos de informação mudam, portanto, de acordo com o contexto, o conteúdo e o usuário, e para uma arquitetura de informação de excelência estes devem ser devidamente estudados. Métodos para tal são discutidos no capítulo 11.
 
@@ -443,15 +443,15 @@ Começando pelo começo: nem todo produto precisa de busca.
 
 Fatores a serem considerados:
 
-- Quantidade de informação
-- Tempo e conhecimento para otimizar o sistema de busca
-- Presença de sistemas navigacionais úteis
+-   Quantidade de informação
+-   Tempo e conhecimento para otimizar o sistema de busca
+-   Presença de sistemas navigacionais úteis
 
 Quando busca ajuda:
 
-- Quando se tem informação demais pra navegar
-- Quanto o site é fragmentado
-- Quando o site é dinâmico e novos conteúdos são adicionados com frequência
+-   Quando se tem informação demais pra navegar
+-   Quanto o site é fragmentado
+-   Quando o site é dinâmico e novos conteúdos são adicionados com frequência
 
 Além disso, a busca é uma ferramenta para se aprender as necessidades dos usuários.
 
@@ -473,8 +473,8 @@ O livro explica como determinar zonas de busca (ex: roupas, calçados e acessór
 
 Existe um <i lang='en'>trade-off</i> fundamental entre essas duas métricas de performance de busca: há um limite pra quanto se pode melhorar uma sem piorar a outra. Por isso, é necessário entender a necessidade de seu usuário:
 
-- Caso se precise encontrar todos os itens relevantes ([busca exaustiva](#busca-exaustiva), ex: preciso encontrar todas as notas fiscais de um determinado mês pra elaborar relatórios de contabilidade), o foco deve ser estar no <i lang='en'>recall</i>
-- Caso se precise encontrar uma fonte relevante (ex: preciso descobrir como tirar uma mancha de vinho da minha camisa), o foco deve ser estar na precisão
+-   Caso se precise encontrar todos os itens relevantes ([busca exaustiva](#busca-exaustiva), ex: preciso encontrar todas as notas fiscais de um determinado mês pra elaborar relatórios de contabilidade), o foco deve ser estar no <i lang='en'>recall</i>
+-   Caso se precise encontrar uma fonte relevante (ex: preciso descobrir como tirar uma mancha de vinho da minha camisa), o foco deve ser estar na precisão
 
 Para entender porque o <i lang='en'>trade-off</i> existe, analisemos a técnica do <i lang='en'>stemming</i>: é frequente que ao pesquisarmos algo como "computadores", o mecanismo de busca pode procurar por todas as palavras que tenham o mesmo radical (computador, computacional, computado, computando), aumentando <i lang='en'>recall</i> e diminuindo precisão; ou pesquisar apenas por itens que tenham exatamente a palavra computadores, aumentando a precisão e diminuindo o <i lang='en'>recall</i>.{id=stemming}
 
@@ -505,9 +505,9 @@ Para entender porque o <i lang='en'>trade-off</i> existe, analisemos a técnica 
 
 ### Exibindo resultados
 
-- Formatos mais comuns: listagem, galeria de imagens e mapas.
-- Em caso de resultados difíceis de distinguir (ex: títulos similares), incluir informações que ajudem a distinguir (ex: capa, autor e ano de publicação de livro)
-- Ordenações: alfabética, cronológica, por distância, popularidade, nota e a galinha dos ovos de ouro: por relevância.
+-   Formatos mais comuns: listagem, galeria de imagens e mapas.
+-   Em caso de resultados difíceis de distinguir (ex: títulos similares), incluir informações que ajudem a distinguir (ex: capa, autor e ano de publicação de livro)
+-   Ordenações: alfabética, cronológica, por distância, popularidade, nota e a galinha dos ovos de ouro: por relevância.
 
 ## Capítulo 10 - <i lang='en'>Search Systems</i>
 
