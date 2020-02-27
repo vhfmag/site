@@ -10,32 +10,10 @@ const sizeOf = memoize(promisify(require("image-size")));
 const EMEBD_CONTAINER_CLASS = "embed-container";
 
 /**
- * @param {string} src
  * @param {string} outputPath
- * @returns {string}
+ * @returns {(img: HTMLImageElement) => void}
  */
-const getSrcPathFromDest = (/** @type {string} */ src, outputPath) => {
-	if (src.startsWith("/") && !src.startsWith("//")) {
-		return `.${src}`;
-	} else {
-		const outputDir = join(outputPath, "..").replace("/public/", "/src/");
-		return `${outputDir}/${src}`;
-	}
-};
-
-const cachePath = "../node_modules/.cache/optimize-images-11ty-plugin";
-
-/**
- * @param {string} outputPath
- * @returns {(img: HTMLImageElement) => Promise<void>}
- */
-const processImage = outputPath => async img => {
-	if (img.src.match(/^https?:\/.*/)) return;
-
-	const srcPath = getSrcPathFromDest(img.src.split("?")[0], outputPath);
-	const { width, height } = await sizeOf(srcPath);
-	img.setAttribute("width", width);
-	img.setAttribute("height", height);
+const processImage = img => {
 	img.setAttribute("loading", "lazy");
 };
 
@@ -52,15 +30,15 @@ async function transformMarkup(originalContent, outputPath) {
 	const dom = new JSDOM(originalContent);
 	/** @type {Window} */
 	const { window } = dom;
+
 	/** @type {HTMLImageElement[]} */
 	const images = [...window.document.querySelectorAll("img")];
-
 	/** @type {HTMLIFrameElement[]} */
 	const iframes = [...window.document.querySelectorAll("iframe")];
 
 	if (images.length > 0) {
 		console.log(`found ${images.length} images in ${outputPath}`);
-		await Promise.all(images.map(processImage(outputPath)));
+		images.forEach(processImage);
 		console.log(`processed ${images.length} images in ${outputPath}`);
 	}
 
