@@ -31,6 +31,12 @@ async function transformMarkup(originalContent, outputPath) {
 	/** @type {Window} */
 	const { window } = dom;
 
+	/** @type {HTMLLinkElement[]} */
+	const toMoveToHead = [...window.querySelectorAll("link[rel=stylesheet]")].filter(
+		link => !link.closest("head"),
+	);
+	toMoveToHead.forEach(toBeMoved => window.document.head.appendChild(toBeMoved));
+
 	/** @type {HTMLImageElement[]} */
 	const images = [...window.document.querySelectorAll("img")];
 	/** @type {HTMLIFrameElement[]} */
