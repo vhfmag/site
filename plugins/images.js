@@ -32,7 +32,7 @@ async function transformMarkup(originalContent, outputPath) {
 	const { window } = dom;
 
 	/** @type {HTMLLinkElement[]} */
-	const toMoveToHead = [...window.querySelectorAll("link[rel=stylesheet]")].filter(
+	const toMoveToHead = [...window.document.querySelectorAll("link[rel=stylesheet]")].filter(
 		link => !link.closest("head"),
 	);
 	toMoveToHead.forEach(toBeMoved => window.document.head.appendChild(toBeMoved));
