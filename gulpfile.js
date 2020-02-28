@@ -71,4 +71,4 @@ function watchAndServe() {
 }
 
 exports.watch = serveOnly;
-exports.default = gulp.parallel(css, html, images, otherwise);
+exports.default = gulp.parallel(css, html, otherwise);
