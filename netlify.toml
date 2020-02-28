@@ -1,3 +1,8 @@
 [build]
     functions = "functions/"
     publish = "dist"
+plugins = [
+    { type = "netlify-plugin-subfont" },
+    { type = "netlify-plugin-checklinks" },
+    { type = "netlify-plugin-debug-cache" },
+]
