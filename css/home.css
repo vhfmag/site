@@ -6,7 +6,6 @@ main.home {
 	grid-template-columns: 1fr 1fr;
 	align-content: flex-start;
 	grid-column-gap: var(--s2);
-	margin-top: calc(-1 * var(--heading-margin));
 }
 
 main.home h1,
@@ -72,7 +71,10 @@ main.home p.excerpt {
 	overflow: hidden;
 }
 
-main.home h1,
+main > section:first-child > h2 {
+	margin-top: 0;
+}
+
 main.home h2 {
 	border-bottom: 2px solid var(--themeColor);
 	padding-bottom: var(--s-3);

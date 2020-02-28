@@ -36,7 +36,7 @@ dt {
 /* Design tokens & theme stuff */
 
 :root {
-	--root-padding: 2em;
+	--root-padding: 2rem;
 	--root-border-width: 0;
 	--sidebar-width: 20ch;
 
