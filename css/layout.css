@@ -304,6 +304,10 @@ main {
 }
 
 @media (max-width: 800px) {
+	:root {
+		--root-padding: 1em;
+	}
+
 	.desktop-only {
 		display: none;
 	}
@@ -311,7 +315,7 @@ main {
 	body {
 		grid-template-columns: 1fr;
 		grid-template-rows: min-content auto;
-		grid-gap: var(--root-padding);
+		grid-gap: calc(var(--ratio) * var(--root-padding));
 
 		font-size: 90%;
 	}
