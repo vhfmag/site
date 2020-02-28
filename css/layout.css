@@ -83,17 +83,17 @@ dt {
 
 body[data-theme="light"] {
 	--textColor: hsl(0, 0%, 0%);
-	--backgroundColor: hsl(0, 0%, 93%);
-	--themeColor: hsl(281, 59%, 49%);
-	--themeColor60: hsla(281, 59%, 49%, 60%);
+	--backgroundColor: hsl(295.2, 5%, 90%);
+	--themeColor: hsl(295.2, 60%, 40%);
+	--themeColor60: hsla(295.2, 60%, 40%, 60%);
 }
 
 @media (prefers-color-scheme: light) {
 	body[data-theme="auto"] {
 		--textColor: hsl(0, 0%, 0%);
-		--backgroundColor: hsl(0, 0%, 93%);
-		--themeColor: hsl(281, 59%, 49%);
-		--themeColor60: hsla(281, 59%, 49%, 60%);
+		--backgroundColor: hsl(295.2, 5%, 90%);
+		--themeColor: hsl(295.2, 60%, 45%);
+		--themeColor60: hsla(295.2, 60%, 45%, 60%);
 	}
 }
 
@@ -101,9 +101,9 @@ body,
 body[data-theme="auto"],
 body[data-theme="dark"] {
 	--textColor: hsl(0, 0%, 93%);
-	--backgroundColor: #27292d;
-	--themeColor: hsl(281, 82%, 70%);
-	--themeColor60: hsla(281, 82%, 70%, 60%);
+	--backgroundColor: hsl(295.2, 15%, 10%);
+	--themeColor: hsl(295.2, 81.7%, 70%);
+	--themeColor60: hsla(295.2, 81.7%, 70%, 60%);
 }
 
 /* The rest of the stuff */
