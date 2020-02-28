@@ -35,6 +35,7 @@ async function transformMarkup(originalContent, outputPath) {
 	const toMoveToHead = [...window.document.querySelectorAll("link[rel=stylesheet]")].filter(
 		link => !link.closest("head"),
 	);
+	/** Moves all stylesheet links to inside the document's head, to optimize loading and avoid FOUC */
 	toMoveToHead.forEach(toBeMoved => window.document.head.appendChild(toBeMoved));
 
 	/** @type {HTMLImageElement[]} */
@@ -42,11 +43,7 @@ async function transformMarkup(originalContent, outputPath) {
 	/** @type {HTMLIFrameElement[]} */
 	const iframes = [...window.document.querySelectorAll("iframe")];
 
-	if (images.length > 0) {
-		console.log(`found ${images.length} images in ${outputPath}`);
-		images.forEach(processImage);
-		console.log(`processed ${images.length} images in ${outputPath}`);
-	}
+	images.forEach(image => image.setAttribute("loading", "lazy"));
 
 	for (const iframe of iframes) {
 		iframe.setAttribute("loading", "lazy");
