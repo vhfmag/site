@@ -20,6 +20,7 @@
 		"escape-html": "^1.0.3",
 		"gulp": "^4.0.2",
 		"gulp-connect": "^5.7.0",
+		"gulp-imagemin": "6",
 		"gulp-postcss": "^8.0.0",
 		"gulp-posthtml": "^3.0.4",
 		"htmlnano": "^0.2.5",
