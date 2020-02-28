@@ -5,4 +5,5 @@ plugins = [
     { type = "netlify-plugin-subfont" },
     { type = "netlify-plugin-checklinks" },
     { type = "netlify-plugin-debug-cache" },
+    { type = "netlify-plugin-image-optim" },
 ]

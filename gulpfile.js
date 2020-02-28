@@ -8,8 +8,6 @@ const posthtml = require("gulp-posthtml");
 const htmlnano = require("htmlnano");
 const imgAutosize = require("posthtml-img-autosize");
 
-const imagemin = require("gulp-imagemin");
-
 const connect = require("gulp-connect");
 
 function css() {
@@ -25,23 +23,6 @@ function html() {
 	return gulp
 		.src("public/**/*.html", { since: gulp.lastRun(html) })
 		.pipe(posthtml([imgAutosize(), htmlnano()]))
-		.pipe(gulp.dest("dist"));
-}
-
-function images() {
-	return gulp
-		.src(
-			[
-				"public/**/*.jpg",
-				"public/**/*.jpeg",
-				"public/**/*.png",
-				"public/**/*.svg",
-				"public/**/*.gif",
-				"public/**/*.webp",
-			],
-			{ since: gulp.lastRun(images) },
-		)
-		.pipe(imagemin())
 		.pipe(gulp.dest("dist"));
 }
 
@@ -66,17 +47,6 @@ function otherwise() {
 function watchOnly() {
 	gulp.watch("public/*.css", css);
 	gulp.watch("public/*.html", html);
-	gulp.watch(
-		[
-			"public/**/*.jpg",
-			"public/**/*.jpeg",
-			"public/**/*.png",
-			"public/**/*.svg",
-			"public/**/*.gif",
-			"public/**/*.webp",
-		],
-		images,
-	);
 	gulp.watch(
 		[
 			"public/**/*.js",
