@@ -12,7 +12,7 @@
 }
 
 html {
-	font-family: "Inter", system;
+	font-family: var(--copy-font-family);
 }
 
 h1,
@@ -22,25 +22,7 @@ h4,
 h5,
 h6,
 dt {
-	font-family: "Lora", system;
-}
-
-@supports (font-variation-settings: normal) {
-	html {
-		font-family: "Inter var", system;
-		font-variation-settings: "wght" 250;
-		font-feature-settings: "zero", "ss01", "ss02";
-	}
-
-	h1,
-	h2,
-	h3,
-	h4,
-	h5,
-	h6,
-	dt {
-		font-family: "Lora var", system;
-	}
+	font-family: var(--heading-font-family);
 }
 
 /* Common sense stuff */
@@ -57,6 +39,46 @@ dt {
 	--root-padding: 2em;
 	--root-border-width: 0;
 	--sidebar-width: 20ch;
+
+	--copy-font-family: "Inter", system;
+	--heading-font-family: "Lora", system;
+	--h1-line-height: 1.15;
+}
+
+@supports (font-variation-settings: normal) {
+	:root {
+		--copy-font-family: "Inter var", system;
+		--heading-font-family: "Lora var", system;
+	}
+
+	html {
+		font-variation-settings: "wght" 250;
+		font-feature-settings: "zero", "ss01", "ss02";
+	}
+
+	h1 {
+		font-variation-settings: "wght" 700;
+	}
+
+	h2 {
+		font-variation-settings: "wght" 650;
+	}
+
+	h3 {
+		font-variation-settings: "wght" 600;
+	}
+
+	h4 {
+		font-variation-settings: "wght" 550;
+	}
+
+	h5 {
+		font-variation-settings: "wght" 500;
+	}
+
+	h6 {
+		font-variation-settings: "wght" 450;
+	}
 }
 
 body[data-theme="light"] {
@@ -117,32 +139,6 @@ h4,
 h5,
 h6 {
 	color: var(--themeColor);
-}
-
-@supports (font-variation-settings: normal) {
-	h1 {
-		font-variation-settings: "wght" 700;
-	}
-
-	h2 {
-		font-variation-settings: "wght" 650;
-	}
-
-	h3 {
-		font-variation-settings: "wght" 600;
-	}
-
-	h4 {
-		font-variation-settings: "wght" 550;
-	}
-
-	h5 {
-		font-variation-settings: "wght" 500;
-	}
-
-	h6 {
-		font-variation-settings: "wght" 450;
-	}
 }
 
 h1 :any-link,
@@ -209,7 +205,7 @@ body {
 
 h1 {
 	margin-top: 0;
-	line-height: 1.15;
+	line-height: var(--h1-line-height);
 }
 
 .metadata > * + *::before {

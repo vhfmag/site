@@ -63,7 +63,11 @@
 }
 
 .self_link .p-name {
-	font-size: 2em;
+	font-size: 2rem;
+	font-family: var(--heading-font-family);
+	font-weight: bold;
+	font-variation-settings: "wght" 700;
+	line-height: var(--h1-line-height);
 }
 
 body[data-theme="auto"] [data-theme="auto"],

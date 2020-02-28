@@ -1,5 +1,9 @@
-{% assign nameTag = "h1" if mainClass == "home" else 
-    "span" %}
+{% if mainClass == "home" %}
+    {% assign nameTag = "h1" %}
+{% else %}
+    {% assign nameTag = "div" %}
+{% endif %}
+
 
 <link rel="stylesheet" href="/css/sidebar.css"/>
 
