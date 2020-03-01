@@ -7,3 +7,37 @@ plugins = [
 [build]
     functions = "functions/"
     publish = "dist"
+
+[[redirects]]
+    from = "/links"
+    to = "/blogroll"
+
+[[redirects]]
+    from = "/.well-known/host-meta"
+    to = "https://fed.brid.gy/.well-known/host-meta"
+
+[[redirects]]
+    from = "/.well-known/host-meta.xrd"
+    to = "https://fed.brid.gy/.well-known/host-meta.xrd"
+
+[[redirects]]
+    from = "/.well-known/host-meta.jrd"
+    to = "https://fed.brid.gy/.well-known/host-meta.jrd"
+
+[[redirects]]
+    from = "/.well-known/webfinger"
+    to = "https://fed.brid.gy/.well-known/webfinger"
+
+[[redirects]]
+    from = "/notes/the-billionaire’s-typewriter"
+    to = "/notes/the-billionaires-typewriter"
+
+[[redirects]]
+    from = "/search"
+    to = "https://duckduckgo.com/?q=:query%20site:victormagalhaes.codes"
+    query = { q = ":query" }
+
+[[redirects]]
+    from = "/*"
+    to = "/404"
+    status = 404
