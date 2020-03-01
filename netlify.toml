@@ -8,6 +8,8 @@ plugins = [
     functions = "functions/"
     publish = "dist"
 
+# Redirects
+
 [[redirects]]
     from = "/links"
     to = "/blogroll"
@@ -41,3 +43,138 @@ plugins = [
     from = "/*"
     to = "/404"
     status = 404
+
+# Headers
+
+[[headers]]
+    for = "/*"
+    [headers.values]
+        X-Frame-Options = "DENY"
+        X-XSS-Protection = "1; mode=block"
+        X-Content-Type-Options = "nosniff"
+        Referrer-Policy = "same-origin"
+        
+        Content-Security-Policy = "default-src 'self'; img-src 'self' https://webmention.io *.amazonaws.com; script-src 'self' https://instant.page/3.0.0; style-src 'self' 'unsafe-inline' https://rsms.me/; font-src 'self' https://rsms.me/; manifest-src 'self'; base-uri: 'self'; form-action: 'self'; frame-src 'self' *.youtube.com *.youtu.be invidio.us *.netlify.com https://codesandbox.io"
+
+[[headers]]
+    for = "/*.css"
+    [headers.values]
+        Cache-Control = '''
+        public,
+        max-age=31536000,
+        immutable'''
+
+[[headers]]
+    for = "/*.gif"
+    [headers.values]
+        Cache-Control = '''
+        public,
+        max-age=31536000,
+        immutable'''
+
+[[headers]]
+    for = "/*.jpg"
+    [headers.values]
+        Cache-Control = '''
+        public,
+        max-age=31536000,
+        immutable'''
+
+[[headers]]
+    for = "/*.jpeg"
+    [headers.values]
+        Cache-Control = '''
+        public,
+        max-age=31536000,
+        immutable'''
+
+[[headers]]
+    for = "/*.png"
+    [headers.values]
+        Cache-Control = '''
+        public,
+        max-age=31536000,
+        immutable'''
+
+[[headers]]
+    for = "/*.svg"
+    [headers.values]
+        Cache-Control = '''
+        public,
+        max-age=31536000,
+        immutable'''
+
+[[headers]]
+    for = "/*.webm"
+    [headers.values]
+        Cache-Control = '''
+        public,
+        max-age=31536000,
+        immutable'''
+
+[[headers]]
+    for = "/*.mp4"
+    [headers.values]
+        Cache-Control = '''
+        public,
+        max-age=31536000,
+        immutable'''
+
+[[headers]]
+    for = "/*.webp"
+    [headers.values]
+        Cache-Control = '''
+        public,
+        max-age=31536000,
+        immutable'''
+
+[[headers]]
+    for = "/*.woff"
+    [headers.values]
+        Cache-Control = '''
+        public,
+        max-age=31536000,
+        immutable'''
+
+[[headers]]
+    for = "/*.woff2"
+    [headers.values]
+        Cache-Control = '''
+        public,
+        max-age=31536000,
+        immutable'''
+
+[[headers]]
+    for = "/*.otf"
+    [headers.values]
+        Cache-Control = '''
+        public,
+        max-age=31536000,
+        immutable'''
+
+[[headers]]
+    for = "/*.ttf"
+    [headers.values]
+        Cache-Control = '''
+        public,
+        max-age=31536000,
+        immutable'''
+
+[[headers]]
+    for = "/*.js"
+    [headers.values]
+        Content-Type = "text/javascript; charset=utf-8"
+        Cache-Control = '''
+        public,
+        max-age=31536000,
+        immutable'''
+
+[[headers]]
+    for = "/*.webmanifest"
+    [headers.values]
+        Content-Type = "application/manifest+json; charset=utf-8"
+
+[[headers]]
+    for = "/*.webmanifest"
+    [headers.values]
+        Cache-Control = "no-cache"
