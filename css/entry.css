@@ -77,6 +77,10 @@ main.entry .footnote-item:target p {
 	outline: 1px dotted;
 }
 
+main.entry article header h1 {
+	margin-bottom: 0;
+}
+
 main.entry article h1:not(:first-child),
 main.entry article h2:not(:first-child),
 main.entry article h3:not(:first-child),
@@ -245,6 +249,7 @@ main.entry article header .metadata {
 
 main.entry article header [itemprop="alternativeHeadline"] {
 	font-size: 1.1em;
+	margin-top: 0.25em;
 }
 
 main.entry article header .metadata {

@@ -44,9 +44,7 @@ function images() {
 
 function otherwise() {
 	return gulp
-		.src("public/**/*.{js,json,xml,otf,ttf,woff,woff2,webmanifest}", {
-			since: gulp.lastRun(otherwise),
-		})
+		.src(["public/**/*.{js,json,xml,otf,ttf,woff,woff2,webmanifest}", "public/.well-known/*"])
 		.pipe(gulp.dest("dist"));
 }
 
@@ -68,6 +66,7 @@ function watchAndServe() {
 exports.css = css;
 exports.html = html;
 exports.images = images;
+exports.otherwise = otherwise;
 exports.watch = serveOnly;
 
 exports.default = gulp.parallel(css, html, images, otherwise);
