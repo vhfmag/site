@@ -28,7 +28,7 @@ function html() {
 		.pipe(
 			posthtml([
 				posthtmlWebp({ replaceExtension: true, extensionIgnore: ["svg", "gif", "webp"] }),
-				imgAutosize(),
+				imgAutosize({ processEmptySize: true }),
 				htmlnano(),
 			]),
 		)
