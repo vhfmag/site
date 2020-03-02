@@ -69,6 +69,12 @@
 	--stack-margin: inherit;
 }
 
+.stack > .no-stack-margin,
+.stack2 > .no-stack-margin,
+.sub-stack > .no-stack-margin {
+	margin-top: 0;
+}
+
 /* hack to avoid nested stacks from interfering with each other */
 .stack2 > * + * {
 	margin-top: var(--s0);
