@@ -7,7 +7,7 @@ const sizeOf = memoize(promisify(require("image-size")));
 /* TODO: use https://npm.im/webp-converter to add a webp source */
 /* TODO: use https://npm.im/cacache or what else to cache this shit */
 
-const EMEBD_CONTAINER_CLASS = "embed-container";
+const EMBED_CONTAINER_CLASS = "embed-container";
 
 /**
  * @param {string} outputPath
@@ -42,19 +42,15 @@ async function transformMarkup(originalContent, outputPath) {
 	/** @type {HTMLIFrameElement[]} */
 	const iframes = [...window.document.querySelectorAll("iframe")];
 
-	if (images.length > 0) {
-		console.log(`found ${images.length} images in ${outputPath}`);
-		images.forEach(processImage);
-		console.log(`processed ${images.length} images in ${outputPath}`);
-	}
+	images.forEach(processImage);
 
 	for (const iframe of iframes) {
 		iframe.setAttribute("loading", "lazy");
 
 		// makes sure it's responsive
-		if (!iframe.parentElement.classList.contains(EMEBD_CONTAINER_CLASS)) {
+		if (!iframe.parentElement.classList.contains(EMBED_CONTAINER_CLASS)) {
 			const wrapper = window.document.createElement("div");
-			wrapper.classList.add(EMEBD_CONTAINER_CLASS);
+			wrapper.classList.add(EMBED_CONTAINER_CLASS);
 			iframe.parentElement.replaceChild(wrapper, iframe);
 			wrapper.appendChild(iframe);
 		}
