@@ -68,7 +68,8 @@ main.entry figure {
 
 main.entry figure > img,
 main.entry figure > video,
-main.entry figure > picture {
+main.entry figure > picture,
+main.entry figure > picture > img {
 	width: 100%;
 }
 
