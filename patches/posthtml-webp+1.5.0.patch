@@ -1,0 +1,73 @@
+diff --git a/node_modules/posthtml-webp/.travis.yml b/node_modules/posthtml-webp/.travis.yml
+old mode 100644
+new mode 100755
+diff --git a/node_modules/posthtml-webp/CONTRIBUTING.md b/node_modules/posthtml-webp/CONTRIBUTING.md
+old mode 100644
+new mode 100755
+diff --git a/node_modules/posthtml-webp/LICENSE b/node_modules/posthtml-webp/LICENSE
+old mode 100644
+new mode 100755
+diff --git a/node_modules/posthtml-webp/README.md b/node_modules/posthtml-webp/README.md
+old mode 100644
+new mode 100755
+diff --git a/node_modules/posthtml-webp/changelog.md b/node_modules/posthtml-webp/changelog.md
+old mode 100644
+new mode 100755
+diff --git a/node_modules/posthtml-webp/lib/index.js b/node_modules/posthtml-webp/lib/index.js
+old mode 100644
+new mode 100755
+index b764fd2..4101b2a
+--- a/node_modules/posthtml-webp/lib/index.js
++++ b/node_modules/posthtml-webp/lib/index.js
+@@ -83,11 +83,11 @@ function getPicture (imgNode, options) {
+     .concat(src)
+     .filter(Boolean)
+     .map(value => {
+-      value = value.trim().split(/\s/)
+-      var path = options.replaceExtension ? removeExtension(value[0]) : value[0]
+-      var size = value[1]
++      var [pathAndQuery, size] = value.trim().split(/\s/)
++      var [path, query] = pathAndQuery.split("?");
++      var cleanedPath = options.replaceExtension ? removeExtension(path) : path
+ 
+-      return [path + '.webp', size].filter(Boolean).join(' ')
++      return [cleanedPath + '.webp' + (query ? `?${query}` : ""), size].filter(Boolean).join(' ')
+     })
+     .join(', ')
+ 
+diff --git a/node_modules/posthtml-webp/test/fixtures/basic.expected.html b/node_modules/posthtml-webp/test/fixtures/basic.expected.html
+old mode 100644
+new mode 100755
+diff --git a/node_modules/posthtml-webp/test/fixtures/extension.expected.html b/node_modules/posthtml-webp/test/fixtures/extension.expected.html
+old mode 100644
+new mode 100755
+diff --git a/node_modules/posthtml-webp/test/fixtures/extension.html b/node_modules/posthtml-webp/test/fixtures/extension.html
+old mode 100644
+new mode 100755
+diff --git a/node_modules/posthtml-webp/test/fixtures/ignore-extension.expected.html b/node_modules/posthtml-webp/test/fixtures/ignore-extension.expected.html
+old mode 100644
+new mode 100755
+diff --git a/node_modules/posthtml-webp/test/fixtures/ignore-extension.html b/node_modules/posthtml-webp/test/fixtures/ignore-extension.html
+old mode 100644
+new mode 100755
+diff --git a/node_modules/posthtml-webp/test/fixtures/ignore.expected.html b/node_modules/posthtml-webp/test/fixtures/ignore.expected.html
+old mode 100644
+new mode 100755
+diff --git a/node_modules/posthtml-webp/test/fixtures/ignore.html b/node_modules/posthtml-webp/test/fixtures/ignore.html
+old mode 100644
+new mode 100755
+diff --git a/node_modules/posthtml-webp/test/fixtures/multisrcset.expected.html b/node_modules/posthtml-webp/test/fixtures/multisrcset.expected.html
+old mode 100644
+new mode 100755
+diff --git a/node_modules/posthtml-webp/test/fixtures/multisrcset.html b/node_modules/posthtml-webp/test/fixtures/multisrcset.html
+old mode 100644
+new mode 100755
+diff --git a/node_modules/posthtml-webp/test/fixtures/no-extension.expected.html b/node_modules/posthtml-webp/test/fixtures/no-extension.expected.html
+old mode 100644
+new mode 100755
+diff --git a/node_modules/posthtml-webp/test/fixtures/no-extension.html b/node_modules/posthtml-webp/test/fixtures/no-extension.html
+old mode 100644
+new mode 100755
+diff --git a/node_modules/posthtml-webp/test/test.js b/node_modules/posthtml-webp/test/test.js
+old mode 100644
+new mode 100755
