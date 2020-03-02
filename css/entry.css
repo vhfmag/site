@@ -3,7 +3,7 @@ main.entry {
 }
 
 main.entry > article > header {
-	margin-bottom: var(--s2);
+	margin-bottom: var(--s1);
 }
 
 .wm-properties .wm-property:not(:first-of-type) {
@@ -249,7 +249,7 @@ main.entry article header .metadata {
 
 main.entry article header [itemprop="alternativeHeadline"] {
 	font-size: 1.1em;
-	margin-top: 0.25em;
+	margin-top: var(--s-3);
 }
 
 main.entry article header .metadata {
