@@ -18,7 +18,7 @@ const connect = require("gulp-connect");
 function css() {
 	return gulp
 		.src("public/**/*.css", { since: gulp.lastRun(css) })
-		.pipe(postcss([postcssPresetEnv(), cssnano()]))
+		.pipe(gulpCache(postcss([postcssPresetEnv(), cssnano()]), { name: "css" }))
 		.pipe(gulp.dest("dist"));
 }
 
@@ -26,19 +26,37 @@ function html() {
 	return gulp
 		.src("public/**/*.html", { since: gulp.lastRun(html) })
 		.pipe(
-			posthtml([
-				posthtmlWebp({ replaceExtension: true, extensionIgnore: ["svg", "gif", "webp"] }),
-				imgAutosize({ processEmptySize: true }),
-				htmlnano(),
-			]),
+			gulpCache(
+				posthtml([
+					posthtmlWebp({
+						replaceExtension: true,
+						extensionIgnore: ["svg", "gif", "webp"],
+					}),
+					imgAutosize({ processEmptySize: true }),
+					htmlnano(),
+				]),
+				{ name: "html" },
+			),
 		)
 		.pipe(gulp.dest("dist"));
 }
 
-function images() {
+function minifyImages() {
 	return gulp
-		.src("public/**/*.{jpg,jpeg,png,svg,gif,tiff,webp}", { since: gulp.lastRun(images) })
-		.pipe(gulpCache(webp(), { name: "webp" }), gulpCache(imagemin(), { name: "imagemin" }))
+		.src("public/**/*.{jpg,jpeg,png,svg,gif,tiff,webp}", { since: gulp.lastRun(minifyImages) })
+		.pipe(gulpCache(imagemin(), { name: "imagemin" }))
+		.pipe(gulp.dest("dist"));
+}
+
+function convertToWebpAndMinifyImages() {
+	return gulp
+		.src("public/**/*.{jpg,jpeg,png,svg,gif,tiff}", {
+			since: gulp.lastRun(convertToWebpAndMinifyImages),
+		})
+		.pipe(
+			gulpCache(webp(), { name: "webp-convert" }),
+			gulpCache(imagemin(), { name: "webp-imagemin" }),
+		)
 		.pipe(gulp.dest("dist"));
 }
 
@@ -59,14 +77,10 @@ function serveOnly(cb) {
 	connect.server({ root: "dist", livereload: true });
 }
 
-function watchAndServe() {
-	return gulp.parallel(serveOnly, watchOnly);
-}
-
 exports.css = css;
 exports.html = html;
-exports.images = images;
+exports.images = gulp.parallel(minifyImages, convertToWebpAndMinifyImages);
 exports.otherwise = otherwise;
 exports.watch = serveOnly;
 
-exports.default = gulp.parallel(css, html, images, otherwise);
+exports.default = gulp.parallel(css, html, minifyImages, convertToWebpAndMinifyImages, otherwise);
