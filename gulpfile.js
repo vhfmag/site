@@ -15,10 +15,18 @@ const webp = require("gulp-webp");
 
 const connect = require("gulp-connect");
 
+const filter = require("gulp-filter");
+const concatCSS = require("gulp-concat-css");
+
 function css() {
+	const layoutFilter = filter(['public/css/layout.css'], { restore: true });
+
 	return gulp
-		.src("public/**/*.css", { since: gulp.lastRun(css) })
-		.pipe(gulpCache(postcss([postcssPresetEnv(), cssnano()]), { name: "css" }))
+		.src(["public/**/*.css", "!public/css/{cssremedy,utility}.css", "!public/fonts/*.css"], { since: gulp.lastRun(css) })
+		.pipe(layoutFilter)
+		.pipe(concatCSS("css/layout.css", { commonBase: '.' }))
+		.pipe(layoutFilter.restore)
+		.pipe(postcss([postcssPresetEnv(), cssnano()]), { name: "css" })
 		.pipe(gulp.dest("dist"));
 }
 
@@ -77,10 +85,15 @@ function serveOnly(cb) {
 	connect.server({ root: "dist", livereload: true });
 }
 
+function clearCache() {
+	return gulpCache.clearAll();
+}
+
 exports.css = css;
 exports.html = html;
 exports.images = gulp.parallel(minifyImages, convertToWebpAndMinifyImages);
 exports.otherwise = otherwise;
 exports.watch = serveOnly;
+exports["clear-cache"] = clearCache;
 
 exports.default = gulp.parallel(css, html, minifyImages, convertToWebpAndMinifyImages, otherwise);
