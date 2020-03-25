@@ -20,7 +20,7 @@ ogtype: website
 
         <link rel="webmention" href="{{ site.webmentionUrl }}"/>
         <link rel="pingback" href="{{ site.pingbackUrl }}"/>
-        <link rel="canonical" href="{{ site.canonicalUrl }}"/>
+        <link rel="canonical" href="{{ site.canonicalUrl }}{{ page.url }}"/>
         <link rel="authorization_endpoint" href="{{ site.indieAuthUrl }}">
         <link rel="token_endpoint" href="{{ site.indieAuthTokenUrl }}">
         <link rel="micropub" href="{{ site.micropubUrl }}">
