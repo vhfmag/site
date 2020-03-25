@@ -1,4 +1,8 @@
 ---
 date: {{ published }}
 likeOf: {{ likeOf }}
+{% if likeOf %}
+    - types: [like-of]
+      link: {{ likeOf }}
+{% endif %}
 ---

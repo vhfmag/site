@@ -2,9 +2,7 @@
 layout: entry
 ---
 
+{% siloEmbed likeOf %}
+
 <a href="{{ likeOf }}" class="u-like-of">{% titleFromUrl likeOf %}</a>
 foi curtido
-
-{% for link in links %}
-    {% siloEmbed link.link %}
-{% endfor %}
