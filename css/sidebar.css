@@ -170,6 +170,8 @@ body[data-theme="light"] [data-theme="light"] {
 @media (max-width: 800px) {
 	.main-sidebar .inline-mobile {
 		display: inline-block;
+		margin-top: 0.5em;
+		margin-bottom: 0.5em;
 	}
 
 	.main-sidebar .inline-mobile + .inline-mobile::before {
