@@ -178,3 +178,14 @@ plugins = [
     for = "/*.webmanifest"
     [headers.values]
         Cache-Control = "no-cache"
+
+# Plugins
+
+[[plugins]]
+package = "netlify-plugin-subfont"
+
+[[plugins]]
+package = "netlify-plugin-image-optim"
+
+[[plugins]]
+package = "netlify-plugin-checklinks"
