@@ -18,13 +18,20 @@ const connect = require("gulp-connect");
 const filter = require("gulp-filter");
 const concatCSS = require("gulp-concat-css");
 
+const fileCache = new gulpCache.Cache({
+	cacheDirName: "gulp-cache",
+	tmpDir: "./node_modules/.cache",
+});
+
 function css() {
-	const layoutFilter = filter(['public/css/layout.css'], { restore: true });
+	const layoutFilter = filter(["public/css/layout.css"], { restore: true });
 
 	return gulp
-		.src(["public/**/*.css", "!public/css/{cssremedy,utility}.css", "!public/fonts/*.css"], { since: gulp.lastRun(css) })
+		.src(["public/**/*.css", "!public/css/{cssremedy,utility}.css", "!public/fonts/*.css"], {
+			since: gulp.lastRun(css),
+		})
 		.pipe(layoutFilter)
-		.pipe(concatCSS("css/layout.css", { commonBase: '.' }))
+		.pipe(concatCSS("css/layout.css", { commonBase: "." }))
 		.pipe(layoutFilter.restore)
 		.pipe(postcss([postcssPresetEnv(), cssnano()]), { name: "css" })
 		.pipe(gulp.dest("dist"));
@@ -43,7 +50,7 @@ function html() {
 					imgAutosize({ processEmptySize: true }),
 					htmlnano(),
 				]),
-				{ name: "html" },
+				{ name: "html", fileCache },
 			),
 		)
 		.pipe(gulp.dest("dist"));
@@ -52,7 +59,7 @@ function html() {
 function minifyImages() {
 	return gulp
 		.src("public/**/*.{jpg,jpeg,png,svg,gif,tiff,webp}", { since: gulp.lastRun(minifyImages) })
-		.pipe(gulpCache(imagemin(), { name: "imagemin" }))
+		.pipe(gulpCache(imagemin(), { name: "imagemin", fileCache }))
 		.pipe(gulp.dest("dist"));
 }
 
@@ -62,8 +69,8 @@ function convertToWebpAndMinifyImages() {
 			since: gulp.lastRun(convertToWebpAndMinifyImages),
 		})
 		.pipe(
-			gulpCache(webp(), { name: "webp-convert" }),
-			gulpCache(imagemin(), { name: "webp-imagemin" }),
+			gulpCache(webp(), { name: "webp-convert", fileCache }),
+			gulpCache(imagemin(), { name: "webp-imagemin", fileCache }),
 		)
 		.pipe(gulp.dest("dist"));
 }
