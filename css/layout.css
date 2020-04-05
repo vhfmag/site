@@ -85,29 +85,29 @@ dt {
 	}
 }
 
+body,
+body[data-theme="auto"],
+body[data-theme="dark"] {
+	--textColor: var(--dark-text-color);
+	--backgroundColor: var(--dark-background-color);
+	--themeColor: var(--dark-theme-color);
+	--themeColor60: var(--dark-muted-theme-color);
+}
+
 body[data-theme="light"] {
-	--textColor: hsl(0, 0%, 0%);
-	--backgroundColor: hsl(295.2, 5%, 90%);
-	--themeColor: hsl(295.2, 60%, 40%);
-	--themeColor60: hsla(295.2, 60%, 40%, 60%);
+	--textColor: var(--light-text-color);
+	--backgroundColor: var(--light-background-color);
+	--themeColor: var(--light-theme-color);
+	--themeColor60: var(--light-muted-theme-color);
 }
 
 @media (prefers-color-scheme: light) {
 	body[data-theme="auto"] {
-		--textColor: hsl(0, 0%, 0%);
-		--backgroundColor: hsl(295.2, 5%, 90%);
-		--themeColor: hsl(295.2, 60%, 45%);
-		--themeColor60: hsla(295.2, 60%, 45%, 60%);
+		--textColor: var(--light-text-color);
+		--backgroundColor: var(--light-background-color);
+		--themeColor: var(--light-theme-color);
+		--themeColor60: var(--light-muted-theme-color);
 	}
-}
-
-body,
-body[data-theme="auto"],
-body[data-theme="dark"] {
-	--textColor: hsl(0, 0%, 93%);
-	--backgroundColor: hsl(295.2, 15%, 10%);
-	--themeColor: hsl(295.2, 81.7%, 70%);
-	--themeColor60: hsla(295.2, 81.7%, 70%, 60%);
 }
 
 /* The rest of the stuff */
