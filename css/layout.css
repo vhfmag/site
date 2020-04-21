@@ -306,7 +306,7 @@ main {
 
 @media (max-width: 800px) {
 	:root {
-		--root-padding: 1em;
+		--root-padding: 1rem;
 	}
 
 	.desktop-only {
