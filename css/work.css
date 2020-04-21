@@ -7,7 +7,7 @@ main.work .timeline {
 main.work .timeline > li {
 	--marker-box: 1em;
 	--marker-size: 0.8em;
-	--marker-top: var(--s-2);
+	--marker-top: var(--s-1);
 	--marker-margin: calc((var(--marker-box) - var(--marker-size)) / 2);
 
 	padding-left: var(--s1);
