@@ -2,7 +2,7 @@
 	"scripts": {
 		"build": "NODE_ENV=production yarn build-dev && gulp",
 		"build-dev": "eleventy --passthroughall",
-		"dev": "yarn build-dev --serve",
+		"dev": "SKIP_WEBMENTIONIO=${SKIP_WEBMENTIONIO:-true} yarn build-dev --serve",
 		"postinstall": "patch-package"
 	},
 	"devDependencies": {
