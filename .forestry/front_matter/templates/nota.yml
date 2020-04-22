@@ -4,23 +4,29 @@ hide_body: false
 fields:
 - type: text
   name: title
-  label: title
+  label: Title
 - type: textarea
   name: description
-  label: description
-- type: list
-  name: customTags
-  label: customTags
+  label: Description
+- type: datetime
+  name: date
+  label: Publication Date
+  config:
+    required: true
+  default: now
+- name: draft
+  type: boolean
+  label: Draft
 - type: field_group_list
   name: links
-  label: links
+  label: Links
   fields:
   - type: list
     name: types
-    label: types
+    label: Link Types
   - type: text
     name: link
-    label: link
-- type: datetime
-  name: date
-  label: date
+    label: URL
+- type: list
+  name: customTags
+  label: Tags
