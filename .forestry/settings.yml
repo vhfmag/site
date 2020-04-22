@@ -9,6 +9,7 @@ sections:
   label: Photos
   create: all
   match: "**/*"
+  exclude: "*.json"
 - type: directory
   path: src/notes
   label: Notes
