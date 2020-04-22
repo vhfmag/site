@@ -423,10 +423,9 @@
     "@nodelib/fs.scandir" "2.1.3"
     fastq "^1.6.0"
 
-"@remy/webmention@1.4.3":
+"@remy/webmention@git+https://git@github.com/vhfmag/wm.git":
   version "1.4.3"
-  resolved "https://registry.yarnpkg.com/@remy/webmention/-/webmention-1.4.3.tgz#9d95cd8f13c77865af3afff910ae1b48616bce08"
-  integrity sha512-EBCVXWOF7llh9DYpLP/ezkm+pEhTFnF6aOEc+5qOyhYoCNz2fOppaI4vQoe6vr41wLIPfy35MmOYJz4UwSrK0g==
+  resolved "git+https://git@github.com/vhfmag/wm.git#c4a569c7db39d31d695ea987f4745428c9be246e"
   dependencies:
     cheerio "0.22.0"
     clui "^0.3.6"

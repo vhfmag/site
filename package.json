@@ -46,7 +46,7 @@
 		"postinstall-postinstall": "^2.0.0"
 	},
 	"dependencies": {
-		"@remy/webmention": "1.4.3",
+		"@remy/webmention": "git+https://git@github.com/vhfmag/wm.git",
 		"babel-loader": "^8.0.6",
 		"url-info-scraper": "^0.1.3"
 	}
