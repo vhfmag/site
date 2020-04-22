@@ -32,7 +32,7 @@ file_template: ":year:-:month:-:day:-:filename:"
 build:
   preview_env:
   - SKIP_WEBMENTIONIO=true
-  preview_output_directory: dist
+  preview_output_directory: public
   install_dependencies_command: yarn install
   preview_docker_image: node:10
   mount_path: "/srv"
