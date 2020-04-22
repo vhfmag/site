@@ -6,12 +6,23 @@ fields:
 - type: text
   name: title
   label: Title
+  config:
+    required: true
 - type: textarea
   name: description
   label: Description
-- type: list
-  name: customTags
-  label: Custom tags
+  config:
+    required: true
+- type: datetime
+  name: date
+  label: Publication date
+  config:
+    required: true
+  default: now
+- name: draft
+  type: boolean
+  label: Draft
+  default: false
 - type: field_group_list
   name: links
   label: Links
@@ -32,10 +43,6 @@ fields:
   - type: text
     name: link
     label: URL
-- type: datetime
-  name: date
-  label: Publication date
-- name: draft
-  type: boolean
-  label: Draft
-  default: false
+- type: list
+  name: customTags
+  label: Custom tags
