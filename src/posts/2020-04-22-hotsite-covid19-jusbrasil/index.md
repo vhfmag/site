@@ -71,7 +71,7 @@ Antes de adotar o _framework_{lang=en}, eu consultei alguns amigos que já o tin
 
 Para navegar internamente em um site feito com _Next.js_{lang=en}, não se pode simplesmente usar a âncora do HTML (`<a>`), pelo menos não sem abrir mão da experiência de um _<abbr title="Single Page Application">SPA</abbr>_. Deve-se usar o componente `Link` fornecido pelo _framework_{lang=en}. Não bastando isso, não se pode apenas incluir a URL da página de destino diretamente se esta for uma rota dinâmica. Imagine, por exemplo, que você tem uma rota `/produtos/[id]`, a que se deseja linkar. Seu impulso inicial serial usar `<a href="/produtos/ventilador">Ventilador</a>`, mas você precisa usar o componente `Link` (`<Link href="/produtos/ventilador"><a>Ventilador</a></Link>`) e adequar seu uso à rota dinâmica (`<Link href="/produtos/[id]" as="/produtos/ventilador"><a>Ventilador</a></Link>`).
 
-O código é maior e menos legível, usos incorretos de `Link` passavam pelo _code review_{lang=en} e concorrentes como o [Sapper](https://sapper.svelte.dev/) [resolvem esse problema com âncoras comuns](https://sapper.svelte.dev/docs#Comparison_with_Next_js).
+O código é maior e menos legível, usos incorretos de `Link` passavam pelo _code review_{lang=en} e concorrentes como o [Sapper](https://sapper.svelte.dev/) resolvem esse problema [com âncoras comuns](https://sapper.svelte.dev/docs#Comparison_with_Next_js).
 
 </dd>
 
