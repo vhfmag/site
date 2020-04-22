@@ -5,26 +5,37 @@ admin_path: ''
 webhook_url: 
 sections:
 - type: directory
-  path: src/photos
-  label: Photos
+  path: src/posts
+  label: Posts
   create: all
   match: "**/*"
   exclude: "*.json"
+  templates:
+  - post
 - type: directory
   path: src/notes
   label: Notes
   create: all
   match: "**/*"
+  exclude: "*.json"
+  templates:
+  - post
 - type: directory
   path: src/bookmarks
   label: Bookmarks
   create: all
   match: "**/*"
+  exclude: "*.json"
+  templates:
+  - post
 - type: directory
-  path: src/posts
-  label: Posts
+  path: src/photos
+  label: Photos
   create: all
   match: "**/*"
+  exclude: "*.json"
+  templates:
+  - post
 upload_dir: uploads
 public_path: "/uploads"
 front_matter_path: ''
