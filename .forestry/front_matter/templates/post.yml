@@ -1,0 +1,26 @@
+---
+label: Post
+hide_body: false
+fields:
+- type: text
+  name: title
+  label: title
+- type: textarea
+  name: description
+  label: description
+- type: list
+  name: customTags
+  label: customTags
+- type: field_group_list
+  name: links
+  label: links
+  fields:
+  - type: list
+    name: types
+    label: types
+  - type: text
+    name: link
+    label: link
+- type: datetime
+  name: date
+  label: date
