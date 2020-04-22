@@ -16,7 +16,7 @@ E assim nasceu o projeto do [hotsite do COVID19 do Jusbrasil](https://covid19.ju
 
 ## Requisitos
 
-Depois de colocar no ar um _<abbr title="Minimum Viable Product">MVP</abbr>_{lang=en} que contemplava o funcionamento de tribunais ([arquivado aqui](http://archive.today/2020.04.21-155640/https://tribunais-corona.webflow.io/)), nos debruçamos sobre o escopo do projeto e seus requisitos, técnicos ou não.
+Depois de colocar no ar um _<abbr title="Minimum Viable Product">MVP</abbr>_{lang=en} que contemplava o funcionamento de tribunais ([arquivado aqui](http://archive.today/2020.04.21-155640/https://tribunais-corona.webflow.io/)) feito com a ferramenta no-code [webflow](https://webflow.com/), nos debruçamos sobre o escopo do projeto e seus requisitos, técnicos ou não.
 
 O hotsite devia:
 
@@ -37,7 +37,7 @@ Finalmente chegamos à parte técnica!
 
 ### Next.js
 
-Optamos por construir o site usando o [Next.js](https://nextjs.org/), o que nos permitiu ter um site feito com [React](https://reactjs.org/) pronto para _<abbr title="Server-Side Rendering">SSR</abbr>_{lang=en} com o mínimo de configuração, nos poupando tempo de desenvolvimento por nos permitir começar mais rápido a efetivamente codar e usando uma stack familiar aos desenvolvedores da empresa. Nossa experiência com o _ramework_{lang=en} foi, em geral, ótima, bastando rodar `npx create-next-app covid19 --example with-relay-modern` para ter um boilerplate funcional se conectando à nossa API; bastaram minutos para estarmos com um projeto funcional onde podíamos colaborar.
+Optamos por construir o site usando o [Next.js](https://nextjs.org/), o que nos permitiu ter um site feito com React pronto para _<abbr title="Server-Side Rendering">SSR</abbr>_{lang=en} com o mínimo de configuração, nos poupando tempo de desenvolvimento por nos permitir começar mais rápido a efetivamente codar e usando uma stack familiar aos desenvolvedores da empresa. Nossa experiência com o _framework_{lang=en} foi, em geral, ótima, bastando rodar `npx create-next-app covid19 --example with-relay-modern` para ter um boilerplate funcional se conectando à nossa API; bastaram minutos para estarmos com um projeto funcional onde podíamos colaborar.
 
 Os únicos contras que eu citaria são:
 
@@ -69,7 +69,7 @@ Links no _Next.js_{lang=en} são... confusos
 
 Antes de adotar o _framework_{lang=en}, eu consultei alguns amigos que já o tinham usado para saber como tinha sido a experiência e se eles recomendavam. A maioria dos feedbacks foi positiva, mas um em particular foi uma expressão inquestionável de um trauma: <q>_Next.js_{lang=en} é o pior _framework_{lang=en} que existe!!!</q>. A origem do trauma? Links que não funcionavam.
 
-Para navegar internamente em um site feito com _Next.js_{lang=en}, não se pode simplesmente usar a âncora do HTML (`<a>`), pelo menos não sem abrir mão da experiência de um _<abbr title="Single Page Application">SPA</abbr>_. Deve-se usar o componente `Link` fornecido pelo _framework_{lang=en}. Não bastando isso, não se pode apenas incluir a URL da página de destino diretamente se esta for uma rota dinâmica. Imagine, por exemplo, que você tem uma rota `/produtos/[id]`, a que se deseja linkar. Seu impulso inicial serial usar `<a href="/produtos/ventilador">Ventilador</a>`, mas você precisa usar o componente `Link` (`<Link href="/produtos/ventilador"><a>Ventilador</a></Link>`) e adequar seu uso à rota dinâmica (`<Link href="/produtos/[id]" as="/produtos/ventilador"><a>Ventilador</a></Link>`).
+Para navegar internamente em um site feito com _Next.js_{lang=en}, não se pode simplesmente usar a âncora do HTML (`<a>`), pelo menos não sem abrir mão da experiência de um _<abbr title="Single Page Application">SPA</abbr>_. Deve-se usar o componente `Link` fornecido pelo _framework_{lang=en}. Não bastando isso, não se pode apenas incluir a URL da página de destino diretamente se esta for uma rota dinâmica. Imagine, por exemplo, que você tem uma rota `/produtos/[id]` (o que equivale a um arquivo `pages/produtos/[id].js`), a que se deseja linkar. Talvez nosso impulso inicial fosse usar `<a href="/produtos/ventilador">Ventilador</a>`, mas precisaríamos usar o componente `Link` (`<Link href="/produtos/ventilador"><a>Ventilador</a></Link>`) e adequar seu uso à rota dinâmica (`<Link href="/produtos/[id]" as="/produtos/ventilador"><a>Ventilador</a></Link>`).
 
 O código é maior e menos legível, usos incorretos de `Link` passavam pelo _code review_{lang=en} e concorrentes como o [Sapper](https://sapper.svelte.dev/) resolvem esse problema [com âncoras comuns](https://sapper.svelte.dev/docs#Comparison_with_Next_js).
 
@@ -77,7 +77,9 @@ O código é maior e menos legível, usos incorretos de `Link` passavam pelo _co
 
 ### Strapi
 
-Como o conteúdo do site precisaria ser modificado com frequência e alimentado por diferentes times, percebemos de cara que precisaríamos de um _<abbr title="Content Management System">CMS</abbr>_{lang=en} _headless_{lang=en}. [Existem diversas opções](https://serverless.css-tricks.com/services/cmss), de <abbr title="Software as a Service">SaaS</abbr> como o [Contentful](https://www.contentful.com/) a opções open source e _self-hosted_{lang=en}. Optamos pelo [Strapi](https://strapi.io/) pela flexibilidade do _<abbr title="Content Management System">CMS</abbr>_{lang=en} e por ser possível hosteá-lo na nossa infraestrutura, evitando gastos desnecessários.
+Como o conteúdo do site precisaria ser modificado com frequência e alimentado por diferentes times, percebemos de cara que precisaríamos de um _<abbr title="Content Management System">CMS</abbr>_{lang=en} _headless_{lang=en} (e você acabou de marcar duas palavras no bingo das _buzzwords_{lang=en}). _<abbr title="Content Management System">CMS</abbr>_{lang=en} ou _Content Management System_{lang=en} é um sistema que te permite criar, deletar e modificar conteúdo, como o Wordpress e o Drupal. Tradicionalmente, um CMS é associado a um site em particular e é o responsável por gerá-lo, como é o caso dos dois citados. Quando esse não é o caso e cabe à página pegar o conteúdo através de uma _<abbr title="Abstract Programming Interface">API</abbr>_{lang=en}, dizemos que esse _<abbr title="Content Management System">CMS</abbr>_{lang=en} é _headless_{lang=en}.
+
+[Existem diversas opções](https://serverless.css-tricks.com/services/cmss), desde <abbr title="Software as a Service">SaaS</abbr> como o [Contentful](https://www.contentful.com/) até opções open source e _self-hosted_{lang=en}. Optamos pelo [Strapi](https://strapi.io/) pela flexibilidade do _<abbr title="Content Management System">CMS</abbr>_{lang=en} e por ser possível hosteá-lo na nossa infraestrutura, evitando gastos desnecessários.
 
 A experiência foi positiva: os tipos de campo disponíveis atenderam a maior parte das nossas necessidades, a interface é intuitiva e ele aguentou nossa carga com uma performance satisfatória. Como sempre, encontramos alguns problemas:
 
@@ -105,11 +107,17 @@ Nós ficaríamos um pouco mais seguros sabendo que o Strapi está validando por 
 
 -   Compartilhar o volume entre várias instâncias do serviço
 -   Mudar configurações é difícil
--   Instalar plugins é difícil
+-   Instalar plugins é difícil (se fosse mais fácil teríamos usado o de GraphQL e o de mudar tamanho de imagens)
 
 </dd>
 
 </dl>
+
+### Typescript
+
+O que dizer? Eu estava na fase inicial do projeto, então ele é feito em Typescript. 🤷
+
+-   Eu criei um sistema de tipos excessivamente complexo para os dados vindos da API do Strapi. Como o tipo dependia da profundidade de um tipo no retorno da API (ex: se eu pego posts, que tem autores, o post tem autores, mas cada autor tem sua lista de posts como ids), a complexidade aumentou, e de repente tinha componentes aceitando o tipo raiz ou o tipo aninhado. Depois, adicionamos parsing (ex: data vem como string, o parser transforma em data) e adicionamos mais dois tipos no bolo. Adicionar um tipo novo era confuso e complexo. Me fez ter saudade do GraphQL.
 
 <hr/>
 
