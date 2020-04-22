@@ -5,6 +5,16 @@ admin_path: ''
 webhook_url: 
 sections:
 - type: directory
+  path: src/notes
+  label: Notes
+  create: all
+  match: "**/*"
+- type: directory
+  path: src/bookmarks
+  label: Bookmarks
+  create: all
+  match: "**/*"
+- type: directory
   path: src/posts
   label: Posts
   create: all
