@@ -19,7 +19,7 @@ sections:
   match: "**/*"
   exclude: "*.json"
   templates:
-  - post
+  - nota
 - type: directory
   path: src/bookmarks
   label: Bookmarks
