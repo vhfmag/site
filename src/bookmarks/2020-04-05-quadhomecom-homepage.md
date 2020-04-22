@@ -20,7 +20,7 @@ syndicationLinks:
 >
 > Those ones and zeros reside on someone else's property, surrounded by dirt, guns, and tax.
 
-I don't about the legal and ethical status of ripping off the entirety someone else's content and republish it (if you're the author and want it removed, please e-mail me you complaint).
+I don't about the legal and ethical status of ripping off the entirety someone else's content and republish it (if you're the author and want it removed, please e-mail me your complaint).
 
 Anyway, my point is that it's AWESOME. Specially this part:
 
