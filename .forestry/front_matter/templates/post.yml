@@ -4,23 +4,37 @@ hide_body: false
 fields:
 - type: text
   name: title
-  label: title
+  label: Title
 - type: textarea
   name: description
-  label: description
+  label: Description
 - type: list
   name: customTags
-  label: customTags
+  label: Custom tags
 - type: field_group_list
   name: links
-  label: links
+  label: Links
   fields:
   - type: list
     name: types
-    label: types
+    label: Link types
+    config:
+      use_select: true
+      source:
+        type: simple
+      options:
+      - bookmark-of
+      - in-reply-to
+      - repost-of
+      - like-of
+      - mention-of
   - type: text
     name: link
-    label: link
+    label: URL
 - type: datetime
   name: date
-  label: date
+  label: Publication date
+- name: draft
+  type: boolean
+  label: Draft
+  default: false
