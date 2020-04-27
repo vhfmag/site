@@ -55,7 +55,7 @@ plugins = [
         Referrer-Policy = "same-origin"
         Cross-Origin-Resource-Policy = "same-origin"
         Cross-Origin-Embedder-Policy = "require-corp"
-        Content-Security-Policy = "default-src 'self'; img-src 'self' https://webmention.io *.amazonaws.com; script-src 'self'; style-src 'self' 'unsafe-inline' https://rsms.me/; font-src 'self' https://rsms.me/; manifest-src 'self'; frame-src 'self' *.youtube.com *.youtu.be invidio.us *.netlify.com https://codesandbox.io"
+        Content-Security-Policy = "default-src 'self'; img-src 'self' https://webmention.io *.amazonaws.com; script-src 'self'; style-src 'self' 'unsafe-inline' https://rsms.me/; font-src 'self' https://rsms.me/; manifest-src 'self'; frame-src 'self' *.youtube.com *.youtu.be invidio.us *.netlify.app https://codesandbox.io"
 
 [[headers]]
     for = "/*.css"
