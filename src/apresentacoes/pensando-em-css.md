@@ -1,6 +1,6 @@
 ---
 title: "Pensando em CSS"
-link: https://pensando-em-css.netlify.com/
+link: https://pensando-em-css.netlify.app/
 date: 2020-01-04
 ---
 

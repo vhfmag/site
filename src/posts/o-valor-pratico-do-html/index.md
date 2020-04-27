@@ -5,7 +5,7 @@ customTags: ["Técnico"]
 date: 2019-02-21
 ---
 
-> Veja também minha [apresentação](https://jsisnottheweb-html.netlify.com/) sobre o mesmo tema.
+> Veja também minha [apresentação](https://jsisnottheweb-html.netlify.app/) sobre o mesmo tema.
 
 Preencher formulários é frustrante o suficiente para que vários artigos tenham sido feitos sobre [como melhorar a experiência de preencher um](https://medium.com/@sympli/6-super-quick-ways-to-improve-the-ux-of-forms-9e0bf152b259) ou até [como convencer alguém a fazer isso](https://medium.com/@prashanth.mahadeva/making-people-fill-forms-8569cc273047). Pior ainda é aquele <i lang='en'>checkbox</i> de termos de privacidade no final de um formulário. Mas se existe justiça divina, existe alguma punição pra quem faz esse <i lang='en'>checkbox</i> sem uma <i lang='en'>label</i>, impedindo de clicar no texto pra marcar:
 
