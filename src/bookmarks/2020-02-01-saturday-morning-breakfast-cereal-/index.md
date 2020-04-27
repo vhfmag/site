@@ -5,7 +5,6 @@ links:
       link: "https://www.smbc-comics.com/comic/mucho"
 date: 2020-02-01T17:33:03.482+00:00
 syndicationLinks:
-
 ---
 
-![](https://www.smbc-comics.com/comics/1580572600-20200201.png)
+![](assets/tirinha.png)

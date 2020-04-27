@@ -5,11 +5,9 @@ links:
       link: "https://manualdominotauro.blogspot.com/2020/02/07-11-2018.html"
 date: 2020-02-01T20:23:37.546+00:00
 syndicationLinks:
-
     - https://brid.gy/publish/twitter
 
     - https://brid.gy/publish/mastodon
-
 ---
 
-![](https://1.bp.blogspot.com/-1Ajz5iUvz9o/XjXXAJurozI/AAAAAAAAGts/0wVZPy1gb28X2aL61YaSVB3ubQXeNKwIgCLcBGAsYHQ/s640/1107.jpg)
+![](assets/tirinha.jpg)

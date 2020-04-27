@@ -15,7 +15,7 @@ Em novembro de 2017, Safari e Edge se juntaram ao Firefox e ao Chrome ao lançar
 -   Jogos na Web tem acesso a um novo patamar de recursos – e <i lang='en'>engines</i> como [o <i lang='en'>Unity</i>](https://blogs.unity3d.com/2018/08/15/webassembly-is-here/) já geram WebAssembly
 -   Algoritmos como os de [visão computacional](https://github.com/Web-Sight/WebSight) podem ser portados para a Web com performance satisfatória:
 
-![Gravação de comparativo de performance entre WebAssembly, asm.js e Javascript](https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2017/09/websight.gif)
+![Gravação de comparativo de performance entre WebAssembly, asm.js e Javascript](./assets/websight-demo.gif)
 
 Ou seja, WebAssembly enterra de uma vez por todas o passado sombrio da Web de Flash e Java applets. Agora, performance próxima de nativa é uma funcionalidade especificada na Web e implementada pelos principais navegadores. 🎉
 
