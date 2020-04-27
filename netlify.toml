@@ -53,9 +53,9 @@ plugins = [
         X-XSS-Protection = "1; mode=block"
         X-Content-Type-Options = "nosniff"
         Referrer-Policy = "same-origin"
-        Cross-Origin-Resource-Policy = "same-origin"
-        Cross-Origin-Embedder-Policy = "require-corp"
-        Content-Security-Policy = "default-src 'self'; img-src 'self' https://webmention.io *.amazonaws.com; script-src 'self'; style-src 'self' 'unsafe-inline' https://rsms.me/; font-src 'self' https://rsms.me/; manifest-src 'self'; frame-src 'self' *.youtube.com *.youtu.be invidio.us *.netlify.app https://codesandbox.io"
+        # Cross-Origin-Resource-Policy = "same-site"
+        # Cross-Origin-Embedder-Policy = "require-corp"
+        Content-Security-Policy = "default-src 'self'; img-src 'self' https://webmention.io; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; manifest-src 'self'; frame-src 'self' *.youtube.com *.youtu.be invidio.us *.netlify.app https://codesandbox.io"
 
 [[headers]]
     for = "/*.css"
