@@ -1,7 +1,7 @@
 plugins = [
-    { type = "netlify-plugin-subfont" },
-    { type = "netlify-plugin-checklinks" },
-    { type = "netlify-plugin-debug-cache" },
+    { package = "netlify-plugin-subfont" },
+    { package = "netlify-plugin-checklinks" },
+    { package = "netlify-plugin-debug-cache" },
 ]
 
 [build]
@@ -53,8 +53,8 @@ plugins = [
         X-XSS-Protection = "1; mode=block"
         X-Content-Type-Options = "nosniff"
         Referrer-Policy = "same-origin"
-        
-        Content-Security-Policy = "default-src 'self'; img-src 'self' https://webmention.io *.amazonaws.com; script-src 'self' https://instant.page/3.0.0; style-src 'self' 'unsafe-inline' https://rsms.me/; font-src 'self' https://rsms.me/; manifest-src 'self'; frame-src 'self' *.youtube.com *.youtu.be invidio.us *.netlify.com https://codesandbox.io"
+        Cross-Origin-Resource-Policy = "same-origin"
+        Content-Security-Policy = "default-src 'self'; img-src 'self' https://webmention.io *.amazonaws.com; script-src 'self'; style-src 'self' 'unsafe-inline' https://rsms.me/; font-src 'self' https://rsms.me/; manifest-src 'self'; frame-src 'self' *.youtube.com *.youtu.be invidio.us *.netlify.com https://codesandbox.io"
 
 [[headers]]
     for = "/*.css"
