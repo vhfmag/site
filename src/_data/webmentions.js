@@ -4,7 +4,6 @@ const _ = require("lodash");
 
 const apiBase = "https://webmention.io/api/mentions.jf2";
 const shouldSkipWebmentions = process.env.SKIP_WEBMENTIONIO === "true";
-console.log({ shouldSkipWebmentions });
 const token = process.env.WEBMENTIONIO_TOKEN;
 
 /**
