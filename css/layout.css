@@ -302,6 +302,10 @@ main {
 	--main-max-width: 60ch;
 	max-width: var(--main-max-width);
 	font-size: calc(1em + 0.15vw);
+
+	--min-font-size: 0.9rem;
+	--max-font-size: 1.25rem;
+	font-size: clamp(var(--min-font-size), var(--c-1) + 1vw, var(--max-font-size));
 }
 
 @media (max-width: 800px) {

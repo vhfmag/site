@@ -23,6 +23,28 @@
 	--s8: calc(var(--s7) * var(--ratio));
 	--s9: calc(var(--s8) * var(--ratio));
 	--s10: calc(var(--s9) * var(--ratio));
+
+	--c-10: calc(var(--c-9) / var(--ratio));
+	--c-9: calc(var(--c-8) / var(--ratio));
+	--c-8: calc(var(--c-7) / var(--ratio));
+	--c-7: calc(var(--c-6) / var(--ratio));
+	--c-6: calc(var(--c-5) / var(--ratio));
+	--c-5: calc(var(--c-4) / var(--ratio));
+	--c-4: calc(var(--c-3) / var(--ratio));
+	--c-3: calc(var(--c-2) / var(--ratio));
+	--c-2: calc(var(--c-1) / var(--ratio));
+	--c-1: calc(var(--c0) / var(--ratio));
+	--c0: 1em;
+	--c1: calc(var(--c0) * var(--ratio));
+	--c2: calc(var(--c1) * var(--ratio));
+	--c3: calc(var(--c2) * var(--ratio));
+	--c4: calc(var(--c3) * var(--ratio));
+	--c5: calc(var(--c4) * var(--ratio));
+	--c6: calc(var(--c5) * var(--ratio));
+	--c7: calc(var(--c6) * var(--ratio));
+	--c8: calc(var(--c7) * var(--ratio));
+	--c9: calc(var(--c8) * var(--ratio));
+	--c10: calc(var(--c9) * var(--ratio));
 }
 
 /* colors */
