@@ -5,7 +5,6 @@ const rssPlugin = require("@11ty/eleventy-plugin-rss");
 const nestingTocPlugin = require("eleventy-plugin-nesting-toc");
 const eleventyPluginReadingTimePlugin = require("eleventy-plugin-reading-time");
 const seoPlugin = require("eleventy-plugin-seo");
-// const eleventyPluginLazyimagesPlugin = require("eleventy-plugin-lazyimages");
 
 const markdownIt = require("markdown-it");
 const mdPluginPrism = require("markdown-it-prism");
