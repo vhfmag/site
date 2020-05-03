@@ -3,7 +3,7 @@ package = "netlify-plugin-subfont"
     [plugins.inputs]
     recursive = false
     inlineCss = true
-    inlineFont = false
+    inlineFonts = false
     fontDisplay = "swap"
 
 [[plugins]]
