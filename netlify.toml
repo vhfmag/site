@@ -4,11 +4,11 @@ package = "netlify-plugin-subfont"
     recursive = false
     inlineCss = true
 
-# [[plugins]]
-# package = "netlify-plugin-checklinks"
+[[plugins]]
+package = "netlify-plugin-checklinks"
 
-# [[plugins]]
-# package = "netlify-plugin-debug-cache"
+[[plugins]]
+package = "netlify-plugin-debug-cache"
 
 [build]
     functions = "functions/"
