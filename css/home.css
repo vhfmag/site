@@ -55,7 +55,7 @@ main.home .post-list {
 }
 
 main.home .post-list.columns {
-	column-width: 15ch;
+	column-width: 14ch;
 }
 
 main.home .post-list li + li {
