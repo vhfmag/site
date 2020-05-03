@@ -58,7 +58,7 @@ package = "netlify-plugin-debug-cache"
         Referrer-Policy = "same-origin"
         # Cross-Origin-Resource-Policy = "same-site"
         # Cross-Origin-Embedder-Policy = "require-corp"
-        Content-Security-Policy = "default-src 'self'; img-src 'self' https://webmention.io; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; manifest-src 'self'; frame-src 'self' *.youtube.com *.youtu.be invidio.us *.netlify.app https://codesandbox.io"
+        Content-Security-Policy = "default-src 'self'; img-src 'self' https://webmention.io; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self'; manifest-src 'self'; frame-src 'self' *.youtube.com *.youtu.be invidio.us *.netlify.app https://codesandbox.io"
 
 [[headers]]
     for = "/*.css"
