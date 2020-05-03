@@ -3,6 +3,8 @@ package = "netlify-plugin-subfont"
     [plugins.inputs]
     recursive = false
     inlineCss = true
+    inlineFont = false
+    fontDisplay = "swap"
 
 [[plugins]]
 package = "netlify-plugin-debug-cache"
