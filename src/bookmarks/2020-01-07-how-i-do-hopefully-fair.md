@@ -5,6 +5,4 @@ links:
       link: "https://blog.pragmaticengineer.com/performance-reviews-for-software-engineers/"
 date: 2020-01-07T23:46:11.562+00:00
 syndicationLinks:
-
 ---
-

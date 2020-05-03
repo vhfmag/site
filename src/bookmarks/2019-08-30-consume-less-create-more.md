@@ -5,7 +5,6 @@ links:
       link: "https://tjcx.me/posts/consumption-distraction/"
 date: 2019-08-30T14:02:16.316+00:00
 syndicationLinks:
-
 ---
 
 > But the real tragedy of modern technology is that it’s turned us into consumers. Our voracious consumption of media parallels our consumption of fossil fuels, corn syrup, and plastic straws. And although we’re starting to worry about our consumption of those physical goods, we seem less concerned about our consumption of information.

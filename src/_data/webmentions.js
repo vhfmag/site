@@ -115,9 +115,9 @@ module.exports = async function fetchWebMentions() {
 	} while (lastWms.children.length > 0);
 
 	return _.mapValues(
-		_.groupBy(allWms, (l) => normalizeTarget(l[l["wm-property"]])),
-		(links) => ({
-			..._.groupBy(links, (l) => l["wm-property"]),
+		_.groupBy(allWms, l => normalizeTarget(l[l["wm-property"]])),
+		links => ({
+			..._.groupBy(links, l => l["wm-property"]),
 			all: links,
 		}),
 	);

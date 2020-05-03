@@ -5,7 +5,6 @@ links:
       link: "https://tumblr.austinkleon.com/post/614230846120034304"
 date: 2020-04-02T12:47:18.828+00:00
 syndicationLinks:
-
 ---
 
 > Measure the walls. Count the ribs. Notch the long days.

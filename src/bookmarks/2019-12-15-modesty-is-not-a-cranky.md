@@ -5,7 +5,6 @@ links:
       link: "https://aeon.co/essays/modesty-is-not-a-cranky-killjoy-but-a-way-to-get-more-from-life"
 date: 2019-12-15T11:05:26.011+00:00
 syndicationLinks:
-
 ---
 
 > Modesty involves breaking out of a way of experiencing life rooted in comparing yourself with others.

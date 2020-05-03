@@ -5,7 +5,6 @@ links:
       link: "https://quadhome.com/"
 date: 2020-04-05T22:24:11.757+00:00
 syndicationLinks:
-
 ---
 
 > Never one to miss an opportunity to ruin someone else's conversation, I interrupted.

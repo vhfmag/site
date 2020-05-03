@@ -5,7 +5,6 @@ links:
       link: "https://crimethinc.com/2014/08/18/feature-what-they-mean-when-they-say-peace"
 date: 2019-08-21T15:35:28.099+00:00
 syndicationLinks:
-
 ---
 
 > This is the same narrative we always hear from the authorities. **First, we must submit to their control; then they will address our concerns. All the problems we face, they insist, are caused by our refusal to cooperate**. This argument sounds most persuasive when it is dressed up in the rhetoric of democracy: those are “our” laws we should shut up and obey—“our” cops who are shooting and gassing us—“our” politicians and leaders begging us to return to business as usual. But to return to business as usual is to step daintily over the bodies of countless Michael Browns, consigning them to the cemetery and oblivion.

@@ -5,7 +5,6 @@ links:
       link: "http://blairreeves.me/2018/12/12/the-internet-as-television/"
 date: 2019-08-24T22:30:06.978+00:00
 syndicationLinks:
-
 ---
 
 > The promise of the internet was that of a panoply of riches; a nearly limitless tapestry of human potential where geography was no longer a factor. But what we’ve gotten is rather the opposite. The vast audiences of the internet are mostly guarded by gatekeepers who are careful to extract and monetize your identity for access. Rather than radically democratizing economic opportunity, the internet has done just the opposite, hyperconcentrating it in a just a few metro areas (and mostly for just a few types of people). Just as television was built in the Hollywood complex, so has tech’s center of gravity remained in Silicon Valley.

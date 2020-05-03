@@ -1,22 +1,23 @@
 ---
-title: ' Design machines'
+title: " Design machines"
 links:
     - types: [mention-of, bookmark-of]
-      link: 'https://louderthanten.com/coax/design-machines'
-date: '2019-02-13'
+      link: "https://louderthanten.com/coax/design-machines"
+date: "2019-02-13"
 customTags:
-  - Design
-  - Web
+    - Design
+    - Web
 ---
+
 Qual é o problema do design digital, hoje?
 
 > **Everything looks the same**
 
 Mas como nós chegamos aqui? O artigo lista as razões:
 
-> - Metrics-obsessed pseudo-science
-> - Copycat culture
-> - Crap content selling crap
+> -   Metrics-obsessed pseudo-science
+> -   Copycat culture
+> -   Crap content selling crap
 
 Ou seja:
 

@@ -1,14 +1,16 @@
 ---
-title: 'Did laughter make the mind? '
+title: "Did laughter make the mind? "
 links:
     - types: [mention-of, bookmark-of]
-      link: 'https://aeon.co/essays/does-laughter-hold-the-key-to-human-consciousness'
-date: '2019-02-12'
+      link: "https://aeon.co/essays/does-laughter-hold-the-key-to-human-consciousness"
+date: "2019-02-12"
 customTags:
-  - Psicologia
-  - Antropologia
+    - Psicologia
+    - Antropologia
 ---
+
 <abbr title="Resumindo">TL;DR</abbr>:
+
 > Collective laughter might have served as a social levelling device helping to keep everyone in line
 
 A parte mais interessante, para mim, é o exemplo dado por Jerome Lewis, que o viveu em seu estudo de campo com o povo Mbendjele, mais conhecido como pigmeus:

@@ -5,7 +5,6 @@ links:
       link: "https://www.invidio.us/watch?v=Sx4BVGPkdzk"
 date: 2019-08-26T11:07:37.819+00:00
 syndicationLinks:
-
 ---
 
 Se você entende inglês, assista!

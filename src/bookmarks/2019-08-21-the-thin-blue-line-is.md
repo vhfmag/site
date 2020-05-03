@@ -5,7 +5,6 @@ links:
       link: "https://crimethinc.com/2014/11/25/feature-the-thin-blue-line-is-a-burning-fuse"
 date: 2019-08-21T15:33:45.757+00:00
 syndicationLinks:
-
 ---
 
 > This also explains why struggles against the police have taken center stage in the popular imagination over the past decade. **The police are the front line of capitalism and racism in every fight**. You might never see the CEO who profits on fracking your water supply, but you’ll see the police who break up your protest against him. You might not meet the bank director or landlord who forces you out, but you will see the sheriff who comes to repossess your home or evict you. As a black person, you might never enter the gated communities of the ones who benefit most from white privilege, but you will encounter the overtly racist officers who profile, bully, and arrest you.

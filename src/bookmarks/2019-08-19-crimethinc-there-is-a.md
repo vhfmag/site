@@ -5,7 +5,6 @@ links:
       link: "https://crimethinc.com/2000/09/11/there-is-a-secret-world-concealed-within-this-one"
 date: 2019-08-19T14:45:39.267+00:00
 syndicationLinks:
-
 ---
 
 > This world, the so-called “real world,” is just a front. Pull back the curtain and you’ll see the libraries are all filled with runaways writing novels, the highways are humming with escapees and sympathizers, all the receptionists and sensible mothers are straining at the leash for a chance to show how alive they still are… and all that talk of practicality and responsibility is just threats and bluffing to keep us from reaching out our hands to find that heaven lies in reach before us.

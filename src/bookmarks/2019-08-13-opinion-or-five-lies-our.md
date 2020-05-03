@@ -8,8 +8,8 @@ date: 2019-08-13T20:27:34.178+00:00
 
 As 5 mentiras:
 
-- Career success is fulfilling.
-- I can make myself happy.
-- Life is an individual journey
-- You have to find your own truth.
-- Rich and successful people are worth more than poorer and less successful people.
+-   Career success is fulfilling.
+-   I can make myself happy.
+-   Life is an individual journey
+-   You have to find your own truth.
+-   Rich and successful people are worth more than poorer and less successful people.

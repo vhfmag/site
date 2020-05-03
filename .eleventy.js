@@ -57,7 +57,7 @@ function addCollection(eleventyConfig, collectionName, collectionFolders) {
 	});
 }
 
-module.exports = function(eleventyConfig) {
+module.exports = function (eleventyConfig) {
 	eleventyConfig.addAsyncShortcode = addAsyncShortcode;
 
 	eleventyConfig.addPassthroughCopy("js");
@@ -83,14 +83,7 @@ module.exports = function(eleventyConfig) {
 				permalinkBefore: false,
 				permalinkSymbol: "🔗",
 				slugify: s =>
-					encodeURIComponent(
-						deburr(
-							String(s)
-								.trim()
-								.toLowerCase()
-								.replace(/\s+/g, "-"),
-						),
-					),
+					encodeURIComponent(deburr(String(s).trim().toLowerCase().replace(/\s+/g, "-"))),
 			})
 			.use(mdPluginFootnote, {}),
 	);

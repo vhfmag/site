@@ -5,6 +5,4 @@ links:
       link: "https://vimeo.com/380157225"
 date: 2020-02-05T11:27:13.926+00:00
 syndicationLinks:
-
 ---
-
