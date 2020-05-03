@@ -43,7 +43,8 @@
 		"posthtml": "^0.13.0",
 		"posthtml-img-autosize": "^0.1.4",
 		"posthtml-webp": "^1.5.0",
-		"postinstall-postinstall": "^2.1.0"
+		"postinstall-postinstall": "^2.1.0",
+		"prettier": "^2.0.5"
 	},
 	"dependencies": {
 		"@remy/webmention": "git+https://git@github.com/vhfmag/wm.git",
