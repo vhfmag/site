@@ -172,6 +172,11 @@ body[data-theme="light"] .theme-button[data-theme="light"] {
 	border-radius: 0.2em;
 }
 
+.main-sidebar [role="search"] input:focus {
+	outline: 1px dotted var(--themeColor);
+	outline-offset: -0.25em;
+}
+
 .main-sidebar h1,
 .main-sidebar h2 {
 	margin: 0;
