@@ -45,6 +45,16 @@
 	gap: var(--s-3);
 }
 
+.theme-button {
+	color: var(--themeColor);
+	background-color: var(--backgroundColor);
+}
+
+.theme-button:focus-within {
+	outline: 1px dotted currentColor;
+	outline-offset: -0.25em;
+}
+
 .main-sidebar :any-link {
 	color: var(--themeColor);
 	border-bottom: none;
@@ -70,9 +80,9 @@
 	line-height: var(--h1-line-height);
 }
 
-body[data-theme="auto"] [data-theme="auto"],
-body[data-theme="dark"] [data-theme="dark"],
-body[data-theme="light"] [data-theme="light"] {
+body[data-theme="auto"] .theme-button[data-theme="auto"],
+body[data-theme="dark"] .theme-button[data-theme="dark"],
+body[data-theme="light"] .theme-button[data-theme="light"] {
 	color: var(--backgroundColor);
 	background-color: var(--themeColor);
 }
