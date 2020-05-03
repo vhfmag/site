@@ -102,6 +102,9 @@ module.exports = function(eleventyConfig) {
 		author: authorName,
 		twitter: "vhfmag",
 		img: "icons/icon-512x512.png",
+		options: {
+			titleDivider: "—",
+		},
 	});
 	eleventyConfig.addPlugin(excerptPlugin);
 	eleventyConfig.addPlugin(rssPlugin);
