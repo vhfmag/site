@@ -2,6 +2,7 @@
 package = "netlify-plugin-subfont"
     [plugins.inputs]
     recursive = false
+    inlineCss = true
 
 # [[plugins]]
 # package = "netlify-plugin-checklinks"
