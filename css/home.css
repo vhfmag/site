@@ -80,7 +80,7 @@ main > section:first-child > h2 {
 }
 
 main.home h2 {
-	border-bottom: 2px solid var(--themeColor);
+	border-bottom: 2px solid currentColor;
 	padding-bottom: var(--s-3);
 	margin-top: var(--heading-margin);
 }
