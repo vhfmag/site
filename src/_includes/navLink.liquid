@@ -1,8 +1,0 @@
-<a
-    {% if exact != true and page.url contains href or href == page.url %}class="current"{% endif %}
-    {% if href == page.url %}aria-current="page"{% endif %}
-    {% if directory and page.url contains href and href == page.url != true %}rel="directory"{% endif %}
-    href="{{ href }}"
->
-    {{ text }}
-</a>

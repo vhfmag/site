@@ -48,8 +48,9 @@ ogtype: website
 
         <meta name="monetization" content="$coil.xrptipbot.com/d8OkU_FdRMuSFJ2w8ac5Sw">
 
-        <!-- SEO! -->
-        {% seo %}
+        {% seo "" %}
+        {% block head %}
+        {% endblock %}
     </head>
     <body
         itemscope=""
@@ -59,7 +60,7 @@ ogtype: website
         data-theme="auto"
     >
         <a href="#main" class="skip-nav">Pular para conteúdo</a>
-        {% include sidebar %}
+        {% include "sidebar.njk" %}
         <main id="main" class="{{ mainClass }}">{{ content | safe }}</main>
     </body>
 </html>

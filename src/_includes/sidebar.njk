@@ -1,8 +1,19 @@
 {% if mainClass == "home" %}
-    {% assign nameTag = "h1" %}
+    {% set nameTag = "h1" %}
 {% else %}
-    {% assign nameTag = "div" %}
+    {% set nameTag = "div" %}
 {% endif %}
+
+{% macro navLink(href, text, directory = false, exact = false) %}
+<a
+    {% if exact != true and (href in page.url or href == page.url) %}class="current"{% endif %}
+    {% if href == page.url %}aria-current="page"{% endif %}
+    {% if directory and href in page.url and href != page.url %}rel="directory"{% endif %}
+    href="{{ href }}"
+>
+    {{ text }}
+</a>
+{% endmacro %}
 
 <header
     itemscope=""
@@ -38,25 +49,25 @@
     <nav aria-label="Principal">
         <ul>
             <li>
-                {% include navLink with href: "/", text: "home", exact: true %}
+                {{ navLink("/", "home", exact = true) }}
             </li>
             <li>
-                {% include navLink with href: "/posts", text: "posts", directory: true %}
+                {{ navLink("/posts", "posts", directory = true) }}
             </li>
             <li>
-                {% include navLink with href: "/bookmarks", text: "recomendações", directory: true %}
+                {{ navLink("/bookmarks", "recomendações", directory = true) }}
             </li>
             <li>
-                {% include navLink with href: "/notes", text: "notas", directory: true %}
+                {{ navLink("/notes", "notas", directory = true) }}
             </li>
             <li>
-                {% include navLink with href: "/apresentacoes", text: "apresentações", directory: true %}
+                {{ navLink("/apresentacoes", "apresentações", directory = true) }}
             </li>
             <li>
-                {% include navLink with href: "/blogroll", text: "blogroll" %}
+                {{ navLink("/blogroll", "blogroll") }}
             </li>
             <li>
-                {% include navLink with href: "/work", text: "trabalho" %}
+                {{ navLink("/work", "trabalho") }}
             </li>
         </ul>
     </nav>
