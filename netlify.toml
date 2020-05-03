@@ -5,9 +5,6 @@ package = "netlify-plugin-subfont"
     inlineCss = true
 
 [[plugins]]
-package = "netlify-plugin-checklinks"
-
-[[plugins]]
 package = "netlify-plugin-debug-cache"
 
 [build]
