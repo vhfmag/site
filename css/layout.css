@@ -42,7 +42,7 @@ dt {
 :root {
 	--root-padding: 2rem;
 	--root-border-width: var(--s-1);
-	--sidebar-width: 20ch;
+	--sidebar-width: 21ch;
 
 	--copy-font-family: "Inter", system;
 	--heading-font-family: "Lora", system;
