@@ -58,9 +58,13 @@ main.home .post-list.columns {
 	column-width: 15ch;
 }
 
+main.home .post-list li + li {
+	margin-top: var(--s0);
+}
+
 main.home .post-list li h3 {
 	font-size: 1em;
-	line-height: inherit;
+	line-height: var(--ratio);
 	margin: 0.3em 0;
 }
 
