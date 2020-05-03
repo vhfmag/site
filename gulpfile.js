@@ -1,6 +1,5 @@
 const gulp = require("gulp");
 const gulpCache = require("gulp-cache");
-const terser = require("terser");
 
 const postcss = require("gulp-postcss");
 const postcssPresetEnv = require("postcss-preset-env");
@@ -10,7 +9,6 @@ const posthtml = require("gulp-posthtml");
 const htmlnano = require("htmlnano");
 const imgAutosize = require("posthtml-img-autosize");
 const posthtmlWebp = require("posthtml-webp");
-const inlineAssets = require("posthtml-inline-assets");
 
 const imagemin = require("gulp-imagemin");
 const webp = require("gulp-webp");
@@ -20,15 +18,9 @@ const connect = require("gulp-connect");
 const filter = require("gulp-filter");
 const concatCSS = require("gulp-concat-css");
 
-const _ = require("lodash");
-
 const fileCache = new gulpCache.Cache({
 	cacheDirName: "gulp-cache",
 	tmpDir: "./node_modules/.cache",
-});
-
-const minifyJs = _.memoize(function unmemoizedMinifyJs(unminifiedCode) {
-	return terser.minify(unminifiedCode).code;
 });
 
 function css() {
@@ -56,37 +48,6 @@ function html() {
 						extensionIgnore: ["svg", "gif", "webp"],
 					}),
 					imgAutosize({ processEmptySize: true }),
-					inlineAssets({
-						root: "./dist",
-						transforms: {
-							image: false,
-							style: false,
-							favicon: false,
-							script: {
-								resolve(node) {
-									const condition =
-										node.tag === "script" &&
-										node.attrs &&
-										node.attrs.inline === "" &&
-										node.attrs.src;
-
-									if (condition) {
-										return node.attrs.src.split("?")[0];
-									} else {
-										return false;
-									}
-								},
-								transform(node, data) {
-									delete node.attrs.src;
-									delete node.attrs.inline;
-
-									node.content = [minifyJs(data.buffer.toString("utf8"))];
-
-									return node;
-								},
-							},
-						},
-					}),
 					htmlnano(),
 				]),
 				{ name: "html", fileCache },
