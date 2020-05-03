@@ -1,12 +1,3 @@
-const wrapper = document.getElementById("theme-selector-wrapper");
-
-function setTheme(theme) {
-	document.body.dataset.theme = theme;
-
-	const input = document.querySelector(`.theme-selector-buttons [data-theme="${theme}"]`);
-	input.click();
-}
-
 const supportsColorScheme = (() => {
 	try {
 		return (
@@ -18,27 +9,34 @@ const supportsColorScheme = (() => {
 	}
 })();
 
-if (wrapper) {
-	const buttons = wrapper.querySelectorAll(".theme-button input");
-	buttons.forEach(button =>
-		button.addEventListener("input", _ev => {
-			const theme = button.parentElement.dataset.theme;
-			setTheme(theme);
-			localStorage.setItem("theme", theme);
-		}),
-	);
+function setTheme(theme) {
+	document.body.dataset.theme = theme;
+}
 
-	wrapper.attributes.removeNamedItem("hidden");
+if (typeof localStorage !== "undefined") {
+	const persistedTheme = localStorage.getItem("theme");
 
-	if (supportsColorScheme) {
-		wrapper.querySelector("[data-theme=auto]").attributes.removeNamedItem("hidden");
-	}
-
-	if (typeof localStorage !== "undefined") {
-		const persistedTheme = localStorage.getItem("theme");
-
-		if (persistedTheme) {
-			setTheme(persistedTheme);
-		}
+	if (persistedTheme) {
+		setTheme(persistedTheme);
 	}
 }
+
+window.onload = () => {
+	console.log("loaded");
+	const wrapper = document.getElementById("theme-selector-wrapper");
+
+	if (wrapper) {
+		const buttons = wrapper.querySelectorAll(".theme-button input");
+		buttons.forEach(button =>
+			button.addEventListener("input", _ev => {
+				const theme = button.parentElement.dataset.theme;
+				setTheme(theme);
+				localStorage.setItem("theme", theme);
+			}),
+		);
+
+		if (supportsColorScheme) {
+			wrapper.querySelector("[data-theme=auto]").attributes.removeNamedItem("hidden");
+		}
+	}
+};

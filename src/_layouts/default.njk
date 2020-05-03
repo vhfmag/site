@@ -45,7 +45,6 @@ ogtype: website
         <link rel="shortcut icon" href="/icons/icon-48x48.png"/>
 
         <script src="/js/sw-register.js" inline></script>
-        <script src="/js/theme.js" inline></script>
 
         <meta name="monetization" content="$coil.xrptipbot.com/d8OkU_FdRMuSFJ2w8ac5Sw">
 
@@ -60,6 +59,7 @@ ogtype: website
         itemid="mdata-blog"
         data-theme="auto"
     >
+        <script src="/js/theme.js" inline></script>
         <a href="#main" class="skip-nav">Pular para conteúdo</a>
         {% include "sidebar.njk" %}
         <main id="main" class="{{ mainClass }}">{{ content | safe }}</main>
