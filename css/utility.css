@@ -30,14 +30,14 @@
 :root {
 	/* dark */
 	--dark-text-color: hsl(0, 0%, 93%);
-	--dark-background-color: #1b1c30;
-	--dark-theme-color: hsl(341.9, 86.1%, 69%);
-	--dark-muted-theme-color: hsla(341.9, 86.1%, 69%, 0.6);
+	--dark-background-color: rgb(5, 79, 140);
+	--dark-theme-color: rgb(231, 179, 195);
+	--dark-muted-theme-color: rgba(231, 179, 195, 0.4);
 	/* light */
 	--light-text-color: hsl(0, 0%, 0%);
-	--light-background-color: #f9f9f9;
-	--light-theme-color: hsl(341.9, 86.1%, 45%);
-	--light-muted-theme-color: hsla(341.9, 86.1%, 45%, 0.6);
+	--light-background-color: rgb(231, 179, 195);
+	--light-theme-color: hsl(207.1, 93.1%, 20.4%);
+	--light-muted-theme-color: hsla(207.1, 93.1%, 20.4%, 0.4);
 }
 
 /* sidebar */
