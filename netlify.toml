@@ -1,8 +1,13 @@
-plugins = [
-    { package = "netlify-plugin-subfont" },
-    { package = "netlify-plugin-checklinks" },
-    { package = "netlify-plugin-debug-cache" },
-]
+[[plugins]]
+package = "netlify-plugin-subfont"
+    [plugins.inputs]
+    recursive = false
+
+# [[plugins]]
+# package = "netlify-plugin-checklinks"
+
+# [[plugins]]
+# package = "netlify-plugin-debug-cache"
 
 [build]
     functions = "functions/"
