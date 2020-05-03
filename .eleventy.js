@@ -1,4 +1,3 @@
-const pwaPlugin = require("eleventy-plugin-pwa");
 const excerptPlugin = require("eleventy-plugin-excerpt");
 const cacheBusterPlugin = require("@mightyplow/eleventy-plugin-cache-buster");
 const rssPlugin = require("@11ty/eleventy-plugin-rss");
@@ -128,17 +127,6 @@ module.exports = function (eleventyConfig) {
 			}),
 		);
 		eleventyConfig.addPlugin(require("./plugins/images"));
-		eleventyConfig.addPlugin(pwaPlugin, {
-			skipWaiting: true,
-			clientsClaim: true,
-			navigationPreload: true,
-			runtimeCaching: [
-				{
-					urlPattern: ({ event }) => event.request.mode === "navigate",
-					handler: "NetworkOnly",
-				},
-			],
-		});
 	}
 
 	const collections = [
