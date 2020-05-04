@@ -21,11 +21,11 @@ Depois de colocar no ar um _<abbr title="Minimum Viable Product">MVP</abbr>_{lan
 O hotsite devia:
 
 -   Disponibilizar:
-    -   Um FAQ curado
+    -   Um _<abbr title="Frequently asked questions">FAQ</abbr>_{lang=en} curado
     -   Informações atualizadas sobre o funcionamento dos principais tribunais do país
     -   Nossas lives sobre o tema
-    -   Demais materiais relacionados ao tema
--   Ser fácil de alimentar
+    -   Demais materiais relacionados
+-   Ser fácil de alimentar sem a ajuda de um desenvolvedor
 -   Ter bom _<abbr title="Search Engine Optimization">SEO</abbr>_{lang=en}
 -   Estar pronto o quanto antes
 
@@ -99,15 +99,11 @@ Nós ficaríamos um pouco mais seguros sabendo que o Strapi está validando por 
 
 </dd>
 
-<dt>Usar o Strapi no Kubernetes poderia ser mais fácil</dt>
+<dt>Devíamos ter criado uma instância do Strapi de dentro do projeto</dt>
 
 <dd>
 
-<mark>Ravi, me ajuda</mark>
-
--   Compartilhar o volume entre várias instâncias do serviço
--   Mudar configurações é difícil
--   Instalar plugins é difícil (se fosse mais fácil teríamos usado o de GraphQL e o de mudar tamanho de imagens)
+Nós escolhemos usar uma imagem docker do CMS pra acelerar o deploy do serviço. Ledo engano. Por causa dessa escolha, dado o tempo limitado pra execução, não pudemos usar GraphQL, tivemos dificuldades em mudar configurações (ex: tamanho máximo de upload) e tivemos problemas ao gerenciar a instância dentro de nossa infraestrutura, perdendo os metadados (os dados continuavam no banco de dados, mas o Strapi não sabia que as coleções existiam). O último ponto é interessante o suficiente pra merecer uma explicação: como o banco de dados fica em um _persistent volume_{lang=en} no nosso kubernetes, ele persistia; mas os metadados parecem ser armazenados junto com a aplicação, e fazer deploy de uma instância mudando suas configurações nos fez perder os metadados e precisar recriar as coleções, uma a uma.
 
 </dd>
 
@@ -115,10 +111,22 @@ Nós ficaríamos um pouco mais seguros sabendo que o Strapi está validando por 
 
 ### Typescript
 
-O que dizer? Eu estava na fase inicial do projeto, então ele é feito em Typescript. 🤷
+Assim como a mão de Midas transforma tudo o que toca em ouro, eu gostaria de deixar todo projeto que eu toco estaticamente tipado. Então, como eu coordenei esse projeto, ele é feito em Typescript. 🤷 Entendo as críticas de ambos os lados:
 
--   Eu criei um sistema de tipos excessivamente complexo para os dados vindos da API do Strapi. Como o tipo dependia da profundidade de um tipo no retorno da API (ex: se eu pego posts, que tem autores, o post tem autores, mas cada autor tem sua lista de posts como ids), a complexidade aumentou, e de repente tinha componentes aceitando o tipo raiz ou o tipo aninhado. Depois, adicionamos parsing (ex: data vem como string, o parser transforma em data) e adicionamos mais dois tipos no bolo. Adicionar um tipo novo era confuso e complexo. Me fez ter saudade do GraphQL.
+Por um lado, como Javascript não é estaticamente tipado, Typescript pode ser uma complicação a mais com benefícios limitados. Eu discordo porque mesmo sem checagem em tempo de execução, tipos são uma ferramenta de comunicação. Perguntas como "que campos essa API retorna?" e "que propriedades esse componente espera?", que envolveriam procurar a resposta no código fonte ou em outros trechos do código que usem a API ou o componente, podem ser facilmente respondidas pelo seu editor com Typescript, sem mudança de contexto.
 
-<hr/>
+Outra vantagem é que se pode comunicar uma restrição para o desenvolvedor e para o compilador, dificultando que bugs cheguem em produção. Por exemplo: imagine que, num site de rastreamento de encomendas, a API retorne um status (`WAITING`{lang=en}, `SENT`{lang=en}, `DELIVERED`{lang=en}) e um objeto mapeie cada valor para um texto a ser exibido na UI ("esperando ser enviado", etc); agora, imagine que um novo status é adicionado (`WAITING_TAKEOUT`{lang=en}). Com tipos, o compilador pode avisar em tempo de desenvolvimento que o objeto precisa mapear o novo valor de status!
 
-Esse artigo foi postado originalmente [no blog de Victor Magalhães]({{page.url}}).
+Por outro lado, entusiastas de sistemas fortes de tipo consideram o Typescript permissivo demais. Eu posso concordar, mas isso é uma _feature_{lang=en}, não um _bug_{lang=en}. Javascript é permissivo, então uma linguagem que se propõe a adicionar um sistema de tipos estáticos em cima de Javascript também precisa ser.
+
+Dito isso, o Typescript certamente pode ser uma complicação, especialmente quando se trata de dados vindos de uma API. Diferentes métodos retornam diferentes propriedades de um mesmo objeto, e alguns componentes aceitam todas as variantes, outros só algumas. Para resolver isso, acabei criando um sistema de tipos excessivamente complexo para os dados vindos da API do Strapi.
+
+Como o tipo dependia da profundidade de um tipo no retorno da API (ex: se eu pego posts, que tem autores, o post tem autores, mas cada autor tem sua lista de posts como ids), a complexidade aumentou, e de repente tinha componentes aceitando o tipo raiz ou o tipo aninhado. Depois, adicionamos parsing (ex: data vem como string, o parser transforma em `Date`{lang=en}) e adicionamos mais dois tipos no bolo. Adicionar um tipo novo era confuso e complexo.
+
+Me fez ter saudade do GraphQL.
+
+De todo modo, tipos ajudaram a reduzir o trabalho necessário pra revisar o código de 12 pessoas trabalhando simultaneamente num projeto sem testes.
+
+## Resultado
+
+Duas semanas e 260 commits depois, finalmente lançamos o site!
