@@ -1,6 +1,6 @@
 {
 	"scripts": {
-		"build": "rm-rf node_modules/.cache/gulp-cache && NODE_ENV=production yarn build-dev && gulp",
+		"build": "NODE_ENV=production yarn build-dev && gulp",
 		"build-dev": "eleventy --passthroughall",
 		"dev": "SKIP_WEBMENTIONIO=${SKIP_WEBMENTIONIO:-true} yarn build-dev --serve",
 		"postinstall": "patch-package"
