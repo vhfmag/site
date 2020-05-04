@@ -49,48 +49,45 @@ function html() {
 	return gulp
 		.src("public/**/*.html", { since: gulp.lastRun(html) })
 		.pipe(
-			gulpCache(
-				posthtml([
-					posthtmlWebp({
-						replaceExtension: true,
-						extensionIgnore: ["svg", "gif", "webp"],
-					}),
-					imgAutosize({ processEmptySize: true }),
-					inlineAssets({
-						root: "./dist",
-						transforms: {
-							image: false,
-							style: false,
-							favicon: false,
-							script: {
-								resolve(node) {
-									const condition =
-										node.tag === "script" &&
-										node.attrs &&
-										node.attrs.inline === "" &&
-										node.attrs.src;
+			posthtml([
+				posthtmlWebp({
+					replaceExtension: true,
+					extensionIgnore: ["svg", "gif", "webp"],
+				}),
+				imgAutosize({ processEmptySize: true }),
+				inlineAssets({
+					root: "./public",
+					transforms: {
+						image: false,
+						style: false,
+						favicon: false,
+						script: {
+							resolve(node) {
+								const condition =
+									node.tag === "script" &&
+									node.attrs &&
+									"inline" in node.attrs &&
+									node.attrs.src;
 
-									if (condition) {
-										return node.attrs.src.split("?")[0];
-									} else {
-										return false;
-									}
-								},
-								transform(node, data) {
-									delete node.attrs.src;
-									delete node.attrs.inline;
+								if (condition) {
+									return node.attrs.src.split("?")[0];
+								} else {
+									return false;
+								}
+							},
+							transform(node, data) {
+								delete node.attrs.src;
+								delete node.attrs.inline;
 
-									node.content = [minifyJs(data.buffer.toString("utf8"))];
+								node.content = [minifyJs(data.buffer.toString("utf8"))];
 
-									return node;
-								},
+								return node;
 							},
 						},
-					}),
-					htmlnano(),
-				]),
-				{ name: "html", fileCache },
-			),
+					},
+				}),
+				htmlnano(),
+			]),
 		)
 		.pipe(gulp.dest("dist"));
 }
