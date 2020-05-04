@@ -60,7 +60,23 @@ function html() {
 					transforms: {
 						image: false,
 						style: false,
-						favicon: false,
+						favicon: {
+							resolve(node) {
+								return (
+									node.tag === "link" &&
+									node.attrs &&
+									(node.attrs.rel.split(/\s+/).includes("icon") ||
+										node.attrs.rel.split(/\s+/).includes("apple-touch-icon")) &&
+									node.attrs.href &&
+									node.attrs.href.split("?")[0]
+								);
+							},
+							transform(node, data) {
+								node.attrs.href = `data:${data.mime};base64,${data.buffer.toString(
+									"base64",
+								)}`;
+							},
+						},
 						script: {
 							resolve(node) {
 								const condition =
