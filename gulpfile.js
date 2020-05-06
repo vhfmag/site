@@ -24,7 +24,7 @@ const _ = require("lodash");
 
 const fileCache = new gulpCache.Cache({
 	cacheDirName: "gulp-cache",
-	tmpDir: "./node_modules/.cache",
+	tmpDir: "./.cache",
 });
 
 const minifyJs = _.memoize(function unmemoizedMinifyJs(unminifiedCode) {
@@ -49,45 +49,48 @@ function html() {
 	return gulp
 		.src("public/**/*.html", { since: gulp.lastRun(html) })
 		.pipe(
-			posthtml([
-				posthtmlWebp({
-					replaceExtension: true,
-					extensionIgnore: ["svg", "gif", "webp"],
-				}),
-				imgAutosize({ processEmptySize: true }),
-				inlineAssets({
-					root: "./public",
-					transforms: {
-						image: false,
-						style: false,
-						favicon: false,
-						script: {
-							resolve(node) {
-								const condition =
-									node.tag === "script" &&
-									node.attrs &&
-									"inline" in node.attrs &&
-									node.attrs.src;
+			gulpCache(
+				posthtml([
+					posthtmlWebp({
+						replaceExtension: true,
+						extensionIgnore: ["svg", "gif", "webp"],
+					}),
+					imgAutosize({ processEmptySize: true }),
+					inlineAssets({
+						root: "./public",
+						transforms: {
+							image: false,
+							style: false,
+							favicon: false,
+							script: {
+								resolve(node) {
+									const condition =
+										node.tag === "script" &&
+										node.attrs &&
+										"inline" in node.attrs &&
+										node.attrs.src;
 
-								if (condition) {
-									return node.attrs.src.split("?")[0];
-								} else {
-									return false;
-								}
-							},
-							transform(node, data) {
-								delete node.attrs.src;
-								delete node.attrs.inline;
+									if (condition) {
+										return node.attrs.src.split("?")[0];
+									} else {
+										return false;
+									}
+								},
+								transform(node, data) {
+									delete node.attrs.src;
+									delete node.attrs.inline;
 
-								node.content = [minifyJs(data.buffer.toString("utf8"))];
+									node.content = [minifyJs(data.buffer.toString("utf8"))];
 
-								return node;
+									return node;
+								},
 							},
 						},
-					},
-				}),
-				htmlnano(),
-			]),
+					}),
+					htmlnano(),
+				]),
+				{ name: "html", fileCache },
+			),
 		)
 		.pipe(gulp.dest("dist"));
 }

@@ -17,3 +17,5 @@ yarn-error.log
 siteaudit/
 hint-report/
 report.html
+# Cache
+.cache/
