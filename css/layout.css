@@ -354,3 +354,7 @@ figcaption {
 	font-size: 0.85em;
 	opacity: 0.7;
 }
+
+.turbolinks-progress-bar {
+	background-color: var(--backgroundColor);
+}

@@ -55,6 +55,16 @@
 	outline-offset: -0.25em;
 }
 
+.theme-button--auto {
+	display: none;
+}
+
+@media (prefers-color-scheme: dark), not (prefers-color-scheme: dark) {
+	.theme-button--auto {
+		display: inherit;
+	}
+}
+
 .main-sidebar :any-link {
 	color: var(--themeColor);
 	border-bottom: none;
