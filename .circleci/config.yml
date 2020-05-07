@@ -6,7 +6,7 @@ jobs:
                 only:
                     - master
         docker:
-            - image: circleci/node:8-browsers
+            - image: circleci/node:14-browsers
         working_directory: ~/repo
         steps:
             - checkout
@@ -17,4 +17,4 @@ jobs:
                       npm run build
             - run:
                   name: run tests
-                  command: npx percy snapshot public --ignore-files "bookmarks/**"
+                  command: npx percy snapshot dist --snapshot-files "index.html,work/index.html,posts/o-valor-pratico-do-html/index.html,posts/minorities/index.html,bookmarks/2019-07-30-o-canudo-nao-e-seu-inimigo/index.html,apresentacoes/o-valor-pratico-do-html/index.html,posts/o-valor-pratico-do-html/index.html,blogroll/index.html,notes/2019-07-23-disposable-income/index.html,404/index.html,posts/index.html,likes/index.html,apresentacoes/index.html,bookmarks/index.html,notes/index.html"
