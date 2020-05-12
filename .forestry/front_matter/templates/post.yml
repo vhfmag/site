@@ -47,4 +47,5 @@ fields:
   name: customTags
   label: Custom tags
 pages:
+- src/bookmarks/brace-yourself-for-the-most-dangerous-idea-yet-most-people-are-pretty-decent.md
 - src/bookmarks/eu-não-me-calo-por-maurício-ricardo.md
