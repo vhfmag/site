@@ -48,7 +48,9 @@ ogtype: website
 
         <meta name="monetization" content="$coil.xrptipbot.com/d8OkU_FdRMuSFJ2w8ac5Sw">
 
-        <script data-turbolinks-eval="false" src="/js/turbolinks.js" defer></script>
+        {% if environment == "production" %}
+            <script data-turbolinks-eval="false" src="/js/turbolinks.js" defer></script>
+        {% endif %}
 
         {% seo "" %}
         {% block head %}
