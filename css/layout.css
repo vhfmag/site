@@ -233,10 +233,6 @@ blockquote {
 	border-inline-start: var(--s-1) solid var(--themeColor);
 }
 
-blockquote > * {
-	font-variation-settings: "wght" 600;
-}
-
 blockquote > :first-child {
 	margin-top: 0;
 }
