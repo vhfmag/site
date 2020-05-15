@@ -153,7 +153,7 @@ h3 :any-link,
 h4 :any-link,
 h5 :any-link,
 h6 :any-link {
-	color: unset;
+	color: currentColor;
 	border-bottom-width: 0.1em;
 	padding-bottom: 0.05em;
 }
@@ -334,6 +334,12 @@ figure > p:last-child {
 
 strong,
 b {
+	font-variation-settings: "wght" 700;
+	color: var(--themeColor);
+}
+
+strong :any-link,
+b :any-link {
 	font-variation-settings: "wght" 700;
 	color: var(--themeColor);
 }
