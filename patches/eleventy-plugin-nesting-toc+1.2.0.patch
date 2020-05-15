@@ -1,0 +1,64 @@
+diff --git a/node_modules/eleventy-plugin-nesting-toc/.eleventy.js b/node_modules/eleventy-plugin-nesting-toc/.eleventy.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/eleventy-plugin-nesting-toc/README.md b/node_modules/eleventy-plugin-nesting-toc/README.md
+old mode 100644
+new mode 100755
+diff --git a/node_modules/eleventy-plugin-nesting-toc/test.js b/node_modules/eleventy-plugin-nesting-toc/test.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/eleventy-plugin-nesting-toc/toc.js b/node_modules/eleventy-plugin-nesting-toc/toc.js
+old mode 100644
+new mode 100755
+index 8101839..afc4a16
+--- a/node_modules/eleventy-plugin-nesting-toc/toc.js
++++ b/node_modules/eleventy-plugin-nesting-toc/toc.js
+@@ -1,4 +1,5 @@
+ const cheerio = require('cheerio');
++const escapeHTML = require("escape-html");
+ 
+ /** Attribute which if found on a heading means the heading is excluded */
+ const ignoreAttribute = 'data-toc-exclude';
+@@ -28,6 +29,7 @@ class Item {
+     constructor($el) {
+         if ($el) {
+             this.slug = $el.attr('id');
++            $el.find("[aria-hidden]").remove();
+             this.text = $el.text();
+             this.level = +$el.get(0).tagName.slice(1);
+         } else {
+@@ -39,9 +41,15 @@ class Item {
+     html() {
+         let markup = '';
+         if (this.slug && this.text) {
+-            markup += `
+-                    <li><a href="#${this.slug}">${this.text}</a>
+-            `;
++            if (this.children.length === 0) {
++            	markup += `
++            		<li><a href="#${this.slug}">${escapeHTML(this.text)}</a>
++            	`;
++            } else {
++            	markup += `
++            		<li><details><summary><a href="#${this.slug}">${escapeHTML(this.text)}</a></summary>
++            	`;
++            }
+         }
+         if (this.children.length > 0) {
+             markup += `
+@@ -95,12 +103,11 @@ class Toc {
+         let html = '';
+ 
+         if (root.children.length) {
+-
++            html += `<${wrapper} class="${wrapperClass}">`;
+             if (headingText) {
+-                html += `<${headingTag}>${headingText}</${headingTag}>\n`;
++            	html += `<${headingTag}>${headingText}</${headingTag}>\n`;
+             }
+-
+-            html += `<${wrapper} class="${wrapperClass}">${root.html()}</${wrapper}>`;
++            html += `${root.html()}</${wrapper}>`;
+         }
+ 
+         return html;
