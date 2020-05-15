@@ -36,6 +36,8 @@
 		"markdown-it-codesandbox-embed": "^0.1.0",
 		"markdown-it-footnote": "^3.0.2",
 		"markdown-it-prism": "2.0.5",
+		"netlify-plugin-debug-cache": "^1.0.3",
+		"netlify-plugin-subfont": "^4.0.2",
 		"patch-package": "6.2.2",
 		"postcss": "^7.0.27",
 		"postcss-preset-env": "^6.7.0",
