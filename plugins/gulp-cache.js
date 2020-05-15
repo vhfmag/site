@@ -3,10 +3,11 @@ const { join: joinPaths } = require("path");
 function generateAbsolutePaths(options) {
 	const buildDirName = joinPaths(__dirname, "..");
 	/** The absolute path to the build folder for Next.js. */
-	const absoluteCacheDirPath = joinPaths(buildDirName, "node_modules");
+	const absoluteCacheDirPath = joinPaths(buildDirName, "node_modules/.cache");
+	const absoluteBuildDirPath = joinPaths(buildDirName, "public");
 
 	return {
-		absolute: { cacheDir: absoluteCacheDirPath },
+		absolute: { cacheDir: absoluteCacheDirPath, buildDir: absoluteBuildDirPath },
 		buildDirName,
 	};
 }
@@ -18,7 +19,10 @@ module.exports = {
 	//  - the file/directory has not been cached yet
 	async onPreBuild({ utils, inputs }) {
 		const paths = generateAbsolutePaths({ inputs });
-		const success = await utils.cache.restore(paths.absolute.cacheDir);
+		const success = await Promise.all([
+			utils.cache.restore(paths.absolute.cacheDir),
+			utils.cache.restore(paths.absolute.buildDir),
+		]);
 
 		if (success) {
 			console.log(
@@ -39,7 +43,10 @@ module.exports = {
 	async onPostBuild({ utils, inputs }) {
 		const paths = generateAbsolutePaths({ inputs });
 
-		const success = await utils.cache.save(paths.absolute.cacheDir);
+		const success = await Promise.all([
+			utils.cache.save(paths.absolute.cacheDir),
+			utils.cache.save(paths.absolute.buildDir),
+		]);
 
 		if (success) {
 			console.log(
