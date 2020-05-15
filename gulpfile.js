@@ -24,7 +24,7 @@ const _ = require("lodash");
 
 const fileCache = new gulpCache.Cache({
 	cacheDirName: "gulp-cache",
-	tmpDir: "./.cache",
+	tmpDir: "./node_modules/.cache",
 });
 
 const minifyJs = _.memoize(function unmemoizedMinifyJs(unminifiedCode) {

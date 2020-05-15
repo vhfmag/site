@@ -9,6 +9,9 @@ package = "netlify-plugin-subfont"
 [[plugins]]
 package = "netlify-plugin-debug-cache"
 
+[[plugins]]
+package = "./plugins/gulp-cache.js"
+
 [build]
     functions = "functions/"
     publish = "dist"
