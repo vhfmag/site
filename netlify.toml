@@ -12,11 +12,6 @@ package = "netlify-plugin-debug-cache"
 [[plugins]]
 package = "./plugins/gulp-cache.js"
 
-[[plugins]]
-package = "@netlify/plugin-lighthouse"
-    [plugins.config]
-    currentVersion = "0.0.1"
-
 [build]
     functions = "functions/"
     publish = "dist"
