@@ -3,7 +3,7 @@ const { join: joinPaths } = require("path");
 function generateAbsolutePaths(options) {
 	const buildDirName = joinPaths(__dirname, "..");
 	/** The absolute path to the build folder for Next.js. */
-	const absoluteCacheDirPath = joinPaths(buildDirName, "node_modules");
+	const absoluteCacheDirPath = joinPaths(buildDirName, "node_modules/.cache");
 	const absoluteBuildDirPath = joinPaths(buildDirName, "public");
 
 	return {
