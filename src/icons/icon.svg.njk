@@ -1,0 +1,41 @@
+---
+permalink: icons/icon.svg
+---
+
+<svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@1,700&amp;display=swap');
+
+        :root {
+            --textColor: var(--dark-text-color);
+            --backgroundColor: var(--dark-background-color);
+            --themeColor: var(--dark-theme-color);
+            --themeColor60: var(--dark-muted-theme-color);
+        }
+
+        @media (prefers-color-scheme: light) {
+            :root {
+                --textColor: var(--light-text-color);
+                --backgroundColor: var(--light-background-color);
+                --themeColor: var(--light-theme-color);
+                --themeColor60: var(--light-muted-theme-color);
+            }
+        }
+
+        :root {
+            --themeColor: hsl(207.1, 93.1%, 20.4%);
+            --backgroundColor: rgb(231, 179, 195);
+        }
+
+        text {
+            font-family: "Lora var", "Lora", system;
+            fill: var(--themeColor);
+            font-size: 10px;
+            font-weight: 700;
+        }
+    </style>
+    <rect width="16" height="16" fill="var(--backgroundColor)" stroke="var(--themeColor)" stroke-width="1">
+    </rect>
+    <text x="1" y="8.25" font-size="8">V</text>
+    <text x="5.5" y="15" font-size="8">M</text>
+</svg>

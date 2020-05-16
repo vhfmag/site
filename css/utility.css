@@ -25,21 +25,6 @@
 	--s10: calc(var(--s9) * var(--ratio));
 }
 
-/* colors */
-
-:root {
-	/* dark */
-	--dark-text-color: hsl(0, 0%, 93%);
-	--dark-background-color: rgb(5, 79, 140);
-	--dark-theme-color: rgb(231, 179, 195);
-	--dark-muted-theme-color: rgba(231, 179, 195, 0.4);
-	/* light */
-	--light-text-color: hsl(0, 0%, 0%);
-	--light-background-color: rgb(231, 179, 195);
-	--light-theme-color: hsl(207.1, 93.1%, 20.4%);
-	--light-muted-theme-color: hsla(207.1, 93.1%, 20.4%, 0.4);
-}
-
 /* sidebar */
 
 .sidebar {

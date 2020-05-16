@@ -6,7 +6,5 @@
 	"description": "Blog de Victor Magalhães, desenvolvedor de Salvador, Brasil",
 	"webmentionUrl": "https://webmention.io/victormagalhaes.codes/webmention",
 	"pingbackUrl": "https://webmention.io/victormagalhaes.codes/xmlrpc",
-	"micropubUrl": "https://vhfmag-indiekit.glitch.me/micropub",
-	"themeColor": "hsla(125, 51%, 32%, 1)",
-	"backgroundColor": "rgb(237, 237, 237)"
+	"micropubUrl": "https://vhfmag-indiekit.glitch.me/micropub"
 }
