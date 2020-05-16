@@ -1,7 +1,7 @@
 {
 	"scripts": {
 		"build": "NODE_ENV=${NODE_ENV:-production} yarn build-dev && NODE_ENV=${NODE_ENV:-production} gulp",
-		"build-dev": "eleventy --passthroughall --incremental",
+		"build-dev": "eleventy --passthroughall",
 		"dev": "SKIP_WEBMENTIONIO=${SKIP_WEBMENTIONIO:-true} yarn build-dev --serve",
 		"postinstall": "patch-package"
 	},

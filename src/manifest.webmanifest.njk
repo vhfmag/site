@@ -7,10 +7,14 @@ permalink: manifest.webmanifest
 	"start_url": "/",
 	"background_color": "{{ theme.light.backgroundColor }}",
 	"theme_color": "{{ theme.light.themeColor }}",
-	"serviceworker": {"src": "./service-worker.js" },
 	"display": "minimal-ui",
 	"lang": "pt-BR",
 	"icons": [
+		{
+			"src": "icons/icon.svg?v=393098781f00f67c2868e7260a385115",
+			"type": "image/svg+xml",
+			"sizes": "16x16 24x14 48x48 72x72 96x96 144x144 192x192 256x256 384x384 512x512"
+		},
 		{
 			"src": "icons/icon-48x48.png?v=393098781f00f67c2868e7260a385115",
 			"sizes": "48x48",
