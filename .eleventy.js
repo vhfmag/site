@@ -119,7 +119,7 @@ module.exports = function (eleventyConfig) {
 					"jpg",
 					"jpeg",
 					"png",
-					"svg",
+					// "svg", FIXME: disabled because of the dynamic /icons/icon.svg
 					"webm",
 					"mp4",
 					"webp",
