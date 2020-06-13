@@ -1,5 +1,7 @@
 require("dotenv").config();
-const fetch = require("make-fetch-happen").defaults({ cacheManager: "./.wm-cache" });
+const fetch = require("make-fetch-happen").defaults({
+	cacheManager: "./node_modules/.cache/webmentions-cache",
+});
 const _ = require("lodash");
 
 const apiBase = "https://webmention.io/api/mentions.jf2";
