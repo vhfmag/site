@@ -72,8 +72,8 @@ section.half-column
 section.half-column.row-3
 	h2 No fone
 	ul.inline-list
-		- for (artist of listeningTo)
-			li= artist
+		- for (artist of lastfm.weekly.artists)
+			li= artist.name
 
 section.half-column.row-3
 	h2 Na estante
