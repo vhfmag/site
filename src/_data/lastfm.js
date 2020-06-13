@@ -129,6 +129,9 @@ const fetchTopTracks = async params => {
 	return ret.topartists.artist;
 };
 
+/**
+ * @param {UserTopParams} params
+ */
 const fetchTopTags = async params => {
 	const artists = await fetchTopArtists(params);
 
