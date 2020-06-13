@@ -125,8 +125,8 @@ const fetchTopArtists = async params => {
  * @returns {Promise<RankingArray<Track>>}
  */
 const fetchTopTracks = async params => {
-	const ret = await fetchLastFmData({ method: "user.gettopartists", ...params });
-	return ret.topartists.artist;
+	const ret = await fetchLastFmData({ method: "user.gettoptracks", ...params });
+	return ret.toptracks.track;
 };
 
 /**

@@ -38,7 +38,7 @@ mixin periodSection(period, title)
                 ol.ranking
                     - for (const track of lastfm[period].tracks)
                         li
-                            a(href=track.url)= track.name
+                            a(href=track.url)= `${track.name} - ${track.artist.name}`
 
             section.columns
                 h3 Tags
