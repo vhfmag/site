@@ -150,11 +150,31 @@ const fetchTopTags = async params => {
 	return _.sortBy(tags, tag => -tag.count).slice(0, params.limit || DEFAULT_LIMIT);
 };
 
+/**
+ * @param {LastFmPeriod} period
+ */
+async function fetchAllTopDataForPeriod(period) {
+	const [albums, artists, tracks, tags] = await Promise.all([
+		fetchTopAlbums({ period }),
+		fetchTopArtists({ period }),
+		fetchTopTracks({ period }),
+		fetchTopTags({ period, limit: 2 * DEFAULT_LIMIT }),
+	]);
+
+	return { albums, artists, tracks, tags };
+}
+
 module.exports = async function fetchAllLastFmData() {
+	/** @type {LastFmPeriod[]} */
+	const periods = ["7day", "1month", "12month", "overall"];
+	const [weekly, monthly, yearly, overall] = await Promise.all(
+		periods.map(period => fetchAllTopDataForPeriod(period)),
+	);
+
 	return {
-		weeklyTopAlbums: await fetchTopAlbums({ period: "7day" }),
-		weeklyTopArtists: await fetchTopArtists({ period: "7day" }),
-		weeklyTopTracks: await fetchTopTracks({ period: "7day" }),
-		weeklyTopTags: await fetchTopTags({ period: "7day", limit: 2 * DEFAULT_LIMIT }),
+		weekly,
+		monthly,
+		yearly,
+		overall,
 	};
 };

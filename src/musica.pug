@@ -10,36 +10,44 @@ h1 Música
 
 p O que eu tenho ouvido, segundo dados do #[a(href="https://www.last.fm/user/vhfmag") meu last.fm].
 
-section
-    h2 Top 10 da semana
+p Pule para os dados #[a(href="#weekly") semanais], #[a(href="#monthly") mensais], #[a(href="#yearly") anuais] ou #[a(href="#overall") de todos os tempos] 
 
-    section
-        h3 Álbuns
-        ol.ranking.with-image
-            - for (const album of lastfm.weeklyTopAlbums)
-                li
-                    img(src=album.image[2]["#text"], width=174, height=174)
-                    a.primary(href=album.url)= album.name
-                    a.secondary(href=album.artist.url)= album.artist.name
-
-    div.ranking-lists
-        section
-            h3 Artistas
-            ol.ranking
-                - for (const artist of lastfm.weeklyTopArtists)
-                    li
-                        a(href=artist.url)= artist.name
+mixin periodSection(period, title)
+    section(id=period)
+        h2= title
 
         section
-            h3 Músicas
-            ol.ranking
-                - for (const track of lastfm.weeklyTopTracks)
+            h3 Álbuns
+            ol.ranking.with-image
+                - for (const album of lastfm[period].albums)
                     li
-                        a(href=track.url)= track.name
+                        img(src=album.image[2]["#text"], width=174, height=174)
+                        a.secondary(href=album.artist.url)= album.artist.name
+                        a.primary(href=album.url)= album.name
 
-        section.columns
-            h3 Tags
-            ol.ranking
-                - for (const tag of lastfm.weeklyTopTags)
-                    li
-                        a(href=tag.url)= tag.name
+        div.ranking-lists
+            section
+                h3 Artistas
+                ol.ranking
+                    - for (const artist of lastfm[period].artists)
+                        li
+                            a(href=artist.url)= artist.name
+
+            section
+                h3 Músicas
+                ol.ranking
+                    - for (const track of lastfm[period].tracks)
+                        li
+                            a(href=track.url)= track.name
+
+            section.columns
+                h3 Tags
+                ol.ranking
+                    - for (const tag of lastfm[period].tags)
+                        li
+                            a(href=tag.url)= tag.name
+
++periodSection("weekly", "Top 10 da semana")
++periodSection("monthly", "Top 10 do mês")
++periodSection("yearly", "Top 10 do ano")
++periodSection("overall", "Top 10 de todos os tempos")
