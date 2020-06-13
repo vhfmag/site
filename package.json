@@ -2,7 +2,8 @@
 	"scripts": {
 		"build": "NODE_ENV=${NODE_ENV:-production} yarn build-dev && NODE_ENV=${NODE_ENV:-production} gulp",
 		"build-dev": "eleventy --passthroughall",
-		"dev": "SKIP_WEBMENTIONIO=${SKIP_WEBMENTIONIO:-true} yarn build-dev --serve",
+		"dev:bare": "SKIP_WEBMENTIONIO=${SKIP_WEBMENTIONIO:-true} yarn build-dev --serve",
+		"dev": "netlify dev -c 'yarn dev:bare'",
 		"postinstall": "patch-package"
 	},
 	"devDependencies": {
@@ -52,6 +53,7 @@
 	"dependencies": {
 		"@remy/webmention": "git+https://git@github.com/vhfmag/wm.git",
 		"babel-loader": "^8.1.0",
+		"netlify-cli": "^2.53.0",
 		"url-info-scraper": "^0.1.3"
 	}
 }
