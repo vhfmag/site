@@ -9,10 +9,6 @@ main.music > section + section {
 
 main.music ol.ranking.with-image {
 	--column-width: var(--last-fm-image-size);
-	--column-width: min(
-		var(--last-fm-image-size),
-		100vw - (2 * var(--root-padding)) - (2 * var(--root-border-width))
-	);
 
 	display: grid;
 	gap: var(--s0);
@@ -23,6 +19,15 @@ main.music ol.ranking.with-image {
 			var(--column-width)
 	);
 	counter-reset: ranking;
+}
+
+@supports (width: min(0, 1px)) {
+	main.music ol.ranking.with-image {
+		--column-width: min(
+			var(--last-fm-image-size),
+			100vw - (2 * var(--root-padding)) - (2 * var(--root-border-width))
+		);
+	}
 }
 
 @media (max-width: 1250px) {
