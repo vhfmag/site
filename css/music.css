@@ -1,0 +1,85 @@
+.music {
+	max-width: unset;
+	--last-fm-image-size: 174px;
+}
+
+.music ol.ranking.with-image {
+	--column-width: var(--last-fm-image-size);
+	--column-width: min(
+		var(--last-fm-image-size),
+		100vw - (2 * var(--root-padding)) - (2 * var(--root-border-width))
+	);
+
+	display: grid;
+	gap: var(--s0);
+	padding: 0;
+	grid-template-columns: repeat(
+		auto-fill,
+		var(--column-width) var(--column-width) var(--column-width) var(--column-width)
+			var(--column-width)
+	);
+	counter-reset: ranking;
+}
+
+@media (max-width: 1250px) {
+	.music ol.ranking.with-image {
+		grid-template-columns: repeat(auto-fit, var(--column-width));
+	}
+}
+
+.music ol.ranking.with-image li img {
+	width: 100%;
+}
+
+.music ol.ranking.with-image li {
+	display: flex;
+	flex-direction: column;
+	position: relative;
+	counter-increment: ranking;
+}
+
+.music ol.ranking.with-image li::before {
+	content: counter(ranking);
+	position: absolute;
+	top: var(--s-2);
+	left: var(--s-2);
+	background-color: var(--themeColor);
+	border: 2px solid var(--backgroundColor);
+	color: var(--backgroundColor);
+	border-radius: 50%;
+	height: 1.5em;
+	width: 1.5em;
+	box-sizing: content-box;
+	text-align: center;
+	font-weight: bold;
+	font-variation-settings: "wght" 500;
+}
+
+.music ol.ranking li,
+.music ol.ranking li * {
+	text-align: left;
+}
+
+.music ol.ranking li .secondary {
+	font-size: var(--s0);
+}
+
+.music section.columns {
+	grid-column: span 2;
+}
+
+.music section.columns ol.ranking {
+	columns: 2 var(--last-fm-image-size);
+}
+
+.music .ranking-lists {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+	grid-gap: 1em;
+}
+
+@media (max-width: 600px) {
+	.music .ranking-lists {
+		display: block;
+	}
+}
