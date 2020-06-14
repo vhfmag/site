@@ -2,13 +2,12 @@ require("dotenv").config();
 
 const { URLSearchParams } = require("url");
 const _ = require("lodash");
-const { withCache } = require("../../utils/with-cache");
-globalThis.fetch = require("node-fetch");
+const { fetchWithCache } = require("../../utils/with-cache");
 
 const username = "vhfmag";
 const DEFAULT_LIMIT = 10;
 
-const apiBase = "http://ws.audioscrobbler.com/2.0";
+const apiBase = "https://ws.audioscrobbler.com/2.0";
 const { LASTFM_API_KEY } = process.env;
 
 /** @typedef {"overall" | "7day" | "1month" | "3month" | "6month" | "12month"} LastFmPeriod */
@@ -35,17 +34,7 @@ async function fetchLastFmData({ method, format = "json", limit = DEFAULT_LIMIT,
 		...otherParams,
 	});
 
-	return fetch(`${apiBase}\?${params.toString()}`).then(res => {
-		if (res.ok) {
-			if (format === "json") {
-				return res.json();
-			} else {
-				return res.text();
-			}
-		} else {
-			throw new Error(`Status code ${res.status}: ${res.statusText}`);
-		}
-	});
+	return fetchWithCache(`${apiBase}\?${params.toString()}`);
 }
 
 /** @typedef {"small" | "medium" | "large" | "extralarge" | "mega"} ImageSize */
@@ -166,7 +155,7 @@ async function fetchAllTopDataForPeriod(period) {
 	return { albums, artists, tracks, tags };
 }
 
-module.exports = withCache("lastfm", async function fetchAllLastFmData() {
+module.exports = async function fetchAllLastFmData() {
 	/** @type {LastFmPeriod[]} */
 	const periods = ["7day", "1month", "12month", "overall"];
 	const [weekly, monthly, yearly, overall] = await Promise.all(
@@ -179,4 +168,4 @@ module.exports = withCache("lastfm", async function fetchAllLastFmData() {
 		yearly,
 		overall,
 	};
-});
+};
