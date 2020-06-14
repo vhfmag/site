@@ -28,13 +28,13 @@ main.shows ul li p {
 }
 
 @supports (grid-template-columns: subgrid) {
-	main.shows ul {
-		grid-template-rows: repeat(auto-fill, max-content max-content);
-	}
-
 	main.shows ul li {
 		gap: var(--s-2);
-		grid-row: span 10;
+		grid-row: span 2;
 		grid-template-rows: subgrid;
+	}
+
+	main.shows ul.watched li {
+		grid-row: span 3;
 	}
 }

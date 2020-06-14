@@ -16,7 +16,7 @@ details
 mixin section(data, title)
     section
         h2= title
-        ul
+        ul(class=data[0].plays ? 'watched' : 'watchlist')
             - for (const el of data.filter(el => el.images.poster))
                 li
                     img.ignore-webp(src=el.images.poster, loading="lazy", width=200, height=285)
