@@ -100,7 +100,7 @@ main.music section.columns ol.ranking {
 
 main.music .ranking-lists {
 	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+	grid-template-columns: repeat(auto-fit, minmax(200px, auto));
 	grid-gap: 1em;
 }
 
