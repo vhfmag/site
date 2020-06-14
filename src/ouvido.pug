@@ -22,7 +22,7 @@ mixin periodSection(period, title)
             ol.ranking.with-image
                 - for (const album of lastfm[period].albums)
                     li
-                        img.ignore-webp(src=album.image[2]["#text"], width=174, height=174)
+                        img(src=album.image[2]["#text"], width=174, height=174)
                         a.secondary(href=album.artist.url)= album.artist.name
                         a.primary(href=album.url)= album.name
 

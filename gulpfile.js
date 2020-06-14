@@ -54,6 +54,8 @@ function html() {
 					posthtmlWebp({
 						replaceExtension: true,
 						extensionIgnore: ["svg", "gif", "webp"],
+						domainIgnore: ["fanart.tv", "tmdb.org"],
+						classIgnore: ["ignore-webp"],
 					}),
 					imgAutosize({ processEmptySize: true }),
 					inlineAssets({
