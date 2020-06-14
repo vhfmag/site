@@ -23,6 +23,8 @@ const addAsyncShortcode = require("./utils/add-async-shortcode");
 const { figureShortcode } = require("./src/_shortcodes/figure");
 const { embedShortcode } = require("./src/_shortcodes/embed");
 const { bridgyLinksShortcode } = require("./src/_shortcodes/bridgy");
+const { withCache } = require("./utils/with-cache");
+const { createPool } = require("./utils/pool");
 
 /**
  *
@@ -188,21 +190,27 @@ module.exports = function (eleventyConfig) {
 		return `${day.padStart(2, "0")}/${month.padStart(2, "0")}/${date.getFullYear()}`;
 	});
 
+	const withPool = createPool();
 	eleventyConfig.addAsyncShortcode(
 		"titleFromUrl",
 		IS_PROD
-			? memoize(url => {
-					return new Promise((res, rej) => {
-						urlInfoScraper(url, (error, linkInfo) => {
-							if (error || !linkInfo.title) {
-								console.error(error);
-								res(url);
-							} else {
-								res(linkInfo.title);
-							}
-						});
-					});
-			  })
+			? withPool(
+					withCache(
+						url => url,
+						url => {
+							return new Promise((res, _rej) => {
+								urlInfoScraper(url, (error, linkInfo) => {
+									if (error || !linkInfo.title) {
+										console.error(error);
+										res(url);
+									} else {
+										res(linkInfo.title);
+									}
+								});
+							});
+						},
+					),
+			  )
 			: url => url,
 	);
 
