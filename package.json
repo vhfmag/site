@@ -31,7 +31,6 @@
 		"image-size": "^0.8.3",
 		"jsdom": "^16.2.2",
 		"lodash": "^4.17.15",
-		"make-fetch-happen": "8.0.7",
 		"markdown-it-anchor": "5.3.0",
 		"markdown-it-attrs": "3.0.2",
 		"markdown-it-codesandbox-embed": "^0.1.0",
@@ -52,8 +51,11 @@
 	},
 	"dependencies": {
 		"@remy/webmention": "git+https://git@github.com/vhfmag/wm.git",
+		"@supercharge/promise-pool": "^1.2.0",
 		"babel-loader": "^8.1.0",
+		"cacache": "^15.0.4",
 		"netlify-cli": "^2.53.0",
+		"node-fetch": "^2.6.0",
 		"url-info-scraper": "^0.1.3"
 	}
 }

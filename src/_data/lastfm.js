@@ -1,10 +1,9 @@
 require("dotenv").config();
 
 const { URLSearchParams } = require("url");
-const fetch = require("make-fetch-happen").defaults({
-	cacheManager: "./node_modules/.cache/lastfm-cache",
-});
 const _ = require("lodash");
+const { withCache } = require("../../utils/with-cache");
+globalThis.fetch = require("node-fetch");
 
 const username = "vhfmag";
 const DEFAULT_LIMIT = 10;
@@ -167,7 +166,7 @@ async function fetchAllTopDataForPeriod(period) {
 	return { albums, artists, tracks, tags };
 }
 
-module.exports = async function fetchAllLastFmData() {
+module.exports = withCache("lastfm", async function fetchAllLastFmData() {
 	/** @type {LastFmPeriod[]} */
 	const periods = ["7day", "1month", "12month", "overall"];
 	const [weekly, monthly, yearly, overall] = await Promise.all(
@@ -180,4 +179,4 @@ module.exports = async function fetchAllLastFmData() {
 		yearly,
 		overall,
 	};
-};
+});

@@ -1,7 +1,7 @@
 require("dotenv").config();
-const fetch = require("make-fetch-happen").defaults({
-	cacheManager: "./node_modules/.cache/webmentions-cache",
-});
+
+const { withCache } = require("../../utils/with-cache");
+globalThis.fetch = require("node-fetch");
 const _ = require("lodash");
 
 const apiBase = "https://webmention.io/api/mentions.jf2";
@@ -98,7 +98,7 @@ async function fetchWebMentionsPage(page) {
  *
  * @returns {Promise<GroupedWebMentions>} a promise for a feed
  */
-module.exports = async function fetchWebMentions() {
+module.exports = withCache("webmentions", async function fetchWebMentions() {
 	if (process.env.NODE_ENV !== "production" || shouldSkipWebmentions) {
 		return {};
 	}
@@ -123,4 +123,4 @@ module.exports = async function fetchWebMentions() {
 			all: links,
 		}),
 	);
-};
+});
