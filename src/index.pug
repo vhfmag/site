@@ -73,7 +73,8 @@ section.half-column.row-3
 	h2 No fone
 	ul.inline-list
 		- for (artist of lastfm.weekly.artists)
-			li= artist.name
+			li #[a(href=artist.url)= artist.name]
+	div #[a(href="/ouvido") Veja mais]
 
 section.half-column.row-3
 	h2 Na estante
@@ -84,5 +85,6 @@ section.half-column.row-3
 section.half-column.row-3
 	h2 No streaming
 	ul.inline-list
-		- for (thing of watching)
-			li= thing
+		- for (thing of [...trakt.watched.shows, ...trakt.watched.movies].sort((a, b) => new Date(b.last_watched_at).valueOf() - new Date(a.last_watched_at).valueOf()).slice(0, 10))
+			li #[a(href=thing.url)= thing.data.title]
+	div #[a(href="/assistido") Veja mais]
