@@ -6738,6 +6738,11 @@ ignore@^5.1.1, ignore@^5.1.4:
   resolved "https://registry.yarnpkg.com/ignore/-/ignore-5.1.4.tgz#84b7b3dbe64552b6ef0eca99f6743dbec6d97adf"
   integrity sha512-MzbUSahkTW1u7JpKKjY7LCARd1fU5W2rLdxlM4kdkayuCwZImjkpluF9CM1aLewYJguPDqewLam18Y6AU69A8A==
 
+image-size@^0.7.2:
+  version "0.7.5"
+  resolved "https://registry.yarnpkg.com/image-size/-/image-size-0.7.5.tgz#269f357cf5797cb44683dfa99790e54c705ead04"
+  integrity sha512-Hiyv+mXHfFEP7LzUL/llg9RwFxxY+o9N3JVLIeG5E7iFIFAalxvRU9UZthBdYDEVnzHMgjnKJPPpay5BWf1g9g==
+
 image-size@^0.8.3:
   version "0.8.3"
   resolved "https://registry.yarnpkg.com/image-size/-/image-size-0.8.3.tgz#f0b568857e034f29baffd37013587f2c0cad8b46"
@@ -8548,10 +8553,10 @@ markdown-it-anchor@5.3.0:
   resolved "https://registry.yarnpkg.com/markdown-it-anchor/-/markdown-it-anchor-5.3.0.tgz#d549acd64856a8ecd1bea58365ef385effbac744"
   integrity sha512-/V1MnLL/rgJ3jkMWo84UR+K+jF1cxNG1a+KwqeXqTIJ+jtA8aWSHuigx8lTzauiIjBDbwF3NcWQMotd0Dm39jA==
 
-markdown-it-attrs@3.0.3:
-  version "3.0.3"
-  resolved "https://registry.yarnpkg.com/markdown-it-attrs/-/markdown-it-attrs-3.0.3.tgz#92acdb16fe551cb056c5eb9848413443cafb5231"
-  integrity sha512-cLnICU2t61skNCr4Wih/sdza+UbQcqJGZwvqAypnbWA284nzDm+Gpc90iaRk/JjsIy4emag5v3s0rXFhFBWhCA==
+markdown-it-attrs@3.0.2:
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/markdown-it-attrs/-/markdown-it-attrs-3.0.2.tgz#55a466b2b60d755b2a77288dff175e741fc1143d"
+  integrity sha512-q45vdXU9TSWaHgFkWEFM97YHEoCmOyG9csLLdv3oVC6ARjT77u4wfng9rRtSOMb5UpxzT7zTX5GBbwm15H40dw==
 
 markdown-it-codesandbox-embed@^0.1.0:
   version "0.1.0"
@@ -10931,10 +10936,10 @@ postcss-values-parser@^3.2.1:
     postcss "^7.0.5"
     url-regex "^5.0.0"
 
-postcss@7.0.32:
-  version "7.0.32"
-  resolved "https://registry.yarnpkg.com/postcss/-/postcss-7.0.32.tgz#4310d6ee347053da3433db2be492883d62cec59d"
-  integrity sha512-03eXong5NLnNCD05xscnGKGDZ98CyzoqPSMjOe6SuoQY7Z2hIj0Ld1g/O/UQRuOle2aRtiIRDg9tDcTGAkLfKw==
+postcss@7.0.30:
+  version "7.0.30"
+  resolved "https://registry.yarnpkg.com/postcss/-/postcss-7.0.30.tgz#cc9378beffe46a02cbc4506a0477d05fcea9a8e2"
+  integrity sha512-nu/0m+NtIzoubO+xdAlwZl/u5S5vi/y6BCsoL8D+8IxsD3XvBS8X4YEADNIVXKVuQvduiucnRv+vPIqj56EGMQ==
   dependencies:
     chalk "^2.4.2"
     source-map "^0.6.1"
@@ -10968,12 +10973,12 @@ postcss@^7.0.2:
     source-map "^0.6.1"
     supports-color "^6.1.0"
 
-posthtml-img-autosize@^0.1.5:
-  version "0.1.5"
-  resolved "https://registry.yarnpkg.com/posthtml-img-autosize/-/posthtml-img-autosize-0.1.5.tgz#951135ebe9bc5b1b6a373d526e3a33392ba7cae7"
-  integrity sha512-V3YDkqpZkWOWVs1JasZ1GkjWulpfI7MRWWXhQofetKMJhw0N5SKT3YilQQn37Ulj+yCfHuqkuDdhswdTNezN5A==
+posthtml-img-autosize@^0.1.4:
+  version "0.1.4"
+  resolved "https://registry.yarnpkg.com/posthtml-img-autosize/-/posthtml-img-autosize-0.1.4.tgz#0c3d612ba5f6682ebfe344de89e57ffedb5da4ed"
+  integrity sha512-Fu6wgpjZ73QlxX3Pf51fgueY+b64p/LI20+p6dKGIhrSoS/mv1nqigF878x6/YOIFc657x6NCUIRvfDCyi43bA==
   dependencies:
-    image-size "^0.8.3"
+    image-size "^0.7.2"
 
 posthtml-inline-assets@^3.1.0:
   version "3.1.0"
@@ -11033,12 +11038,12 @@ posthtml-urls@1.0.0:
     parse-srcset "^1.0.2"
     promise-each "^2.2.0"
 
-posthtml-webp@^1.5.1:
-  version "1.5.1"
-  resolved "https://registry.yarnpkg.com/posthtml-webp/-/posthtml-webp-1.5.1.tgz#bfc94e486950902ef89884fc19bebfe85e7b8f37"
-  integrity sha512-Ac4OJVQJVcf0ldOEhJMD7XFrc91so1Hd0zs+ltJJoC7jpyQMjR1LteYWRRyyVen1wSoKuUjfBQqFwYgzcKqELA==
+posthtml-webp@^1.5.0:
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/posthtml-webp/-/posthtml-webp-1.5.0.tgz#40ff9efb6a55a198613211988ec37b499bed6a9f"
+  integrity sha512-aer+AJVtOEocrt8COdtRb0b7i/u6gdcZnUHdAQnEB3oG+bax46HnrAhxDKRCgzzEyV0QCmxhSmFh5bZ6PnebHQ==
   dependencies:
-    posthtml "^0.13.0"
+    posthtml "^0.12.0"
 
 posthtml@^0.11.0:
   version "0.11.6"
