@@ -1,10 +1,11 @@
 [[plugins]]
 package = "netlify-plugin-subfont"
     [plugins.inputs]
-    recursive = false
+    recursive = true
     inlineCss = true
     inlineFonts = false
     fontDisplay = "swap"
+    fallbacks = true
 
 [[plugins]]
 package = "netlify-plugin-debug-cache"
