@@ -1,22 +1,3 @@
-diff --git a/node_modules/posthtml-webp/.travis.yml b/node_modules/posthtml-webp/.travis.yml
-old mode 100644
-new mode 100755
-diff --git a/node_modules/posthtml-webp/CONTRIBUTING.md b/node_modules/posthtml-webp/CONTRIBUTING.md
-old mode 100644
-new mode 100755
-diff --git a/node_modules/posthtml-webp/LICENSE b/node_modules/posthtml-webp/LICENSE
-old mode 100644
-new mode 100755
-diff --git a/node_modules/posthtml-webp/README.md b/node_modules/posthtml-webp/README.md
-old mode 100644
-new mode 100755
-diff --git a/node_modules/posthtml-webp/changelog.md b/node_modules/posthtml-webp/changelog.md
-old mode 100644
-new mode 100755
-diff --git a/node_modules/posthtml-webp/lib/index.js b/node_modules/posthtml-webp/lib/index.js
-old mode 100644
-new mode 100755
-index b764fd2..a5327f1
 --- a/node_modules/posthtml-webp/lib/index.js
 +++ b/node_modules/posthtml-webp/lib/index.js
 @@ -13,6 +13,10 @@ module.exports = function (options) {
@@ -55,40 +36,3 @@ index b764fd2..a5327f1
 +      return [cleanedPath + '.webp' + (query ? `?${query}` : ""), size].filter(Boolean).join(' ')
      })
      .join(', ')
- 
-diff --git a/node_modules/posthtml-webp/test/fixtures/basic.expected.html b/node_modules/posthtml-webp/test/fixtures/basic.expected.html
-old mode 100644
-new mode 100755
-diff --git a/node_modules/posthtml-webp/test/fixtures/extension.expected.html b/node_modules/posthtml-webp/test/fixtures/extension.expected.html
-old mode 100644
-new mode 100755
-diff --git a/node_modules/posthtml-webp/test/fixtures/extension.html b/node_modules/posthtml-webp/test/fixtures/extension.html
-old mode 100644
-new mode 100755
-diff --git a/node_modules/posthtml-webp/test/fixtures/ignore-extension.expected.html b/node_modules/posthtml-webp/test/fixtures/ignore-extension.expected.html
-old mode 100644
-new mode 100755
-diff --git a/node_modules/posthtml-webp/test/fixtures/ignore-extension.html b/node_modules/posthtml-webp/test/fixtures/ignore-extension.html
-old mode 100644
-new mode 100755
-diff --git a/node_modules/posthtml-webp/test/fixtures/ignore.expected.html b/node_modules/posthtml-webp/test/fixtures/ignore.expected.html
-old mode 100644
-new mode 100755
-diff --git a/node_modules/posthtml-webp/test/fixtures/ignore.html b/node_modules/posthtml-webp/test/fixtures/ignore.html
-old mode 100644
-new mode 100755
-diff --git a/node_modules/posthtml-webp/test/fixtures/multisrcset.expected.html b/node_modules/posthtml-webp/test/fixtures/multisrcset.expected.html
-old mode 100644
-new mode 100755
-diff --git a/node_modules/posthtml-webp/test/fixtures/multisrcset.html b/node_modules/posthtml-webp/test/fixtures/multisrcset.html
-old mode 100644
-new mode 100755
-diff --git a/node_modules/posthtml-webp/test/fixtures/no-extension.expected.html b/node_modules/posthtml-webp/test/fixtures/no-extension.expected.html
-old mode 100644
-new mode 100755
-diff --git a/node_modules/posthtml-webp/test/fixtures/no-extension.html b/node_modules/posthtml-webp/test/fixtures/no-extension.html
-old mode 100644
-new mode 100755
-diff --git a/node_modules/posthtml-webp/test/test.js b/node_modules/posthtml-webp/test/test.js
-old mode 100644
-new mode 100755
