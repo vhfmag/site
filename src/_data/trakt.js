@@ -12,7 +12,7 @@ const trakt = new Trakt({
 		images: {
 			tmdbApiKey: process.env.TMDB_API_KEY,
 			fanartApiKey: process.env.FANART_API_KEY,
-			// tvdbApiKey: process.env.TVDB_API_KEY,
+			tvdbApiKey: process.env.TVDB_API_KEY,
 			smallerImages: true,
 			cached: true,
 		},
