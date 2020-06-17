@@ -242,13 +242,6 @@ blockquote {
 	border-left: var(--s-1) solid var(--themeColor);
 }
 
-@supports (border-inline-start: var(--s-1) solid var(--themeColor)) {
-	blockquote {
-		border-left: unset;
-		border-inline-start: var(--s-1) solid var(--themeColor);
-	}
-}
-
 blockquote > :first-child {
 	margin-top: 0;
 }
