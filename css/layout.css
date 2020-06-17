@@ -239,7 +239,14 @@ blockquote {
 	padding-top: var(--s-1);
 	padding-bottom: var(--s-1);
 	padding-left: var(--s0);
-	border-inline-start: var(--s-1) solid var(--themeColor);
+	border-left: var(--s-1) solid var(--themeColor);
+}
+
+@supports (border-inline-start: var(--s-1) solid var(--themeColor)) {
+	blockquote {
+		border-left: unset;
+		border-inline-start: var(--s-1) solid var(--themeColor);
+	}
 }
 
 blockquote > :first-child {
