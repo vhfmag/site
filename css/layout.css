@@ -371,3 +371,7 @@ figcaption {
 .turbolinks-progress-bar {
 	background-color: var(--backgroundColor);
 }
+
+hr {
+	border-color: var(--themeColor);
+}
