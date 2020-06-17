@@ -1,11 +1,11 @@
-[[plugins]]
-package = "netlify-plugin-subfont"
-    [plugins.inputs]
-    recursive = false
-    inlineCss = true
-    inlineFonts = false
-    fontDisplay = "swap"
-    fallbacks = true
+# [[plugins]]
+# package = "netlify-plugin-subfont"
+#     [plugins.inputs]
+#     recursive = false
+#     inlineCss = true
+#     inlineFonts = false
+#     fontDisplay = "swap"
+#     fallbacks = true
 
 [[plugins]]
 package = "netlify-plugin-submit-sitemap"
