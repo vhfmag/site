@@ -16,15 +16,16 @@ A memória mais antiga que tenho em que eu já me reconhecia gay é de uns 10 an
 
 Sempre achei estranha a noção de se descobrir gay, porque desde que comecei a pensar em sexualidade eu sabia por quem eu me interessava. Nunca houve dúvida, embate interno sobre ser certo ou errado, nem nenhuma resistência de minha parte. Eu me sentia atraído por homens, isso era um fato sob o qual eu não tinha controle e não fazia sentido debater a moral de algo inato que acontece entre pessoas que consentiram. Isso se resolveu muito rápido dentro de mim. Já o resto...
 
-No ginásio, passei a ter terror de ser descoberto na escola (em retrospecto: todo mundo imaginava 🤷🏽‍♂️), então passei a me vigiar muito, o tempo inteiro. O rebolado e a voz eram minhas principais paranoias, mas tudo era constantemente vigiado: minha simpatia pelo feminismo e pela causa LGBT, meus olhares, o fato de que eu sempre fiz mais amizades com mulheres... Na época eu me sentia vigiado (e talvez fosse), mas o principal vigia era eu mesmo. Nunca me aproximei das gay da escola, tive uma adolescência gay solitária. Demorei de beijar um homem pela primeira vez ([mas não uma mulher](https://twitter.com/vhfmag/status/1270021339454279680)), me sentia atrasado, sentia que a maldição de só 10% dos homens serem gays (não lembro de onde tirei o número, mas [parece surpreendentemente preciso](https://pt.wikipedia.org/wiki/Demografia_das_orienta%C3%A7%C3%B5es_sexuais#Brasil)) tinha me condenado a ficar só. Adolescentes conseguem ser bem dramáticos, mas como eu encontraria alguém, estando no armário?
+No ginásio, passei a ter terror de ser descoberto na escola (em retrospecto: todo mundo imaginava 🤷🏽‍♂️), então passei a me vigiar muito, o tempo inteiro. O rebolado e a voz eram minhas principais paranoias, mas tudo era constantemente vigiado: minha simpatia pelo feminismo e pela causa LGBT, meus olhares, o fato de que eu sempre fiz mais amizades com mulheres... Na época eu me sentia vigiado (e talvez fosse), mas o principal vigia era eu mesmo. Nunca me aproximei das gay da escola, tive uma adolescência gay solitária. Demorei de beijar um homem pela primeira vez ([mas não uma mulher](#beijo-hetero)), me sentia atrasado, sentia que a maldição de só 10% dos homens serem gays (não lembro de onde tirei o número, mas [parece surpreendentemente preciso](https://pt.wikipedia.org/wiki/Demografia_das_orienta%C3%A7%C3%B5es_sexuais#Brasil)) tinha me condenado a ficar só. Adolescentes conseguem ser bem dramáticos, mas como eu encontraria alguém, estando no armário?
 
-A história do meu primeiro beijo é divertida o suficiente pra reproduzir aqui:
+A história do meu primeiro beijo é divertida o suficiente pra reproduzir um tuíte sobre ele aqui:
 
 > na 5ª série uma menina armou com colegas e me prendeu no corredor na hora do recreio pra me beijar. cedi com medo de dizer não acabar me revelando como gay.
 >
 > no outro dia, ela me pediu em namoro, eu disse que ia pedir a minha mãe pra ganhar tempo
 >
 > aí ela sentou no colo de um menino (que eu achava bonitinho, inclusive rs) e eu fingi ciúmes pra terminar 🤷🏽‍♂️
+> — [tuíte](ttps://twitter.com/vhfmag/status/1270021339454279680) por mim mesmo, ligeiramente editado {id=beijo-hetero}
 
 Certa feita, um amigo que eu muito admirava me disse algo como: "existem dois caminhos para quem cresce sendo gay: ou você é afeminado e se aproxima de outros gays, mas sofre discriminação aberta; ou você é encubado e não se aproxima de seus iguais, mas se protege da discriminação". Discriminação ou isolamento de seus pares. Escolhi a segunda opção.
 
