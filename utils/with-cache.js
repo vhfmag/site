@@ -15,7 +15,7 @@ const fetchWithCache = withCache(
 			} else {
 				throw new Error(
 					`Status code ${res.status}: ${res.statusText} for ${JSON.stringify(
-						{ input, init },
+						{ args },
 						undefined,
 						4,
 					)}`,
