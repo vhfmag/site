@@ -11,6 +11,7 @@ main.shows ul {
 
 main.shows ul li {
 	display: grid;
+	gap: var(--s-2);
 }
 
 main.shows ul li,
@@ -20,7 +21,7 @@ main.shows ul li * {
 
 main.shows ul img {
 	display: block;
-	height: 100%;
+	width: 100%;
 }
 
 main.shows ul li p {
@@ -29,7 +30,6 @@ main.shows ul li p {
 
 @supports (grid-template-columns: subgrid) {
 	main.shows ul li {
-		gap: var(--s-2);
 		grid-row: span 2;
 		grid-template-rows: subgrid;
 	}
