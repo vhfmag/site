@@ -1,5 +1,6 @@
 {
 	"layout": "photo",
+	"collectionSlug": "photos",
 	"collection": "Foto",
 	"collectionName": "Fotos"
 }

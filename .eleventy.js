@@ -190,6 +190,23 @@ module.exports = function (eleventyConfig) {
 		return `${day.padStart(2, "0")}/${month.padStart(2, "0")}/${date.getFullYear()}`;
 	});
 
+	eleventyConfig.addFilter("splitlines", function (input) {
+		const parts = input.split(" ");
+		const lines = parts.reduce(function (prev, current) {
+			if (!prev.length) {
+				return [current];
+			}
+
+			let lastOne = prev[prev.length - 1];
+			if (lastOne.length + current.length > 18) {
+				return [...prev, current];
+			}
+			prev[prev.length - 1] = lastOne + " " + current;
+			return prev;
+		}, []);
+		return lines;
+	});
+
 	const withPool = createPool();
 	eleventyConfig.addAsyncShortcode(
 		"titleFromUrl",

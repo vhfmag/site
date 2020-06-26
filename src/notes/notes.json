@@ -1,5 +1,6 @@
 {
 	"layout": "entry",
+	"collectionSlug": "notes",
 	"collection": "Nota",
 	"collectionName": "Notas"
 }

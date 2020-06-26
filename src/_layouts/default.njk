@@ -54,6 +54,13 @@ ogtype: website
         {% endif %}
 
         {% seo "" %}
+
+        {% if title and collectionSlug %}
+            <meta property="og:image" content="{{ site.canonicalUrl }}/preview/{{ collectionSlug }}/{{ page.fileSlug }}.png">
+            <meta property="og:image:secure_url" content="{{ site.canonicalUrl }}/preview/{{ collectionSlug }}/{{ page.fileSlug }}.png">
+            <meta name="twitter:image" content="{{ site.canonicalUrl }}/preview/{{ collectionSlug }}/{{ page.fileSlug }}.png">
+        {% endif %}
+
         {% block head %}
         {% endblock %}
     </head>

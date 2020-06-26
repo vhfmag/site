@@ -1,5 +1,6 @@
 {
 	"layout": "post",
+	"collectionSlug": "posts",
 	"collection": "Post",
 	"collectionName": "Posts"
 }
