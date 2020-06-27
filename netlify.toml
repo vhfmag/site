@@ -20,6 +20,11 @@ package = "@netlify/plugin-lighthouse"
 [[plugins]]
 package = "netlify-plugin-debug-cache"
 
+[[plugins]]
+package = "netlify-plugin-chromium"
+[plugins.inputs]
+packageManager = "yarn"
+
 [build]
     functions = "functions/"
     publish = "dist"

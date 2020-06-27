@@ -12,6 +12,8 @@ const imgAutosize = require("posthtml-img-autosize");
 const posthtmlWebp = require("posthtml-webp");
 const inlineAssets = require("posthtml-inline-assets");
 
+const svg2png = require("gulp-svg2png-update");
+
 const imagemin = require("gulp-imagemin");
 const webp = require("gulp-webp");
 
@@ -97,6 +99,10 @@ function html() {
 		.pipe(gulp.dest("dist"));
 }
 
+function generatePngPreviews() {
+	return gulp.src("public/preview/**/*.svg").pipe(svg2png()).pipe(gulp.dest("dist/preview/"));
+}
+
 function minifyImages() {
 	return gulp
 		.src("public/**/*.{jpg,jpeg,png,svg,gif,tiff,webp}", { since: gulp.lastRun(minifyImages) })
@@ -142,6 +148,14 @@ exports.html = html;
 exports.images = gulp.parallel(minifyImages, convertToWebpAndMinifyImages);
 exports.otherwise = otherwise;
 exports.watch = serveOnly;
+exports.pngPreview = generatePngPreviews;
 exports["clear-cache"] = clearCache;
 
-exports.default = gulp.parallel(css, html, minifyImages, convertToWebpAndMinifyImages, otherwise);
+exports.default = gulp.parallel(
+	css,
+	html,
+	minifyImages,
+	convertToWebpAndMinifyImages,
+	generatePngPreviews,
+	otherwise,
+);
