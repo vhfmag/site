@@ -190,7 +190,7 @@ module.exports = function (eleventyConfig) {
 		return `${day.padStart(2, "0")}/${month.padStart(2, "0")}/${date.getFullYear()}`;
 	});
 
-	eleventyConfig.addFilter("splitlines", function (input) {
+	eleventyConfig.addFilter("splitlines15", function (input) {
 		const parts = input.split(" ");
 		const lines = parts.reduce(function (prev, current) {
 			if (!prev.length) {
@@ -198,7 +198,24 @@ module.exports = function (eleventyConfig) {
 			}
 
 			let lastOne = prev[prev.length - 1];
-			if (lastOne.length + current.length > 18) {
+			if (lastOne.length + current.length > 19) {
+				return [...prev, current];
+			}
+			prev[prev.length - 1] = lastOne + " " + current;
+			return prev;
+		}, []);
+		return lines;
+	});
+
+	eleventyConfig.addFilter("splitlines8", function (input) {
+		const parts = input.split(" ");
+		const lines = parts.reduce(function (prev, current) {
+			if (!prev.length) {
+				return [current];
+			}
+
+			let lastOne = prev[prev.length - 1];
+			if (lastOne.length + current.length > 40) {
 				return [...prev, current];
 			}
 			prev[prev.length - 1] = lastOne + " " + current;

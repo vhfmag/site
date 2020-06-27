@@ -11,6 +11,8 @@
 }
 ---
 
+{% set lines = post.data.title | splitlines15 %}
+
 <svg width="1200px" height="630px" viewBox="0 0 190 100" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <rect
         width="190"
@@ -26,10 +28,19 @@
     </text>
 
     <text fill="{{theme.light.themeColor}}" font-size="15">
-        {% for line in post.data.title | splitlines %}
+        {% for line in lines %}
         <tspan x="4" y="{{ 24.5 + loop.index0 * 15 }}">{{ line }}</tspan>
         {% endfor %}
     </text>
+
+    {% if post.data.description and lines | length <= 2 %}
+    {% set y_base = 24.5 + (lines | length) * 15 %}
+    <text fill="{{theme.light.themeColor}}" font-size="8">
+        {% for line in post.data.description | splitlines8 %}
+        <tspan x="5" y="{{ y_base + loop.index0 * 8 }}">{{ line }}</tspan>
+        {% endfor %}
+    </text>
+    {% endif %}
 
     <text font-size="5" x="125" y="92.5" fill="{{theme.light.textColor}}">
         victormagalhaes.codes
