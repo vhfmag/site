@@ -1,7 +1,7 @@
 ---
 date: 2020-06-28T11:13:29.000-03:00
 title: Crescer sendo viado
-description: Do medo e repressão de mim e do outro ao reconhecimento de que ser viado é força, não fraqueza
+excerpt: Do medo e repressão de mim e do outro ao reconhecimento de que ser viado é força, não fraqueza
 links: []
 customTags:
     - gay

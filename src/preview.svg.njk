@@ -33,10 +33,10 @@
         {% endfor %}
     </text>
 
-    {% if post.data.description and lines | length <= 2 %}
+    {% if post.data.excerpt and lines | length <= 2 %}
     {% set y_base = 24.5 + (lines | length) * 15 %}
     <text fill="{{theme.light.themeColor}}" font-size="8">
-        {% for line in post.data.description | splitlines8 %}
+        {% for line in post.data.excerpt | splitlines8 %}
         <tspan x="5" y="{{ y_base + loop.index0 * 8 }}">{{ line }}</tspan>
         {% endfor %}
     </text>

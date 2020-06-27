@@ -3,53 +3,53 @@ label: Post
 hide_body: false
 display_field: title
 fields:
-- type: text
-  name: title
-  label: Title
-  config:
-    required: true
-- type: textarea
-  name: description
-  label: Description
-  config:
-    required: false
-- type: datetime
-  name: date
-  label: Publication date
-  config:
-    required: true
-  default: now
-- name: draft
-  type: boolean
-  label: Draft
-  default: false
-- type: field_group_list
-  name: links
-  label: Links
-  fields:
-  - type: list
-    name: types
-    label: Link types
-    config:
-      use_select: true
-      source:
-        type: simple
-      options:
-      - bookmark-of
-      - in-reply-to
-      - repost-of
-      - like-of
-      - mention-of
-  - type: text
-    name: link
-    label: URL
-- type: list
-  name: customTags
-  label: Custom tags
+    - type: text
+      name: title
+      label: Title
+      config:
+          required: true
+    - type: textarea
+      name: excerpt
+      label: Description
+      config:
+          required: false
+    - type: datetime
+      name: date
+      label: Publication date
+      config:
+          required: true
+      default: now
+    - name: draft
+      type: boolean
+      label: Draft
+      default: false
+    - type: field_group_list
+      name: links
+      label: Links
+      fields:
+          - type: list
+            name: types
+            label: Link types
+            config:
+                use_select: true
+                source:
+                    type: simple
+                options:
+                    - bookmark-of
+                    - in-reply-to
+                    - repost-of
+                    - like-of
+                    - mention-of
+          - type: text
+            name: link
+            label: URL
+    - type: list
+      name: customTags
+      label: Custom tags
 pages:
-- src/bookmarks/bob-black-sobre-trabalho.md
-- src/bookmarks/brace-yourself-for-the-most-dangerous-idea-yet-most-people-are-pretty-decent.md
-- src/bookmarks/eu-não-me-calo-por-maurício-ricardo.md
-- src/bookmarks/potyguara-bardo-curupira-audio.md
-- src/bookmarks/who-is-responsible-for-climate-change-who-needs-to-fix-it-kurzgesagt.md
-- src/posts/crescer-sendo-viado.md
+    - src/bookmarks/bob-black-sobre-trabalho.md
+    - src/bookmarks/brace-yourself-for-the-most-dangerous-idea-yet-most-people-are-pretty-decent.md
+    - src/bookmarks/eu-não-me-calo-por-maurício-ricardo.md
+    - src/bookmarks/potyguara-bardo-curupira-audio.md
+    - src/bookmarks/who-is-responsible-for-climate-change-who-needs-to-fix-it-kurzgesagt.md
+    - src/posts/crescer-sendo-viado.md

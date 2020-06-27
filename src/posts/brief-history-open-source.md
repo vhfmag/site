@@ -1,6 +1,6 @@
 ---
 title: "Uma breve história do código aberto e do software livre"
-description: "De bem comum a marketing"
+excerpt: "De bem comum a marketing"
 customTags: ["Software livre", "Código aberto"]
 date: 2018-05-31
 ---

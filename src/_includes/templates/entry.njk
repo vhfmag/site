@@ -27,8 +27,8 @@
             </span>
             {% block metadata %}{% endblock %}
         </div>
-        {% if description %}
-            <p itemprop="alternativeHeadline">{{ description }}</p>
+        {% if excerpt %}
+            <p itemprop="alternativeHeadline">{{ excerpt }}</p>
         {% endif %}
         {% block header %}{% endblock %}
     </header>

@@ -1,6 +1,6 @@
 ---
 title: O valor prático de saber HTML
-description: "Muito além da div"
+excerpt: "Muito além da div"
 customTags: ["Técnico"]
 date: 2019-02-21
 ---

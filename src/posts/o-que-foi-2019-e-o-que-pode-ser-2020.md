@@ -1,6 +1,6 @@
 ---
 title: "O que foi 2019 e o que pode ser 2020"
-description: "Antes tarde do que nunca (eu acho)"
+excerpt: "Antes tarde do que nunca (eu acho)"
 date: 2020-01-05
 customTags: ["Retrospectiva", "Metas"]
 ---

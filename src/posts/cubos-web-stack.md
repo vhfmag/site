@@ -1,6 +1,6 @@
 ---
 title: A stack front-end da Cubos
-description: Que linguagens e bibliotecas a Cubos usa em seus web apps?
+excerpt: Que linguagens e bibliotecas a Cubos usa em seus web apps?
 customTags: ["Técnico"]
 date: 2017-10-13
 ---

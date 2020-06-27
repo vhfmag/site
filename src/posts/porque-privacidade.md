@@ -1,6 +1,6 @@
 ---
 title: "Privacidade (WIP)"
-description: "Por que, pra quê e pra quem"
+excerpt: "Por que, pra quê e pra quem"
 date: 2018-12-10
 customTags: ["Privacidade", "Sociedade"]
 draft: true

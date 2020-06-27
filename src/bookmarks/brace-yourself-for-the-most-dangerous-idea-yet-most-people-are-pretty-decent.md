@@ -1,15 +1,15 @@
 ---
 date: 2020-05-12T09:43:40-03:00
-title: 'Brace yourself for the most dangerous idea yet: most people are pretty decent'
-description: ''
+title: "Brace yourself for the most dangerous idea yet: most people are pretty decent"
+excerpt: ""
 draft: false
 links:
-- types:
-  - bookmark-of
-  link: https://thecorrespondent.com/443/brace-yourself-for-the-most-dangerous-idea-yet-most-people-are-pretty-decent/58612083398-55f77a22
+    - types:
+          - bookmark-of
+      link: https://thecorrespondent.com/443/brace-yourself-for-the-most-dangerous-idea-yet-most-people-are-pretty-decent/58612083398-55f77a22
 customTags: []
-
 ---
+
 > Peter Kropotkin believed that most people are pretty decent.
 
 > Kropotkin was far ahead of his time. He rejected both authoritarian communism and the iron cage of capitalism. He believed in the power of the individual, but equally that we can’t survive without each other.

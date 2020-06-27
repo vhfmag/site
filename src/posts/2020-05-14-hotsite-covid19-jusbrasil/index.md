@@ -1,6 +1,6 @@
 ---
 title: "Desenvolvendo o hotsite da Jusbrasil sobre Covid19"
-# description: "Premissas, desafios..."
+# excerpt: "Premissas, desafios..."
 customTags: ["Jusbrasil"]
 date: 2020-05-14T12:45:55.920-03:00
 ---
