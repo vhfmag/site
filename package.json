@@ -50,12 +50,14 @@
 		"prettier": "^2.0.5"
 	},
 	"dependencies": {
+		"@netlify/plugin-lighthouse": "^1.2.1",
 		"@remy/webmention": "git+https://git@github.com/vhfmag/wm.git",
 		"@supercharge/promise-pool": "^1.2.0",
 		"babel-loader": "^8.1.0",
 		"cacache": "^15.0.4",
 		"full-icu": "^1.3.1",
 		"netlify-cli": "^2.53.0",
+		"netlify-plugin-submit-sitemap": "^0.1.4",
 		"node-fetch": "^2.6.0",
 		"trakt.tv": "^8.0.0",
 		"trakt.tv-images": "^5.2.0",

@@ -9,11 +9,13 @@
 
 [[plugins]]
 package = "netlify-plugin-submit-sitemap"
-
 [plugins.inputs]
 baseUrl = "https://victormagalhaes.codes"
 sitemapPath = "/sitemap.xml"
 providers = ["google", "bing"]
+
+[[plugins]]
+package = "@netlify/plugin-lighthouse"
 
 [[plugins]]
 package = "netlify-plugin-debug-cache"
