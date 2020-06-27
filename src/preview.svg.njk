@@ -15,23 +15,23 @@
     <rect
         width="190"
         height="100"
-        fill="{{theme.dark.backgroundColor}}"
-        stroke="{{theme.dark.themeColor}}"
+        fill="{{theme.light.backgroundColor}}"
+        stroke="{{theme.light.themeColor}}"
         stroke-width="5"
     >
     </rect>
 
-    <text font-size="5" x="5" y="10" fill="{{theme.dark.textColor}}">
+    <text font-size="5" x="5" y="10" fill="{{theme.light.textColor}}">
         {{ post.data.collection }} de {{ post.data.date | formatDate }}
     </text>
 
-    <text fill="{{theme.dark.themeColor}}" font-size="15">
+    <text fill="{{theme.light.themeColor}}" font-size="15">
         {% for line in post.data.title | splitlines %}
         <tspan x="4" y="{{ 24.5 + loop.index0 * 15 }}">{{ line }}</tspan>
         {% endfor %}
     </text>
 
-    <text font-size="5" x="125" y="92.5" fill="{{theme.dark.textColor}}">
+    <text font-size="5" x="125" y="92.5" fill="{{theme.light.textColor}}">
         victormagalhaes.codes
     </text>
 </svg>
