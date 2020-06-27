@@ -3,7 +3,6 @@ title: "Desenvolvendo o hotsite da Jusbrasil sobre Covid19"
 # description: "Premissas, desafios..."
 customTags: ["Jusbrasil"]
 date: 2020-05-14T12:45:55.920-03:00
-draft: true
 ---
 
 No longíquo dia 12 de março, [a Jusbrasil fechou seus escritórios](https://rafaelcosta.jusbrasil.com.br/artigos/820643550/fechamos-os-escritorios-do-jusbrasil-hoje-e-recomendamos-que-faca-o-mesmo) devido à disseminação do COVID19, 6 dias antes da prefeitura de Salvador [decretar situação de emergência](https://noticias.uol.com.br/cotidiano/ultimas-noticias/2020/03/18/salvador-decreta-situacao-de-emergencia-e-fecha-shoppings-por-coronavirus.htm). A crise, hoje tão clara e presente que é impossível ignorar, era então uma ameaça assustadora, mas distante.
