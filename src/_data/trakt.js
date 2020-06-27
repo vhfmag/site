@@ -66,26 +66,21 @@ function addMetadata(showOrMovie) {
 	return showOrMovie;
 }
 
+const cachedTrakt = {
+	watchedShows: withCache("trakt-watched-shows", trakt.users.watched),
+	watchedMovies: withCache("trakt-watched-movies", trakt.users.watched),
+	showsToWatch: withCache("trakt-watchlist-shows", trakt.users.watchlist),
+	moviesToWatch: withCache("trakt-watchlist-movies", trakt.users.watchlist),
+};
+
 module.exports = async function fetchTracktData() {
 	const [watchedShows, watchedMovies, watchlistShows, watchlistMovies] = (
 		await Promise.all(
 			[
-				withCache(
-					"trakt-watched-shows",
-					trakt.users.watched,
-				)({ username: USERNAME, type: "shows" }),
-				withCache(
-					"trakt-watched-movies",
-					trakt.users.watched,
-				)({ username: USERNAME, type: "movies" }),
-				withCache(
-					"trakt-watchlist-shows",
-					trakt.users.watchlist,
-				)({ username: USERNAME, type: "shows" }),
-				withCache(
-					"trakt-watchlist-movies",
-					trakt.users.watchlist,
-				)({ username: USERNAME, type: "movies" }),
+				cachedTrakt.watchedShows({ username: USERNAME, type: "shows" }),
+				cachedTrakt.watchedMovies({ username: USERNAME, type: "movies" }),
+				cachedTrakt.showsToWatch({ username: USERNAME, type: "shows" }),
+				cachedTrakt.moviesToWatch({ username: USERNAME, type: "movies" }),
 			].map(p => p.then(fetchImages)),
 		)
 	).map(arr => arr.map(addMetadata));
