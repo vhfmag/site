@@ -100,10 +100,7 @@ function html() {
 }
 
 function generatePngPreviews() {
-	return gulp
-		.src("public/preview/**/*.svg")
-		.pipe(gulpCache(svg2png(), { name: "png-post-previews", fileCache }))
-		.pipe(gulp.dest("dist/preview/"));
+	return gulp.src("public/preview/**/*.svg").pipe(svg2png()).pipe(gulp.dest("dist/preview/"));
 }
 
 function minifyImages() {
