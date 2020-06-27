@@ -14,7 +14,7 @@
             </time>
         {% endif %}
         <span><span itemprop="wordCount">{{ entry.templateContent | wordcount }}</span> palavras, <abbr aria-label="aproximadamente" title="aproximadamente">~</abbr>
-            <span itemprop="timeRequired">{{ entry | readingTime(raw=true) }} minutos</span> de leitura</span>
+            <span itemprop="timeRequired">{{ entry | readingTime(raw=true) * 2 }} minutos</span> de leitura</span>
         {% if entry.data.draft %}
             <span><span class="metadata--draft">Rascunho</span></span>
         {% endif %}
