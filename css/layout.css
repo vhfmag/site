@@ -306,9 +306,10 @@ ol {
 }
 
 main {
-	--main-max-width: 60ch;
+	--main-max-width: 70ch;
 	max-width: var(--main-max-width);
-	font-size: calc(1em + 0.15vw);
+	font-size: calc(1em + 0.2vw);
+	font-size: clamp(1em, 1em + 0.2vw, 1.5em);
 }
 
 @media (max-width: 800px) {
