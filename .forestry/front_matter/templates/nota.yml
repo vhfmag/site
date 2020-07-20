@@ -2,31 +2,31 @@
 label: Nota
 hide_body: false
 fields:
-    - type: text
-      name: title
-      label: Title
-    - type: textarea
-      name: excerpt
-      label: Description
-    - type: datetime
-      name: date
-      label: Publication Date
-      config:
-          required: true
-      default: now
-    - name: draft
-      type: boolean
-      label: Draft
-    - type: field_group_list
-      name: links
-      label: Links
-      fields:
-          - type: list
-            name: types
-            label: Link Types
-          - type: text
-            name: link
-            label: URL
-    - type: list
-      name: customTags
-      label: Tags
+- type: text
+  name: title
+  label: Title
+- type: textarea
+  name: excerpt
+  label: Description
+- type: datetime
+  name: date
+  label: Publication Date
+  config:
+    required: true
+  default: now
+- name: draft
+  type: boolean
+  label: Draft
+- type: field_group_list
+  name: links
+  label: Links
+  fields:
+  - type: list
+    name: types
+    label: Link Types
+  - type: text
+    name: link
+    label: URL
+- type: list
+  name: customTags
+  label: Tags
