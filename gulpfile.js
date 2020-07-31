@@ -59,7 +59,7 @@ function html() {
 						domainIgnore: ["fanart.tv", "tmdb.org"],
 						classIgnore: ["ignore-webp"],
 					}),
-					imgAutosize({ processEmptySize: true }),
+					imgAutosize({ processEmptySize: true, questionMarkAsVersion: true }),
 					inlineAssets({
 						root: "./public",
 						transforms: {
