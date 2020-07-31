@@ -1,0 +1,13 @@
+diff --git a/node_modules/posthtml-img-autosize/lib/imgAutosize.js b/node_modules/posthtml-img-autosize/lib/imgAutosize.js
+index 0d6ac52..64b546f 100644
+--- a/node_modules/posthtml-img-autosize/lib/imgAutosize.js
++++ b/node_modules/posthtml-img-autosize/lib/imgAutosize.js
+@@ -68,7 +68,7 @@ module.exports = {
+                                 img.attrs.height = dimensions.height;
+                             }
+                         })
+-                        .catch(e => Promise.reject(e.message))
++                        .catch(e => console.error('Erro ao dimensionar', { imagePath }, e))
+                 );
+ 
+                 return img;
