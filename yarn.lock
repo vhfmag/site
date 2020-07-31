@@ -9652,7 +9652,7 @@ netlify-plugin-debug-cache@^1.0.3:
   dependencies:
     make-dir "^3.1.0"
 
-netlify-plugin-subfont@5.0.6:
+netlify-plugin-subfont@^5.0.6:
   version "5.0.6"
   resolved "https://registry.yarnpkg.com/netlify-plugin-subfont/-/netlify-plugin-subfont-5.0.6.tgz#6076d119b984445cfd0741f845ec18c1a2884aa2"
   integrity sha512-zV5JPzW22ZJt7dGMfIgC4lZuBbTioD7vDUHSXacX21Cr+13NcWDkMWtw9QgzuzVcmkQW7Ntp3xcZXULVETNjpg==

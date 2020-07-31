@@ -37,7 +37,7 @@
 		"markdown-it-footnote": "^3.0.2",
 		"markdown-it-prism": "2.1.0",
 		"netlify-plugin-debug-cache": "^1.0.3",
-		"netlify-plugin-subfont": "5.0.6",
+		"netlify-plugin-subfont": "^5.0.6",
 		"patch-package": "6.2.2",
 		"postcss": "7.0.32",
 		"postcss-preset-env": "^6.7.0",
