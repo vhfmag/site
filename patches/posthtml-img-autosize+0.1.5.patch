@@ -1,5 +1,5 @@
 diff --git a/node_modules/posthtml-img-autosize/lib/imgAutosize.js b/node_modules/posthtml-img-autosize/lib/imgAutosize.js
-index 0d6ac52..20ffeea 100644
+index 0d6ac52..69f43a8 100644
 --- a/node_modules/posthtml-img-autosize/lib/imgAutosize.js
 +++ b/node_modules/posthtml-img-autosize/lib/imgAutosize.js
 @@ -68,7 +68,7 @@ module.exports = {
@@ -20,7 +20,7 @@ index 0d6ac52..20ffeea 100644
 +                    try {
 +                        resolve(imageSize(Buffer.concat(chunks)))
 +                    } catch (error) {
-+                        console.error('Erro ao dimensionar (sem host)', { imgPath }, e)
++                        console.error('Erro ao dimensionar (sem host)', { imgPath }, error)
 +                    }
 +                });
          }).on('error', reject);
