@@ -7011,6 +7011,11 @@ ignore@^5.1.4:
   resolved "https://registry.yarnpkg.com/ignore/-/ignore-5.1.4.tgz#84b7b3dbe64552b6ef0eca99f6743dbec6d97adf"
   integrity sha512-MzbUSahkTW1u7JpKKjY7LCARd1fU5W2rLdxlM4kdkayuCwZImjkpluF9CM1aLewYJguPDqewLam18Y6AU69A8A==
 
+image-size@^0.7.2:
+  version "0.7.5"
+  resolved "https://registry.yarnpkg.com/image-size/-/image-size-0.7.5.tgz#269f357cf5797cb44683dfa99790e54c705ead04"
+  integrity sha512-Hiyv+mXHfFEP7LzUL/llg9RwFxxY+o9N3JVLIeG5E7iFIFAalxvRU9UZthBdYDEVnzHMgjnKJPPpay5BWf1g9g==
+
 image-size@^0.8.3:
   version "0.8.3"
   resolved "https://registry.yarnpkg.com/image-size/-/image-size-0.8.3.tgz#f0b568857e034f29baffd37013587f2c0cad8b46"
@@ -11526,12 +11531,12 @@ postcss@^7.0.0, postcss@^7.0.1, postcss@^7.0.14, postcss@^7.0.17, postcss@^7.0.2
     source-map "^0.6.1"
     supports-color "^6.1.0"
 
-posthtml-img-autosize@0.1.5:
-  version "0.1.5"
-  resolved "https://registry.yarnpkg.com/posthtml-img-autosize/-/posthtml-img-autosize-0.1.5.tgz#951135ebe9bc5b1b6a373d526e3a33392ba7cae7"
-  integrity sha512-V3YDkqpZkWOWVs1JasZ1GkjWulpfI7MRWWXhQofetKMJhw0N5SKT3YilQQn37Ulj+yCfHuqkuDdhswdTNezN5A==
+posthtml-img-autosize@0.1.4:
+  version "0.1.4"
+  resolved "https://registry.yarnpkg.com/posthtml-img-autosize/-/posthtml-img-autosize-0.1.4.tgz#0c3d612ba5f6682ebfe344de89e57ffedb5da4ed"
+  integrity sha512-Fu6wgpjZ73QlxX3Pf51fgueY+b64p/LI20+p6dKGIhrSoS/mv1nqigF878x6/YOIFc657x6NCUIRvfDCyi43bA==
   dependencies:
-    image-size "^0.8.3"
+    image-size "^0.7.2"
 
 posthtml-inline-assets@^3.1.0:
   version "3.1.0"
