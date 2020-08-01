@@ -1,8 +1,17 @@
 diff --git a/node_modules/posthtml-img-autosize/lib/imgAutosize.js b/node_modules/posthtml-img-autosize/lib/imgAutosize.js
-index 0d6ac52..69f43a8 100644
+index 0d6ac52..f3fc616 100644
 --- a/node_modules/posthtml-img-autosize/lib/imgAutosize.js
 +++ b/node_modules/posthtml-img-autosize/lib/imgAutosize.js
-@@ -68,7 +68,7 @@ module.exports = {
+@@ -55,6 +55,8 @@ module.exports = {
+                 promises.push(
+                     getImageDimensions(imagePath)
+                         .then(dimensions => {
++                            if (!dimensions) return;
++
+                             dimensions = ratio(
+                                 { width: img.attrs.width, height: img.attrs.height },
+                                 dimensions
+@@ -68,7 +70,7 @@ module.exports = {
                                  img.attrs.height = dimensions.height;
                              }
                          })
@@ -11,7 +20,7 @@ index 0d6ac52..69f43a8 100644
                  );
  
                  return img;
-@@ -120,7 +120,13 @@ function getImageDimensions(imgPath) {
+@@ -120,7 +122,13 @@ function getImageDimensions(imgPath) {
  
              response
                  .on('data', chunk => chunks.push(chunk))
