@@ -14,7 +14,7 @@ main.home section {
 }
 
 main.home section {
-	grid-row: span 6;
+	grid-row: span 12;
 	padding-bottom: 1em;
 }
 
@@ -35,11 +35,15 @@ main.home section.half-column {
 }
 
 main.home section.half-row {
-	grid-row: span 3;
+	grid-row: span 6;
 }
 
 main.home section.row-3 {
-	grid-row: span 2;
+	grid-row: span 4;
+}
+
+main.home section.row-4 {
+	grid-row: span 3;
 }
 
 @media (max-width: 1000px) {
@@ -56,6 +60,7 @@ main.home .post-list {
 
 main.home .post-list.columns {
 	column-width: 14ch;
+	column-width: clamp(12ch, 10vw, 14ch);
 }
 
 main.home .post-list li + li {

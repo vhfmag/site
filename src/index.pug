@@ -69,20 +69,20 @@ section.half-column
 			li(title=link.description && link.description.replace(/<[^>]+>/g, ""))
 				a(href=link.url)= link.name
 
-section.half-column.row-3
+section.half-column.row-4
 	h2 No fone
 	ul.inline-list
 		- for (artist of lastfm.weekly.artists)
 			li #[a(href=artist.url)= artist.name]
 	div #[a(href="/ouvido") Veja mais]
 
-section.half-column.row-3
+section.half-column.row-4
 	h2 Na estante
 	ul.inline-list
 		- for (book of reading)
 			li(data-separator="; ")= book
 
-section.half-column.row-3
+section.half-column.row-4
 	h2 No streaming
 	ul.inline-list
 		- for (thing of [...trakt.watched.shows, ...trakt.watched.movies].sort((a, b) => new Date(b.last_watched_at).valueOf() - new Date(a.last_watched_at).valueOf()).slice(0, 10))
