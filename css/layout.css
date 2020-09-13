@@ -48,6 +48,8 @@ dt {
 	--copy-font-family: "Inter", system;
 	--heading-font-family: "Lora", system;
 	--h1-line-height: 1.15;
+
+	color-scheme: light dark;
 }
 
 @supports (font-variation-settings: normal) {
