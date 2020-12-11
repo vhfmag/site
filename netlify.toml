@@ -76,7 +76,7 @@ packageManager = "yarn"
         Referrer-Policy = "same-origin"
         # Cross-Origin-Resource-Policy = "same-site"
         # Cross-Origin-Embedder-Policy = "require-corp"
-        Content-Security-Policy = "default-src 'self'; img-src 'self' data: https://webmention.io *.amazonaws.com *.fastly.net assets.fanart.tv image.tmdb.org; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com https://hypothes.is https://cdn.hypothes.is; style-src 'self' 'unsafe-inline' https://cdn.hypothes.is; font-src 'self'; manifest-src 'self'; frame-src 'self' *.youtube.com *.youtu.be invidio.us *.netlify.app https://codesandbox.io https://hypothes.is"
+        Content-Security-Policy = "default-src 'self'; connect-src 'self' https://*.cloudflareinsights.com; img-src 'self' data: https://webmention.io *.amazonaws.com *.fastly.net assets.fanart.tv image.tmdb.org; script-src 'self' 'unsafe-inline' https://*.cloudflareinsights.com https://hypothes.is https://cdn.hypothes.is; style-src 'self' 'unsafe-inline' https://cdn.hypothes.is; font-src 'self'; manifest-src 'self'; frame-src 'self' *.youtube.com *.youtu.be invidio.us *.netlify.app https://codesandbox.io https://hypothes.is"
 
 [[headers]]
     for = "/*.css"
