@@ -3,7 +3,7 @@
 		"prebuild": "test \"$CI\" = true && npx pnpm install --store=node_modules/.pnpm-store || echo skiping pnpm install",
 		"build": "NODE_ENV=${NODE_ENV:-production} yarn build-dev && NODE_ENV=${NODE_ENV:-production} gulp",
 		"build-dev": "TZ=America/Sao_Paulo NODE_ICU_DATA=$(node-full-icu-path) eleventy --passthroughall",
-		"dev:bare": "SKIP_WEBMENTIONIO=${SKIP_WEBMENTIONIO:-true} yarn build-dev --serve",
+		"dev:bare": "SKIP_WEBMENTIONIO=${SKIP_WEBMENTIONIO:-true} npm run build-dev --serve",
 		"dev": "netlify dev -c 'yarn dev:bare'",
 		"postinstall": "patch-package"
 	},
