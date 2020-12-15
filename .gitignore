@@ -19,3 +19,6 @@ hint-report/
 report.html
 # Cache
 .cache/
+# npm & yarn
+package-lock.json
+yarn.lock

@@ -28,6 +28,8 @@ packageManager = "yarn"
 [build]
     functions = "functions/"
     publish = "dist"
+    [build.environment]
+        NPM_FLAGS="--prefix=/"
 
 # Redirects
 
