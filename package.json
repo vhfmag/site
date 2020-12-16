@@ -1,6 +1,6 @@
 {
 	"scripts": {
-		"prebuild": "test \"$CI\" = true && npx pnpm install --store=node_modules/.pnpm-store || echo skiping pnpm install",
+		"prebuild": "test \"$CI\" = true && npx pnpm@latest install --store=node_modules/.pnpm-store || echo skiping pnpm install",
 		"build": "NODE_ENV=${NODE_ENV:-production} npm run build-dev && NODE_ENV=${NODE_ENV:-production} gulp",
 		"build-dev": "TZ=America/Sao_Paulo NODE_ICU_DATA=$(node-full-icu-path) eleventy --passthroughall",
 		"dev:bare": "SKIP_WEBMENTIONIO=${SKIP_WEBMENTIONIO:-true} npm run build-dev --serve",
