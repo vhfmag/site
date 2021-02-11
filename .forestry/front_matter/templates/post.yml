@@ -47,6 +47,7 @@ fields:
   name: customTags
   label: Custom tags
 pages:
+- src/bookmarks/an-interactive-guide-to-css-transitions-by-josh-w-comeau.md
 - src/bookmarks/bob-black-sobre-trabalho.md
 - src/bookmarks/brace-yourself-for-the-most-dangerous-idea-yet-most-people-are-pretty-decent.md
 - src/bookmarks/eu-não-me-calo-por-maurício-ricardo.md
