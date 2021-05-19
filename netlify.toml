@@ -202,3 +202,9 @@ package = "netlify-plugin-chromium"
     for = "/*.webmanifest"
     [headers.values]
         Cache-Control = "no-cache"
+
+[[headers]]
+    for = "/*.xml"
+    [headers.values]
+        Cache-Control = "no-cache"
+        Application-Type = "text/xml; charset=utf-8"
