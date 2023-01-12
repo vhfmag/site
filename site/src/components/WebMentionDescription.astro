@@ -1,0 +1,48 @@
+---
+import { groupBy, map } from "lodash-es";
+import { WebMentionType, wmTypeMap } from "../data/wmType";
+import { isNotNullish } from "../utils/typeGuards";
+
+export type WebMentionLink = { types: WebMentionType[]; title?: string; link?: string };
+
+interface Props {
+	links: WebMentionLink[] | undefined;
+}
+
+const { links } = Astro.props;
+---
+
+<>
+	{
+		links && links.length > 0 ? (
+			<span class="wm-properties">
+				{links.map(link => {
+					const wmTypes = link.types
+						.map(wmType => wmTypeMap.get(wmType))
+						.filter(isNotNullish);
+					const byConnective = groupBy(wmTypes, "connective");
+					const wmProperties = map(byConnective, (wmTypeData, connective) => (
+						<span class="wm-property">
+							{wmTypeData.map(wmTypeDatum => (
+								<span class="wm-property">{wmTypeDatum.singular}</span>
+							))}
+							{connective}
+						</span>
+					));
+
+					return (
+						<>
+							{wmProperties}
+							<a
+								href={link.link}
+								class:list={link.types.map(wmType => `u-${wmType}`)}
+							>
+								{link.title || link.link}
+							</a>
+						</>
+					);
+				})}
+			</span>
+		) : null
+	}
+</>

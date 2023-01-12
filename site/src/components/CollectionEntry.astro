@@ -1,0 +1,20 @@
+---
+interface Props {
+	class?: string;
+	mdEntryType?: string;
+}
+
+const { class: className, mdEntryType = "blogPost" } = Astro.props;
+---
+
+<li class={className}>
+	<article
+		itemprop={mdEntryType}
+		itemscope=""
+		itemref="mdata-author"
+		itemtype="https://schema.org/BlogPosting"
+		class="h-entry p-entry"
+	>
+		<slot />
+	</article>
+</li>

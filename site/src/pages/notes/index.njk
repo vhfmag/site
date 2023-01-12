@@ -1,0 +1,47 @@
+---
+title: Notas
+layout: default.njk
+tags: []
+collection: notes
+mdEntryType: blogPost
+mainClass: collection notes
+htmlClass: h-feed
+sitemapChangefreq: daily
+sitemapPriority: 1
+pagination:
+    data: collections.notes
+    alias: entries
+    size: 10
+---
+
+{% extends 'templates/collection.njk' %}
+{% from 'macros/wm-description.njk' import wmDescriptions %}
+
+{% block css %}
+	<link rel="stylesheet" href="/css/collection-notes.css"/>
+{% endblock %}
+
+{% block entry %}
+
+	<section>{{ entry.templateContent | safe }}</section>
+	<header>
+    <span>
+			<a class="u-url" href="{{ entry.url }}">Nota</a>
+			{% if entry.data.date %}
+				publicada em 
+				<time
+                    itemprop="datePublished dateModified pubdate"
+                    class="dt-published"
+                    datetime="{{ entry.data.date | formatDateISO }}"
+                >
+					{{ entry.data.date | formatDateTime }}
+				</time>
+			{% endif %}
+		</span>
+		{{ wmDescriptions(entry.data.links) }}
+
+	</header>
+
+{% endblock %}
+
+<!-- this needs to be here for pagination to work -->

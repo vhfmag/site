@@ -1,0 +1,260 @@
+---
+import Layout from "../layouts/Default.astro";
+import { parseCollection } from "../utils/parseCollection";
+import { blogroll } from "../data/blogroll";
+
+let lastPosts = parseCollection(
+	Object.values(import.meta.glob("./posts/**/*.md", { eager: true })),
+);
+let lastBookmarks = parseCollection(
+	Object.values(import.meta.glob("./bookmarks/**/*.md", { eager: true })),
+);
+---
+
+<Layout>
+	<section>
+		<h2>Quem sou eu</h2>
+		<p>
+			Desenvolvedor e <i lang="en">tech-lead</i> de Salvador, Brasil, com experiência em desenvolvimento
+			web e back-end e programação funcional. Pessoa apreensiva com a crise climática e o vigilantismo,
+			interessada pela interseção de computação e humanidades, pelas possibilidades da web enquanto
+			mídia e por <a href="https://solar.lowtechmagazine.com/" hreflang="en"
+				><i lang="en">low-tech</i></a
+			>.
+		</p>
+	</section>
+	<section class="half-column">
+		<h2>Últimos posts e notas</h2>
+		<ol class="post-list">
+			{
+				lastPosts.slice(0, 5).map(entry => (
+					<li>
+						<h3>
+							<a href={entry.url}>{entry.frontmatter.title}</a>
+						</h3>
+					</li>
+				))
+			}
+			<li>Ver mais <a href="/posts">posts</a> e <a href="/notes">notas</a></li>
+		</ol>
+	</section>
+	<section class="half-column">
+		<h2>Últimas recomendações</h2>
+		<ol class="post-list">
+			{
+				lastBookmarks.slice(0, 5).map(entry => (
+					<li>
+						<h3>
+							<a href={entry.url}>{entry.frontmatter.title}</a>
+						</h3>
+					</li>
+				))
+			}
+			<li><a href="/bookmarks">Ver mais</a></li>
+		</ol>
+	</section>
+	<section class="half-column">
+		<h2>O que me inspira</h2>
+		<p>
+			Um mundo em que o conhecimento é compartilhado e inovações acontecem passo a passo, ao
+			invés de serem reinventadas ano após ano (<i
+				><abbr title="também conhecido como" aria-label="também conhecido como">AKA</abbr>
+				<a href="https://ose-21.org/">open source everything</a></i
+			>), seja para escrever código, seja para <a href="https://www.wikihouse.cc/About"
+				>construir</a
+			>
+			<a href="https://www.opentecture.com/concept">casas</a>, <a
+				href="https://openstructures.net/">móveis</a
+			> ou até <a href="http://wikispeed.org/">carros</a>.
+		</p>
+		<ul class="inline-list">
+			<li>Antirracismo</li>
+			<li>feminismo</li>
+			<li>anti-homofobia</li>
+			<li>antitransfobia</li>
+			<li>decolonialismo</li>
+			<li>reparação histórica</li>
+			<li>
+				<a href="https://pt.wikipedia.org/wiki/Decrescimento_(economia)"
+					>decrescimento econômico</a
+				>
+			</li>
+			<li>sustentabilidade</li>
+			<li>
+				<a href="https://solar.lowtechmagazine.com/"
+					>críticas a nossa tecnocracia e tecno-utopia</a
+				>
+			</li>
+		</ul>
+		<ul class="inline-list">
+			<li>CSS</li>
+			<li>HTML semântico</li>
+			<li>Javascript</li>
+			<li>decentralização (Dat, IPFS, SSB, etc)</li>
+			<li>IndieWeb</li>
+			<li>uma web diversa e aberta</li>
+			<li>as possibilidades da web enquanto mídia</li>
+			<li>programação funcional</li>
+			<li>sistemas de tipo</li>
+		</ul>
+	</section>
+	<section class="half-column">
+		<h2>Como esse site foi feito</h2>
+		<p>
+			Esse site foi feito usando o gerador de sites estáticos <a href="https://www.11ty.io/"
+				>Eleventy</a
+			>; escrito em Nunjucks, Markdown e Pug; e hospedado na <a href="https://netlify.com"
+				>Netlify</a
+			>. As duas fontes usadas são a <a href="https://rsms.me/inter/">Inter</a> por <a
+				href="https://rsms.me/about/">Rasmus Andersson</a
+			>, e a <a href="https://github.com/cyrealtype/Lora-Cyrillic">Lora Cyrillic</a> pela <a
+				href="http://www.cyreal.org/">Cyreal Fonts</a
+			>, ambas <a
+				href="https://blog.typekit.com/2016/09/14/variable-fonts-a-new-kind-of-font-for-flexible-design/"
+				>fontes variáveis</a
+			>.
+		</p>
+		<p>
+			Ele se integra com a <a href="https://indieweb.org/">IndieWeb</a> usando serviços como <a
+				href="https://webmention.io/">webmention.io</a
+			> (recebe, armazena e me dá acesso às WebMentions que me mencionam), <a
+				href="https://webmention.app/">webmention.app</a
+			> (envia WebMentions em meu nome) e <a href="https://brid.gy/">Bridgy</a> (reproduz meus
+			posts em outras redes sociais - POSSE - e manda WebMentions quando interagem com eles - likes,
+			RTs...), além do <a href="https://paulrobertlloyd.github.io/indiekit/">IndieKit</a> (me permite
+			postar no meu site por uma interface). <a href="https://github.com/vhfmag/site"
+				>Veja o código</a
+			>!
+		</p>
+	</section>
+	<section class="half-column">
+		<h2>Blogroll</h2>
+		<ul class="post-list columns blogroll">
+			{
+				blogroll
+					.filter(b => !b.hide)
+					.map(b => (
+						<li title={b.description.replace(/<[^>]+>/g, "")}>
+							<a href={b.url}>{b.name}</a>
+						</li>
+					))
+			}
+		</ul>
+	</section>
+	<!-- section.half-column.row-4
+		h2 No fone
+		ul.inline-list
+			- for (artist of lastfm.weekly.artists)
+				li #[a(href=artist.url)= artist.name]
+		div #[a(href="/ouvido") Veja mais]
+	section.half-column.row-4
+		h2 Na estante
+		ul.inline-list
+			- for (book of reading)
+				li(data-separator="; ")= book
+	section.half-column.row-4
+		h2 No streaming
+		ul.inline-list
+			- for (thing of [...trakt.watched.shows, ...trakt.watched.movies].sort((a, b) => new Date(b.last_watched_at).valueOf() - new Date(a.last_watched_at).valueOf()).slice(0, 10))
+				li #[a(href=thing.url)= thing.data.title]
+		div #[a(href="/assistido") Veja mais] -->
+</Layout>
+
+<style>
+	/* TODO: how terrible is this? does it mess with other pages' <main> after navigation? */
+	:global(main) {
+		--heading-margin: var(--s1);
+
+		max-width: 90ch;
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		align-content: flex-start;
+		grid-column-gap: var(--s2);
+	}
+
+	h1,
+	section {
+		grid-column: 1 / -1;
+	}
+
+	section {
+		grid-row: span 12;
+		padding-bottom: 1em;
+	}
+
+	section > * {
+		margin: 0;
+	}
+
+	section > * + * {
+		margin-top: 1em !important;
+	}
+
+	section.main p:first-of-type {
+		font-size: var(--s1);
+	}
+
+	section.half-column {
+		grid-column: span 1;
+	}
+
+	section.half-row {
+		grid-row: span 6;
+	}
+
+	section.row-3 {
+		grid-row: span 4;
+	}
+
+	section.row-4 {
+		grid-row: span 3;
+	}
+
+	@media (max-width: 1000px) {
+		:global(main) {
+			grid-template-columns: 1fr;
+		}
+	}
+
+	.post-list {
+		margin: 0;
+		padding: 0;
+		list-style-type: none;
+	}
+
+	.post-list.columns {
+		column-width: 14ch;
+		column-width: clamp(12ch, 10vw, 14ch);
+	}
+
+	.post-list li + li {
+		margin-top: var(--s0);
+	}
+
+	.post-list li h3 {
+		font-size: 1em;
+		line-height: var(--ratio);
+		margin: 0.3em 0;
+	}
+
+	p.excerpt {
+		display: -webkit-box;
+		-webkit-box-orient: vertical;
+		-webkit-line-clamp: 3;
+		overflow: hidden;
+	}
+
+	:global(main) > section:first-child > h2 {
+		margin-top: 0;
+	}
+
+	h2 {
+		border-bottom: 2px solid currentColor;
+		padding-bottom: var(--s-3);
+		margin-top: var(--heading-margin);
+	}
+
+	ul.blogroll li :any-link {
+		color: var(--themeColor);
+	}
+</style>

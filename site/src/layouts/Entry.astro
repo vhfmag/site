@@ -1,0 +1,396 @@
+---
+import Authors, { type Author } from "../components/Authors.astro";
+import { type WebMentionType, wmTypeMap } from "../data/wmType";
+import { formatDate } from "../utils/formatting";
+import { map, groupBy, filter } from "lodash-es";
+import { isNotNullish } from "../utils/typeGuards";
+import Default from "./Default.astro";
+import type { MarkdownLayoutProps } from "astro";
+import WebMentionDescription from "../components/WebMentionDescription.astro";
+
+export type EntryLayoutFrontmatter = {
+	title: string;
+	authors?: Author[];
+	// TODO: double check the type
+	date?: Date | string;
+	excerpt?: string;
+	draft?: boolean;
+	// collection data
+	collectionData: {
+		layout: string;
+		collectionSlug: string;
+		collection: string;
+		collectionName: string;
+	};
+	// WebMention stuff
+	links?: { types: WebMentionType[]; title?: string; link?: string }[];
+	// IndieWeb stuff
+	syndicationLinks?: string[];
+	twitterContent?: string;
+	mastodonContent?: string;
+	mediumContent?: string;
+
+	// likes only
+	likeOf?: string;
+};
+
+export type EntryLayoutProps = MarkdownLayoutProps<EntryLayoutFrontmatter>;
+
+type Props = EntryLayoutProps;
+
+const {
+	frontmatter: {
+		title,
+		authors,
+		date,
+		excerpt,
+		syndicationLinks,
+		twitterContent,
+		mastodonContent,
+		mediumContent,
+		links,
+		collectionData,
+	},
+} = Astro.props;
+---
+
+<Default>
+	<article>
+		<header>
+			<h1 class="post-title p-name" itemprop="headline title">
+				<a class="u-url u-uid" href={Astro.url.pathname}>{title}</a>
+			</h1>
+			<div class="metadata">
+				<span>
+					<slot name="category">
+						<span class="p-category">{collectionData.collection}</span>
+					</slot>
+				</span>
+				<span><Authors authors={authors} /></span>
+				{
+					date ? (
+						<span>
+							<time
+								class="dt-published"
+								itemprop="datePublished pubdate"
+								datetime="{{ date | formatDateISO }}"
+							>
+								{formatDate(date)}
+							</time>
+						</span>
+					) : null
+				}
+				<!-- TODO: reading time -->
+				<!-- <span>
+                <abbr aria-label="aproximadamente" title="aproximadamente">~</abbr><span itemprop="timeRequired">{{ content | readingTime(raw=true) * 2 }} minutos</span> de leitura
+            </span> -->
+				<WebMentionDescription links={links} />
+				<slot name="metadata" />
+			</div>
+			{excerpt ? <p itemprop="alternativeHeadline">{excerpt}</p> : null}
+			<slot name="header" />
+		</header>
+
+		<div class="e-content">
+			<div hidden>
+				{syndicationLinks?.map(href => <a href={href} role="presentation" />)}
+
+				{twitterContent ? <p class="p-bridgy-twitter-content">{twitterContent}</p> : null}
+
+				{
+					mastodonContent ? (
+						<p class="p-bridgy-mastodon-content">{mastodonContent}</p>
+					) : null
+				}
+
+				{mediumContent ? <p class="p-bridgy-medium-content">{mediumContent}</p> : null}
+			</div>
+
+			<script src="https://hypothes.is/embed.js" defer></script>
+			<slot name="body_start" />
+			<div
+				class:list={[
+					{
+						"p-bridgy-twitter-content": !twitterContent,
+						"p-bridgy-mastodon-content": !mastodonContent,
+						"p-bridgy-medium-content": !mediumContent,
+					},
+				]}
+			>
+				{title && <div hidden>{{ title }} — </div>}
+				<slot />
+				<slot name="body_end" />
+			</div>
+		</div>
+
+		<!-- TODO: web mentions -->
+		<!-- {% if webmentions[page.url].all | length > 0 %}
+            <hr/>
+            <section class="webmentions" id="webmentions">
+                {% import 'macros/webmentions.njk' as wms %}
+
+                {{ wms.authorPhotos(webmentions, page.url, "like-of", "curtida", "curtidas", authorUrl = true) }}
+                {{ wms.authorPhotos(webmentions, page.url, "bookmark-of", "favoritaram", "favoritou", authorUrl = true) }}
+                {{ wms.authorPhotos(webmentions, page.url, "repost-of", "repostagem", "repostagens") }}
+                {{ wms.comment(webmentions, page.url, "mention-of", "menção", "menções") }}
+                {{ wms.comment(webmentions, page.url, "in-reply-to", "resposta", "respostas", open = true) }}
+            </section>
+        {% endif %} -->
+	</article>
+</Default>
+
+<style>
+	> article > header {
+		margin-bottom: var(--s1);
+	}
+
+	.wm-properties .wm-property:not(:first-of-type) {
+		text-transform: lowercase;
+	}
+
+	.wm-properties .wm-property + .wm-property::before {
+		content: ", ";
+	}
+
+	.wm-properties .wm-property + .wm-property:last-of-type::before {
+		content: " e ";
+	}
+
+	.embed-container {
+		position: relative;
+		padding-bottom: 57.25%;
+		height: 0;
+		overflow: hidden;
+	}
+
+	.embed-container > iframe,
+	.embed-container > object,
+	.embed-container > embed {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+	}
+
+	.e-content > p,
+	.e-content > ul,
+	.e-content > ol,
+	.e-content > aside,
+	.e-content > figure,
+	.e-content > p > img,
+	.e-content > p > video,
+	.e-content > img,
+	.e-content > video,
+	.e-content > blockquote,
+	.e-content > pre,
+	.e-content > iframe,
+	.e-content > .embed-container {
+		max-width: var(--main-max-width);
+	}
+
+	article > hr {
+		max-width: var(--main-max-width);
+		border: 0;
+		border-bottom: 2px dotted var(--themeColor);
+		margin-right: auto;
+		margin-left: unset;
+		margin-top: var(--s1);
+		margin-bottom: var(--s1);
+	}
+
+	figure {
+		display: flex;
+		flex-direction: column;
+	}
+
+	figure > img,
+	figure > video,
+	figure > picture,
+	figure > picture > img {
+		width: 100%;
+	}
+
+	.footnote-item:target p {
+		outline: 1px dotted;
+	}
+
+	article header h1 {
+		margin-bottom: 0;
+	}
+
+	article h1:not(:first-child),
+	article h2:not(:first-child),
+	article h3:not(:first-child),
+	article h4:not(:first-child),
+	article h5:not(:first-child),
+	article h6:not(:first-child) {
+		margin-top: 2em;
+	}
+
+	:hover > .header-anchor {
+		opacity: 1;
+	}
+
+	.header-anchor {
+		margin-left: var(--s-2);
+		opacity: 0;
+		transition: opacity ease 0.25s;
+		text-decoration: none;
+	}
+
+	.webmentions .comment > ul > li + li {
+		margin-top: var(--s3);
+	}
+
+	.webmentions .comment article {
+		display: grid;
+		grid-template-areas: "photo title" "photo metadata" "photo content";
+		grid-template-columns: max-content auto;
+		grid-column-gap: var(--s-2);
+	}
+
+	.webmentions .comment article header {
+		display: contents;
+	}
+
+	.webmentions .comment article header img {
+		grid-area: photo;
+		width: var(--s2);
+		height: var(--s2);
+		margin-top: var(--s-3);
+		border-radius: 50%;
+	}
+
+	.webmentions .comment article header .name {
+		grid-area: title;
+		font-variation-settings: "wght" 600;
+	}
+
+	.webmentions .comment article header .metadata {
+		grid-area: metadata;
+		font-size: small;
+	}
+
+	.webmentions .comment article p {
+		grid-area: content;
+		margin: var(--s0) 0 0;
+	}
+
+	.webmentions details > ul {
+		list-style-type: none;
+		margin: 0;
+		padding: 0;
+	}
+
+	.webmentions .author-photos li {
+		display: inline-flex;
+		justify-content: stretch;
+		align-items: stretch;
+	}
+
+	.webmentions .author-photos li + li {
+		margin-left: calc(-1 * var(--s-1));
+		transition: margin-left 0.5s ease;
+	}
+
+	.webmentions .author-photos:hover li + li {
+		margin-left: 0;
+	}
+
+	.webmentions .author-photos li,
+	.webmentions .author-photos a,
+	.webmentions .author-photos article,
+	.webmentions .author-photos img {
+		width: var(--s2);
+		height: var(--s2);
+		border-radius: 50%;
+	}
+
+	.webmentions .author-photos img {
+		object-fit: cover;
+		object-position: center;
+	}
+
+	pre[class*="language-"] {
+		max-width: 100%;
+	}
+
+	article {
+		max-width: calc(100vw - 3 * var(--root-padding) - var(--sidebar-width));
+	}
+
+	.img-caption {
+		display: block;
+		max-width: var(--main-max-width);
+		text-align: center;
+		margin-bottom: 1.6875rem;
+	}
+
+	@media (max-width: 800px) {
+		article {
+			max-width: calc(100vw - 2 * var(--root-padding));
+		}
+	}
+
+	.toc > summary {
+		font-variation-settings: "wght" 500;
+		font-size: 1.2em;
+	}
+
+	.toc ol {
+		counter-reset: toc-section;
+		list-style-type: none;
+	}
+
+	.toc > ol {
+		font-size: 0.9em;
+	}
+
+	.toc ol li {
+		display: flex;
+	}
+
+	.toc ol li::before {
+		counter-increment: toc-section;
+		content: counters(toc-section, ".") ". ";
+		white-space: pre-wrap;
+		font-feature-settings: "tnum";
+	}
+
+	.toc ol li > a,
+	.toc ol ol {
+		padding-left: 1.1em;
+	}
+
+	@supports (grid-template-columns: subgrid) {
+		.toc ol {
+			display: grid;
+			grid-template-columns: max-content auto;
+		}
+
+		.toc ol li {
+			display: grid;
+			grid-template-columns: subgrid;
+			grid-column: 1 / -1;
+		}
+
+		.toc ol li::before {
+			text-align: right;
+		}
+	}
+
+	article header [itemprop="alternativeHeadline"],
+	article header .metadata {
+		opacity: 0.8;
+	}
+
+	article header [itemprop="alternativeHeadline"] {
+		font-size: 1.3em;
+		margin-top: var(--s-3);
+	}
+
+	article header .metadata {
+		font-size: 0.85em;
+	}
+</style>

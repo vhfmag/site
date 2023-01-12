@@ -1,0 +1,25 @@
+---
+import * as me from "../data/me";
+
+interface Props {
+	authors: Author[] | undefined;
+}
+
+export type Author = { url?: string; name: string };
+
+const { authors = [me] } = Astro.props;
+---
+
+{
+	authors.map(author =>
+		author.url ? (
+			<a href={author.url} class="p-author h-card u-url" itemprop="">
+				{author.name}
+			</a>
+		) : (
+			<span class="p-author h-card" itemprop="">
+				{author.name}
+			</span>
+		),
+	)
+}

@@ -1,0 +1,133 @@
+---
+import type { MarkdownInstance, Page } from "astro";
+import Authors from "../components/Authors.astro";
+import CollectionEntry from "../components/CollectionEntry.astro";
+import { formatDate, formatDateISO } from "../utils/formatting";
+import Default from "./Default.astro";
+import type { EntryLayoutFrontmatter } from "./Entry.astro";
+
+export type CollectionPageProp = Page<MarkdownInstance<EntryLayoutFrontmatter>>;
+
+interface Props {
+	collectionName: string;
+	// TODO: stricter typing
+	mdEntryType?: string;
+	page: CollectionPageProp;
+}
+
+const { collectionName, mdEntryType, page } = Astro.props;
+---
+
+<Default>
+	<slot name="body-start" />
+
+	<h1 class="p-name">
+		<a class="u-url" href={Astro.url.pathname}>{collectionName}</a>
+	</h1>
+
+	<ol aria-label="{{ collectionName }}" class="entry-list">
+		<slot>
+			{
+				page.data.map(entry => (
+					<CollectionEntry mdEntryType={mdEntryType}>
+						<header>
+							<h2 itemprop="headline title" class="post-title p-name">
+								<a class="u-url u-uid" href={entry.url}>
+									{entry.frontmatter.title}
+								</a>
+							</h2>
+							<div class="metadata">
+								<span>
+									<span class="p-category">
+										{entry.frontmatter.collectionData.collection}
+									</span>
+									<span class="visually-hidden">
+										{" "}
+										por <Authors authors={entry.frontmatter.authors} />
+									</span>
+								</span>
+								{entry.frontmatter.date ? (
+									<time
+										itemprop="datePublished dateModified pubdate"
+										class="dt-published"
+										datetime={formatDateISO(entry.frontmatter.date)}
+									>
+										{formatDate(entry.frontmatter.date)}
+									</time>
+								) : null}
+
+								{/* TODO: <span><span itemprop="wordCount">{{ entry.templateContent | wordcount }}</span> palavras, <abbr aria-label="aproximadamente" title="aproximadamente">~</abbr>
+                            <span itemprop="timeRequired">{{ entry | readingTime(raw=true) * 2 }} minutos</span> de leitura</span> */}
+
+								{entry.frontmatter.draft ? (
+									<span>
+										<span class="metadata--draft">Rascunho</span>
+									</span>
+								) : null}
+							</div>
+						</header>
+					</CollectionEntry>
+				))
+			}</slot
+		>
+	</ol>
+
+	<nav class="pagination" aria-label={`Paginação de ${collectionName}`}>
+		{
+			page.url.prev ? (
+				<a class="prev" rel="prev" href={page.url.prev}>
+					‹ Itens anteriores
+				</a>
+			) : null
+		}
+		{
+			page.url.next ? (
+				<a class="next" rel="next" href={page.url.next}>
+					Próximos itens ›
+				</a>
+			) : null
+		}
+	</nav>
+</Default>
+
+<style>
+	ol {
+		margin: 0;
+		padding: 0;
+		list-style-type: none;
+	}
+
+	h1 {
+		margin-bottom: var(--s2);
+	}
+
+	h2 {
+		margin-top: var(--s1);
+		margin-bottom: 0;
+		line-height: 1.5;
+	}
+
+	.pagination {
+		display: flex;
+		margin-top: var(--s1);
+	}
+
+	.pagination a {
+		display: inline-block;
+	}
+
+	.pagination .prev {
+		margin-right: auto;
+	}
+
+	.pagination .next {
+		margin-left: auto;
+	}
+
+	.metadata--draft {
+		background-color: var(--themeColor);
+		color: var(--backgroundColor);
+		border-radius: var(--s-2);
+		padding: var(--s-4) var(--s-3);
+	}
+</style>

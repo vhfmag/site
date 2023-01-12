@@ -1,0 +1,88 @@
+:root:lang(pt),
+:not(:lang(pt)) > :lang(pt) {
+	quotes: "\201c""\201d""\2018""\2019";
+}
+
+*,
+::before,
+::after {
+	box-sizing: border-box;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	* {
+		animation-duration: 0.001s !important;
+		transition-duration: 0.001s !important;
+	}
+}
+
+body {
+	margin: 0;
+}
+
+h1 {
+	font-size: 2em;
+	margin: 0.67em 0;
+}
+h2 {
+	font-size: 1.5em;
+}
+h3 {
+	font-size: 1.17em;
+}
+h4 {
+	font-size: 1em;
+}
+h5 {
+	font-size: 0.83em;
+}
+h6 {
+	font-size: 0.67em;
+}
+
+h2,
+h3,
+h4,
+h5,
+h6 {
+	line-height: 1;
+}
+
+pre {
+	white-space: pre-wrap;
+}
+
+hr {
+	border: 0.5px solid;
+}
+
+nav ul {
+	list-style: none;
+}
+
+img,
+video,
+canvas,
+audio,
+iframe,
+embed,
+object {
+	display: block;
+	vertical-align: middle;
+}
+img,
+video {
+	max-width: 100%;
+	height: auto;
+}
+img {
+	border-style: none;
+}
+
+:root {
+	line-sizing: normal;
+}
+
+:root {
+	text-spacing: trim-start allow-end trim-adjacent ideograph-alpha ideograph-numeric;
+}

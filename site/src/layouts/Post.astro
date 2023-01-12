@@ -1,0 +1,18 @@
+---
+import Entry, { type EntryLayoutProps } from "./Entry.astro";
+
+interface Props extends EntryLayoutProps {}
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!-- TODO: TOC --><!-- <aside>
+    <nav aria-label="Índice">
+        {{ content | toc | safe }}
+    </nav>
+</aside> -->
+<Entry {...Astro.props}><slot /></Entry>
+
+<hr />
+
+<p>Esse artigo foi postado originalmente <a href={canonicalURL}>no blog de Victor Magalhães</a>.</p>

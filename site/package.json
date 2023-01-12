@@ -1,0 +1,20 @@
+{
+  "name": "@example/basics",
+  "type": "module",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@types/lodash-es": "^4.17.6",
+    "@types/luxon": "^3.2.0",
+    "astro": "^1.9.0",
+    "lodash-es": "^4.17.21",
+    "luxon": "^3.2.1"
+  }
+}

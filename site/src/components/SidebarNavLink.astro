@@ -1,0 +1,23 @@
+---
+interface Props {
+	href: string;
+	children: any;
+	isExact?: boolean;
+	isDirectory?: boolean;
+}
+
+const { href, isExact = false, isDirectory = false } = Astro.props;
+const isCurrent = href === Astro.url.pathname || href === Astro.url.pathname + "/";
+const shouldBeHighlighted = isExact ? Astro.url.pathname.startsWith(href) : isCurrent;
+const shouldHaveRelDir = isDirectory && Astro.url.pathname.startsWith(href) && !isCurrent;
+---
+
+<!-- {% macro navLink(href, text, directory = false, exact = false) %} -->
+<a
+	class={shouldBeHighlighted ? "current" : undefined}
+	aria-current={isCurrent ? "page" : undefined}
+	rel={shouldHaveRelDir ? "directory" : undefined}
+	href={href}
+>
+	<slot />
+</a>

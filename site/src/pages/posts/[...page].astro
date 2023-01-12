@@ -1,0 +1,15 @@
+---
+import Collection, { type CollectionPageProp } from "../../layouts/Collection.astro";
+import { generateGetStaticPathsForCollection } from "../../utils/pagination";
+import { collectionName } from "./posts.json";
+
+export const getStaticPaths = generateGetStaticPathsForCollection(
+	import.meta.glob("./**/*.md", { eager: true }),
+);
+
+interface Props {
+	page: CollectionPageProp;
+}
+---
+
+<Collection {...Astro.props} collectionName={collectionName} />
