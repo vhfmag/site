@@ -2,12 +2,21 @@
 import Layout from "../layouts/Default.astro";
 import { parseCollection } from "../utils/parseCollection";
 import { blogroll } from "../data/blogroll";
+import { fetchAllLastFmData } from "../data/lastFm";
+import { fetchTracktData } from "../data/trakt";
 
 let lastPosts = parseCollection(
 	Object.values(import.meta.glob("./posts/**/*.md", { eager: true })),
 );
 let lastBookmarks = parseCollection(
 	Object.values(import.meta.glob("./bookmarks/**/*.md", { eager: true })),
+);
+
+const lastFm = await fetchAllLastFmData();
+const traktData = await fetchTracktData();
+
+const topWatchedTraktData = [...traktData.watched.shows, ...traktData.watched.movies].sort(
+	(a, b) => new Date(b.last_watched_at).valueOf() - new Date(a.last_watched_at).valueOf(),
 );
 ---
 
@@ -141,23 +150,37 @@ let lastBookmarks = parseCollection(
 			}
 		</ul>
 	</section>
+	<section class="half-column row-4">
+		<h2>No fone</h2>
+		<ul class="inline-list">
+			{
+				lastFm.weekly.artists.map(artist => (
+					<li>
+						<a href={artist.url}>{artist.name}</a>
+					</li>
+				))
+			}
+		</ul>
+		<div><a href="/ouvido">Veja mais</a></div>
+	</section>
 	<!-- section.half-column.row-4
-		h2 No fone
-		ul.inline-list
-			- for (artist of lastfm.weekly.artists)
-				li #[a(href=artist.url)= artist.name]
-		div #[a(href="/ouvido") Veja mais]
-	section.half-column.row-4
 		h2 Na estante
 		ul.inline-list
 			- for (book of reading)
-				li(data-separator="; ")= book
-	section.half-column.row-4
-		h2 No streaming
-		ul.inline-list
-			- for (thing of [...trakt.watched.shows, ...trakt.watched.movies].sort((a, b) => new Date(b.last_watched_at).valueOf() - new Date(a.last_watched_at).valueOf()).slice(0, 10))
-				li #[a(href=thing.url)= thing.data.title]
-		div #[a(href="/assistido") Veja mais] -->
+				li(data-separator="; ")= book -->
+	<section class="half-column row-4">
+		<h2>No streaming</h2>
+		<ul class="inline-list">
+			{
+				topWatchedTraktData.slice(0, 10).map(thing => (
+					<li>
+						<a href={thing.url}>{thing.data.title}</a>
+					</li>
+				))
+			}
+		</ul>
+		<div><a href="/assistido">Veja mais</a></div>
+	</section>
 </Layout>
 
 <style>

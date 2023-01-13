@@ -1,0 +1,32 @@
+---
+import ListenedSection from "../components/ListenedSection.astro";
+import Default from "../layouts/Default.astro";
+---
+
+<Default>
+	<h1>Música</h1>
+
+	<p>
+		O que eu tenho ouvido, segundo dados do <a href="https://www.last.fm/user/vhfmag"
+			>meu last.fm</a
+		>.
+	</p>
+
+	<p>
+		Pule para os dados <a href="#weekly">semanais</a>, <a href="#monthly">mensais</a>, <a
+			href="#yearly">anuais</a
+		> ou <a href="#overall">de todos os tempos</a>
+	</p>
+
+	<ListenedSection period="weekly" title="Top 10 da semana" />
+	<ListenedSection period="monthly" title="Top 10 do mês" />
+	<ListenedSection period="yearly" title="Top 10 do ano" />
+	<ListenedSection period="overall" title="Top 10 de todos os tempos" />
+</Default>
+
+<style>
+	:global(main) {
+		max-width: unset;
+		--last-fm-image-size: 174px;
+	}
+</style>
