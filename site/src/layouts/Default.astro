@@ -8,6 +8,12 @@ import {
 } from "../data/site";
 import * as themes from "../data/theme";
 import Sidebar from "../components/Sidebar.astro";
+import SkipNav from "../components/SkipNav.astro";
+
+import "cssremedy/css/remedy.css";
+import "cssremedy/css/quotes.css";
+import "../styles/fonts/inter/inter.css";
+import "../styles/fonts/lora/lora.css";
 
 interface Props {
 	htmlClass?: string;
@@ -113,9 +119,7 @@ const { htmlClass, mainClass } = Astro.props;
 		itemid="mdata-blog"
 		data-theme="auto"
 	>
-		{/* TODO: */}
-		<!-- <script src="/js/theme.js" inline></script> -->
-		<a href="#main" class="skip-nav">Pular para conteúdo</a>
+		<SkipNav />
 		<Sidebar />
 		<main id="main" class={mainClass}><slot /></main>
 	</body>
@@ -136,10 +140,7 @@ const { htmlClass, mainClass } = Astro.props;
 >
 	/* Font stuff */
 
-	@import url("../styles/cssremedy.css");
 	@import url("../styles/utility.css");
-	@import url("../styles/fonts/inter/inter.css");
-	@import url("../styles/fonts/lora/lora.css");
 
 	@font-face {
 		font-family: system;
@@ -408,32 +409,6 @@ const { htmlClass, mainClass } = Astro.props;
 		display: grid;
 		grid-template-columns: min-content auto;
 		grid-gap: var(--root-padding);
-	}
-
-	.skip-nav {
-		border: 0;
-		clip: rect(0 0 0 0);
-		height: 1px;
-		width: 1px;
-		margin: -1px;
-		padding: 0;
-		overflow: hidden;
-		position: absolute;
-	}
-
-	.skip-nav:focus {
-		padding: 1rem;
-		position: fixed;
-		top: var(--root-border-width);
-		left: var(--root-border-width);
-		z-index: 1;
-		width: auto;
-		height: auto;
-		clip: auto;
-
-		background-color: var(--themeColor);
-		color: var(--backgroundColor);
-		opacity: 1;
 	}
 
 	ul,
