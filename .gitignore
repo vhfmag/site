@@ -5,7 +5,7 @@ node_modules
 .env
 .env.*
 # Build directory
-public/
+./public/
 dist/
 _site/
 .DS_Store
