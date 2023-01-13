@@ -4,6 +4,7 @@ import { parseCollection } from "../utils/parseCollection";
 import { blogroll } from "../data/blogroll";
 import { fetchAllLastFmData } from "../data/lastFm";
 import { fetchTracktData } from "../data/trakt";
+import { booksImSupposedlyReading } from "../data/reading";
 
 let lastPosts = parseCollection(
 	Object.values(import.meta.glob("./posts/**/*.md", { eager: true })),
@@ -163,11 +164,13 @@ const topWatchedTraktData = [...traktData.watched.shows, ...traktData.watched.mo
 		</ul>
 		<div><a href="/ouvido">Veja mais</a></div>
 	</section>
-	<!-- section.half-column.row-4
-		h2 Na estante
-		ul.inline-list
-			- for (book of reading)
-				li(data-separator="; ")= book -->
+	<section class="half-column row-4">
+		<h2>Na estante</h2>
+		<ul class="inline-list">
+			{booksImSupposedlyReading.map(book => <li data-separator="; ">{book}</li>)}
+		</ul>
+		<div><a href="/assistido">Veja mais</a></div>
+	</section>
 	<section class="half-column row-4">
 		<h2>No streaming</h2>
 		<ul class="inline-list">
