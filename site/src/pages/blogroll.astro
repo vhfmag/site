@@ -1,0 +1,34 @@
+---
+import { groupBy } from "lodash";
+import { blogroll } from "../data/blogroll";
+import Default from "../layouts/Default.astro";
+
+const linksByType = groupBy(
+	blogroll.filter(b => !b.hide),
+	"type",
+);
+---
+
+<Default>
+	<h1>Blogroll</h1>
+
+	<p>Blogs, canais e outros sites que eu acompanho e recomendo</p>
+
+	{
+		Object.entries(linksByType).map(([type, linksOfType]) => (
+			<section>
+				<>
+					<h2 set:html={type} />
+					<ul>
+						{linksOfType.map(link => (
+							<li>
+								<a href={link.url}>{link.name}</a> –{" "}
+								<Fragment set:html={link.description} />
+							</li>
+						))}
+					</ul>
+				</>
+			</section>
+		))
+	}
+</Default>
