@@ -380,7 +380,7 @@ Está em todas as páginas de um site por definição, e costuma ser implementad
 <figcaption>Barra de navegação da Adidas</figcaption>
 </figure>
 
-Outros padrões frequentes são mega menus e _fat footers_{lang=en}:
+Outros padrões frequentes são mega menus e _fat footers_:
 
 <figure>
 
@@ -398,7 +398,7 @@ Os **mega menus** são como os menus comuns, mas multiníveis, e costumam tomar 
 <figcaption><i lang='en'>Fat footer</i> da Adidas</figcaption>
 </figure>
 
-Já **fat footers**{lang=en} costumam revelar a organização básica dos conteúdos do site, muitas vezes até o segundo nível, e incluir links diretos para conteúdos secundários como termos de serviço e privacidade, etc.
+Já **fat footers** costumam revelar a organização básica dos conteúdos do site, muitas vezes até o segundo nível, e incluir links diretos para conteúdos secundários como termos de serviço e privacidade, etc.
 
 #### Local
 

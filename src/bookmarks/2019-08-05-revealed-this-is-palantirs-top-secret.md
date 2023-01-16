@@ -6,6 +6,6 @@ links:
 date: 2019-08-05T11:21:30.578+00:00
 ---
 
-Sobre como o sistema global distribuído de vigilância que gigantes de tecnologia (de Facebooks a proponentes do conceito _smart city_{lang=en}) construíram, e de que nós todos fazemos parte, é vendido para departamentos de polícia dos Estados Unidos: um mecanismo de busca onde você digita o nome de alguém e tem todos os dados que a fascista Palantir tem sobre essa pessoa.
+Sobre como o sistema global distribuído de vigilância que gigantes de tecnologia (de Facebooks a proponentes do conceito _smart city_) construíram, e de que nós todos fazemos parte, é vendido para departamentos de polícia dos Estados Unidos: um mecanismo de busca onde você digita o nome de alguém e tem todos os dados que a fascista Palantir tem sobre essa pessoa.
 
 Mas privacidade não importa!
