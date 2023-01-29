@@ -35,7 +35,7 @@ E a pergunta que fica é:
 
 > What would today’s octopus look like?
 
-A nojenta _alt-right_ já resolveu isso:
+A nojenta _alt-right_{lang=en} já resolveu isso:
 
 > In recent years, the alt-right has been particularly effective at minting new symbols that capture big ideas that are difficult to articulate. Chief among them, perhaps, is the “red pill,” which dragged the perception-shifting plot device from The Matrix through the fetid and paranoid misogyny of “men’s rights activist” forums into a politically actionable concept.
 >

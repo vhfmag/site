@@ -23,17 +23,12 @@ Na época eu me sentia vigiado (e talvez fosse), mas o principal vigia era eu me
 
 A história do meu primeiro beijo é divertida o suficiente pra reproduzir um tuíte sobre ele aqui:
 
-<div id="beijo-hetero">
-
 > na 5ª série uma menina armou com colegas e me prendeu no corredor na hora do recreio pra me beijar. cedi com medo de dizer não acabar me revelando como gay.
 >
 > no outro dia ela me pediu em namoro e eu disse que ia pedir a minha mãe pra ganhar tempo
 >
 > aí ela sentou no colo de um menino (que eu achava bonitinho, inclusive rs) e eu fingi ciúmes pra terminar 🤷🏽‍♂️
->
-> — [tuíte](ttps://twitter.com/vhfmag/status/1270021339454279680) por mim mesmo, ligeiramente editado
-
-</div>
+> — [tuíte](ttps://twitter.com/vhfmag/status/1270021339454279680) por mim mesmo, ligeiramente editado {id=beijo-hetero}
 
 Certa feita, um amigo que eu muito admirava me disse algo como: "existem dois caminhos para quem cresce sendo gay: ou você é afeminado e se aproxima de outros gays, mas sofre discriminação aberta; ou você é encubado e não se aproxima de seus iguais, mas se protege da discriminação". Discriminação ou isolamento de seus pares. Escolhi a segunda opção.
 

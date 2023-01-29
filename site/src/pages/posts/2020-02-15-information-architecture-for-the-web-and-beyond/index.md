@@ -48,11 +48,7 @@ Um trabalho efetivo em <abbr title="arquitetura da informação">AI</abbr> preci
 
 <figure style="float: right; width: min-content; margin: 0 0 0 1em;">
 
-<div style="min-width: 15ch">
-
-![O modelo simplista consiste em assumir que buscas tem três passos: o usuário pergunta algo, o sistema processa isso e o usuário recebe sua resposta](/posts/2020-02-15-information-architecture-for-the-web-and-beyond/too-simple-model.png)
-
-</div>
+![O modelo simplista consiste em assumir que buscas tem três passos: o usuário pergunta algo, o sistema processa isso e o usuário recebe sua resposta](/posts/2020-02-15-information-architecture-for-the-web-and-beyond/too-simple-model.png){style="min-width: 15ch"}
 
 <figcaption>O modelo simplista</figcaption>
 
@@ -78,19 +74,11 @@ Para projetar um produto cujos conteúdos sejam encontráveis, precisamos primei
 
 ... e esses são só alguns exemplos.
 
-<div style="width: 100%; max-width: 500px; margin: auto; border: 1vw solid white">
-
-![](/posts/2020-02-15-information-architecture-for-the-web-and-beyond/information-needs.png)
-
-</div>
+![](/posts/2020-02-15-information-architecture-for-the-web-and-beyond/information-needs.png){style="width: 100%; max-width: 500px; margin: auto; border: 1vw solid white"}
 
 Outra limitação do modelo é que ele não vê a iteratividade do processo: alternância entre busca e navegação, refinamentos de busca ou mesmo mudança de propósito da busca devido aos resultados encontrados em etapas anteriores.
 
-<div style="width: 100%; max-width: 500px; margin: auto; border: 1vw solid white">
-
-![](/posts/2020-02-15-information-architecture-for-the-web-and-beyond/berrypicking.png)
-
-</div>
+![](/posts/2020-02-15-information-architecture-for-the-web-and-beyond/berrypicking.png){style="width: 100%; max-width: 500px; margin: auto; border: 1vw solid white"}
 
 As necessidades e comportamentos de informação mudam, portanto, de acordo com o contexto, o conteúdo e o usuário, e para uma arquitetura de informação de excelência estes devem ser devidamente estudados. Métodos para tal são discutidos no capítulo 11.
 
@@ -249,15 +237,11 @@ Sistemas de organização podem ser:
 <dt>Ambíguos</dt>
 <dd>
 
-<figure style="float: right; margin: 0; margin-left: 1em;">
+<figure style="float: right; margin: 0; margin-left: 1em; width: min-content;">
 
-<div style="max-width: 150px">
+![Navegação por audiência do CERN em 3 de fevereiro de 2020](/posts/2020-02-15-information-architecture-for-the-web-and-beyond/cern-audience-nav.png){style="max-width: 150px"}
 
-![Navegação por audiência do CERN em 3 de fevereiro de 2020](/posts/2020-02-15-information-architecture-for-the-web-and-beyond/cern-audience-nav.png)
-
-</div>
-
-<figcaption>Navegação por<br>audiência do CERN</figcaption>
+<figcaption>Navegação por audiência do CERN</figcaption>
 </figure>
 
 Por lidarem com categorias subjetivas, diferentes pessoas com diferentes necessidades de informação poderiam classificar um dado conteúdo em diferentes categorias; além disso, é comum que conteúdos estejam em mais de uma categoria. Exemplos incluem a organização por tipo do supermercado, a organização por tarefa a ser realizada do Microsoft Word, e a organização por público-alvo de sites como o do CERN.
@@ -396,7 +380,7 @@ Está em todas as páginas de um site por definição, e costuma ser implementad
 <figcaption>Barra de navegação da Adidas</figcaption>
 </figure>
 
-Outros padrões frequentes são mega menus e _fat footers_:
+Outros padrões frequentes são mega menus e _fat footers_{lang=en}:
 
 <figure>
 
@@ -414,7 +398,7 @@ Os **mega menus** são como os menus comuns, mas multiníveis, e costumam tomar 
 <figcaption><i lang='en'>Fat footer</i> da Adidas</figcaption>
 </figure>
 
-Já **fat footers** costumam revelar a organização básica dos conteúdos do site, muitas vezes até o segundo nível, e incluir links diretos para conteúdos secundários como termos de serviço e privacidade, etc.
+Já **fat footers**{lang=en} costumam revelar a organização básica dos conteúdos do site, muitas vezes até o segundo nível, e incluir links diretos para conteúdos secundários como termos de serviço e privacidade, etc.
 
 #### Local
 
@@ -455,11 +439,7 @@ Começando pelo começo: nem todo produto precisa de busca.
 
 ### Seu produto precisa de busca?
 
-<div id="more-lib-than-app">
-
-> If your product is more like a library than a software application, then search probably makes sense.
-
-</div>
+> If your product is more like a library than a software application, then search probably makes sense.{id=more-lib-than-app}
 
 Fatores a serem considerados:
 
@@ -496,7 +476,7 @@ Existe um <i lang='en'>trade-off</i> fundamental entre essas duas métricas de p
 -   Caso se precise encontrar todos os itens relevantes ([busca exaustiva](#busca-exaustiva), ex: preciso encontrar todas as notas fiscais de um determinado mês pra elaborar relatórios de contabilidade), o foco deve ser estar no <i lang='en'>recall</i>
 -   Caso se precise encontrar uma fonte relevante (ex: preciso descobrir como tirar uma mancha de vinho da minha camisa), o foco deve ser estar na precisão
 
-<p id="stemming">Para entender porque o <i lang='en'>trade-off</i> existe, analisemos a técnica do <i lang='en'>stemming</i>: é frequente que ao pesquisarmos algo como "computadores", o mecanismo de busca pode procurar por todas as palavras que tenham o mesmo radical (computador, computacional, computado, computando), aumentando <i lang='en'>recall</i> e diminuindo precisão; ou pesquisar apenas por itens que tenham exatamente a palavra computadores, aumentando a precisão e diminuindo o <i lang='en'>recall</i>.</p>
+Para entender porque o <i lang='en'>trade-off</i> existe, analisemos a técnica do <i lang='en'>stemming</i>: é frequente que ao pesquisarmos algo como "computadores", o mecanismo de busca pode procurar por todas as palavras que tenham o mesmo radical (computador, computacional, computado, computando), aumentando <i lang='en'>recall</i> e diminuindo precisão; ou pesquisar apenas por itens que tenham exatamente a palavra computadores, aumentando a precisão e diminuindo o <i lang='en'>recall</i>.{id=stemming}
 
 ### Algoritmos de busca e técnicas relacionadas
 
