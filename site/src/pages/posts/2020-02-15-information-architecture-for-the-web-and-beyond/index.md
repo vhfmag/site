@@ -50,7 +50,7 @@ Um trabalho efetivo em <abbr title="arquitetura da informação">AI</abbr> preci
 
 <div style="min-width: 15ch">
 
-![O modelo simplista consiste em assumir que buscas tem três passos: o usuário pergunta algo, o sistema processa isso e o usuário recebe sua resposta](./assets/too-simple-model.png)
+![O modelo simplista consiste em assumir que buscas tem três passos: o usuário pergunta algo, o sistema processa isso e o usuário recebe sua resposta](/posts/2020-02-15-information-architecture-for-the-web-and-beyond/too-simple-model.png)
 
 </div>
 
@@ -80,7 +80,7 @@ Para projetar um produto cujos conteúdos sejam encontráveis, precisamos primei
 
 <div style="width: 100%; max-width: 500px; margin: auto; border: 1vw solid white">
 
-![](./assets/information-needs.png)
+![](/posts/2020-02-15-information-architecture-for-the-web-and-beyond/information-needs.png)
 
 </div>
 
@@ -88,7 +88,7 @@ Outra limitação do modelo é que ele não vê a iteratividade do processo: alt
 
 <div style="width: 100%; max-width: 500px; margin: auto; border: 1vw solid white">
 
-![](./assets/berrypicking.png)
+![](/posts/2020-02-15-information-architecture-for-the-web-and-beyond/berrypicking.png)
 
 </div>
 
@@ -108,9 +108,9 @@ O mesmo se aplica aos tais **lugares feitos de linguagem**:
 
 <figure style="margin-left: 0; margin-right: 0">
 
-![Cabeçalho do site do Banco do Brasil em 3 de fevereiro de 2020](./assets/banco-do-brasil.png)
+![Cabeçalho do site do Banco do Brasil em 3 de fevereiro de 2020](/posts/2020-02-15-information-architecture-for-the-web-and-beyond/banco-do-brasil.png)
 
-![Cabeçalho do site do Banco Itaú em 3 de fevereiro de 2020](./assets/itau.png)
+![Cabeçalho do site do Banco Itaú em 3 de fevereiro de 2020](/posts/2020-02-15-information-architecture-for-the-web-and-beyond/itau.png)
 
 <figcaption>As semelhanças não são meras coincidências</figcaption>
 
@@ -122,7 +122,7 @@ Além disso, assim como construções, sites e produtos digitais mudam em difere
 
 <figure style="width: 100%; max-width: 500px; margin: auto;">
 
-![](./assets/layers.png)
+![](/posts/2020-02-15-information-architecture-for-the-web-and-beyond/layers.png)
 
 <figcaption>As camadas de mudança de uma construção</figcaption>
 
@@ -253,7 +253,7 @@ Sistemas de organização podem ser:
 
 <div style="max-width: 150px">
 
-![Navegação por audiência do CERN em 3 de fevereiro de 2020](./assets/cern-audience-nav.png)
+![Navegação por audiência do CERN em 3 de fevereiro de 2020](/posts/2020-02-15-information-architecture-for-the-web-and-beyond/cern-audience-nav.png)
 
 </div>
 
@@ -264,7 +264,7 @@ Por lidarem com categorias subjetivas, diferentes pessoas com diferentes necessi
 
 <figure style="margin-left: 0; margin-right: 0">
 
-![Navegação por tarefa do Microsoft Word](./assets/word-nav.png)
+![Navegação por tarefa do Microsoft Word](/posts/2020-02-15-information-architecture-for-the-web-and-beyond/word-nav.png)
 
 <figcaption>Navegação por tarefa do Microsoft Word</figcaption>
 </figure>
@@ -286,7 +286,7 @@ A hierarquia do seu conteúdo precisa ser planejada de acordo com os três pilar
 
 <figure style="margin: auto; max-width: 600px">
 
-![](./assets/broad-shallow-deep-hierarchy.png)
+![](/posts/2020-02-15-information-architecture-for-the-web-and-beyond/broad-shallow-deep-hierarchy.png)
 
 <figcaption>Exemplos de hierarquias rasas e amplas vs profundas e estreitas</figcaption>
 
@@ -308,7 +308,7 @@ Exemplos são (hash)tags, trending topics do Twitter, recomendações de compet�
 
 <figure style="float: left; max-width: 220px; margin-left: 0">
 
-![](./assets/labelling-starbucks.png)
+![](/posts/2020-02-15-information-architecture-for-the-web-and-beyond/labelling-starbucks.png)
 
 <figcaption>Navegação global da Starbucks</figcaption>
 
@@ -379,7 +379,7 @@ Os principais tipos de navegação são:
 
 <figure style="margin-left: auto; margin-right: auto; max-width: 500px">
 
-![](assets/nav-map.png)
+![](/posts/2020-02-15-information-architecture-for-the-web-and-beyond/nav-map.png)
 
 <figcaption>Os tipos de navegação embutida: global, local e contextual</figcaption>
 
@@ -391,7 +391,7 @@ Está em todas as páginas de um site por definição, e costuma ser implementad
 
 <figure>
 
-![](./assets/adidas-navbar.png)
+![](/posts/2020-02-15-information-architecture-for-the-web-and-beyond/adidas-navbar.png)
 
 <figcaption>Barra de navegação da Adidas</figcaption>
 </figure>
@@ -400,7 +400,7 @@ Outros padrões frequentes são mega menus e _fat footers_:
 
 <figure>
 
-![](./assets/adidas-mega-menu.png)
+![](/posts/2020-02-15-information-architecture-for-the-web-and-beyond/adidas-mega-menu.png)
 
 <figcaption><i lang='en'>Mega menu</i> da Adidas</figcaption>
 </figure>
@@ -409,7 +409,7 @@ Os **mega menus** são como os menus comuns, mas multiníveis, e costumam tomar 
 
 <figure>
 
-![](./assets/adidas-fat-footer.png)
+![](/posts/2020-02-15-information-architecture-for-the-web-and-beyond/adidas-fat-footer.png)
 
 <figcaption><i lang='en'>Fat footer</i> da Adidas</figcaption>
 </figure>
@@ -422,8 +422,8 @@ A navegação global é frequentemente acompanhada por uma navegação local que
 
 <figure>
 
-![](./assets/amazon-toys.png)
-![](./assets/amazon-books.png)
+![](/posts/2020-02-15-information-architecture-for-the-web-and-beyond/amazon-toys.png)
+![](/posts/2020-02-15-information-architecture-for-the-web-and-beyond/amazon-books.png)
 
 <figcaption>Navegação local da Amazon nas seções de brinquedos e de livros, respectivamente</figcaption>
 </figure>
@@ -434,7 +434,7 @@ As navegações globais e locais nem sempre dão conta de todas as relações en
 
 <figure>
 
-![](./assets/wikipedia-contextual-local.png)
+![](/posts/2020-02-15-information-architecture-for-the-web-and-beyond/wikipedia-contextual-local.png)
 
 <figcaption>Navegação local e contexutal na Wikipedia</figcaption>
 </figure>
@@ -443,7 +443,7 @@ As navegações globais e locais nem sempre dão conta de todas as relações en
 
 <figure style="margin-left: auto; margin-right: auto; max-width: 500px">
 
-![](assets/supplemental-nav.png)
+![](/posts/2020-02-15-information-architecture-for-the-web-and-beyond/supplemental-nav.png)
 
 <figcaption>Os principais tipos de navegação suplementar: mapas de site, índices e guias</figcaption>
 

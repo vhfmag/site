@@ -99,7 +99,7 @@ A experiência foi positiva: os tipos de campo disponíveis atenderam a maior pa
 
 Nós ficaríamos um pouco mais seguros sabendo que o Strapi está validando por nós que não temos campos de URL sendo preenchidos incorretamente.
 
-![](./assets/strapi-fields.png)
+![](/posts/2020-05-14-hotsite-covid19-jusbrasil/strapi-fields.png)
 
 <figcaption>Os tipos de campo do Strapi</figcaption>
 </figure>
