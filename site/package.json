@@ -26,5 +26,9 @@
 		"trakt.tv-images": "^5.2.0",
 		"type-fest": "^3.5.1",
 		"zod": "^3.20.2"
+	},
+	"devDependencies": {
+		"remark-gfm": "^3.0.1",
+		"unist-util-visit-parents": "^5.1.3"
 	}
 }
