@@ -23,7 +23,6 @@
 		"minimal-promise-pool": "^2.1.2",
 		"ms": "^2.1.3",
 		"netlify-cli": "^12.7.2",
-		"remark-gfm": "^3.0.1",
 		"trakt.tv": "^8.1.1",
 		"trakt.tv-images": "^5.2.0",
 		"type-fest": "^3.5.1",
