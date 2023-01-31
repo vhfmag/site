@@ -1,0 +1,22 @@
+---
+import MediaSection from "../components/MediaSection.astro";
+import { fetchTracktData } from "../data/trakt";
+import Default from "../layouts/Default.astro";
+
+const traktData = await fetchTracktData();
+---
+
+<Default>
+	<h1>Filmes e Séries</h1>
+
+	<MediaSection data={traktData.watched.shows} title="Séries assistidas" />
+	<MediaSection data={traktData.watched.movies} title="Filmes assistidos" />
+	<MediaSection data={traktData.watchlist.shows} title="Séries na lista de espera 👀" />
+	<MediaSection data={traktData.watchlist.movies} title="Filmes na lista de espera 👀" />
+</Default>
+
+<style>
+	:global(main) {
+		max-width: unset;
+	}
+</style>
