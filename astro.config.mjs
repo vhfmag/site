@@ -2,6 +2,7 @@ import { defineConfig } from "astro/config";
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
 import { astroImageTools } from "astro-imagetools";
+import react from "@astrojs/react";
 import assert from "node:assert";
 import { visitParents } from "unist-util-visit-parents";
 import { canonicalUrl } from "./src/data/site";
@@ -10,7 +11,7 @@ import { attributesExtensionPlugin } from "./src/plugins/remark/attributesExtens
 
 // https://astro.build/config
 export default defineConfig({
-	integrations: [mdx(), sitemap(), astroImageTools],
+	integrations: [mdx(), sitemap(), astroImageTools, react()],
 	site: canonicalUrl,
 	markdown: {
 		extendDefaultPlugins: true,

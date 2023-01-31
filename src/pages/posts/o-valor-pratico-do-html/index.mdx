@@ -5,15 +5,35 @@ customTags: ["Técnico"]
 date: 2019-02-21
 ---
 
+import { Sandpack, getSandpackCssText } from "@codesandbox/sandpack-react";
+import niceInputHtml from "./assets/nice-input.html?raw";
+import notNiceInputHtml from "./assets/not-nice-input.html?raw";
+
+<style id="sandpack" set:html={getSandpackCssText()} />
+
 > Veja também minha [apresentação](https://jsisnottheweb-html.netlify.app/) sobre o mesmo tema.
 
 Preencher formulários é frustrante o suficiente para que vários artigos tenham sido feitos sobre [como melhorar a experiência de preencher um](https://medium.com/@sympli/6-super-quick-ways-to-improve-the-ux-of-forms-9e0bf152b259) ou até [como convencer alguém a fazer isso](https://medium.com/@prashanth.mahadeva/making-people-fill-forms-8569cc273047). Pior ainda é aquele <i lang='en'>checkbox</i> de termos de privacidade no final de um formulário. Mas se existe justiça divina, existe alguma punição pra quem faz esse <i lang='en'>checkbox</i> sem uma <i lang='en'>label</i>, impedindo de clicar no texto pra marcar:
 
-@[codesandbox](o-valor-pratico-do-html/not-nice-input)
+<Sandpack
+	client:visible
+	customSetup={{
+		entry: "/index.html",
+	}}
+	files={{
+		"/index.html": notNiceInputHtml,
+	}}
+/>
 
 Bastaria ter substituído o insignificante (porque sem significado) `<span>` por um `<label>` e meu dedo gordo não teria me impedido de marcar o <i lang='en'>checkbox</i> em meu celular e eu teria dado direito de venda sobre meus dados sem nem ler os termos:
 
-@[codesandbox](o-valor-pratico-do-html/nice-input)
+<Sandpack
+	client:visible
+	customSetup={{ entry: "/index.html" }}
+	files={{
+		"/index.html": niceInputHtml,
+	}}
+/>
 
 Uhu, todos felizes! 🎉
 
@@ -58,7 +78,9 @@ Quais são as expectativas de comportamento e semântica dos elementos nativos? 
 
 ### &lt;button>
 
-<button class="button" style="all: revert" onclick='javascript:alert("Oi, eu sou o Goku!")'>Clique aqui</button>
+<button class="button" style="all: revert" onclick='javascript:alert("Oi, eu sou o Goku!")'>
+	Clique aqui
+</button>
 
 `<button>` é um dos elementos interativos mais fundamentais da Web, junto com o `<a>` e o `<input>`. Ele também é um dos que mais tem implementações customizadas, frequentemente feitas com `<a>` ou `<div>` e quebrando as expectativas e comportamento de um botão. Por exemplo, se espera que eles:
 
@@ -249,7 +271,12 @@ Implementadores de navegadores, dispositivos, plataformas, ferramentas de desenv
 
 Relógios, carros e <i lang='en'>headsets</i> de realidade virtual já tem navegadores e cada um deles, com seu formato e suas particularidades, impõe novas limitações e abre novas possibilidades sobre como interagir com a Web. O tamanho reduzido da tela do <i lang='en'>Apple Watch</i> impõe limitações severas de usabilidade – ler é difícil, clicar é difícil – e o modo de leitura é uma solução elegante que está disponível para sites que tenham sido feitos com HTML semântico. Bruce Lawson descreve melhor do que eu:
 
-> <q>I didn’t choose to use &lt;article> and `itemprop` and input types because I wanted to support the Apple Watch; I did it before the Apple Watch existed, in order that my code is future-proof. By choosing the right semantics now, a machine that I don’t know about yet can understand my content and display it in the best way for its users</q>
+> <q>
+> 	I didn’t choose to use &lt;article> and `itemprop` and input types because I wanted to support
+> 	the Apple Watch; I did it before the Apple Watch existed, in order that my code is
+> 	future-proof. By choosing the right semantics now, a machine that I don’t know about yet can
+> 	understand my content and display it in the best way for its users
+> </q>
 >
 > Bruce Lawson em [The practical value of semantic HTML](https://www.brucelawson.co.uk/2018/the-practical-value-of-semantic-html/)
 
@@ -275,7 +302,13 @@ Como será um botão num navegador de realidade virtual daqui a 5 anos? Quanto t
 
 Além de navegadores e outros <i lang='en'><a href="https://en.wikipedia.org/wiki/User_agent">user agents</a></i>, ferramentas que geram ou interagem com HTML também podem se beneficiar de um HTML semântico. Como exemplo, o [React](https://reactjs.org/) vai reduzir a prioridade de renderização de elementos que tenham o atributo `hidden` do HTML 5 e de toda a sua sub-árvore, renderizando primeiro o conteúdo visível:
 
-> <q>when a HTML component sets the hidden={true} property, React will automatically change the priority of this subtree so that it won’t be part of the initial render. The idea is to e.g have a tab component that can render out every window in advance so switching tabs is super fast but it only needs to display the first tab’s content in the initial render so the hidden tabs can be deprioritized</q>
+> <q>
+> 	when a HTML component sets the hidden={true} property, React will automatically change the
+> 	priority of this subtree so that it won’t be part of the initial render. The idea is to e.g
+> 	have a tab component that can render out every window in advance so switching tabs is super
+> 	fast but it only needs to display the first tab’s content in the initial render so the hidden
+> 	tabs can be deprioritized
+> </q>
 >
 > Do repositório sobre Concurrent React, [página](https://github.com/sw-yx/fresh-concurrent-react/blob/master/apis/hidden.md) sobre `hidden={true}`
 
