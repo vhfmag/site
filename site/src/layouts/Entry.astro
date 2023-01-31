@@ -1,9 +1,6 @@
 ---
 import Authors, { type Author } from "../components/Authors.astro";
-import { type WebMentionType, wmTypeMap } from "../data/wmType";
 import { formatDate } from "../utils/formatting";
-import { map, groupBy, filter } from "lodash-es";
-import { isNotNullish } from "../utils/typeGuards";
 import Default from "./Default.astro";
 import type { MarkdownLayoutProps } from "astro";
 import WebMentionDescription from "../components/WebMentionDescription.astro";

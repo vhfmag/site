@@ -28,16 +28,13 @@ export default defineConfig({
 				});
 
 				visitParents(root, "element", (node, parents) => {
-					console.log({ node, parents });
 					assert(node.type === "element");
-					tagNames.add(node.tagName);
 					if (node.tagName !== "iframe") return;
 
 					const parent = parents.at(-1);
 					assert(parent);
 
 					if (parent.properties.class?.split(/\s+/g).includes("embed-container")) {
-						console.log("🎉".repeat(10), "parent contains class, aborting");
 						return;
 					}
 
@@ -54,11 +51,8 @@ export default defineConfig({
 						children: [node],
 					};
 
-					console.log({ node, parent, index, wrapperNode });
-
 					parent.children.splice(index, 1, wrapperNode);
 				});
-				console.log({ tagNames: [...tagNames] });
 
 				return root;
 			},
