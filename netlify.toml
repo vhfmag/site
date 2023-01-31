@@ -1,3 +1,7 @@
+[dev]
+    command = "npm run dev"
+    targetPort = 3000
+
 [build]
     functions = "functions/"
     publish = "dist"
