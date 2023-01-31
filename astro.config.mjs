@@ -8,9 +8,12 @@ import { visitParents } from "unist-util-visit-parents";
 import { canonicalUrl } from "./src/data/site";
 import { addAutomaticLayoutPlugin } from "./src/plugins/remark/collectionData";
 import { attributesExtensionPlugin } from "./src/plugins/remark/attributesExtension";
+import netlify from "@astrojs/netlify/functions";
 
 // https://astro.build/config
 export default defineConfig({
+	output: "server",
+	adapter: netlify(),
 	integrations: [mdx(), sitemap(), astroImageTools, react()],
 	site: canonicalUrl,
 	markdown: {
