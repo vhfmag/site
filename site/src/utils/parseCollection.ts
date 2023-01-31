@@ -3,7 +3,7 @@ export interface ParseCollectionOptions {
 }
 
 export function parseCollection(
-	collection: any[],
+	collection: MD[],
 	{ requireTitle = true }: ParseCollectionOptions = {},
 ) {
 	return collection
