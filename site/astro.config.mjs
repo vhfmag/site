@@ -1,17 +1,16 @@
 import { defineConfig } from "astro/config";
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
+import { astroImageTools } from "astro-imagetools";
 import assert from "node:assert";
-import * as fs from "node:fs";
 import { visitParents } from "unist-util-visit-parents";
 import { canonicalUrl } from "./src/data/site";
 import { addAutomaticLayoutPlugin } from "./src/plugins/remark/collectionData";
 import { attributesExtensionPlugin } from "./src/plugins/remark/attributesExtension";
 
-const tagNames = new Set();
 // https://astro.build/config
 export default defineConfig({
-	integrations: [mdx(), sitemap()],
+	integrations: [mdx(), sitemap(), astroImageTools],
 	site: canonicalUrl,
 	markdown: {
 		extendDefaultPlugins: true,

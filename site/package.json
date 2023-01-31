@@ -28,5 +28,9 @@
 		"type-fest": "^3.5.1",
 		"unist-util-visit-parents": "^5.1.3",
 		"zod": "^3.20.2"
+	},
+	"dependencies": {
+		"@astrojs/rss": "^2.1.0",
+		"astro-imagetools": "^0.7.6"
 	}
 }
