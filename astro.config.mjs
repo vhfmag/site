@@ -1,18 +1,19 @@
-import { defineConfig } from "astro/config";
 import mdx from "@astrojs/mdx";
 import partytown from "@astrojs/partytown";
-import sitemap from "@astrojs/sitemap";
-import { astroImageTools } from "astro-imagetools";
 import react from "@astrojs/react";
+import sitemap from "@astrojs/sitemap";
+import compress from "astro-compress";
+import { astroImageTools } from "astro-imagetools";
+import { defineConfig } from "astro/config";
 import assert from "node:assert";
 import { visitParents } from "unist-util-visit-parents";
 import { canonicalUrl } from "./src/data/site";
-import { addAutomaticLayoutPlugin } from "./src/plugins/remark/collectionData";
 import { attributesExtensionPlugin } from "./src/plugins/remark/attributesExtension";
+import { addAutomaticLayoutPlugin } from "./src/plugins/remark/collectionData";
 
 // https://astro.build/config
 export default defineConfig({
-	integrations: [mdx(), sitemap(), astroImageTools, react(), partytown()],
+	integrations: [mdx(), sitemap(), astroImageTools, react(), partytown(), compress()],
 	site: canonicalUrl,
 	markdown: {
 		extendDefaultPlugins: true,
