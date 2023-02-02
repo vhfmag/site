@@ -381,8 +381,6 @@ const NameComp = mainClass === "home" ? "h1" : "div";
 		}
 	}
 
-	loadTheme();
-
 	function onLoad() {
 		loadTheme();
 		const wrapper = document.getElementById("theme-selector-wrapper");
@@ -398,8 +396,8 @@ const NameComp = mainClass === "home" ? "h1" : "div";
 		}
 	}
 
-	window.onload = onLoad;
-	document.addEventListener("turbolinks:load", onLoad);
+	window.addEventListener('load', onLoad);
+	loadTheme();
 </script>
 
 <style>
