@@ -1,5 +1,5 @@
 ---
-title: "Trendism &amp; cognitive stagnation"
+title: "Trendism & cognitive stagnation"
 links:
     - types: [bookmark-of]
       link: "https://medium.com/@enkiv2/trendism-cognitive-stagnation-21c8e003df83"
