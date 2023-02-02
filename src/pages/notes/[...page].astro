@@ -7,7 +7,7 @@ import { generateGetStaticPathsForCollection } from "../../utils/pagination";
 import { collectionName, collection } from "./notes.json";
 
 export const getStaticPaths = generateGetStaticPathsForCollection(
-	import.meta.glob("./**/*.md", { eager: true }),
+	import.meta.glob("./**/*.{md,mdx}", { eager: true }),
 	{ requireTitle: false },
 );
 

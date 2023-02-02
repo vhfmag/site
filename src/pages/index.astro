@@ -7,10 +7,10 @@ import { fetchTracktData } from "../data/trakt";
 import { booksImSupposedlyReading } from "../data/reading";
 
 let lastPosts = parseCollection(
-	Object.values(import.meta.glob("./posts/**/*.md", { eager: true })),
+	Object.values(import.meta.glob("./posts/**/*.{md,mdx}", { eager: true })),
 );
 let lastBookmarks = parseCollection(
-	Object.values(import.meta.glob("./bookmarks/**/*.md", { eager: true })),
+	Object.values(import.meta.glob("./bookmarks/**/*.{md,mdx}", { eager: true })),
 );
 
 const lastFm = await fetchAllLastFmData();
