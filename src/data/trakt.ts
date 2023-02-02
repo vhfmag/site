@@ -10,7 +10,7 @@ import TraktImages from "trakt.tv-images";
 import { z } from "zod";
 import { decorateWithPersistentCache } from "../utils/cache";
 import { runInPromisePool } from "../utils/pooling";
-import { isNotNullish } from "../utils/typeGuards";
+import { assertIsNotNullish, isNotNullish } from "../utils/typeGuards";
 
 const trakt = new Trakt({
 	client_id: z.string().parse(process.env.TRACKT_CLIENT_ID),
@@ -20,8 +20,8 @@ const trakt = new Trakt({
 	},
 	options: {
 		images: {
-			tmdbApiKey: process.env.TMDB_API_KEY,
-			fanartApiKey: process.env.FANART_API_KEY,
+			tmdbApiKey: assertIsNotNullish(process.env.TMDB_API_KEY),
+			fanartApiKey: assertIsNotNullish(process.env.FANART_API_KEY),
 			// tvdbApiKey: process.env.TVDB_API_KEY,
 			smallerImages: true,
 			cached: true,

@@ -3,6 +3,7 @@ import * as path from "node:path";
 import { fileURLToPath } from "node:url";
 import { readFileSync, existsSync, statSync } from "node:fs";
 import type { RemarkPlugin } from "@astrojs/markdown-remark";
+import { assertIsNotNullish } from "../../utils/typeGuards";
 
 const currentDir = globalThis.__dirname ?? path.dirname(fileURLToPath(import.meta.url));
 
@@ -58,9 +59,9 @@ export const addAutomaticLayoutPlugin: RemarkPlugin = () => {
 		const pathRelativeToPages = path.relative(pagesFolder, file.path);
 		const splitRelativePath = pathRelativeToPages.split(path.sep);
 
-		if (splitRelativePath.length === 1) return;
+		if (splitRelativePath.length <= 1) return;
 
-		const collectionFolderName = splitRelativePath[0];
+		const collectionFolderName = assertIsNotNullish(splitRelativePath[0]);
 		const collectionFolderData = readCollectionData(collectionFolderName);
 		astroData.frontmatter.collectionData = collectionFolderData;
 

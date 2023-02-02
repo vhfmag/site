@@ -2,7 +2,7 @@ import type { RemarkPlugin } from "@astrojs/markdown-remark";
 import { visitParents } from "unist-util-visit-parents";
 import type { Content, Root } from "mdast";
 import assert from "node:assert";
-import { isNotNullish } from "../../utils/typeGuards";
+import { assertIsNotNullish, isNotNullish } from "../../utils/typeGuards";
 
 const syntaxRegex =
 	/\{((?:(?:[#.][\w-]+)|(?:[\w-]+=.*?))(?: (?:(?:[#.][\w-]+)|(?:[\w-]+=.*?)))*)\}/gm;
@@ -19,7 +19,7 @@ export const attributesExtensionPlugin: RemarkPlugin = () => {
 
 			for (const match of matches) {
 				const attributes = Object.fromEntries(
-					[...match[1].matchAll(regularAttributeRegex)]
+					[...assertIsNotNullish(match[1]).matchAll(regularAttributeRegex)]
 						.map(match => {
 							const wholeMatch = match[0];
 							if (!wholeMatch) return null;
@@ -51,7 +51,7 @@ export const attributesExtensionPlugin: RemarkPlugin = () => {
 					const nodePosition = parent.children.indexOf(textNode as any);
 					assert(nodePosition > 0, "nodePosition > 0");
 					// previous sibling
-					nodeToModify = parent.children[nodePosition - 1];
+					nodeToModify = parent.children[nodePosition - 1]!;
 				} else if (match.index === textNode.value.length - match[0].length) {
 					nodeToModify = parent;
 				} else {

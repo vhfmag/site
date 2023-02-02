@@ -42,14 +42,14 @@ type ImageSize = "small" | "medium" | "large" | "extralarge" | "mega";
 type Image = { size: ImageSize; "#text": string };
 
 // FIXME: needed?
-interface PaginationAttr {
-	/** The current page number as a string. Starts at 1. */
-	page: string;
-	perPage: string;
-	user: string;
-	total: string;
-	totalPages: string;
-}
+// interface PaginationAttr {
+// 	/** The current page number as a string. Starts at 1. */
+// 	page: string;
+// 	perPage: string;
+// 	user: string;
+// 	total: string;
+// 	totalPages: string;
+// }
 
 interface BaseArtist {
 	url: string;
