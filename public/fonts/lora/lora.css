@@ -1,0 +1,62 @@
+@font-face {
+	font-family: "Lora";
+	font-style: normal;
+	font-weight: 400;
+	font-display: swap;
+	src: url("Lora-Regular.ttf") format("woff2");
+}
+@font-face {
+	font-family: "Lora";
+	font-style: italic;
+	font-weight: 400;
+	font-display: swap;
+	src: url("Lora-Italic.ttf") format("woff2");
+}
+
+@font-face {
+	font-family: "Lora";
+	font-style: normal;
+	font-weight: 500;
+	font-display: swap;
+	src: url("Lora-Medium.ttf") format("woff2");
+}
+@font-face {
+	font-family: "Lora";
+	font-style: italic;
+	font-weight: 500;
+	font-display: swap;
+	src: url("Lora-MediumItalic.ttf") format("woff2");
+}
+
+@font-face {
+	font-family: "Lora";
+	font-style: normal;
+	font-weight: 700;
+	font-display: swap;
+	src: url("Lora-Bold.ttf") format("woff2");
+}
+@font-face {
+	font-family: "Lora";
+	font-style: italic;
+	font-weight: 700;
+	font-display: swap;
+	src: url("Lora-BoldItalic.ttf") format("woff2");
+}
+
+@font-face {
+	font-family: "Lora var";
+	font-weight: 100 900;
+	font-display: swap;
+	font-style: normal;
+	font-named-instance: "Regular";
+	src: url("Lora-VF.woff2") format("woff2");
+}
+
+@font-face {
+	font-family: "Lora var";
+	font-weight: 100 900;
+	font-display: swap;
+	font-style: italic;
+	font-named-instance: "Italic";
+	src: url("Lora-Italic-VF.woff2") format("woff2");
+}
