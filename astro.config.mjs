@@ -1,5 +1,6 @@
 import { defineConfig } from "astro/config";
 import mdx from "@astrojs/mdx";
+import partytown from "@astrojs/partytown";
 import sitemap from "@astrojs/sitemap";
 import { astroImageTools } from "astro-imagetools";
 import react from "@astrojs/react";
@@ -11,7 +12,7 @@ import { attributesExtensionPlugin } from "./src/plugins/remark/attributesExtens
 
 // https://astro.build/config
 export default defineConfig({
-	integrations: [mdx(), sitemap(), astroImageTools, react()],
+	integrations: [mdx(), sitemap(), astroImageTools, react(), partytown()],
 	site: canonicalUrl,
 	markdown: {
 		extendDefaultPlugins: true,
