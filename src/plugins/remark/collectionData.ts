@@ -4,7 +4,9 @@ import { fileURLToPath } from "node:url";
 import { readFileSync, existsSync, statSync } from "node:fs";
 import type { RemarkPlugin } from "@astrojs/markdown-remark";
 
-const projectRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../../");
+const currentDir = globalThis.__dirname ?? path.dirname(fileURLToPath(import.meta.url));
+
+const projectRoot = path.resolve(currentDir, "../../../");
 const pagesFolder = path.resolve(projectRoot, "./src/pages");
 
 function uncachedReadCollectionData(collectionFolderName: string) {

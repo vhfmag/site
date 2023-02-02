@@ -21,10 +21,9 @@ export function decorateWithClosureCache<Args extends unknown[], Return extends 
 	};
 }
 
-const DEFAULT_CACACHE_CACHE_PATH = path.join(
-	fileURLToPath(import.meta.url),
-	"../../../node_modules/.cache/cacache",
-);
+const currentDir = globalThis.__dirname ?? path.dirname(fileURLToPath(import.meta.url));
+
+const DEFAULT_CACACHE_CACHE_PATH = path.join(currentDir, "../../../node_modules/.cache/cacache");
 
 export function decorateWithPersistentCache<Args extends unknown[], Result>(
 	key: string | ((...args: Args) => string),
