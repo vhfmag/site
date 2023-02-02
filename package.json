@@ -20,7 +20,7 @@
 		"cssremedy": "github:jensimmons/cssremedy",
 		"lodash-es": "^4.17.21",
 		"luxon": "^3.2.1",
-		"minimal-promise-pool": "^2.1.5",
+		"minimal-promise-pool": "^2.1.2",
 		"ms": "^2.1.3",
 		"netlify-cli": "^12.10.0",
 		"trakt.tv": "^8.1.1",
