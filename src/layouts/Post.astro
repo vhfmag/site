@@ -1,20 +1,19 @@
 ---
+import TableOfContents from "../components/TableOfContents/TableOfContents.astro";
 import Entry, { type Props as EntryLayoutProps } from "./Entry.astro";
 
 interface Props extends EntryLayoutProps {}
 
-// TODO: TOC
-// const { headings } = await Astro.props.entry.render();
+const { headings } = await Astro.props.entry.render();
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 ---
 
-<!-- TODO: TOC --><!-- <aside>
-    <nav aria-label="Índice">
-        {{ content | toc | safe }}
-    </nav>
-</aside> -->
-<Entry {...Astro.props} />
+<Entry {...Astro.props}>
+	<aside slot="body_start">
+		<TableOfContents headings={headings} />
+	</aside>
+</Entry>
 
 <hr />
 

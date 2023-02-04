@@ -1,0 +1,29 @@
+---
+import type { TreeMarkdownHeading } from "./TableOfContents.astro";
+
+interface Props {
+	heading: TreeMarkdownHeading;
+}
+
+const { heading } = Astro.props;
+const hasChildren = heading.children.length > 0;
+---
+
+<li>
+	{
+		hasChildren ? (
+			<details>
+				<summary>
+					<a href={`#${heading.slug}`}>{heading.text}</a>
+				</summary>
+				<ol>
+					{heading.children.map(childHeading => (
+						<Astro.self heading={childHeading} />
+					))}
+				</ol>
+			</details>
+		) : (
+			<a href={`#${heading.slug}`}>{heading.text}</a>
+		)
+	}
+</li>

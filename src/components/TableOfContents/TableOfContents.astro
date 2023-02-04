@@ -1,0 +1,96 @@
+---
+import type { MarkdownHeading } from "astro";
+import TableOfContentsHeading from "./TableOfContentsHeading.astro";
+
+interface Props {
+	ariaLabel?: string;
+	headings: MarkdownHeading[];
+}
+
+const { headings, ariaLabel = "Índice" } = Astro.props;
+
+export type TreeMarkdownHeading = MarkdownHeading & { children: TreeMarkdownHeading[] };
+const treeHeadings = headings.reduce<TreeMarkdownHeading[]>((acc, el) => {
+	const lastEl = acc.at(-1);
+	const treeEl: TreeMarkdownHeading = { ...el, children: [] };
+
+	if (!lastEl || lastEl.depth >= el.depth) {
+		acc.push(treeEl);
+	} else {
+		const leaves = [lastEl];
+		while (leaves[0]!.children.length > 0) {
+			leaves.unshift(leaves[0]!.children.at(-1)!);
+		}
+
+		const deeperLeafWithLesserDepth = leaves.find(leafEl => leafEl.depth < el.depth);
+		deeperLeafWithLesserDepth!.children.push(treeEl);
+	}
+
+	return acc;
+}, []);
+---
+
+<nav aria-label={ariaLabel}>
+	<details>
+		<summary><span>Índice</span></summary>
+		<ol>{treeHeadings.map(heading => <TableOfContentsHeading heading={heading} />)}</ol>
+	</details>
+</nav>
+
+<style>
+	nav {
+		float: inline-end;
+	}
+
+	summary {
+		font-variation-settings: "wght" 500;
+		font-size: 1.2em;
+	}
+
+	summary span {
+		padding-inline-start: var(--s-2);
+	}
+
+	nav :global(ol) {
+		counter-reset: toc-section;
+		list-style-type: none;
+	}
+
+	/* only applies to the top <ol> due to Astro encapsulation */
+	ol {
+		font-size: 0.9em;
+	}
+
+	nav :global(li) {
+		display: flex;
+	}
+
+	nav :global(li::before) {
+		counter-increment: toc-section;
+		content: counters(toc-section, ".") ". ";
+		white-space: pre-wrap;
+		font-feature-settings: "tnum";
+	}
+
+	nav :global(ol li > a),
+	nav :global(ol ol) {
+		padding-left: 1.1em;
+	}
+
+	@supports (grid-template-columns: subgrid) {
+		nav :global(ol) {
+			display: grid;
+			grid-template-columns: max-content auto;
+		}
+
+		nav :global(ol li) {
+			display: grid;
+			grid-template-columns: subgrid;
+			grid-column: 1 / -1;
+		}
+
+		nav :global(ol li::before) {
+			text-align: right;
+		}
+	}
+</style>

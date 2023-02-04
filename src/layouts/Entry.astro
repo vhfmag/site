@@ -295,53 +295,6 @@ const { Content } = await entry.render();
 		}
 	}
 
-	.toc > summary {
-		font-variation-settings: "wght" 500;
-		font-size: 1.2em;
-	}
-
-	.toc ol {
-		counter-reset: toc-section;
-		list-style-type: none;
-	}
-
-	.toc > ol {
-		font-size: 0.9em;
-	}
-
-	.toc ol li {
-		display: flex;
-	}
-
-	.toc ol li::before {
-		counter-increment: toc-section;
-		content: counters(toc-section, ".") ". ";
-		white-space: pre-wrap;
-		font-feature-settings: "tnum";
-	}
-
-	.toc ol li > a,
-	.toc ol ol {
-		padding-left: 1.1em;
-	}
-
-	@supports (grid-template-columns: subgrid) {
-		.toc ol {
-			display: grid;
-			grid-template-columns: max-content auto;
-		}
-
-		.toc ol li {
-			display: grid;
-			grid-template-columns: subgrid;
-			grid-column: 1 / -1;
-		}
-
-		.toc ol li::before {
-			text-align: right;
-		}
-	}
-
 	article header [itemprop="alternativeHeadline"],
 	article header .metadata {
 		opacity: 0.8;
