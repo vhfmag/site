@@ -10,9 +10,13 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 ---
 
 <Entry {...Astro.props}>
-	<aside slot="body_start">
-		<TableOfContents headings={headings} />
-	</aside>
+	{
+		headings.length > 0 && (
+			<aside slot="body_start">
+				<TableOfContents headings={headings} />
+			</aside>
+		)
+	}
 </Entry>
 
 <hr />
