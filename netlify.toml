@@ -18,7 +18,7 @@ package = "netlify-plugin-subfont"
 [[plugins]]
 package = "netlify-plugin-submit-sitemap"
 [plugins.inputs]
-baseUrl = "https://victormagalhaes.codes"
+baseUrl = "https://vhfmag.dev"
 sitemapPath = "/sitemap.xml"
 providers = ["google", "bing"]
 
@@ -59,7 +59,7 @@ package = "netlify-plugin-chromium"
 
 [[redirects]]
     from = "/search"
-    to = "https://duckduckgo.com/?q=:query%20site:victormagalhaes.codes"
+    to = "https://duckduckgo.com/?q=:query%20site:vhfmag.dev"
     query = { q = ":query" }
 
 [[redirects]]
