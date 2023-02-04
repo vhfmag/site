@@ -25,7 +25,7 @@ const { collectionName } = collectionData[collection];
 		<a class="u-url" href={Astro.url.pathname}>{collectionName}</a>
 	</h1>
 
-	<ol aria-label="{{ collectionName }}" class="entry-list">
+	<ol aria-label={collectionName} class="entry-list">
 		<slot>
 			{
 				page.data.map(entry => (

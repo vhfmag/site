@@ -3,7 +3,7 @@ import Authors from "../components/Authors.astro";
 import WebMentionDescription from "../components/WebMentionDescription.astro";
 import type { AnyCollectionEntry } from "../content/config";
 import { collectionData } from "../data/collections";
-import { formatDate } from "../utils/formatting";
+import { formatDate, formatDateISO } from "../utils/formatting";
 import Default from "./Default.astro";
 
 export type Props = { entry: AnyCollectionEntry };
@@ -30,7 +30,7 @@ const { Content } = await entry.render();
 					<time
 						class="dt-published"
 						itemprop="datePublished pubdate"
-						datetime="{{ date | formatDateISO }}"
+						datetime={formatDateISO(entry.data.date)}
 					>
 						{formatDate(entry.data.date)}
 					</time>

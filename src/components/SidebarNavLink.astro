@@ -12,7 +12,6 @@ const shouldBeHighlighted = isExact ? Astro.url.pathname.startsWith(href) : isCu
 const shouldHaveRelDir = isDirectory && Astro.url.pathname.startsWith(href) && !isCurrent;
 ---
 
-<!-- {% macro navLink(href, text, directory = false, exact = false) %} -->
 <a
 	class={shouldBeHighlighted ? "current" : undefined}
 	aria-current={isCurrent ? "page" : undefined}
