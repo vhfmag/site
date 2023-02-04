@@ -15,6 +15,11 @@ import { addAutomaticLayoutPlugin } from "./src/plugins/remark/collectionData";
 export default defineConfig({
 	integrations: [mdx(), sitemap(), astroImageTools, react(), partytown(), compress()],
 	site: canonicalUrl,
+	vite: {
+		optimizeDeps: {
+			exclude: ["electron"],
+		},
+	},
 	markdown: {
 		extendDefaultPlugins: true,
 		remarkPlugins: [addAutomaticLayoutPlugin, attributesExtensionPlugin],
