@@ -7,4 +7,4 @@ date: 2020-02-01T17:33:03.482+00:00
 syndicationLinks:
 ---
 
-![](assets/tirinha.png)
+![](/bookmarks/2020-02-01-saturday-morning-breakfast-cereal-/tirinha.png)

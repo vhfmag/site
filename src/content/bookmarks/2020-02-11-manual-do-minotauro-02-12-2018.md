@@ -7,4 +7,4 @@ date: 2020-02-11T13:41:14.397+00:00
 syndicationLinks:
 ---
 
-![](assets/tirinha.jpg)
+![](/bookmarks/2020-02-11-manual-do-minotauro-02-12-2018/tirinha.jpg)

@@ -10,4 +10,4 @@ syndicationLinks:
     - https://brid.gy/publish/mastodon
 ---
 
-![](assets/tirinha.jpg)
+![](/bookmarks/2020-02-01-manual-do-minotauro-07-11-2018/tirinha.jpg)

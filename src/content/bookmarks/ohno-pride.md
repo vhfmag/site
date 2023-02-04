@@ -7,4 +7,4 @@ links:
       title: Pride
 ---
 
-[![Tirinha chamada 'Pride'](./assets/tirinha.png)](https://webcomicname.com/post/185682073569)
+[![Tirinha chamada 'Pride'](/bookmarks/ohno-pride/tirinha.png)](https://webcomicname.com/post/185682073569)

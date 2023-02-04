@@ -43,7 +43,10 @@ Modelagem de tráfego é o controle do tráfego na rede para otimizar ou garanti
 
 No Brasil, estamos acostumados a acessar qualquer site ou serviço, sem restrições e com a mesma velocidade de conexão - conforme regulado no Marco Civil. Mas países como a Indonésia e Portugal, onde esse tipo de regulamentação é fraca ou inexiste, podem ilustrar melhor as práticas de mercado concretas decorrentes da não-neutralidade. A seguir, um print extraído do site da provedora portuguesa [MEO](https://www.meo.pt/internet/internet-movel/telemovel/pacotes-com-telemovel), mostrando planos de internet estruturados como os de TV a cabo, com acesso ilimitado restrito a uma gama predeterminada de serviços:
 
-![Na provedora portuguesa MEO, os planos de internet móvel 'Smart Net' dão acesso ilimitado a serviços predeterminados, mediante contratação de pacotes específicos](assets/meo.jpg)
+<figure>
+  <img src="/posts/net-neutrality/meo.jpg" alt="Print do site da MEO mostrando planos que dão acesso gratuito a serviços específicos, como WhatsApp ou YouTube" />
+  <figcaption>Na provedora portuguesa MEO, os planos de internet móvel 'Smart Net' dão acesso ilimitado a serviços predeterminados, mediante contratação de pacotes específicos</figcaption>
+</figure>
 
 O modelo de cobrança ilustra umas das principais críticas levantadas por quem apoia a neutralidade contra sua ausência: o aumento da barreira para a entrada de novos serviços no mercado e, portanto, o aumento da dificuldade de inovação[^net-neutrality-innovation]. A lógica é como segue: imagine que uma empresa local crie um novo serviço de _streaming_. Ela acabou de entrar no mercado e tem pouco capital, não podendo pagar para as provedoras e, portanto, não estando nos planos de acesso ilimitado. Para competir contra serviços como a Netflix, além de barreiras que já existem hoje (como a presença de menos conteúdo, menor poder de barganha e capital de giro, etc), adicionaria-se um agravante: o seu usuário precisaria pagar para consumir o seu pesado conteúdo, enquanto poderia assistir aos títulos de suas concorrentes maiores gratuitamente.
 

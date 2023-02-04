@@ -7,4 +7,4 @@ links:
       title: "tirinha sem nome"
 ---
 
-[![Tirinha](assets/tirinha.png)](https://webcomicname.com/post/185865818194)
+[![Tirinha](/bookmarks/ohno-diy-ecology/tirinha.png)](https://webcomicname.com/post/185865818194)

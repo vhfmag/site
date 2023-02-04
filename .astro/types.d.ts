@@ -636,8 +636,8 @@ declare module 'astro:content' {
   collection: "bookmarks",
   data: InferEntrySchema<"bookmarks">
 },
-"2020-02-01-manual-do-minotauro-07-11-2018/index.md": {
-  id: "2020-02-01-manual-do-minotauro-07-11-2018/index.md",
+"2020-02-01-manual-do-minotauro-07-11-2018.md": {
+  id: "2020-02-01-manual-do-minotauro-07-11-2018.md",
   slug: "2020-02-01-manual-do-minotauro-07-11-2018",
   body: string,
   collection: "bookmarks",
@@ -650,8 +650,8 @@ declare module 'astro:content' {
   collection: "bookmarks",
   data: InferEntrySchema<"bookmarks">
 },
-"2020-02-01-saturday-morning-breakfast-cereal-/index.md": {
-  id: "2020-02-01-saturday-morning-breakfast-cereal-/index.md",
+"2020-02-01-saturday-morning-breakfast-cereal-.md": {
+  id: "2020-02-01-saturday-morning-breakfast-cereal-.md",
   slug: "2020-02-01-saturday-morning-breakfast-cereal-",
   body: string,
   collection: "bookmarks",
@@ -685,8 +685,8 @@ declare module 'astro:content' {
   collection: "bookmarks",
   data: InferEntrySchema<"bookmarks">
 },
-"2020-02-11-manual-do-minotauro-02-12-2018/index.md": {
-  id: "2020-02-11-manual-do-minotauro-02-12-2018/index.md",
+"2020-02-11-manual-do-minotauro-02-12-2018.md": {
+  id: "2020-02-11-manual-do-minotauro-02-12-2018.md",
   slug: "2020-02-11-manual-do-minotauro-02-12-2018",
   body: string,
   collection: "bookmarks",
@@ -832,8 +832,8 @@ declare module 'astro:content' {
   collection: "bookmarks",
   data: InferEntrySchema<"bookmarks">
 },
-"distraction-is-the-new-censorship/index.md": {
-  id: "distraction-is-the-new-censorship/index.md",
+"distraction-is-the-new-censorship.md": {
+  id: "distraction-is-the-new-censorship.md",
   slug: "distraction-is-the-new-censorship",
   body: string,
   collection: "bookmarks",
@@ -951,15 +951,15 @@ declare module 'astro:content' {
   collection: "bookmarks",
   data: InferEntrySchema<"bookmarks">
 },
-"ohno-diy-ecology/index.md": {
-  id: "ohno-diy-ecology/index.md",
+"ohno-diy-ecology.md": {
+  id: "ohno-diy-ecology.md",
   slug: "ohno-diy-ecology",
   body: string,
   collection: "bookmarks",
   data: InferEntrySchema<"bookmarks">
 },
-"ohno-pride/index.md": {
-  id: "ohno-pride/index.md",
+"ohno-pride.md": {
+  id: "ohno-pride.md",
   slug: "ohno-pride",
   body: string,
   collection: "bookmarks",
@@ -2021,15 +2021,15 @@ declare module 'astro:content' {
 },
 },
 "posts": {
-"2020-02-15-information-architecture-for-the-web-and-beyond/index.md": {
-  id: "2020-02-15-information-architecture-for-the-web-and-beyond/index.md",
+"2020-02-15-information-architecture-for-the-web-and-beyond.md": {
+  id: "2020-02-15-information-architecture-for-the-web-and-beyond.md",
   slug: "2020-02-15-information-architecture-for-the-web-and-beyond",
   body: string,
   collection: "posts",
   data: InferEntrySchema<"posts">
 },
-"2020-05-14-hotsite-covid19-jusbrasil/index.md": {
-  id: "2020-05-14-hotsite-covid19-jusbrasil/index.md",
+"2020-05-14-hotsite-covid19-jusbrasil.md": {
+  id: "2020-05-14-hotsite-covid19-jusbrasil.md",
   slug: "2020-05-14-hotsite-covid19-jusbrasil",
   body: string,
   collection: "posts",
@@ -2098,8 +2098,8 @@ declare module 'astro:content' {
   collection: "posts",
   data: InferEntrySchema<"posts">
 },
-"net-neutrality/index.md": {
-  id: "net-neutrality/index.md",
+"net-neutrality.md": {
+  id: "net-neutrality.md",
   slug: "net-neutrality",
   body: string,
   collection: "posts",
@@ -2126,8 +2126,8 @@ declare module 'astro:content' {
   collection: "posts",
   data: InferEntrySchema<"posts">
 },
-"porque-webassembly/index.md": {
-  id: "porque-webassembly/index.md",
+"porque-webassembly.md": {
+  id: "porque-webassembly.md",
   slug: "porque-webassembly",
   body: string,
   collection: "posts",

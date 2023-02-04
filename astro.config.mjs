@@ -3,7 +3,6 @@ import partytown from "@astrojs/partytown";
 import react from "@astrojs/react";
 import sitemap from "@astrojs/sitemap";
 import compress from "astro-compress";
-import { astroImageTools } from "astro-imagetools";
 import { defineConfig } from "astro/config";
 import assert from "node:assert";
 import { visitParents } from "unist-util-visit-parents";
@@ -13,7 +12,7 @@ import { addAutomaticLayoutPlugin } from "./src/plugins/remark/collectionData";
 
 // https://astro.build/config
 export default defineConfig({
-	integrations: [mdx(), sitemap(), astroImageTools, react(), partytown(), compress()],
+	integrations: [mdx(), sitemap(), react(), partytown(), compress()],
 	site: canonicalUrl,
 	vite: {
 		optimizeDeps: {

@@ -41,7 +41,6 @@
 		"@linaria/vite": "^4.2.5",
 		"@netlify/functions": "^1.4.0",
 		"astro-compress": "^1.1.29",
-		"astro-imagetools": "^0.7.6",
 		"chromium": "^3.0.3",
 		"mafs": "^0.15.1",
 		"react": "^18.2.0",
