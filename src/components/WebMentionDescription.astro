@@ -1,9 +1,8 @@
 ---
 import { groupBy, map } from "lodash-es";
-import { WebMentionType, wmTypeMap } from "../data/wmType";
+import { wmTypeMap } from "../data/wmType";
+import type { WebMentionLink } from "../utils/schemas";
 import { isNotNullish } from "../utils/typeGuards";
-
-export type WebMentionLink = { types: WebMentionType[]; title?: string; link?: string };
 
 interface Props {
 	links: WebMentionLink[] | undefined;

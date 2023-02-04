@@ -1,21 +1,21 @@
 ---
-import type { MarkdownInstance, Page } from "astro";
+import type { Page } from "astro";
 import Authors from "../components/Authors.astro";
 import CollectionEntry from "../components/CollectionEntry.astro";
+import type { AnyCollectionEntry, CollectionSlug } from "../content/config";
+import { collectionData } from "../data/collections";
 import { formatDate, formatDateISO } from "../utils/formatting";
 import Default from "./Default.astro";
-import type { EntryLayoutFrontmatter } from "./Entry.astro";
-
-export type CollectionPageProp = Page<MarkdownInstance<EntryLayoutFrontmatter>>;
 
 interface Props {
-	collectionName: string;
+	collection: CollectionSlug;
 	// TODO: stricter typing
 	mdEntryType?: string;
-	page: CollectionPageProp;
+	page: Page<AnyCollectionEntry>;
 }
 
-const { collectionName, mdEntryType, page } = Astro.props;
+const { collection, mdEntryType, page } = Astro.props;
+const { collectionName } = collectionData[collection];
 ---
 
 <Default>
@@ -32,34 +32,32 @@ const { collectionName, mdEntryType, page } = Astro.props;
 					<CollectionEntry mdEntryType={mdEntryType}>
 						<header>
 							<h2 itemprop="headline title" class="post-title p-name">
-								<a class="u-url u-uid" href={entry.url}>
-									{entry.frontmatter.title}
+								<a class="u-url u-uid" href={`/${entry.collection}/${entry.slug}`}>
+									{entry.data.title}
 								</a>
 							</h2>
 							<div class="metadata">
 								<span>
-									<span class="p-category">
-										{entry.frontmatter.collectionData.collection}
-									</span>
+									<span class="p-category">{entry.collection}</span>
 									<span class="visually-hidden">
 										{" "}
-										por <Authors authors={entry.frontmatter.authors} />
+										por <Authors authors={entry.data.authors ?? undefined} />
 									</span>
 								</span>
-								{entry.frontmatter.date ? (
+								{entry.data.date ? (
 									<time
 										itemprop="datePublished dateModified pubdate"
 										class="dt-published"
-										datetime={formatDateISO(entry.frontmatter.date)}
+										datetime={formatDateISO(entry.data.date)}
 									>
-										{formatDate(entry.frontmatter.date)}
+										{formatDate(entry.data.date)}
 									</time>
 								) : null}
 
 								{/* TODO: <span><span itemprop="wordCount">{{ entry.templateContent | wordcount }}</span> palavras, <abbr aria-label="aproximadamente" title="aproximadamente">~</abbr>
                             <span itemprop="timeRequired">{{ entry | readingTime(raw=true) * 2 }} minutos</span> de leitura</span> */}
 
-								{entry.frontmatter.draft ? (
+								{entry.data.draft ? (
 									<span>
 										<span class="metadata--draft">Rascunho</span>
 									</span>

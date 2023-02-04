@@ -1,120 +1,86 @@
 ---
-import Authors, { type Author } from "../components/Authors.astro";
+import Authors from "../components/Authors.astro";
+import WebMentionDescription from "../components/WebMentionDescription.astro";
+import type { AnyCollectionEntry } from "../content/config";
+import { collectionData } from "../data/collections";
 import { formatDate } from "../utils/formatting";
 import Default from "./Default.astro";
-import type { MarkdownLayoutProps } from "astro";
-import WebMentionDescription from "../components/WebMentionDescription.astro";
 
-export type EntryLayoutFrontmatter = {
-	title: string;
-	authors?: Author[];
-	// TODO: double check the type
-	date?: Date | string;
-	excerpt?: string;
-	draft?: boolean;
-	// collection data
-	collectionData: {
-		layout: string;
-		collectionSlug: string;
-		collection: string;
-		collectionName: string;
-	};
-	// WebMention stuff
-	links?: { types: WebMentionType[]; title?: string; link?: string }[];
-	// IndieWeb stuff
-	syndicationLinks?: string[];
-	twitterContent?: string;
-	mastodonContent?: string;
-	mediumContent?: string;
+export type Props = { entry: AnyCollectionEntry };
 
-	// likes only
-	likeOf?: string;
-};
-
-export type EntryLayoutProps = MarkdownLayoutProps<EntryLayoutFrontmatter>;
-
-type Props = EntryLayoutProps;
-
-const {
-	frontmatter: {
-		title,
-		authors,
-		date,
-		excerpt,
-		syndicationLinks,
-		twitterContent,
-		mastodonContent,
-		mediumContent,
-		links,
-		collectionData,
-	},
-} = Astro.props;
+const { entry } = Astro.props;
+const { Content } = await entry.render();
 ---
 
 <Default>
 	<article>
 		<header>
 			<h1 class="post-title p-name" itemprop="headline title">
-				<a class="u-url u-uid" href={Astro.url.pathname}>{title}</a>
+				<a class="u-url u-uid" href={Astro.url.pathname}>{entry.data.title}</a>
 			</h1>
 			<div class="metadata">
 				<span>
 					<slot name="category">
-						<span class="p-category">{collectionData.collection}</span>
+						<span class="p-category">{collectionData[entry.collection].collection}</span
+						>
 					</slot>
 				</span>
-				<span><Authors authors={authors} /></span>
-				{
-					date ? (
-						<span>
-							<time
-								class="dt-published"
-								itemprop="datePublished pubdate"
-								datetime="{{ date | formatDateISO }}"
-							>
-								{formatDate(date)}
-							</time>
-						</span>
-					) : null
-				}
+				<span><Authors authors={entry.data.authors ?? undefined} /></span>
+				<span>
+					<time
+						class="dt-published"
+						itemprop="datePublished pubdate"
+						datetime="{{ date | formatDateISO }}"
+					>
+						{formatDate(entry.data.date)}
+					</time>
+				</span>
 				<!-- TODO: reading time -->
 				<!-- <span>
                 <abbr aria-label="aproximadamente" title="aproximadamente">~</abbr><span itemprop="timeRequired">{{ content | readingTime(raw=true) * 2 }} minutos</span> de leitura
             </span> -->
-				<WebMentionDescription links={links} />
+				<WebMentionDescription links={entry.data.links ?? undefined} />
 				<slot name="metadata" />
 			</div>
-			{excerpt ? <p itemprop="alternativeHeadline">{excerpt}</p> : null}
+			{entry.data.excerpt ? <p itemprop="alternativeHeadline">{entry.data.excerpt}</p> : null}
 			<slot name="header" />
 		</header>
 
 		<div class="e-content">
 			<div hidden>
-				{syndicationLinks?.map(href => <a href={href} role="presentation" />)}
-
-				{twitterContent ? <p class="p-bridgy-twitter-content">{twitterContent}</p> : null}
+				{entry.data.syndicationLinks?.map(href => <a href={href} role="presentation" />)}
 
 				{
-					mastodonContent ? (
-						<p class="p-bridgy-mastodon-content">{mastodonContent}</p>
+					entry.data.twitterContent ? (
+						<p class="p-bridgy-twitter-content">{entry.data.twitterContent}</p>
 					) : null
 				}
 
-				{mediumContent ? <p class="p-bridgy-medium-content">{mediumContent}</p> : null}
+				{
+					entry.data.mastodonContent ? (
+						<p class="p-bridgy-mastodon-content">{entry.data.mastodonContent}</p>
+					) : null
+				}
+
+				{
+					entry.data.mediumContent ? (
+						<p class="p-bridgy-medium-content">{entry.data.mediumContent}</p>
+					) : null
+				}
 			</div>
 
 			<slot name="body_start" />
 			<div
 				class:list={[
 					{
-						"p-bridgy-twitter-content": !twitterContent,
-						"p-bridgy-mastodon-content": !mastodonContent,
-						"p-bridgy-medium-content": !mediumContent,
+						"p-bridgy-twitter-content": !entry.data.twitterContent,
+						"p-bridgy-mastodon-content": !entry.data.mastodonContent,
+						"p-bridgy-medium-content": !entry.data.mediumContent,
 					},
 				]}
 			>
-				{title && <div hidden>{{ title }} — </div>}
-				<slot />
+				{entry.data.title && <div hidden>{entry.data.title} — </div>}
+				<Content />
 				<slot name="body_end" />
 			</div>
 		</div>

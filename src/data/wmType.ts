@@ -1,3 +1,12 @@
+import type { WebMentionType } from "../utils/schemas";
+
+type WmTypeMetadata = {
+	slug: WebMentionType;
+	singular: string;
+	plural: string;
+	connective: string;
+};
+
 const wmTypes = [
 	{
 		slug: "in-reply-to",
@@ -35,8 +44,6 @@ const wmTypes = [
 		plural: "Confirmações",
 		connective: "para",
 	},
-] as const;
-
-export type WebMentionType = (typeof wmTypes)[number]["slug"];
+] as const satisfies readonly WmTypeMetadata[];
 
 export const wmTypeMap = new Map(wmTypes.map(wmType => [wmType.slug, wmType] as const));

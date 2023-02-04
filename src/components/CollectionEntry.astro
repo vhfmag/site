@@ -1,7 +1,7 @@
 ---
 interface Props {
 	class?: string;
-	mdEntryType?: string;
+	mdEntryType?: string | undefined;
 }
 
 const { class: className, mdEntryType = "blogPost" } = Astro.props;

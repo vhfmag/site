@@ -1,51 +1,65 @@
 ---
+import { getCollection } from "astro:content";
 import CollectionEntry from "../../components/CollectionEntry.astro";
 import WebMentionDescription from "../../components/WebMentionDescription.astro";
-import Collection, { type CollectionPageProp } from "../../layouts/Collection.astro";
+import { collectionData } from "../../data/collections";
+import Collection from "../../layouts/Collection.astro";
+import Entry from "../../layouts/Entry.astro";
 import { formatDateISO, formatDateTime } from "../../utils/formatting";
+import type { EntryOrPageProps } from "../../utils/pagination";
 import { generateGetStaticPathsForCollection } from "../../utils/pagination";
-import { collectionName, collection } from "./notes.json";
 
-export const getStaticPaths = generateGetStaticPathsForCollection(
-	import.meta.glob("./**/*.{md,mdx}", { eager: true }),
-	{ requireTitle: false },
-);
+export const collection = "notes";
+export const getStaticPaths = generateGetStaticPathsForCollection(await getCollection(collection), {
+	requireTitle: false,
+});
 
-interface Props {
-	page: CollectionPageProp;
-}
-
-const { page } = Astro.props;
+type Props = EntryOrPageProps<typeof collection>;
+const props = Astro.props;
 ---
 
-<!-- TODO: customizar pra notas -->
-<Collection {...Astro.props} collectionName={collectionName}>
-	{
-		page.data.map(entry => (
-			<CollectionEntry class="entry">
-				<section set:html={entry.compiledContent()} />
-				<header>
-					<span>
-						<a class="u-url" href={entry.url} set:text={collection} />
-						{entry.frontmatter.date ? (
-							<>
-								publicada em
-								<time
-									itemprop="datePublished dateModified pubdate"
-									class="dt-published"
-									datetime={formatDateISO(entry.frontmatter.date)}
-								>
-									{formatDateTime(entry.frontmatter.date)}
-								</time>
-							</>
-						) : null}
-					</span>
-					<WebMentionDescription links={entry.frontmatter.links} />
-				</header>
-			</CollectionEntry>
-		))
-	}
-</Collection>
+{
+	props.type === "page" ? (
+		// TODO: customizar pra notas
+		<Collection {...props} collection={collection}>
+			{props.page.data.map(entry => {
+				return (
+					<CollectionEntry class="entry">
+						<section>
+							{entry.render().then(({ Content }) => (
+								<Content />
+							))}
+						</section>
+						<header>
+							<span>
+								<a
+									class="u-url"
+									href={`/${entry.collection}/${entry.slug}`}
+									set:text={collectionData.notes.collection}
+								/>
+								{entry.data.date ? (
+									<>
+										publicada em
+										<time
+											itemprop="datePublished dateModified pubdate"
+											class="dt-published"
+											datetime={formatDateISO(entry.data.date)}
+										>
+											{formatDateTime(entry.data.date)}
+										</time>
+									</>
+								) : null}
+							</span>
+							<WebMentionDescription links={entry.data.links ?? undefined} />
+						</header>
+					</CollectionEntry>
+				);
+			})}
+		</Collection>
+	) : (
+		<Entry entry={props.entry} />
+	)
+}
 
 <style>
 	.entry + .entry {
@@ -54,7 +68,7 @@ const { page } = Astro.props;
 		border-top: 2px dotted var(--themeColor);
 	}
 
-	.entry section :first-child) {
+	.entry section :first-child {
 		margin-top: 0;
 	}
 

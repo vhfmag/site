@@ -1,11 +1,10 @@
 ---
 import * as me from "../data/me";
+import type { Author } from "../utils/schemas";
 
 interface Props {
 	authors: Author[] | undefined;
 }
-
-export type Author = { url?: string; name: string };
 
 const { authors = [me] } = Astro.props;
 ---

@@ -1,7 +1,10 @@
 ---
-import Entry, { type EntryLayoutProps } from "./Entry.astro";
+import Entry, { type Props as EntryLayoutProps } from "./Entry.astro";
 
 interface Props extends EntryLayoutProps {}
+
+// TODO: TOC
+// const { headings } = await Astro.props.entry.render();
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 ---
@@ -11,7 +14,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
         {{ content | toc | safe }}
     </nav>
 </aside> -->
-<Entry {...Astro.props}><slot /></Entry>
+<Entry {...Astro.props} />
 
 <hr />
 

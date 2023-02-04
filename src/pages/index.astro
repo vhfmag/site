@@ -5,12 +5,13 @@ import { blogroll } from "../data/blogroll";
 import { fetchAllLastFmData } from "../data/lastFm";
 import { fetchTracktData } from "../data/trakt";
 import { booksImSupposedlyReading } from "../data/reading";
+import { getCollection } from "astro:content";
 
 let lastPosts = parseCollection(
-	Object.values(import.meta.glob("./posts/**/*.{md,mdx}", { eager: true })),
+	await getCollection('posts'),
 );
 let lastBookmarks = parseCollection(
-	Object.values(import.meta.glob("./bookmarks/**/*.{md,mdx}", { eager: true })),
+	await getCollection('bookmarks'),
 );
 
 const lastFm = await fetchAllLastFmData();
@@ -40,7 +41,7 @@ const topWatchedTraktData = [...traktData.watched.shows, ...traktData.watched.mo
 				lastPosts.slice(0, 5).map(entry => (
 					<li>
 						<h3>
-							<a href={entry.url}>{entry.frontmatter.title}</a>
+							<a href={`/${entry.collection}/${entry.slug}`}>{entry.data.title}</a>
 						</h3>
 					</li>
 				))
@@ -55,7 +56,7 @@ const topWatchedTraktData = [...traktData.watched.shows, ...traktData.watched.mo
 				lastBookmarks.slice(0, 5).map(entry => (
 					<li>
 						<h3>
-							<a href={entry.url}>{entry.frontmatter.title}</a>
+							<a href={`/${entry.collection}/${entry.slug}`}>{entry.data.title}</a>
 						</h3>
 					</li>
 				))
@@ -155,7 +156,7 @@ const topWatchedTraktData = [...traktData.watched.shows, ...traktData.watched.mo
 		<h2>No fone</h2>
 		<ul class="inline-list">
 			{
-				lastFm.weekly.artists.map(artist => (
+				lastFm.weekly?.artists.map(artist => (
 					<li>
 						<a href={artist.url}>{artist.name}</a>
 					</li>

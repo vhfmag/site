@@ -1,15 +1,20 @@
 ---
-import Collection, { type CollectionPageProp } from "../../layouts/Collection.astro";
-import { generateGetStaticPathsForCollection } from "../../utils/pagination";
-import { collectionName } from "./bookmarks.json";
+import { getCollection } from "astro:content";
+import Collection from "../../layouts/Collection.astro";
+import Entry from "../../layouts/Entry.astro";
+import { EntryOrPageProps, generateGetStaticPathsForCollection } from "../../utils/pagination";
 
-export const getStaticPaths = generateGetStaticPathsForCollection(
-	import.meta.glob("./**/*.{md,mdx}", { eager: true }),
-);
+export const collection = "bookmarks";
+export const getStaticPaths = generateGetStaticPathsForCollection(await getCollection(collection));
 
-interface Props {
-	page: CollectionPageProp;
-}
+type Props = EntryOrPageProps<typeof collection>;
+const props = Astro.props;
 ---
 
-<Collection {...Astro.props} collectionName={collectionName} />
+{
+	props.type === "page" ? (
+		<Collection {...props} collection={collection} />
+	) : (
+		<Entry entry={props.entry} />
+	)
+}
