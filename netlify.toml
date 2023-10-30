@@ -6,7 +6,7 @@ targetPort = 4321
 publish = "dist"
 command = "npm run build"
 [build.environment]
-NODE_VERSION = "14.15.4"
+NODE_VERSION = "19.9.0"
 
 [[plugins]]
 package = "netlify-plugin-subfont"
