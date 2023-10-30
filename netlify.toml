@@ -1,19 +1,21 @@
 [dev]
-    command = "npm run dev"
-    targetPort = 3000
+command = "npm run dev"
+targetPort = 4321
 
 [build]
-    publish = "dist"
-    command = "npm run build"
+publish = "dist"
+command = "npm run build"
+[build.environment]
+NODE_VERSION = "14.15.4"
 
 [[plugins]]
 package = "netlify-plugin-subfont"
-    [plugins.inputs]
-    recursive = false
-    inlineCss = true
-    inlineFonts = false
-    fontDisplay = "swap"
-    fallbacks = true
+[plugins.inputs]
+recursive = false
+inlineCss = true
+inlineFonts = false
+fontDisplay = "swap"
+fallbacks = true
 
 [[plugins]]
 package = "netlify-plugin-submit-sitemap"
@@ -34,178 +36,178 @@ package = "netlify-plugin-chromium"
 # Redirects
 
 [[redirects]]
-    from = "/links"
-    to = "/blogroll"
+from = "/links"
+to = "/blogroll"
 
 [[redirects]]
-    from = "/.well-known/host-meta"
-    to = "https://fed.brid.gy/.well-known/host-meta"
+from = "/.well-known/host-meta"
+to = "https://fed.brid.gy/.well-known/host-meta"
 
 [[redirects]]
-    from = "/.well-known/host-meta.xrd"
-    to = "https://fed.brid.gy/.well-known/host-meta.xrd"
+from = "/.well-known/host-meta.xrd"
+to = "https://fed.brid.gy/.well-known/host-meta.xrd"
 
 [[redirects]]
-    from = "/.well-known/host-meta.jrd"
-    to = "https://fed.brid.gy/.well-known/host-meta.jrd"
+from = "/.well-known/host-meta.jrd"
+to = "https://fed.brid.gy/.well-known/host-meta.jrd"
 
 [[redirects]]
-    from = "/.well-known/webfinger"
-    to = "https://fed.brid.gy/.well-known/webfinger"
+from = "/.well-known/webfinger"
+to = "https://fed.brid.gy/.well-known/webfinger"
 
 [[redirects]]
-    from = "/notes/the-billionaire’s-typewriter"
-    to = "/notes/the-billionaires-typewriter"
+from = "/notes/the-billionaire’s-typewriter"
+to = "/notes/the-billionaires-typewriter"
 
 [[redirects]]
-    from = "/search"
-    to = "https://duckduckgo.com/?q=:query%20site:vhfmag.dev"
-    query = { q = ":query" }
+from = "/search"
+to = "https://duckduckgo.com/?q=:query%20site:vhfmag.dev"
+query = { q = ":query" }
 
 [[redirects]]
-    from = "/*"
-    to = "/404"
-    status = 404
+from = "/*"
+to = "/404"
+status = 404
 
 # Headers
 
 [[headers]]
-    for = "/*"
-    [headers.values]
-        X-Frame-Options = "DENY"
-        X-XSS-Protection = "1; mode=block"
-        X-Content-Type-Options = "nosniff"
-        Referrer-Policy = "same-origin"
-        Permissions-Policy = "interest-cohort=()"
-        # Cross-Origin-Resource-Policy = "same-site"
-        # Cross-Origin-Embedder-Policy = "require-corp"
-        Content-Security-Policy = "default-src 'self'; connect-src 'self' https://cloudflareinsights.com https://*.cloudflareinsights.com; img-src 'self' data: https://webmention.io *.amazonaws.com *.fastly.net assets.fanart.tv image.tmdb.org; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.cloudflareinsights.com; style-src 'self' 'unsafe-inline'; font-src 'self'; manifest-src 'self'; frame-src 'self' *.youtube.com *.youtu.be invidio.us *.netlify.app *.codesandbox.io"
+for = "/*"
+[headers.values]
+X-Frame-Options = "DENY"
+X-XSS-Protection = "1; mode=block"
+X-Content-Type-Options = "nosniff"
+Referrer-Policy = "same-origin"
+Permissions-Policy = "interest-cohort=()"
+# Cross-Origin-Resource-Policy = "same-site"
+# Cross-Origin-Embedder-Policy = "require-corp"
+Content-Security-Policy = "default-src 'self'; connect-src 'self' https://cloudflareinsights.com https://*.cloudflareinsights.com; img-src 'self' data: https://webmention.io *.amazonaws.com *.fastly.net assets.fanart.tv image.tmdb.org; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.cloudflareinsights.com; style-src 'self' 'unsafe-inline'; font-src 'self'; manifest-src 'self'; frame-src 'self' *.youtube.com *.youtu.be invidio.us *.netlify.app *.codesandbox.io"
 
 [[headers]]
-    for = "/*.css"
-    [headers.values]
-        Cache-Control = '''
+for = "/*.css"
+[headers.values]
+Cache-Control = '''
         public,
         max-age=31536000,
         immutable'''
 
 [[headers]]
-    for = "/*.gif"
-    [headers.values]
-        Cache-Control = '''
+for = "/*.gif"
+[headers.values]
+Cache-Control = '''
         public,
         max-age=31536000,
         immutable'''
 
 [[headers]]
-    for = "/*.jpg"
-    [headers.values]
-        Cache-Control = '''
+for = "/*.jpg"
+[headers.values]
+Cache-Control = '''
         public,
         max-age=31536000,
         immutable'''
 
 [[headers]]
-    for = "/*.jpeg"
-    [headers.values]
-        Cache-Control = '''
+for = "/*.jpeg"
+[headers.values]
+Cache-Control = '''
         public,
         max-age=31536000,
         immutable'''
 
 [[headers]]
-    for = "/*.png"
-    [headers.values]
-        Cache-Control = '''
+for = "/*.png"
+[headers.values]
+Cache-Control = '''
         public,
         max-age=31536000,
         immutable'''
 
 [[headers]]
-    for = "/*.svg"
-    [headers.values]
-        Cache-Control = '''
+for = "/*.svg"
+[headers.values]
+Cache-Control = '''
         public,
         max-age=31536000,
         immutable'''
 
 [[headers]]
-    for = "/*.webm"
-    [headers.values]
-        Cache-Control = '''
+for = "/*.webm"
+[headers.values]
+Cache-Control = '''
         public,
         max-age=31536000,
         immutable'''
 
 [[headers]]
-    for = "/*.mp4"
-    [headers.values]
-        Cache-Control = '''
+for = "/*.mp4"
+[headers.values]
+Cache-Control = '''
         public,
         max-age=31536000,
         immutable'''
 
 [[headers]]
-    for = "/*.webp"
-    [headers.values]
-        Cache-Control = '''
+for = "/*.webp"
+[headers.values]
+Cache-Control = '''
         public,
         max-age=31536000,
         immutable'''
 
 [[headers]]
-    for = "/*.woff"
-    [headers.values]
-        Cache-Control = '''
+for = "/*.woff"
+[headers.values]
+Cache-Control = '''
         public,
         max-age=31536000,
         immutable'''
 
 [[headers]]
-    for = "/*.woff2"
-    [headers.values]
-        Cache-Control = '''
+for = "/*.woff2"
+[headers.values]
+Cache-Control = '''
         public,
         max-age=31536000,
         immutable'''
 
 [[headers]]
-    for = "/*.otf"
-    [headers.values]
-        Cache-Control = '''
+for = "/*.otf"
+[headers.values]
+Cache-Control = '''
         public,
         max-age=31536000,
         immutable'''
 
 [[headers]]
-    for = "/*.ttf"
-    [headers.values]
-        Cache-Control = '''
+for = "/*.ttf"
+[headers.values]
+Cache-Control = '''
         public,
         max-age=31536000,
         immutable'''
 
 [[headers]]
-    for = "/*.js"
-    [headers.values]
-        Content-Type = "text/javascript; charset=utf-8"
-        Cache-Control = '''
+for = "/*.js"
+[headers.values]
+Content-Type = "text/javascript; charset=utf-8"
+Cache-Control = '''
         public,
         max-age=31536000,
         immutable'''
 
 [[headers]]
-    for = "/*.webmanifest"
-    [headers.values]
-        Content-Type = "application/manifest+json; charset=utf-8"
+for = "/*.webmanifest"
+[headers.values]
+Content-Type = "application/manifest+json; charset=utf-8"
 
 [[headers]]
-    for = "/*.webmanifest"
-    [headers.values]
-        Cache-Control = "no-cache"
+for = "/*.webmanifest"
+[headers.values]
+Cache-Control = "no-cache"
 
 [[headers]]
-    for = "/*.xml"
-    [headers.values]
-        Cache-Control = "no-cache"
-        Application-Type = "text/xml; charset=utf-8"
+for = "/*.xml"
+[headers.values]
+Cache-Control = "no-cache"
+Application-Type = "text/xml; charset=utf-8"

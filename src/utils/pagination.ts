@@ -2,7 +2,8 @@ import type { GetStaticPaths, GetStaticPathsItem, Page } from "astro";
 import type { CollectionEntry } from "astro:content";
 import type { AnyCollectionEntry, CollectionSlug } from "../content/config";
 import { defaultPageSize } from "../data/config";
-import { parseCollection, ParseCollectionOptions } from "./parseCollection";
+import type { ParseCollectionOptions } from "./parseCollection";
+import { parseCollection } from "./parseCollection";
 
 interface GenerateGetStaticPathsForCollectionOptions extends ParseCollectionOptions {
 	pageSize?: number;

@@ -1,11 +1,12 @@
 import { PromisePool } from "minimal-promise-pool";
-import Trakt, {
+import type {
 	BareEntityTypeMap,
 	EntityType,
 	NestedEntityTypeMap,
 	TraktWatchedEntry,
 	TraktWatchlistEntry,
 } from "trakt.tv";
+import Trakt from "trakt.tv";
 import TraktImages from "trakt.tv-images";
 import { z } from "zod";
 import { decorateWithPersistentCache } from "../utils/cache";

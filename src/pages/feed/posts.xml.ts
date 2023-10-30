@@ -9,19 +9,17 @@ export const get = async () =>
 		description,
 		site: import.meta.env.SITE,
 		items: (await pagesGlobToRssItems(
-			mapValues(
-				import.meta.glob("../posts/**/*.{md,mdx}"),
-				value => () =>
-					value()
-						.then(MarkdownInstanceSchema.parse)
-						.then(page => ({
-							...page,
-							frontmatter: {
-								...page.frontmatter,
-								pubDate: page.frontmatter.pubDate ?? page.frontmatter.date,
-							},
-						})),
-			),
+			mapValues(import.meta.glob("../posts/**/*.{md,mdx}"), value => async () => {
+				value()
+					.then(MarkdownInstanceSchema.parse)
+					.then(page => ({
+						...page,
+						frontmatter: {
+							...page.frontmatter,
+							pubDate: page.frontmatter.pubDate ?? page.frontmatter.date,
+						},
+					}));
+			}),
 		)) as RSSOptions["items"],
 		customData: `<language>pt-br</language>`,
 	});

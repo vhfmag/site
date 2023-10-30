@@ -1,4 +1,5 @@
-import { CollectionEntry, defineCollection } from "astro:content";
+import type { CollectionEntry } from "astro:content";
+import { defineCollection } from "astro:content";
 import { frontmatterSchema, likeFrontmatterSchema, noteFrontmatterSchema } from "../utils/schemas";
 
 const generalCollection = defineCollection({
