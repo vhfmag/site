@@ -7,12 +7,8 @@ import { fetchTracktData } from "../data/trakt";
 import { booksImSupposedlyReading } from "../data/reading";
 import { getCollection } from "astro:content";
 
-let lastPosts = parseCollection(
-	await getCollection('posts'),
-);
-let lastBookmarks = parseCollection(
-	await getCollection('bookmarks'),
-);
+let lastPosts = parseCollection(await getCollection("posts"));
+let lastBookmarks = parseCollection(await getCollection("bookmarks"));
 
 const lastFm = await fetchAllLastFmData();
 const traktData = await fetchTracktData();
@@ -23,14 +19,16 @@ const topWatchedTraktData = [...traktData.watched.shows, ...traktData.watched.mo
 ---
 
 <Layout>
+	<title>Victor Magalhães</title>
 	<section>
 		<h2>Quem sou eu</h2>
 		<p>
-			Desenvolvedor e <i lang="en">tech-lead</i> de Salvador, Brasil, com experiência em desenvolvimento
-			web e back-end e programação funcional. Pessoa apreensiva com a crise climática e o vigilantismo,
-			interessada pela interseção de computação e humanidades, pelas possibilidades da web enquanto
-			mídia e por <a href="https://solar.lowtechmagazine.com/" hreflang="en"
-				><i lang="en">low-tech</i></a
+			Desenvolvedor e <i lang="en">tech-lead</i> de Salvador, Brasil, com experiência em
+			desenvolvimento web e back-end e programação funcional. Pessoa apreensiva com a crise
+			climática e o vigilantismo, interessada pela interseção de computação e humanidades,
+			pelas possibilidades da web enquanto mídia e por <a
+				href="https://solar.lowtechmagazine.com/"
+				hreflang="en"><i lang="en">low-tech</i></a
 			>.
 		</p>
 	</section>
@@ -131,10 +129,11 @@ const topWatchedTraktData = [...traktData.watched.shows, ...traktData.watched.mo
 			> (recebe, armazena e me dá acesso às WebMentions que me mencionam), <a
 				href="https://webmention.app/">webmention.app</a
 			> (envia WebMentions em meu nome) e <a href="https://brid.gy/">Bridgy</a> (reproduz meus
-			posts em outras redes sociais - POSSE - e manda WebMentions quando interagem com eles - likes,
-			RTs...), além do <a href="https://paulrobertlloyd.github.io/indiekit/">IndieKit</a> (me permite
-			postar no meu site por uma interface). <a href="https://github.com/vhfmag/site"
-				>Veja o código</a
+			posts em outras redes sociais - POSSE - e manda WebMentions quando interagem com eles -
+			likes, RTs...), além do <a href="https://paulrobertlloyd.github.io/indiekit/"
+				>IndieKit</a
+			> (me permite postar no meu site por uma interface). <a
+				href="https://github.com/vhfmag/site">Veja o código</a
 			>!
 		</p>
 	</section>
@@ -163,14 +162,14 @@ const topWatchedTraktData = [...traktData.watched.shows, ...traktData.watched.mo
 				))
 			}
 		</ul>
-		<div><a href="/ouvido">Veja mais</a></div>
+		<div><a href="/ouvido">Veja mais<span class="sr-only"> do que eu ouço</span></a></div>
 	</section>
 	<section class="half-column row-4">
 		<h2>Na estante</h2>
 		<ul class="inline-list">
 			{booksImSupposedlyReading.map(book => <li data-separator="; ">{book}</li>)}
 		</ul>
-		<div><a href="/assistido">Veja mais</a></div>
+		<div><a href="/assistido">Veja mais<span class="sr-only"> do que eu leio</span></a></div>
 	</section>
 	<section class="half-column row-4">
 		<h2>No streaming</h2>
@@ -183,7 +182,7 @@ const topWatchedTraktData = [...traktData.watched.shows, ...traktData.watched.mo
 				))
 			}
 		</ul>
-		<div><a href="/assistido">Veja mais</a></div>
+		<div><a href="/assistido">Veja mais<span class="sr-only"> do que eu assisto</span></a></div>
 	</section>
 </Layout>
 
