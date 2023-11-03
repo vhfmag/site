@@ -1,9 +1,9 @@
 import { title } from "../data/site";
 import { light } from "../data/theme";
 
-export const get = () => {
-	return {
-		body: JSON.stringify({
+export const GET = () => {
+	return new Response(
+		JSON.stringify({
 			name: title,
 			short_name: title,
 			start_url: "/",
@@ -54,5 +54,11 @@ export const get = () => {
 				},
 			],
 		}),
-	};
+		{
+			status: 200,
+			headers: {
+				"Content-Type": "application/manifest+json",
+			},
+		},
+	);
 };
