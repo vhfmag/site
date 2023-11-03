@@ -2,7 +2,7 @@
 import { getCollection } from "astro:content";
 import Collection from "../../layouts/Collection.astro";
 import Entry from "../../layouts/Entry.astro";
-import { EntryOrPageProps, generateGetStaticPathsForCollection } from "../../utils/pagination";
+import { type EntryOrPageProps, generateGetStaticPathsForCollection } from "../../utils/pagination";
 
 export const collection = "apresentacoes";
 export const getStaticPaths = generateGetStaticPathsForCollection(await getCollection(collection));

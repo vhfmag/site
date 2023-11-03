@@ -38,7 +38,7 @@ async function fetchImages<
 	const promisePool = new PromisePool(2);
 	const results = await Promise.allSettled(
 		arr.map(el =>
-			runInPromisePool(promisePool, () => {
+			runInPromisePool(promisePool, async () => {
 				const type = "show" in el ? "show" : "movie" in el ? "movie" : null;
 				const mediaData = "show" in el ? el.show : "movie" in el ? el.movie : null;
 				if (!mediaData || !type)
@@ -75,7 +75,7 @@ function unreachable(errorMessage: string): never {
 	throw new Error(`Unreachable state: ${errorMessage}`);
 }
 
-type EntityWithMetadata<T extends EntityType> = T extends any
+type EntityWithMetadata<T extends EntityType> = T extends unknown
 	? { type: T; data: BareEntityTypeMap[T]; url: string | undefined }
 	: never;
 

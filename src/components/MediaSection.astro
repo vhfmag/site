@@ -12,7 +12,11 @@ const { title, data } = Astro.props;
 
 <section>
 	<h2>{title}</h2>
-	<ul class:list={[{ watched: "plays" in data[0], watchlist: !("plays" in data[0]) }]}>
+	<ul
+		class:list={[
+			{ watched: data[0] && "plays" in data[0], watchlist: data[0] && !("plays" in data[0]) },
+		]}
+	>
 		{
 			data
 				.filter(el => el.images.poster)

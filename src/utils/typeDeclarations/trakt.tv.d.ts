@@ -9,7 +9,7 @@ declare module "trakt.tv" {
 	};
 
 	export type TraktPlugin<Options> = {
-		init(trakt: TraktInstance<any>, options: Options): void;
+		init(trakt: TraktInstance<unknown>, options: Options): void;
 	};
 
 	export type TraktMovie = {
@@ -58,7 +58,7 @@ declare module "trakt.tv" {
 		person: { person: TraktPerson };
 	}[T];
 
-	export type TraktWatchlistEntry<T extends EntityType> = T extends any
+	export type TraktWatchlistEntry<T extends EntityType> = T extends unknown
 		? {
 				rank: number;
 				id: number;
@@ -69,7 +69,7 @@ declare module "trakt.tv" {
 		  } & { [key in T]: BareEntityTypeMap[T] }
 		: never;
 
-	export type TraktWatchedEntry<T extends EntityType> = T extends any
+	export type TraktWatchedEntry<T extends EntityType> = T extends unknown
 		? {
 				plays: number;
 				/** Datetime ISO string */

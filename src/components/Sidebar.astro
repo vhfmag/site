@@ -300,15 +300,15 @@ const NameComp = mainClass === "home" ? "h1" : "div";
 
 				<label class="button theme-button theme-button--auto" data-theme="auto">
 					<input type="radio" name="theme" class="visually-hidden" />
-					Automático
+					 Automático
 				</label>
 				<label class="button theme-button" data-theme="dark">
 					<input type="radio" name="theme" class="visually-hidden" />
-					Escuro
+					 Escuro
 				</label>
 				<label class="button theme-button" data-theme="light">
 					<input type="radio" name="theme" class="visually-hidden" />
-					Claro
+					 Claro
 				</label>
 			</fieldset>
 		</details>
@@ -388,7 +388,7 @@ const NameComp = mainClass === "home" ? "h1" : "div";
 		if (wrapper) {
 			const buttons = wrapper.querySelectorAll(".theme-button input");
 			buttons.forEach(button =>
-				button.addEventListener("input", _ev => {
+				button.addEventListener("input", () => {
 					const theme = button.parentElement?.dataset.theme;
 					if (theme) setTheme(theme);
 				}),
@@ -396,7 +396,7 @@ const NameComp = mainClass === "home" ? "h1" : "div";
 		}
 	}
 
-	window.addEventListener('load', onLoad);
+	window.addEventListener("load", onLoad);
 	loadTheme();
 </script>
 

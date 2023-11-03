@@ -1,8 +1,9 @@
 import type { RemarkPlugin } from "@astrojs/markdown-remark";
 import { visitParents } from "unist-util-visit-parents";
-import type { Content, Root } from "mdast";
+import type { RootContent, Root } from "mdast";
 import assert from "node:assert";
 import { assertIsNotNullish, isNotNullish } from "../../utils/typeGuards";
+import { unionOfArrayToArrayOfUnion } from "../../utils/types";
 
 const syntaxRegex =
 	/\{((?:(?:[#.][\w-]+)|(?:[\w-]+=.*?))(?: (?:(?:[#.][\w-]+)|(?:[\w-]+=.*?)))*)\}/gm;
@@ -46,9 +47,11 @@ export const attributesExtensionPlugin: RemarkPlugin = () => {
 					"Visited node must have a parent since we're not visiting the root node",
 				);
 
-				let nodeToModify: Content | Root;
+				let nodeToModify: RootContent | Root;
 				if (match.index === 0) {
-					const nodePosition = parent.children.indexOf(textNode as any);
+					const nodePosition = unionOfArrayToArrayOfUnion(parent.children).indexOf(
+						textNode,
+					);
 					assert(nodePosition > 0, "nodePosition > 0");
 					// previous sibling
 					nodeToModify = parent.children[nodePosition - 1]!;

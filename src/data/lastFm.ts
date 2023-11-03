@@ -35,7 +35,7 @@ async function fetchLastFmData<AdditionalParams>({
 		...otherParams,
 	});
 
-	return fetchWithCache(`${apiBase}\?${params.toString()}`);
+	return fetchWithCache(`${apiBase}?${params.toString()}`);
 }
 
 type ImageSize = "small" | "medium" | "large" | "extralarge" | "mega";

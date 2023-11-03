@@ -17,9 +17,9 @@ const lastfm = await fetchAllLastFmData();
 		<h3>Álbuns</h3>
 		<ol class="ranking with-image">
 			{
-				lastfm[period].albums.map(album => (
+				lastfm[period]?.albums.map(album => (
 					<li>
-						<img src={album.image[2]["#text"]} width="174" height="174" />
+						<img src={album.image[2]?.["#text"]} width="174" height="174" />
 						<a class="secondary" href={album.artist.url}>
 							{album.artist.name}
 						</a>
@@ -37,7 +37,7 @@ const lastfm = await fetchAllLastFmData();
 			<h3>Artistas</h3>
 			<ol class="ranking">
 				{
-					lastfm[period].artists.map(artist => (
+					lastfm[period]?.artists.map(artist => (
 						<li>
 							<a href={artist.url}>{artist.name}</a>
 						</li>
@@ -50,7 +50,7 @@ const lastfm = await fetchAllLastFmData();
 			<h3>Músicas</h3>
 			<ol class="ranking">
 				{
-					lastfm[period].tracks.map(track => (
+					lastfm[period]?.tracks.map(track => (
 						<li>
 							<a href={track.url}>
 								{track.name} - {track.artist.name}
@@ -65,7 +65,7 @@ const lastfm = await fetchAllLastFmData();
 			<h3>Tags</h3>
 			<ol class="ranking">
 				{
-					lastfm[period].tags.map(tag => (
+					lastfm[period]?.tags.map(tag => (
 						<li>
 							<a href={tag.url}>{tag.name}</a>
 						</li>

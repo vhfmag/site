@@ -4,7 +4,7 @@ import * as path from "node:path";
 import { fileURLToPath } from "node:url";
 import { withDynamicName } from "./hof";
 
-export function decorateWithClosureCache<Args extends unknown[], Return extends unknown>(
+export function decorateWithClosureCache<Args extends unknown[], Return>(
 	fn: (...args: Args) => Return,
 ): (...args: Args) => Return {
 	const cacheMap = new Map<string, Return>();
