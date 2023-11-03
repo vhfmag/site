@@ -44,9 +44,12 @@
 		"astro-compress": "^2.2.2",
 		"chromium": "^3.0.3",
 		"mafs": "^0.17.1",
+		"mathjs": "^12.0.0",
 		"patch-package": "^8.0.0",
 		"react": "^18.2.0",
-		"react-dom": "^18.2.0"
+		"react-dom": "^18.2.0",
+		"react-math-keyboard": "^1.4.2",
+		"tex-math-parser": "^2.0.4"
 	},
 	"volta": {
 		"node": "19.9.0"

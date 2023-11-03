@@ -1,0 +1,129 @@
+diff --git a/node_modules/react-math-keyboard/dist/react-math-keyboard.d.ts b/node_modules/react-math-keyboard/dist/react-math-keyboard.d.ts
+index ccf725e..6246f71 100644
+--- a/node_modules/react-math-keyboard/dist/react-math-keyboard.d.ts
++++ b/node_modules/react-math-keyboard/dist/react-math-keyboard.d.ts
+@@ -3,21 +3,15 @@
+ //   ../react
+ 
+ import "./style.css";
+-import { MathInput } from "react-math-keyboard/mathInput/mathInput";
+-import { MathInputProps } from "react-math-keyboard/mathInput/mathInput";
+-import { KeyProps } from "react-math-keyboard/keyboard/keys/key";
+-import { KeysPropsMap } from "react-math-keyboard/keyboard/keys/keys";
+-import { allKeysProps } from "react-math-keyboard/keyboard/keys/keys";
+-import { KeyId } from "react-math-keyboard/keyboard/keys/keyIds";
+-
+-export default MathInput;
+-export type { KeyId };
+-export type { KeyProps };
+-export type { MathInputProps };
+-export { KeysPropsMap };
+-export { allKeysProps };
+ 
+-declare module 'react-math-keyboard/mathInput/mathInput' {
++export default MathInputModule.MathInput;
++export type MathInputProps = MathInputModule.MathInputProps;
++export type KeyId = KeyboardKeysKeyIdsModule.KeyId;
++export type KeyProps = KeyboardKeysKeyModule.KeyProps;
++export type KeysPropsMap = KeyboardKeysKeysModule.KeysPropsMap;
++export const allKeysProps = KeyboardKeysKeysModule.allKeysProps;
++
++namespace MathInputModule {
+     import React from "react";
+     import { MathField } from "react-math-keyboard/types/types";
+     import { KeyProps } from "react-math-keyboard/keyboard/keys/key";
+@@ -43,7 +37,12 @@ declare module 'react-math-keyboard/mathInput/mathInput' {
+     export const MathInput: ({ numericToolbarKeys, numericToolbarTabs, alphabeticToolbarKeys, setValue, setMathfieldRef, setClearRef, style, initialLatex, rootElementId, divisionFormat, size, fullWidth, allowAlphabeticKeyboard, scrollType, }: MathInputProps) => JSX.Element;
+ }
+ 
+-declare module 'react-math-keyboard/keyboard/keys/key' {
++declare module 'react-math-keyboard/mathInput/mathInput' {
++    export const MathInput: MathInputModule.MathInput;
++    export type MathInputProps = MathInputModule.MathInputProps;
++}
++
++namespace KeyboardKeysKeyModule {
+     import { ReactNode } from "react";
+     import { MathfieldInstructions } from "react-math-keyboard/types/types";
+     import { KeyId } from "react-math-keyboard/keyboard/keys/keyIds";
+@@ -62,14 +61,24 @@ declare module 'react-math-keyboard/keyboard/keys/key' {
+     export const Key: ({ id, formatedId, label, labelType, onClick, mathfieldInstructions, fullWidth, isUtilityKey, }: KeyProps) => JSX.Element;
+ }
+ 
+-declare module 'react-math-keyboard/keyboard/keys/keys' {
++declare module 'react-math-keyboard/keyboard/keys/key' {
++    export const Key: typeof KeyboardKeysKeyModule.Key;
++    export type KeyProps = KeyboardKeysKeyModule.KeyProps;
++}
++
++namespace KeyboardKeysKeysModule {
+     import { KeyProps } from "react-math-keyboard/keyboard/keys/key";
+     import { KeyId } from "react-math-keyboard/keyboard/keys/keyIds";
+     export const allKeysProps: KeyProps[];
+     export const KeysPropsMap: Map<KeyId, KeyProps>;
+ }
+ 
+-declare module 'react-math-keyboard/keyboard/keys/keyIds' {
++declare module 'react-math-keyboard/keyboard/keys/keys' {
++    export const KeysPropsMap: typeof KeyboardKeysKeysModule.KeysPropsMap;
++    export const allKeysProps: typeof KeyboardKeysKeysModule.allKeysProps;
++}
++
++namespace KeyboardKeysKeyIdsModule {
+     export type KeyId = 
+     /**units */
+     "cm" | "cm2" | "degree" | "Hz" | "mol" | "kJ" | "mL"
+@@ -99,7 +108,11 @@ declare module 'react-math-keyboard/keyboard/keys/keyIds' {
+      | "Dihydrogène" | "Dioxygène" | "Eau" | "Méthane" | "Dioxyde de carbone" | "Ammoniac" | "Dioxyde de soufre" | "Éthanol" | "Glucose" | "Méthanol" | "Propane" | "Butane" | "Acide sulfurique" | "Propylène" | "Benzène" | "Acetonitrile" | "Méthanal" | "Méthanoate de sodium" | "Carbonate de calcium" | "Sulfate d'ammonium" | "Soude caustique" | "Nitrate d'ammonium" | "Carbonate de sodium" | "Vitamine C" | "Aspirine" | "Caféine" | "Paracétamol" | "Chlorure de sodium" | "Lactose" | "Acide acétique" | "Magnésium" | "Oxyde de magnésium" | "Fer" | "Oxyde de fer(III)" | "Éthane" | "Éthylène" | "Acétone" | "Toluène" | "Éthylène glycol" | "Butène" | "Pentène" | "Cyclohexane" | "Acétate d'éthyle" | "Acétate de méthyle" | "Acétate de butyle" | "Phénol" | "Éthanal" | "Butyraldéhyde" | "Furfural" | "Acide formique" | "Sucrose" | "Acide chlorhydrique" | "Hydroxyde de sodium" | "Nitrate d'argent" | "Chlorure d'argent" | "Nitrate de sodium" | "Hydroxyde de calcium" | "Sulfate de calcium" | "Sulfate de cuivre" | "Hydroxyde de cuivre(II)" | "Sulfate de sodium" | "Zinc" | "Chlorure de zinc" | "Hydroxyde de potassium" | "Sulfate de potassium" | "Peroxyde d'hydrogène" | "Chlorure de plomb(II)" | "Iodure de potassium" | "Iodure de plomb(II)" | "Chlorure de potassium" | "Acétate de sodium" | "Soufre" | "Nitrate de baryum" | "Sulfate de baryum" | "Cuivre" | "Nitrate de cuivre(II)" | "Argent" | "Phosphate de calcium" | "Soufre" | "Nitrate de potassium" | "Azote" | "Nitrate de plomb(II)" | "Sulfate de plomb(II)" | "Oxyde de calcium" | "Chlorure de cuivre(II)" | "Chlorure de fer(II)" | "Dichlore" | "Protoxyde d'azote" | "Peroxyde de dinitrogène" | "Dioxyde d'azote" | "Chlorate de potassium" | "Sulfate de zinc" | "Acide phosphorique" | "Oxyde de sodium" | "Monoxyde d'azote" | "Monoxyde de carbone" | "Oxyde de fer(III)" | "Sulfure de cuivre(I)" | "Oxyde de cuivre(I)" | "Ion hydronium" | "Ion sulfate" | "Ion fer(II)" | "Ion hydroxyde" | "Ion argent(I)" | "Ion phosphate" | "Phosphate d'argent(I)" | "Ion cuivre(II)" | "Acétate de sodium" | "Phosphate de calcium" | "Chlorure d'ammonium" | "cyclooctasoufre " | "Hydroxyde de magnésium" | "Chlorure de magnésium";
+ }
+ 
+-declare module 'react-math-keyboard/types/types' {
++declare module 'react-math-keyboard/keyboard/keys/keyIds' {
++    export type KeyId = KeyboardKeysKeyIdsModule.KeyId;
++}
++
++namespace TypesTypesModule {
+     export interface MathFieldConfig {
+         typingAsteriskWritesTimesSymbol?: boolean;
+         spaceBehavesLikeTab?: boolean;
+@@ -153,7 +166,14 @@ declare module 'react-math-keyboard/types/types' {
+     }
+ }
+ 
+-declare module 'react-math-keyboard/keyboard/toolbar/toolbarTabs' {
++declare module 'react-math-keyboard/types/types' {
++    export interface MathFieldConfig extends TypesTypesModule.MathFieldConfig {}
++    export type Direction = TypesTypesModule.Direction;
++    export interface MathField extends TypesTypesModule.MathField {}
++    export interface MathfieldInstructions extends TypesTypesModule.MathfieldInstructions {}
++}
++
++namespace KeyboardToolbarToolbarTabsModule {
+     import { KeyProps } from "react-math-keyboard/keyboard/keys/key";
+     import { KeyGroupIds } from "react-math-keyboard/keyboard/keys/keyGroup";
+     import { KeyId } from "react-math-keyboard/keyboard/keys/keyIds";
+@@ -173,7 +193,14 @@ declare module 'react-math-keyboard/keyboard/toolbar/toolbarTabs' {
+     export const defaultTabs: ToolbarTabIds[];
+ }
+ 
+-declare module 'react-math-keyboard/keyboard/keys/keyGroup' {
++declare module 'react-math-keyboard/keyboard/toolbar/toolbarTabs' {
++    export type ToolbarTab = KeyboardToolbarToolbarTabsModule.ToolbarTab;
++    export type ToolbarTabIds = KeyboardToolbarToolbarTabsModule.ToolbarTabIds;
++    export const toolbarTabs: typeof KeyboardToolbarToolbarTabsModule.toolbarTabs;
++    export const defaultTabs: typeof KeyboardToolbarToolbarTabsModule.defaultTabs;
++}
++
++namespace KeyboardKeysKeyGroupsModule {
+     export type KeyGroupIds = "sets" | "proba" | "functions" | "trigo" | "sequences" | "complex" | "minLetters" | "majLetters" | "greek" | "utility" | "sequences" | "alphabet" | "basicOperations" | "otherOperations" | "numbers" | "algebra" | "geometry" | "words" | "units" | "atoms" | "molecules";
+     export type KeyGroup = {
+         id: KeyGroupIds;
+@@ -182,3 +209,8 @@ declare module 'react-math-keyboard/keyboard/keys/keyGroup' {
+     export const keyGroups: KeyGroup[];
+ }
+ 
++declare module 'react-math-keyboard/keyboard/keys/keyGroup' {
++    export type KeyGroupIds = KeyboardKeysKeyGroupsModule.KeyGroupIds;
++    export type KeyGroup = KeyboardKeysKeyGroupsModule.KeyGroup;
++    export const keyGroups: typeof KeyboardKeysKeyGroupsModule.keyGroups;
++}
