@@ -1,6 +1,8 @@
 ---
 import SidebarNavLink from "./SidebarNavLink.astro";
 import { email } from "../data/me";
+import avatarImg from "../assets/avatar.png";
+import { Image } from "astro:assets";
 
 interface Props {
 	mainClass?: string;
@@ -32,7 +34,7 @@ const NameComp = mainClass === "home" ? "h1" : "div";
 	</a>
 
 	<div hidden>
-		<img class="u-photo" src="/uploads/avatar.png" alt="Eu!" />
+		<Image class="u-photo" src={avatarImg} alt="Eu!" />
 	</div>
 
 	<div class="inline-mobile no-stack-margin">
@@ -312,56 +314,6 @@ const NameComp = mainClass === "home" ? "h1" : "div";
 				</label>
 			</fieldset>
 		</details>
-
-		<details class="stack" style="--stack-margin: var(--s-1)">
-			<summary>
-				<i lang="en">Disclaimers</i>
-			</summary>
-
-			<a href="/uploads/antifa.jpg" target="_blank">
-				<img
-					src="/uploads/antifa.jpg"
-					alt="Aqui não há lugar para o ódio. Este espaço está em defesa das mulheres, da população negra, indígena, pobre, LBGTTIQ, imigrante, muçulmana, judia, refugiada e todas as pessoas sob ataque. #SomosTodasAntifascistas"
-				/>
-			</a>
-
-			<p>Apoia o atual presidente? Você não é bem vindo, fascista. Saia 👋🏾</p>
-
-			<p>
-				<a
-					href="https://www.smithsonianmag.com/science-nature/climate-change-will-accelerate-earths-sixth-mass-extinction-180955138/"
-					>Espécies estão sendo extintas</a
-				>; <a href="https://theoutline.com/post/1859/drowning-cities?zd=1&zi=m55bcfbz"
-					>cidades, afundadas</a
-				>; <a
-					href="https://www.wfpusa.org/explore/wfps-work/drivers-of-hunger/climate-change/"
-					>já está faltando comida</a
-				>. Mas ainda dá pra fazer algo contra a <strong>catástrofe climática</strong>:
-			</p>
-
-			<ul style="padding-left: var(--s0)">
-				<li>
-					<a
-						href="https://www.theguardian.com/environment/2018/dec/21/lifestyle-change-eat-less-meat-climate-change"
-						>reduza seu consumo de carne</a
-					>;
-				</li>
-				<li>vote consciente (e nunca em ruralista);</li>
-				<li>
-					<a
-						href="https://www.nytimes.com/2017/07/27/climate/airplane-pollution-global-warming.html"
-						>viaje menos de avião</a
-					>;
-				</li>
-				<li>use transporte público;</li>
-				<li>
-					<a href="https://www.queroevoluir.com.br/reduza-reutilize-e-so-entao-recicle/"
-						>reduza, reuse, recicle</a
-					>;
-				</li>
-				<li>consuma produtos locais;</li>
-			</ul>
-		</details>
 	</div>
 </header>
 
@@ -435,6 +387,7 @@ const NameComp = mainClass === "home" ? "h1" : "div";
 		display: flex;
 		flex-wrap: wrap;
 		justify-content: space-between;
+		flex-direction: column;
 	}
 
 	.theme-selector-buttons {
