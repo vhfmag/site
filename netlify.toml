@@ -4,7 +4,7 @@ targetPort = 4321
 
 [build]
 publish = "dist"
-command = "npm run build"
+command = "npm run check && npm run build"
 [build.environment]
 NODE_VERSION = "19.9.0"
 
