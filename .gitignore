@@ -49,3 +49,5 @@ C:\\Users\\*
 
 # typescript
 tsconfig.tsbuildinfo
+
+.astro/
