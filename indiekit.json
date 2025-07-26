@@ -11,6 +11,10 @@
 		{
 			"uid": "https://brid.gy/publish/medium",
 			"name": "https://brid.gy/publish/medium"
+		},
+		{
+			"uid": "https://brid.gy/publish/bluesky",
+			"name": "https://brid.gy/publish/bluesky"
 		}
 	],
 	"post-types": {
