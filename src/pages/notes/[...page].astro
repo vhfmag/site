@@ -1,5 +1,5 @@
 ---
-import { getCollection } from "astro:content";
+import { getCollection, render } from "astro:content";
 import CollectionEntry from "../../components/CollectionEntry.astro";
 import WebMentionDescription from "../../components/WebMentionDescription.astro";
 import { collectionData } from "../../data/collections";
@@ -26,7 +26,7 @@ const props = Astro.props;
 				return (
 					<CollectionEntry class="entry">
 						<section>
-							{entry.render().then(({ Content }) => (
+							{render(entry).then(({ Content }) => (
 								<Content />
 							))}
 						</section>

@@ -1,6 +1,7 @@
 ---
 import Authors from "../components/Authors.astro";
 import WebMentionDescription from "../components/WebMentionDescription.astro";
+import { render } from "astro:content";
 import type { AnyCollectionEntry } from "../content.config";
 import { collectionData } from "../data/collections";
 import { formatDate, formatDateISO } from "../utils/formatting";
@@ -9,7 +10,7 @@ import Default from "./Default.astro";
 export type Props = { entry: AnyCollectionEntry };
 
 const { entry } = Astro.props;
-const { Content } = await entry.render();
+const { Content } = await render(entry);
 ---
 
 <Default>
