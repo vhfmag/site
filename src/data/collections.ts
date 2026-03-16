@@ -1,4 +1,4 @@
-import type { CollectionSlug } from "../content/config";
+import type { CollectionSlug } from "../content.config";
 
 export interface CollectionMetadata {
 	/** Singular */

@@ -1,25 +1,30 @@
 import type { CollectionEntry } from "astro:content";
 import { defineCollection } from "astro:content";
-import { frontmatterSchema, likeFrontmatterSchema, noteFrontmatterSchema } from "../utils/schemas";
+import { glob } from "astro/loaders";
+import { frontmatterSchema, likeFrontmatterSchema, noteFrontmatterSchema } from "./utils/schemas";
 
-const generalCollection = defineCollection({
-	schema: frontmatterSchema,
-});
+const generalCollection = (base: string) =>
+	defineCollection({
+		loader: glob({ base, pattern: "**/*.{md,mdx}" }),
+		schema: frontmatterSchema,
+	});
 
 const noteCollection = defineCollection({
+	loader: glob({ base: "./src/content/notes", pattern: "**/*.{md,mdx}" }),
 	schema: noteFrontmatterSchema,
 });
 
 const likeCollection = defineCollection({
+	loader: glob({ base: "./src/content/likes", pattern: "**/*.{md,mdx}" }),
 	schema: likeFrontmatterSchema,
 });
 
 export const collections = {
-	apresentacoes: generalCollection,
-	bookmarks: generalCollection,
+	apresentacoes: generalCollection("./src/content/apresentacoes"),
+	bookmarks: generalCollection("./src/content/bookmarks"),
 	likes: likeCollection,
 	notes: noteCollection,
-	posts: generalCollection,
+	posts: generalCollection("./src/content/posts"),
 };
 
 export type CollectionSlug = keyof typeof collections;

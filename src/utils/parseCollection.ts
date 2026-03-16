@@ -1,4 +1,4 @@
-import type { AnyCollectionEntry } from "../content/config";
+import type { AnyCollectionEntry } from "../content.config";
 
 export interface ParseCollectionOptions {
 	requireTitle?: boolean;
