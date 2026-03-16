@@ -1,6 +1,5 @@
 import * as mafs from "mafs";
 import { useCallback, useEffect, useMemo, useState } from "react";
-import z from "zod";
 import MathInput from "react-math-keyboard";
 import { parseTex } from "tex-math-parser";
 import { evaluate } from "mathjs";
@@ -20,7 +19,13 @@ export const Graph = () => {
 
 	useEffect(() => {
 		try {
-			const newFn = z.function(z.tuple([z.number()]), z.number().or(z.nan())).parse(fn);
+			const newFn = (x: number) => {
+				const result = fn(x);
+				if (typeof result !== "number" || Number.isNaN(result)) {
+					throw new Error("Function must return a valid number");
+				}
+				return result;
+			};
 			newFn(0);
 			setYFn(() => newFn);
 		} catch (error) {
