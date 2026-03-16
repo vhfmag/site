@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from "astro:content";
 
 export const MarkdownInstanceSchema = z.object({
 	frontmatter: z.record(z.any()),

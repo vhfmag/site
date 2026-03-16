@@ -39,7 +39,7 @@ const topWatchedTraktData = [...traktData.watched.shows, ...traktData.watched.mo
 				lastPosts.slice(0, 5).map(entry => (
 					<li>
 						<h3>
-							<a href={`/${entry.collection}/${entry.slug}`}>{entry.data.title}</a>
+							<a href={`/${entry.collection}/${entry.id}`}>{entry.data.title}</a>
 						</h3>
 					</li>
 				))
@@ -54,7 +54,7 @@ const topWatchedTraktData = [...traktData.watched.shows, ...traktData.watched.mo
 				lastBookmarks.slice(0, 5).map(entry => (
 					<li>
 						<h3>
-							<a href={`/${entry.collection}/${entry.slug}`}>{entry.data.title}</a>
+							<a href={`/${entry.collection}/${entry.id}`}>{entry.data.title}</a>
 						</h3>
 					</li>
 				))

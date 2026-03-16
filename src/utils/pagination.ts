@@ -30,7 +30,7 @@ export function generateGetStaticPathsForCollection(
 			),
 			...getCollectionResult.map(
 				(entry): GetStaticPathsItem => ({
-					params: { page: entry.slug },
+					params: { page: entry.id },
 					props: { entry, type: "entry" } as const,
 				}),
 			),
