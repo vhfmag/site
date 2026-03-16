@@ -12,11 +12,22 @@ The project requires **Node 20.18.0** (specified via Volta in `package.json`). U
 
 ### Running the dev server
 
-```
-npm run dev
-```
+Use `npx netlify dev` instead of `npm run dev`. This injects environment variables from the linked Netlify site (requires `NETLIFY_AUTH_TOKEN` and `npx netlify link --id 20f0bcd0-22b2-49a8-87f5-b9ab0b078eb1` first).
 
-Starts Astro dev server on port **4321**.
+- **Port 8888**: Netlify proxy (preferred — handles env vars and edge functions)
+- **Port 4321**: Raw Astro dev server (used internally by Netlify dev)
+
+A `.env` file in the repo root bridges the env var name mismatch: Netlify stores keys with `PUBLIC_` prefix (e.g. `PUBLIC_LASTFM_API_KEY`) but the code reads without it (e.g. `LASTFM_API_KEY`). The `.env` file is gitignored.
+
+To create the `.env` file from Netlify env vars:
+```
+npx netlify env:list --json 2>/dev/null | python3 -c "
+import sys, json
+data = json.load(sys.stdin)
+mapping = {'PUBLIC_LASTFM_API_KEY':'LASTFM_API_KEY','PUBLIC_TRACKT_CLIENT_ID':'TRACKT_CLIENT_ID','PUBLIC_TMDB_API_KEY':'TMDB_API_KEY','PUBLIC_FANART_API_KEY':'FANART_API_KEY'}
+[print(f'{v}={data[k]}') for k,v in mapping.items() if k in data]
+" > .env
+```
 
 ### Lint / Format / Type-check
 
@@ -31,6 +42,14 @@ Standard commands in `package.json`:
 ### External API keys
 
 The homepage (`/`) and media pages (`/ouvido`, `/assistido`) require four environment variables: `LASTFM_API_KEY`, `TRACKT_CLIENT_ID`, `TMDB_API_KEY`, `FANART_API_KEY`. Without them, those pages return 500. Other pages (`/posts`, `/notes`, `/bookmarks`, `/blogroll`, `/apresentacoes`, individual post pages) work without any API keys.
+
+### Cache directory gotcha
+
+In dev mode, the `cacache` persistent cache path resolves to `/node_modules/.cache/cacache` (root filesystem, not the project `node_modules`). You may need to `sudo mkdir -p /node_modules/.cache/cacache && sudo chmod -R 777 /node_modules` to avoid `EACCES` errors.
+
+### Trakt.tv API
+
+As of March 2026, the `TRACKT_CLIENT_ID` stored on Netlify returns **403 Forbidden** from the Trakt API. This causes `/` (homepage) and `/assistido` to 500. The Last.fm API key works correctly.
 
 ### Build
 
