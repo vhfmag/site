@@ -3,7 +3,7 @@ import partytown from "@astrojs/partytown";
 import react from "@astrojs/react";
 import sitemap from "@astrojs/sitemap";
 import compress from "astro-compress";
-import { defineConfig } from "astro/config";
+import { defineConfig, envField } from "astro/config";
 import assert from "node:assert";
 import { visitParents } from "unist-util-visit-parents";
 import { canonicalUrl } from "./src/data/site";
@@ -14,6 +14,14 @@ import { addAutomaticLayoutPlugin } from "./src/plugins/remark/collectionData";
 export default defineConfig({
 	integrations: [mdx(), sitemap(), react(), partytown(), compress()],
 	site: canonicalUrl,
+	env: {
+		schema: {
+			FANART_API_KEY: envField.string({ context: "server", access: "secret" }),
+			LASTFM_API_KEY: envField.string({ context: "server", access: "secret" }),
+			TMDB_API_KEY: envField.string({ context: "server", access: "secret" }),
+			TRACKT_CLIENT_ID: envField.string({ context: "server", access: "secret" }),
+		},
+	},
 	vite: {
 		optimizeDeps: {
 			exclude: ["electron"],
