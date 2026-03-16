@@ -5,16 +5,19 @@ import { frontmatterSchema, likeFrontmatterSchema, noteFrontmatterSchema } from 
 
 const generalCollection = (base: string) =>
 	defineCollection({
+		type: "content",
 		loader: glob({ base, pattern: "**/*.{md,mdx}" }),
 		schema: frontmatterSchema,
 	});
 
 const noteCollection = defineCollection({
+	type: "content",
 	loader: glob({ base: "./src/content/notes", pattern: "**/*.{md,mdx}" }),
 	schema: noteFrontmatterSchema,
 });
 
 const likeCollection = defineCollection({
+	type: "content",
 	loader: glob({ base: "./src/content/likes", pattern: "**/*.{md,mdx}" }),
 	schema: likeFrontmatterSchema,
 });
