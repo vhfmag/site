@@ -46,7 +46,7 @@
 		"trakt.tv-images": "^5.2.0",
 		"type-fest": "^4.6.0",
 		"unist-util-visit-parents": "^6.0.1",
-		"zod": "^3.22.4"
+		"zod": "^4.3.6"
 	},
 	"dependencies": {
 		"@astrojs/check": "^0.9.7",
