@@ -20,6 +20,7 @@
 	},
 	"devDependencies": {
 		"@astrojs/sitemap": "^3.7.1",
+		"@netlify/plugin-lighthouse": "^6.0.4",
 		"@types/cacache": "^17.0.1",
 		"@types/lodash-es": "^4.17.10",
 		"@types/luxon": "^3.3.3",
