@@ -1,10 +1,11 @@
 ---
 import TableOfContents from "../components/TableOfContents/TableOfContents.astro";
+import { render } from "astro:content";
 import Entry, { type Props as EntryLayoutProps } from "./Entry.astro";
 
 interface Props extends EntryLayoutProps {}
 
-const { headings } = await Astro.props.entry.render();
+const { headings } = await render(Astro.props.entry);
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 ---

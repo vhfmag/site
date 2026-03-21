@@ -1,13 +1,12 @@
 import { groupBy, map, sortBy, sumBy } from "lodash-es";
-import type { Merge } from "type-fest";
 import { z } from "zod";
+import { LASTFM_API_KEY } from "astro:env/server";
 import { fetchWithCache } from "../utils/cache";
 
 const username = "vhfmag";
 const DEFAULT_LIMIT = 10;
 
 const apiBase = "https://ws.audioscrobbler.com/2.0";
-const LASTFM_API_KEY = process.env.LASTFM_API_KEY;
 
 type LastFmPeriod = "overall" | "7day" | "1month" | "3month" | "6month" | "12month";
 
@@ -18,21 +17,29 @@ interface LastFmFetchParams {
 	limit?: number;
 }
 
-async function fetchLastFmData<AdditionalParams>({
+type LastFmRequestParams = LastFmFetchParams & Record<string, number | string | undefined>;
+
+async function fetchLastFmData({
 	method,
 	format = "json",
 	limit = DEFAULT_LIMIT,
 	page,
 	...otherParams
-}: Merge<AdditionalParams, LastFmFetchParams> & LastFmFetchParams) {
+}: LastFmRequestParams) {
+	const extraParams = Object.fromEntries(
+		Object.entries(otherParams)
+			.filter(([, value]) => value !== undefined)
+			.map(([key, value]) => [key, String(value)]),
+	);
+
 	const params = new URLSearchParams({
 		api_key: z.string().parse(LASTFM_API_KEY),
 		user: username,
 		method,
 		format,
 		limit: String(limit),
-		page: String(page),
-		...otherParams,
+		...(page ? { page: String(page) } : {}),
+		...extraParams,
 	});
 
 	return fetchWithCache(`${apiBase}?${params.toString()}`);
@@ -115,7 +122,7 @@ const fetchTopTags = async (params: Omit<UserTopParams, "method">) => {
 	const tagsWithDuplicates = (
 		await Promise.all([
 			...artists.map(a =>
-				fetchLastFmData<{ mbid: string }>({ method: "artist.gettoptags", mbid: a.mbid }),
+				fetchLastFmData({ method: "artist.gettoptags", mbid: a.mbid }),
 			),
 		])
 	)

@@ -9,20 +9,21 @@ import type {
 import Trakt from "trakt.tv";
 import TraktImages from "trakt.tv-images";
 import { z } from "zod";
+import { FANART_API_KEY, TMDB_API_KEY, TRACKT_CLIENT_ID } from "astro:env/server";
 import { decorateWithPersistentCache } from "../utils/cache";
 import { runInPromisePool } from "../utils/pooling";
 import { assertIsNotNullish, isNotNullish } from "../utils/typeGuards";
 
 const trakt = new Trakt({
-	client_id: z.string().parse(process.env.TRACKT_CLIENT_ID),
+	client_id: z.string().parse(TRACKT_CLIENT_ID),
 	debug: true,
 	plugins: {
 		images: TraktImages,
 	},
 	options: {
 		images: {
-			tmdbApiKey: assertIsNotNullish(process.env.TMDB_API_KEY),
-			fanartApiKey: assertIsNotNullish(process.env.FANART_API_KEY),
+			tmdbApiKey: assertIsNotNullish(TMDB_API_KEY),
+			fanartApiKey: assertIsNotNullish(FANART_API_KEY),
 			// tvdbApiKey: process.env.TVDB_API_KEY,
 			smallerImages: true,
 			cached: true,

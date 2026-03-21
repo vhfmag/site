@@ -1,14 +1,14 @@
 import { z } from "zod";
 
 export const MarkdownInstanceSchema = z.object({
-	frontmatter: z.record(z.any()),
+	frontmatter: z.record(z.string(), z.any()),
 	file: z.string(),
 	url: z.string().optional(),
-}) satisfies z.ZodType<Partial<MD>>;
+});
 
 export const authorSchema = z.object({
 	name: z.string(),
-	url: z.ostring(),
+	url: z.string().optional(),
 });
 
 export type Author = z.infer<typeof authorSchema>;
@@ -29,8 +29,8 @@ export const webMentionLinkSchema = z.object({
 		.array(webMentionTypeSchema)
 		.or(webMentionTypeSchema)
 		.transform(x => (Array.isArray(x) ? x : [x])),
-	title: z.ostring(),
-	link: z.ostring(),
+	title: z.string().optional(),
+	link: z.string().optional(),
 });
 
 export type WebMentionLink = z.infer<typeof webMentionLinkSchema>;
@@ -51,30 +51,30 @@ export const frontmatterSchema = z.object({
 		.string()
 		.transform(value => (typeof value === "string" ? new Date(value) : value))
 		.or(z.date()),
-	excerpt: z.ostring().or(z.null()),
-	draft: z.oboolean().or(z.null()),
+	excerpt: z.string().optional().or(z.null()),
+	draft: z.boolean().optional().or(z.null()),
 	// collection data
 	collectionData: collectionDataSchema.optional().or(z.null()),
 	// WebMention stuff
 	links: z.array(webMentionLinkSchema).optional().or(z.null()),
 	// IndieWeb stuff
 	syndicationLinks: z.array(z.string()).optional().or(z.null()),
-	twitterContent: z.ostring().or(z.null()),
-	mastodonContent: z.ostring().or(z.null()),
-	mediumContent: z.ostring().or(z.null()),
+	twitterContent: z.string().optional().or(z.null()),
+	mastodonContent: z.string().optional().or(z.null()),
+	mediumContent: z.string().optional().or(z.null()),
 });
 
 export type Frontmatter = z.infer<typeof frontmatterSchema>;
 
 export const likeFrontmatterSchema = frontmatterSchema.extend({
 	likeOf: z.string(),
-	title: z.ostring(),
+	title: z.string().optional(),
 });
 
 export type LikeFrontmatter = z.infer<typeof likeFrontmatterSchema>;
 
 export const noteFrontmatterSchema = frontmatterSchema.extend({
-	title: z.ostring(),
+	title: z.string().optional(),
 });
 
 export type NoteFrontmatter = z.infer<typeof noteFrontmatterSchema>;
