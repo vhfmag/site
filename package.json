@@ -70,8 +70,5 @@
 		"react-math-keyboard": "^1.4.2",
 		"tex-math-parser": "^2.0.4",
 		"typescript": "^5.9.3"
-	},
-	"volta": {
-		"node": "22.12.0"
 	}
 }
